@@ -192,7 +192,7 @@
   .paybox a:hover{text-decoration:underline}
 
   /* Teilen-Button + Toast */
-  .sharebar{display:flex; justify-content:flex-end; margin-top:13px}
+  .sharebar{display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap; margin-top:13px}
   .sharebtn{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line2); background:var(--bg2); color:var(--ink); border-radius:10px; padding:8px 14px; font-weight:700; font-size:12.5px; font-family:"Hanken Grotesk",sans-serif}
   .sharebtn svg{width:15px; height:15px}
   .sharebtn:hover{border-color:var(--green-line); color:var(--green)}
@@ -411,6 +411,55 @@
   .soonbox.sm{padding:13px 14px; margin:0 0 10px}
   .soonbox.sm .ic{font-size:18px}
   .row.tba .time{color:var(--muted)}
+
+  /* Abo-Rechner */
+  .abo{background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:16px; margin:2px 0 14px; border-top:3px solid var(--green)}
+  .abo-h{font-family:"Archivo",sans-serif; font-weight:900; font-size:18px; letter-spacing:-.02em; display:flex; align-items:center; gap:8px}
+  .abo-h .em{font-size:19px}
+  .abo-sub{color:var(--muted); font-size:12.5px; margin:5px 0 12px; max-width:52ch}
+  .abo-pick{font:700 10.5px "Hanken Grotesk",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0 0 8px}
+  .abo-chips{display:flex; flex-wrap:wrap; gap:7px}
+  .abo-chip{border:1px solid var(--line); background:var(--bg2); color:var(--ink); padding:7px 13px; font-size:12.5px; font-weight:600; border-radius:99px; display:inline-flex; align-items:center; gap:6px; transition:border-color .15s, background .15s}
+  .abo-chip:hover{border-color:var(--green-line)}
+  .abo-chip[aria-pressed="true"]{background:var(--green); color:var(--on-accent); border-color:var(--green)}
+  .abo-chip .ck{font-weight:800; font-size:11px}
+  .abo-res{margin-top:14px; border-top:1px dashed var(--line); padding-top:14px}
+  .abo-empty{color:var(--faint); font-size:13px; text-align:center; padding:14px 6px}
+  .abo-totbar{display:flex; align-items:center; gap:12px; background:var(--bg2); border:1px solid var(--line); border-radius:13px; padding:13px 15px}
+  .abo-totbar.free{background:var(--free-soft); border-color:var(--free-line)}
+  .abo-totlbl{font-size:11px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.04em}
+  .abo-tot{font-family:"Space Mono",monospace; font-weight:700; font-size:24px; color:var(--ink); margin-left:auto; line-height:1}
+  .abo-tot small{font-size:12px; color:var(--muted); font-weight:400}
+  .abo-tot.free{color:var(--free); font-size:15px}
+  .abo-need{font:700 10.5px "Hanken Grotesk",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:14px 0 8px}
+  .abo-prov{display:flex; align-items:center; gap:11px; padding:11px 12px; border:1px solid var(--line); border-radius:12px; margin-top:8px; background:var(--surface)}
+  .abo-plogo{width:38px; height:38px; border-radius:10px; flex:0 0 auto; display:grid; place-items:center; font-family:"Archivo",sans-serif; font-weight:900; font-size:11px; background:var(--surface2); color:var(--ink); border:1px solid var(--line2)}
+  .abo-plogo.free{background:var(--free-soft); color:var(--free); border-color:var(--free-line)}
+  .abo-pmid{flex:1; min-width:0}
+  .abo-pname{font-weight:700; font-size:14px}
+  .abo-pnote{font-size:11.5px; color:var(--muted); margin-top:1px}
+  .abo-pprice{font-family:"Space Mono",monospace; font-weight:700; font-size:14px; color:var(--ink); white-space:nowrap; flex:0 0 auto}
+  .abo-pprice.free{color:var(--free)}
+  .abo-cov{display:flex; flex-direction:column; gap:6px; margin-top:12px}
+  .abo-covrow{display:flex; align-items:center; gap:8px; font-size:12.5px; flex-wrap:wrap}
+  .abo-covrow .cn{font-weight:600}
+  .abo-pill{font-family:"Space Mono",monospace; font-size:9px; font-weight:700; letter-spacing:.03em; padding:2.5px 7px; border-radius:5px; white-space:nowrap}
+  .abo-pill.free{background:var(--free); color:var(--on-accent)}
+  .abo-pill.full{background:var(--green-soft); color:var(--green); border:1px solid var(--green-line)}
+  .abo-pill.part{background:transparent; color:var(--muted); border:1px solid var(--line2)}
+  .abo-hint{font-size:11.5px; color:var(--wm); width:100%; padding-left:2px}
+  .abo-foot{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:14px}
+  .abo-visit{font-size:12px; font-weight:700; color:var(--on-accent); background:var(--green); border:none; border-radius:9px; padding:8px 13px; text-decoration:none; display:inline-flex; align-items:center; gap:5px}
+  .abo-visit.free{background:var(--free)}
+  .abo-visit:hover{filter:brightness(1.06)}
+  .abo-reset{margin-left:auto; border:1px solid var(--line2); background:var(--bg2); color:var(--muted); border-radius:9px; padding:8px 13px; font-size:12px; font-weight:700}
+  .abo-reset:hover{color:var(--ink); border-color:var(--green-line)}
+  .abo-affnote{font-size:10.5px; color:var(--faint); line-height:1.5; margin-top:10px}
+
+  /* Folgen */
+  .sharebtn.folbtn{gap:6px}
+  .sharebtn.folbtn.done{border-color:var(--wm); color:var(--wm); background:var(--wm-soft)}
+  .folmark{color:var(--wm); font-size:12px; margin-right:1px; flex:0 0 auto}
 </style>
 </head>
 <body>
@@ -464,6 +513,13 @@
   </section>
 
   <section class="tabpane" id="pane-anbieter" role="tabpanel">
+    <div class="abo" id="aboBox">
+      <div class="abo-h"><span class="em">🧮</span><span data-i18n="abo_title">Welches Abo brauche ich?</span></div>
+      <p class="abo-sub" data-i18n="abo_sub">Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.</p>
+      <div class="abo-pick" data-i18n="abo_pick">Wettbewerbe wählen:</div>
+      <div class="abo-chips" id="aboChips"></div>
+      <div class="abo-res" id="aboRes"></div>
+    </div>
     <div class="fsearch"><span class="ic">⌕</span><input id="provSearch" type="text" placeholder="Anbieter, Wettbewerb oder Land suchen …"></div>
     <div class="filters" id="provFilters"></div>
     <div class="section-eyebrow"><h2 data-i18n="prov_title">Anbieter &amp; Preise</h2><span class="cnt mono" id="provCount"></span></div>
@@ -574,10 +630,19 @@ const I18N = {
     where:"Sender in", more:"Sender in weiteren Ländern", less:"Weniger anzeigen", running:"Läuft",
     fta:"Free-TV", pay:"Pay", recent:"Vergangene Spiele", top_news:"Aktuelle News", prov_title:"Anbieter & Preise",
     best_free:"Free-TV", best_radio:"Radio", best_pay:"Nur Pay", source:"Quelle", goals:"Tore", read:"Zur Quelle",
-    tz:"MEZ", share:"Teilen", shared:"Link kopiert", shared_btn:"Kopiert!",
+    tz:"MEZ", share:"Teilen", shared:"Link kopiert", shared_btn:"Kopiert!", cal_add:"In Kalender", cal_done:"Termin als .ics gespeichert 📅",
     ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
     price_from:"ab", price_approx:"ca.",
     result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Topspiele",
+    f_free:"Nur Free-TV", f_tonight:"Heute Abend", f_now:"Läuft jetzt", f_mine:"★ Meine",
+    mine_empty:"Noch keinem Team gefolgt — tippe in einem Spiel auf „folgen“.", filt_empty:"Keine Spiele für diesen Filter.",
+    follow:"folgen", following:"folge ich", follow_hint:"Folge Teams, um nur deine Spiele zu sehen — Kalender-Erinnerung inklusive.",
+    abo_title:"Welches Abo brauche ich?", abo_sub:"Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.",
+    abo_pick:"Wettbewerbe wählen:", abo_pick_none:"Tippe oben auf die Wettbewerbe, die du sehen willst.",
+    abo_total:"Günstigste Kombination", abo_month:"/Mon.", abo_free_only:"Komplett gratis — kein Abo nötig! 🎉",
+    abo_free_keeps:"Gratis dabei (ARD/ZDF)", abo_need:"Dafür brauchst du", abo_full:"komplett", abo_partial:"Teil",
+    abo_complete:"Für die komplette Abdeckung zusätzlich:", abo_visit:"Zum Anbieter", abo_reset:"Zurücksetzen",
+    abo_aff_note:"Anbieter-Links sind neutral (kein Affiliate aktiv). Preise ca., Stand Juni 2026 — bitte beim Anbieter prüfen.",
     f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
@@ -608,10 +673,19 @@ const I18N = {
     where:"Channels in", more:"Channels in other countries", less:"Show less", running:"Live",
     fta:"Free TV", pay:"Pay", recent:"Past matches", top_news:"Latest news", prov_title:"Providers & Prices",
     best_free:"Free TV", best_radio:"Radio", best_pay:"Pay only", source:"Source", goals:"goals", read:"Read at source",
-    tz:"CET", share:"Share", shared:"Link copied", shared_btn:"Copied!",
+    tz:"CET", share:"Share", shared:"Link copied", shared_btn:"Copied!", cal_add:"Add to calendar", cal_done:"Saved as .ics 📅",
     ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
     price_from:"from", price_approx:"approx.",
     result:"Final", ft:"FT", nohits:"No results", f_all:"All", f_3goals:"3+ goals", f_top:"Top games",
+    f_free:"Free TV only", f_tonight:"Tonight", f_now:"Live now", f_mine:"★ Mine",
+    mine_empty:"Not following any team yet — tap “follow” on a match.", filt_empty:"No matches for this filter.",
+    follow:"follow", following:"following", follow_hint:"Follow teams to see only your matches — calendar reminder included.",
+    abo_title:"Which subscription do I need?", abo_sub:"Pick what you want to watch — we show the cheapest combination and what stays free.",
+    abo_pick:"Choose competitions:", abo_pick_none:"Tap the competitions above that you want to watch.",
+    abo_total:"Cheapest combination", abo_month:"/mo", abo_free_only:"Completely free — no subscription needed! 🎉",
+    abo_free_keeps:"Free with ARD/ZDF", abo_need:"You'll need", abo_full:"full", abo_partial:"part",
+    abo_complete:"For full coverage also add:", abo_visit:"Visit provider", abo_reset:"Reset",
+    abo_aff_note:"Provider links are neutral (no affiliate active). Prices approx., as of June 2026 — please verify with the provider.",
     f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
@@ -936,13 +1010,63 @@ const PROVIDERS = [
 ];
 
 let LANG="de", LIVE_FILTER="all", LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+const FOLLOW = new Set();   // gefolgte Teams (nur In-Memory pro Sitzung — kein localStorage)
+const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
+
+/* =========================================================================
+   ABO-RECHNER · Anbieter-, Preis- & Rechte-Daten   (Markt: Deutschland)
+   ▸ EINZIGE Quelle für den Rechner — hier Preise/Rechte pflegen.
+   ▸ price = günstigster regulärer Einstieg pro Monat (ca.), Stand Juni 2026.
+     DAZN 34,99 (Jahresabo) · Sky/WOW 29,99 · MagentaSport 9,95 ·
+     Prime 8,99 · RTL+ 6,99 · ARD/ZDF beitragsfinanziert = 0.
+   ▸ AFFILIATE: Das Feld "aff" ist ein Platzhalter und greift NUR, wenn
+     AFFILIATE_ENABLED = true. Default AUS -> es werden neutrale url-Links genutzt.
+   ========================================================================= */
+const AFFILIATE_ENABLED = false; // Feature-Flag: Affiliate-Links AUS (Standard)
+const ABO_PROVIDERS = {
+  ard_zdf:{name:"ARD / ZDF",          free:true,  price:0,     note:{de:"Beitragsfinanziert, frei empfangbar", en:"Licence-funded, free to air"}, url:"https://www.sportschau.de",        aff:""},
+  magenta:{name:"MagentaTV",          free:false, price:9.95,  note:{de:"MagentaSport · WM-Paket separat",      en:"MagentaSport · WC package separate"}, url:"https://www.telekom.de/magenta-tv", aff:""},
+  sky:    {name:"Sky / WOW",          free:false, price:29.99, note:{de:"WOW Live-Sport oder Sky Bundesliga",   en:"WOW Live-Sport or Sky Bundesliga"},   url:"https://www.wow.de",               aff:""},
+  dazn:   {name:"DAZN",               free:false, price:34.99, note:{de:"Unlimited · Jahresabo",               en:"Unlimited · annual plan"},           url:"https://www.dazn.com",             aff:""},
+  prime:  {name:"Amazon Prime Video", free:false, price:8.99,  note:{de:"in der Prime-Mitgliedschaft",          en:"part of Prime membership"},          url:"https://www.amazon.de/prime",      aff:""},
+  rtl:    {name:"RTL+",               free:false, price:6.99,  note:{de:"RTL+ Premium",                        en:"RTL+ Premium"},                      url:"https://plus.rtl.de",              aff:""}
+};
+/* Wettbewerb -> Carrier · cov: "full" (zeigt alle Spiele) | "part" (nur Auswahl) */
+const ABO_COMPS = [
+  {id:"wm",   name:{de:"WM 2026",en:"World Cup 2026"},            carriers:[{p:"ard_zdf",cov:"part"},{p:"magenta",cov:"full"}]},
+  {id:"bl",   name:{de:"Bundesliga",en:"Bundesliga"},            carriers:[{p:"sky",cov:"part"},{p:"dazn",cov:"part"}]},
+  {id:"bl2",  name:{de:"2. Bundesliga",en:"2. Bundesliga"},      carriers:[{p:"sky",cov:"full"}]},
+  {id:"dfb",  name:{de:"DFB-Pokal",en:"DFB-Pokal"},              carriers:[{p:"sky",cov:"full"},{p:"ard_zdf",cov:"part"}]},
+  {id:"cl",   name:{de:"Champions League",en:"Champions League"},carriers:[{p:"dazn",cov:"full"},{p:"prime",cov:"part",req:false}]},
+  {id:"el",   name:{de:"Europa League",en:"Europa League"},      carriers:[{p:"rtl",cov:"full"}]},
+  {id:"ecl",  name:{de:"Conference League",en:"Conference League"},carriers:[{p:"rtl",cov:"full"}]},
+  {id:"pl",   name:{de:"Premier League",en:"Premier League"},    carriers:[{p:"sky",cov:"full"}]},
+  {id:"liga", name:{de:"La Liga",en:"La Liga"},                  carriers:[{p:"dazn",cov:"full"}]},
+  {id:"sa",   name:{de:"Serie A",en:"Serie A"},                  carriers:[{p:"dazn",cov:"full"}]},
+  {id:"l3",   name:{de:"3. Liga",en:"3. Liga"},                  carriers:[{p:"magenta",cov:"full"}]}
+];
+
+/* TODO (Backend/später, nicht im HTML-Prototyp):
+   - Eigene Domain + Next.js + indexierbare Einzel-Spiel-Landingpages für SEO
+     (z. B. /verein-a-gegen-verein-b-heute-uebertragung).
+   - Newsletter/Push für Wiederkehr, unabhängig von Google-SEO.
+   - FOLLOW + ABO_SEL serverseitig/lokal persistieren (hier bewusst nur In-Memory). */
 
 /* ---------- Helpers ---------- */
 const CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
 const SHARE_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg>';
+const CAL_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>';
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function shareBar(title,text,url){const t=I18N[LANG];
   return '<div class="sharebar"><button class="sharebtn" data-share data-share-title="'+esc(title)+'" data-share-text="'+esc(text)+'" data-share-url="'+esc(url)+'">'+SHARE_ICON+'<span>'+t.share+'</span></button></div>';}
+function followBtn(team){ const on=FOLLOW.has(team), t=I18N[LANG];
+  return '<button class="sharebtn folbtn'+(on?' done':'')+'" data-follow="'+esc(team)+'" title="'+esc(team)+' '+(on?t.following:t.follow)+'">'+(on?'★ ':'☆ ')+'<span>'+esc(team)+'</span></button>'; }
+function liveActions(m){const t=I18N[LANG];
+  const ch=((m.tv&&m.tv[COUNTRY])||[]).map(s=>s.n).join(", ");
+  const cal='<button class="sharebtn calbtn" data-cal data-day="'+esc(m.day)+'" data-time="'+esc(m.time)+'" data-h="'+esc(m.h)+'" data-a="'+esc(m.a)+'" data-comp="'+esc(m.comp||"")+'" data-ch="'+esc(ch)+'">'+CAL_ICON+'<span>'+t.cal_add+'</span></button>';
+  const share='<button class="sharebtn" data-share data-share-title="'+esc(m.h+" – "+m.a)+'" data-share-text="'+esc(m.h+" – "+m.a+" · "+(m.comp||"")+" (TVFussball.de)")+'" data-share-url="https://tvfussball.de">'+SHARE_ICON+'<span>'+t.share+'</span></button>';
+  return '<div class="sharebar">'+followBtn(m.h)+followBtn(m.a)+cal+share+'</div>';
+}
 
 /* Übersetzungs-Helfer für deutschsprachige Datenfelder */
 const WD_FULL={Montag:"Monday",Dienstag:"Tuesday",Mittwoch:"Wednesday",Donnerstag:"Thursday",Freitag:"Friday",Samstag:"Saturday",Sonntag:"Sunday"};
@@ -974,17 +1098,34 @@ function adSlotHTML(){ const t=I18N[LANG]; if(ADS_ENABLED) return '<div class="a
 function dayKey(s){const x=String(s).match(/(\d{2})\.(\d{2})\.(\d{4})/); return x?(+x[3])*10000+(+x[2])*100+(+x[1]):0;}
 function catOf(m){ if(m.cat) return m.cat; const c=m.comp||""; if(/^WM/i.test(c)) return "wm"; if(/DFB/i.test(c)) return "dfb"; if(/Bundesliga/i.test(c)) return "bl"; if(/Champions/i.test(c)) return "cl"; return "other"; }
 function soonHint(t,cat){ let title=t.soon_title, sub=t.soon_sub; if(cat==="bl"){ title=t.soon_bl_t; sub=t.soon_bl; } return '<div class="soonbox"><span class="ic">🗓️</span><div><b>'+title+'</b><span>'+sub+'</span></div></div>'; }
+function isFreeTV(m){ return !m.tba && (m.tv && (m.tv[COUNTRY]||[]).some(s=>s.t==="fta")); }
+function todayKeyNow(){ const d=new Date(); return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate(); }
+function matchStart(m){ const dm=String(m.day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(m.time).match(/(\d{1,2}):(\d{2})/);
+  if(!dm||!tm) return null; return new Date(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]); }
+function isLiveNow(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return !!m.live;
+  const now=Date.now(); return now>=s.getTime() && now<=s.getTime()+115*60000; }
+function isTonight(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return false;
+  return dayKey(m.day)===todayKeyNow() && s.getHours()>=18; }
+function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(dayKey(m.day)>=TODAY_KEY && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); return n; }
 function renderLiveFilters(){ const t=I18N[LANG];
-  const defs=[["all",t.f_all],["wm",t.f_wm],["dfb",t.f_dfb],["bl",t.f_bl],["cl",t.f_cl]];
+  const mc=mineCount();
+  const defs=[["all",t.f_all],["mine",t.f_mine+(mc?" ("+mc+")":"")],["free",t.f_free],["tonight",t.f_tonight],["now",t.f_now],
+    ["wm",t.f_wm],["dfb",t.f_dfb],["bl",t.f_bl],["cl",t.f_cl]];
   document.getElementById("liveFilters").innerHTML = defs.map(d=>
     '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(LIVE_FILTER===d[0])+'">'+d[1]+'</button>').join("");
 }
 function renderLive(){
   const t=I18N[LANG], board=document.getElementById("liveBoard");
   document.getElementById("liveNote").innerHTML = t.live_note;
+  const openKeys=[...board.querySelectorAll(".row.open")].map(r=>r.dataset.k); // offene Karten merken
   const q=(LIVE_Q||"").trim().toLowerCase();
   let list = MATCHES.filter(m=>dayKey(m.day)>=TODAY_KEY);
-  if(LIVE_FILTER!=="all") list = list.filter(m=>catOf(m)===LIVE_FILTER);
+  const F=LIVE_FILTER;
+  if(F==="mine")        list = list.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a));
+  else if(F==="free")   list = list.filter(isFreeTV);
+  else if(F==="tonight")list = list.filter(isTonight);
+  else if(F==="now")    list = list.filter(isLiveNow);
+  else if(F!=="all")    list = list.filter(m=>catOf(m)===F);
   if(q) list = list.filter(m=>((m.h+" "+m.a+" "+(m.comp||"")).toLowerCase().includes(q)));
   list.sort((a,b)=> (dayKey(a.day)-dayKey(b.day)) || String(a.time).localeCompare(String(b.time)));
   let html="", curDay="";
@@ -994,24 +1135,32 @@ function renderLive(){
   });
   let hint="";
   if(!q && (LIVE_FILTER==="bl"||LIVE_FILTER==="cl")) hint = soonHint(t, LIVE_FILTER);
-  if(!list.length && !hint) hint = q ? soonHint(t) : '<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
+  if(!list.length && !hint){
+    if(LIVE_FILTER==="mine" && !FOLLOW.size) hint='<div class="empty">'+t.mine_empty+'</div>';
+    else if(["mine","free","tonight","now"].includes(LIVE_FILTER)) hint='<div class="empty">'+t.filt_empty+'</div>';
+    else hint = q ? soonHint(t) : '<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
+  }
   board.innerHTML = html + hint;
+  openKeys.forEach(k=>{ const r=board.querySelector('.row[data-k="'+CSS.escape(k)+'"]'); // offene Karten wiederherstellen
+    if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); } });
 }
+function rowKey(m){ return esc(m.day+"|"+m.time+"|"+m.h+"|"+m.a); }
+function folMark(team){ return FOLLOW.has(team)?'<span class="folmark">★</span>':''; }
 function tbaRow(m,t){
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" (TVFussball.de)", "https://tvfussball.de");
-  return '<div class="row tba">'+
+  return '<div class="row tba" data-k="'+rowKey(m)+'">'+
     '<button class="rowhead" aria-expanded="false">'+
       '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>'+
       '<div class="teams">'+
-        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
-        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="t">'+folMark(m.h)+'<span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
+        '<div class="t" style="margin-top:3px">'+folMark(m.a)+'<span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
         '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span><span class="freebest pay">'+t.tba_chip+'</span></div>'+
       '</div>'+
       '<span class="chev">'+CHEV+'</span>'+
     '</button>'+
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="soonbox sm"><span class="ic">📺</span><div><b>'+t.tba_note_t+'</b><span>'+t.tba_note_s+'</span></div></div>'+
-      share+
+      liveActions(m)+
     '</div></div></div>'+
   '</div>';
 }
@@ -1025,11 +1174,11 @@ function matchRow(m){
   const aux = [ ...getRadio(m).map(r=>'<a href="#"><span class="ic">♪</span>'+r+'</a>'),
                 ...getTicker(m).map(x=>'<a href="#"><span class="ic">≡</span>'+x+'</a>') ].join("");
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" — "+(LANG==="de"?"wo läuft das Spiel?":"where to watch?")+" (TVFussball.de)", "https://tvfussball.de");
-  return '<div class="row'+(free?' free':'')+'">'+
+  return '<div class="row'+(free?' free':'')+'" data-k="'+rowKey(m)+'">'+
     '<button class="rowhead" aria-expanded="false">'+timeCell+
       '<div class="teams">'+
-        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
-        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="t">'+folMark(m.h)+'<span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
+        '<div class="t" style="margin-top:3px">'+folMark(m.a)+'<span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
         '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+
       '</div>'+
       '<span class="chev">'+CHEV+'</span>'+
@@ -1040,7 +1189,7 @@ function matchRow(m){
       '<button class="morebtn" data-more aria-expanded="false">＋ '+t.more+'</button>'+
       '<div class="morewrap"><div>'+groups+'</div></div>'+
       (aux?'<div class="auxlinks">'+aux+'</div>':"")+
-      share+
+      liveActions(m)+
     '</div></div></div>'+
   '</div>';
 }
@@ -1195,6 +1344,42 @@ function setTheme(th){ document.documentElement.dataset.theme=th; const b=docume
 let TOAST_TIMER;
 function toast(msg){ const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
   clearTimeout(TOAST_TIMER); TOAST_TIMER=setTimeout(()=>el.classList.remove("show"),1900); }
+function icsPad(n){return String(n).padStart(2,"0");}
+function icsRange(day,time){
+  const dm=String(day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(time).match(/(\d{1,2}):(\d{2})/);
+  if(!dm||!tm) return null;
+  const start=new Date(Date.UTC(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]));
+  const end=new Date(start.getTime()+120*60000);
+  const f=d=>d.getUTCFullYear()+icsPad(d.getUTCMonth()+1)+icsPad(d.getUTCDate())+"T"+icsPad(d.getUTCHours())+icsPad(d.getUTCMinutes())+"00";
+  return {s:f(start), e:f(end)};
+}
+function icsEsc(t){return String(t||"").replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
+const ICS_TZ=["BEGIN:VTIMEZONE","TZID:Europe/Berlin",
+ "BEGIN:DAYLIGHT","TZOFFSETFROM:+0100","TZOFFSETTO:+0200","TZNAME:CEST","DTSTART:19700329T020000","RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU","END:DAYLIGHT",
+ "BEGIN:STANDARD","TZOFFSETFROM:+0200","TZOFFSETTO:+0100","TZNAME:CET","DTSTART:19701025T030000","RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU","END:STANDARD",
+ "END:VTIMEZONE"];
+function addToCalendar(d){
+  const t=I18N[LANG], r=icsRange(d.day,d.time);
+  if(!r){ toast(LANG==="de"?"Termin konnte nicht erstellt werden":"Could not create event"); return; }
+  const now=new Date();
+  const fz=x=>x.getUTCFullYear()+icsPad(x.getUTCMonth()+1)+icsPad(x.getUTCDate())+"T"+icsPad(x.getUTCHours())+icsPad(x.getUTCMinutes())+icsPad(x.getUTCSeconds())+"Z";
+  const uid=r.s+"-"+(d.h+d.a).replace(/[^A-Za-z0-9]/g,"")+"@tvfussball.de";
+  const sum="⚽ "+d.h+" – "+d.a;
+  const desc=(d.comp||"")+(d.ch?" · "+(LANG==="de"?"Sender":"Channel")+": "+d.ch:"")+" — TVFussball.de";
+  let lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//TVFussball.de//Spielplan//DE","CALSCALE:GREGORIAN","METHOD:PUBLISH"]
+    .concat(ICS_TZ)
+    .concat(["BEGIN:VEVENT","UID:"+uid,"DTSTAMP:"+fz(now),
+      "DTSTART;TZID=Europe/Berlin:"+r.s,"DTEND;TZID=Europe/Berlin:"+r.e,
+      "SUMMARY:"+icsEsc(sum),"DESCRIPTION:"+icsEsc(desc)]);
+  if(d.ch) lines.push("LOCATION:"+icsEsc(d.ch));
+  lines=lines.concat(["BEGIN:VALARM","TRIGGER:-PT15M","ACTION:DISPLAY","DESCRIPTION:"+icsEsc(sum),"END:VALARM","END:VEVENT","END:VCALENDAR"]);
+  const blob=new Blob([lines.join("\r\n")],{type:"text/calendar;charset=utf-8"});
+  const url=URL.createObjectURL(blob), a=document.createElement("a");
+  a.href=url; a.download=(d.h+"-"+d.a).replace(/[^A-Za-z0-9ÄÖÜäöüß]+/g,"_")+".ics";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  toast(t.cal_done);
+}
 async function doShare(btn){
   const t=I18N[LANG];
   const title=btn.dataset.shareTitle||"TVFussball.de";
@@ -1211,12 +1396,82 @@ async function doShare(btn){
   setTimeout(()=>{ btn.classList.remove("done"); lbl.textContent=old; },1800);
 }
 
-function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); applyLang(); }
+/* ---------- Render: Abo-Rechner ---------- */
+function eur(n){ const s=Number(n).toFixed(2); return (LANG==="de"?s.replace(".",","):s)+" €"; }
+function aboReqCarriers(c){ return c.carriers.filter(ca=>ca.req!==false); }
+function aboBestCombo(selIds){
+  const provIds=Object.keys(ABO_PROVIDERS), comps=ABO_COMPS.filter(c=>selIds.includes(c.id));
+  if(!comps.length) return null;
+  const n=provIds.length; let best=null;
+  for(let mask=0; mask<(1<<n); mask++){
+    const chosen=[]; for(let i=0;i<n;i++) if(mask&(1<<i)) chosen.push(provIds[i]);
+    if(!comps.every(c=>aboReqCarriers(c).some(ca=>chosen.includes(ca.p)))) continue; // jeder Wettbewerb braucht ≥1 Carrier
+    const cost=chosen.reduce((s,p)=>s+ABO_PROVIDERS[p].price,0);
+    if(!best || cost<best.cost || (cost===best.cost && chosen.length<best.chosen.length)) best={chosen,cost};
+  }
+  return best;
+}
+function aboCompCoverage(c, chosen){
+  const reqIn=c.carriers.filter(ca=>ca.req!==false && chosen.includes(ca.p));
+  const cov=reqIn.some(ca=>ca.cov==="full")?"full":"part";
+  const viaFree=reqIn.some(ca=>ABO_PROVIDERS[ca.p].free);
+  let hint=null;
+  if(cov!=="full"){
+    const fullC=c.carriers.find(ca=>ca.cov==="full" && ca.req!==false && !chosen.includes(ca.p));
+    if(fullC) hint=[fullC.p];
+    else { const miss=c.carriers.filter(ca=>ca.req!==false && !chosen.includes(ca.p)).map(ca=>ca.p); if(miss.length) hint=miss; }
+  }
+  return {cov,viaFree,hint};
+}
+function aboLink(p){ return (AFFILIATE_ENABLED && p.aff) ? p.aff : p.url; }
+function renderAbo(){
+  const t=I18N[LANG], chipsEl=document.getElementById("aboChips"), res=document.getElementById("aboRes");
+  if(!chipsEl||!res) return;
+  chipsEl.innerHTML = ABO_COMPS.map(c=>{ const on=!!ABO_SEL[c.id];
+    return '<button class="abo-chip" data-aboc="'+c.id+'" aria-pressed="'+on+'">'+(on?'<span class="ck">✓</span>':'')+c.name[LANG]+'</button>'; }).join("");
+  const sel=ABO_COMPS.filter(c=>ABO_SEL[c.id]).map(c=>c.id);
+  if(!sel.length){ res.innerHTML='<div class="abo-empty">'+t.abo_pick_none+'</div>'; return; }
+  const best=aboBestCombo(sel), chosen=best.chosen;
+  const ordered=chosen.slice().sort((a,b)=>ABO_PROVIDERS[b].price-ABO_PROVIDERS[a].price); // teuerste zuerst, gratis zuletzt
+  let html="";
+  if(best.cost<=0) html+='<div class="abo-totbar free"><span class="abo-totlbl">'+t.abo_total+'</span><span class="abo-tot free">'+t.abo_free_only+'</span></div>';
+  else html+='<div class="abo-totbar"><span class="abo-totlbl">'+t.abo_total+'</span><span class="abo-tot">'+eur(best.cost)+'<small> '+t.abo_month+'</small></span></div>';
+  html+='<div class="abo-need">'+t.abo_need+'</div>';
+  ordered.forEach(pid=>{ const p=ABO_PROVIDERS[pid];
+    html+='<div class="abo-prov"><div class="abo-plogo'+(p.free?' free':'')+'">'+mono(p.name)+'</div>'+
+      '<div class="abo-pmid"><div class="abo-pname">'+p.name+'</div><div class="abo-pnote">'+p.note[LANG]+'</div></div>'+
+      '<div class="abo-pprice'+(p.free?' free':'')+'">'+(p.free?(LANG==="de"?"gratis":"free"):eur(p.price)+" "+t.abo_month)+'</div></div>'; });
+  html+='<div class="abo-cov">';
+  sel.forEach(id=>{ const c=ABO_COMPS.find(x=>x.id===id), cv=aboCompCoverage(c,chosen);
+    const pill=cv.viaFree?'<span class="abo-pill free">'+t.fta+'</span>':(cv.cov==="full"?'<span class="abo-pill full">'+t.abo_full+'</span>':'<span class="abo-pill part">'+t.abo_partial+'</span>');
+    let row='<div class="abo-covrow"><span class="cn">'+c.name[LANG]+'</span>'+pill;
+    if(cv.hint&&cv.hint.length){ row+='<span class="abo-hint">↳ '+t.abo_complete+' '+cv.hint.map(p=>ABO_PROVIDERS[p].name).join(" + ")+'</span>'; }
+    html+=row+'</div>'; });
+  html+='</div>';
+  const freeComps=sel.map(id=>ABO_COMPS.find(x=>x.id===id)).filter(c=>aboCompCoverage(c,chosen).viaFree);
+  if(freeComps.length) html+='<div class="abo-covrow" style="margin-top:10px"><span class="abo-pill free">'+t.fta+'</span><span class="cn">'+t.abo_free_keeps+': '+freeComps.map(c=>c.name[LANG]).join(", ")+'</span></div>';
+  html+='<div class="abo-foot">';
+  ordered.forEach(pid=>{ const p=ABO_PROVIDERS[pid];
+    html+='<a class="abo-visit'+(p.free?' free':'')+'" href="'+aboLink(p)+'" target="_blank" rel="noopener nofollow sponsored">'+t.abo_visit+': '+p.name+' ↗</a>'; });
+  html+='<button class="abo-reset" id="aboReset">'+t.abo_reset+'</button></div>';
+  html+='<div class="abo-affnote">'+t.abo_aff_note+'</div>';
+  res.innerHTML=html;
+}
+
+function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); renderAbo(); applyLang(); }
 
 /* ---------- Events ---------- */
 document.addEventListener("click", e=>{
+  const ca=e.target.closest("[data-cal]");
+  if(ca){ addToCalendar(ca.dataset); return; }
   const sh=e.target.closest("[data-share]");
   if(sh){ doShare(sh); return; }
+  const fol=e.target.closest("[data-follow]");
+  if(fol){ const team=fol.dataset.follow; FOLLOW.has(team)?FOLLOW.delete(team):FOLLOW.add(team);
+    renderLiveFilters(); renderLive(); return; }
+  const ac=e.target.closest("[data-aboc]");
+  if(ac){ const id=ac.dataset.aboc; if(ABO_SEL[id]) delete ABO_SEL[id]; else ABO_SEL[id]=true; renderAbo(); return; }
+  if(e.target.id==="aboReset" || e.target.closest("#aboReset")){ Object.keys(ABO_SEL).forEach(k=>delete ABO_SEL[k]); renderAbo(); return; }
   const wopt=e.target.closest("[data-wq]");
   if(wopt){ wmAnswer(+wopt.dataset.wq, +wopt.dataset.wo); return; }
   const wlike=e.target.closest("[data-wm-like]");
