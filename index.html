@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TVFussball.de — Wo läuft was?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* LIGHT = Standard */
+  :root{
+    --bg:#F5F7FA; --bg2:#EAEEF5; --surface:#FFFFFF; --surface2:#F1F4F9;
+    --line:#E3E8F0; --line2:#D2DAE6;
+    --ink:#0E1726; --muted:#54607A; --faint:#96A1B5;
+    --green:#2F54EB; --green-soft:rgba(47,84,235,.10); --green-line:rgba(47,84,235,.24);
+    --free:#07966A; --free-soft:rgba(7,150,106,.12); --free-line:rgba(7,150,106,.30);
+    --red:#E5484D; --on-accent:#FFFFFF;
+    --wm:#B7791F; --wm-soft:#FBF3DD;
+    --glow1:rgba(47,84,235,.06); --glow2:rgba(47,84,235,.02);
+    --header-bg:rgba(255,255,255,.85); --hover:rgba(14,23,38,.035);
+    --ball-circle:#1B3A8A; --ball-panel:#FFFFFF;
+    --shadow:0 1px 2px rgba(16,24,40,.04), 0 12px 30px -10px rgba(16,24,40,.12);
+    --header-shadow:0 4px 20px rgba(16,24,40,.05);
+    --r:16px;
+  }
+  /* DARK = professionell überarbeitet */
+  html[data-theme="dark"]{
+    --bg:#0A0D14; --bg2:#0E121B; --surface:#141A26; --surface2:#1C2433;
+    --line:#262F3F; --line2:#37424F;
+    --ink:#E9EDF5; --muted:#98A3B6; --faint:#5E6878;
+    --green:#6B8AFF; --green-soft:rgba(107,138,255,.16); --green-line:rgba(107,138,255,.36);
+    --free:#2FD49A; --free-soft:rgba(47,212,154,.15); --free-line:rgba(47,212,154,.34);
+    --red:#FF6F6F; --on-accent:#0A0D14;
+    --wm:#E8C44E; --wm-soft:rgba(232,196,78,.12);
+    --glow1:rgba(107,138,255,.12); --glow2:rgba(233,237,245,.022);
+    --header-bg:rgba(10,13,20,.82); --hover:rgba(255,255,255,.04);
+    --ball-circle:#E9EDF5; --ball-panel:#141A26;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 32px -16px rgba(0,0,0,.8);
+    --header-shadow:0 6px 24px rgba(0,0,0,.5);
+    --r:13px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg); color:var(--ink); font-family:"Hanken Grotesk",system-ui,sans-serif;
+    line-height:1.45; min-height:100vh; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+  body::before{content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:radial-gradient(820px 460px at 12% -10%, var(--glow1), transparent 62%),
+      radial-gradient(760px 420px at 96% -6%, var(--glow2), transparent 60%)}
+  .wrap{position:relative; z-index:1; max-width:760px; margin:0 auto; padding:0 14px 96px}
+  button{font-family:inherit; cursor:pointer; color:inherit}
+  .mono{font-family:"Space Mono",monospace}
+  :focus-visible{outline:2px solid var(--green); outline-offset:2px; border-radius:6px}
+
+  header{position:sticky; top:0; z-index:40; background:var(--header-bg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line); box-shadow:var(--header-shadow)}
+  .hbar{max-width:760px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; gap:12px; justify-content:space-between}
+  .logo{font-family:"Archivo",sans-serif; font-weight:900; letter-spacing:-.025em; font-size:19px; white-space:nowrap; line-height:1}
+  .logo .tv{background:var(--green); color:var(--on-accent); padding:3px 5px; border-radius:6px; margin-right:1px; font-style:italic}
+  .logo .de{color:var(--faint); font-weight:700; font-size:13px}
+  .switches{display:flex; align-items:center; gap:8px}
+  .seg{display:flex; background:var(--bg2); border:1px solid var(--line); border-radius:9px; padding:2px; gap:1px}
+  .seg button{border:none; background:transparent; color:var(--muted); font-size:11.5px; font-weight:700; padding:6px 9px; border-radius:7px; font-family:"Space Mono",monospace}
+  .seg button[aria-pressed="true"]{background:var(--surface2); color:var(--green)}
+  .themebtn{border:1px solid var(--line); background:var(--bg2); color:var(--muted); border-radius:9px; width:34px; height:34px; display:grid; place-items:center}
+  .themebtn svg{width:18px; height:18px}
+  .themebtn:hover{color:var(--ink); border-color:var(--green-line)}
+
+  /* Bottom navigation */
+  nav.bottomnav{position:fixed; left:0; right:0; bottom:0; z-index:45; display:flex; justify-content:center; gap:2px;
+    padding:8px 10px calc(8px + env(safe-area-inset-bottom)); background:var(--header-bg);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-top:1px solid var(--line);
+    box-shadow:0 -6px 22px rgba(19,33,58,.06)}
+  html[data-theme="dark"] nav.bottomnav{box-shadow:none}
+  .navitem{flex:1 1 0; max-width:140px; border:none; background:none; display:flex; flex-direction:column; align-items:center; gap:4px;
+    padding:6px 2px; border-radius:13px; color:var(--muted); font-family:"Hanken Grotesk",sans-serif; font-weight:600;
+    font-size:10px; white-space:nowrap; transition:color .15s, background .15s, transform .1s}
+  .navitem svg{width:22px; height:22px}
+  .navitem[aria-selected="true"]{color:var(--green); background:var(--green-soft)}
+  .navitem:active{transform:scale(.95)}
+
+  /* Day separators */
+  .daybar{display:flex; align-items:center; gap:11px; margin:20px 2px 11px}
+  .daybar .d{font-family:"Archivo",sans-serif; font-weight:800; font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+  .daybar .ln{flex:1; height:1px; background:var(--line)}
+  .section-eyebrow{display:flex; align-items:baseline; gap:9px; margin:18px 2px 9px}
+  .section-eyebrow h2{font-family:"Archivo",sans-serif; font-weight:800; font-size:17px; letter-spacing:-.02em}
+  .section-eyebrow .cnt{font-family:"Space Mono",monospace; font-size:11px; color:var(--faint)}
+
+  /* Match / card rows */
+  .board{display:flex; flex-direction:column; gap:8px}
+  .row{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); transition:border-color .18s}
+  .row.open{border-color:var(--line2)}
+  .row.free{box-shadow:inset 3px 0 0 var(--free), var(--shadow)}
+  .rowhead{width:100%; border:none; background:none; display:grid; grid-template-columns:52px 1fr auto; align-items:center; gap:12px; padding:13px 14px 13px 15px; text-align:left}
+  .rowhead:hover{background:var(--hover)}
+  .time{font-family:"Space Mono",monospace; font-weight:700; font-size:16px; color:var(--ink); text-align:center; line-height:1.05}
+  .time small{display:block; font-size:8px; color:var(--faint); font-weight:400; letter-spacing:.06em; margin-top:3px}
+  .time.live{color:var(--red)}
+  .live-flag{display:inline-flex; align-items:center; gap:4px; font-family:"Space Mono",monospace; font-size:9px; color:var(--red); font-weight:700; letter-spacing:.04em}
+  .live-flag b{width:5px; height:5px; border-radius:50%; background:var(--red); animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,90,77,.5)}70%{box-shadow:0 0 0 6px rgba(255,90,77,0)}100%{box-shadow:0 0 0 0 rgba(255,90,77,0)}}
+  .teams{min-width:0}
+  .teams .t{font-weight:600; font-size:15px; display:flex; align-items:center; gap:8px}
+  .teams .t .sc{font-family:"Space Mono",monospace; font-weight:700; margin-left:auto; font-size:14px; color:var(--ink)}
+  .flag{font-size:16px; line-height:1; flex:0 0 auto; width:1.25em; text-align:center}
+  .teams .meta{display:flex; align-items:center; gap:8px; margin-top:7px; flex-wrap:wrap}
+  .comp{font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.05em; text-transform:uppercase; border-left:1.5px solid var(--line2); padding-left:7px}
+  .freebest{font-family:"Space Mono",monospace; font-size:9.5px; font-weight:700; padding:2.5px 7px; border-radius:6px; display:inline-flex; gap:4px; align-items:center; white-space:nowrap}
+  .freebest.tv{background:var(--free); color:var(--on-accent)}
+  .freebest.radio{background:transparent; color:var(--free); border:1px solid var(--free-line)}
+  .freebest.pay{background:transparent; color:var(--muted); border:1px solid var(--line2)}
+  .chev{justify-self:end; width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:var(--bg2); color:var(--muted); display:grid; place-items:center; transition:transform .25s ease, background .15s, color .15s, border-color .15s; flex:0 0 auto}
+  .chev svg{width:16px; height:16px}
+  .rowhead:hover .chev{color:var(--green); border-color:var(--green-line)}
+  .row.open .chev{transform:rotate(180deg); background:var(--green-soft); color:var(--green); border-color:var(--green-line)}
+
+  .panel{display:grid; grid-template-rows:0fr; transition:grid-template-rows .26s ease}
+  .row.open .panel{grid-template-rows:1fr}
+  .panel-in{overflow:hidden; min-height:0}
+  .panel-pad{padding:2px 15px 14px; border-top:1px solid var(--line)}
+  .dh{font:700 10.5px "Hanken Grotesk",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:13px 0 4px; display:flex; align-items:center; gap:6px}
+  .dh .ff{font-size:14px}
+  .chlist{}
+  .chrow{display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid var(--line); font-size:14px}
+  .chrow:last-child{border-bottom:0}
+  .chrow .nm{font-weight:600}
+  .chrow .none{color:var(--faint); font-style:italic; font-size:13px}
+  .q{font-family:"Space Mono",monospace; font-weight:700; font-size:9px; letter-spacing:.02em; padding:2px 5px; border-radius:4px; background:var(--surface2); color:var(--muted); border:1px solid var(--line)}
+  .q.k4{color:var(--green); border-color:var(--green-line)}
+  .q.k8{color:var(--red)}
+  .chrow .tag{font-family:"Space Mono",monospace; font-size:9px; font-weight:700; letter-spacing:.03em; padding:2.5px 7px; border-radius:5px; margin-left:auto; white-space:nowrap}
+  .tag.fta{background:var(--free); color:var(--on-accent)}
+  .tag.pay{background:transparent; color:var(--muted); border:1px solid var(--line2)}
+
+  .morebtn{margin-top:11px; width:100%; border:1px solid var(--line); background:var(--bg2); color:var(--muted); border-radius:10px; padding:10px; font-weight:700; font-size:12.5px; display:flex; align-items:center; justify-content:center; gap:7px}
+  .morebtn:hover{color:var(--ink); border-color:var(--green-line)}
+  .morewrap{display:grid; grid-template-rows:0fr; transition:grid-template-rows .24s ease}
+  .morewrap.show{grid-template-rows:1fr}
+  .morewrap > div{overflow:hidden; min-height:0}
+  .cgroup{margin-top:12px}
+  .cgroup .ctitle{display:flex; align-items:center; gap:7px; font:700 12.5px "Hanken Grotesk",sans-serif; color:var(--ink); margin-bottom:2px}
+  .cgroup .ctitle .ff{font-size:15px}
+
+  .auxlinks{display:flex; flex-wrap:wrap; gap:7px; margin-top:12px}
+  .auxlinks a{font-size:11.5px; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:8px; padding:6px 9px; background:var(--bg2); display:inline-flex; align-items:center; gap:6px}
+  .auxlinks a:hover{color:var(--ink); border-color:var(--line2)}
+  .auxlinks a .ic{color:var(--free); font-size:11px}
+
+  /* Highlights extras */
+  .summary{font-family:"Space Mono",monospace; font-size:12.5px; color:var(--ink); padding:12px 0 4px; font-weight:700}
+  .scorers{display:flex; flex-direction:column; gap:6px; padding:6px 0}
+  .scorer{display:flex; align-items:center; gap:9px; font-size:13.5px}
+  .scorer .min{font-family:"Space Mono",monospace; color:var(--free); font-size:12px; width:46px; font-weight:700}
+  .scorer .who{font-weight:600}
+  .vids{display:grid; gap:9px; margin-top:6px}
+  .vid{border:1px solid var(--line); border-radius:11px; overflow:hidden; background:var(--bg2)}
+  .vthumb{aspect-ratio:16/9; background:linear-gradient(140deg,#1d2b46,#101a2e); display:grid; place-items:center; position:relative}
+  html[data-theme="dark"] .vthumb{background:linear-gradient(140deg,#23241d,#16160f)}
+  .vthumb .play{width:48px; height:48px; border-radius:50%; background:var(--green); display:grid; place-items:center; color:var(--on-accent)}
+  .vthumb .play svg{margin-left:3px}
+  .vthumb .yt{position:absolute; top:8px; left:9px; font-family:"Space Mono",monospace; font-size:9px; color:#cfd8ea; background:rgba(8,14,26,.65); padding:3px 6px; border-radius:5px}
+  .vcap{display:flex; justify-content:space-between; gap:8px; padding:9px 11px; font-size:11px}
+  .vcap .vt{font-weight:600}
+  .vcap .src{color:var(--faint); font-family:"Space Mono",monospace; font-size:9.5px; white-space:nowrap}
+
+  /* Highlights: Quellen / Relive / Pay */
+  .sumrow{display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid var(--line); font-size:13.5px}
+  .sumrow:last-child{border-bottom:0}
+  .slabel{font-family:"Space Mono",monospace; font-weight:700; font-size:10px; padding:3px 7px; border-radius:5px; border:1px solid var(--line2); color:var(--muted); flex:0 0 auto}
+  .slabel.zdf{color:#C8791B; border-color:rgba(231,160,60,.45); background:rgba(231,160,60,.12)}
+  .slabel.ard{color:#2C6BD6; border-color:rgba(74,140,230,.45); background:rgba(74,140,230,.12)}
+  .slabel.yt{color:#D63A35; border-color:rgba(229,80,70,.45); background:rgba(229,80,70,.12)}
+  html[data-theme="dark"] .slabel.zdf{color:#F0B45A}
+  html[data-theme="dark"] .slabel.ard{color:#74B0FF}
+  html[data-theme="dark"] .slabel.yt{color:#FF7A72}
+  .sumrow .sname{font-weight:600; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .sumrow .sright{margin-left:auto; display:flex; align-items:center; gap:11px; flex:0 0 auto}
+  .sumrow .slen{font-family:"Space Mono",monospace; font-size:11px; color:var(--faint)}
+  .sumrow .swatch{font-size:11.5px; color:var(--green); font-weight:700; text-decoration:none; white-space:nowrap}
+  .sumrow .swatch:hover{text-decoration:underline}
+  .fullm{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink); background:var(--free-soft); border:1px solid var(--free-line); border-radius:12px; padding:12px 13px; margin-top:2px}
+  .fullm:hover{border-color:var(--free)}
+  .fullm .fic{width:33px; height:33px; border-radius:9px; background:var(--free); color:var(--on-accent); display:grid; place-items:center; font-size:12px; flex:0 0 auto}
+  .fullm .ftx{flex:1; display:flex; flex-direction:column; min-width:0}
+  .fullm .ftx b{font-weight:700; font-size:14px}
+  .fullm .ftx span{font-size:11.5px; color:var(--muted)}
+  .fullm .fmeta{text-align:right; font-size:11px; color:var(--muted); white-space:nowrap; line-height:1.45; flex:0 0 auto}
+  .fullm .fmeta b{display:block; color:var(--free); font-size:11.5px; font-weight:700}
+  .paybox{display:flex; align-items:center; gap:11px; background:var(--bg2); border:1px dashed var(--line2); border-radius:12px; padding:12px 13px; font-size:12.5px; color:var(--muted); margin-top:2px}
+  .paybox .pic{width:33px; height:33px; border-radius:9px; background:var(--surface2); display:grid; place-items:center; flex:0 0 auto}
+  .paybox a{color:var(--green); font-weight:700; text-decoration:none}
+  .paybox a:hover{text-decoration:underline}
+
+  /* Teilen-Button + Toast */
+  .sharebar{display:flex; justify-content:flex-end; margin-top:13px}
+  .sharebtn{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line2); background:var(--bg2); color:var(--ink); border-radius:10px; padding:8px 14px; font-weight:700; font-size:12.5px; font-family:"Hanken Grotesk",sans-serif}
+  .sharebtn svg{width:15px; height:15px}
+  .sharebtn:hover{border-color:var(--green-line); color:var(--green)}
+  .sharebtn.done{border-color:var(--free-line); color:var(--free); background:var(--free-soft)}
+  .toast{position:fixed; left:50%; bottom:86px; transform:translateX(-50%) translateY(12px); z-index:70; background:var(--ink); color:var(--bg); font-size:12.5px; font-weight:700; padding:11px 18px; border-radius:11px; box-shadow:0 12px 34px rgba(0,0,0,.28); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  /* ===== WM-Tab ===== */
+  .wm-hero{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:20px; padding:20px 18px; background:var(--surface); box-shadow:var(--shadow); margin-bottom:4px}
+  .wm-hero::before{content:""; position:absolute; inset:0; opacity:.09; background:linear-gradient(100deg,#1f6fff 0 33%,#ffffff 33% 66%,#16a34a 66% 100%)}
+  html[data-theme="dark"] .wm-hero::before{opacity:.14}
+  .wm-eyebrow{position:relative; display:inline-flex; align-items:center; gap:6px; font-family:"Space Mono",monospace; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--wm); border:1px solid var(--wm); background:var(--wm-soft); border-radius:999px; padding:5px 11px}
+  .wm-h1{position:relative; font-family:"Archivo",sans-serif; font-weight:900; letter-spacing:-.025em; font-size:27px; line-height:1.06; margin:13px 0 5px}
+  .wm-sub{position:relative; color:var(--muted); font-size:13.5px; max-width:46ch}
+  .wm-meta{position:relative; margin-top:13px; display:flex; flex-wrap:wrap; gap:7px}
+  .wm-pill{font-size:11.5px; font-weight:600; color:var(--muted); background:var(--bg2); border:1px solid var(--line); border-radius:999px; padding:5px 11px}
+  .wm-pill b{color:var(--ink); font-family:"Space Mono",monospace}
+
+  details.wmsec{margin-top:10px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
+  details.wmsec>summary{list-style:none; cursor:pointer; padding:15px 15px; display:flex; align-items:center; gap:13px}
+  details.wmsec>summary::-webkit-details-marker{display:none}
+  .wm-secico{flex:0 0 auto; width:42px; height:42px; border-radius:12px; display:grid; place-items:center; background:var(--green-soft); color:var(--green); border:1px solid var(--green-line)}
+  .wm-secico svg{width:21px; height:21px}
+  .wm-sectt{flex:1 1 auto; min-width:0}
+  .wm-sectt b{display:block; font-family:"Archivo",sans-serif; font-weight:800; font-size:16px; letter-spacing:-.01em}
+  .wm-sectt span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+  .wmchev{flex:0 0 auto; width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:var(--bg2); color:var(--muted); display:grid; place-items:center; transition:transform .25s ease, color .15s, background .15s, border-color .15s}
+  .wmchev svg{width:16px; height:16px}
+  details.wmsec>summary:hover .wmchev,details.wmsub>summary:hover .wmchev{color:var(--green); border-color:var(--green-line)}
+  details.wmsec[open]>summary .wmchev,details.wmsub[open]>summary .wmchev{transform:rotate(180deg); color:var(--green); background:var(--green-soft); border-color:var(--green-line)}
+  .wmsec-body{padding:0 15px 16px}
+  .wm-updated{display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--muted); margin:2px 0 10px}
+  .wm-dot{width:7px; height:7px; border-radius:50%; background:var(--free); box-shadow:0 0 0 3px var(--free-soft)}
+
+  details.wmsub{border:1px solid var(--line); border-radius:11px; margin-top:9px; background:var(--bg2); overflow:hidden}
+  details.wmsub>summary{list-style:none; cursor:pointer; padding:11px 13px; display:flex; align-items:center; gap:9px}
+  details.wmsub>summary::-webkit-details-marker{display:none}
+  .wm-lbl{flex:1; font-weight:700; font-size:13.5px}
+  .wm-mini{font-family:"Space Mono",monospace; font-size:11px; color:var(--faint)}
+  .wmsub-body{padding:3px 12px 12px}
+  .wm-legend{display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--muted); padding:9px 2px 2px}
+  .wm-legend i{display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:middle}
+
+  table.wm-tbl{width:100%; border-collapse:collapse; font-size:13px}
+  table.wm-tbl th{font-family:"Space Mono",monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--faint); font-weight:700; text-align:center; padding:6px 2px; border-bottom:1px solid var(--line)}
+  table.wm-tbl th.team{text-align:left; padding-left:6px}
+  table.wm-tbl td{padding:8px 2px; text-align:center; border-bottom:1px solid var(--line)}
+  table.wm-tbl tr:last-child td{border-bottom:none}
+  table.wm-tbl td.team{text-align:left; font-weight:600}
+  table.wm-tbl td.team .fl{margin-right:6px}
+  table.wm-tbl td.pkt{font-weight:800; font-family:"Space Mono",monospace}
+  table.wm-tbl td.pos{color:var(--faint); font-weight:700; width:20px; font-family:"Space Mono",monospace}
+  table.wm-tbl tr.q{box-shadow:inset 3px 0 0 var(--free)}
+  table.wm-tbl tr.q td.pos{color:var(--free)}
+  table.wm-tbl tr.maybe{box-shadow:inset 3px 0 0 var(--wm)}
+
+  .wm-koday{font-family:"Space Mono",monospace; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--faint); margin:13px 2px 5px}
+  .wm-match{border:1px solid var(--line); border-radius:11px; padding:11px 12px; margin-top:8px; background:var(--surface)}
+  .wm-t{display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; padding:3px 0}
+  .wm-t .fl{font-size:17px}
+  .wm-t.open{color:var(--muted); font-weight:600}
+  .wm-t .tip{margin-left:auto; font-family:"Space Mono",monospace; font-size:9px; font-weight:700; letter-spacing:.04em; color:var(--free); border:1px solid var(--free-line); background:var(--free-soft); border-radius:6px; padding:2px 7px}
+  .wm-vs{font-family:"Space Mono",monospace; font-size:10px; color:var(--faint); font-weight:700; padding-left:2px}
+  .wm-info{display:flex; flex-wrap:wrap; gap:5px 12px; margin-top:9px; padding-top:9px; border-top:1px dashed var(--line); font-size:11.5px; color:var(--muted)}
+  .wm-info b{color:var(--ink); font-weight:700}
+  .wm-nn{opacity:.7; font-style:italic}
+
+  .wm-count{font-size:11.5px; color:var(--faint); margin:2px 2px 6px}
+  .wm-anthem{display:flex; align-items:center; gap:11px; padding:11px 2px; border-bottom:1px solid var(--line)}
+  .wm-anthem:last-child{border-bottom:none}
+  .wm-anthem .fl{font-size:23px; flex:0 0 auto; width:1.3em; text-align:center}
+  .wm-att{flex:1; min-width:0}
+  .wm-att .n{font-weight:700; font-size:14px}
+  .wm-att .n em{font-style:normal; color:var(--muted); font-weight:600}
+  .wm-att .d{font-size:12px; color:var(--muted); margin-top:2px}
+  .wm-play{flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-size:12px; font-weight:700; color:#fff; background:#CC0000; border-radius:9px; padding:8px 11px; white-space:nowrap}
+  .wm-play svg{width:14px; height:14px}
+  .wm-empty{padding:22px 6px; text-align:center; color:var(--faint); font-size:13px}
+
+  .wm-introtext{font-size:12.5px; color:var(--muted); margin:2px 2px 8px}
+  .wm-q{border:1px solid var(--line); border-radius:12px; padding:13px; margin-top:10px; background:var(--surface)}
+  .wm-q .qn{font-family:"Space Mono",monospace; font-size:10px; font-weight:700; letter-spacing:.05em; color:var(--green); text-transform:uppercase}
+  .wm-q .qt{font-weight:700; font-size:14.5px; margin:5px 0 9px}
+  .wm-opt{display:flex; justify-content:space-between; align-items:center; gap:8px; width:100%; text-align:left; border:1px solid var(--line); background:var(--bg2); color:var(--ink); border-radius:10px; padding:10px 12px; font-size:13.5px; margin-top:7px; cursor:pointer; transition:border-color .15s, background .15s; font-family:"Hanken Grotesk",sans-serif}
+  .wm-opt:hover{border-color:var(--green-line)}
+  .wm-opt.correct{border-color:var(--free-line); background:var(--free-soft)}
+  .wm-opt.wrong{border-color:var(--red); background:rgba(229,72,77,.12)}
+  .wm-opt.locked{cursor:default}
+  .wm-opt .mk{font-weight:800}
+  .wm-quizbar{position:sticky; bottom:78px; margin-top:14px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:11px 14px; display:flex; align-items:center; gap:12px; box-shadow:var(--shadow)}
+  .wm-sc{font-family:"Space Mono",monospace; font-weight:700; font-size:14px}
+  .wm-sc span{color:var(--muted); font-weight:400; font-size:12px}
+  .wm-quizbar button{margin-left:auto; border:1px solid var(--line2); background:var(--bg2); color:var(--ink); border-radius:9px; padding:8px 13px; font-size:12.5px; font-weight:700}
+  .wm-result{margin-top:12px; border-radius:12px; padding:16px; text-align:center; border:1px solid var(--wm); background:var(--wm-soft)}
+  .wm-result .big{font-family:"Archivo",sans-serif; font-weight:900; font-size:28px}
+  .wm-result .lvl{font-weight:800; font-size:16px; margin-top:3px}
+  .wm-result .rsub{font-size:12.5px; color:var(--muted); margin-top:4px}
+
+  .wm-wip{font-size:12.5px; font-weight:700; color:var(--wm); background:var(--wm-soft); border:1px solid var(--wm); border-radius:11px; padding:11px 13px; margin:2px 0 12px}
+  .wm-memegrid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  @media(max-width:520px){.wm-memegrid{grid-template-columns:1fr}}
+  .wm-meme{border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface)}
+  .wm-meme .img{aspect-ratio:16/10; display:grid; place-items:center; font-size:42px; background:var(--bg2)}
+  .wm-meme .cap{padding:10px 11px; font-size:13px; font-weight:600; line-height:1.35}
+  .wm-meme .bar{display:flex; align-items:center; gap:6px; padding:0 11px 11px}
+  .wm-meme .lk{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:var(--bg2); color:var(--ink); border-radius:9px; padding:6px 10px; font-size:12px; font-weight:700; cursor:pointer}
+  .wm-meme .lk.on{color:var(--red); border-color:var(--red)}
+  .wm-meme .tagx{margin-left:auto; font-family:"Space Mono",monospace; font-size:9px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--faint)}
+
+  /* Filters & search */
+  .filters{display:flex; gap:7px; overflow-x:auto; padding:4px 0 2px; scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .fchip{flex:0 0 auto; border:1px solid var(--line); background:var(--bg2); color:var(--muted); padding:7px 14px; font-size:12px; font-weight:600; white-space:nowrap; border-radius:99px}
+  .fchip[aria-pressed="true"]{background:var(--green); color:var(--on-accent); border-color:var(--green)}
+  .fsearch{display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 13px; margin:11px 0 4px; box-shadow:var(--shadow)}
+  .fsearch input{flex:1; background:none; border:none; color:var(--ink); font-family:inherit; font-size:13.5px; outline:none}
+  .fsearch input::placeholder{color:var(--faint)}
+  .fsearch .ic{color:var(--muted); font-size:16px}
+
+  /* News */
+  .news{display:flex; flex-direction:column; gap:8px}
+  .ncard{display:block; text-decoration:none; color:inherit; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:15px; box-shadow:var(--shadow); transition:border-color .16s}
+  .ncard:hover{border-color:var(--line2)}
+  .nhead{display:flex; align-items:center; gap:8px; margin-bottom:8px}
+  .nsrc{display:inline-flex; align-items:center; gap:7px; font-family:"Space Mono",monospace; font-size:10px; font-weight:700; color:var(--muted)}
+  .nsrc .dot{width:20px; height:20px; border-radius:5px; display:grid; place-items:center; font-size:8.5px; color:var(--muted); font-family:"Archivo",sans-serif; font-weight:900; background:var(--surface2); border:1px solid var(--line2)}
+  .ntime{margin-left:auto; font-family:"Space Mono",monospace; font-size:10px; color:var(--faint)}
+  .ncard h3{font-family:"Archivo",sans-serif; font-weight:700; font-size:15.5px; line-height:1.25; letter-spacing:-.01em}
+  .ncard p{color:var(--muted); font-size:13px; margin-top:6px}
+  .ntags{display:flex; gap:6px; margin-top:10px; flex-wrap:wrap}
+  .ntag{font-size:10px; color:var(--muted); background:var(--bg2); border:1px solid var(--line); border-radius:6px; padding:2px 8px; font-weight:600}
+  .nlink{font-size:11.5px; color:var(--green); font-weight:700; display:inline-flex; align-items:center; gap:5px}
+  .ncard{border-left:4px solid var(--club,var(--line))}
+  .nhead .dot{font-family:"Archivo",sans-serif; font-weight:900; letter-spacing:-.03em}
+  .nfoot{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:11px; padding-top:10px; border-top:1px dashed var(--line)}
+  .nsource{font-family:"Space Mono",monospace; font-size:10.5px; color:var(--muted)}
+  .fchip .cdot{width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:7px; vertical-align:middle; box-shadow:0 0 0 1px rgba(0,0,0,.14) inset}
+
+  /* Providers */
+  .provlist{display:flex; flex-direction:column; gap:8px}
+  .pcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:15px; box-shadow:var(--shadow); transition:border-color .16s}
+  .pcard:hover{border-color:var(--line2)}
+  .phead{display:flex; align-items:center; gap:11px}
+  .plogo{width:40px; height:40px; border-radius:10px; flex:0 0 auto; display:grid; place-items:center; font-family:"Archivo",sans-serif; font-weight:900; font-size:12px; letter-spacing:-.04em; background:var(--surface2); color:var(--ink); border:1px solid var(--line2)}
+  .plogo.free{background:var(--free-soft); color:var(--free); border-color:var(--free-line)}
+  .pname{font-family:"Archivo",sans-serif; font-weight:700; font-size:15.5px}
+  .pcc{font-family:"Space Mono",monospace; font-size:10px; color:var(--faint); margin-top:2px; letter-spacing:.04em}
+  .phead .tag{margin-left:auto; font-family:"Space Mono",monospace; font-size:9px; font-weight:700; padding:3px 7px; border-radius:5px}
+  .pcard p{color:var(--muted); font-size:12.5px; margin-top:9px}
+  .pcomps{display:flex; gap:6px; flex-wrap:wrap; margin-top:9px}
+  .pcomp{font-size:10px; color:var(--muted); background:var(--bg2); border:1px solid var(--line); border-radius:6px; padding:2px 8px; font-weight:600}
+  .pfoot{display:flex; align-items:center; gap:10px; margin-top:11px; padding-top:11px; border-top:1px solid var(--line)}
+  .pprice{font-family:"Space Mono",monospace; font-weight:700; font-size:13px; color:var(--ink)}
+  .pprice small{display:block; font-family:"Hanken Grotesk",sans-serif; font-weight:400; font-size:10.5px; color:var(--faint); margin-top:1px}
+  .pprice small.pcheck{color:var(--green); opacity:.9; margin-top:3px}
+  .pvisit{margin-left:auto; font-size:12px; font-weight:700; color:var(--on-accent); background:var(--green); border:none; border-radius:9px; padding:9px 14px; text-decoration:none; display:inline-flex; align-items:center; gap:5px; white-space:nowrap}
+  .pvisit:hover{filter:brightness(1.06)}
+
+  .adslot{border:1px dashed var(--line2); border-radius:var(--r); padding:18px 12px; text-align:center}
+  .adslot .lbl{font-family:"Space Mono",monospace; font-size:10px; color:var(--faint); letter-spacing:.08em}
+  .adslot .sub{font-size:11px; color:var(--faint); margin-top:4px}
+  .empty{text-align:center; color:var(--faint); font-size:13px; padding:34px 0}
+  .note{color:var(--faint); font-size:11.5px; line-height:1.6; padding:18px 2px 6px}
+  .note a{color:var(--green); text-decoration:none}
+  .note b{color:var(--muted)}
+
+  /* Ball loader */
+  .loader{position:fixed; inset:0; z-index:60; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center}
+  .loader.hide{opacity:0; pointer-events:none; transition:opacity .4s}
+  .court{width:54px; height:78px; position:relative}
+  .ball{position:absolute; top:0; left:50%; width:36px; height:36px; margin-left:-18px; animation:bounce .6s cubic-bezier(.32,0,.68,1) infinite alternate}
+  .ball svg{display:block}
+  .ball svg circle{fill:var(--ball-circle)}
+  .ball svg path{fill:var(--ball-panel)}
+  .shadow{position:absolute; bottom:2px; left:50%; width:36px; height:9px; margin-left:-18px; background:radial-gradient(ellipse at center, rgba(0,0,0,.5), transparent 72%); border-radius:50%; animation:shadow .6s cubic-bezier(.32,0,.68,1) infinite alternate}
+  @keyframes bounce{0%{transform:translateY(0)}100%{transform:translateY(42px)}}
+  @keyframes shadow{0%{transform:scaleX(.5) scaleY(.7); opacity:.22}100%{transform:scaleX(1.15) scaleY(1.1); opacity:.55}}
+  .loader .ltxt{font-family:"Space Mono",monospace; font-size:11px; color:var(--green); letter-spacing:.14em; margin-top:18px}
+
+  .tabpane{display:none}
+  .tabpane.active{display:block}
+  footer{border-top:1px solid var(--line); margin-top:24px; padding:18px 2px; display:flex; flex-wrap:wrap; gap:12px 18px; color:var(--faint); font-size:11.5px}
+  footer a{color:var(--muted); text-decoration:none}
+  footer a:hover{color:var(--ink)}
+  footer .lnote{flex-basis:100%; font-size:10.5px; line-height:1.5; color:var(--faint)}
+
+  .consent{position:fixed; left:12px; right:12px; bottom:80px; z-index:55; max-width:736px; margin:0 auto;
+    background:var(--surface); border:1px solid var(--line2); border-radius:13px; padding:14px;
+    display:flex; gap:12px; align-items:center; box-shadow:0 14px 44px rgba(19,33,58,.18)}
+  .consent.hide{display:none}
+  .consent p{font-size:11.5px; color:var(--muted); flex:1}
+  .consent .cbtns{display:flex; gap:7px; flex:0 0 auto}
+  .consent button{border-radius:9px; padding:8px 13px; font-size:12px; font-weight:700; border:1px solid var(--line2); background:var(--bg2); color:var(--ink)}
+  .consent button.ok{background:var(--green); color:var(--on-accent); border-color:var(--green)}
+
+  @media (max-width:480px){.seg button{padding:6px 7px}.rowhead{grid-template-columns:46px 1fr auto; gap:10px}}
+  @media (prefers-reduced-motion:reduce){.ball,.shadow,.live-flag b{animation:none !important}.ball{transform:translateY(22px)}*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="court">
+    <div class="ball"><svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="17" fill="#F4F2EA"/>
+      <path d="M18 6.6l5 3.6-1.9 5.9h-6.2l-1.9-5.9 5-3.6z" fill="#1A1A17"/>
+      <path d="M8.4 13.1l1.9 5.9-3.9 3-1.2-1.2a13 13 0 0 1 3.2-7.7zM27.6 13.1a13 13 0 0 1 3.2 7.7l-1.2 1.2-3.9-3 1.9-5.9zM12.6 29.8l1.5-3.8h7.8l1.5 3.8a13 13 0 0 1-10.8 0z" fill="#1A1A17"/>
+    </svg></div>
+    <div class="shadow"></div>
+  </div>
+  <div class="ltxt">LADE SPIELTAG</div>
+</div>
+
+<header>
+  <div class="hbar">
+    <span class="logo"><span class="tv">TV</span>FUSSBALL<span class="de">.de</span></span>
+    <div class="switches">
+      <div class="seg lang" role="group" aria-label="Sprache">
+        <button data-lang="de" aria-pressed="true">DE</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="themebtn" id="themeToggle" aria-label="Hell/Dunkel umschalten"></button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="tabpane active" id="pane-live" role="tabpanel">
+    <div class="board" id="liveBoard"></div>
+    <p class="note" id="liveNote"></p>
+  </section>
+
+  <section class="tabpane" id="pane-hl" role="tabpanel">
+    <div class="fsearch"><span class="ic">⌕</span><input id="hlSearch" type="text" placeholder="Mannschaft suchen … (z. B. Frankreich)"></div>
+    <div class="filters" id="hlFilters"></div>
+    <div class="section-eyebrow"><h2 data-i18n="recent">Vergangene Spiele</h2><span class="cnt mono" id="hlCount"></span></div>
+    <div class="board" id="hlBoard"></div>
+    <p class="note" id="hlNote"></p>
+  </section>
+
+  <section class="tabpane" id="pane-news" role="tabpanel">
+    <div class="fsearch"><span class="ic">⌕</span><input id="newsSearch" type="text" placeholder="Mannschaft oder Spieler filtern …"></div>
+    <div class="filters" id="newsFilters"></div>
+    <div class="section-eyebrow"><h2 data-i18n="top_news">Top-News heute</h2><span class="cnt mono" id="newsUpdated"></span></div>
+    <div class="news" id="newsList"></div>
+  </section>
+
+  <section class="tabpane" id="pane-anbieter" role="tabpanel">
+    <div class="fsearch"><span class="ic">⌕</span><input id="provSearch" type="text" placeholder="Anbieter, Wettbewerb oder Land suchen …"></div>
+    <div class="filters" id="provFilters"></div>
+    <div class="section-eyebrow"><h2 data-i18n="prov_title">Anbieter &amp; Preise</h2><span class="cnt mono" id="provCount"></span></div>
+    <div class="provlist" id="provList"></div>
+    <p class="note" id="provNote"></p>
+  </section>
+
+  <section class="tabpane" id="pane-wm" role="tabpanel">
+    <div class="wm-hero">
+      <span class="wm-eyebrow">🏆 <span data-i18n="wm_eyebrow">WM Special 2026</span></span>
+      <h1 class="wm-h1" data-i18n="wm_title">Die WM in USA, Kanada &amp; Mexiko</h1>
+    </div>
+
+    <details class="wmsec">
+      <summary>
+        <span class="wm-secico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 9a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .9-1 1.5v.7"/><circle cx="12" cy="17" r=".6" fill="currentColor"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <span class="wm-sectt"><b data-i18n="wm_quiz">WM Quiz</b><span data-i18n="wm_quiz_sub">15 Fragen — wie gut kennst du die WM 2026?</span></span>
+        <span class="wmchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+      </summary>
+      <div class="wmsec-body">
+        <p class="wm-introtext" data-i18n="wm_quiz_intro">Tippe pro Frage auf eine Antwort. Du siehst sofort, ob es stimmt. Am Ende gibt es deinen Rang.</p>
+        <div id="wm-quiz"></div>
+        <div class="wm-quizbar"><div class="wm-sc" id="wm-score"></div><button id="wm-quizReset" data-i18n="wm_quiz_reset">Neu starten</button></div>
+        <div id="wm-quizResult"></div>
+      </div>
+    </details>
+
+    <details class="wmsec">
+      <summary>
+        <span class="wm-secico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span>
+        <span class="wm-sectt"><b data-i18n="wm_anthems">Hymnen der Teams</b><span data-i18n="wm_anthems_sub">Alle 48 Teams — mit Kurzbeschreibung und Anhör-Link</span></span>
+        <span class="wmchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+      </summary>
+      <div class="wmsec-body">
+        <div class="fsearch"><span class="ic">⌕</span><input id="wm-anthemSearch" type="text" placeholder="Land suchen … z. B. Brasilien, Japan"></div>
+        <div class="wm-count" id="wm-anthemCount"></div>
+        <div id="wm-anthemList"></div>
+      </div>
+    </details>
+
+    <p class="note" id="wmNote"></p>
+  </section>
+
+  <footer>
+    <a href="#" data-i18n="imprint">Impressum</a>
+    <a href="#" data-i18n="privacy">Datenschutz</a>
+    <a href="#" data-i18n="about">Über uns</a>
+    <span class="lnote" data-i18n="legal_note">TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.</span>
+  </footer>
+</div>
+
+<nav class="bottomnav" role="tablist" aria-label="Bereiche">
+  <button class="navitem" role="tab" aria-selected="true" data-tab="live">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/><path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/></svg>
+    <span data-i18n="nav_live">Heute</span></button>
+  <button class="navitem" role="tab" aria-selected="false" data-tab="hl">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M10.2 8.6l4.8 3.4-4.8 3.4z" fill="currentColor" stroke="none"/></svg>
+    <span data-i18n="nav_hl">Highlights</span></button>
+  <button class="navitem" role="tab" aria-selected="false" data-tab="news">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h12.5v15H6.2A2.2 2.2 0 0 1 4 17.3z"/><path d="M16.5 8.5h3.5v9a2 2 0 0 1-2 2"/><path d="M7 8.5h6.5M7 12h6.5M7 15.5h4"/></svg>
+    <span data-i18n="nav_news">News</span></button>
+  <button class="navitem" role="tab" aria-selected="false" data-tab="anbieter">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 3.3l7.1 7.1a2 2 0 0 1 0 2.8l-6.5 6.5a2 2 0 0 1-2.8 0l-7.1-7.1V5.3a2 2 0 0 1 2-2z"/><circle cx="8" cy="8" r="1.5"/></svg>
+    <span data-i18n="nav_prov">Anbieter</span></button>
+  <button class="navitem" role="tab" aria-selected="false" data-tab="wm">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 21.5h16"/><path d="M10 14.6V17c0 .6-.5 1-1 1.2C7.9 18.8 7 20.2 7 21.5"/><path d="M14 14.6V17c0 .6.5 1 1 1.2 1.1.5 2 1.9 2 2.8"/><path d="M18 2.5H6V9a6 6 0 0 0 12 0V2.5z"/></svg>
+    <span data-i18n="nav_wm">WM</span></button>
+</nav>
+
+<div class="consent hide" id="consent">
+  <p data-i18n="consent_text">Wir nutzen Geo-IP, YouTube-Einbettungen (nocookie) und – sobald aktiviert – Werbung. Auslieferung erst nach deiner Einwilligung.</p>
+  <div class="cbtns">
+    <button id="consentNo" data-i18n="consent_no">Ablehnen</button>
+    <button class="ok" id="consentYes" data-i18n="consent_yes">Einverstanden</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const ADS_ENABLED = false;
+const COUNTRY = "DE"; // Standardmarkt (in Produktion per Geo-IP); alle Länder unter „Mehr Sender"
+const TODAY_KEY = 20260624; // Stichtag: Spiele davor erscheinen nicht mehr in der Senderliste (sondern in Highlights)
+
+const I18N = {
+  de:{ nav_live:"Heute", nav_hl:"Highlights", nav_news:"News", nav_prov:"Anbieter", nav_wm:"WM",
+    wm_eyebrow:"WM Special 2026", wm_title:"Die WM in USA, Kanada & Mexiko",
+    wm_sub:"Tabellen, K.-o.-Baum, Hymnen aller Teams, Memes und das große Quiz — alles an einem Ort.",
+    wm_groups:"Gruppen", wm_final:"Finale", wm_tables:"Tabellen & K.-o.-Runde",
+    wm_tables_sub:"Gruppen A–L plus Sechzehntel-, Achtel- und Viertelfinale",
+    wm_updated:"Stand: 23. Juni 2026 · Gruppenphase, Rangfolge ändert sich bis 27.06.",
+    wm_group_phase:"Gruppenphase", wm_leg_q:"1.–2.: Kurs Achtelfinale", wm_leg_m:"3.: beste Dritte",
+    wm_r32:"Sechzehntelfinale", wm_r16:"Achtelfinale", wm_r8:"Viertelfinale",
+    wm_quiz:"WM Quiz", wm_quiz_sub:"15 Fragen — wie gut kennst du die WM 2026?",
+    wm_quiz_intro:"Tippe pro Frage auf eine Antwort. Du siehst sofort, ob es stimmt. Am Ende gibt es deinen Rang.",
+    wm_quiz_reset:"Neu starten", wm_correct:"richtig",
+    wm_anthems:"Hymnen der Teams", wm_anthems_sub:"Alle 48 Teams — mit Kurzbeschreibung und Anhör-Link", wm_listen:"Anhören",
+    wm_memes:"Memes & Kurioses", wm_memes_sub:"Diese Sektion ist noch in Bearbeitung",
+    wm_wip:"Diese Sektion ist noch in Bearbeitung — Inhalte und Bilder folgen.",
+    wm_meme_note:"Bilder sind Platzhalter. Die Likes gelten nur für diese Sitzung.",
+    where:"Sender in", more:"Sender in weiteren Ländern", less:"Weniger anzeigen", running:"Läuft",
+    fta:"Free-TV", pay:"Pay", recent:"Vergangene Spiele", top_news:"Aktuelle News", prov_title:"Anbieter & Preise",
+    best_free:"Free-TV", best_radio:"Radio", best_pay:"Nur Pay", source:"Quelle", goals:"Tore", read:"Zur Quelle",
+    tz:"MEZ", share:"Teilen", shared:"Link kopiert", shared_btn:"Kopiert!",
+    ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
+    price_from:"ab", price_approx:"ca.",
+    result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Topspiele",
+    visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
+    imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
+    legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
+    consent_text:"Wir nutzen Geo-IP, YouTube-Einbettungen (nocookie) und – sobald aktiviert – Werbung. Auslieferung erst nach deiner Einwilligung.",
+    consent_no:"Ablehnen", consent_yes:"Einverstanden",
+    prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
+    live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Sender DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
+    f_relive:"Ganzes Spiel gratis", hl_summaries:"Zusammenfassungen", hl_full:"Komplettes Spiel",
+    hl_watch:"ansehen", hl_whole:"Ganze Partie", hl_free_stream:"kostenlos im Stream", hl_checked:"geprüft",
+    hl_pay_only:"Kein kostenloses Komplettspiel — nur bei", hl_pay_suffix:"(Pay · alle 104 Spiele)",
+    hl_note:"Quellen: ZDF-Mediathek, ARD/Sportschau, offizielle YouTube-Kanäle (abgerufen 23.06.2026). Ganze Spiele („Relive“) gibt es nur für ARD/ZDF-Partien und nur zeitlich begrenzt gratis; sonst ausschließlich Pay (MagentaTV, alle 104 Spiele). TVFussball verlinkt nur, überträgt selbst nicht." },
+  en:{ nav_live:"Today", nav_hl:"Highlights", nav_news:"News", nav_prov:"Providers", nav_wm:"WM",
+    wm_eyebrow:"World Cup Special 2026", wm_title:"The World Cup in USA, Canada & Mexico",
+    wm_sub:"Tables, knockout bracket, anthems of all teams, memes and the big quiz — all in one place.",
+    wm_groups:"groups", wm_final:"Final", wm_tables:"Tables & knockout stage",
+    wm_tables_sub:"Groups A–L plus round of 32, 16 and quarter-finals",
+    wm_updated:"As of 23 June 2026 · group stage, standings change until 27 June.",
+    wm_group_phase:"Group stage", wm_leg_q:"1st–2nd: into the round of 32", wm_leg_m:"3rd: best-third ranking",
+    wm_r32:"Round of 32", wm_r16:"Round of 16", wm_r8:"Quarter-finals",
+    wm_quiz:"World Cup quiz", wm_quiz_sub:"15 questions — how well do you know the 2026 World Cup?",
+    wm_quiz_intro:"Tap one answer per question. You'll see right away if it's correct. Your rank shows at the end.",
+    wm_quiz_reset:"Restart", wm_correct:"correct",
+    wm_anthems:"Team anthems", wm_anthems_sub:"All 48 teams — with a short description and a listen link", wm_listen:"Listen",
+    wm_memes:"Memes & oddities", wm_memes_sub:"This section is still in progress",
+    wm_wip:"This section is still in progress — content and images to follow.",
+    wm_meme_note:"Images are placeholders. Likes are for this session only.",
+    where:"Channels in", more:"Channels in other countries", less:"Show less", running:"Live",
+    fta:"Free TV", pay:"Pay", recent:"Past matches", top_news:"Latest news", prov_title:"Providers & Prices",
+    best_free:"Free TV", best_radio:"Radio", best_pay:"Pay only", source:"Source", goals:"goals", read:"Read at source",
+    tz:"CET", share:"Share", shared:"Link copied", shared_btn:"Copied!",
+    ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
+    price_from:"from", price_approx:"approx.",
+    result:"Final", ft:"FT", nohits:"No results", f_all:"All", f_3goals:"3+ goals", f_top:"Top games",
+    visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
+    imprint:"Imprint", privacy:"Privacy", about:"About",
+    legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
+    consent_text:"We use Geo-IP, YouTube embeds (nocookie) and — once enabled — advertising. Delivery only after your consent.",
+    consent_no:"Decline", consent_yes:"Accept",
+    prov_note:"Prices approx., as of June 2026 — offers, bundles and terms vary. Please check with the provider before subscribing.",
+    live_note:"Kick-off times in Central European Time (CET). Channels DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Quality: 4K = UHD (MagentaTV), HD = HD broadcast; below HD no symbol. Domestic leagues (Bundesliga, Premier League, Serie A, La Liga, Champions/Europa League) are currently on summer break.",
+    f_relive:"Free full match", hl_summaries:"Summaries", hl_full:"Full match",
+    hl_watch:"watch", hl_whole:"Full match", hl_free_stream:"free stream", hl_checked:"verified",
+    hl_pay_only:"No free full match — only on", hl_pay_suffix:"(pay · all 104 games)",
+    hl_note:"Sources: ZDF Mediathek, ARD/Sportschau, official YouTube channels (retrieved 23 June 2026). Full-match replays are only available free for ARD/ZDF games and only for a limited time; otherwise pay only (MagentaTV, all 104 games). TVFussball only links, it does not broadcast." }
+};
+
+/* Flaggen (Emoji) */
+const FL = {Portugal:"🇵🇹",Usbekistan:"🇺🇿",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Ghana:"🇬🇭",Panama:"🇵🇦",Kroatien:"🇭🇷",
+  Kolumbien:"🇨🇴","DR Kongo":"🇨🇩",Schweiz:"🇨🇭",Kanada:"🇨🇦","Bosnien-H.":"🇧🇦",Katar:"🇶🇦",
+  Marokko:"🇲🇦",Haiti:"🇭🇹",Schottland:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",Brasilien:"🇧🇷",Tschechien:"🇨🇿",Mexiko:"🇲🇽",
+  "Südafrika":"🇿🇦","Südkorea":"🇰🇷",Ecuador:"🇪🇨",Deutschland:"🇩🇪","Curaçao":"🇨🇼","Elfenbeinküste":"🇨🇮",
+  Norwegen:"🇳🇴",Senegal:"🇸🇳",Jordanien:"🇯🇴",Algerien:"🇩🇿",Frankreich:"🇫🇷",Irak:"🇮🇶",
+  Argentinien:"🇦🇷","Österreich":"🇦🇹",Spanien:"🇪🇸","Saudi-Arabien":"🇸🇦",Tunesien:"🇹🇳",Japan:"🇯🇵",
+  Niederlande:"🇳🇱",Schweden:"🇸🇪","Türkei":"🇹🇷",Paraguay:"🇵🇾",USA:"🇺🇸",Australien:"🇦🇺",Iran:"🇮🇷",
+  Neuseeland:"🇳🇿",Uruguay:"🇺🇾",Belgien:"🇧🇪","Ägypten":"🇪🇬","Kap Verde":"🇨🇻","Bosnien-Herzegowina":"🇧🇦"};
+function flag(n){ return FL[n] || "⚽"; }
+
+/* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
+const MAG={n:"MagentaTV",t:"pay",q:"4K"}, ARD={n:"Das Erste",t:"fta",q:"HD"}, ZDF={n:"ZDF",t:"fta",q:"HD"},
+  ORF={n:"ORF 1",t:"fta",q:"HD"}, SERV={n:"ServusTV",t:"fta",q:"HD"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD"},
+  SRF2={n:"SRF zwei",t:"fta",q:"HD"}, SRFi={n:"SRF info",t:"fta",q:"HD"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
+  SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
+  UKg={n:"BBC / ITV",t:"fta",q:"HD"};
+
+const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧"};
+const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK"}};
+
+/* WM 2026 — echte Partien, Zeiten (MEZ), Sender (DE/AT/CH via fussballgucken.info, UK via BBC/ITV) */
+const MATCHES = [
+  {day:"Dienstag, 23.06.2026", time:"19:00", live:true, comp:"WM 2026 · Gruppe K · 2. Spieltag",
+   h:"Portugal", a:"Usbekistan", tv:{DE:[ARD,MAG],AT:[SERV],CH:[SRFg],UK:[UKg]}},
+  {day:"Dienstag, 23.06.2026", time:"22:00", comp:"WM 2026 · Gruppe L · 2. Spieltag",
+   h:"England", a:"Ghana", tv:{DE:[ARD,MAG],AT:[SERV],CH:[SRFg],UK:[BBC]}},
+
+  {day:"Mittwoch, 24.06.2026", time:"01:00", comp:"WM 2026 · Gruppe L · 2. Spieltag",
+   h:"Panama", a:"Kroatien", tv:{DE:[MAG],AT:[SERV],CH:[RTS],UK:[ITV]}},
+  {day:"Mittwoch, 24.06.2026", time:"04:00", comp:"WM 2026 · Gruppe K · 2. Spieltag",
+   h:"Kolumbien", a:"DR Kongo", tv:{DE:[ARD,MAG],AT:[SERV],CH:[RTS],UK:[UKg]}},
+  {day:"Mittwoch, 24.06.2026", time:"21:00", comp:"WM 2026 · Gruppe B · 3. Spieltag",
+   h:"Schweiz", a:"Kanada", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRF2],UK:[ITV]}},
+  {day:"Mittwoch, 24.06.2026", time:"21:00", comp:"WM 2026 · Gruppe B · 3. Spieltag",
+   h:"Bosnien-H.", a:"Katar", tv:{DE:[MAG],AT:[ATg],CH:[SRFi],UK:[ITV]}},
+
+  {day:"Donnerstag, 25.06.2026", time:"00:00", comp:"WM 2026 · Gruppe C · 3. Spieltag",
+   h:"Marokko", a:"Haiti", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFi],UK:[UKg]}},
+  {day:"Donnerstag, 25.06.2026", time:"00:00", comp:"WM 2026 · Gruppe C · 3. Spieltag",
+   h:"Schottland", a:"Brasilien", tv:{DE:[MAG],AT:[ATg],CH:[RTS],UK:[BBC]}},
+  {day:"Donnerstag, 25.06.2026", time:"03:00", comp:"WM 2026 · Gruppe A · 3. Spieltag",
+   h:"Tschechien", a:"Mexiko", tv:{DE:[MAG],AT:[ATg],CH:[RTS],UK:[UKg]}},
+  {day:"Donnerstag, 25.06.2026", time:"03:00", comp:"WM 2026 · Gruppe A · 3. Spieltag",
+   h:"Südafrika", a:"Südkorea", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Donnerstag, 25.06.2026", time:"22:00", comp:"WM 2026 · Gruppe E · 3. Spieltag",
+   h:"Ecuador", a:"Deutschland", tv:{DE:[ARD,MAG],AT:[ORF],CH:[SRFg],UK:[UKg]}},
+  {day:"Donnerstag, 25.06.2026", time:"22:00", comp:"WM 2026 · Gruppe E · 3. Spieltag",
+   h:"Curaçao", a:"Elfenbeinküste", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}}
+];
+
+/* Highlights — echte WM-2026-Ergebnisse + offizielle Quellen (Stand 23.06.2026).
+   zdf:[Länge, URL] | null · full:[Anbieter, Länge, Verfügbarkeit, URL] | null (=nur Pay) */
+const ZDFV="https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/";
+const ARD_RL="https://www.zdf.de/video/livestreams/collection-index-page-ard-collection-ard-dxjuomfyzdpzag93ojkynwmxymi0zdc3nzbimdc-104/";
+const ARD_HUB="https://www.ardmediathek.de/sport-fifa-weltmeisterschaft";
+const ZDF_YT="https://www.youtube.com/@sportstudiofussball/videos";
+const MAGENTA="https://www.magentasport.de/";
+const HL = [
+ {h:"Portugal",a:"Usbekistan",s:"5:0",g:"WM 2026 · Gruppe K",date:"Di, 23.06.",zdf:null,full:["ARD Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713929/"]},
+ {h:"England",a:"Ghana",s:"0:0",g:"WM 2026 · Gruppe L",date:"Di, 23.06.",zdf:null,full:["ARD Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713947/"]},
+ {h:"Norwegen",a:"Senegal",s:"3:2",g:"WM 2026 · Gruppe I",date:"Di, 23.06.",zdf:null,full:["ZDF Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713896/"]},
+ {h:"Jordanien",a:"Algerien",s:"1:2",g:"WM 2026 · Gruppe J",date:"Di, 23.06.",zdf:null,full:["ZDF Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713914/"]},
+ {h:"Argentinien",a:"Österreich",s:"2:0",g:"WM 2026 · Gruppe J",date:"Mo, 22.06.",zdf:null,full:["ARD Relive","","noch 5 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713911/"]},
+ {h:"Frankreich",a:"Irak",s:"3:0",g:"WM 2026 · Gruppe I",date:"Mo, 22.06.",zdf:null,full:["ARD Relive","","noch 5 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713893/"]},
+ {h:"Ecuador",a:"Curaçao",s:"0:0",g:"WM 2026 · Gruppe E",date:"So, 21.06.",zdf:["10 Min.",ZDFV+"wm-2026-ecuador-curacao-highlights-zusammenfassung-100"],full:["ZDF Relive","128 Min.","noch 7 Tage",ZDFV+"ecuador-curacao-gruppe-e-livestream-100"]},
+ {h:"Deutschland",a:"Elfenbeinküste",s:"2:1",g:"WM 2026 · Gruppe E",date:"Sa, 20.06.",zdf:["11 Min.",ZDFV+"wm-2026-deutschland-elfenbeinkueste-highlights-zusammenfassung-100"],full:["ZDF Relive","212 Min.","noch 6 Tage",ZDFV+"deutschland-elfenbeinkueste-gruppe-e-livestream-100"]},
+ {h:"Niederlande",a:"Schweden",s:"5:1",g:"WM 2026 · Gruppe F",date:"Sa, 20.06.",zdf:["9 Min.",ZDFV+"wm-2026-niederlande-schweden-highlights-zusammenfassung-100"],full:["ZDF Relive","177 Min.","noch 6 Tage",ZDFV+"niederlande-schweden-gruppe-f-livestream-100"]},
+ {h:"Brasilien",a:"Haiti",s:"3:0",g:"WM 2026 · Gruppe C",date:"Sa, 20.06.",zdf:["8 Min.",ZDFV+"wm-2026-brasilien-haiti-highlights-zusammenfassung-100"],full:null},
+ {h:"Schottland",a:"Marokko",s:"0:1",g:"WM 2026 · Gruppe C",date:"Sa, 20.06.",zdf:["7 Min.",ZDFV+"wm-2026-schottland-marokko-highlights-zusammenfassung-100"],full:null},
+ {h:"Türkei",a:"Paraguay",s:"0:1",g:"WM 2026 · Gruppe D",date:"Sa, 20.06.",zdf:["11 Min.",ZDFV+"wm-2026-tuerkei-paraguay-highlights-zusammenfassung-100"],full:null},
+ {h:"USA",a:"Australien",s:"2:0",g:"WM 2026 · Gruppe D",date:"Fr, 19.06.",zdf:["7 Min.",ZDFV+"wm-2026-usa-australien-highlights-zusammenfassung-100"],full:["ARD Relive","186 Min.","noch 5 Tage",ARD_RL+"page-video-ard-usa-gegen-australien---das-re-live-100"]},
+ {h:"Kanada",a:"Katar",s:"6:0",g:"WM 2026 · Gruppe B",date:"Fr, 19.06.",zdf:["8 Min.",ZDFV+"wm-2026-kanada-katar-highlights-zusammenfassung-100"],full:["ZDF Relive","176 Min.","noch 4 Tage",ZDFV+"kanada-katar-gruppe-b-livestream-100"]},
+ {h:"Mexiko",a:"Südkorea",s:"1:0",g:"WM 2026 · Gruppe A",date:"Fr, 19.06.",zdf:["7 Min.",ZDFV+"wm-2026-mexiko-suedkorea-highlights-zusammenfassung-100"],full:null},
+ {h:"Tschechien",a:"Südafrika",s:"1:1",g:"WM 2026 · Gruppe A",date:"Do, 18.06.",zdf:["7 Min.",ZDFV+"wm-2026-tschechien-suedafrika-highlights-zusammenfassung-100"],full:["ZDF Relive","188 Min.","noch 4 Tage",ZDFV+"tschechien-suedafrika-gruppe-a-livestream-100"]},
+ {h:"Schweiz",a:"Bosnien-Herzegowina",s:"4:1",g:"WM 2026 · Gruppe B",date:"Do, 18.06.",zdf:["7 Min.",ZDFV+"wm-2026-schweiz-bosnien-herzegowina-highlights-zusammenfassung-100"],full:null},
+ {h:"Usbekistan",a:"Kolumbien",s:"1:3",g:"WM 2026 · Gruppe K",date:"Do, 18.06.",zdf:["7 Min.",ZDFV+"wm-2026-usbekistan-kolumbien-highlights-zusammenfassung-100"],full:null},
+ {h:"Ghana",a:"Panama",s:"1:0",g:"WM 2026 · Gruppe L",date:"Do, 18.06.",zdf:["8 Min.",ZDFV+"wm-2026-ghana-panama-highlights-zusammenfassung-100"],full:null},
+ {h:"England",a:"Kroatien",s:"4:2",g:"WM 2026 · Gruppe L",date:"Mi, 17.06.",zdf:["11 Min.",ZDFV+"wm-2026-england-kroatien-highlights-zusammenfassung-100"],full:["ZDF Relive","189 Min.","noch 3 Tage",ZDFV+"england-kroatien-gruppe-l-livestream-100"]},
+ {h:"Portugal",a:"DR Kongo",s:"1:1",g:"WM 2026 · Gruppe K",date:"Mi, 17.06.",zdf:["8 Min.",ZDFV+"wm-2026-portugal-demokratische-republik-kongo-highlights-zusammenfassung-100"],full:["ZDF Relive","192 Min.","noch 3 Tage",ZDFV+"portugal-kongo-gruppe-k-livestream-100"]},
+ {h:"Österreich",a:"Jordanien",s:"3:1",g:"WM 2026 · Gruppe J",date:"Mi, 17.06.",zdf:["9 Min.",ZDFV+"wm-2026-oesterreich-jordanien-highlights-zusammenfassung-100"],full:["ZDF Relive","164 Min.","noch 2 Tage",ZDFV+"oesterreich-jordanien-gruppe-j-livestream-100"]},
+ {h:"Argentinien",a:"Algerien",s:"3:0",g:"WM 2026 · Gruppe J",date:"Mi, 17.06.",zdf:["7 Min.",ZDFV+"wm-2026-argentinien-algerien-highlights-zusammenfassung-100"],full:["ARD Relive","147 Min.","noch 3 Tage",ARD_RL+"page-video-ard-argentinien-gegen-algerien---das-re-live-100"]},
+ {h:"Irak",a:"Norwegen",s:"1:4",g:"WM 2026 · Gruppe I",date:"Mi, 17.06.",zdf:["8 Min.",ZDFV+"wm-2026-irak-norwegen-highlights-zusammenfassung-100"],full:null},
+ {h:"Frankreich",a:"Senegal",s:"3:1",g:"WM 2026 · Gruppe I",date:"Di, 16.06.",zdf:["9 Min.",ZDFV+"wm-2026-frankreich-senegal-highlights-zusammenfassung-100"],full:null},
+ {h:"Iran",a:"Neuseeland",s:"2:2",g:"WM 2026 · Gruppe G",date:"Di, 16.06.",zdf:["9 Min.",ZDFV+"wm-2026-iran-neuseeland-highlights-zusammenfassung-100"],full:["ZDF Relive","134 Min.","noch 2 Tage",ZDFV+"iran-neuseeland-gruppe-g-livestream-100"]},
+ {h:"Saudi-Arabien",a:"Uruguay",s:"1:1",g:"WM 2026 · Gruppe H",date:"Di, 16.06.",zdf:["4 Min.",ZDFV+"wm-2026-saudi-arabien-uruguay-highlights-zusammenfassung-100"],full:["ZDF Relive","144 Min.","noch 1 Tag",ZDFV+"saudi-arabien-uruguay-gruppe-h-livestream-100"]},
+ {h:"Elfenbeinküste",a:"Ecuador",s:"1:0",g:"WM 2026 · Gruppe E",date:"Mo, 15.06.",zdf:["9 Min.",ZDFV+"wm-2026-elfenbeinkueste-ecuador-highlights-zusammenfassung-100"],full:["ARD Relive","210 Min.","noch 1 Tag",ARD_RL+"page-video-ard-elfenbeinkueste-gegen-ecuador---das-re-live-100"]},
+ {h:"Schweden",a:"Tunesien",s:"5:1",g:"WM 2026 · Gruppe F",date:"Mo, 15.06.",zdf:["9 Min.",ZDFV+"wm-2026-schweden-tunesien-highlights-zusammenfassung-100"],full:null},
+ {h:"Spanien",a:"Kap Verde",s:"0:0",g:"WM 2026 · Gruppe H",date:"Mo, 15.06.",zdf:["8 Min.",ZDFV+"wm-2026-spanien-kap-verden-highlights-zusammenfassung-100"],full:["ARD Relive","151 Min.","noch 1 Tag",ARD_RL+"page-video-ard-spanien-gegen-kap-verde---das-re-live-100"]},
+ {h:"Belgien",a:"Ägypten",s:"1:1",g:"WM 2026 · Gruppe G",date:"Mo, 15.06.",zdf:["8 Min.",ZDFV+"wm-2026-belgien-aegypten-highlights-zusammenfassung-100"],full:["ARD Relive","190 Min.","noch 1 Tag",ARD_RL+"page-video-ard-belgien-gegen-aegypten---das-re-live-100"]},
+ {h:"Deutschland",a:"Curaçao",s:"7:1",g:"WM 2026 · Gruppe E",date:"So, 14.06.",zdf:null,full:["ARD Relive","227 Min.","noch 1 Tag",ARD_RL+"page-video-ard-deutschland-gegen-curacao---das-re-live-100"]},
+ {h:"Niederlande",a:"Japan",s:"2:2",g:"WM 2026 · Gruppe F",date:"So, 14.06.",zdf:["10 Min.",ZDFV+"wm-2026-niederlande-japan-highlights-zusammenfassung-100"],full:null},
+ {h:"Haiti",a:"Schottland",s:"0:1",g:"WM 2026 · Gruppe C",date:"So, 14.06.",zdf:null,full:["ARD Relive","147 Min.","noch 1 Tag",ARD_RL+"page-video-ard-haiti-gegen-schottland---das-re-live-100"]}
+];
+
+/* News — DFB-Team + 18 Bundesligavereine (Teamliste mit Farben/Kürzel) */
+const TEAMS = [
+  {id:"dfb",name:"DFB-Team",short:"DFB",color:"#c7a008",nat:true},
+  {id:"bayern",name:"FC Bayern München",short:"FCB",color:"#dc052d"},
+  {id:"bvb",name:"Borussia Dortmund",short:"BVB",color:"#f4c400",fg:"#1a1a1a"},
+  {id:"rbl",name:"RB Leipzig",short:"RBL",color:"#d4023a"},
+  {id:"vfb",name:"VfB Stuttgart",short:"VfB",color:"#e32219"},
+  {id:"b04",name:"Bayer Leverkusen",short:"B04",color:"#b1080f"},
+  {id:"scf",name:"SC Freiburg",short:"SCF",color:"#e1000f"},
+  {id:"sge",name:"Eintracht Frankfurt",short:"SGE",color:"#1a1a1a"},
+  {id:"tsg",name:"TSG Hoffenheim",short:"TSG",color:"#1c63b7"},
+  {id:"fca",name:"FC Augsburg",short:"FCA",color:"#ba3733"},
+  {id:"m05",name:"1. FSV Mainz 05",short:"M05",color:"#c3141e"},
+  {id:"fcu",name:"1. FC Union Berlin",short:"FCU",color:"#d4011d"},
+  {id:"bmg",name:"Bor. Mönchengladbach",short:"BMG",color:"#00a859"},
+  {id:"hsv",name:"Hamburger SV",short:"HSV",color:"#003da5"},
+  {id:"koeln",name:"1. FC Köln",short:"KOE",color:"#e2001a"},
+  {id:"svw",name:"SV Werder Bremen",short:"SVW",color:"#169b62"},
+  {id:"s04",name:"FC Schalke 04",short:"S04",color:"#004d9d"},
+  {id:"sve",name:"SV Elversberg",short:"SVE",color:"#c8102e"},
+  {id:"scp",name:"SC Paderborn",short:"SCP",color:"#005ca9"}
+];
+const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
+
+const NEWS = [
+  {team:"rbl",date:"2026-06-24",title:"Paukenschlag: RB Leipzig trennt sich von Ole Werner",teaser:"Nach nur einem Jahr ist für Trainer Ole Werner bei RB Leipzig Schluss – der Klub muss sich auf der Trainerposition neu aufstellen.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
+  {team:"svw",date:"2026-06-24",title:"Werder verpflichtet Cedric Itten ablösefrei",teaser:"Der 29-jährige Stürmer kommt nach dem Abstieg von Fortuna Düsseldorf ohne Ablöse und hat seinen Vertrag in Bremen bereits unterschrieben.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
+  {team:"fcu",date:"2026-06-24",title:"Nsoki bleibt fest: Union zieht die Kaufoption",teaser:"Nach der Leihe verpflichtet Union Berlin Verteidiger Stanley Nsoki dauerhaft von der TSG Hoffenheim – kolportierte Ablöse rund 1,5 Millionen Euro.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
+  {team:"scp",date:"2026-06-24",title:"Torwart-Lösung: Noll vor Leihe nach Paderborn",teaser:"Keeper Nahuel Noll steht vor einem Wechsel von der TSG Hoffenheim zum Aufsteiger und beerbt dort den zum VfB zurückkehrenden Dennis Seimen.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
+  {team:"vfb",date:"2026-06-24",title:"Seimen kehrt nach Leihe zum VfB zurück",teaser:"Nach seiner Station in Paderborn ist Torwart-Talent Dennis Seimen zurück in Stuttgart und kämpft um einen Platz im Tor.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
+  {team:"bayern",date:"2026-06-24",title:"Saibari: Unterschrift erst nach dem 30. Juni geplant",teaser:"Der Wechsel des PSV-Profis zum FC Bayern gilt als sicher, soll aus steuerlichen Gründen aufseiten Eindhovens aber erst nach dem 30. Juni offiziell besiegelt werden.",src:"Sport1",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
+  {team:"b04",date:"2026-06-23",title:"Leverkusen schnappt sich Talent Eichhorn",teaser:"Bayer 04 verstärkt sich mit dem hoch gehandelten Mittelfeldspieler Kennet Eichhorn, der Hertha BSC verlässt.",src:"Sport1",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
+  {team:"m05",date:"2026-06-23",title:"Mainz verlängert die Leihe von Talent Schopp",teaser:"Innenverteidiger Konstantin Schopp sammelt weiter Spielpraxis: Der FSV verlängert die Leihe des 20-Jährigen zum TSV Hartberg.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
+  {team:"dfb",date:"2026-06-22",title:"Gruppensieger Gruppe E – Achtelfinale am 29. Juni",teaser:"Nach zwei Siegen steht die DFB-Elf als Erster der Gruppe E fest und trifft am 29. Juni in Foxborough auf einen noch offenen Gruppendritten.",src:"DFB.de",url:"https://www.dfb.de/maenner/nationalmannschaften/nationalmannschaft"},
+  {team:"dfb",date:"2026-06-21",title:"Undav-Doppelpack dreht das Spiel gegen die Elfenbeinküste",teaser:"Joker Deniz Undav schießt Deutschland in der Schlussphase zum 2:1 und macht das Weiterkommen vorzeitig perfekt.",src:"ZDFheute",url:"https://www.zdfheute.de/sport/fussball-wm/fussball-wm-2026-gruppe-deutschland-elfenbeinkueste-tore-ergebnis-100.html"},
+  {team:"dfb",date:"2026-06-14",title:"7:1 zum WM-Auftakt gegen Curaçao",teaser:"Furioser Start mit einem Havertz-Doppelpack; das Spiel sahen im Schnitt über 23 Millionen Menschen in der ARD.",src:"DFB.de",url:"https://www.dfb.de/maenner/nationalmannschaften/nationalmannschaft"},
+  {team:"dfb",date:"2026-05-21",title:"Nagelsmann nominiert 26er-Kader: Neuer zurück als Nummer eins",teaser:"Der Bundestrainer holt Manuel Neuer zurück ins Tor, auch Leroy Sané und Lennart Karl stehen im Aufgebot; Kapitän bleibt Joshua Kimmich.",src:"Sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026/nagelsmann-nimmt-neuer-karl-und-sane-mit-zur-wm,kaderbekanntgabe-wm-100.html"},
+  {team:"bayern",date:"2026-06-23",title:"Saibari-Transfer auf der Zielgeraden",teaser:"Sportvorstand Eberl drückt die feste Ablöse für den Marokkaner von PSV offenbar unter 50 Millionen Euro; der Medizincheck soll bereits erledigt sein.",src:"Sport1",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
+  {team:"bayern",date:"2026-06-22",title:"Auch Bergvall auf dem Zettel",teaser:"Neben Brown und Saibari soll Bayern das schwedische Mittelfeldtalent Lucas Bergvall von Tottenham beobachten.",src:"Sport.de",url:"https://www.sport.de/news/ne16898920/transfer-hammer-naechster-wm-star-beim-fc-bayern-gehandelt/"},
+  {team:"bayern",date:"2026-06-20",title:"Real Madrid plant Mega-Offensive um Olise – Bayern will nicht verkaufen",teaser:"Berichten zufolge erwägt Madrid ein Angebot jenseits der 200-Millionen-Marke; München signalisiert, den Flügelstürmer halten zu wollen.",src:"Bavarian Football Works",url:"https://www.bavarianfootballworks.com/transfer-rumors/214507/bayern-munich-real-madrid-olise-bvb-tottenham-de-cat-fc-barcelona-arsenal-chelsea"},
+  {team:"bayern",date:"2026-06-15",title:"Brown-Wechsel von Frankfurt rückt näher",teaser:"Mit dem DFB-Linksverteidiger soll man sich einig sein; Knackpunkt bleibt die von Frankfurt geforderte hohe Ablöse.",src:"RevierSport",url:"https://www.reviersport.de/fussball/1bundesliga/a627638---transferticker-neuer-trainer-fuer-rb-leipzig-drittligisten-legen.html"},
+  {team:"bvb",date:"2026-06-23",title:"Adeyemi-Verlängerung stockt",teaser:"Klub und Spielerseite liegen bei den Gesprächen über 2027 hinaus weiterhin weit auseinander.",src:"kicker",url:"https://www.kicker.de/borussia-dortmund/team-transfers"},
+  {team:"bvb",date:"2026-06-23",title:"Duranville vor Wechsel zu Olympique Lyon",teaser:"Für den belgischen Flügelspieler sieht der BVB keine sportliche Perspektive mehr; ein Wechsel nach Frankreich bahnt sich an.",src:"kicker / Sky",url:"https://www.kicker.de/borussia-dortmund/team-transfers"},
+  {team:"bvb",date:"2026-06-23",title:"Guirassys Zukunft offen – Fenerbahçe dran",teaser:"Um den Stürmer gibt es Interesse aus der Türkei; eine Ausstiegsklausel von rund 40 Millionen Euro ist im Gespräch.",src:"TransferFeed / Bild",url:"https://www.transferfeed.com/clubs/borussia-dortmund/64"},
+  {team:"bvb",date:"2026-05-12",title:"Joane Gadou von Salzburg verpflichtet",teaser:"Der Innenverteidiger wechselt für rund 19,5 Millionen Euro nach Dortmund und unterschreibt bis 2031.",src:"FotMob",url:"https://www.fotmob.com/teams/9789/transfers/borussia-dortmund"},
+  {team:"b04",date:"2026-06-04",title:"Carles Martínez Novell wird neuer Cheftrainer",teaser:"Der Spanier kommt vom FC Toulouse und folgt auf Kasper Hjulmand; sein Vertrag läuft bis 2028.",src:"bundesliga.com",url:"https://www.bundesliga.com/de/bundesliga/news/neuer-trainer-bayer-04-leverkusen-wechsel-transfer-vertrag-37692"},
+  {team:"b04",date:"2026-06-23",title:"Grimaldo drängt auf Spanien-Rückkehr",teaser:"Atlético soll sich mit dem Linksverteidiger einig sein; offen ist die Einigung mit Leverkusen, dessen Schmerzgrenze bei rund 30 Millionen Euro liegt.",src:"kicker",url:"https://www.kicker.de/bayer-04-leverkusen/team-transfers"},
+  {team:"b04",date:"2026-06-15",title:"Afonso Moreira kommt von Olympique Lyon",teaser:"Der 21-jährige Portugiese wechselt für ein Paket von über 30 Millionen Euro an den Rhein und unterschreibt bis 2031.",src:"kicker",url:"https://www.kicker.de/bayer-04-leverkusen/team-transfers"},
+  {team:"b04",date:"2026-06-09",title:"Eichhorn-Coup: 16-jähriges Talent von Hertha",teaser:"Gegen die Konkurrenz zahlreicher Topklubs sichert sich Bayer das Mittelfeldtalent Kennet Eichhorn bis 2031.",src:"kicker",url:"https://www.kicker.de/bayer-04-leverkusen/team-transfers"},
+  {team:"rbl",date:"2026-06-22",title:"Martín Demichelis wird neuer Cheftrainer",teaser:"Der frühere Bayern-Profi kommt von RCD Mallorca und unterschreibt bis 2028; eine Millionenablöse wird fällig.",src:"weltfussball",url:"https://www.weltfussball.de/news/ne16899922/offiziell-rb-leipzig-trifft-trainer-entscheidung/"},
+  {team:"rbl",date:"2026-06-17",title:"Trainer-Beben: Werner trotz CL-Quali freigestellt",teaser:"Obwohl er Leipzig zurück in die Champions League führte, muss Ole Werner gehen; auch sein Co-Trainerstab wird freigestellt.",src:"kicker",url:"https://www.kicker.de/rb-leipzig/team-transfers"},
+  {team:"rbl",date:"2026-06-18",title:"100-Millionen-Angebot für Diomande abgelehnt",teaser:"Liverpool, PSG und Real sollen den 19-Jährigen wollen; ein erstes Gebot von knapp 100 Millionen Euro wies RB zurück.",src:"kicker / TransferFeed",url:"https://www.transferfeed.com/clubs/rb-leipzig/238"},
+  {team:"rbl",date:"2026-06-19",title:"Klopp-Machtkampf prägt den Klub",teaser:"Rund um die Werner-Freistellung wird über die Rolle von Jürgen Klopp und ein neues „Hire and Fire“ diskutiert.",src:"kicker",url:"https://www.kicker.de/rb-leipzig/team-news"},
+  {team:"vfb",date:"2026-06-15",title:"Stiller-Ausstiegsklausel hängt am WM-Abschneiden",teaser:"Die Klausel über 36,5 Millionen Euro ist offenbar an den WM-Verbleib der DFB-Elf gekoppelt; Liverpool, Juve und Inter werden genannt.",src:"Bild / fussballtransfers",url:"https://www.fussballtransfers.com/a4976121628534895547-stiller-klausel-haengt-an-wm"},
+  {team:"vfb",date:"2026-06-08",title:"Undav verlängert bis 2029",teaser:"Der Nationalstürmer dehnt seinen Vertrag um zwei Jahre aus, inklusive Option auf ein weiteres Jahr.",src:"kicker",url:"https://www.kicker.de/vfb-stuttgart/team-transfers"},
+  {team:"vfb",date:"2026-06-19",title:"Van der Leij als Sturm-Talent geholt",teaser:"Der 20-jährige Niederländer kommt vom RKC Waalwijk und soll zunächst beim VfB II in der 3. Liga starten.",src:"kicker",url:"https://www.kicker.de/vfb-stuttgart/team-transfers"},
+  {team:"scf",date:"2026-05-29",title:"Europa-League-Finale verloren – 0:3 gegen Aston Villa",teaser:"Der Traum von der Champions League platzt im Endspiel; international dabei ist Freiburg dennoch.",src:"Badische Zeitung",url:"https://www.badische-zeitung.de/sport/scfreiburg"},
+  {team:"scf",date:"2026-06-11",title:"Keisuke Goto kommt von Anderlecht",teaser:"Für rund 10 Millionen Euro verpflichtet der SC den japanischen WM-Teilnehmer als neuen Angreifer.",src:"kicker",url:"https://www.kicker.de/sc-freiburg/team-transfers"},
+  {team:"scf",date:"2026-06-04",title:"Atubolu drängt auf einen Wechsel",teaser:"Um den Abschied des bisherigen Stammkeepers gibt es Berichte über Spannungen; der Verein reagiert deutlich.",src:"Badische Zeitung",url:"https://www.badische-zeitung.de/sport/scfreiburg"},
+  {team:"sge",date:"2026-06-21",title:"Adi Hütter kehrt als Cheftrainer zurück",teaser:"Nach der kurzen Ära Riera übernimmt Hütter zum 1. Juli zum zweiten Mal in Frankfurt und unterschreibt bis 2029.",src:"kicker",url:"https://www.kicker.de/eintracht-frankfurt/team-transfers"},
+  {team:"sge",date:"2026-06-22",title:"Brown-Abgang zu Bayern weiter offen",teaser:"Beide Klubs sind sich über die Ablöse noch nicht einig; Frankfurt fordert rund 60 Millionen Euro für den Linksverteidiger.",src:"kicker",url:"https://www.kicker.de/eintracht-frankfurt/team-transfers"},
+  {team:"sge",date:"2026-06-07",title:"Großer Umbruch möglich – bis zu 100 Mio. Erlös",teaser:"Mit Theate, Larsson und Bahoya könnten gleich mehrere Profis in die Premier League wechseln.",src:"Goal",url:"https://www.goal.com/en-us/lists/huge-transfer-windfall-from-players-leaving-eintracht-frankfurt-could-be-in-for-eur200-million/bltc5d6212479306f12"},
+  {team:"sge",date:"2026-06-16",title:"Galatasaray heiß auf Can Uzun",teaser:"Für den 20-Jährigen soll ein Angebot um 40 Millionen Euro vorbereitet werden; Frankfurt taxiert ihn höher.",src:"Goal",url:"https://www.goal.com/en-us/lists/huge-transfer-windfall-from-players-leaving-eintracht-frankfurt-could-be-in-for-eur200-million/bltc5d6212479306f12"},
+  {team:"tsg",date:"2026-06-17",title:"Mats Rots verstärkt die Abwehr",teaser:"Für rund 12 Millionen Euro plus Boni kommt der niederländische Linksverteidiger von Twente Enschede.",src:"kicker",url:"https://www.kicker.de/tsg-hoffenheim/team-transfers"},
+  {team:"tsg",date:"2026-06-02",title:"Wimmer kommt aus Wolfsburg",teaser:"Die TSG zieht die Ausstiegsklausel über 10 Millionen Euro für den österreichischen WM-Fahrer.",src:"90min",url:"https://www.90min.de/teams/hoffenheim"},
+  {team:"tsg",date:"2026-06-10",title:"Asllani europaweit umworben",teaser:"Nach starker Saison wird der Stürmer mit Barcelona, Chelsea und Tottenham in Verbindung gebracht.",src:"Goal",url:"https://www.goal.com/en-us/team/hoffenheim/news/4l9mrqzmajz5crzlz50mtbt6x"},
+  {team:"fca",date:"2026-06-16",title:"Kömür heiß begehrt – Besiktas-Gebot abgelehnt",teaser:"Ein 12-Millionen-Angebot aus Istanbul lehnt der FCA ab; auch Leipzig und Frankfurt sollen Interesse haben.",src:"TransferFeed / Sky",url:"https://www.transferfeed.com/clubs/fc-augsburg/85"},
+  {team:"fca",date:"2026-06-05",title:"Kaufoption für Matsima gezogen",teaser:"Für rund 5 Millionen Euro verpflichtet Augsburg den Innenverteidiger fest von der AS Monaco.",src:"TransferFeed",url:"https://www.transferfeed.com/clubs/fc-augsburg/85"},
+  {team:"fca",date:"2026-06-06",title:"Stürmersuche läuft",teaser:"Auf der Suche nach mehr Durchschlagskraft im Angriff prüft der FCA mehrere Kandidaten.",src:"OneFootball",url:"https://onefootball.com/en/news/bundesliga-january-2026-transfer-primersfc-augsburg-42140944"},
+  {team:"m05",date:"2026-05-30",title:"Rang 6 und Conference League",teaser:"Mainz beendet die Saison auf Platz sechs und qualifiziert sich erneut für die Conference League.",src:"bulinews",url:"https://bulinews.com/mainz"},
+  {team:"m05",date:"2026-06-18",title:"Königsdörffer kommt vom HSV",teaser:"Der Stürmer wechselt nach Mainz und soll die Offensive verstärken.",src:"90min",url:"https://www.90min.de/teams/hsv/transfers"},
+  {team:"m05",date:"2026-06-12",title:"Frankfurt umwirbt Kaishu Sano",teaser:"Der Mittelfeldspieler steht offenbar auf der Liste der SGE; auch Brentford soll interessiert sein.",src:"TransferFeed / Bild",url:"https://www.transferfeed.com/clubs/fsv-mainz-05/558"},
+  {team:"fcu",date:"2026-06-19",title:"Mauro Lustrinelli wird neuer Cheftrainer",teaser:"Der Schweizer kommt vom Überraschungsteam FC Thun und folgt auf die Interimslösung nach Steffen Baumgart.",src:"kicker",url:"https://www.kicker.de/1-fc-union-berlin/team-transfers"},
+  {team:"fcu",date:"2026-06-20",title:"Van den Bosch von Antwerp verpflichtet",teaser:"Der belgische Innenverteidiger mit Champions-League-Erfahrung unterschreibt bis 2029 plus Option.",src:"kicker",url:"https://www.kicker.de/1-fc-union-berlin/team-transfers"},
+  {team:"fcu",date:"2026-06-18",title:"Marvin Friedrich kehrt ablösefrei zurück",teaser:"Nach viereinhalb Jahren in Gladbach läuft der Innenverteidiger wieder für Union auf.",src:"kicker",url:"https://www.kicker.de/1-fc-union-berlin/team-news"},
+  {team:"bmg",date:"2026-06-18",title:"Polanski bleibt – Trainerteam wird umgebaut",teaser:"Nach schwacher Saison darf der Cheftrainer weitermachen; um ihn herum kommt es zu personellen Veränderungen.",src:"GladbachLIVE",url:"https://www.gladbachlive.de/news/gladbach-ueberraschung-wm-held-bei-borussia-ploetzlich-aussortiert-1305093"},
+  {team:"bmg",date:"2026-06-10",title:"Lidberg kommt aus Darmstadt",teaser:"Der schwedische Stürmer wechselt für 3,5 Millionen Euro zu den Fohlen und unterschreibt bis 2030.",src:"kicker",url:"https://www.kicker.de/bor-moenchengladbach/team-transfers"},
+  {team:"bmg",date:"2026-06-12",title:"Kader soll verkleinert werden",teaser:"Sportchef Schröder hat mehrere Profis auf einer Streichliste; auch Honorat will den Verein verlassen.",src:"90min",url:"https://www.90min.de/teams/gladbach"},
+  {team:"hsv",date:"2026-06-19",title:"Grönbaek fest von Rennes",teaser:"Nach starker Leihe verpflichtet der HSV den dänischen Mittelfeldspieler dauerhaft bis 2030.",src:"kicker",url:"https://www.kicker.de/hamburger-sv/team-transfers"},
+  {team:"hsv",date:"2026-06-21",title:"Vuskovic kehrt zurück – Brighton bietet 52 Mio.",teaser:"Der zuletzt starke Leih-Innenverteidiger geht zu Tottenham zurück; Brighton soll sein Angebot kräftig erhöht haben.",src:"kicker",url:"https://www.kicker.de/hamburger-sv/team-transfers"},
+  {team:"hsv",date:"2026-06-20",title:"Glatzel-Wechsel zu Wolfsburg angebahnt",teaser:"HSV und der Absteiger sollen sich bei den Modalitäten für den Stürmer angenähert haben.",src:"90min",url:"https://www.90min.de/teams/hsv/transfers"},
+  {team:"koeln",date:"2026-06-05",title:"El-Mala-Rekordtransfer zu Brentford geplatzt",teaser:"Ein fast fixer Wechsel für bis zu 50 Millionen Euro scheitert, nachdem die Spielerseite absagt.",src:"Sport.de / Bild",url:"https://www.sport.de/news/ne16838077/1-fc-koeln-transfer-kehrtwende-um-said-el-mala/"},
+  {team:"koeln",date:"2026-06-20",title:"Topklubs beobachten El Mala weiter",teaser:"Liverpool, der BVB und Tottenham werden genannt; Köln pocht auf eine fixe Ablöse von rund 50 Millionen Euro.",src:"GEISSBLOG",url:"https://geissblog.koeln/2026/06/100-mio-transfer-als-dominostein-ex-manager-verraet-el-mala-wette-mit-dfb-boss/"},
+  {team:"koeln",date:"2026-06-10",title:"Kaminski fest verpflichtet",teaser:"Im Vertrag des Polen ist eine Ausstiegsklausel über 20 Millionen Euro verankert.",src:"Sportschau",url:"https://www.sportschau.de/regional/wdr/wdr-fc-vor-schwierigem-transfersommer-was-wird-aus-el-mala-und-kaminski-100.html"},
+  {team:"svw",date:"2026-06-20",title:"Lasse Günther von Elversberg vor Wechsel",teaser:"Der Linksverteidiger hat zugesagt; offen ist nur noch die Einigung über die Ablöse.",src:"DeichStube",url:"https://www.deichstube.de/news/werder-bremen-transfer-geruecht-svw-einig-verteidiger-lasse-guenther-sv-elversberg-bundesliga-wechsel-zr-94355899.html"},
+  {team:"svw",date:"2026-06-18",title:"Cedric Itten kommt ablösefrei",teaser:"Der Schweizer WM-Fahrer einigt sich mit Werder und verstärkt den Angriff.",src:"kicker",url:"https://www.kicker.de/werder-bremen/team-transfers"},
+  {team:"svw",date:"2026-06-12",title:"Backhaus zieht es nach Freiburg",teaser:"Der Torhüter verlässt Bremen; um ihn soll es auch Interesse aus Newcastle und Mailand gegeben haben.",src:"kicker / DeichStube",url:"https://www.kicker.de/werder-bremen/team-transfers"},
+  {team:"s04",date:"2026-05-23",title:"Aufstieg perfekt – Muslic-Vertrag bis 2028",teaser:"Mit dem direkten Aufstieg verlängert sich der Vertrag von Cheftrainer Miron Muslic automatisch.",src:"kicker",url:"https://www.kicker.de/fc-schalke-04/team-transfers"},
+  {team:"s04",date:"2026-06-22",title:"Einigung mit Igor Julio von Brighton",teaser:"Mit dem brasilianischen Innenverteidiger ist man sich einig; die Verhandlungen mit Brighton laufen noch.",src:"Sport.de",url:"https://www.sport.de/news/ne16900672/einigung-erzielt-transfer-coup-fuer-schalke-04/"},
+  {team:"s04",date:"2026-06-19",title:"Baumann will den Kader verkleinern",teaser:"Der Sportvorstand rechnet mit mehr Ab- als Zugängen; bis zu 13 Profis könnten gehen.",src:"Sport.de",url:"https://www.sport.de/news/ne16888702/baumann-enthuellt-transfer-plaene-des-fc-schalke-04/"},
+  {team:"sve",date:"2026-05-21",title:"Erstmals Bundesliga – das Fußballmärchen aus dem Saarland",teaser:"Ein Jahr nach dem bitteren Relegations-Aus steigt die SVE auf und wird zum 59. Bundesligisten der Geschichte.",src:"bundesliga.com",url:"https://www.bundesliga.com/de/bundesliga/news/sv-07-elversberg-bundesliga-aufstieg-marchen-37405"},
+  {team:"sve",date:"2026-06-12",title:"Krattenmacher fest von Bayern verpflichtet",teaser:"Der 20-jährige Offensivmann unterschreibt bis 2030 und steht vor seinem Bundesliga-Debüt.",src:"kicker",url:"https://www.kicker.de/sv-elversberg/team-transfers"},
+  {team:"sve",date:"2026-06-22",title:"Onyeka-Leihe von Leverkusen",teaser:"Der 19-Jährige soll im Oberhaus weiter Spielpraxis sammeln; in Leverkusen verlängerte er bis 2032.",src:"kicker",url:"https://www.kicker.de/sv-elversberg/team-transfers"},
+  {team:"scp",date:"2026-05-25",title:"Aufstieg in der Relegation gegen Wolfsburg",teaser:"Curda trifft in der Verlängerung zum 2:1; für den SCP ist es der dritte Bundesliga-Aufstieg.",src:"kicker",url:"https://www.kicker.de/paderborn-gegen-wolfsburg-2026-bundesliga-relegation-5196312/analyse"},
+  {team:"scp",date:"2026-05-28",title:"Erster Neuzugang: Tom Baack von Nürnberg",teaser:"Der zentrale Mittelfeldspieler kommt ablösefrei und soll dem Aufsteiger Erfahrung und Übersicht geben.",src:"Sport1",url:"https://www.sport1.de/news/fussball/bundesliga/2026/05/aufsteiger-paderborn-holt-baack-aus-nuernberg"}
+];
+
+const PROVIDERS = [
+  {name:"DAZN", kind:"pay", countries:["DE","AT","CH"], price:"34,99 €/Mon", sub:"Jahresabo · 44,99 € monatl. · Super Sports ab 19,99 €",
+   comps:["Bundesliga","Champions League","La Liga","Serie A","Ligue 1"], url:"https://www.dazn.com",
+   de:"Größtes Sport-Streaming in DE: Bundesliga am Freitag und Sonntag plus Samstags-Konferenz, der Großteil der Champions League sowie La Liga, Serie A und Ligue 1.",
+   en:"Germany's biggest sport streamer: Bundesliga on Friday and Sunday plus the Saturday conference, most of the Champions League and La Liga, Serie A and Ligue 1."},
+  {name:"Sky / WOW", kind:"pay", countries:["DE","AT"], price:"ab 29,99 €/Mon", sub:"WOW Live-Sport oder Sky Bundesliga-Paket",
+   comps:["Bundesliga","2. Bundesliga","Premier League","DFB-Pokal"], url:"https://www.wow.de",
+   de:"Heimat der Bundesliga: Freitag und Samstag inkl. Topspiel, die komplette 2. Bundesliga und der DFB-Pokal. Flexibel als WOW oder klassisch über Sky.",
+   en:"Home of the Bundesliga: Friday and Saturday incl. the top game, the full 2. Bundesliga and the DFB-Pokal. Flexible as WOW or classic Sky."},
+  {name:"MagentaTV", kind:"pay", countries:["DE"], price:"ab 9,95 €/Mon", sub:"MagentaSport · WM-2026-Paket separat",
+   comps:["WM 2026","3. Liga"], url:"https://www.telekom.de/magenta-tv",
+   de:"Telekom-Plattform mit allen 104 Spielen der WM 2026 (44 davon exklusiv) sowie der 3. Liga — in UHD/4K. Unabhängig vom Internetanbieter nutzbar.",
+   en:"Telekom platform with all 104 matches of the 2026 World Cup (44 exclusive) plus the 3. Liga — in UHD/4K. Usable regardless of your ISP."},
+  {name:"Amazon Prime Video", kind:"pay", countries:["DE","UK"], price:"8,99 €/Mon", sub:"Prime-Mitgliedschaft (89,90 €/Jahr)",
+   comps:["Champions League"], url:"https://www.amazon.de/prime",
+   de:"Zeigt in Deutschland das Dienstags-Topspiel der Champions League. Im Prime-Abo enthalten, das auch Versand und Streaming abdeckt.",
+   en:"Shows the Tuesday top Champions League game in Germany. Included in the Prime membership that also covers delivery and streaming."},
+  {name:"RTL+", kind:"pay", countries:["DE"], price:"ab 6,99 €/Mon", sub:"RTL+ Premium",
+   comps:["Europa League","Conference League"], url:"https://plus.rtl.de",
+   de:"Hauptsender für Europa League und Conference League in Deutschland, dazu ausgewählte Länderspiele.",
+   en:"Main home of the Europa League and Conference League in Germany, plus selected internationals."},
+  {name:"ARD", kind:"free", countries:["DE"], price:"kostenlos", sub:"Rundfunkbeitrag",
+   comps:["WM 2026","DFB-Pokal","Sportschau"], url:"https://www.sportschau.de",
+   de:"Öffentlich-rechtlich und kostenlos: ausgewählte WM-Spiele, DFB-Pokal-Partien und die Sportschau mit den Bundesliga-Highlights.",
+   en:"Public-service and free: selected World Cup matches, DFB-Pokal games and the Sportschau with Bundesliga highlights."},
+  {name:"ZDF", kind:"free", countries:["DE"], price:"kostenlos", sub:"Rundfunkbeitrag",
+   comps:["WM 2026","DFB-Pokal"], url:"https://www.zdf.de",
+   de:"Öffentlich-rechtlich: WM-Spiele inkl. Eröffnung und Finale sowie ausgewählte DFB-Pokal-Partien — frei empfangbar.",
+   en:"Public-service: World Cup matches incl. opening and final plus selected DFB-Pokal games — free to air."},
+  {name:"Sport1", kind:"free", countries:["DE"], price:"kostenlos", sub:"Free-TV / Stream",
+   comps:["2. Bundesliga","Frauen-Bundesliga"], url:"https://www.sport1.de",
+   de:"Free-TV-Sender mit dem 2.-Bundesliga-Topspiel am Montag, der Frauen-Bundesliga und zahlreichen Highlight-Formaten.",
+   en:"Free-TV channel with the Monday 2. Bundesliga top game, the women's Bundesliga and many highlight shows."},
+  {name:"ORF", kind:"free", countries:["AT"], price:"kostenlos", sub:"ORF-Beitrag (Österreich)",
+   comps:["WM 2026","Champions League"], url:"https://sport.orf.at",
+   de:"Österreichs öffentlich-rechtlicher Sender: rund die Hälfte der WM-2026-Spiele frei sowie Champions-League-Begegnungen.",
+   en:"Austria's public broadcaster: around half of the 2026 World Cup matches free plus Champions League games."},
+  {name:"ServusTV", kind:"free", countries:["AT"], price:"kostenlos", sub:"Free-TV (Österreich)",
+   comps:["WM 2026","Champions League"], url:"https://www.servustv.com",
+   de:"Privater Free-TV-Sender in Österreich mit der zweiten Hälfte der WM-2026-Spiele und Champions-League-Partien.",
+   en:"Private free-TV channel in Austria with the other half of the 2026 World Cup matches and Champions League games."},
+  {name:"SRF", kind:"free", countries:["CH"], price:"kostenlos", sub:"Serafe-Abgabe (Schweiz)",
+   comps:["WM 2026"], url:"https://www.srf.ch/sport",
+   de:"Schweizer öffentlich-rechtlicher Sender — überträgt die WM 2026 frei empfangbar (SRF zwei / SRF info, dazu RTS und RSI).",
+   en:"Swiss public broadcaster — shows the 2026 World Cup free to air (SRF zwei / SRF info, plus RTS and RSI)."},
+  {name:"blue Sport", kind:"pay", countries:["CH"], price:"ab CHF 24.90/Mon", sub:"Swisscom blue (Schweiz)",
+   comps:["Bundesliga","Champions League","Premier League","Serie A"], url:"https://www.blue.ch/sport",
+   de:"Schweizer Pay-Anbieter (Swisscom) mit Bundesliga, Champions League, Premier League und Serie A.",
+   en:"Swiss pay provider (Swisscom) with Bundesliga, Champions League, Premier League and Serie A."},
+  {name:"BBC", kind:"free", countries:["UK"], price:"kostenlos", sub:"TV licence (UK)",
+   comps:["WM 2026","FA Cup","Länderspiele"], url:"https://www.bbc.co.uk/sport",
+   de:"Gebührenfinanziert in UK: WM 2026, FA Cup, Länderspiele und Match of the Day — frei empfangbar.",
+   en:"Licence-funded in the UK: 2026 World Cup, FA Cup, internationals and Match of the Day — free to air."},
+  {name:"ITV", kind:"free", countries:["UK"], price:"kostenlos", sub:"TV licence (UK)",
+   comps:["WM 2026","FA Cup","Länderspiele"], url:"https://www.itv.com",
+   de:"Britischer Free-TV-Sender mit WM 2026, FA Cup und Länderspielen, im Wechsel mit der BBC.",
+   en:"UK free-TV channel with the 2026 World Cup, FA Cup and internationals, alternating with the BBC."},
+  {name:"Sky Sports", kind:"pay", countries:["UK"], price:"ab £26/Mon", sub:"Sky / NOW (UK)",
+   comps:["Premier League","EFL"], url:"https://www.skysports.com",
+   de:"Wichtigster Pay-Sender in UK für die Premier League und die EFL.",
+   en:"The main UK pay broadcaster for the Premier League and the EFL."},
+  {name:"TNT Sports", kind:"pay", countries:["UK"], price:"ab £30.99/Mon", sub:"über discovery+ (UK)",
+   comps:["Champions League","Europa League","Premier League"], url:"https://www.tntsports.co.uk",
+   de:"UK-Pay-Anbieter (über discovery+) mit Champions League, Europa League und Premier-League-Spielen.",
+   en:"UK pay provider (via discovery+) with Champions League, Europa League and Premier League games."}
+];
+
+let LANG="de", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+
+/* ---------- Helpers ---------- */
+const CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+const SHARE_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg>';
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function shareBar(title,text,url){const t=I18N[LANG];
+  return '<div class="sharebar"><button class="sharebtn" data-share data-share-title="'+esc(title)+'" data-share-text="'+esc(text)+'" data-share-url="'+esc(url)+'">'+SHARE_ICON+'<span>'+t.share+'</span></button></div>';}
+
+/* Übersetzungs-Helfer für deutschsprachige Datenfelder */
+const WD_FULL={Montag:"Monday",Dienstag:"Tuesday",Mittwoch:"Wednesday",Donnerstag:"Thursday",Freitag:"Friday",Samstag:"Saturday",Sonntag:"Sunday"};
+const WD_ABBR={Mo:"Mon",Di:"Tue",Mi:"Wed",Do:"Thu",Fr:"Fri",Sa:"Sat",So:"Sun"};
+function locDay(s){ return LANG==="de"?s:s.replace(/^([A-Za-zäöü]+)/,(m,w)=>WD_FULL[w]||w); }
+function locDate(s){ return LANG==="de"?s:s.replace(/^([A-Za-zäöü]{2}),/,(m,w)=>(WD_ABBR[w]||w)+","); }
+function locComp(s){ return LANG==="de"?s:s.replace("WM 2026","World Cup 2026").replace("Gruppe","Group").replace("Spieltag","Matchday"); }
+function locAvail(s){ return LANG==="de"?s:s.replace(/^noch (\d+) Tage$/,"$1 days left").replace(/^noch 1 Tag$/,"1 day left"); }
+function locMin(s){ return LANG==="de"?s:s.replace(" Min."," min"); }
+function qBadge(q){ if(!q) return ""; const c=q==="4K"?"k4":(q==="8K"?"k8":""); return '<span class="q '+c+'">'+q+'</span>'; }
+function tagFor(t){ const x=I18N[LANG]; return '<span class="tag '+t+'">'+(t==="fta"?x.fta:x.pay)+'</span>'; }
+function chList(list){
+  if(!list || !list.length) return '<div class="chrow"><span class="none">— keine Übertragung gelistet —</span></div>';
+  return list.map(s=>'<div class="chrow"><span class="nm">'+s.n+'</span>'+qBadge(s.q)+tagFor(s.t)+'</div>').join("");
+}
+function getRadio(m){ return m.radio || ["ARD WM-Radio"]; }
+function getTicker(m){ return m.ticker || ["kicker WM-Ticker"]; }
+function bestFree(m){
+  const t=I18N[LANG], list=m.tv[COUNTRY]||[];
+  const fta=list.find(s=>s.t==="fta");
+  if(fta) return '<span class="freebest tv">▣ '+t.best_free+' · '+fta.n+'</span>';
+  const r=getRadio(m); if(r.length) return '<span class="freebest radio">♪ '+t.best_radio+' · '+r[0]+'</span>';
+  return '<span class="freebest pay">'+t.best_pay+'</span>';
+}
+function adSlotHTML(){ const t=I18N[LANG]; if(ADS_ENABLED) return '<div class="adslot"><div class="lbl">'+t.ad_on+'</div></div>';
+  return '<div class="adslot"><div class="lbl">'+t.ad_label+'</div><div class="sub">'+t.ad_sub+'</div></div>'; }
+
+/* ---------- Render: Live (day-grouped) ---------- */
+function dayKey(s){const x=String(s).match(/(\d{2})\.(\d{2})\.(\d{4})/); return x?(+x[3])*10000+(+x[2])*100+(+x[1]):0;}
+function renderLive(){
+  const t=I18N[LANG]; let html=""; let curDay="";
+  const upcoming = MATCHES.filter(m=>dayKey(m.day)>=TODAY_KEY);
+  document.getElementById("liveNote").innerHTML = t.live_note;
+  if(!upcoming.length){
+    document.getElementById("liveBoard").innerHTML='<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
+    return;
+  }
+  upcoming.forEach(m=>{
+    if(m.day!==curDay){ curDay=m.day;
+      html += '<div class="daybar"><span class="d">'+locDay(m.day)+'</span><span class="ln"></span></div>';
+    }
+    html += matchRow(m);
+  });
+  document.getElementById("liveBoard").innerHTML = html;
+}
+function matchRow(m){
+  const t=I18N[LANG], free=(m.tv[COUNTRY]||[]).some(s=>s.t==="fta");
+  const timeCell = '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>';
+  const groups = ["DE","AT","CH","UK"].filter(cc=>cc!==COUNTRY).map(cc=>
+    '<div class="cgroup"><div class="ctitle"><span class="ff">'+CFLAG[cc]+'</span> '+CNAME[LANG][cc]+'</div>'+chList(m.tv[cc])+'</div>').join("");
+  const aux = [ ...getRadio(m).map(r=>'<a href="#"><span class="ic">♪</span>'+r+'</a>'),
+                ...getTicker(m).map(x=>'<a href="#"><span class="ic">≡</span>'+x+'</a>') ].join("");
+  const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" — "+(LANG==="de"?"wo läuft das Spiel?":"where to watch?")+" (TVFussball.de)", "https://tvfussball.de");
+  return '<div class="row'+(free?' free':'')+'">'+
+    '<button class="rowhead" aria-expanded="false">'+timeCell+
+      '<div class="teams">'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+
+      '</div>'+
+      '<span class="chev">'+CHEV+'</span>'+
+    '</button>'+
+    '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
+      '<div class="dh"><span class="ff">'+CFLAG[COUNTRY]+'</span>'+t.where+' '+CNAME[LANG][COUNTRY]+'</div>'+
+      '<div class="chlist">'+chList(m.tv[COUNTRY])+'</div>'+
+      '<button class="morebtn" data-more aria-expanded="false">＋ '+t.more+'</button>'+
+      '<div class="morewrap"><div>'+groups+'</div></div>'+
+      (aux?'<div class="auxlinks">'+aux+'</div>':"")+
+      share+
+    '</div></div></div>'+
+  '</div>';
+}
+
+/* ---------- Render: Highlights ---------- */
+function renderHLFilters(){ const t=I18N[LANG];
+  const defs=[["all",t.f_all],["3goals",t.f_3goals],["relive",t.f_relive]];
+  document.getElementById("hlFilters").innerHTML = defs.map(d=>
+    '<button class="fchip" data-hlf="'+d[0]+'" aria-pressed="'+(HL_FILTER===d[0])+'">'+d[1]+'</button>').join("");
+}
+function hlGoals(s){ const p=s.split(":").map(n=>parseInt(n,10)); return (p[0]||0)+(p[1]||0); }
+function renderHL(){
+  const t=I18N[LANG], board=document.getElementById("hlBoard");
+  document.getElementById("hlNote").innerHTML=t.hl_note;
+  let list=HL.filter(m=>{
+    if(HL_FILTER==="3goals" && hlGoals(m.s)<3) return false;
+    if(HL_FILTER==="relive" && !m.full) return false;
+    if(HL_Q){const q=HL_Q.toLowerCase(); if(!((m.h+" "+m.a).toLowerCase().includes(q))) return false;}
+    return true;
+  });
+  document.getElementById("hlCount").textContent="["+list.length+"]";
+  if(!list.length){board.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
+  let html="", curDate="";
+  list.forEach(m=>{
+    if(m.date!==curDate){curDate=m.date; html+='<div class="daybar"><span class="d">'+locDate(m.date)+' 2026</span><span class="ln"></span></div>';}
+    html+=hlRow(m,t);
+  });
+  board.innerHTML=html;
+}
+function hlRow(m,t){
+  const tot=hlGoals(m.s);
+  // Zusammenfassungen
+  let sums="";
+  if(m.zdf) sums+='<div class="sumrow"><span class="slabel zdf">ZDF</span><span class="sname">sportstudio · '+t.hl_checked+'</span>'+
+    '<span class="sright"><span class="slen">'+locMin(m.zdf[0])+'</span><a class="swatch" href="'+m.zdf[1]+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
+  sums+='<div class="sumrow"><span class="slabel ard">ARD</span><span class="sname">Sportschau / Mediathek</span>'+
+    '<span class="sright"><a class="swatch" href="'+ARD_HUB+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
+  sums+='<div class="sumrow"><span class="slabel yt">YT</span><span class="sname">sportstudio fußball</span>'+
+    '<span class="sright"><a class="swatch" href="'+ZDF_YT+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
+  // Komplettes Spiel
+  let full;
+  if(m.full){
+    full='<a class="fullm" href="'+m.full[3]+'" target="_blank" rel="noopener">'+
+      '<span class="fic">▶</span><span class="ftx"><b>'+t.hl_whole+'</b><span>'+t.hl_free_stream+'</span></span>'+
+      '<span class="fmeta"><b>'+m.full[0]+'</b>'+(m.full[1]?locMin(m.full[1])+' · ':'')+locAvail(m.full[2])+'</span></a>';
+  } else {
+    full='<div class="paybox"><span class="pic">🔒</span><span>'+t.hl_pay_only+' '+
+      '<a href="'+MAGENTA+'" target="_blank" rel="noopener">MagentaTV</a> '+t.hl_pay_suffix+'</span></div>';
+  }
+  const share = shareBar(m.h+" "+m.s+" "+m.a, m.h+" "+m.s+" "+m.a+" · "+(LANG==="de"?"Highlights & Relive":"highlights & replay")+" (TVFussball.de)", m.full?m.full[3]:(m.zdf?m.zdf[1]:"https://tvfussball.de"));
+  return '<div class="row">'+
+    '<button class="rowhead" aria-expanded="false">'+
+      '<div class="time">'+m.s+'<small>'+t.ft+'</small></div>'+
+      '<div class="teams">'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="meta"><span class="comp">'+locComp(m.g)+'</span><span class="freebest pay">'+locDate(m.date)+'</span>'+
+          (tot>=3?'<span class="freebest tv">'+tot+' '+t.goals+'</span>':"")+
+          (m.full?'<span class="freebest radio">▶ '+t.f_relive+'</span>':"")+'</div>'+
+      '</div><span class="chev">'+CHEV+'</span>'+
+    '</button>'+
+    '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
+      '<div class="dh">'+t.hl_summaries+'</div><div class="chlist">'+sums+'</div>'+
+      '<div class="dh">'+t.hl_full+'</div>'+full+
+      share+
+    '</div></div></div>'+
+  '</div>';
+}
+
+/* ---------- Render: News ---------- */
+function renderNewsFilters(){
+  const chips=[["",I18N[LANG].f_all], ...TEAMS.map(tm=>[tm.id,tm.name])];
+  document.getElementById("newsFilters").innerHTML = chips.map(c=>{
+    const tm=c[0]?T[c[0]]:null;
+    const dot=tm?'<span class="cdot" style="background:'+tm.color+'"></span>':'';
+    return '<button class="fchip" data-newsf="'+c[0]+'" aria-pressed="'+(NEWS_TEAM===c[0])+'">'+dot+c[1]+'</button>';
+  }).join("");
+}
+function fmtNewsDate(iso){const p=iso.split("-"); return p[2]+"."+p[1]+"."+p[0];}
+function renderNews(){
+  const t=I18N[LANG], box=document.getElementById("newsList");
+  let list=NEWS.filter(n=>{
+    if(NEWS_TEAM && n.team!==NEWS_TEAM) return false;
+    if(NEWS_Q){const q=NEWS_Q.toLowerCase(); const tm=T[n.team];
+      if(!((n.title+" "+n.teaser+" "+n.src+" "+(tm?tm.name:"")).toLowerCase().includes(q))) return false;}
+    return true;
+  }).sort((a,b)=>b.date.localeCompare(a.date));
+  document.getElementById("newsUpdated").textContent="["+list.length+"]";
+  if(!list.length){box.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
+  box.innerHTML=list.map(n=>{
+    const tm=T[n.team], fg=tm.fg||"#fff", name=tm.nat?"★ "+tm.name:tm.name;
+    return '<a class="ncard" href="'+n.url+'" target="_blank" rel="noopener" style="--club:'+tm.color+'">'+
+      '<div class="nhead"><span class="nsrc"><span class="dot" style="background:'+tm.color+';color:'+fg+';border-color:transparent">'+tm.short+'</span>'+name+'</span><span class="ntime">'+fmtNewsDate(n.date)+'</span></div>'+
+      '<h3>'+n.title+'</h3><p>'+n.teaser+'</p>'+
+      '<div class="nfoot"><span class="nsource">'+t.source+': '+n.src+'</span><span class="nlink">'+t.read+' ↗</span></div></a>';
+  }).join("");
+}
+function mono(s){const w=s.replace(/[^A-Za-z0-9 ]/g," ").split(" ").filter(Boolean);
+  if(w.length>=2) return (w[0][0]+w[1][0]).toUpperCase(); return s.replace(/[^A-Za-z0-9]/g,"").slice(0,2).toUpperCase();}
+
+/* ---------- Render: Providers ---------- */
+function renderProvFilters(){ const t=I18N[LANG];
+  const defs=[["all",t.f_all],["DE","DE"],["AT","AT"],["CH","CH"],["UK","UK"],["free",t.best_free],["pay","Pay"],["Bundesliga","Bundesliga"],["Champions League","CL"],["WM 2026","WM 2026"],["Premier League","PL"]];
+  document.getElementById("provFilters").innerHTML = defs.map(d=>
+    '<button class="fchip" data-provf="'+d[0]+'" aria-pressed="'+(PROV_FILTER===d[0])+'">'+d[1]+'</button>').join("");
+}
+function renderProviders(){
+  const t=I18N[LANG], box=document.getElementById("provList");
+  const fmt = p => p.kind==="free" ? (LANG==="de"?"kostenlos":"free") : (p.price.indexOf("ab ")===0 ? t.price_from+" "+t.price_approx+" "+p.price.slice(3) : t.price_approx+" "+p.price);
+  document.getElementById("provNote").textContent=t.prov_note;
+  let list=PROVIDERS.filter(p=>{
+    const f=PROV_FILTER;
+    if(f && f!=="all"){
+      if(["DE","AT","CH","UK"].includes(f)){ if(!p.countries.includes(f)) return false; }
+      else if(f==="free"||f==="pay"){ if(p.kind!==f) return false; }
+      else { if(!p.comps.includes(f)) return false; }
+    }
+    if(PROV_Q){ const q=PROV_Q.toLowerCase();
+      if(!((p.name+" "+p[LANG]+" "+p.comps.join(" ")+" "+p.countries.join(" ")+" "+p.kind).toLowerCase().includes(q))) return false; }
+    return true;
+  });
+  document.getElementById("provCount").textContent="["+list.length+"]";
+  if(!list.length){box.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
+  box.innerHTML=list.map(p=>{
+    const badge=p.kind==="free"?'<span class="tag fta">'+t.p_free+'</span>':'<span class="tag pay">'+t.p_pay+'</span>';
+    const comps='<div class="pcomps">'+p.comps.map(c=>'<span class="pcomp">'+c+'</span>').join("")+'</div>';
+    return '<div class="pcard"><div class="phead">'+
+      '<div class="plogo '+(p.kind==="free"?"free":"")+'">'+mono(p.name)+'</div>'+
+      '<div style="min-width:0"><div class="pname">'+p.name+'</div><div class="pcc">'+p.countries.join(" · ")+'</div></div>'+badge+'</div>'+
+      '<p>'+p[LANG]+'</p>'+comps+
+      '<div class="pfoot"><div class="pprice">'+fmt(p)+'<small>'+p.sub+'</small><small class="pcheck">'+t.prov_check+' ↗</small></div>'+
+        '<a class="pvisit" href="'+p.url+'" target="_blank" rel="noopener">'+t.visit+' ↗</a></div></div>';
+  }).join("");
+}
+
+/* ---------- i18n / theme ---------- */
+function applyLang(){
+  const t=I18N[LANG];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(t[k]) el.textContent=t[k];});
+  document.documentElement.lang=LANG;
+  document.getElementById("hlSearch").placeholder = LANG==="de"?"Mannschaft suchen … (z. B. Frankreich)":"Search team … (e.g. France)";
+  document.getElementById("newsSearch").placeholder = LANG==="de"?"Verein, Quelle oder Stichwort suchen …":"Search club, source or keyword …";
+  document.getElementById("provSearch").placeholder = LANG==="de"?"Anbieter, Wettbewerb oder Land suchen …":"Search provider, competition or country …";
+  document.getElementById("wm-anthemSearch").placeholder = LANG==="de"?"Land suchen … z. B. Brasilien, Japan":"Search country … e.g. Brazil, Japan";
+}
+const ICON_MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.3A8 8 0 1 1 10.7 3.5a6.3 6.3 0 0 0 9.8 9.8z"/></svg>';
+const ICON_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>';
+function setTheme(th){ document.documentElement.dataset.theme=th; const b=document.getElementById("themeToggle"); if(b) b.innerHTML=th==="dark"?ICON_SUN:ICON_MOON; }
+
+let TOAST_TIMER;
+function toast(msg){ const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
+  clearTimeout(TOAST_TIMER); TOAST_TIMER=setTimeout(()=>el.classList.remove("show"),1900); }
+async function doShare(btn){
+  const t=I18N[LANG];
+  const title=btn.dataset.shareTitle||"TVFussball.de";
+  const text=btn.dataset.shareText||title;
+  const url=btn.dataset.shareUrl||"https://tvfussball.de";
+  if(navigator.share){
+    try{ await navigator.share({title,text,url}); return; }
+    catch(err){ if(err && err.name==="AbortError") return; }
+  }
+  try{ await navigator.clipboard.writeText(text+" "+url); }catch(_){}
+  toast(t.shared);
+  btn.classList.add("done");
+  const lbl=btn.querySelector("span"); const old=lbl.textContent; lbl.textContent=t.shared_btn;
+  setTimeout(()=>{ btn.classList.remove("done"); lbl.textContent=old; },1800);
+}
+
+function renderAll(){ renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); applyLang(); }
+
+/* ---------- Events ---------- */
+document.addEventListener("click", e=>{
+  const sh=e.target.closest("[data-share]");
+  if(sh){ doShare(sh); return; }
+  const wopt=e.target.closest("[data-wq]");
+  if(wopt){ wmAnswer(+wopt.dataset.wq, +wopt.dataset.wo); return; }
+  const wlike=e.target.closest("[data-wm-like]");
+  if(wlike){ const i=wlike.dataset.wmLike; WM_LIKES[i]=!WM_LIKES[i];
+    wlike.classList.toggle("on",WM_LIKES[i]); wlike.querySelector("span").textContent=WM_LIKES[i]?1:0;
+    wlike.firstChild.textContent=WM_LIKES[i]?"❤️ ":"🤍 "; return; }
+  if(e.target.id==="wm-quizReset"){ wmBuildQuiz(); return; }
+  const head=e.target.closest(".rowhead");
+  if(head){const row=head.closest(".row"); const open=row.classList.toggle("open"); head.setAttribute("aria-expanded",open); return;}
+  const more=e.target.closest("[data-more]");
+  if(more){const w=more.nextElementSibling; const show=w.classList.toggle("show");
+    more.setAttribute("aria-expanded",show); more.textContent=(show?"－ "+I18N[LANG].less:"＋ "+I18N[LANG].more); return;}
+  const tab=e.target.closest(".navitem");
+  if(tab){document.querySelectorAll(".navitem").forEach(x=>x.setAttribute("aria-selected","false"));
+    tab.setAttribute("aria-selected","true");
+    document.querySelectorAll(".tabpane").forEach(p=>p.classList.remove("active"));
+    document.getElementById("pane-"+tab.dataset.tab).classList.add("active");
+    if(tab.dataset.tab==="wm"){ document.querySelectorAll("#pane-wm details").forEach(d=>d.open=false); }
+    window.scrollTo({top:0,behavior:"smooth"}); return;}
+  const lb=e.target.closest("[data-lang]");
+  if(lb){document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed","false"));
+    lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; renderAll(); return;}
+  const hlf=e.target.closest("[data-hlf]");
+  if(hlf){HL_FILTER=hlf.dataset.hlf; renderHLFilters(); renderHL(); return;}
+  const nf=e.target.closest("[data-newsf]");
+  if(nf){NEWS_TEAM=nf.dataset.newsf; renderNewsFilters(); renderNews(); return;}
+  const pf=e.target.closest("[data-provf]");
+  if(pf){PROV_FILTER=pf.dataset.provf; renderProvFilters(); renderProviders(); return;}
+  if(e.target.id==="themeToggle"){ setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"); return; }
+  if(e.target.id==="consentYes"||e.target.id==="consentNo"){document.getElementById("consent").classList.add("hide");}
+});
+document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; renderHL();});
+document.getElementById("newsSearch").addEventListener("input",e=>{NEWS_Q=e.target.value; renderNews();});
+document.getElementById("provSearch").addEventListener("input",e=>{PROV_Q=e.target.value; renderProviders();});
+document.getElementById("wm-anthemSearch").addEventListener("input",e=>wmRenderAnthems(e.target.value));
+
+/* ===================== WM-Tab ===================== */
+const WM_GROUPS=[
+ ["A",[["Mexiko","🇲🇽",6,2,2,0,0,3,0],["Südkorea","🇰🇷",3,2,1,0,1,2,2],["Tschechien","🇨🇿",1,2,0,1,1,2,3],["Südafrika","🇿🇦",1,2,0,1,1,1,3]]],
+ ["B",[["Kanada","🇨🇦",4,2,1,1,0,7,1],["Schweiz","🇨🇭",4,2,1,1,0,5,2],["Bosnien-Herz.","🇧🇦",1,2,0,1,1,2,5],["Katar","🇶🇦",1,2,0,1,1,1,7]]],
+ ["C",[["Brasilien","🇧🇷",4,2,1,1,0,4,1],["Marokko","🇲🇦",4,2,1,1,0,2,1],["Schottland","🏴󠁧󠁢󠁳󠁣󠁴󠁿",3,2,1,0,1,1,1],["Haiti","🇭🇹",0,2,0,0,2,0,4]]],
+ ["D",[["USA","🇺🇸",6,2,2,0,0,6,1],["Australien","🇦🇺",3,2,1,0,1,2,2],["Paraguay","🇵🇾",3,2,1,0,1,2,4],["Türkei","🇹🇷",0,2,0,0,2,0,3]]],
+ ["E",[["Deutschland","🇩🇪",6,2,2,0,0,9,2],["Elfenbeinküste","🇨🇮",3,2,1,0,1,2,2],["Ecuador","🇪🇨",1,2,0,1,1,0,1],["Curaçao","🇨🇼",1,2,0,1,1,1,7]]],
+ ["F",[["Niederlande","🇳🇱",4,2,1,1,0,7,3],["Japan","🇯🇵",4,2,1,1,0,6,2],["Schweden","🇸🇪",3,2,1,0,1,6,6],["Tunesien","🇹🇳",0,2,0,0,2,1,9]]],
+ ["G",[["Ägypten","🇪🇬",4,2,1,1,0,4,2],["Iran","🇮🇷",2,2,0,2,0,2,2],["Belgien","🇧🇪",2,2,0,2,0,1,1],["Neuseeland","🇳🇿",1,2,0,1,1,3,5]]],
+ ["H",[["Spanien","🇪🇸",4,2,1,1,0,4,0],["Uruguay","🇺🇾",2,2,0,2,0,3,3],["Kap Verde","🇨🇻",2,2,0,2,0,2,2],["Saudi-Arabien","🇸🇦",1,2,0,1,1,1,5]]],
+ ["I",[["Frankreich","🇫🇷",6,2,2,0,0,6,1],["Norwegen","🇳🇴",6,2,2,0,0,7,3],["Senegal","🇸🇳",0,2,0,0,2,3,6],["Irak","🇮🇶",0,2,0,0,2,1,7]]],
+ ["J",[["Argentinien","🇦🇷",6,2,2,0,0,5,0],["Österreich","🇦🇹",3,2,1,0,1,3,3],["Jordanien","🇯🇴",0,1,0,0,1,1,3],["Algerien","🇩🇿",0,1,0,0,1,0,3]]],
+ ["K",[["Kolumbien","🇨🇴",3,1,1,0,0,3,1],["Portugal","🇵🇹",1,1,0,1,0,1,1],["DR Kongo","🇨🇩",1,1,0,1,0,1,1],["Usbekistan","🇺🇿",0,1,0,0,1,1,3]]],
+ ["L",[["England","🏴󠁧󠁢󠁥󠁮󠁧󠁿",3,1,1,0,0,4,2],["Ghana","🇬🇭",3,1,1,0,0,1,0],["Panama","🇵🇦",0,1,0,0,1,0,1],["Kroatien","🇭🇷",0,1,0,0,1,2,4]]]
+];
+const WM_R32=[
+ {d:"So 28.06.",t:"21:00",city:"Los Angeles",st:"SoFi Stadium",a:null,aph:"Zweiter A",b:null,bph:"Zweiter B",fav:null},
+ {d:"Mo 29.06.",t:"19:00",city:"Houston",st:"NRG Stadium",a:null,aph:"Erster C",b:null,bph:"Zweiter F",fav:null},
+ {d:"Mo 29.06.",t:"22:30",city:"Boston",st:"Gillette Stadium",a:["Deutschland","🇩🇪"],b:null,bph:"Dritter A/B/C/D/F",fav:0},
+ {d:"Di 30.06.",t:"02:00",city:"Monterrey",st:"Estadio BBVA",a:null,aph:"Erster F",b:null,bph:"Zweiter C",fav:null},
+ {d:"Di 30.06.",t:"19:00",city:"Dallas",st:"AT&T Stadium",a:null,aph:"Zweiter E",b:null,bph:"Zweiter I",fav:null},
+ {d:"Di 30.06.",t:"23:00",city:"New Jersey",st:"MetLife Stadium",a:null,aph:"Erster I",b:null,bph:"Dritter C/D/F/G/H",fav:0},
+ {d:"Mi 01.07.",t:"02:00",city:"Mexiko-Stadt",st:"Aztekenstadion",a:["Mexiko","🇲🇽"],b:null,bph:"Dritter C/E/F/H/I",fav:0},
+ {d:"Mi 01.07.",t:"18:00",city:"Atlanta",st:"Mercedes-Benz Stadium",a:null,aph:"Erster L",b:null,bph:"Dritter E/H/I/J/K",fav:0},
+ {d:"Mi 01.07.",t:"22:00",city:"Seattle",st:"Lumen Field",a:null,aph:"Erster G",b:null,bph:"Dritter A/E/H/I/J",fav:0},
+ {d:"Do 02.07.",t:"02:00",city:"San Francisco",st:"Levi's Stadium",a:["USA","🇺🇸"],b:null,bph:"Dritter B/E/F/I/J",fav:0},
+ {d:"Do 02.07.",t:"21:00",city:"Los Angeles",st:"SoFi Stadium",a:null,aph:"Erster H",b:null,bph:"Zweiter J",fav:0},
+ {d:"Fr 03.07.",t:"01:00",city:"Toronto",st:"BMO Field",a:null,aph:"Zweiter K",b:null,bph:"Zweiter L",fav:null},
+ {d:"Fr 03.07.",t:"05:00",city:"Vancouver",st:"BC Place",a:null,aph:"Erster B",b:null,bph:"Dritter E/F/G/I/J",fav:0},
+ {d:"Fr 03.07.",t:"20:00",city:"Dallas",st:"AT&T Stadium",a:null,aph:"Zweiter D",b:null,bph:"Zweiter G",fav:null},
+ {d:"Sa 04.07.",t:"00:00",city:"Miami",st:"Hard Rock Stadium",a:["Argentinien","🇦🇷"],b:null,bph:"Zweiter H",fav:0},
+ {d:"Sa 04.07.",t:"03:30",city:"Kansas City",st:"Arrowhead Stadium",a:null,aph:"Erster K",b:null,bph:"Dritter D/E/I/J/L",fav:0}
+];
+const WM_ANTHEMS=[
+ ["Deutschland","🇩🇪","Deutschlandlied (3. Strophe)","Melodie von Joseph Haydn (1797), Text von Hoffmann von Fallersleben."],
+ ["Frankreich","🇫🇷","La Marseillaise","Revolutionslied von 1792 — eine der kämpferischsten Hymnen der Welt."],
+ ["Brasilien","🇧🇷","Hino Nacional Brasileiro","Melodisch verspielt und textlich dicht — Fans summen oft a cappella weiter."],
+ ["Argentinien","🇦🇷","Himno Nacional Argentino","Fast opernhaft und ungewöhnlich lang, mit langer Instrumental-Einleitung."],
+ ["Spanien","🇪🇸","Marcha Real","Eine der wenigen Hymnen ganz ohne offiziellen Text."],
+ ["England","🏴󠁧󠁢󠁥󠁮󠁧󠁿","God Save the King","Königshymne — kurz, getragen, monarchisch."],
+ ["Niederlande","🇳🇱","Het Wilhelmus","Gilt als eine der ältesten Nationalhymnen der Welt."],
+ ["Portugal","🇵🇹","A Portuguesa","Marschartige Hymne mit maritimem Stolz."],
+ ["Belgien","🇧🇪","La Brabançonne","Wird je nach Landesteil auf Französisch, Niederländisch oder Deutsch gesungen."],
+ ["Kroatien","🇭🇷","Lijepa naša domovino","Lyrische Liebeserklärung an die Heimat („Unser schönes Vaterland“)."],
+ ["Uruguay","🇺🇾","Himno Nacional del Uruguay","Gilt als längste Nationalhymne der Welt."],
+ ["Japan","🇯🇵","Kimigayo","Einer der kürzesten Hymnentexte der Welt — getragen und sehr ruhig."],
+ ["Südkorea","🇰🇷","Aegukga","„Patriotisches Lied“ — feierlich und gefühlvoll."],
+ ["Mexiko","🇲🇽","Himno Nacional Mexicano","Pompös und kriegerisch, mit kraftvollem Refrain."],
+ ["USA","🇺🇸","The Star-Spangled Banner","Berühmt-schwierig zu singen wegen des großen Tonumfangs."],
+ ["Kanada","🇨🇦","O Canada","Zweisprachig (Englisch/Französisch), ruhig und hymnisch."],
+ ["Schweiz","🇨🇭","Schweizerpsalm","Eher ein Gebet als ein Marsch — feierlich und besinnlich."],
+ ["Österreich","🇦🇹","Land der Berge, Land am Strome","Melodie aus dem Umfeld Mozarts, geschlechtergerecht überarbeiteter Text."],
+ ["Marokko","🇲🇦","Hymne Chérifien","Königliche Hymne mit feierlichem Charakter."],
+ ["Senegal","🇸🇳","Pincez tous vos koras","Benannt nach der Kora, der westafrikanischen Stegharfe."],
+ ["Elfenbeinküste","🇨🇮","L'Abidjanaise","Patriotisches Lied an die größte Stadt Abidjan."],
+ ["Ägypten","🇪🇬","Bilady, Bilady, Bilady","„Mein Land“ — eingängig und stolz."],
+ ["Tunesien","🇹🇳","Humat al-Hima","„Verteidiger des Vaterlands“ — kämpferisch."],
+ ["Algerien","🇩🇿","Kassaman","„Wir schwören“ — entstanden im Unabhängigkeitskampf."],
+ ["Ghana","🇬🇭","God Bless Our Homeland Ghana","Würdevolle Bitte um Segen für die Heimat."],
+ ["Kap Verde","🇨🇻","Cântico da Liberdade","„Gesang der Freiheit“ des Inselstaats."],
+ ["Südafrika","🇿🇦","Nkosi Sikelel' iAfrika / Die Stem","Vereint fünf Sprachen in einer einzigen Hymne."],
+ ["DR Kongo","🇨🇩","Debout Congolais","„Steht auf, Kongolesen“ — Aufbruchshymne."],
+ ["Kolumbien","🇨🇴","Himno Nacional de Colombia","Opernhaft, mit klarer Strophen-Refrain-Struktur."],
+ ["Paraguay","🇵🇾","Paraguayos, República o Muerte","Dramatischer Titel: „Republik oder Tod“."],
+ ["Schottland","🏴󠁧󠁢󠁳󠁣󠁴󠁿","Flower of Scotland","Inoffizielle, aber von Fans gelebte Sport-Hymne."],
+ ["Norwegen","🇳🇴","Ja, vi elsker dette landet","„Ja, wir lieben dieses Land“ — feierlich."],
+ ["Schweden","🇸🇪","Du gamla, du fria","„Du alter, du freier (Norden)“ — ruhig und stolz."],
+ ["Türkei","🇹🇷","İstiklâl Marşı","„Unabhängigkeitsmarsch“ — kraftvoll und pathetisch."],
+ ["Iran","🇮🇷","Soroud-e Melli","Kurze, getragene Hymne der Islamischen Republik."],
+ ["Saudi-Arabien","🇸🇦","Aash Al-Maleek","Kurze königliche Hymne („Lang lebe der König“)."],
+ ["Katar","🇶🇦","As Salam al Amiri","Feierliche Hymne des Emirats."],
+ ["Irak","🇮🇶","Mawtini","„Meine Heimat“ — emotional, in der ganzen Region beliebt."],
+ ["Jordanien","🇯🇴","As-salam al-malaki al-urduni","Königliche Hymne — kurz und feierlich."],
+ ["Usbekistan","🇺🇿","Davlat Madhiyasi","Hymne der Republik, breit und feierlich."],
+ ["Australien","🇦🇺","Advance Australia Fair","Optimistisch und melodisch."],
+ ["Neuseeland","🇳🇿","God Defend New Zealand","Wird auf Māori und Englisch gesungen."],
+ ["Haiti","🇭🇹","La Dessalinienne","Benannt nach dem Unabhängigkeitshelden Dessalines."],
+ ["Panama","🇵🇦","Himno Istmeño","„Hymne der Landenge“ — heiter und marschartig."],
+ ["Ecuador","🇪🇨","Salve, Oh Patria","Sehr lang und opernhaft, meist nur im Refrain gesungen."],
+ ["Curaçao","🇨🇼","Himno di Kòrsou","In Papiamentu gesungen — Stolz des kleinen Inselstaats."],
+ ["Bosnien-Herzegowina","🇧🇦","Državna himna BiH","Hat offiziell keinen Text — nur die Melodie zählt."]
+];
+const WM_MEMES=[
+ ["🏝️","Curaçao holt einen Punkt gegen Ecuador. Der halbe Inselstaat steht jetzt im Tor.","Underdog"],
+ ["😴","Achtelfinale, Anstoß 5:00 Uhr. Mein Wecker und ich sind keine Freunde mehr.","Anstoßzeiten"],
+ ["🇮🇹","48 Teams bei der WM. Italien: „Wir gucken trotzdem von zu Hause.“","Dauerbrenner"],
+ ["🇩🇪","9 Tore in 2 Spielen. Nagelsmann tut so, als wäre das normal.","DFB"],
+ ["🔤","„Erster L gegen Dritter E/H/I/J/K.“ Mein Spielplan sieht aus wie eine Matheklausur.","Modus"],
+ ["🥅","Tunesien nach 2 Spielen: 9 Gegentore. Der Torwart braucht Urlaub.","Kurioses"]
+];
+const WM_YT='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.8-.5-5.6a2.9 2.9 0 0 0-2-2C18.7 4 12 4 12 4s-6.7 0-8.5.4a2.9 2.9 0 0 0-2 2C1 8.2 1 12 1 12s0 3.8.5 5.6a2.9 2.9 0 0 0 2 2C5.3 20 12 20 12 20s6.7 0 8.5-.4a2.9 2.9 0 0 0 2-2C23 15.8 23 12 23 12zM10 15.5v-7l6 3.5-6 3.5z"/></svg>';
+
+function wmGroupTable(letter,rows){
+  const body=rows.map((r,i)=>{
+    const [name,fl,pkt,sp,s,u,n,to,gt]=r, td=to-gt, cls=i<2?"q":(i===2?"maybe":"");
+    return '<tr class="'+cls+'"><td class="pos">'+(i+1)+'</td><td class="team"><span class="fl">'+fl+'</span>'+name+'</td>'+
+      '<td>'+sp+'</td><td>'+s+'</td><td>'+u+'</td><td>'+n+'</td><td>'+to+':'+gt+'</td><td>'+(td>0?'+':'')+td+'</td><td class="pkt">'+pkt+'</td></tr>';
+  }).join("");
+  return '<details class="wmsub"><summary><span class="wm-lbl">Gruppe '+letter+'</span><span class="wm-mini">'+rows[0][1]+' '+rows[0][0]+'</span><span class="wmchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>'+
+    '<div class="wmsub-body"><table class="wm-tbl"><thead><tr><th></th><th class="team">Team</th><th>Sp</th><th>S</th><th>U</th><th>N</th><th>Tore</th><th>TD</th><th>Pkt</th></tr></thead><tbody>'+body+'</tbody></table></div></details>';
+}
+function wmTeamLine(team,ph,isFav){
+  if(team) return '<div class="wm-t"><span class="fl">'+team[1]+'</span>'+team[0]+(isFav?'<span class="tip">Tipp ✓</span>':'')+'</div>';
+  return '<div class="wm-t open"><span class="fl">⚪</span>'+ph+'</div>';
+}
+function wmMatchCard(m){
+  return '<div class="wm-match">'+wmTeamLine(m.a,m.aph,m.fav===0)+'<div class="wm-vs">gegen</div>'+wmTeamLine(m.b,m.bph,m.fav===1)+
+    '<div class="wm-info"><span><b>'+m.d+'</b> · '+m.t+' Uhr</span><span>📍 '+m.city+'</span><span>🏟️ '+m.st+'</span><span>🧑‍⚖️ <span class="wm-nn">n. n.</span></span></div></div>';
+}
+function wmBracket(prefix,games,info){
+  let html='<p class="wm-introtext">'+info+'</p>';
+  for(let i=1;i<=games;i++){
+    html+='<div class="wm-match"><div class="wm-t open"><span class="fl">⚪</span>Sieger '+prefix+' '+(i*2-1)+'</div><div class="wm-vs">gegen</div>'+
+      '<div class="wm-t open"><span class="fl">⚪</span>Sieger '+prefix+' '+(i*2)+'</div>'+
+      '<div class="wm-info"><span class="wm-nn">Datum, Anstoß, Stadion &amp; Schiri folgen</span></div></div>';
+  }
+  return html;
+}
+function wmRenderAnthems(q){
+  const t=I18N[LANG], term=(q||"").trim().toLowerCase();
+  const list=WM_ANTHEMS.filter(a=>!term||a[0].toLowerCase().includes(term)||a[2].toLowerCase().includes(term)).sort((a,b)=>a[0].localeCompare(b[0],"de"));
+  document.getElementById("wm-anthemCount").textContent=list.length+" / "+WM_ANTHEMS.length+(LANG==="de"?" Teams":" teams");
+  const box=document.getElementById("wm-anthemList");
+  if(!list.length){box.innerHTML='<div class="wm-empty">'+(LANG==="de"?"Kein Land gefunden.":"No country found.")+'</div>';return;}
+  box.innerHTML=list.map(a=>{
+    const yt="https://www.youtube.com/results?search_query="+encodeURIComponent(a[0]+" Nationalhymne");
+    return '<div class="wm-anthem"><span class="fl">'+a[1]+'</span><div class="wm-att"><div class="n">'+a[0]+' <em>· '+a[2]+'</em></div><div class="d">'+a[3]+'</div></div>'+
+      '<a class="wm-play" href="'+yt+'" target="_blank" rel="noopener">'+WM_YT+' '+t.wm_listen+'</a></div>';
+  }).join("");
+}
+let WM_ANSWERED={}, WM_CORRECT=0;
+const WM_QUIZ=[
+ ["Wie viele Teams spielen bei dieser WM mit?",["32","40","48","64"],2],
+ ["In wie vielen Ländern wird die WM 2026 ausgetragen?",["1","2","3","4"],2],
+ ["Welche K.-o.-Runde gibt es 2026 zum ersten Mal?",["Sechzehntelfinale","Achtelfinale","Viertelfinale","Halbfinale"],0],
+ ["Wie viele Gruppen gibt es (A bis …)?",["8","10","12","16"],2],
+ ["Welcher kleine Inselstaat holte überraschend ein 0:0 gegen Ecuador?",["Haiti","Curaçao","Kap Verde","Panama"],1],
+ ["Welche große Fußballnation ist 2026 (mal wieder) nicht dabei?",["Italien","Niederlande","Kroatien","Belgien"],0],
+ ["Wie viele Tore schoss Deutschland in den ersten zwei Spielen? [Stand 23.06.]",["4","6","9","12"],2],
+ ["Wer eröffnete das Turnier im Aztekenstadion?",["USA","Kanada","Mexiko","Brasilien"],2],
+ ["Wie lange dauert die Verlängerung in der K.-o.-Phase?",["1× 15 Min","2× 15 Min","2× 10 Min","Golden Goal"],1],
+ ["Welches WM-Team hat eine Hymne ganz ohne offiziellen Text?",["Frankreich","Spanien","Japan","Ghana"],1],
+ ["Welche gilt als längste Nationalhymne der Welt?",["Brasilien","Argentinien","Uruguay","Deutschland"],2],
+ ["Wie viele der 48 Teams erreichen die K.-o.-Phase?",["16","24","32","48"],2],
+ ["Wie viele beste Gruppendritte kommen weiter?",["4","6","8","12"],2],
+ ["Welcher Bundestrainer führt Deutschland bei der WM 2026?",["Hansi Flick","Julian Nagelsmann","Rudi Völler","Jürgen Klopp"],1],
+ ["Wo steigt das Finale am 19. Juli?",["Los Angeles","Miami","New York / New Jersey","Mexiko-Stadt"],2]
+];
+function wmBuildQuiz(){
+  WM_ANSWERED={}; WM_CORRECT=0; document.getElementById("wm-quizResult").innerHTML="";
+  wmUpdateScore();
+  document.getElementById("wm-quiz").innerHTML=WM_QUIZ.map((q,qi)=>
+    '<div class="wm-q"><div class="qn">'+(LANG==="de"?"Frage":"Question")+' '+(qi+1)+' / 15</div><div class="qt">'+q[0]+'</div>'+
+    q[1].map((opt,oi)=>'<button class="wm-opt" data-wq="'+qi+'" data-wo="'+oi+'"><span>'+opt+'</span></button>').join("")+'</div>').join("");
+}
+function wmUpdateScore(){ document.getElementById("wm-score").innerHTML=WM_CORRECT+' / 15 <span>'+I18N[LANG].wm_correct+'</span>'; }
+function wmAnswer(qi,oi){
+  if(WM_ANSWERED[qi]!==undefined) return;
+  WM_ANSWERED[qi]=oi; const ci=WM_QUIZ[qi][2];
+  document.querySelectorAll('.wm-opt[data-wq="'+qi+'"]').forEach(o=>{
+    o.classList.add("locked"); const ooi=+o.dataset.wo;
+    if(ooi===ci){o.classList.add("correct"); o.insertAdjacentHTML("beforeend",'<span class="mk">✓</span>');}
+    else if(ooi===oi){o.classList.add("wrong"); o.insertAdjacentHTML("beforeend",'<span class="mk">✕</span>');}
+  });
+  if(oi===ci) WM_CORRECT++;
+  wmUpdateScore();
+  if(Object.keys(WM_ANSWERED).length===WM_QUIZ.length) wmShowResult();
+}
+function wmShowResult(){
+  const de=LANG==="de"; let emo,lvl,sub;
+  if(WM_CORRECT>=13){emo="🏆";lvl=de?"WM-Experte":"World Cup expert";sub=de?"Du gehörst auf die Couch der ARD-Analysten.":"You belong on the pundits' couch.";}
+  else if(WM_CORRECT>=9){emo="⚽";lvl=de?"Kenner":"Connoisseur";sub=de?"Solides Wissen mit Stil.":"Solid knowledge with style.";}
+  else if(WM_CORRECT>=5){emo="🛋️";lvl=de?"Couch-Co-Trainer":"Couch assistant";sub=de?"Grundlagen sitzen, Feinschliff fehlt noch.":"Basics there, polish to follow.";}
+  else{emo="🐾";lvl=de?"Maskottchen":"Mascot";sub=de?"Dabei sein ist alles!":"Taking part is what counts!";}
+  document.getElementById("wm-quizResult").innerHTML='<div class="wm-result"><div class="big">'+emo+' '+WM_CORRECT+'/15</div><div class="lvl">'+lvl+'</div><div class="rsub">'+sub+'</div></div>';
+}
+function wmRenderMemes(){
+  document.getElementById("wm-memes").innerHTML=WM_MEMES.map((m,i)=>
+    '<div class="wm-meme"><div class="img">'+m[0]+'</div><div class="cap">'+m[1]+'</div>'+
+    '<div class="bar"><button class="lk" data-wm-like="'+i+'">🤍 <span>0</span></button><span class="tagx">'+m[2]+'</span></div></div>').join("");
+}
+const WM_LIKES={};
+function wmInit(){
+  wmRenderAnthems("");
+  wmBuildQuiz();
+}
+
+/* ---------- Boot ---------- */
+setTheme(document.documentElement.dataset.theme || "light");
+renderAll();
+wmInit();
+window.addEventListener("load",()=>{
+  setTimeout(()=>{ document.getElementById("loader").classList.add("hide");
+    setTimeout(()=>document.getElementById("consent").classList.remove("hide"), 600);
+  }, 1100);
+});
+</script>
+</body>
+</html>
