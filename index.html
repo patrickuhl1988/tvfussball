@@ -404,6 +404,13 @@
 
   @media (max-width:480px){.seg button{padding:6px 7px}.rowhead{grid-template-columns:46px 1fr auto; gap:10px}}
   @media (prefers-reduced-motion:reduce){.ball,.shadow,.live-flag b{animation:none !important}.ball{transform:translateY(22px)}*{transition:none !important}}
+  .soonbox{display:flex; align-items:center; gap:12px; padding:22px 18px; border:1px dashed var(--line); border-radius:14px; background:var(--bg2); color:var(--muted); margin:6px 0}
+  .soonbox .ic{font-size:22px; flex:0 0 auto}
+  .soonbox b{display:block; color:var(--ink); font-size:14px; margin-bottom:2px}
+  .soonbox span{font-size:12.5px; line-height:1.45}
+  .soonbox.sm{padding:13px 14px; margin:0 0 10px}
+  .soonbox.sm .ic{font-size:18px}
+  .row.tba .time{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -435,6 +442,8 @@
 
 <div class="wrap">
   <section class="tabpane active" id="pane-live" role="tabpanel">
+    <div class="filters" id="liveFilters"></div>
+    <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" placeholder="Weitere Wettbewerbe oder Teams suchen …"></div>
     <div class="board" id="liveBoard"></div>
     <p class="note" id="liveNote"></p>
   </section>
@@ -569,6 +578,7 @@ const I18N = {
     ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
     price_from:"ab", price_approx:"ca.",
     result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Topspiele",
+    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
@@ -602,6 +612,7 @@ const I18N = {
     ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
     price_from:"from", price_approx:"approx.",
     result:"Final", ft:"FT", nohits:"No results", f_all:"All", f_3goals:"3+ goals", f_top:"Top games",
+    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
@@ -632,6 +643,7 @@ const MAG={n:"MagentaTV",t:"pay",q:"4K"}, ARD={n:"Das Erste",t:"fta",q:"HD"}, ZD
   SRF2={n:"SRF zwei",t:"fta",q:"HD"}, SRFi={n:"SRF info",t:"fta",q:"HD"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
   SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
   UKg={n:"BBC / ITV",t:"fta",q:"HD"};
+const SAT1={n:"SAT.1",t:"fta",q:"HD"}, SKY={n:"Sky",t:"pay",q:"HD"};
 
 const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧"};
 const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK"}};
@@ -663,7 +675,40 @@ const MATCHES = [
   {day:"Donnerstag, 25.06.2026", time:"22:00", comp:"WM 2026 · Gruppe E · 3. Spieltag",
    h:"Ecuador", a:"Deutschland", tv:{DE:[ARD,MAG],AT:[ORF],CH:[SRFg],UK:[UKg]}},
   {day:"Donnerstag, 25.06.2026", time:"22:00", comp:"WM 2026 · Gruppe E · 3. Spieltag",
-   h:"Curaçao", a:"Elfenbeinküste", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}}
+   h:"Curaçao", a:"Elfenbeinküste", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {cat:"dfb", day:"Freitag, 21.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SC Preußen Münster", a:"Karlsruher SC", tba:true},
+  {cat:"dfb", day:"Freitag, 21.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SV Waldhof Mannheim", a:"1. FC Kaiserslautern", tba:true},
+  {cat:"dfb", day:"Freitag, 21.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SC St. Tönis 1911/20", a:"Eintracht Frankfurt", tba:true},
+  {cat:"dfb", day:"Freitag, 21.08.2026", time:"20:45", comp:"DFB-Pokal · 1. Runde", h:"F.C. Hansa Rostock", a:"VfB Stuttgart", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"13:00", comp:"DFB-Pokal · 1. Runde", h:"FC Energie Cottbus", a:"FC Augsburg", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"13:00", comp:"DFB-Pokal · 1. Runde", h:"SV Wehen Wiesbaden", a:"Bayer 04 Leverkusen", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"FC Erzgebirge Aue", a:"TSG 1899 Hoffenheim", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"FC Viktoria Köln", a:"1. FC Nürnberg", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"1. FC Saarbrücken", a:"Hertha BSC", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"MSV Duisburg", a:"SV Elversberg", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"Lüneburger SK Hansa", a:"SV Werder Bremen", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"SV Hemelingen", a:"Hannover 96", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SG Sonnenhof Großaspach", a:"DSC Arminia Bielefeld", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"TSV 1860 München", a:"Holstein Kiel", tba:true},
+  {cat:"dfb", day:"Samstag, 22.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SV Eintracht Trier", a:"RB Leipzig", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"13:00", comp:"DFB-Pokal · 1. Runde", h:"SSV Jeddeloh", a:"1. FC Heidenheim", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"13:00", comp:"DFB-Pokal · 1. Runde", h:"SpVgg Greuther Fürth", a:"VfL Bochum", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"SV Westfalia Rhynern", a:"SG Dynamo Dresden", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"TSV Schott Mainz", a:"Borussia Mönchengladbach", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"Eintracht Braunschweig", a:"1. FC Union Berlin", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"Bahlinger SC", a:"1. FC Magdeburg", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"VfB 1921 Krieschow", a:"1. FSV Mainz 05", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"15:30", comp:"DFB-Pokal · 1. Runde", h:"FC Carl Zeiss Jena", a:"SV Darmstadt 98", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"Fortuna Düsseldorf", a:"SC Freiburg", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"1. FC Phönix Lübeck", a:"SC Paderborn", tba:true},
+  {cat:"dfb", day:"Sonntag, 23.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"Rot-Weiss Essen", a:"FC St. Pauli", tba:true},
+  {cat:"dfb", day:"Montag, 24.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"VSG Altglienicke Berlin", a:"VfL Wolfsburg", tba:true},
+  {cat:"dfb", day:"Montag, 24.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SC Verl", a:"Hamburger SV", tba:true},
+  {cat:"dfb", day:"Montag, 24.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"FC Würzburger Kickers", a:"1. FC Köln", tba:true},
+  {cat:"dfb", day:"Montag, 24.08.2026", time:"20:45", comp:"DFB-Pokal · 1. Runde", h:"Hallescher FC", a:"FC Schalke 04", tba:true},
+  {cat:"dfb", day:"Dienstag, 01.09.2026", time:"20:45", comp:"DFB-Pokal · 1. Runde", h:"HEBC Hamburg", a:"Borussia Dortmund", tba:true},
+  {cat:"dfb", day:"Mittwoch, 02.09.2026", time:"20:45", comp:"DFB-Pokal · 1. Runde", h:"VfL Osnabrück", a:"FC Bayern München", tba:true},
+  {cat:"bl", day:"Samstag, 22.08.2026", time:"20:30", comp:"Franz-Beckenbauer-Supercup", h:"Borussia Dortmund", a:"FC Bayern München", tv:{DE:[SAT1,SKY]}, radio:[], ticker:[]}
 ];
 
 /* Highlights — echte WM-2026-Ergebnisse + offizielle Quellen (Stand 23.06.2026).
@@ -874,7 +919,7 @@ const PROVIDERS = [
    en:"UK pay provider (via discovery+) with Champions League, Europa League and Premier League games."}
 ];
 
-let LANG="de", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+let LANG="de", LIVE_FILTER="all", LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
 
 /* ---------- Helpers ---------- */
 const CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
@@ -911,24 +956,53 @@ function adSlotHTML(){ const t=I18N[LANG]; if(ADS_ENABLED) return '<div class="a
 
 /* ---------- Render: Live (day-grouped) ---------- */
 function dayKey(s){const x=String(s).match(/(\d{2})\.(\d{2})\.(\d{4})/); return x?(+x[3])*10000+(+x[2])*100+(+x[1]):0;}
+function catOf(m){ if(m.cat) return m.cat; const c=m.comp||""; if(/^WM/i.test(c)) return "wm"; if(/DFB/i.test(c)) return "dfb"; if(/Bundesliga/i.test(c)) return "bl"; if(/Champions/i.test(c)) return "cl"; return "other"; }
+function soonHint(t,cat){ let title=t.soon_title, sub=t.soon_sub; if(cat==="bl"){ title=t.soon_bl_t; sub=t.soon_bl; } return '<div class="soonbox"><span class="ic">🗓️</span><div><b>'+title+'</b><span>'+sub+'</span></div></div>'; }
+function renderLiveFilters(){ const t=I18N[LANG];
+  const defs=[["all",t.f_all],["wm",t.f_wm],["dfb",t.f_dfb],["bl",t.f_bl],["cl",t.f_cl]];
+  document.getElementById("liveFilters").innerHTML = defs.map(d=>
+    '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(LIVE_FILTER===d[0])+'">'+d[1]+'</button>').join("");
+}
 function renderLive(){
-  const t=I18N[LANG]; let html=""; let curDay="";
-  const upcoming = MATCHES.filter(m=>dayKey(m.day)>=TODAY_KEY);
+  const t=I18N[LANG], board=document.getElementById("liveBoard");
   document.getElementById("liveNote").innerHTML = t.live_note;
-  if(!upcoming.length){
-    document.getElementById("liveBoard").innerHTML='<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
-    return;
-  }
-  upcoming.forEach(m=>{
-    if(m.day!==curDay){ curDay=m.day;
-      html += '<div class="daybar"><span class="d">'+locDay(m.day)+'</span><span class="ln"></span></div>';
-    }
+  const q=(LIVE_Q||"").trim().toLowerCase();
+  let list = MATCHES.filter(m=>dayKey(m.day)>=TODAY_KEY);
+  if(LIVE_FILTER!=="all") list = list.filter(m=>catOf(m)===LIVE_FILTER);
+  if(q) list = list.filter(m=>((m.h+" "+m.a+" "+(m.comp||"")).toLowerCase().includes(q)));
+  list.sort((a,b)=> (dayKey(a.day)-dayKey(b.day)) || String(a.time).localeCompare(String(b.time)));
+  let html="", curDay="";
+  list.forEach(m=>{
+    if(m.day!==curDay){ curDay=m.day; html += '<div class="daybar"><span class="d">'+locDay(m.day)+'</span><span class="ln"></span></div>'; }
     html += matchRow(m);
   });
-  document.getElementById("liveBoard").innerHTML = html;
+  let hint="";
+  if(!q && (LIVE_FILTER==="bl"||LIVE_FILTER==="cl")) hint = soonHint(t, LIVE_FILTER);
+  if(!list.length && !hint) hint = q ? soonHint(t) : '<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
+  board.innerHTML = html + hint;
+}
+function tbaRow(m,t){
+  const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" (TVFussball.de)", "https://tvfussball.de");
+  return '<div class="row tba">'+
+    '<button class="rowhead" aria-expanded="false">'+
+      '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>'+
+      '<div class="teams">'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span><span class="freebest pay">'+t.tba_chip+'</span></div>'+
+      '</div>'+
+      '<span class="chev">'+CHEV+'</span>'+
+    '</button>'+
+    '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
+      '<div class="soonbox sm"><span class="ic">📺</span><div><b>'+t.tba_note_t+'</b><span>'+t.tba_note_s+'</span></div></div>'+
+      share+
+    '</div></div></div>'+
+  '</div>';
 }
 function matchRow(m){
-  const t=I18N[LANG], free=(m.tv[COUNTRY]||[]).some(s=>s.t==="fta");
+  const t=I18N[LANG];
+  if(m.tba) return tbaRow(m,t);
+  const free=(m.tv[COUNTRY]||[]).some(s=>s.t==="fta");
   const timeCell = '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>';
   const groups = ["DE","AT","CH","UK"].filter(cc=>cc!==COUNTRY).map(cc=>
     '<div class="cgroup"><div class="ctitle"><span class="ff">'+CFLAG[cc]+'</span> '+CNAME[LANG][cc]+'</div>'+chList(m.tv[cc])+'</div>').join("");
@@ -1092,6 +1166,7 @@ function applyLang(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(t[k]) el.textContent=t[k];});
   document.documentElement.lang=LANG;
   document.getElementById("hlSearch").placeholder = LANG==="de"?"Mannschaft suchen … (z. B. Frankreich)":"Search team … (e.g. France)";
+  document.getElementById("liveSearch").placeholder = LANG==="de"?"Weitere Wettbewerbe oder Teams suchen …":"Search other competitions or teams …";
   document.getElementById("newsSearch").placeholder = LANG==="de"?"Verein, Quelle oder Stichwort suchen …":"Search club, source or keyword …";
   document.getElementById("provSearch").placeholder = LANG==="de"?"Anbieter, Wettbewerb oder Land suchen …":"Search provider, competition or country …";
   document.getElementById("wm-anthemSearch").placeholder = LANG==="de"?"Land suchen … z. B. Brasilien, Japan":"Search country … e.g. Brazil, Japan";
@@ -1120,7 +1195,7 @@ async function doShare(btn){
   setTimeout(()=>{ btn.classList.remove("done"); lbl.textContent=old; },1800);
 }
 
-function renderAll(){ renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); applyLang(); }
+function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); applyLang(); }
 
 /* ---------- Events ---------- */
 document.addEventListener("click", e=>{
@@ -1151,6 +1226,8 @@ document.addEventListener("click", e=>{
   const lb=e.target.closest("[data-lang]");
   if(lb){document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed","false"));
     lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; renderAll(); return;}
+  const lf=e.target.closest("[data-livef]");
+  if(lf){LIVE_FILTER=lf.dataset.livef; renderLiveFilters(); renderLive(); return;}
   const hlf=e.target.closest("[data-hlf]");
   if(hlf){HL_FILTER=hlf.dataset.hlf; renderHLFilters(); renderHL(); return;}
   const nf=e.target.closest("[data-newsf]");
@@ -1160,6 +1237,7 @@ document.addEventListener("click", e=>{
   if(e.target.id==="themeToggle"){ setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"); return; }
   if(e.target.id==="consentYes"||e.target.id==="consentNo"){document.getElementById("consent").classList.add("hide");}
 });
+document.getElementById("liveSearch").addEventListener("input",e=>{LIVE_Q=e.target.value; renderLive();});
 document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; renderHL();});
 document.getElementById("newsSearch").addEventListener("input",e=>{NEWS_Q=e.target.value; renderNews();});
 document.getElementById("provSearch").addEventListener("input",e=>{PROV_Q=e.target.value; renderProviders();});
