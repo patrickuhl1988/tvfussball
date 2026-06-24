@@ -142,8 +142,11 @@
   .tag.fta{background:var(--free); color:var(--on-accent)}
   .tag.pay{background:transparent; color:var(--muted); border:1px solid var(--line2)}
 
-  .morebtn{margin-top:11px; width:100%; border:1px solid var(--line); background:var(--bg2); color:var(--muted); border-radius:10px; padding:10px; font-weight:700; font-size:12.5px; display:flex; align-items:center; justify-content:center; gap:7px}
-  .morebtn:hover{color:var(--ink); border-color:var(--green-line)}
+  .morebtn{margin-top:10px; border:none; background:none; color:var(--green); border-radius:8px; padding:6px 2px; font-family:"Hanken Grotesk",sans-serif; font-weight:700; font-size:12.5px; display:inline-flex; align-items:center; gap:6px; cursor:pointer}
+  .morebtn:hover{text-decoration:underline; text-underline-offset:3px}
+  .morebtn .mchev{width:14px; height:14px; flex:0 0 auto; transition:transform .25s cubic-bezier(.34,1.4,.5,1)}
+  .morebtn[aria-expanded="true"] .mchev{transform:rotate(180deg)}
+  .morebtn:focus-visible{outline:2px solid var(--green); outline-offset:2px}
   .morewrap{display:grid; grid-template-rows:0fr; transition:grid-template-rows .24s ease}
   .morewrap.show{grid-template-rows:1fr}
   .morewrap > div{overflow:hidden; min-height:0}
@@ -583,6 +586,23 @@
   /* Info-Links (Radio/Ticker) gleich breit ausrichten */
   .auxlinks{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px}
   .auxlinks a{justify-content:center; padding:9px 10px; border-radius:11px}
+  /* Favoriten-Stern direkt am Verein (Übersicht) */
+  .favstar{margin-left:auto; cursor:pointer; font-size:16px; line-height:1; color:var(--faint); flex:0 0 auto; padding:2px; border-radius:6px; transition:transform .12s ease, color .15s ease; -webkit-tap-highlight-color:transparent; user-select:none}
+  .favstar:hover{color:var(--wm); transform:scale(1.12)}
+  .favstar.on{color:var(--wm)}
+  .favstar:active{transform:scale(.88)}
+  .favstar:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+  .tag.aux{background:var(--free); color:var(--on-accent)}
+  /* ---- Fußball-Formate ---- */
+  .fmticon{font-size:16px; line-height:1; margin-right:1px}
+  .row.fmt .teams .t{font-weight:700}
+  .fmtwhen{font-size:11px; color:var(--muted); font-weight:600; margin-top:6px; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+  .fmt-live{font-size:9px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--on-accent); background:var(--free); padding:2px 6px; border-radius:5px}
+  .fmtkind{margin-bottom:10px}
+  .fmtkind .tag{font-family:"Space Mono",monospace; font-size:10px; font-weight:700; letter-spacing:.03em; padding:3px 9px; border-radius:6px; background:var(--green-soft); color:var(--green)}
+  .fmtdesc{font-size:13px; color:var(--muted); line-height:1.55; margin:0 0 12px}
+  .fmtlink{display:inline-block; margin-top:12px; font-size:12.5px; font-weight:700; color:var(--green); text-decoration:none}
+  .fmtlink:hover{text-decoration:underline; text-underline-offset:3px}
 </style>
 </head>
 <body data-page="news">
@@ -758,7 +778,7 @@ const I18N = {
     ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
     price_from:"ab", price_approx:"ca.",
     result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Topspiele",
-    f_free:"Nur Free-TV", f_tonight:"Heute Abend", f_now:"Läuft jetzt", f_mine:"★ Meine",
+    f_free:"Nur Free-TV", f_tonight:"Heute Abend", f_now:"Läuft jetzt", f_format:"Formate", f_mine:"★ Meine", fmt_head:"Sendungen & Magazine", fmt_live:"live", fmt_more:"Zur Sendung", fk_highlights:"Highlights", fk_magazin:"Magazin", fk_talk:"Talk", fk_vorbericht:"Vorbericht", fk_live:"Live-Studio",
     mine_empty:"Noch keinem Team gefolgt — tippe in einem Spiel auf „folgen“.", filt_empty:"Keine Spiele für diesen Filter.",
     follow:"folgen", following:"folge ich", follow_hint:"Folge Teams, um nur deine Spiele zu sehen — Kalender-Erinnerung inklusive.",
     abo_title:"Welches Abo brauche ich?", abo_sub:"Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.",
@@ -771,7 +791,7 @@ const I18N = {
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
-    consent_text:"Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.", wk_title:"Preisdeal-Wecker", wk_soon:"Bald automatisch", wk_sub:"Lass dich per E-Mail benachrichtigen, sobald wir ein gutes Angebot für deine Anbieter finden.", wk_pick:"Anbieter wählen:", wk_email_ph:"deine@email.de", wk_btn:"Wecker stellen", wk_priv:"Wir nutzen deine E-Mail ausschließlich für Preisdeal-Benachrichtigungen. Abmeldung jederzeit per Antwort-Mail.", wk_need_prov:"Bitte mindestens einen Anbieter wählen.", wk_need_mail:"Bitte eine gültige E-Mail eingeben.", wk_done_t:"Fast geschafft!", wk_done_s:"Sende die vorbereitete E-Mail ab \u2013 dann bist du vorgemerkt und wir melden uns, sobald wir ein passendes Angebot finden.", wk_change:"Auswahl ändern", wk_mail_subject:"Preisdeal-Wecker \u2013 Anmeldung", wk_mail_l1:"Ich möchte über Preisdeals für meine Anbieter benachrichtigt werden.", wk_mail_prov:"Anbieter:", wk_mail_mail:"E-Mail:", wk_mail_foot:"(Gesendet über den Preisdeal-Wecker auf tvfussball.de)",
+    consent_text:"Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.", wk_title:"Preisdeal-Wecker", wk_soon:"Bald automatisch", wk_sub:"Lass dich per E-Mail benachrichtigen, sobald wir ein gutes Angebot für deine Anbieter finden.", wk_pick:"Anbieter wählen:", wk_email_ph:"deine@email.de", wk_btn:"Wecker stellen", wk_priv:"Wir nutzen deine E-Mail ausschließlich für Preisdeal-Benachrichtigungen. Abmeldung jederzeit per Antwort-Mail.", wk_need_prov:"Bitte mindestens einen Anbieter wählen.", wk_need_mail:"Bitte eine gültige E-Mail eingeben.", wk_done_t:"Fast geschafft!", wk_done_s:"Sende die vorbereitete E-Mail ab \u2013 dann bist du vorgemerkt und wir melden uns, sobald wir ein passendes Angebot finden.", wk_change:"Auswahl ändern", wk_mail_subject:"Preisdeal-Wecker \u2013 Anmeldung", wk_mail_l1:"Ich möchte über Preisdeals für meine Anbieter benachrichtigt werden.", wk_mail_prov:"Anbieter:", wk_mail_mail:"E-Mail:", wk_mail_foot:"(Gesendet über den Preisdeal-Wecker auf tvfussball.de)", aux_radio:"Radio", aux_ticker:"Ticker",
     consent_no:"Ablehnen", consent_yes:"Einverstanden",
     prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
     live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Sender DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
@@ -801,7 +821,7 @@ const I18N = {
     ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
     price_from:"from", price_approx:"approx.",
     result:"Final", ft:"FT", nohits:"No results", f_all:"All", f_3goals:"3+ goals", f_top:"Top games",
-    f_free:"Free TV only", f_tonight:"Tonight", f_now:"Live now", f_mine:"★ Mine",
+    f_free:"Free TV only", f_tonight:"Tonight", f_now:"Live now", f_format:"Shows", f_mine:"★ Mine", fmt_head:"Shows & magazines", fmt_live:"live", fmt_more:"Show page", fk_highlights:"Highlights", fk_magazin:"Magazine", fk_talk:"Talk", fk_vorbericht:"Preview", fk_live:"Live studio",
     mine_empty:"Not following any team yet — tap “follow” on a match.", filt_empty:"No matches for this filter.",
     follow:"follow", following:"following", follow_hint:"Follow teams to see only your matches — calendar reminder included.",
     abo_title:"Which subscription do I need?", abo_sub:"Pick what you want to watch — we show the cheapest combination and what stays free.",
@@ -814,7 +834,7 @@ const I18N = {
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
-    consent_text:"We use Google Analytics to measure how this site is used, anonymously. Cookies for this are only set after your consent.", wk_title:"Price-deal alert", wk_soon:"Auto soon", wk_sub:"Get an email as soon as we find a good deal for your providers.", wk_pick:"Choose providers:", wk_email_ph:"you@email.com", wk_btn:"Set alert", wk_priv:"We use your email only for price-deal alerts. Unsubscribe anytime by replying.", wk_need_prov:"Please choose at least one provider.", wk_need_mail:"Please enter a valid email.", wk_done_t:"Almost done!", wk_done_s:"Send the prepared email \u2014 then you are on the list and we will reach out when a matching deal appears.", wk_change:"Change selection", wk_mail_subject:"Price-deal alert \u2013 sign-up", wk_mail_l1:"I would like to be notified about price deals for my providers.", wk_mail_prov:"Providers:", wk_mail_mail:"Email:", wk_mail_foot:"(Sent via the price-deal alert on tvfussball.de)",
+    consent_text:"We use Google Analytics to measure how this site is used, anonymously. Cookies for this are only set after your consent.", wk_title:"Price-deal alert", wk_soon:"Auto soon", wk_sub:"Get an email as soon as we find a good deal for your providers.", wk_pick:"Choose providers:", wk_email_ph:"you@email.com", wk_btn:"Set alert", wk_priv:"We use your email only for price-deal alerts. Unsubscribe anytime by replying.", wk_need_prov:"Please choose at least one provider.", wk_need_mail:"Please enter a valid email.", wk_done_t:"Almost done!", wk_done_s:"Send the prepared email \u2014 then you are on the list and we will reach out when a matching deal appears.", wk_change:"Change selection", wk_mail_subject:"Price-deal alert \u2013 sign-up", wk_mail_l1:"I would like to be notified about price deals for my providers.", wk_mail_prov:"Providers:", wk_mail_mail:"Email:", wk_mail_foot:"(Sent via the price-deal alert on tvfussball.de)", aux_radio:"Radio", aux_ticker:"Ticker",
     consent_no:"Decline", consent_yes:"Accept",
     prov_note:"Prices approx., as of June 2026 — offers, bundles and terms vary. Please check with the provider before subscribing.",
     live_note:"Kick-off times in Central European Time (CET). Channels DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Quality: 4K = UHD (MagentaTV), HD = HD broadcast; below HD no symbol. Domestic leagues (Bundesliga, Premier League, Serie A, La Liga, Champions/Europa League) are currently on summer break.",
@@ -937,6 +957,8 @@ const ARD_HUB="https://www.ardmediathek.de/sport-fifa-weltmeisterschaft";
 const ZDF_YT="https://www.youtube.com/@sportstudiofussball/videos";
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
+ {h:"Panama",a:"Kroatien",s:"0:1",g:"WM 2026 · Gruppe L",date:"Mi, 24.06.",zdf:null,full:null},
+ {h:"Kolumbien",a:"DR Kongo",s:"1:0",g:"WM 2026 · Gruppe K",date:"Mi, 24.06.",zdf:null,full:null},
  {h:"Portugal",a:"Usbekistan",s:"5:0",g:"WM 2026 · Gruppe K",date:"Di, 23.06.",zdf:null,full:["ARD Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713929/"]},
  {h:"England",a:"Ghana",s:"0:0",g:"WM 2026 · Gruppe L",date:"Di, 23.06.",zdf:null,full:["ARD Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713947/"]},
  {h:"Norwegen",a:"Senegal",s:"3:2",g:"WM 2026 · Gruppe I",date:"Di, 23.06.",zdf:null,full:["ZDF Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713896/"]},
@@ -998,6 +1020,7 @@ const TEAMS = [
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  {team:"bayern",date:"2026-06-24",title:"Goretzka vor Vertragsende – Juventus zeigt Interesse",teaser:"Leon Goretzkas Vertrag beim FC Bayern läuft Ende Juni aus; laut Gazzetta dello Sport gilt der 31-Jährige bei Juventus als Wunschkandidat, sollte Khephren Thuram zu PSG wechseln.",src:"Sport1",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
   {team:"rbl",date:"2026-06-24",title:"Paukenschlag: RB Leipzig trennt sich von Ole Werner",teaser:"Nach nur einem Jahr ist für Trainer Ole Werner bei RB Leipzig Schluss – der Klub muss sich auf der Trainerposition neu aufstellen.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
   {team:"svw",date:"2026-06-24",title:"Werder verpflichtet Cedric Itten ablösefrei",teaser:"Der 29-jährige Stürmer kommt nach dem Abstieg von Fortuna Düsseldorf ohne Ablöse und hat seinen Vertrag in Bremen bereits unterschrieben.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
   {team:"fcu",date:"2026-06-24",title:"Nsoki bleibt fest: Union zieht die Kaufoption",teaser:"Nach der Leihe verpflichtet Union Berlin Verteidiger Stanley Nsoki dauerhaft von der TSG Hoffenheim – kolportierte Ablöse rund 1,5 Millionen Euro.",src:"kicker",url:"https://www.kicker.de/bundesliga/transfermarkt"},
@@ -1137,7 +1160,55 @@ const PROVIDERS = [
    en:"UK pay provider (via discovery+) with Champions League, Europa League and Premier League games."}
 ];
 
-let LANG="de", LIVE_FILTER="all", LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+let LANG="de", LIVE_SEL=new Set(["wm"]), LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+const FORMATS = [
+  {id:"ard-wm", day:"Donnerstag, 25.06.2026", time:"21:00", name:"Sportschau live – WM 2026", ch:"Das Erste (ARD)", icon:"📡", kind:"live", live:true,
+   when_de:"WM 2026 · Live-Spiele & Studio", when_en:"World Cup 2026 · live games & studio",
+   desc_de:"Die ARD überträgt im Wechsel mit dem ZDF Live-Spiele der WM 2026 – inklusive Vorbericht, Analysen und Studio. Ein mögliches Achtel- und Halbfinale mit deutscher Beteiligung läuft live in der ARD.",
+   desc_en:"ARD shows live World Cup 2026 matches (alternating with ZDF), including pre-match coverage, analysis and studio. A possible round of 16 and semi-final with German participation airs live on ARD.",
+   stream:"sportschau.de / ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"zdf-wm", day:"Freitag, 26.06.2026", time:"20:15", name:"ZDF sportstudio live – WM 2026", ch:"ZDF", icon:"📡", kind:"live", live:true,
+   when_de:"WM 2026 · Live-Spiele & WM-Studio", when_en:"World Cup 2026 · live games & studio",
+   desc_de:"Das ZDF zeigt 30 WM-Spiele live aus dem WM-Studio im Zollernhof in Berlin – mit Vorberichten, Experten-Analysen und Schalten ins DFB-Quartier. Das WM-Finale am 19. Juli 2026 läuft live im ZDF.",
+   desc_en:"ZDF broadcasts 30 World Cup matches live from its studio in Berlin – with previews, expert analysis and links to the German team's camp. The World Cup final on 19 July 2026 airs live on ZDF.",
+   stream:"sportstudio.de / ZDF Mediathek", url:"https://www.zdf.de/sport/sportstudio-live"},
+  {id:"wm-vorbericht", day:"Donnerstag, 25.06.2026", time:"05:30", name:"ZDF-Morgenmagazin – WM-Vorberichte", ch:"ZDF", icon:"🎙️", kind:"vorbericht", live:true,
+   when_de:"Mo–Fr · 05:30–09:00", when_en:"Mon–Fri · 05:30–09:00",
+   desc_de:"Während der WM berichtet das „Moma“ täglich aus dem DFB-Quartier in North Carolina – mit Vorberichten, Interviews und Experten-Einschätzungen (u. a. René Adler) rund um das DFB-Team.",
+   desc_en:"During the World Cup, ZDF's morning show reports daily from the German team's camp in North Carolina, with previews, interviews and expert views (incl. René Adler).",
+   stream:"ZDF Mediathek", url:"https://www.zdf.de/"},
+  {id:"sportschau-sa", day:"Samstag, 29.08.2026", time:"18:30", name:"Sportschau – Bundesliga", ch:"Das Erste (ARD)", icon:"⚽", kind:"highlights",
+   when_de:"Samstags · ab 18:30 (Saison)", when_en:"Saturdays · from 18:30 (in season)",
+   desc_de:"Der Klassiker am Samstagabend: Zusammenfassungen aller Bundesliga-Spiele des Nachmittags, ab ca. 18:00 Uhr mit der 3. Liga. Aktuell Sommerpause – Start der Saison 2026/27 im August.",
+   desc_en:"The Saturday-night institution: highlights of all afternoon Bundesliga games, with 3rd-division reports from around 18:00. Currently on summer break – the 2026/27 season starts in August.",
+   stream:"sportschau.de / ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"sportschau-so", day:"Sonntag, 30.08.2026", time:"18:00", name:"Sportschau am Sonntag", ch:"Das Erste (ARD)", icon:"⚽", kind:"highlights",
+   when_de:"Sonntags · 18:00 (Saison)", when_en:"Sundays · 18:00 (in season)",
+   desc_de:"Die Sonntagsausgabe fasst die Bundesliga-Sonntagsspiele zusammen und blickt auf das Spieltags-Geschehen zurück.",
+   desc_en:"The Sunday edition rounds up the Sunday Bundesliga games and reviews the matchday.",
+   stream:"ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"sportstudio", day:"Samstag, 29.08.2026", time:"23:00", name:"das aktuelle sportstudio", ch:"ZDF", icon:"🥅", kind:"magazin",
+   when_de:"Samstags · ab 23:00 (Stream ab 22:30)", when_en:"Saturdays · from 23:00 (stream 22:30)",
+   desc_de:"Seit 1963 das Kult-Sportmagazin am Samstagabend: Bundesliga-Highlights, Analysen, prominente Gäste und das legendäre Torwandschießen. Während der WM als „sportstudio live“ im WM-Modus.",
+   desc_en:"The cult Saturday-night sports magazine since 1963: Bundesliga highlights, analysis, celebrity guests and the legendary Torwand shootout. During the World Cup it runs as 'sportstudio live'.",
+   stream:"sportstudio.de / ZDF Mediathek", url:"https://www.zdf.de/sport/das-aktuelle-sportstudio"},
+  {id:"doppelpass", day:"Sonntag, 30.08.2026", time:"11:00", name:"Der CHECK24 Doppelpass", ch:"SPORT1", icon:"🗣️", kind:"talk",
+   when_de:"Sonntags · 11:00–13:30 (Saison)", when_en:"Sundays · 11:00–13:30 (in season)",
+   desc_de:"Deutschlands bekanntester Fußball-Stammtisch: Moderator und Experten diskutieren die heißesten Themen des Bundesliga-Wochenendes, dazu Highlight-Szenen des Spieltags.",
+   desc_en:"Germany's best-known football talk show: host and pundits debate the hottest topics of the Bundesliga weekend, with matchday highlight clips.",
+   stream:"sport1.de", url:"https://www.sport1.de/news/doppelpass/info"},
+  {id:"vor-acht", day:"Freitag, 28.08.2026", time:"19:55", name:"Sportschau vor acht", ch:"Das Erste (ARD)", icon:"📅", kind:"vorbericht",
+   when_de:"Werktags · vor der Tagesschau (Saison)", when_en:"Weekdays · before the 8pm news (in season)",
+   desc_de:"Kurzer Sport-Ausblick vor der 20-Uhr-Tagesschau – freitags mit Vorschau auf den anstehenden Bundesliga-Spieltag.",
+   desc_en:"A short sports preview before the 8pm news – on Fridays with an outlook on the upcoming Bundesliga matchday.",
+   stream:"ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"ran", day:"Samstag, 22.08.2026", time:"19:45", name:"ran Fußball – Supercup & DFB-Pokal", ch:"SAT.1", icon:"🏆", kind:"live",
+   when_de:"Bei ausgewählten Spielen", when_en:"At selected matches",
+   desc_de:"Unter dem „ran“-Label zeigt SAT.1 im Free-TV ausgewählte Top-Spiele wie den Supercup (22.08.2026, Dortmund – Bayern) und das DFB-Pokal-Finale – jeweils mit ausführlicher Vorberichterstattung.",
+   desc_en:"Under the 'ran' brand, SAT.1 shows selected top matches free-to-air, such as the Supercup (22 Aug 2026, Dortmund vs Bayern) and the German Cup final – each with extensive pre-match coverage.",
+   stream:"ran.de / Joyn", url:"https://www.ran.de/"}
+];
+
 const FOLLOW = new Set();   // gefolgte Teams (nur In-Memory pro Sitzung — kein localStorage)
 const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
 
@@ -1214,7 +1285,6 @@ function liveActions(m){const t=I18N[LANG];
   const cal='<button class="sharebtn calbtn" data-cal data-day="'+esc(m.day)+'" data-time="'+esc(m.time)+'" data-h="'+esc(m.h)+'" data-a="'+esc(m.a)+'" data-comp="'+esc(m.comp||"")+'" data-ch="'+esc(ch)+'">'+CAL_ICON+'<span>'+t.cal_add+'</span></button>';
   const share='<button class="sharebtn" data-share data-share-title="'+esc(m.h+" – "+m.a)+'" data-share-text="'+esc(m.h+" – "+m.a+" · "+(m.comp||"")+" (TVFussball.de)")+'" data-share-url="https://tvfussball.de">'+SHARE_ICON+'<span>'+t.share+'</span></button>';
   return '<div class="actwrap">'+
-    '<div class="actrow follow">'+followBtn(m.h)+followBtn(m.a)+'</div>'+
     '<div class="actrow main">'+cal+share+'</div>'+
   '</div>';
 }
@@ -1235,6 +1305,10 @@ function chList(list){
 }
 function getRadio(m){ return m.radio || ["ARD WM-Radio"]; }
 function getTicker(m){ return m.ticker || ["kicker WM-Ticker"]; }
+function auxRows(m){ const t=I18N[LANG];
+  const r=getRadio(m).map(x=>'<div class="chrow"><span class="nm">'+x+'</span><span class="tag aux">'+t.aux_radio+'</span></div>');
+  const k=getTicker(m).map(x=>'<div class="chrow"><span class="nm">'+x+'</span><span class="tag aux">'+t.aux_ticker+'</span></div>');
+  return r.concat(k).join(""); }
 function bestFree(m){
   const t=I18N[LANG], list=m.tv[COUNTRY]||[];
   const fta=list.find(s=>s.t==="fta");
@@ -1257,54 +1331,97 @@ function isLiveNow(m){ if(m.tba) return false; const s=matchStart(m); if(!s) ret
   const now=Date.now(); return now>=s.getTime() && now<=s.getTime()+115*60000; }
 function isTonight(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return false;
   return dayKey(m.day)===todayKeyNow() && s.getHours()>=18; }
-function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(dayKey(m.day)>=TODAY_KEY && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); return n; }
+function isTonightFmt(f){ const dm=String(f.day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(f.time).match(/(\d{1,2}):(\d{2})/);
+  if(!dm||!tm) return false; const s=new Date(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]);
+  return dayKey(f.day)===todayKeyNow() && s.getHours()>=18; }
+function isFinished(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return false; return Date.now() > s.getTime()+115*60000; }
+function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
 function renderLiveFilters(){ const t=I18N[LANG];
   const mc=mineCount();
-  const defs=[["all",t.f_all],["mine",t.f_mine+(mc?" ("+mc+")":"")],["free",t.f_free],["tonight",t.f_tonight],["now",t.f_now],
+  const defs=[["all",t.f_all],["mine",t.f_mine+(mc?" ("+mc+")":"")],["free",t.f_free],["tonight",t.f_tonight],["format",t.f_format],
     ["wm",t.f_wm],["dfb",t.f_dfb],["bl",t.f_bl],["cl",t.f_cl]];
   document.getElementById("liveFilters").innerHTML = defs.map(d=>
-    '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(LIVE_FILTER===d[0])+'">'+d[1]+'</button>').join("");
+    '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(d[0]==="all"?LIVE_SEL.size===0:LIVE_SEL.has(d[0]))+'">'+d[1]+'</button>').join("");
 }
 function renderLive(){
   const t=I18N[LANG], board=document.getElementById("liveBoard");
   document.getElementById("liveNote").innerHTML = t.live_note;
-  const openKeys=[...board.querySelectorAll(".row.open")].map(r=>r.dataset.k); // offene Karten merken
+  const openKeys=[...board.querySelectorAll(".row.open")].map(r=>r.dataset.k);
   const q=(LIVE_Q||"").trim().toLowerCase();
-  let list = MATCHES.filter(m=>dayKey(m.day)>=TODAY_KEY);
-  const F=LIVE_FILTER;
-  if(F==="mine")        list = list.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a));
-  else if(F==="free")   list = list.filter(isFreeTV);
-  else if(F==="tonight")list = list.filter(isTonight);
-  else if(F==="now")    list = list.filter(isLiveNow);
-  else if(F!=="all")    list = list.filter(m=>catOf(m)===F);
-  if(q) list = list.filter(m=>((m.h+" "+m.a+" "+(m.comp||"")).toLowerCase().includes(q)));
-  list.sort((a,b)=> (dayKey(a.day)-dayKey(b.day)) || String(a.time).localeCompare(String(b.time)));
+  const SEL=LIVE_SEL, none=SEL.size===0;
+  const catSel=["wm","dfb","bl","cl"].filter(c=>SEL.has(c));
+  const wantFmt=SEL.has("format");
+  const cond=SEL.has("mine")||SEL.has("free")||SEL.has("tonight");
+  const condOnly=cond && catSel.length===0 && !wantFmt;
+  // Spiele filtern
+  let mList = (none || catSel.length>0 || condOnly) ? MATCHES.filter(m=>!isFinished(m)) : [];
+  if(catSel.length)      mList = mList.filter(m=>catSel.includes(catOf(m)));
+  if(SEL.has("mine"))    mList = mList.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a));
+  if(SEL.has("free"))    mList = mList.filter(isFreeTV);
+  if(SEL.has("tonight")) mList = mList.filter(isTonight);
+  if(q) mList = mList.filter(m=>((m.h+" "+m.a+" "+(m.comp||"")).toLowerCase().includes(q)));
+  // Formate filtern (alle Free-TV)
+  let fList = (none || wantFmt || condOnly) ? FORMATS.filter(f=>!isFinished(f)) : [];
+  if(SEL.has("mine"))    fList = fList.filter(f=>FOLLOW.has(f.id));
+  if(SEL.has("tonight")) fList = fList.filter(isTonightFmt);
+  if(q) fList = fList.filter(f=>((f.name+" "+f.ch+" "+(LANG==="de"?f.when_de:f.when_en)).toLowerCase().includes(q)));
+  // Spiele + Formate mischen, nach Datum & Uhrzeit sortieren
+  let items = mList.map(m=>({day:m.day,time:String(m.time),k:"m",o:m}))
+                   .concat(fList.map(f=>({day:f.day,time:String(f.time),k:"f",o:f})));
+  items.sort((a,b)=> (dayKey(a.day)-dayKey(b.day)) || a.time.localeCompare(b.time));
   let html="", curDay="";
-  list.forEach(m=>{
-    if(m.day!==curDay){ curDay=m.day; html += '<div class="daybar"><span class="d">'+locDay(m.day)+'</span><span class="ln"></span></div>'; }
-    html += matchRow(m);
+  items.forEach(it=>{
+    if(it.day!==curDay){ curDay=it.day; html += '<div class="daybar"><span class="d">'+locDay(it.day)+'</span><span class="ln"></span></div>'; }
+    html += it.k==="m" ? matchRow(it.o) : formatRow(it.o);
   });
   let hint="";
-  if(!q && (LIVE_FILTER==="bl"||LIVE_FILTER==="cl")) hint = soonHint(t, LIVE_FILTER);
-  if(!list.length && !hint){
-    if(LIVE_FILTER==="mine" && !FOLLOW.size) hint='<div class="empty">'+t.mine_empty+'</div>';
-    else if(["mine","free","tonight","now"].includes(LIVE_FILTER)) hint='<div class="empty">'+t.filt_empty+'</div>';
+  if(!q && (SEL.has("bl")||SEL.has("cl"))) hint = soonHint(t, SEL.has("bl")?"bl":"cl");
+  if(!items.length && !hint){
+    if(SEL.has("mine") && !mineCount()) hint='<div class="empty">'+t.mine_empty+'</div>';
+    else if(cond || wantFmt || catSel.length) hint='<div class="empty">'+t.filt_empty+'</div>';
     else hint = q ? soonHint(t) : '<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
   }
   board.innerHTML = html + hint;
-  openKeys.forEach(k=>{ const r=board.querySelector('.row[data-k="'+CSS.escape(k)+'"]'); // offene Karten wiederherstellen
+  openKeys.forEach(k=>{ const r=board.querySelector('.row[data-k="'+CSS.escape(k)+'"]');
     if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); } });
 }
 function rowKey(m){ return esc(m.day+"|"+m.time+"|"+m.h+"|"+m.a); }
-function folMark(team){ return FOLLOW.has(team)?'<span class="folmark">★</span>':''; }
+function folMark(team){ const on=FOLLOW.has(team), t=I18N[LANG], lbl=esc(team)+" "+(on?t.following:t.follow);
+  return '<span class="favstar'+(on?' on':'')+'" data-follow="'+esc(team)+'" role="button" tabindex="0" aria-pressed="'+on+'" aria-label="'+lbl+'" title="'+lbl+'">'+(on?'★':'☆')+'</span>'; }
+function formatRow(f){
+  const t=I18N[LANG], on=FOLLOW.has(f.id);
+  const when=LANG==="de"?f.when_de:f.when_en, desc=LANG==="de"?f.desc_de:f.desc_en;
+  const kindlbl=t["fk_"+f.kind]||f.kind;
+  const live=f.live?'<span class="fmt-live">'+t.fmt_live+'</span>':'';
+  const timeCell='<div class="time">'+esc(f.time)+'<small>'+t.tz+'</small></div>';
+  const star='<span class="favstar'+(on?' on':'')+'" data-follow="'+esc(f.id)+'" role="button" tabindex="0" aria-pressed="'+on+'" aria-label="'+esc(f.name)+'" title="'+esc(f.name)+'">'+(on?'★':'☆')+'</span>';
+  return '<div class="row fmt free" data-k="fmt-'+esc(f.id)+'">'+
+    '<button class="rowhead" aria-expanded="false">'+timeCell+
+      '<div class="teams">'+
+        '<div class="t"><span class="fmticon">'+(f.icon||'📺')+'</span><span>'+esc(f.name)+'</span>'+star+live+'</div>'+
+        '<div class="meta"><span class="comp">'+esc(f.ch)+'</span><span class="freebest tv">▣ '+t.best_free+'</span></div>'+
+        '<div class="fmtwhen">'+esc(when)+'</div>'+
+      '</div>'+
+      '<span class="chev">'+CHEV+'</span>'+
+    '</button>'+
+    '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
+      '<div class="fmtkind"><span class="tag">'+esc(kindlbl)+'</span></div>'+
+      '<p class="fmtdesc">'+esc(desc)+'</p>'+
+      '<div class="chlist"><div class="chrow"><span class="nm">'+esc(f.ch)+'</span><span class="tag fta">'+t.best_free+'</span></div>'+
+        (f.stream?'<div class="chrow"><span class="nm">'+esc(f.stream)+'</span><span class="tag aux">Stream</span></div>':'')+'</div>'+
+      (f.url?'<a class="fmtlink" href="'+esc(f.url)+'" target="_blank" rel="noopener">'+t.fmt_more+' ↗</a>':'')+
+    '</div></div></div>'+
+  '</div>';
+}
+
 function tbaRow(m,t){
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" (TVFussball.de)", "https://tvfussball.de");
   return '<div class="row tba" data-k="'+rowKey(m)+'">'+
     '<button class="rowhead" aria-expanded="false">'+
       '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>'+
       '<div class="teams">'+
-        '<div class="t">'+folMark(m.h)+'<span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
-        '<div class="t" style="margin-top:3px">'+folMark(m.a)+'<span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
         '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span><span class="freebest pay">'+t.tba_chip+'</span></div>'+
       '</div>'+
       '<span class="chev">'+CHEV+'</span>'+
@@ -1327,23 +1444,20 @@ function matchRow(m){
   const isWM = /^WM/i.test(m.comp||"");
   const sccs = ["AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US"]:[]);
   const groups = sccs.map(cc=>{ const list = m.tv[cc] || (isWM?WM_INTL[cc]:null); return list?sendRow(cc,list):""; }).filter(Boolean).join("");
-  const aux = [ ...getRadio(m).map(r=>'<a href="#"><span class="ic">♪</span>'+r+'</a>'),
-                ...getTicker(m).map(x=>'<a href="#"><span class="ic">≡</span>'+x+'</a>') ].join("");
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" — "+(LANG==="de"?"wo läuft das Spiel?":"where to watch?")+" (TVFussball.de)", "https://tvfussball.de");
   return '<div class="row'+(free?' free':'')+'" data-k="'+rowKey(m)+'">'+
     '<button class="rowhead" aria-expanded="false">'+timeCell+
       '<div class="teams">'+
-        '<div class="t">'+folMark(m.h)+'<span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
-        '<div class="t" style="margin-top:3px">'+folMark(m.a)+'<span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
         '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+
       '</div>'+
       '<span class="chev">'+CHEV+'</span>'+
     '</button>'+
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="dh"><span class="ff">'+CFLAG[COUNTRY]+'</span>'+t.where+' '+CNAME[LANG][COUNTRY]+'</div>'+
-      '<div class="chlist">'+chList(m.tv[COUNTRY])+'</div>'+
-      (groups?'<button class="morebtn" data-more aria-expanded="false">＋ '+t.more+'</button><div class="morewrap"><div class="sendlist">'+groups+'</div></div>':"")+
-      (aux?'<div class="auxlinks">'+aux+'</div>':"")+
+      '<div class="chlist">'+chList(m.tv[COUNTRY])+auxRows(m)+'</div>'+
+      (groups?'<button class="morebtn" data-more aria-expanded="false"><span class="mlbl">'+t.more+'</span><svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="morewrap"><div class="sendlist">'+groups+'</div></div>':"")+
       liveActions(m)+
     '</div></div></div>'+
   '</div>';
@@ -1655,6 +1769,12 @@ function weckerSubmit(){
 function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); renderAbo(); renderWecker(); applyLang(); }
 
 /* ---------- Events ---------- */
+document.addEventListener("keydown", e=>{
+  const fav=e.target.closest&&e.target.closest("[data-follow]");
+  if(fav && (e.key==="Enter"||e.key===" ")){ e.preventDefault(); e.stopPropagation();
+    const team=fav.dataset.follow; FOLLOW.has(team)?FOLLOW.delete(team):FOLLOW.add(team);
+    renderLiveFilters(); renderLive(); }
+});
 document.addEventListener("click", e=>{
   const ca=e.target.closest("[data-cal]");
   if(ca){ addToCalendar(ca.dataset); return; }
@@ -1684,7 +1804,7 @@ document.addEventListener("click", e=>{
   if(head){const row=head.closest(".row"); const open=row.classList.toggle("open"); head.setAttribute("aria-expanded",open); return;}
   const more=e.target.closest("[data-more]");
   if(more){const w=more.nextElementSibling; const show=w.classList.toggle("show");
-    more.setAttribute("aria-expanded",show); more.textContent=(show?"－ "+I18N[LANG].less:"＋ "+I18N[LANG].more); return;}
+    more.setAttribute("aria-expanded",show); const lbl=more.querySelector(".mlbl"); if(lbl) lbl.textContent=(show?I18N[LANG].less:I18N[LANG].more); return;}
   const tab=e.target.closest(".navitem");
   if(tab){ e.preventDefault();
     const dest=tab.dataset.tab;
@@ -1694,7 +1814,10 @@ document.addEventListener("click", e=>{
   if(lb){document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed","false"));
     lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; renderAll(); return;}
   const lf=e.target.closest("[data-livef]");
-  if(lf){LIVE_FILTER=lf.dataset.livef; renderLiveFilters(); renderLive(); return;}
+  if(lf){ const k=lf.dataset.livef;
+    if(k==="all") LIVE_SEL.clear();
+    else { LIVE_SEL.has(k)?LIVE_SEL.delete(k):LIVE_SEL.add(k); }
+    renderLiveFilters(); renderLive(); return;}
   const hlf=e.target.closest("[data-hlf]");
   if(hlf){HL_FILTER=hlf.dataset.hlf; renderHLFilters(); renderHL(); return;}
   const nf=e.target.closest("[data-newsf]");
