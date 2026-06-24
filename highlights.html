@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="de" data-theme="light">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BT8VKN46TH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {'analytics_storage':'denied'});
+  gtag('config', 'G-BT8VKN46TH');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Highlights & Re-Live — TVFussball.de</title>
@@ -141,6 +150,14 @@
   .cgroup{margin-top:12px}
   .cgroup .ctitle{display:flex; align-items:center; gap:7px; font:700 12.5px "Hanken Grotesk",sans-serif; color:var(--ink); margin-bottom:2px}
   .cgroup .ctitle .ff{font-size:15px}
+  .sendlist{margin-top:10px; border-top:1px solid var(--line)}
+  .sendrow{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:9px 2px; border-bottom:1px solid var(--line)}
+  .sendrow .sflag{font-size:18px; line-height:1; flex:0 0 auto}
+  .sendrow .schans{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:5px 9px}
+  .sendrow .schans .ch{font:600 12.5px "Hanken Grotesk",sans-serif; white-space:nowrap; color:var(--ink)}
+  .sendrow .schans .ch.fta{color:var(--free)}
+  .sendrow .schans .ch.pay{color:var(--muted)}
+  .sendrow .schans .none{font-size:12px; color:var(--faint)}
 
   .auxlinks{display:flex; flex-wrap:wrap; gap:7px; margin-top:12px}
   .auxlinks a{font-size:11.5px; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:8px; padding:6px 9px; background:var(--bg2); display:inline-flex; align-items:center; gap:6px}
@@ -648,7 +665,7 @@ const I18N = {
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
-    consent_text:"Wir nutzen Geo-IP, YouTube-Einbettungen (nocookie) und – sobald aktiviert – Werbung. Auslieferung erst nach deiner Einwilligung.",
+    consent_text:"Wir nutzen Geo-IP, YouTube-Einbettungen (nocookie) und Google Analytics zur Reichweitenmessung. Diese werden erst nach deiner Einwilligung geladen.",
     consent_no:"Ablehnen", consent_yes:"Einverstanden",
     prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
     live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Sender DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
@@ -691,7 +708,7 @@ const I18N = {
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
-    consent_text:"We use Geo-IP, YouTube embeds (nocookie) and — once enabled — advertising. Delivery only after your consent.",
+    consent_text:"We use Geo-IP, YouTube embeds (nocookie) and Google Analytics for audience measurement. These load only after your consent.",
     consent_no:"Decline", consent_yes:"Accept",
     prov_note:"Prices approx., as of June 2026 — offers, bundles and terms vary. Please check with the provider before subscribing.",
     live_note:"Kick-off times in Central European Time (CET). Channels DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Quality: 4K = UHD (MagentaTV), HD = HD broadcast; below HD no symbol. Domestic leagues (Bundesliga, Premier League, Serie A, La Liga, Champions/Europa League) are currently on summer break.",
@@ -719,9 +736,13 @@ const MAG={n:"MagentaTV",t:"pay",q:"4K"}, ARD={n:"Das Erste",t:"fta",q:"HD"}, ZD
   SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
   UKg={n:"BBC / ITV",t:"fta",q:"HD"};
 const SAT1={n:"SAT.1",t:"fta",q:"HD"}, SKY={n:"Sky",t:"pay",q:"HD"};
+const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"},
+  RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
+  CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"};
+const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[MONO29,MONOMAX], CA:[CTV,TSN], US:[FOX,TELE] };
 
-const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧"};
-const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK"}};
+const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",ES:"🇪🇸",NL:"🇳🇱",TH:"🇹🇭",CA:"🇨🇦",US:"🇺🇸"};
+const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Frankreich",IT:"Italien",ES:"Spanien",NL:"Niederlande",TH:"Thailand",CA:"Kanada",US:"USA"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK",FR:"France",IT:"Italy",ES:"Spain",NL:"Netherlands",TH:"Thailand",CA:"Canada",US:"USA"}};
 
 /* WM 2026 — echte Partien, Zeiten (MEZ), Sender (DE/AT/CH via fussballgucken.info, UK via BBC/ITV) */
 const MATCHES = [
@@ -1180,13 +1201,18 @@ function tbaRow(m,t){
     '</div></div></div>'+
   '</div>';
 }
+function sendRow(cc,list){
+  const chans=(list&&list.length)?list.map(s=>'<span class="ch '+(s.t==="fta"?"fta":"pay")+'">'+s.n+'</span>').join(""):'<span class="none">'+(LANG==="de"?"k. A.":"n/a")+'</span>';
+  return '<div class="sendrow"><span class="sflag">'+(CFLAG[cc]||"🏳️")+'</span><span class="schans">'+chans+'</span></div>';
+}
 function matchRow(m){
   const t=I18N[LANG];
   if(m.tba) return tbaRow(m,t);
   const free=(m.tv[COUNTRY]||[]).some(s=>s.t==="fta");
   const timeCell = '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>';
-  const groups = ["DE","AT","CH","UK"].filter(cc=>cc!==COUNTRY).map(cc=>
-    '<div class="cgroup"><div class="ctitle"><span class="ff">'+CFLAG[cc]+'</span> '+CNAME[LANG][cc]+'</div>'+chList(m.tv[cc])+'</div>').join("");
+  const isWM = /^WM/i.test(m.comp||"");
+  const sccs = ["AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US"]:[]);
+  const groups = sccs.map(cc=>{ const list = m.tv[cc] || (isWM?WM_INTL[cc]:null); return list?sendRow(cc,list):""; }).filter(Boolean).join("");
   const aux = [ ...getRadio(m).map(r=>'<a href="#"><span class="ic">♪</span>'+r+'</a>'),
                 ...getTicker(m).map(x=>'<a href="#"><span class="ic">≡</span>'+x+'</a>') ].join("");
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" — "+(LANG==="de"?"wo läuft das Spiel?":"where to watch?")+" (TVFussball.de)", "https://tvfussball.de");
@@ -1202,8 +1228,7 @@ function matchRow(m){
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="dh"><span class="ff">'+CFLAG[COUNTRY]+'</span>'+t.where+' '+CNAME[LANG][COUNTRY]+'</div>'+
       '<div class="chlist">'+chList(m.tv[COUNTRY])+'</div>'+
-      '<button class="morebtn" data-more aria-expanded="false">＋ '+t.more+'</button>'+
-      '<div class="morewrap"><div>'+groups+'</div></div>'+
+      (groups?'<button class="morebtn" data-more aria-expanded="false">＋ '+t.more+'</button><div class="morewrap"><div class="sendlist">'+groups+'</div></div>':"")+
       (aux?'<div class="auxlinks">'+aux+'</div>':"")+
       liveActions(m)+
     '</div></div></div>'+
@@ -1520,7 +1545,8 @@ document.addEventListener("click", e=>{
   const pf=e.target.closest("[data-provf]");
   if(pf){PROV_FILTER=pf.dataset.provf; renderProvFilters(); renderProviders(); return;}
   if(e.target.id==="themeToggle"){ setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"); return; }
-  if(e.target.id==="consentYes"||e.target.id==="consentNo"){document.getElementById("consent").classList.add("hide");}
+  if(e.target.id==="consentYes"||e.target.id==="consentNo"){document.getElementById("consent").classList.add("hide");
+    if(e.target.id==="consentYes" && typeof gtag==="function"){ gtag('consent','update',{'analytics_storage':'granted'}); }}
 });
 document.getElementById("liveSearch").addEventListener("input",e=>{LIVE_Q=e.target.value; renderLive();});
 document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; renderHL();});
@@ -1738,13 +1764,15 @@ const LEGAL={
    '<h4>Verantwortlicher</h4>'+
    '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim<br>E-Mail: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
    '<h4>Überblick</h4>'+
-   '<p>TVFussball.de ist als statische Website ohne Nutzerkonten und ohne Werbung gestaltet. Wir setzen keine eigenen Cookies. Zur Reichweitenmessung nutzen wir ein datenschutzfreundliches, cookiefreies Analyse-Tool (siehe „Web-Analyse"); darüber hinaus speichern wir selbst keine personenbezogenen Daten.</p>'+
+   '<p>TVFussball.de ist eine statische Website ohne Nutzerkonten und ohne Werbung. Ohne Ihre Einwilligung setzen wir keine Analyse-Cookies. Zur Reichweitenmessung nutzen wir Cloudflare Web Analytics (cookiefrei) sowie – nach Ihrer Einwilligung – Google Analytics (siehe „Web-Analyse"). Darüber hinaus speichern wir selbst keine personenbezogenen Daten.</p>'+
    '<h4>Hosting &amp; Server-Logfiles</h4>'+
    '<p>Die Seite wird über GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) bereitgestellt. Beim Aufruf verarbeitet der Hoster technisch notwendige Verbindungsdaten wie IP-Adresse, Datum und Uhrzeit, abgerufene Datei und Browsertyp. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer, störungsfreier Betrieb).</p>'+
    '<h4>Schriftarten (Google Fonts)</h4>'+
    '<p>Zur einheitlichen Darstellung werden Schriftarten von Google Fonts nachgeladen. Dabei wird Ihre IP-Adresse an Google übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Eine lokale Einbindung der Schriften ist für eine spätere Version vorgesehen.</p>'+
    '<h4>Web-Analyse (Cloudflare Web Analytics)</h4>'+
    '<p>Zur anonymen Reichweitenmessung nutzen wir Cloudflare Web Analytics (Cloudflare, Inc., USA). Das Tool kommt ohne Cookies aus und erstellt keine geräteübergreifenden Nutzerprofile; erfasst werden aggregierte Daten wie aufgerufene Seiten, Verweisquelle und ungefährer Browser-/Gerätetyp. Dabei wird Ihre IP-Adresse verarbeitet, von Cloudflare aber nicht dauerhaft gespeichert. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Interesse an einer datensparsamen Reichweitenmessung).</p>'+
+   '<h4>Web-Analyse (Google Analytics)</h4>'+
+   '<p>Nach Ihrer Einwilligung über den Cookie-Hinweis nutzen wir Google Analytics 4 (Google Ireland Ltd.). Dabei werden Cookies gesetzt und Nutzungsdaten verarbeitet (u. a. gekürzte IP-Adresse, aufgerufene Seiten, Verweisquelle, ungefähre Region sowie Gerät und Browser), teils auf Servern von Google – auch in den USA. Vor der Einwilligung ist die Analyse per Consent Mode deaktiviert (analytics_storage: denied). Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO; Sie können sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>'+
    '<h4>Externe Links und Inhalte</h4>'+
    '<p>Highlights, Relives und Quellen werden nicht eingebettet, sondern nur verlinkt. Erst wenn Sie einen Link anklicken (etwa zu ARD, ZDF, YouTube oder MagentaTV), gelangen Sie zum jeweiligen Anbieter, auf dessen Seite dessen eigene Datenschutzerklärung gilt.</p>'+
    '<h4>Teilen-Funktion</h4>'+
@@ -1780,13 +1808,15 @@ const LEGAL={
    '<h4>Controller</h4>'+
    '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim, Germany<br>Email: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
    '<h4>Overview</h4>'+
-   '<p>TVFussball.de is a static website with no user accounts and no advertising. We set no cookies of our own. For audience measurement we use a privacy-friendly, cookieless analytics tool (see “Web analytics”); beyond that we store no personal data ourselves.</p>'+
+   '<p>TVFussball.de is a static website with no user accounts and no advertising. Without your consent we set no analytics cookies. For audience measurement we use Cloudflare Web Analytics (cookieless) and — after your consent — Google Analytics (see “Web analytics”). Beyond that we store no personal data ourselves.</p>'+
    '<h4>Hosting &amp; server log files</h4>'+
    '<p>The site is served via GitHub Pages (GitHub Inc., San Francisco, USA). On access the host processes technically necessary connection data such as IP address, date and time, the file requested and the browser type. Legal basis: Art. 6 (1) (f) GDPR (secure, fault-free operation).</p>'+
    '<h4>Fonts (Google Fonts)</h4>'+
    '<p>For a consistent look, fonts are loaded from Google Fonts, which transfers your IP address to Google. Legal basis: Art. 6 (1) (f) GDPR. Self-hosting of the fonts is planned for a future version.</p>'+
    '<h4>Web analytics (Cloudflare Web Analytics)</h4>'+
    '<p>For anonymous audience measurement we use Cloudflare Web Analytics (Cloudflare, Inc., USA). It works without cookies and builds no cross-device user profiles; it records aggregated data such as pages viewed, referrer and approximate browser/device type. Your IP address is processed but not stored permanently by Cloudflare. Legal basis: Art. 6 (1) (f) GDPR (interest in privacy-friendly audience measurement).</p>'+
+   '<h4>Web analytics (Google Analytics)</h4>'+
+   '<p>After your consent via the cookie notice, we use Google Analytics 4 (Google Ireland Ltd.). It sets cookies and processes usage data (e.g. truncated IP address, pages viewed, referrer, approximate region, device and browser), partly on Google servers, including in the USA. Before consent, analytics is disabled via Consent Mode (analytics_storage: denied). The legal basis is your consent under Art. 6 (1) (a) GDPR; you can withdraw it at any time with effect for the future.</p>'+
    '<h4>External links and content</h4>'+
    '<p>Highlights, replays and sources are not embedded, only linked. Only when you click a link (e.g. to ARD, ZDF, YouTube or MagentaTV) do you reach the respective provider, where its own privacy policy applies.</p>'+
    '<h4>Share function</h4>'+
