@@ -1860,11 +1860,19 @@ document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLegal
 activatePage(PAGE);
 renderAll();
 wmInit();
-window.addEventListener("load",()=>{
-  setTimeout(()=>{ document.getElementById("loader").classList.add("hide");
-    if(PAGE==="live" && !consentGet()){ setTimeout(()=>document.getElementById("consent").classList.remove("hide"), 600); }
-  }, 1100);
-});
+function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
+if(PAGE==="live"){
+  /* Startseite: bewusste, kurze Marken-Intro */
+  window.addEventListener("load",()=>{
+    setTimeout(()=>{ hideLoader();
+      if(!consentGet()){ setTimeout(()=>document.getElementById("consent").classList.remove("hide"), 600); }
+    }, 1100);
+  });
+} else {
+  /* Übrige Seiten: kein künstliches Warten – Loader sofort weg, sobald der Inhalt steht.
+     Nur bei wirklich langsamem Laden bleibt er bis hierhin sichtbar. */
+  hideLoader();
+}
 </script>
   <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4849f056f0a74e2982e767e3818c5e25"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
