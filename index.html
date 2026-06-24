@@ -478,6 +478,111 @@
   .sharebtn.folbtn{gap:6px}
   .sharebtn.folbtn.done{border-color:var(--wm); color:var(--wm); background:var(--wm-soft)}
   .folmark{color:var(--wm); font-size:12px; margin-right:1px; flex:0 0 auto}
+
+  /* ════════════════════════════════════════════════════════════
+     Refinement-Layer 2026 · Politur Light + Dark (additiv)
+     Verfeinert Tiefe, Akzent & Interaktion — Struktur unverändert.
+     ════════════════════════════════════════════════════════════ */
+  :root{
+    --elev-1:0 1px 2px rgba(16,24,40,.05), 0 10px 24px -14px rgba(16,24,40,.14);
+    --elev-2:0 3px 6px rgba(16,24,40,.06), 0 22px 44px -16px rgba(16,24,40,.22);
+    --hairline-top:rgba(255,255,255,.85);
+    --accent-grad:linear-gradient(135deg,#3E66FF,#2F54EB 62%,#2546C9);
+    --free-grad:linear-gradient(135deg,#0BB081,#07966A);
+  }
+  html[data-theme="dark"]{
+    --elev-1:0 1px 2px rgba(0,0,0,.5), 0 12px 28px -16px rgba(0,0,0,.85);
+    --elev-2:0 3px 8px rgba(0,0,0,.55), 0 26px 52px -18px rgba(0,0,0,.95);
+    --hairline-top:rgba(255,255,255,.07);
+    --accent-grad:linear-gradient(135deg,#93A8FF,#6B8AFF 62%,#5673E8);
+    --free-grad:linear-gradient(135deg,#3CE3AB,#2FD49A);
+  }
+
+  /* Karten: geschichtete Elevation + von oben beleuchtete Haarlinie, sanftes Anheben */
+  .row{ box-shadow:inset 0 1px 0 var(--hairline-top), var(--elev-1);
+        transition:border-color .18s ease, box-shadow .24s ease, transform .14s ease }
+  .row:hover{ box-shadow:inset 0 1px 0 var(--hairline-top), var(--elev-2); transform:translateY(-1px) }
+  .row.open{ box-shadow:inset 0 1px 0 var(--hairline-top), var(--elev-2) }
+  .row.free{ box-shadow:inset 3px 0 0 var(--free), inset 0 1px 0 var(--hairline-top), var(--elev-1) }
+  .row.free:hover, .row.free.open{ box-shadow:inset 3px 0 0 var(--free), inset 0 1px 0 var(--hairline-top), var(--elev-2) }
+  .rowhead:active{ background:var(--hover) }
+
+  /* Kohärenter Akzent-Verlauf: Logo-Pill & primäre Aktionen */
+  .logo .tv{ background:var(--accent-grad); box-shadow:0 3px 10px -3px var(--green-line) }
+  .consent button.ok{ background:var(--accent-grad); border-color:transparent; box-shadow:0 4px 14px -4px var(--green-line) }
+
+  /* Free-TV-Badge = Markenseele: Verlauf + zarter Schein */
+  .freebest.tv{ background:var(--free-grad); box-shadow:0 3px 12px -4px var(--free-line) }
+
+  /* Segmented Control & aktive Filter-Chips: weiche Erhebung, gleicher Akzent */
+  .seg button[aria-pressed="true"]{ box-shadow:0 1px 3px rgba(16,24,40,.10) }
+  html[data-theme="dark"] .seg button[aria-pressed="true"]{ box-shadow:0 1px 3px rgba(0,0,0,.5) }
+  .fchip{ transition:background .16s ease, color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .12s ease }
+  .fchip[aria-pressed="true"]{ background:var(--accent-grad); border-color:transparent; box-shadow:0 3px 12px -4px var(--green-line) }
+  .fchip:active{ transform:scale(.96) }
+
+  /* Bottom-Nav · Signatur: Akzent-Indikator über dem aktiven Icon + Spring-Lift */
+  .navitem{ position:relative; transition:color .2s ease, background .2s ease, transform .12s ease }
+  .navitem:hover{ color:var(--ink) }
+  .navitem[aria-selected="true"]{ color:var(--green) }
+  .navitem svg{ transition:transform .22s cubic-bezier(.34,1.56,.64,1) }
+  .navitem[aria-selected="true"] svg{ transform:translateY(-1px) }
+  .navitem[aria-selected="true"]::before{ content:""; position:absolute; top:2px; left:50%; transform:translateX(-50%);
+    width:16px; height:3px; border-radius:3px; background:var(--green); box-shadow:0 0 8px -1px var(--green-line) }
+
+  /* Chevron: geschmeidigeres Easing */
+  .chev{ transition:transform .28s cubic-bezier(.34,1.4,.5,1), background .18s, color .18s, border-color .18s }
+
+  /* Reduced Motion respektieren */
+  @media (prefers-reduced-motion:reduce){
+    *, *::before, *::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important }
+    .row:hover{ transform:none } .navitem[aria-selected="true"] svg{ transform:none }
+  }
+  /* Preisdeal-Wecker */
+  .wecker{background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:inset 0 1px 0 var(--hairline-top), var(--elev-1); padding:16px; margin:2px 0 14px; border-top:3px solid var(--free)}
+  .wk-h{font-family:"Archivo",sans-serif; font-weight:900; font-size:18px; letter-spacing:-.02em; display:flex; align-items:center; gap:8px}
+  .wk-h .em{font-size:19px}
+  .wk-soon{margin-left:auto; font:700 9.5px "Space Mono",monospace; letter-spacing:.06em; text-transform:uppercase; color:var(--wm); background:var(--wm-soft); border:1px solid var(--wm-soft); padding:3px 8px; border-radius:99px}
+  .wk-sub{color:var(--muted); font-size:12.5px; margin:5px 0 12px; max-width:54ch}
+  .wk-pick{font:700 10.5px "Hanken Grotesk",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0 0 8px}
+  .wk-chips{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:13px}
+  .wk-chip{border:1px solid var(--line); background:var(--bg2); color:var(--ink); padding:7px 13px 7px 9px; font-size:12.5px; font-weight:600; border-radius:99px; display:inline-flex; align-items:center; gap:7px; transition:border-color .15s, background .15s, box-shadow .15s}
+  .wk-chip:hover{border-color:var(--free-line)}
+  .wk-chip[aria-pressed="true"]{background:var(--free-soft); color:var(--free); border-color:var(--free-line); box-shadow:0 2px 10px -4px var(--free-line)}
+  .wk-chip .ck{width:16px; height:16px; border-radius:50%; border:1.5px solid var(--line2); display:inline-grid; place-items:center; font-size:10px; font-weight:800; color:transparent; transition:all .15s}
+  .wk-chip[aria-pressed="true"] .ck{background:var(--free); border-color:var(--free); color:var(--on-accent)}
+  .wk-form{display:flex; gap:8px; flex-wrap:wrap}
+  .wk-email{flex:1 1 200px; min-width:0; border:1px solid var(--line2); background:var(--bg2); color:var(--ink); border-radius:11px; padding:11px 13px; font-size:14px; font-family:inherit}
+  .wk-email::placeholder{color:var(--faint)}
+  .wk-email:focus{outline:none; border-color:var(--free-line); box-shadow:0 0 0 3px var(--free-soft)}
+  .wk-btn{flex:0 0 auto; border:1px solid transparent; background:var(--free-grad); color:var(--on-accent); border-radius:11px; padding:11px 18px; font-weight:800; font-size:13.5px; box-shadow:0 4px 14px -5px var(--free-line); transition:transform .12s ease, box-shadow .15s ease}
+  .wk-btn:hover{box-shadow:0 6px 18px -5px var(--free-line)}
+  .wk-btn:active{transform:scale(.97)}
+  .wk-priv{font-size:11px; color:var(--faint); margin-top:10px; line-height:1.5}
+  .wk-done{display:flex; gap:11px; align-items:flex-start; background:var(--free-soft); border:1px solid var(--free-line); border-radius:13px; padding:13px 15px}
+  .wk-done .wk-ic{font-size:20px; line-height:1}
+  .wk-done b{display:block; font-size:14px; color:var(--ink); margin-bottom:2px}
+  .wk-done span{font-size:12.5px; color:var(--muted)}
+  .wk-change{margin-top:10px; border:1px solid var(--line2); background:var(--bg2); color:var(--ink); border-radius:10px; padding:8px 14px; font-weight:700; font-size:12.5px}
+  .wk-change:hover{border-color:var(--free-line); color:var(--free)}
+  /* Aktionen im aufgeklappten Spiel — aufgeräumtes, gleichbreites Raster */
+  .actwrap{margin-top:13px; display:flex; flex-direction:column; gap:8px}
+  .actrow{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .actrow .sharebtn{width:100%; justify-content:center; padding:10px 12px; border-radius:11px; min-width:0}
+  .actrow .sharebtn span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  /* Folgen-Reihe = sekundär */
+  .actrow.follow .sharebtn{background:var(--bg2); border-color:var(--line); color:var(--muted); font-weight:700}
+  .actrow.follow .sharebtn:hover{color:var(--ink); border-color:var(--line2)}
+  .actrow.follow .sharebtn.done{background:var(--wm-soft); border-color:var(--wm); color:var(--wm)}
+  /* Hauptaktionen: Kalender neutral, Teilen als Akzent */
+  .actrow.main .sharebtn.calbtn{background:var(--surface2); border-color:var(--line2); color:var(--ink)}
+  .actrow.main .sharebtn.calbtn:hover{border-color:var(--green-line); color:var(--green)}
+  .actrow.main .sharebtn[data-share]{background:var(--accent-grad); border-color:transparent; color:var(--on-accent); box-shadow:0 4px 14px -5px var(--green-line)}
+  .actrow.main .sharebtn[data-share]:hover{color:var(--on-accent); box-shadow:0 6px 18px -5px var(--green-line)}
+  .actrow.main .sharebtn[data-share].done{background:var(--free-grad); border-color:transparent; color:var(--on-accent); box-shadow:0 4px 14px -5px var(--free-line)}
+  /* Info-Links (Radio/Ticker) gleich breit ausrichten */
+  .auxlinks{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px}
+  .auxlinks a{justify-content:center; padding:9px 10px; border-radius:11px}
 </style>
 </head>
 <body data-page="live">
@@ -538,6 +643,7 @@
       <div class="abo-chips" id="aboChips"></div>
       <div class="abo-res" id="aboRes"></div>
     </div>
+    <div class="wecker" id="weckerBox"></div>
     <div class="fsearch"><span class="ic">⌕</span><input id="provSearch" type="text" placeholder="Anbieter, Wettbewerb oder Land suchen …"></div>
     <div class="filters" id="provFilters"></div>
     <div class="section-eyebrow"><h2 data-i18n="prov_title">Anbieter &amp; Preise</h2><span class="cnt mono" id="provCount"></span></div>
@@ -665,7 +771,7 @@ const I18N = {
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
-    consent_text:"Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.",
+    consent_text:"Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.", wk_title:"Preisdeal-Wecker", wk_soon:"Bald automatisch", wk_sub:"Lass dich per E-Mail benachrichtigen, sobald wir ein gutes Angebot für deine Anbieter finden.", wk_pick:"Anbieter wählen:", wk_email_ph:"deine@email.de", wk_btn:"Wecker stellen", wk_priv:"Wir nutzen deine E-Mail ausschließlich für Preisdeal-Benachrichtigungen. Abmeldung jederzeit per Antwort-Mail.", wk_need_prov:"Bitte mindestens einen Anbieter wählen.", wk_need_mail:"Bitte eine gültige E-Mail eingeben.", wk_done_t:"Fast geschafft!", wk_done_s:"Sende die vorbereitete E-Mail ab \u2013 dann bist du vorgemerkt und wir melden uns, sobald wir ein passendes Angebot finden.", wk_change:"Auswahl ändern", wk_mail_subject:"Preisdeal-Wecker \u2013 Anmeldung", wk_mail_l1:"Ich möchte über Preisdeals für meine Anbieter benachrichtigt werden.", wk_mail_prov:"Anbieter:", wk_mail_mail:"E-Mail:", wk_mail_foot:"(Gesendet über den Preisdeal-Wecker auf tvfussball.de)",
     consent_no:"Ablehnen", consent_yes:"Einverstanden",
     prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
     live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Sender DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
@@ -708,7 +814,7 @@ const I18N = {
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
-    consent_text:"We use Google Analytics to measure how this site is used, anonymously. Cookies for this are only set after your consent.",
+    consent_text:"We use Google Analytics to measure how this site is used, anonymously. Cookies for this are only set after your consent.", wk_title:"Price-deal alert", wk_soon:"Auto soon", wk_sub:"Get an email as soon as we find a good deal for your providers.", wk_pick:"Choose providers:", wk_email_ph:"you@email.com", wk_btn:"Set alert", wk_priv:"We use your email only for price-deal alerts. Unsubscribe anytime by replying.", wk_need_prov:"Please choose at least one provider.", wk_need_mail:"Please enter a valid email.", wk_done_t:"Almost done!", wk_done_s:"Send the prepared email \u2014 then you are on the list and we will reach out when a matching deal appears.", wk_change:"Change selection", wk_mail_subject:"Price-deal alert \u2013 sign-up", wk_mail_l1:"I would like to be notified about price deals for my providers.", wk_mail_prov:"Providers:", wk_mail_mail:"Email:", wk_mail_foot:"(Sent via the price-deal alert on tvfussball.de)",
     consent_no:"Decline", consent_yes:"Accept",
     prov_note:"Prices approx., as of June 2026 — offers, bundles and terms vary. Please check with the provider before subscribing.",
     live_note:"Kick-off times in Central European Time (CET). Channels DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Quality: 4K = UHD (MagentaTV), HD = HD broadcast; below HD no symbol. Domestic leagues (Bundesliga, Premier League, Serie A, La Liga, Champions/Europa League) are currently on summer break.",
@@ -1107,7 +1213,10 @@ function liveActions(m){const t=I18N[LANG];
   const ch=((m.tv&&m.tv[COUNTRY])||[]).map(s=>s.n).join(", ");
   const cal='<button class="sharebtn calbtn" data-cal data-day="'+esc(m.day)+'" data-time="'+esc(m.time)+'" data-h="'+esc(m.h)+'" data-a="'+esc(m.a)+'" data-comp="'+esc(m.comp||"")+'" data-ch="'+esc(ch)+'">'+CAL_ICON+'<span>'+t.cal_add+'</span></button>';
   const share='<button class="sharebtn" data-share data-share-title="'+esc(m.h+" – "+m.a)+'" data-share-text="'+esc(m.h+" – "+m.a+" · "+(m.comp||"")+" (TVFussball.de)")+'" data-share-url="https://tvfussball.de">'+SHARE_ICON+'<span>'+t.share+'</span></button>';
-  return '<div class="sharebar">'+followBtn(m.h)+followBtn(m.a)+cal+share+'</div>';
+  return '<div class="actwrap">'+
+    '<div class="actrow follow">'+followBtn(m.h)+followBtn(m.a)+'</div>'+
+    '<div class="actrow main">'+cal+share+'</div>'+
+  '</div>';
 }
 
 /* Übersetzungs-Helfer für deutschsprachige Datenfelder */
@@ -1504,7 +1613,46 @@ function renderAbo(){
   res.innerHTML=html;
 }
 
-function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); renderAbo(); applyLang(); }
+/* ---------- Preisdeal-Wecker ---------- */
+const WECKER_KEY="tvf_dealwecker";
+const WECKER_SEL=new Set();
+let WECKER_DONE=false, WECKER_MAIL="";
+const WECKER_TO="patrick.uhl1988@googlemail.com";
+function weckerLoad(){ try{ const r=JSON.parse(localStorage.getItem(WECKER_KEY)||"null");
+  if(r){ WECKER_MAIL=r.email||""; (r.providers||[]).forEach(p=>WECKER_SEL.add(p)); WECKER_DONE=!!r.done; } }catch(e){} }
+function weckerSave(done){ try{ localStorage.setItem(WECKER_KEY, JSON.stringify({email:WECKER_MAIL, providers:[...WECKER_SEL], done:!!done, ts:Date.now()})); }catch(e){} }
+function emailOK(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v||"").trim()); }
+function renderWecker(){
+  const t=I18N[LANG], box=document.getElementById("weckerBox"); if(!box) return;
+  const pays=PROVIDERS.filter(p=>p.kind==="pay");
+  let html='<div class="wk-h"><span class="em">\uD83D\uDD14</span><span>'+t.wk_title+'</span><span class="wk-soon">'+t.wk_soon+'</span></div>'+
+    '<p class="wk-sub">'+t.wk_sub+'</p>';
+  if(WECKER_DONE){
+    html+='<div class="wk-done"><span class="wk-ic">\u2705</span><div><b>'+t.wk_done_t+'</b><span>'+t.wk_done_s+'</span></div></div>'+
+      '<button class="wk-change" id="wkChange">'+t.wk_change+'</button>';
+    box.innerHTML=html; return;
+  }
+  html+='<div class="wk-pick">'+t.wk_pick+'</div><div class="wk-chips">'+
+    pays.map(p=>{ const on=WECKER_SEL.has(p.name);
+      return '<button class="wk-chip" data-wk="'+esc(p.name)+'" aria-pressed="'+on+'"><span class="ck">\u2713</span>'+esc(p.name)+'</button>'; }).join("")+
+    '</div>'+
+    '<div class="wk-form"><input id="wkEmail" class="wk-email" type="email" inputmode="email" autocomplete="email" placeholder="'+esc(t.wk_email_ph)+'" value="'+esc(WECKER_MAIL)+'">'+
+    '<button class="wk-btn" id="wkSubmit">'+t.wk_btn+'</button></div>'+
+    '<p class="wk-priv">'+t.wk_priv+'</p>';
+  box.innerHTML=html;
+}
+function weckerSubmit(){
+  const t=I18N[LANG], inp=document.getElementById("wkEmail");
+  const mail=inp?inp.value.trim():"";
+  if(WECKER_SEL.size===0){ toast(t.wk_need_prov); return; }
+  if(!emailOK(mail)){ toast(t.wk_need_mail); if(inp) inp.focus(); return; }
+  WECKER_MAIL=mail;
+  const sel=[...WECKER_SEL];
+  const body=t.wk_mail_l1+"\n\n"+t.wk_mail_prov+" "+sel.join(", ")+"\n"+t.wk_mail_mail+" "+mail+"\n\n"+t.wk_mail_foot;
+  weckerSave(true); WECKER_DONE=true; renderWecker();
+  location.href="mailto:"+WECKER_TO+"?subject="+encodeURIComponent(t.wk_mail_subject)+"&body="+encodeURIComponent(body);
+}
+function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderProvFilters(); renderProviders(); renderAbo(); renderWecker(); applyLang(); }
 
 /* ---------- Events ---------- */
 document.addEventListener("click", e=>{
@@ -1517,6 +1665,10 @@ document.addEventListener("click", e=>{
     renderLiveFilters(); renderLive(); return; }
   const ac=e.target.closest("[data-aboc]");
   if(ac){ const id=ac.dataset.aboc; if(ABO_SEL[id]) delete ABO_SEL[id]; else ABO_SEL[id]=true; renderAbo(); return; }
+  const wk=e.target.closest("[data-wk]");
+  if(wk){ const nm=wk.dataset.wk; if(WECKER_SEL.has(nm)){WECKER_SEL.delete(nm); wk.setAttribute("aria-pressed","false");} else {WECKER_SEL.add(nm); wk.setAttribute("aria-pressed","true");} return; }
+  if(e.target.id==="wkSubmit" || e.target.closest("#wkSubmit")){ weckerSubmit(); return; }
+  if(e.target.id==="wkChange" || e.target.closest("#wkChange")){ WECKER_DONE=false; weckerSave(false); renderWecker(); return; }
   if(e.target.id==="aboReset" || e.target.closest("#aboReset")){ Object.keys(ABO_SEL).forEach(k=>delete ABO_SEL[k]); renderAbo(); return; }
   const wopt=e.target.closest("[data-wq]");
   if(wopt){ wmAnswer(+wopt.dataset.wq, +wopt.dataset.wo); return; }
@@ -1779,6 +1931,8 @@ const LEGAL={
    '<p>Zur anonymen Reichweitenmessung nutzen wir Cloudflare Web Analytics (Cloudflare, Inc., USA). Das Tool kommt ohne Cookies aus und erstellt keine geräteübergreifenden Nutzerprofile; erfasst werden aggregierte Daten wie aufgerufene Seiten, Verweisquelle und ungefährer Browser-/Gerätetyp. Dabei wird Ihre IP-Adresse verarbeitet, von Cloudflare aber nicht dauerhaft gespeichert. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Interesse an einer datensparsamen Reichweitenmessung).</p>'+
    '<h4>Web-Analyse (Google Analytics)</h4>'+
    '<p>Nach Ihrer Einwilligung über den Cookie-Hinweis nutzen wir Google Analytics 4 (Google Ireland Ltd.). Dabei werden Cookies gesetzt und Nutzungsdaten verarbeitet (u. a. gekürzte IP-Adresse, aufgerufene Seiten, Verweisquelle, ungefähre Region sowie Gerät und Browser), teils auf Servern von Google – auch in den USA. Vor der Einwilligung ist die Analyse per Consent Mode deaktiviert (analytics_storage: denied). Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO; Sie können sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>'+
+   '<h4>Preisdeal-Wecker (E-Mail-Benachrichtigung)</h4>'+
+   '<p>Wenn Sie den Preisdeal-Wecker nutzen, öffnet sich Ihr E-Mail-Programm mit einer vorbereiteten Nachricht an uns, die die von Ihnen gewählten Anbieter und Ihre E-Mail-Adresse enthält. Erst durch das Absenden dieser E-Mail übermitteln Sie uns die Daten; wir verwenden sie ausschließlich, um Sie über passende Angebote zu benachrichtigen. Ihre Auswahl wird zusätzlich nur lokal in Ihrem Browser gespeichert (kein Server). Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO; ein Widerruf ist jederzeit per Antwort-Mail möglich.</p>'+
    '<h4>Externe Links und Inhalte</h4>'+
    '<p>Highlights, Relives und Quellen werden nicht eingebettet, sondern nur verlinkt. Erst wenn Sie einen Link anklicken (etwa zu ARD, ZDF, YouTube oder MagentaTV), gelangen Sie zum jeweiligen Anbieter, auf dessen Seite dessen eigene Datenschutzerklärung gilt.</p>'+
    '<h4>Teilen-Funktion</h4>'+
@@ -1823,6 +1977,8 @@ const LEGAL={
    '<p>For anonymous audience measurement we use Cloudflare Web Analytics (Cloudflare, Inc., USA). It works without cookies and builds no cross-device user profiles; it records aggregated data such as pages viewed, referrer and approximate browser/device type. Your IP address is processed but not stored permanently by Cloudflare. Legal basis: Art. 6 (1) (f) GDPR (interest in privacy-friendly audience measurement).</p>'+
    '<h4>Web analytics (Google Analytics)</h4>'+
    '<p>After your consent via the cookie notice, we use Google Analytics 4 (Google Ireland Ltd.). It sets cookies and processes usage data (e.g. truncated IP address, pages viewed, referrer, approximate region, device and browser), partly on Google servers, including in the USA. Before consent, analytics is disabled via Consent Mode (analytics_storage: denied). The legal basis is your consent under Art. 6 (1) (a) GDPR; you can withdraw it at any time with effect for the future.</p>'+
+   '<h4>Price-deal alert (email notification)</h4>'+
+   '<p>When you use the price-deal alert, your email app opens with a prepared message to us containing the providers you selected and your email address. Only by sending this email do you transmit the data to us; we use it solely to notify you about matching deals. Your selection is additionally stored only locally in your browser (no server). Legal basis is your consent under Art. 6 (1) (a) GDPR; you can withdraw at any time by replying.</p>'+
    '<h4>External links and content</h4>'+
    '<p>Highlights, replays and sources are not embedded, only linked. Only when you click a link (e.g. to ARD, ZDF, YouTube or MagentaTV) do you reach the respective provider, where its own privacy policy applies.</p>'+
    '<h4>Share function</h4>'+
@@ -1858,6 +2014,7 @@ document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLegal
   setTheme((tp==="dark"||tp==="light") ? tp : (document.documentElement.dataset.theme||"light"));
 })();
 activatePage(PAGE);
+weckerLoad();
 renderAll();
 wmInit();
 function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
