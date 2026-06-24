@@ -378,6 +378,20 @@
   footer a{color:var(--muted); text-decoration:none}
   footer a:hover{color:var(--ink)}
   footer .lnote{flex-basis:100%; font-size:10.5px; line-height:1.5; color:var(--faint)}
+  .legal-ov{position:fixed; inset:0; z-index:120; display:none; background:rgba(0,0,0,.5); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); padding:14px; overflow-y:auto}
+  .legal-ov.show{display:block}
+  .legal-card{max-width:640px; margin:28px auto 40px; background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); overflow:hidden}
+  .legal-head{position:sticky; top:0; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 18px; background:var(--surface); border-bottom:1px solid var(--line)}
+  .legal-head h3{font-size:17px; font-weight:800; color:var(--ink)}
+  .legal-x{width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:var(--bg2); color:var(--muted); font-size:14px; cursor:pointer; flex:0 0 auto; display:grid; place-items:center; transition:color .15s,border-color .15s}
+  .legal-x:hover{color:var(--ink); border-color:var(--green-line)}
+  .legal-body{padding:18px; color:var(--ink); font-size:13.5px; line-height:1.6}
+  .legal-body h4{font-size:13px; font-weight:800; margin:16px 0 4px; color:var(--ink)}
+  .legal-body h4:first-child{margin-top:0}
+  .legal-body p{margin:0 0 9px; color:var(--muted)}
+  .legal-body p.addr{color:var(--ink); line-height:1.55}
+  .legal-body a{color:var(--green); text-decoration:none}
+  .legal-body a:hover{text-decoration:underline}
 
   .consent{position:fixed; left:12px; right:12px; bottom:80px; z-index:55; max-width:736px; margin:0 auto;
     background:var(--surface); border:1px solid var(--line2); border-radius:13px; padding:14px;
@@ -485,11 +499,18 @@
   </section>
 
   <footer>
-    <a href="#" data-i18n="imprint">Impressum</a>
-    <a href="#" data-i18n="privacy">Datenschutz</a>
-    <a href="#" data-i18n="about">Über uns</a>
+    <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
+    <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
+    <a href="#" data-legal="about" data-i18n="about">Über uns</a>
     <span class="lnote" data-i18n="legal_note">TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.</span>
   </footer>
+
+  <div class="legal-ov" id="legalOv" aria-hidden="true">
+    <div class="legal-card" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+      <div class="legal-head"><h3 id="legalTitle"></h3><button class="legal-x" id="legalClose" aria-label="Schließen">✕</button></div>
+      <div class="legal-body" id="legalBody"></div>
+    </div>
+  </div>
 </div>
 
 <nav class="bottomnav" role="tablist" aria-label="Bereiche">
@@ -1074,6 +1095,7 @@ function applyLang(){
   document.getElementById("newsSearch").placeholder = LANG==="de"?"Verein, Quelle oder Stichwort suchen …":"Search club, source or keyword …";
   document.getElementById("provSearch").placeholder = LANG==="de"?"Anbieter, Wettbewerb oder Land suchen …":"Search provider, competition or country …";
   document.getElementById("wm-anthemSearch").placeholder = LANG==="de"?"Land suchen … z. B. Brasilien, Japan":"Search country … e.g. Brazil, Japan";
+  if(LEGAL_CUR && document.getElementById("legalOv").classList.contains("show")) openLegal(LEGAL_CUR);
 }
 const ICON_MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.3A8 8 0 1 1 10.7 3.5a6.3 6.3 0 0 0 9.8 9.8z"/></svg>';
 const ICON_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>';
@@ -1111,6 +1133,9 @@ document.addEventListener("click", e=>{
     wlike.classList.toggle("on",WM_LIKES[i]); wlike.querySelector("span").textContent=WM_LIKES[i]?1:0;
     wlike.firstChild.textContent=WM_LIKES[i]?"❤️ ":"🤍 "; return; }
   if(e.target.id==="wm-quizReset"){ wmBuildQuiz(); return; }
+  const lg=e.target.closest("[data-legal]");
+  if(lg){ e.preventDefault(); openLegal(lg.dataset.legal); return; }
+  if(e.target.id==="legalClose"||e.target.id==="legalOv"){ closeLegal(); return; }
   const head=e.target.closest(".rowhead");
   if(head){const row=head.closest(".row"); const open=row.classList.toggle("open"); head.setAttribute("aria-expanded",open); return;}
   const more=e.target.closest("[data-more]");
@@ -1326,6 +1351,100 @@ function wmInit(){
   wmRenderAnthems("");
   wmBuildQuiz();
 }
+
+/* ---------- Impressum / Datenschutz / Über uns ---------- */
+let LEGAL_CUR=null;
+const LEGAL={
+ de:{
+  imprint:{t:"Impressum",h:
+   '<h4>Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)</h4>'+
+   '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim<br>Deutschland</p>'+
+   '<h4>Kontakt</h4>'+
+   '<p>E-Mail: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
+   '<h4>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h4>'+
+   '<p>Patrick Uhl (Anschrift wie oben)</p>'+
+   '<h4>Art des Angebots</h4>'+
+   '<p>TVFussball.de ist ein privat betriebenes, nicht-kommerzielles Informationsangebot. Es werden keine Umsätze erzielt; eine Umsatzsteuer-Identifikationsnummer besteht nicht.</p>'+
+   '<h4>Haftung für Inhalte</h4>'+
+   '<p>Die Inhalte wurden mit größter Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität – insbesondere bei Sendeangaben und Ergebnissen – kann keine Gewähr übernommen werden.</p>'+
+   '<h4>Haftung für Links</h4>'+
+   '<p>Dieses Angebot enthält Links zu externen Websites Dritter (z. B. ARD, ZDF, YouTube, MagentaTV). Auf deren Inhalte haben wir keinen Einfluss; dafür ist stets der jeweilige Anbieter verantwortlich.</p>'+
+   '<h4>Urheberrecht</h4>'+
+   '<p>TVFussball.de überträgt selbst keine Spiele und hostet keine Videoinhalte, sondern verweist ausschließlich auf die offiziellen, legalen Angebote der Rechteinhaber. Marken-, Vereins- und Wettbewerbsnamen sind Eigentum der jeweiligen Inhaber.</p>'},
+  privacy:{t:"Datenschutzerklärung",h:
+   '<h4>Verantwortlicher</h4>'+
+   '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim<br>E-Mail: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
+   '<h4>Überblick</h4>'+
+   '<p>TVFussball.de ist als statische Website ohne Nutzerkonten, ohne Tracking und ohne Werbung gestaltet. Wir setzen keine eigenen Cookies, nutzen keine Analyse-Werkzeuge und speichern selbst keine personenbezogenen Daten.</p>'+
+   '<h4>Hosting &amp; Server-Logfiles</h4>'+
+   '<p>Die Seite wird über GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) bereitgestellt. Beim Aufruf verarbeitet der Hoster technisch notwendige Verbindungsdaten wie IP-Adresse, Datum und Uhrzeit, abgerufene Datei und Browsertyp. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer, störungsfreier Betrieb).</p>'+
+   '<h4>Schriftarten (Google Fonts)</h4>'+
+   '<p>Zur einheitlichen Darstellung werden Schriftarten von Google Fonts nachgeladen. Dabei wird Ihre IP-Adresse an Google übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Eine lokale Einbindung der Schriften ist für eine spätere Version vorgesehen.</p>'+
+   '<h4>Externe Links und Inhalte</h4>'+
+   '<p>Highlights, Relives und Quellen werden nicht eingebettet, sondern nur verlinkt. Erst wenn Sie einen Link anklicken (etwa zu ARD, ZDF, YouTube oder MagentaTV), gelangen Sie zum jeweiligen Anbieter, auf dessen Seite dessen eigene Datenschutzerklärung gilt.</p>'+
+   '<h4>Teilen-Funktion</h4>'+
+   '<p>Die Teilen-Schaltfläche nutzt die Web-Share-Funktion Ihres Geräts bzw. – als Rückfalloption – die Zwischenablage. Dabei werden keine Daten an uns übertragen.</p>'+
+   '<h4>Ihre Rechte</h4>'+
+   '<p>Sie haben nach DSGVO das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde. Wenden Sie sich dazu an die oben genannte Kontaktadresse.</p>'+
+   '<p style="color:var(--faint);font-size:11.5px">Stand: Juni 2026</p>'},
+  about:{t:"Über uns",h:
+   '<p>TVFussball.de beantwortet eine einfache Frage: <b>Wo läuft das Spiel?</b> Durch die zersplitterten Übertragungsrechte ist genau das oft unübersichtlich – mal Free-TV, mal Pay, mal nur im Stream oder Radio.</p>'+
+   '<p>Wir bündeln diese Angaben pro Spiel und Land (Deutschland, Österreich, Schweiz, UK) an einem Ort: Anstoßzeiten, Sender, kostenlose Zusammenfassungen und Relives sowie kompakte News.</p>'+
+   '<h4>Kein Streaming-Anbieter</h4>'+
+   '<p>TVFussball.de überträgt keine Spiele. Wir verweisen ausschließlich auf die offiziellen, legalen Angebote der Rechteinhaber.</p>'+
+   '<h4>Privates Projekt</h4>'+
+   '<p>Das Projekt wird privat und nicht-kommerziell von Patrick Uhl betrieben. Feedback ist jederzeit willkommen: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'}
+ },
+ en:{
+  imprint:{t:"Imprint",h:
+   '<h4>Information pursuant to § 5 DDG (German Digital Services Act)</h4>'+
+   '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim<br>Germany</p>'+
+   '<h4>Contact</h4>'+
+   '<p>Email: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
+   '<h4>Responsible for content (§ 18 (2) MStV)</h4>'+
+   '<p>Patrick Uhl (address as above)</p>'+
+   '<h4>Nature of the service</h4>'+
+   '<p>TVFussball.de is a privately operated, non-commercial information service. It generates no revenue and holds no VAT identification number.</p>'+
+   '<h4>Liability for content</h4>'+
+   '<p>Content has been compiled with great care. No guarantee can be given for its accuracy, completeness or timeliness, in particular for broadcast details and results.</p>'+
+   '<h4>Liability for links</h4>'+
+   '<p>This service links to external third-party websites (e.g. ARD, ZDF, YouTube, MagentaTV). We have no influence over their content; the respective provider is always responsible for it.</p>'+
+   '<h4>Copyright</h4>'+
+   '<p>TVFussball.de does not broadcast any matches and hosts no video content; it only points to the official, legal offerings of the rights holders. Brand, club and competition names are the property of their respective owners.</p>'},
+  privacy:{t:"Privacy Policy",h:
+   '<h4>Controller</h4>'+
+   '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim, Germany<br>Email: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
+   '<h4>Overview</h4>'+
+   '<p>TVFussball.de is a static website with no user accounts, no tracking and no advertising. We set no cookies of our own, use no analytics tools and store no personal data ourselves.</p>'+
+   '<h4>Hosting &amp; server log files</h4>'+
+   '<p>The site is served via GitHub Pages (GitHub Inc., San Francisco, USA). On access the host processes technically necessary connection data such as IP address, date and time, the file requested and the browser type. Legal basis: Art. 6 (1) (f) GDPR (secure, fault-free operation).</p>'+
+   '<h4>Fonts (Google Fonts)</h4>'+
+   '<p>For a consistent look, fonts are loaded from Google Fonts, which transfers your IP address to Google. Legal basis: Art. 6 (1) (f) GDPR. Self-hosting of the fonts is planned for a future version.</p>'+
+   '<h4>External links and content</h4>'+
+   '<p>Highlights, replays and sources are not embedded, only linked. Only when you click a link (e.g. to ARD, ZDF, YouTube or MagentaTV) do you reach the respective provider, where its own privacy policy applies.</p>'+
+   '<h4>Share function</h4>'+
+   '<p>The share button uses your device Web Share feature or, as a fallback, the clipboard. No data is transmitted to us.</p>'+
+   '<h4>Your rights</h4>'+
+   '<p>Under the GDPR you have the right to access, rectification, erasure, restriction of processing, data portability and objection, plus the right to lodge a complaint with a supervisory authority. Please use the contact address above.</p>'+
+   '<p style="color:var(--faint);font-size:11.5px">As of June 2026</p>'},
+  about:{t:"About us",h:
+   '<p>TVFussball.de answers one simple question: <b>where is the match on?</b> Fragmented broadcasting rights make that surprisingly hard to track – sometimes free TV, sometimes pay, sometimes stream or radio only.</p>'+
+   '<p>We bring those details together per match and country (Germany, Austria, Switzerland, UK) in one place: kick-off times, channels, free summaries and replays, plus concise news.</p>'+
+   '<h4>Not a streaming service</h4>'+
+   '<p>TVFussball.de does not broadcast matches. We only point to the official, legal offerings of the rights holders.</p>'+
+   '<h4>A private project</h4>'+
+   '<p>The project is run privately and non-commercially by Patrick Uhl. Feedback is always welcome: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'}
+ }
+};
+function openLegal(key){
+  const set=LEGAL[LANG]||LEGAL.de, d=set[key]||LEGAL.de[key]; if(!d) return;
+  LEGAL_CUR=key;
+  document.getElementById("legalTitle").textContent=d.t;
+  document.getElementById("legalBody").innerHTML=d.h;
+  const ov=document.getElementById("legalOv"); ov.classList.add("show"); ov.setAttribute("aria-hidden","false"); ov.scrollTop=0;
+}
+function closeLegal(){ const ov=document.getElementById("legalOv"); ov.classList.remove("show"); ov.setAttribute("aria-hidden","true"); LEGAL_CUR=null; }
+document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLegal(); });
 
 /* ---------- Boot ---------- */
 setTheme(document.documentElement.dataset.theme || "light");
