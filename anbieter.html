@@ -615,7 +615,7 @@
 </nav>
 
 <div class="consent hide" id="consent">
-  <p data-i18n="consent_text">Wir nutzen Geo-IP, YouTube-Einbettungen (nocookie) und – sobald aktiviert – Werbung. Auslieferung erst nach deiner Einwilligung.</p>
+  <p data-i18n="consent_text">Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.</p>
   <div class="cbtns">
     <button id="consentNo" data-i18n="consent_no">Ablehnen</button>
     <button class="ok" id="consentYes" data-i18n="consent_yes">Einverstanden</button>
@@ -665,7 +665,7 @@ const I18N = {
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
-    consent_text:"Wir nutzen Geo-IP, YouTube-Einbettungen (nocookie) und Google Analytics zur Reichweitenmessung. Diese werden erst nach deiner Einwilligung geladen.",
+    consent_text:"Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.",
     consent_no:"Ablehnen", consent_yes:"Einverstanden",
     prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
     live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Sender DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
@@ -708,7 +708,7 @@ const I18N = {
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
-    consent_text:"We use Geo-IP, YouTube embeds (nocookie) and Google Analytics for audience measurement. These load only after your consent.",
+    consent_text:"We use Google Analytics to measure how this site is used, anonymously. Cookies for this are only set after your consent.",
     consent_no:"Decline", consent_yes:"Accept",
     prov_note:"Prices approx., as of June 2026 — offers, bundles and terms vary. Please check with the provider before subscribing.",
     live_note:"Kick-off times in Central European Time (CET). Channels DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Quality: 4K = UHD (MagentaTV), HD = HD broadcast; below HD no symbol. Domestic leagues (Bundesliga, Premier League, Serie A, La Liga, Champions/Europa League) are currently on summer break.",
@@ -1079,6 +1079,11 @@ const ABO_COMPS = [
    Sprache/Theme werden über URL-Parameter (?lang=en&theme=dark) zwischen den Seiten
    weitergereicht — kein Browser-Storage. */
 const PAGE = (document.body && document.body.dataset.page) || "live";
+const CONSENT_KEY="tvf_consent";
+function consentGet(){ try{ return localStorage.getItem(CONSENT_KEY); }catch(e){ return null; } }
+function consentSet(v){ try{ localStorage.setItem(CONSENT_KEY,v); }catch(e){} }
+function consentApply(v){ if(v==="yes" && typeof gtag==="function"){ gtag('consent','update',{'analytics_storage':'granted'}); } }
+consentApply(consentGet());
 const PAGE_FILES = {live:"index.html", hl:"highlights.html", news:"news.html", anbieter:"anbieter.html", wm:"wm.html"};
 function navUrl(tab){ const ps=[];
   if(LANG==="en") ps.push("lang=en");
@@ -1546,7 +1551,8 @@ document.addEventListener("click", e=>{
   if(pf){PROV_FILTER=pf.dataset.provf; renderProvFilters(); renderProviders(); return;}
   if(e.target.id==="themeToggle"){ setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"); return; }
   if(e.target.id==="consentYes"||e.target.id==="consentNo"){document.getElementById("consent").classList.add("hide");
-    if(e.target.id==="consentYes" && typeof gtag==="function"){ gtag('consent','update',{'analytics_storage':'granted'}); }}
+    consentSet(e.target.id==="consentYes"?"yes":"no");
+    if(e.target.id==="consentYes"){ consentApply("yes"); }}
 });
 document.getElementById("liveSearch").addEventListener("input",e=>{LIVE_Q=e.target.value; renderLive();});
 document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; renderHL();});
@@ -1856,7 +1862,7 @@ renderAll();
 wmInit();
 window.addEventListener("load",()=>{
   setTimeout(()=>{ document.getElementById("loader").classList.add("hide");
-    setTimeout(()=>document.getElementById("consent").classList.remove("hide"), 600);
+    if(PAGE==="live" && !consentGet()){ setTimeout(()=>document.getElementById("consent").classList.remove("hide"), 600); }
   }, 1100);
 });
 </script>
