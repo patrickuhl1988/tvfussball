@@ -628,6 +628,15 @@
   /* Sanftes Einblenden des aktiven Tabs (einmalig, respektiert reduced-motion oben) */
   .tabpane.active{animation:v2rise .45s cubic-bezier(.2,.7,.3,1)}
   @keyframes v2rise{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+
+  /* ============ FILTER-CHIPS (Heute) · Design wie Vorlage ============ */
+  #liveFilters{gap:9px; padding:6px 0 12px}
+  #liveFilters .fchip{background:var(--surface); color:var(--ink); border:1px solid var(--line);
+    padding:10px 16px; font-size:13.5px; font-weight:700; border-radius:999px;
+    box-shadow:var(--elev-1); display:inline-flex; align-items:center; gap:7px}
+  #liveFilters .fchip[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink); box-shadow:var(--elev-1)}
+  #liveFilters .fchip .fcount{font-family:"JetBrains Mono",monospace; font-weight:600; font-size:11.5px; color:var(--faint)}
+  #liveFilters .fchip[aria-pressed="true"] .fcount{color:inherit; opacity:.55}
 </style>
 </head>
 <body data-page="hl">
@@ -1240,7 +1249,21 @@ const FORMATS = [
    stream:"ran.de / Joyn", url:"https://www.ran.de/"}
 ];
 
-const FOLLOW = new Set();   // gefolgte Teams (nur In-Memory pro Sitzung — kein localStorage)
+const FOLLOW = new Set();   // gefolgte Teams (jetzt mit localStorage-Persistenz)
+
+/* ---------- Persistenz: funktionaler localStorage (kein Tracking) ---------- */
+const LS_OK=(function(){ try{ const k="tvf:v1:__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
+const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang" };
+function lsGet(k){ if(!LS_OK) return null; try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ if(!LS_OK) return; try{ localStorage.setItem(k,v); }catch(e){} }
+function saveFollow(){ lsSet(LS_KEY.follow, JSON.stringify([...FOLLOW])); }
+function saveFilters(){ lsSet(LS_KEY.filters, JSON.stringify([...LIVE_SEL])); }
+function saveLang(){ lsSet(LS_KEY.lang, JSON.stringify(LANG)); }
+function loadPersisted(){
+  try{ const raw=lsGet(LS_KEY.follow); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ FOLLOW.clear(); a.forEach(x=>FOLLOW.add(x)); } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.filters); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ LIVE_SEL.clear(); a.forEach(x=>LIVE_SEL.add(x)); } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.lang); if(raw!==null){ const v=JSON.parse(raw); if(v==="de"||v==="en") LANG=v; } }catch(e){}
+}
 const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
 
 /* =========================================================================
@@ -1369,11 +1392,24 @@ function isTonightFmt(f){ const dm=String(f.day).match(/(\d{2})\.(\d{2})\.(\d{4}
 function isFinished(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return false; return Date.now() > s.getTime()+115*60000; }
 function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
 function renderLiveFilters(){ const t=I18N[LANG];
-  const mc=mineCount();
-  const defs=[["all",t.f_all],["mine",t.f_mine+(mc?" ("+mc+")":"")],["free",t.f_free],["tonight",t.f_tonight],["format",t.f_format],
+  const up=MATCHES.filter(m=>!isFinished(m)), upF=FORMATS.filter(f=>!isFinished(f));
+  const cnt={
+    all: up.length+upF.length,
+    mine: up.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a)).length + upF.filter(f=>FOLLOW.has(f.id)).length,
+    free: up.filter(isFreeTV).length,
+    tonight: up.filter(isTonight).length + upF.filter(isTonightFmt).length,
+    format: upF.length,
+    wm: up.filter(m=>catOf(m)==="wm").length,
+    dfb: up.filter(m=>catOf(m)==="dfb").length,
+    bl: up.filter(m=>catOf(m)==="bl").length,
+    cl: up.filter(m=>catOf(m)==="cl").length
+  };
+  const defs=[["all",t.f_all],["mine",t.f_mine],["free",t.f_free],["tonight",t.f_tonight],["format",t.f_format],
     ["wm",t.f_wm],["dfb",t.f_dfb],["bl",t.f_bl],["cl",t.f_cl]];
-  document.getElementById("liveFilters").innerHTML = defs.map(d=>
-    '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(d[0]==="all"?LIVE_SEL.size===0:LIVE_SEL.has(d[0]))+'">'+d[1]+'</button>').join("");
+  document.getElementById("liveFilters").innerHTML = defs.map(d=>{
+    const c=cnt[d[0]];
+    return '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(d[0]==="all"?LIVE_SEL.size===0:LIVE_SEL.has(d[0]))+'">'+d[1]+(c?'<span class="fcount">'+c+'</span>':'')+'</button>';
+  }).join("");
 }
 function renderLive(){
   const t=I18N[LANG], board=document.getElementById("liveBoard");
@@ -1804,7 +1840,7 @@ function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); rend
 document.addEventListener("keydown", e=>{
   const fav=e.target.closest&&e.target.closest("[data-follow]");
   if(fav && (e.key==="Enter"||e.key===" ")){ e.preventDefault(); e.stopPropagation();
-    const team=fav.dataset.follow; FOLLOW.has(team)?FOLLOW.delete(team):FOLLOW.add(team);
+    const team=fav.dataset.follow; FOLLOW.has(team)?FOLLOW.delete(team):FOLLOW.add(team); saveFollow();
     renderLiveFilters(); renderLive(); }
 });
 document.addEventListener("click", e=>{
@@ -1813,7 +1849,7 @@ document.addEventListener("click", e=>{
   const sh=e.target.closest("[data-share]");
   if(sh){ doShare(sh); return; }
   const fol=e.target.closest("[data-follow]");
-  if(fol){ const team=fol.dataset.follow; FOLLOW.has(team)?FOLLOW.delete(team):FOLLOW.add(team);
+  if(fol){ const team=fol.dataset.follow; FOLLOW.has(team)?FOLLOW.delete(team):FOLLOW.add(team); saveFollow();
     renderLiveFilters(); renderLive(); return; }
   const ac=e.target.closest("[data-aboc]");
   if(ac){ const id=ac.dataset.aboc; if(ABO_SEL[id]) delete ABO_SEL[id]; else ABO_SEL[id]=true; renderAbo(); return; }
@@ -1844,11 +1880,12 @@ document.addEventListener("click", e=>{
     location.href = navUrl(dest); return; }
   const lb=e.target.closest("[data-lang]");
   if(lb){document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed","false"));
-    lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; renderAll(); return;}
+    lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; saveLang(); renderAll(); return;}
   const lf=e.target.closest("[data-livef]");
   if(lf){ const k=lf.dataset.livef;
     if(k==="all") LIVE_SEL.clear();
     else { LIVE_SEL.has(k)?LIVE_SEL.delete(k):LIVE_SEL.add(k); }
+    saveFilters();
     renderLiveFilters(); renderLive(); return;}
   const hlf=e.target.closest("[data-hlf]");
   if(hlf){HL_FILTER=hlf.dataset.hlf; renderHLFilters(); renderHL(); return;}
@@ -2161,6 +2198,7 @@ function closeLegal(){ const ov=document.getElementById("legalOv"); ov.classList
 document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLegal(); });
 
 /* ---------- Boot ---------- */
+loadPersisted();
 (function(){
   const p=new URLSearchParams(location.search);
   const lp=p.get("lang"); if(lp==="en"||lp==="de") LANG=lp;
