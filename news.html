@@ -137,7 +137,10 @@
   .chlist{}
   .chrow{display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid var(--line); font-size:14px}
   .chrow:last-child{border-bottom:0}
+  .time .odtime{font:700 11px "JetBrains Mono",monospace;color:#2563EB;letter-spacing:.02em;display:inline-block;padding-top:3px}
   .chrow .nm{font-weight:600}
+  .chrow .nm a.streamlink,.sendrow .schans a.streamlink{color:inherit;text-decoration:underline;text-decoration-color:#2563EB;text-underline-offset:2px;text-decoration-thickness:1.5px;cursor:pointer}
+  .chrow .nm a.streamlink:hover,.sendrow .schans a.streamlink:hover{color:#2563EB}
   .chrow .none{color:var(--faint); font-style:italic; font-size:13px}
   .q{font-family:"JetBrains Mono",monospace; font-weight:700; font-size:9px; letter-spacing:.02em; padding:2px 5px; border-radius:4px; background:var(--surface2); color:var(--muted); border:1px solid var(--line)}
   .q.k4{color:var(--green); border-color:var(--green-line)}
@@ -728,6 +731,44 @@
   .tsoc.fb{background:#1877F2}
   .tsoc.ig{background:linear-gradient(95deg,#F58529,#DD2A7B 45%,#8134AF 72%,#515BD4)}
   .tsoc:hover{filter:brightness(1.06)}
+
+  /* ════════════════════════════════════════════════════════════
+     DARK MODE v2 · 2026 — kühle, kohärente Palette + mehr Tiefe
+     Free-TV = Blau (Akzent) · Pay/Stream = Violett · Radio = Grau
+     ════════════════════════════════════════════════════════════ */
+  html[data-theme="dark"]{
+    --bg:#070B16; --bg2:#0C1322; --surface:#141C30; --surface2:#1C2740;
+    --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.16);
+    --ink:#EDF2FC; --muted:#A2B2CE; --faint:#7B8BA6;
+    /* Free-TV erbt den vorhandenen Akzent-Blauton */
+    --free:#5B8CFF; --free-soft:rgba(91,140,255,.16); --free-line:rgba(91,140,255,.42);
+    --free-grad:linear-gradient(135deg,#84AAFF,#5B8CFF 60%,#4F7EF0);
+    /* Pay/Stream = eigener kühler Violett-Ton */
+    --pay:#A78BFA; --pay-soft:rgba(167,139,250,.16); --pay-line:rgba(167,139,250,.42);
+    --hairline-top:rgba(255,255,255,.10);
+    --header-bg:rgba(8,12,24,.85); --ball-panel:#141C30;
+    --glow1:rgba(91,140,255,.18); --glow2:rgba(167,139,250,.06);
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 34px -14px rgba(0,0,0,.7);
+    --elev-1:0 1px 2px rgba(0,0,0,.45), 0 12px 32px -14px rgba(0,0,0,.66);
+    --elev-2:0 2px 6px rgba(0,0,0,.55), 0 24px 50px -16px rgba(0,0,0,.78);
+  }
+  /* Karten: feiner Vertikal-Verlauf + klare Oberkante → räumliche Tiefe */
+  html[data-theme="dark"] .row{
+    background:linear-gradient(180deg,#1A2540 0%,#151D33 60%,#121A2C 100%);
+    border-color:rgba(255,255,255,.08);
+  }
+  html[data-theme="dark"] .row:hover{ border-color:rgba(255,255,255,.15) }
+  html[data-theme="dark"] .row.open{ border-color:var(--free-line) }
+  /* Pay/Stream-Schiene + Tags = Violett (klar getrennt vom Free-TV-Blau) */
+  html[data-theme="dark"] .row.pay{ box-shadow:inset 3px 0 0 var(--pay), inset 0 1px 0 var(--hairline-top), var(--elev-1) }
+  html[data-theme="dark"] .row.pay:hover, html[data-theme="dark"] .row.pay.open{ box-shadow:inset 3px 0 0 var(--pay), inset 0 1px 0 var(--hairline-top), var(--elev-2) }
+  html[data-theme="dark"] .tag.pay{ color:#C9BBFF; border-color:var(--pay-line) }
+  html[data-theme="dark"] .freebest.pay{ color:#C9BBFF; border-color:var(--pay-line) }
+  html[data-theme="dark"] .sendrow .schans .ch.pay{ color:#BCABF7 }
+  /* Radio-Badge neutral grau (vorher grün) */
+  html[data-theme="dark"] .freebest.radio{ color:var(--faint); border-color:var(--line2) }
+  /* Segmented-Control etwas klarer abgesetzt */
+  html[data-theme="dark"] .seg{ background:rgba(255,255,255,.035) }
 </style>
 </head>
 <body data-page="news">
@@ -1003,7 +1044,7 @@ const I18N = {
     ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
     price_from:"ab", price_approx:"ca.",
     result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Topspiele",
-    f_free:"Nur Free-TV", f_tonight:"Heute Abend", f_now:"Läuft jetzt", f_format:"Formate", f_mine:"★ Meine", fmt_head:"Sendungen & Magazine", fmt_live:"live", fmt_more:"Zur Sendung", fk_highlights:"Highlights", fk_magazin:"Magazin", fk_talk:"Talk", fk_vorbericht:"Vorbericht", fk_live:"Live-Studio",
+    f_free:"Nur Free-TV", f_tonight:"Heute Abend", f_now:"Läuft jetzt", f_format:"Formate", f_mine:"★ Meine", fmt_head:"Sendungen & Magazine", fmt_live:"live", fmt_more:"Zur Sendung", fk_highlights:"Highlights", fk_magazin:"Magazin", fk_talk:"Talk", fk_vorbericht:"Vorbericht", fk_live:"Live-Studio", fk_podcast:"Podcast", fk_video:"Video",
     mine_empty:"Noch keinem Team gefolgt — tippe in einem Spiel auf „folgen“.", filt_empty:"Keine Spiele für diesen Filter.",
     follow:"folgen", following:"folge ich", follow_hint:"Folge Teams, um nur deine Spiele zu sehen — Kalender-Erinnerung inklusive.",
     abo_title:"Welches Abo brauche ich?", abo_sub:"Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.",
@@ -1012,7 +1053,7 @@ const I18N = {
     abo_free_keeps:"Gratis dabei (ARD/ZDF)", abo_need:"Dafür brauchst du", abo_full:"komplett", abo_partial:"Teil",
     abo_complete:"Für die komplette Abdeckung zusätzlich:", abo_visit:"Zum Anbieter", abo_reset:"Zurücksetzen",
     abo_aff_note:"Anbieter-Links sind neutral (kein Affiliate aktiv). Preise ca., Stand Juni 2026 — bitte beim Anbieter prüfen.",
-    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
+    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Liga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_test:"Tests", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
@@ -1066,7 +1107,7 @@ const I18N = {
     ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
     price_from:"from", price_approx:"approx.",
     result:"Final", ft:"FT", nohits:"No results", f_all:"All", f_3goals:"3+ goals", f_top:"Top games",
-    f_free:"Free TV only", f_tonight:"Tonight", f_now:"Live now", f_format:"Shows", f_mine:"★ Mine", fmt_head:"Shows & magazines", fmt_live:"live", fmt_more:"Show page", fk_highlights:"Highlights", fk_magazin:"Magazine", fk_talk:"Talk", fk_vorbericht:"Preview", fk_live:"Live studio",
+    f_free:"Free TV only", f_tonight:"Tonight", f_now:"Live now", f_format:"Shows", f_mine:"★ Mine", fmt_head:"Shows & magazines", fmt_live:"live", fmt_more:"Show page", fk_highlights:"Highlights", fk_magazin:"Magazine", fk_talk:"Talk", fk_vorbericht:"Preview", fk_live:"Live studio", fk_podcast:"Podcast", fk_video:"Video",
     mine_empty:"Not following any team yet — tap “follow” on a match.", filt_empty:"No matches for this filter.",
     follow:"follow", following:"following", follow_hint:"Follow teams to see only your matches — calendar reminder included.",
     abo_title:"Which subscription do I need?", abo_sub:"Pick what you want to watch — we show the cheapest combination and what stays free.",
@@ -1075,7 +1116,7 @@ const I18N = {
     abo_free_keeps:"Free with ARD/ZDF", abo_need:"You'll need", abo_full:"full", abo_partial:"part",
     abo_complete:"For full coverage also add:", abo_visit:"Visit provider", abo_reset:"Reset",
     abo_aff_note:"Provider links are neutral (no affiliate active). Prices approx., as of June 2026 — please verify with the provider.",
-    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
+    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Bundesliga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_test:"Friendlies", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
@@ -1101,12 +1142,13 @@ const FL = {Portugal:"🇵🇹",Usbekistan:"🇺🇿",England:"🏴󠁧󠁢󠁥�
 function flag(n){ return FL[n] || "⚽"; }
 
 /* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
-const MAG={n:"MagentaTV",t:"pay",q:"4K"}, ARD={n:"Das Erste",t:"fta",q:"HD"}, ZDF={n:"ZDF",t:"fta",q:"HD"},
+const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
   ORF={n:"ORF 1",t:"fta",q:"HD"}, SERV={n:"ServusTV",t:"fta",q:"HD"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD"},
   SRF2={n:"SRF zwei",t:"fta",q:"HD"}, SRFi={n:"SRF info",t:"fta",q:"HD"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
   SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
   UKg={n:"BBC / ITV",t:"fta",q:"HD"};
-const SAT1={n:"SAT.1",t:"fta",q:"HD"}, SKY={n:"Sky",t:"pay",q:"HD"};
+const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, SKY={n:"Sky",t:"pay",q:"HD"};
+const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
 const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"},
   RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
   CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"};
@@ -1117,8 +1159,49 @@ const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Fran
 
 /* WM 2026 — echte Partien, Zeiten (MEZ), Sender (DE/AT/CH via fussballgucken.info, UK via BBC/ITV) */
 const MATCHES = [
+  {cat:"wm", day:"Samstag, 04.07.2026", time:"—", comp:"WM 2026 · Achtelfinale", h:"Achtelfinale", a:"8 Spiele · 04.–07. Juli", tba:true},
+  {cat:"wm", day:"Donnerstag, 09.07.2026", time:"—", comp:"WM 2026 · Viertelfinale", h:"Viertelfinale", a:"4 Spiele · 09.–11. Juli", tba:true},
+  {cat:"wm", day:"Dienstag, 14.07.2026", time:"—", comp:"WM 2026 · Halbfinale", h:"Halbfinale", a:"14./15. Juli · Dallas & Atlanta", tba:true},
+  {cat:"wm", day:"Samstag, 18.07.2026", time:"23:00", comp:"WM 2026 · Spiel um Platz 3", h:"Verlierer HF 1", a:"Verlierer HF 2", tv:{DE:[ZDF,JOYN,MAG]}},
+  {cat:"wm", day:"Sonntag, 19.07.2026", time:"21:00", comp:"WM 2026 · Finale", h:"Finalist 1", a:"Finalist 2", tv:{DE:[ZDF,JOYN,MAG]}},
+  {cat:"bl", day:"Freitag, 28.08.2026", time:"20:30", comp:"Bundesliga · 1. Spieltag", h:"Saison 2026/27", a:"Eröffnungsspiel · Spielplan ab 02.07.", tba:true},
+  {cat:"bl2", day:"Freitag, 07.08.2026", time:"—", comp:"2. Bundesliga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt · Spielplan folgt", tba:true},
+  {cat:"bl3", day:"Freitag, 31.07.2026", time:"—", comp:"3. Liga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt (vsl.) · Termine folgen", tba:true},
+  {cat:"cl", day:"Mittwoch, 12.08.2026", time:"21:00", comp:"UEFA Supercup", h:"Sieger Champions League", a:"Sieger Europa League", tba:true},
+  {cat:"cl", day:"Dienstag, 07.07.2026", time:"—", comp:"Champions League · 1. Qualifikationsrunde", h:"Hinspiele", a:"07./08. Juli · Rückspiele 14./15.07.", tba:true},
+  {cat:"cl", day:"Dienstag, 21.07.2026", time:"—", comp:"Champions League · 2. Qualifikationsrunde", h:"Hinspiele", a:"21./22. Juli · Rückspiele 28./29.07.", tba:true},
+  {cat:"cl", day:"Dienstag, 04.08.2026", time:"—", comp:"Champions League · 3. Qualifikationsrunde", h:"Hinspiele", a:"04./05. Aug. · Rückspiele 11.08.", tba:true},
+  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Qualifikationsrunde", h:"Hinspiele", a:"09. Juli · Rückspiele 16.07.", tba:true},
+  {cat:"el", day:"Donnerstag, 23.07.2026", time:"—", comp:"Europa League · 2. Qualifikationsrunde", h:"Hinspiele", a:"23. Juli · Rückspiele 30.07.", tba:true},
+  {cat:"el", day:"Donnerstag, 06.08.2026", time:"—", comp:"Europa League · 3. Qualifikationsrunde", h:"Hinspiele", a:"06. Aug. · Rückspiele 13.08.", tba:true},
+  {cat:"cl", day:"Dienstag, 18.08.2026", time:"—", comp:"Champions League · Playoffs", h:"Playoff-Hinspiele", a:"18./19. August", tba:true},
+  {cat:"cl", day:"Dienstag, 08.09.2026", time:"—", comp:"Champions League · Ligaphase", h:"1. Spieltag", a:"08.–10. Sept. · Auslosung 27.08.", tba:true},
+  {cat:"el", day:"Donnerstag, 20.08.2026", time:"—", comp:"Europa League · Playoffs", h:"Playoff-Hinspiele", a:"20. August", tba:true},
+  {cat:"el", day:"Mittwoch, 16.09.2026", time:"—", comp:"Europa League · Ligaphase", h:"1. Spieltag", a:"16./17. Sept. · Auslosung 28.08.", tba:true},
+  {cat:"pl", day:"Freitag, 21.08.2026", time:"21:00", comp:"Premier League · 1. Spieltag", h:"FC Arsenal", a:"Coventry City", tba:true},
+  {cat:"facup", day:"Sonntag, 16.08.2026", time:"16:00", comp:"Community Shield", h:"Manchester City", a:"FC Arsenal", tba:true},
+  {cat:"facup", day:"Samstag, 08.08.2026", time:"—", comp:"FA Cup · Qualifikation", h:"Saison 2026/27", a:"Quali ab Aug. · 3. Runde Jan. 2027", tba:true},
+  {cat:"it", day:"Samstag, 22.08.2026", time:"—", comp:"Serie A · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt (vsl.) · Termine folgen", tba:true},
+  {cat:"it", day:"Freitag, 14.08.2026", time:"—", comp:"Coppa Italia · 1. Runde", h:"Saison 2026/27", a:"Erste Runden ab August", tba:true},
+  {cat:"es", day:"Samstag, 15.08.2026", time:"—", comp:"LaLiga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt · Spielplan ab 30.06.", tba:true},
+  {cat:"es", day:"Mittwoch, 28.10.2026", time:"—", comp:"Copa del Rey · 1. Runde", h:"Saison 2026/27", a:"Start ca. Ende Oktober", tba:true},
+  {cat:"test", day:"Samstag, 18.07.2026", time:"—", comp:"Freundschaftsspiele · Bundesligisten", h:"Testspiele", a:"Vorbereitung Juli/August 2026", tba:true},
   {day:"Sonntag, 28.06.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Südafrika", a:"Kanada", tv:{DE:[MAG]}},
-  {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Gruppendritter (A/B/C/D/F)", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}},
+  {day:"Montag, 29.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Brasilien", a:"Japan", tv:{DE:[ZDF,JOYN,MAG]}},
+  {day:"Dienstag, 30.06.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Niederlande", a:"Marokko", tv:{DE:[MAG]}},
+  {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"2. Gruppe I", tv:{DE:[MAG]}},
+  {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe I", a:"3. Gruppe C/D/F/G/H", tv:{DE:[MAG]}},
+  {day:"Mittwoch, 01.07.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Mexiko", a:"3. Gruppe C/E/F/H/I", tv:{DE:[MAG]}},
+  {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe L", a:"3. Gruppe E/H/I/J/K", tv:{DE:[MAG]}},
+  {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe G", a:"3. Gruppe A/E/H/I/J", tv:{DE:[MAG]}},
+  {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", tv:{DE:[MAG]}},
+  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe H", a:"2. Gruppe J", tv:{DE:[MAG]}},
+  {day:"Freitag, 03.07.2026", time:"01:00", comp:"WM 2026 · Sechzehntelfinale", h:"2. Gruppe K", a:"2. Gruppe L", tv:{DE:[MAG]}},
+  {day:"Freitag, 03.07.2026", time:"05:00", comp:"WM 2026 · Sechzehntelfinale", h:"Schweiz", a:"3. Gruppe E/F/G/I/J", tv:{DE:[MAG]}},
+  {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"2. Gruppe G", tv:{DE:[MAG]}},
+  {day:"Samstag, 04.07.2026", time:"00:00", comp:"WM 2026 · Sechzehntelfinale", h:"Argentinien", a:"2. Gruppe H", tv:{DE:[MAG]}},
+  {day:"Samstag, 04.07.2026", time:"03:30", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe K", a:"3. Gruppe D/E/I/J/L", tv:{DE:[MAG]}},
+  {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Gruppendritter (A/B/C/D/F)", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}},
   {day:"Dienstag, 23.06.2026", time:"19:00", live:true, comp:"WM 2026 · Gruppe K · 2. Spieltag",
    h:"Portugal", a:"Usbekistan", tv:{DE:[ARD,MAG],AT:[SERV],CH:[SRFg],UK:[UKg]}},
   {day:"Dienstag, 23.06.2026", time:"22:00", comp:"WM 2026 · Gruppe L · 2. Spieltag",
@@ -1471,11 +1554,39 @@ const FORMATS = [
    stream:"ran.de / Joyn", url:"https://www.ran.de/"}
 ];
 
+const FORMATS_OD = [
+  {id:"kicker-wmdaily", od:true, name:"kicker WM-Daily", ch:"kicker", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"T\u00e4glich \u00b7 6:00 Uhr (bis 19.07.)", when_en:"Daily \u00b7 6:00 (until 19 Jul)",
+   desc_de:"Der t\u00e4gliche WM-Podcast der kicker-Redaktion: In rund 15 Minuten ordnet das Team jeden Morgen die Spiele der Nacht und die wichtigsten Themen des Turniers ein.",
+   desc_en:"kicker's daily World Cup podcast: every morning the team sorts through the night's games and the key tournament topics in around 15 minutes.",
+   stream:"Spotify / Apple Podcasts / kicker", url:"https://www.kicker.de/"},
+  {id:"kicker-dazn", od:true, name:"kicker meets DAZN", ch:"kicker & DAZN", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"Montags \u00b7 Bundesliga-Spieltag", when_en:"Mondays \u00b7 Bundesliga matchday",
+   desc_de:"Der Bundesliga-Podcast f\u00fcr alle Fans: kicker-Redakteure und das DAZN-Team analysieren jeden Montag die Highlights des Spieltags \u2013 mit Interviews und einer Portion Streitkultur.",
+   desc_en:"The Bundesliga podcast for fans: kicker editors and the DAZN team break down the matchday highlights every Monday, with interviews and plenty of debate.",
+   stream:"Spotify / Apple Podcasts", url:"https://www.kicker.de/"},
+  {id:"sportschau-wm", od:true, name:"Wir Weltmeister.", ch:"Sportschau (ARD)", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"W\u00f6chentlich \u00b7 ARD Audiothek", when_en:"Weekly \u00b7 ARD Audiothek",
+   desc_de:"Der Fu\u00dfball-Podcast der Sportschau rund um die Nationalmannschaft und die gro\u00dfen Turniere \u2013 mit Reportern, Experten und Geschichten hinter den Spielen.",
+   desc_en:"The Sportschau football podcast around the national team and the big tournaments \u2013 with reporters, experts and the stories behind the games.",
+   stream:"ARD Audiothek / Spotify", url:"https://www.sportschau.de/"},
+  {id:"bohndesliga", od:true, name:"Bohndesliga", ch:"Rocket Beans \u00b7 YouTube", icon:"\u25B6\uFE0F", kind:"video",
+   when_de:"W\u00f6chentlich \u00b7 YouTube (Saison)", when_en:"Weekly \u00b7 YouTube (in season)",
+   desc_de:"Das Bundesliga-Videoformat von Rocket Beans: Nils Bomhoff, Etienne Gard\u00e9 und Tobias Escher nehmen den Spieltag taktisch und mit viel Meinung auseinander \u2013 floskelarm und diskussionsfreudig.",
+   desc_en:"Rocket Beans' Bundesliga video show: the hosts dissect the matchday tactically and with strong opinions \u2013 low on clich\u00e9s, high on debate.",
+   stream:"YouTube", url:"https://www.youtube.com/@Bohndesliga"},
+  {id:"luppen", od:true, name:"Einfach mal Luppen", ch:"Toni & Felix Kroos", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"W\u00f6chentlich \u00b7 Podcast", when_en:"Weekly \u00b7 podcast",
+   desc_de:"Toni und Felix Kroos plaudern aus dem N\u00e4hk\u00e4stchen des Profifu\u00dfballs \u2013 pers\u00f6nliche Einblicke, Anekdoten und klare Meinungen zu den aktuellen Themen.",
+   desc_en:"Toni and Felix Kroos chat from inside professional football \u2013 personal insights, anecdotes and clear opinions on current topics.",
+   stream:"Spotify / YouTube", url:"https://www.youtube.com/@einfachmalluppen"}
+];
+
 const FOLLOW = new Set();   // gefolgte Teams (jetzt mit localStorage-Persistenz)
 
 /* ---------- Persistenz: funktionaler localStorage (kein Tracking) ---------- */
 const LS_OK=(function(){ try{ const k="tvf:v1:__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
-const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang" };
+const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme" };
 function lsGet(k){ if(!LS_OK) return null; try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function lsSet(k,v){ if(!LS_OK) return; try{ localStorage.setItem(k,v); }catch(e){} }
 function saveFollow(){ lsSet(LS_KEY.follow, JSON.stringify([...FOLLOW])); }
@@ -1552,6 +1663,7 @@ const CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wi
 const SHARE_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg>';
 const CAL_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>';
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function chNm(s){ return (s&&s.u) ? '<a class="streamlink" href="'+esc(s.u)+'" target="_blank" rel="noopener">'+s.n+'</a>' : (s?s.n:''); }
 function shareBar(title,text,url){const t=I18N[LANG];
   return '<div class="sharebar"><button class="sharebtn" data-share data-share-title="'+esc(title)+'" data-share-text="'+esc(text)+'" data-share-url="'+esc(url)+'">'+SHARE_ICON+'<span>'+t.share+'</span></button></div>';}
 function followBtn(team){ const on=FOLLOW.has(team), t=I18N[LANG];
@@ -1577,13 +1689,16 @@ function qBadge(q){ if(!q) return ""; const c=q==="4K"?"k4":(q==="8K"?"k8":""); 
 function tagFor(t){ const x=I18N[LANG]; return '<span class="tag '+t+'">'+(t==="fta"?x.fta:x.pay)+'</span>'; }
 function chList(list){
   if(!list || !list.length) return '<div class="chrow"><span class="none">— keine Übertragung gelistet —</span></div>';
-  return list.map(s=>'<div class="chrow"><span class="nm">'+s.n+'</span>'+qBadge(s.q)+tagFor(s.t)+'</div>').join("");
+  return list.map(s=>'<div class="chrow"><span class="nm">'+chNm(s)+'</span>'+qBadge(s.q)+tagFor(s.t)+'</div>').join("");
 }
 function getRadio(m){ return m.radio || ["ARD WM-Radio"]; }
 function getTicker(m){ return m.ticker || ["kicker WM-Ticker"]; }
+const RADIO_URL={"ARD WM-Radio":"https://www.ardaudiothek.de/"};
+const TICKER_URL={"kicker WM-Ticker":"https://www.kicker.de/"};
+function auxLink(x,u){ return u?'<a class="streamlink" href="'+esc(u)+'" target="_blank" rel="noopener">'+x+'</a>':x; }
 function auxRows(m){ const t=I18N[LANG];
-  const r=getRadio(m).map(x=>'<div class="chrow"><span class="nm">'+x+'</span><span class="tag aux">'+t.aux_radio+'</span></div>');
-  const k=getTicker(m).map(x=>'<div class="chrow"><span class="nm">'+x+'</span><span class="tag aux">'+t.aux_ticker+'</span></div>');
+  const r=getRadio(m).map(x=>'<div class="chrow"><span class="nm">'+auxLink(x,RADIO_URL[x])+'</span><span class="tag aux">'+t.aux_radio+'</span></div>');
+  const k=getTicker(m).map(x=>'<div class="chrow"><span class="nm">'+auxLink(x,TICKER_URL[x])+'</span><span class="tag aux">'+t.aux_ticker+'</span></div>');
   return r.concat(k).join(""); }
 function railClass(m){ const list=m.tv[COUNTRY]||[]; if(list.some(s=>s.t==="fta")) return "free"; if(getRadio(m).length) return "radio"; return "pay"; }
 function bestFree(m){
@@ -1624,10 +1739,18 @@ function renderLiveFilters(){ const t=I18N[LANG];
     wm: up.filter(m=>catOf(m)==="wm").length,
     dfb: up.filter(m=>catOf(m)==="dfb").length,
     bl: up.filter(m=>catOf(m)==="bl").length,
-    cl: up.filter(m=>catOf(m)==="cl").length
+    bl2: up.filter(m=>catOf(m)==="bl2").length,
+    bl3: up.filter(m=>catOf(m)==="bl3").length,
+    cl: up.filter(m=>catOf(m)==="cl").length,
+    el: up.filter(m=>catOf(m)==="el").length,
+    pl: up.filter(m=>catOf(m)==="pl").length,
+    facup: up.filter(m=>catOf(m)==="facup").length,
+    it: up.filter(m=>catOf(m)==="it").length,
+    es: up.filter(m=>catOf(m)==="es").length,
+    test: up.filter(m=>catOf(m)==="test").length
   };
-  const defs=[["all",t.f_all],["mine",t.f_mine],["free",t.f_free],["tonight",t.f_tonight],["format",t.f_format],
-    ["wm",t.f_wm],["dfb",t.f_dfb],["bl",t.f_bl],["cl",t.f_cl]];
+  const defs=[["all",t.f_all],["mine",t.f_mine],["free",t.f_free],["tonight",t.f_tonight],["format",t.f_format]]
+    .concat([["wm",t.f_wm],["dfb",t.f_dfb],["bl",t.f_bl],["bl2",t.f_bl2],["bl3",t.f_bl3],["cl",t.f_cl],["el",t.f_el],["pl",t.f_pl],["facup",t.f_facup],["it",t.f_it],["es",t.f_es],["test",t.f_test]].filter(d=>cnt[d[0]]>0));
   document.getElementById("liveFilters").innerHTML = defs.map(d=>{
     const c=cnt[d[0]];
     return '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(d[0]==="all"?LIVE_SEL.size===0:LIVE_SEL.has(d[0]))+'">'+d[1]+(c?'<span class="fcount">'+c+'</span>':'')+'</button>';
@@ -1639,7 +1762,7 @@ function renderLive(){
   const openKeys=[...board.querySelectorAll(".row.open")].map(r=>r.dataset.k);
   const q=(LIVE_Q||"").trim().toLowerCase();
   const SEL=LIVE_SEL, none=SEL.size===0;
-  const catSel=["wm","dfb","bl","cl"].filter(c=>SEL.has(c));
+  const catSel=["wm","dfb","bl","bl2","bl3","cl","el","pl","facup","it","es","test"].filter(c=>SEL.has(c));
   const wantFmt=SEL.has("format");
   const cond=SEL.has("mine")||SEL.has("free")||SEL.has("tonight");
   const condOnly=cond && catSel.length===0 && !wantFmt;
@@ -1656,12 +1779,20 @@ function renderLive(){
   if(SEL.has("tonight")) fList = fList.filter(isTonightFmt);
   if(q) fList = fList.filter(f=>((f.name+" "+f.ch+" "+(LANG==="de"?f.when_de:f.when_en)).toLowerCase().includes(q)));
   // Spiele + Formate mischen, nach Datum & Uhrzeit sortieren
-  let items = mList.map(m=>({day:m.day,time:String(m.time),k:"m",o:m}))
-                   .concat(fList.map(f=>({day:f.day,time:String(f.time),k:"f",o:f})));
-  items.sort((a,b)=> (dayKey(a.day)-dayKey(b.day)) || a.time.localeCompare(b.time));
+  let items = mList.map(m=>({day:m.day,sk:skOf(m.day,m.time),k:"m",o:m}))
+                   .concat(fList.map(f=>({day:f.day,sk:skOf(f.day,f.time),k:"f",o:f})));
+  function skOf(day,time){ var mm=String(time).match(/(\d{1,2}):(\d{2})/); return dayKey(day)*10000+(mm?(+mm[1])*60+(+mm[2]):9998); }
+  if(wantFmt && typeof FORMATS_OD!=="undefined" && FORMATS_OD.length){
+    let odl=FORMATS_OD.slice();
+    if(SEL.has("mine")) odl=odl.filter(f=>FOLLOW.has(f.id));
+    if(q) odl=odl.filter(f=>((f.name+" "+f.ch+" "+(LANG==="de"?f.desc_de:f.desc_en)).toLowerCase().includes(q)));
+    const anchor=items.length?Math.min.apply(null,items.map(it=>dayKey(it.day))):todayKeyNow();
+    items=items.concat(odl.map(f=>({day:"__od__",sk:anchor*10000+9999,k:"f",o:f})));
+  }
+  items.sort((a,b)=> a.sk-b.sk);
   let html="", curDay="";
   items.forEach(it=>{
-    if(it.day!==curDay){ curDay=it.day; html += '<div class="daybar"><span class="d">'+locDay(it.day)+'</span><span class="ln"></span></div>'; }
+    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); html += '<div class="daybar"><span class="d">'+dlabel+'</span><span class="ln"></span></div>'; }
     html += it.k==="m" ? matchRow(it.o) : formatRow(it.o);
   });
   let hint="";
@@ -1683,13 +1814,13 @@ function formatRow(f){
   const when=LANG==="de"?f.when_de:f.when_en, desc=LANG==="de"?f.desc_de:f.desc_en;
   const kindlbl=t["fk_"+f.kind]||f.kind;
   const live=f.live?'<span class="fmt-live">'+t.fmt_live+'</span>':'';
-  const timeCell='<div class="time">'+esc(f.time)+'<small>'+t.tz+'</small></div>';
+  const timeCell=f.od?'<div class="time"><span class="odtime">'+(LANG==="de"?"Abruf":"On-dem.")+'</span></div>':'<div class="time">'+esc(f.time)+'<small>'+t.tz+'</small></div>';
   const star='<span class="favstar'+(on?' on':'')+'" data-follow="'+esc(f.id)+'" role="button" tabindex="0" aria-pressed="'+on+'" aria-label="'+esc(f.name)+'" title="'+esc(f.name)+'">'+(on?'★':'☆')+'</span>';
   return '<div class="row fmt free" data-k="fmt-'+esc(f.id)+'">'+
     '<button class="rowhead" aria-expanded="false">'+timeCell+
       '<div class="teams">'+
         '<div class="t"><span class="fmticon">'+(f.icon||'📺')+'</span><span>'+esc(f.name)+'</span>'+star+live+'</div>'+
-        '<div class="meta"><span class="comp">'+esc(f.ch)+'</span><span class="freebest tv">▣ '+t.best_free+'</span></div>'+
+        '<div class="meta"><span class="comp">'+esc(f.ch)+'</span>'+(f.od?'<span class="freebest '+(f.kind==="video"?"tv":"radio")+'">'+(f.kind==="video"?"▶ Video":"🎧 Podcast")+'</span>':'<span class="freebest tv">▣ '+t.best_free+'</span>')+'</div>'+
         '<div class="fmtwhen">'+esc(when)+'</div>'+
       '</div>'+
       '<span class="chev">'+CHEV+'</span>'+
@@ -1697,7 +1828,7 @@ function formatRow(f){
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="fmtkind"><span class="tag">'+esc(kindlbl)+'</span></div>'+
       '<p class="fmtdesc">'+esc(desc)+'</p>'+
-      '<div class="chlist"><div class="chrow"><span class="nm">'+esc(f.ch)+'</span><span class="tag fta">'+t.best_free+'</span></div>'+
+      '<div class="chlist"><div class="chrow"><span class="nm">'+esc(f.ch)+'</span><span class="tag '+(f.od?"aux":"fta")+'">'+(f.od?(f.kind==="video"?"Video":"Podcast"):t.best_free)+'</span></div>'+
         (f.stream?'<div class="chrow"><span class="nm">'+esc(f.stream)+'</span><span class="tag aux">Stream</span></div>':'')+'</div>'+
       (f.url?'<a class="fmtlink" href="'+esc(f.url)+'" target="_blank" rel="noopener">'+t.fmt_more+' ↗</a>':'')+
     '</div></div></div>'+
@@ -1723,7 +1854,7 @@ function tbaRow(m,t){
   '</div>';
 }
 function sendRow(cc,list){
-  const chans=(list&&list.length)?list.map(s=>'<span class="ch '+(s.t==="fta"?"fta":"pay")+'">'+s.n+'</span>').join(""):'<span class="none">'+(LANG==="de"?"k. A.":"n/a")+'</span>';
+  const chans=(list&&list.length)?list.map(s=>'<span class="ch '+(s.t==="fta"?"fta":"pay")+'">'+chNm(s)+'</span>').join(""):'<span class="none">'+(LANG==="de"?"k. A.":"n/a")+'</span>';
   return '<div class="sendrow"><span class="sflag">'+(CFLAG[cc]||"🏳️")+'</span><span class="schans">'+chans+'</span></div>';
 }
 function matchRow(m){
@@ -1901,7 +2032,7 @@ function applyLang(){
 }
 const ICON_MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.3A8 8 0 1 1 10.7 3.5a6.3 6.3 0 0 0 9.8 9.8z"/></svg>';
 const ICON_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>';
-function setTheme(th){ document.documentElement.dataset.theme=th; const b=document.getElementById("themeToggle"); if(b) b.innerHTML=th==="dark"?ICON_SUN:ICON_MOON; }
+function setTheme(th){ document.documentElement.dataset.theme=th; const b=document.getElementById("themeToggle"); if(b) b.innerHTML=th==="dark"?ICON_SUN:ICON_MOON; lsSet(LS_KEY.theme, JSON.stringify(th)); }
 
 let TOAST_TIMER;
 function toast(msg){ const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
@@ -2118,7 +2249,7 @@ document.addEventListener("click", e=>{
   if(nf){NEWS_TEAM=nf.dataset.newsf; renderNewsFilters(); renderNews(); return;}
   const pf=e.target.closest("[data-provf]");
   if(pf){PROV_FILTER=pf.dataset.provf; renderProvFilters(); renderProviders(); return;}
-  if(e.target.id==="themeToggle"){ setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"); return; }
+  if(e.target.closest("#themeToggle")){ setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"); return; }
   if(e.target.id==="consentYes"||e.target.id==="consentNo"){document.getElementById("consent").classList.add("hide");
     consentSet(e.target.id==="consentYes"?"yes":"no");
     if(e.target.id==="consentYes"){ consentApply("yes"); }}
@@ -2521,7 +2652,8 @@ loadPersisted();
   const lp=p.get("lang"); if(lp==="en"||lp==="de") LANG=lp;
   document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed", x.dataset.lang===LANG?"true":"false"));
   const tp=p.get("theme");
-  setTheme((tp==="dark"||tp==="light") ? tp : (document.documentElement.dataset.theme||"light"));
+  let stp=null; try{ const r=lsGet(LS_KEY.theme); if(r!==null){ const v=JSON.parse(r); if(v==="dark"||v==="light") stp=v; } }catch(e){}
+  setTheme((tp==="dark"||tp==="light") ? tp : (stp || document.documentElement.dataset.theme || "light"));
 })();
 activatePage(PAGE);
 weckerLoad();
