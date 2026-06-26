@@ -1505,7 +1505,7 @@ const PROVIDERS = [
    en:"UK pay provider (via discovery+) with Champions League, Europa League and Premier League games."}
 ];
 
-let LANG="de", LIVE_SEL=new Set(["wm"]), LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+let LANG="de", LIVE_SEL=new Set([]), LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
 const FORMATS = [
   {id:"ard-wm", day:"Donnerstag, 25.06.2026", time:"21:00", name:"Sportschau live – WM 2026", ch:"Das Erste (ARD)", icon:"📡", kind:"live", live:true,
    when_de:"WM 2026 · Live-Spiele & Studio", when_en:"World Cup 2026 · live games & studio",
@@ -1803,8 +1803,12 @@ function renderLive(){
     else hint = q ? soonHint(t) : '<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
   }
   board.innerHTML = html + hint;
+  /*auto-open*/ let _restored=false;
   openKeys.forEach(k=>{ const r=board.querySelector('.row[data-k="'+CSS.escape(k)+'"]');
-    if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); } });
+    if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); _restored=true; } });
+  if(!_restored){ const _nx=items.find(it=>it.k==="m" && !it.o.tba);
+    if(_nx){ const r=board.querySelector('.row[data-k="'+CSS.escape(rowKey(_nx.o))+'"]');
+      if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); } } }
 }
 function rowKey(m){ return esc(m.day+"|"+m.time+"|"+m.h+"|"+m.a); }
 function folMark(team){ const on=FOLLOW.has(team), t=I18N[LANG], lbl=esc(team)+" "+(on?t.following:t.follow);
@@ -1908,6 +1912,8 @@ function renderHL(){
     html+=hlRow(m,t);
   });
   board.innerHTML=html;
+  /*hl-auto-open*/ const _hf=board.querySelector(".row");
+  if(_hf){ _hf.classList.add("open"); const _hh=_hf.querySelector(".rowhead"); if(_hh) _hh.setAttribute("aria-expanded","true"); }
 }
 function hlRow(m,t){
   const tot=hlGoals(m.s);
@@ -2225,7 +2231,9 @@ document.addEventListener("click", e=>{
   if(lg){ e.preventDefault(); openLegal(lg.dataset.legal); return; }
   if(e.target.id==="legalClose"||e.target.id==="legalOv"){ closeLegal(); return; }
   const head=e.target.closest(".rowhead");
-  if(head){const row=head.closest(".row"); const open=row.classList.toggle("open"); head.setAttribute("aria-expanded",open); return;}
+  if(head){const row=head.closest(".row"); const willOpen=!row.classList.contains("open");
+    if(willOpen){ const _bd=row.closest(".board"); if(_bd) _bd.querySelectorAll(".row.open").forEach(o=>{ if(o!==row){ o.classList.remove("open"); const oh=o.querySelector(".rowhead"); if(oh) oh.setAttribute("aria-expanded","false"); } }); }
+    row.classList.toggle("open"); head.setAttribute("aria-expanded",willOpen); return;}
   const more=e.target.closest("[data-more]");
   if(more){const w=more.nextElementSibling; const show=w.classList.toggle("show");
     more.setAttribute("aria-expanded",show); const lbl=more.querySelector(".mlbl"); if(lbl) lbl.textContent=(show?I18N[LANG].less:I18N[LANG].more); return;}
