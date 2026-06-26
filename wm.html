@@ -643,6 +643,91 @@
   #liveFilters .fchip[aria-pressed="true"] .fcount{color:inherit; opacity:.55}
   .slabel.kicker{color:#C81E1E; border-color:rgba(200,30,30,.42); background:rgba(200,30,30,.12)}
   html[data-theme="dark"] .slabel.kicker{color:#FF6B6B}
+  /* ---- Tippspiel ---- */
+  #tippLive.hide, #tippDone.hide, #tippFallback.hide{display:none}
+  .tipp-hero{padding:6px 2px 2px}
+  .tipp-eyebrow{display:inline-flex; align-items:center; gap:7px; font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--green); background:var(--green-soft); border:1px solid var(--green-line); padding:5px 11px; border-radius:999px}
+  .tipp-h1{font-family:"Archivo",sans-serif; font-weight:800; font-size:26px; line-height:1.12; letter-spacing:-.02em; margin:13px 0 6px; color:var(--ink)}
+  .tipp-sub{font-size:14px; color:var(--muted); line-height:1.5; max-width:46ch}
+  .tipp-match{margin:16px 0 18px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--elev-1); padding:18px 16px 14px; position:relative; overflow:hidden}
+  .tipp-match::before{content:""; position:absolute; top:0; left:0; right:0; height:4px; background:var(--accent-grad)}
+  .tm-comp{font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); text-align:center}
+  .tm-teams{display:flex; align-items:center; justify-content:space-between; gap:8px; margin:14px 0 6px}
+  .tm-side{flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; min-width:0}
+  .tm-flag{font-size:42px; line-height:1}
+  .tm-name{font-family:"Archivo",sans-serif; font-weight:700; font-size:16px; color:var(--ink); text-align:center; line-height:1.15}
+  .tm-mid{display:flex; flex-direction:column; align-items:center; gap:2px; flex:0 0 auto; padding:0 6px}
+  .tm-time{font-family:"JetBrains Mono",monospace; font-weight:700; font-size:21px; color:var(--ink)}
+  .tm-vs{font-size:10px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:.12em}
+  .tm-meta{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px}
+  .tm-badge{font-size:11.5px; font-weight:600; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:4px 11px}
+  .tm-badge.free{color:var(--free); background:var(--free-soft); border-color:var(--free-line)}
+  .tm-count{margin-top:13px; text-align:center; font-size:13px; color:var(--muted); background:var(--bg); border:1px dashed var(--line); border-radius:12px; padding:10px}
+  .tm-count b{font-family:"JetBrains Mono",monospace; color:var(--ink); font-size:15px; margin-left:5px; letter-spacing:.02em}
+  .tm-count .cd-pre{font-weight:600}
+  .tm-count .tm-live{color:var(--free); font-weight:700; letter-spacing:.01em}
+  .tipp-form{margin-bottom:6px}
+  .tf-field{margin-bottom:14px; display:flex; flex-direction:column; gap:6px}
+  .tf-label{font-size:13px; font-weight:700; color:var(--ink)}
+  .tf-input{width:100%; box-sizing:border-box; font-family:"Inter",sans-serif; font-size:15px; color:var(--ink); background:var(--surface); border:1.5px solid var(--line); border-radius:13px; padding:12px 13px; transition:border-color .15s, box-shadow .15s; resize:vertical}
+  .tf-input::placeholder{color:var(--faint)}
+  .tf-input:focus{outline:none; border-color:var(--green); box-shadow:0 0 0 4px var(--green-soft)}
+  textarea.tf-input{min-height:54px; line-height:1.45}
+  .tf-help{font-size:12px; color:var(--muted)}
+  .tf-consent{display:flex; align-items:flex-start; gap:9px; font-size:12.5px; color:var(--muted); line-height:1.45; margin:4px 0 14px; cursor:pointer}
+  .tf-consent input{margin-top:2px; width:17px; height:17px; accent-color:var(--green); flex:0 0 auto}
+  .tipp-msg{display:none; font-size:13px; font-weight:600; margin-bottom:11px; padding:10px 12px; border-radius:11px}
+  .tipp-msg.error{display:block; color:#B42318; background:rgba(217,45,32,.1); border:1px solid rgba(217,45,32,.25)}
+  .tipp-msg.closed{display:block; color:var(--muted); background:var(--bg); border:1px solid var(--line)}
+  html[data-theme="dark"] .tipp-msg.error{color:#FFA39E; background:rgba(255,107,107,.12); border-color:rgba(255,107,107,.3)}
+  .tipp-submit{width:100%; font-family:"Archivo",sans-serif; font-weight:700; font-size:16px; color:var(--on-accent); background:var(--accent-grad); border:none; border-radius:14px; padding:14px; cursor:pointer; box-shadow:var(--elev-1); transition:transform .1s, filter .15s; -webkit-tap-highlight-color:transparent}
+  .tipp-submit:hover{filter:brightness(1.05)}
+  .tipp-submit:active{transform:scale(.99)}
+  .tipp-submit:disabled{opacity:.55; cursor:not-allowed}
+  .tipp-submit.loading{opacity:.7; pointer-events:none}
+  .tipp-rules{margin-top:16px; background:var(--bg); border:1px solid var(--line); border-radius:14px; padding:13px 15px}
+  .tipp-rules .tr-t{font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:7px}
+  .tipp-rules ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:5px}
+  .tipp-rules li{font-size:12.5px; color:var(--muted); line-height:1.4}
+  .tipp-done{text-align:center; padding:20px 16px 12px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--elev-1)}
+  .td-ic{font-size:42px; line-height:1}
+  .tipp-done h3{font-family:"Archivo",sans-serif; font-weight:800; font-size:21px; color:var(--ink); margin:8px 0 4px}
+  .td-sub{font-size:14px; color:var(--muted); margin-bottom:15px}
+  .td-card{display:flex; align-items:flex-start; gap:10px; text-align:left; background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:10px 13px; margin:8px 0}
+  .td-k{flex:0 0 80px; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.03em; padding-top:2px}
+  .td-v{flex:1; font-size:14px; color:var(--ink); font-weight:600; word-break:break-word}
+  .td-fallback{margin-top:13px; padding-top:13px; border-top:1px dashed var(--line)}
+  .td-fallback p{font-size:13px; color:var(--muted); line-height:1.45; margin-bottom:11px}
+  .td-fb{display:inline-flex; align-items:center; gap:7px; font-weight:700; font-size:14px; color:#fff; background:#1877F2; border-radius:11px; padding:11px 18px; text-decoration:none}
+  .td-fb:hover{filter:brightness(1.06)}
+  .td-edit{margin-top:14px; background:none; border:none; color:var(--green); font-family:"Inter",sans-serif; font-weight:600; font-size:13px; cursor:pointer; text-decoration:underline; text-underline-offset:3px}
+  .tipp-prizes{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px 15px; margin-top:14px; box-shadow:var(--elev-1)}
+  .tp-head{display:flex; align-items:center; gap:8px; font-weight:800; font-size:13px; letter-spacing:.02em; color:var(--ink); margin-bottom:11px}
+  .tp-ic{font-size:16px}
+  .tp-list{display:flex; flex-wrap:wrap; gap:8px}
+  .tp-pill{display:inline-flex; align-items:center; gap:7px; background:var(--free-soft); color:var(--free); border:1px solid var(--free-line); border-radius:11px; padding:8px 13px; font-weight:700; font-size:13px}
+  .tp-pill::before{content:"🎟️"; font-size:13px; filter:grayscale(.1)}
+  .tipp-double{display:flex; align-items:center; gap:12px; margin-top:11px; padding:13px 15px; border-radius:16px; text-decoration:none; background:var(--accent-grad); color:var(--on-accent); box-shadow:0 7px 20px -9px var(--green-line)}
+  .tipp-double:hover{filter:brightness(1.05)}
+  .tdb-ic{font-size:20px; flex:0 0 auto}
+  .tdb-tx{flex:1; display:flex; flex-direction:column; min-width:0; gap:1px}
+  .tdb-tx b{font-size:14px; font-weight:800}
+  .tdb-tx span{font-size:12px; opacity:.93; line-height:1.35}
+  .tdb-go{flex:0 0 auto; font-weight:800; font-size:12.5px; white-space:nowrap; align-self:center}
+  .tipp-shareblock{margin-top:16px; padding-top:15px; border-top:1px solid var(--line)}
+  .tsb-h{display:flex; align-items:center; gap:8px; font-weight:800; font-size:13px; color:var(--ink); margin-bottom:11px}
+  .tsb-ic{font-size:15px}
+  .tipp-share{display:flex; flex-wrap:wrap; gap:8px}
+  .tipp-share .sharebtn{flex:1 1 auto; justify-content:center; min-width:118px}
+  .tipp-share .sharebtn[data-share]{background:var(--accent-grad); border-color:transparent; color:var(--on-accent)}
+  .tipp-share .sharebtn[data-share]:hover{color:var(--on-accent)}
+  .tipp-share .tsh-em{font-size:14px}
+  .tipp-social{display:flex; gap:8px; margin-top:9px; flex-wrap:wrap}
+  .tsoc{flex:1 1 0; min-width:150px; display:inline-flex; align-items:center; justify-content:center; gap:7px; text-decoration:none; font-weight:800; font-size:13px; border-radius:13px; padding:12px 14px; color:#fff; box-shadow:0 6px 16px -9px rgba(0,0,0,.55)}
+  .tsoc .tsoc-go{opacity:.9}
+  .tsoc.fb{background:#1877F2}
+  .tsoc.ig{background:linear-gradient(95deg,#F58529,#DD2A7B 45%,#8134AF 72%,#515BD4)}
+  .tsoc:hover{filter:brightness(1.06)}
 </style>
 </head>
 <body data-page="wm">
@@ -693,6 +778,83 @@
     <div class="filters" id="newsFilters"></div>
     <div class="section-eyebrow"><h2 data-i18n="top_news">Top-News heute</h2><span class="cnt mono" id="newsUpdated"></span></div>
     <div class="news" id="newsList"></div>
+  </section>
+
+  <section class="tabpane" id="pane-tippspiel" role="tabpanel">
+    <div class="tipp-hero">
+      <span class="tipp-eyebrow">🎯 <span data-i18n="tipp_eyebrow">Tippspiel</span></span>
+      <h1 class="tipp-h1" data-i18n="tipp_title">Tippe das Spiel – und gewinne</h1>
+      <p class="tipp-sub" data-i18n="tipp_sub">Gib deinen Tipp zum heutigen WM-Spiel ab. Gewinnst du, melden wir uns über Facebook bei dir.</p>
+    </div>
+
+    <div class="tipp-match">
+      <div class="tm-comp">WM 2026 · Gruppe I · 3. Spieltag</div>
+      <div class="tm-teams">
+        <div class="tm-side"><span class="tm-flag">🇳🇴</span><span class="tm-name">Norwegen</span></div>
+        <div class="tm-mid"><span class="tm-time">21:00</span><span class="tm-vs">vs</span></div>
+        <div class="tm-side"><span class="tm-flag">🇫🇷</span><span class="tm-name">Frankreich</span></div>
+      </div>
+      <div class="tm-meta"><span class="tm-badge free">▣ Free-TV · ZDF</span><span class="tm-badge">📍 Boston</span></div>
+      <div class="tm-count" id="tippCountdown"></div>
+    </div>
+
+    <div class="tipp-prizes">
+      <div class="tp-head"><span class="tp-ic">🎁</span><span data-i18n="tipp_prizes_t">Heutige Gewinne</span></div>
+      <div class="tp-list" id="tippPrizes"></div>
+    </div>
+    <div class="tipp-double">
+      <span class="tdb-ic">⚡</span>
+      <span class="tdb-tx"><b data-i18n="tipp_double_t">Dreifache Gewinnchance</b><span data-i18n="tipp_double_s">Tippe auf tvfussball.de, bei Facebook UND bei Instagram – so bist du dreifach im Lostopf.</span></span>
+    </div>
+    <div class="tipp-social">
+      <a class="tsoc fb" id="tippFbGame" href="#" target="_blank" rel="noopener"><span data-i18n="tipp_fb_game">Facebook-Gewinnspiel</span><span class="tsoc-go">↗</span></a>
+      <a class="tsoc ig" id="tippIgGame" href="#" target="_blank" rel="noopener"><span data-i18n="tipp_ig_game">Instagram-Gewinnspiel</span><span class="tsoc-go">↗</span></a>
+    </div>
+    <form class="tipp-form" id="tippForm" novalidate>
+      <div id="tippLive">
+        <div class="tf-field">
+          <label class="tf-label" for="tippText" data-i18n="tipp_tip_label">Dein Tipp</label>
+          <textarea id="tippText" class="tf-input" rows="2" maxlength="280" data-i18n-ph="tipp_tip_ph" placeholder="z. B. 2:1 für Frankreich – Mbappé trifft doppelt"></textarea>
+        </div>
+        <div class="tf-field">
+          <label class="tf-label" for="tippNick" data-i18n="tipp_nick">Spitzname (optional)</label>
+          <input id="tippNick" class="tf-input" type="text" maxlength="40" data-i18n-ph="tipp_nick_ph" placeholder="Wie sollen wir dich nennen?">
+        </div>
+        <div class="tf-field">
+          <label class="tf-label" for="tippFb" data-i18n="tipp_fb_label">Dein Insta- oder Facebook-Profil</label>
+          <input id="tippFb" class="tf-input" type="url" inputmode="url" data-i18n-ph="tipp_fb_ph" placeholder="Link zu deinem Insta- oder FB-Profil">
+          <span class="tf-help" data-i18n="tipp_fb_help">Nur zur Kontaktaufnahme, falls du gewinnst.</span>
+        </div>
+        <label class="tf-consent"><input id="tippConsent" type="checkbox"><span data-i18n="tipp_consent">Ich bin einverstanden, dass mein Tipp und mein Profil-Link zur Kontaktaufnahme im Gewinnfall gespeichert und verarbeitet werden.</span></label>
+        <div class="tipp-msg" id="tippMsg" role="alert"></div>
+        <button type="submit" class="tipp-submit" id="tippSubmit"><span data-i18n="tipp_submit">Tipp abgeben</span></button>
+        <div class="tipp-rules">
+          <div class="tr-t" data-i18n="tipp_rules_t">So funktioniert's</div>
+          <ul>
+            <li data-i18n="tipp_rule1">Tippe das Endergebnis – Freitext genügt.</li>
+            <li data-i18n="tipp_rule2">Teilnahmeschluss ist der Anpfiff um 21:00 Uhr.</li>
+            <li data-i18n="tipp_rule3">Ein Tipp pro Person. Bei Gewinn melden wir uns über Facebook.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="tippDone" class="tipp-done hide">
+        <div class="td-ic">🎉</div>
+        <h3 data-i18n="tipp_done_t">Dein Tipp ist eingegangen!</h3>
+        <p class="td-sub" data-i18n="tipp_done_s">Viel Glück! Bei Gewinn melden wir uns über Facebook.</p>
+        <div class="td-card"><span class="td-k" data-i18n="tipp_your">Dein Tipp</span><span class="td-v" data-done-tip></span></div>
+        <div class="td-card"><span class="td-k" data-i18n="tipp_name">Name</span><span class="td-v" data-done-nick></span></div>
+        <div class="td-fallback hide" id="tippFallback">
+          <p data-i18n="tipp_fallback">Damit dein Tipp uns sicher erreicht, schick ihn uns kurz per Facebook – wir haben ihn schon für dich kopiert.</p>
+          <a class="td-fb" id="tippFbSend" href="#" target="_blank" rel="noopener">▶ <span data-i18n="tipp_fb_send">Auf Facebook senden</span></a>
+        </div>
+        <button type="button" class="td-edit" id="tippEdit" data-i18n="tipp_edit">Tipp ändern</button>
+      </div>
+    </form>
+    <div class="tipp-shareblock">
+      <div class="tsb-h"><span class="tsb-ic">📣</span><span data-i18n="tipp_share_t">Gewinnspiel mit Freunden teilen</span></div>
+      <div id="tippShare" class="tipp-share"></div>
+    </div>
   </section>
 
   <section class="tabpane" id="pane-anbieter" role="tabpanel">
@@ -766,6 +928,9 @@
   <a class="navitem" role="tab" aria-selected="false" data-tab="live" href="index.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/><path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/></svg>
     <span data-i18n="nav_live">Heute</span></a>
+  <a class="navitem" role="tab" aria-selected="false" data-tab="tippspiel" href="tippspiel.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"/></svg>
+    <span data-i18n="nav_tipp">Tippspiel</span></a>
   <a class="navitem" role="tab" aria-selected="false" data-tab="news" href="news.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h12.5v15H6.2A2.2 2.2 0 0 1 4 17.3z"/><path d="M16.5 8.5h3.5v9a2 2 0 0 1-2 2"/><path d="M7 8.5h6.5M7 12h6.5M7 15.5h4"/></svg>
     <span data-i18n="nav_news">News</span></a>
@@ -796,7 +961,27 @@ const COUNTRY = "DE"; // Standardmarkt (in Produktion per Geo-IP); alle Länder 
 const TODAY_KEY = 20260624; // Stichtag: Spiele davor erscheinen nicht mehr in der Senderliste (sondern in Highlights)
 
 const I18N = {
-  de:{ nav_live:"Heute", nav_hl:"Highlights", nav_news:"News", nav_prov:"Anbieter", nav_wm:"WM",
+  de:{ nav_live:"Heute", nav_hl:"Highlights", nav_news:"News", nav_prov:"Anbieter", nav_wm:"WM", nav_tipp:"Tippspiel",
+    tipp_eyebrow:"Tippspiel", tipp_title:"Tippe das Spiel – und gewinne",
+    tipp_sub:"Gib deinen Tipp zum heutigen WM-Spiel ab. Gewinnst du, melden wir uns über Facebook bei dir.",
+    tipp_nick:"Spitzname (optional)", tipp_nick_ph:"Wie sollen wir dich nennen?",
+    tipp_tip_label:"Dein Tipp", tipp_tip_ph:"z. B. 2:1 für Frankreich – Mbappé trifft doppelt",
+    tipp_fb_label:"Dein Insta- oder Facebook-Profil", tipp_fb_ph:"Link zu deinem Insta- oder FB-Profil",
+    tipp_fb_help:"Nur zur Kontaktaufnahme, falls du gewinnst.",
+    tipp_consent:"Ich bin einverstanden, dass mein Tipp und mein Profil-Link zur Kontaktaufnahme im Gewinnfall gespeichert und verarbeitet werden.",
+    tipp_submit:"Tipp abgeben", tipp_rules_t:"So funktioniert's",
+    tipp_rule1:"Tippe das Endergebnis – Freitext genügt.",
+    tipp_rule2:"Teilnahmeschluss ist der Anpfiff um 21:00 Uhr.",
+    tipp_rule3:"Ein Tipp pro Person. Bei Gewinn melden wir uns über Facebook.",
+    tipp_cd:"Anpfiff in", tipp_kickoff:"Anpfiff – Tippabgabe geschlossen",
+    tipp_closed:"Das Spiel hat begonnen – die Tippabgabe ist geschlossen.",
+    tipp_e_tip:"Bitte gib deinen Tipp ein.", tipp_e_fb:"Bitte gib einen gültigen Instagram- oder Facebook-Link ein.",
+    tipp_e_consent:"Bitte stimme der Verarbeitung zu, um teilzunehmen.",
+    tipp_done_t:"Dein Tipp ist eingegangen!", tipp_done_s:"Viel Glück! Bei Gewinn melden wir uns über Facebook.",
+    tipp_your:"Dein Tipp", tipp_name:"Name",
+    tipp_fallback:"Damit dein Tipp uns sicher erreicht, schick ihn uns kurz per Facebook – wir haben ihn schon für dich kopiert.",
+    tipp_fb_send:"Auf Facebook senden", tipp_edit:"Tipp ändern",
+    tipp_prizes_t:"Heutige Gewinne", tipp_double_t:"Dreifache Gewinnchance", tipp_double_s:"Tippe auf tvfussball.de, bei Facebook UND bei Instagram – so bist du dreifach im Lostopf.", tipp_fb_game:"Facebook-Gewinnspiel", tipp_ig_game:"Instagram-Gewinnspiel", tipp_share_t:"Gewinnspiel mit Freunden teilen", tipp_share_native:"Teilen", tipp_share_text:"Tippe Norwegen – Frankreich auf TVFussball.de und gewinne Amazon-Gutscheine! 🎯⚽",
     wm_eyebrow:"WM Special 2026", wm_title:"Die WM in USA, Kanada & Mexiko",
     wm_sub:"Tabellen, K.-o.-Baum, Hymnen aller Teams, Memes und das große Quiz — alles an einem Ort.",
     wm_groups:"Gruppen", wm_final:"Finale", wm_tables:"Tabellen & K.-o.-Runde",
@@ -839,7 +1024,27 @@ const I18N = {
     hl_watch:"ansehen", hl_whole:"Ganze Partie", hl_free_stream:"kostenlos im Stream", hl_checked:"geprüft",
     hl_pay_only:"Kein kostenloses Komplettspiel — nur bei", hl_pay_suffix:"(Pay · alle 104 Spiele)",
     hl_note:"Quellen: ZDF-Mediathek, ARD/Sportschau, offizielle YouTube-Kanäle (abgerufen 23.06.2026). Ganze Spiele („Relive“) gibt es nur für ARD/ZDF-Partien und nur zeitlich begrenzt gratis; sonst ausschließlich Pay (MagentaTV, alle 104 Spiele). TVFussball verlinkt nur, überträgt selbst nicht." },
-  en:{ nav_live:"Today", nav_hl:"Highlights", nav_news:"News", nav_prov:"Providers", nav_wm:"WM",
+  en:{ nav_live:"Today", nav_hl:"Highlights", nav_news:"News", nav_prov:"Providers", nav_wm:"WM", nav_tipp:"Predictions",
+    tipp_eyebrow:"Prediction game", tipp_title:"Predict the match – and win",
+    tipp_sub:"Submit your prediction for today's World Cup match. If you win, we'll reach out via Facebook.",
+    tipp_nick:"Nickname (optional)", tipp_nick_ph:"What should we call you?",
+    tipp_tip_label:"Your prediction", tipp_tip_ph:"e.g. 2:1 France – Mbappé scores twice",
+    tipp_fb_label:"Your Instagram or Facebook profile", tipp_fb_ph:"Link to your Instagram or FB profile",
+    tipp_fb_help:"Only used to contact you if you win.",
+    tipp_consent:"I agree that my prediction and profile link may be stored and processed so you can be contacted if you win.",
+    tipp_submit:"Submit prediction", tipp_rules_t:"How it works",
+    tipp_rule1:"Predict the final score – free text is fine.",
+    tipp_rule2:"Entries close at kick-off, 9:00 pm CEST.",
+    tipp_rule3:"One entry per person. If you win, we'll contact you via Facebook.",
+    tipp_cd:"Kick-off in", tipp_kickoff:"Kick-off – entries closed",
+    tipp_closed:"The match has started – entries are now closed.",
+    tipp_e_tip:"Please enter your prediction.", tipp_e_fb:"Please enter a valid Instagram or Facebook link.",
+    tipp_e_consent:"Please accept the processing to take part.",
+    tipp_done_t:"Your prediction is in!", tipp_done_s:"Good luck! If you win, we'll reach out via Facebook.",
+    tipp_your:"Your prediction", tipp_name:"Name",
+    tipp_fallback:"To make sure your entry reaches us, please send it via Facebook – we've already copied it for you.",
+    tipp_fb_send:"Send via Facebook", tipp_edit:"Edit prediction",
+    tipp_prizes_t:"Today's prizes", tipp_double_t:"Triple your chance", tipp_double_s:"Predict on tvfussball.de, on Facebook AND on Instagram – three entries in the draw.", tipp_fb_game:"Facebook giveaway", tipp_ig_game:"Instagram giveaway", tipp_share_t:"Share the giveaway with friends", tipp_share_native:"Share", tipp_share_text:"Predict Norway – France on TVFussball.de and win Amazon vouchers! 🎯⚽",
     wm_eyebrow:"World Cup Special 2026", wm_title:"The World Cup in USA, Canada & Mexico",
     wm_sub:"Tables, knockout bracket, anthems of all teams, memes and the big quiz — all in one place.",
     wm_groups:"groups", wm_final:"Final", wm_tables:"Tables & knockout stage",
@@ -1332,7 +1537,7 @@ function consentGet(){ try{ return localStorage.getItem(CONSENT_KEY); }catch(e){
 function consentSet(v){ try{ localStorage.setItem(CONSENT_KEY,v); }catch(e){} }
 function consentApply(v){ if(v==="yes" && typeof gtag==="function"){ gtag('consent','update',{'analytics_storage':'granted'}); } }
 consentApply(consentGet());
-const PAGE_FILES = {live:"index.html", hl:"highlights.html", news:"news.html", anbieter:"anbieter.html", wm:"wm.html"};
+const PAGE_FILES = {live:"index.html", hl:"highlights.html", news:"news.html", anbieter:"anbieter.html", wm:"wm.html", tippspiel:"tippspiel.html"};
 function navUrl(tab){ const ps=[];
   if(LANG==="en") ps.push("lang=en");
   if(document.documentElement.dataset.theme==="dark") ps.push("theme=dark");
@@ -1685,6 +1890,7 @@ function renderProviders(){
 function applyLang(){
   const t=I18N[LANG];
   document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(t[k]) el.textContent=t[k];});
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{const k=el.dataset.i18nPh; if(t[k]) el.placeholder=t[k];});
   document.documentElement.lang=LANG;
   document.getElementById("hlSearch").placeholder = LANG==="de"?"Mannschaft suchen … (z. B. Frankreich)":"Search team … (e.g. France)";
   document.getElementById("liveSearch").placeholder = LANG==="de"?"Weitere Wettbewerbe oder Teams suchen …":"Search other competitions or teams …";
@@ -2216,6 +2422,98 @@ function openLegal(key){
 function closeLegal(){ const ov=document.getElementById("legalOv"); ov.classList.remove("show"); ov.setAttribute("aria-hidden","true"); LEGAL_CUR=null; }
 document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLegal(); });
 
+/* ---------- Tippspiel ---------- */
+const TIPP = {
+  h:"Norwegen", a:"Frankreich", match:"Norwegen – Frankreich",
+  kickoff:"2026-06-26T21:00:00+02:00",
+  /* >>> EINSTELLUNGEN <<<
+     endpoint: kostenlose Formspree-URL eintragen (formspree.io) -> dann landen alle Tipps
+       automatisch in deinem Postfach. Solange "" : Tipp wird lokal gespeichert + in die
+       Zwischenablage kopiert und kann per Facebook gesendet werden.
+     fb: Link zu eurer Facebook-Seite (Button "Auf Facebook senden"). */
+  prizes:["1× 50 € Amazon-Gutschein","3× 10 € Amazon-Gutschein"],
+  endpoint:"",
+  fb:"https://www.facebook.com/share/18y8ZKLNdG/",
+  ig:"https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA=="
+};
+function tippInit(){
+  const form=document.getElementById("tippForm"); if(!form) return;
+  const KEY="tvf:v1:tipp";
+    /* Gewinne, Facebook-Gewinnspiel & Teilen */
+    (function(){
+      const tt=I18N[LANG];
+      const pz=document.getElementById("tippPrizes");
+      if(pz) pz.innerHTML=(TIPP.prizes||[]).map(p=>'<span class="tp-pill">'+esc(p)+'</span>').join("");
+      const fg=document.getElementById("tippFbGame"); if(fg) fg.href=TIPP.fb||"#";
+      const ig=document.getElementById("tippIgGame"); if(ig) ig.href=TIPP.ig||"#";
+      const sb=document.getElementById("tippShare");
+      if(sb){
+        const url="https://tvfussball.de/tippspiel.html", txt=tt.tipp_share_text, ti=tt.tipp_eyebrow+": "+TIPP.match;
+        const U=encodeURIComponent(url), T=encodeURIComponent(txt+" "+url), X=encodeURIComponent(txt);
+        sb.innerHTML=
+          '<button class="sharebtn" data-share data-share-title="'+esc(ti)+'" data-share-text="'+esc(txt)+'" data-share-url="'+esc(url)+'">'+SHARE_ICON+'<span data-i18n="tipp_share_native">'+esc(tt.tipp_share_native)+'</span></button>'+
+          '<a class="sharebtn" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?text='+T+'"><span class="tsh-em">🟢</span><span>WhatsApp</span></a>'+
+          '<a class="sharebtn" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+U+'"><span class="tsh-em">🔵</span><span>Facebook</span></a>'+
+          '<a class="sharebtn" target="_blank" rel="noopener" href="https://t.me/share/url?url='+U+'&text='+X+'"><span class="tsh-em">✈️</span><span>Telegram</span></a>';
+      }
+    })();
+  const live=document.getElementById("tippLive"), done=document.getElementById("tippDone"),
+        elN=document.getElementById("tippNick"), elT=document.getElementById("tippText"),
+        elF=document.getElementById("tippFb"), elC=document.getElementById("tippConsent"),
+        msg=document.getElementById("tippMsg"), cd=document.getElementById("tippCountdown"),
+        btn=document.getElementById("tippSubmit"), fbBtn=document.getElementById("tippFbSend"),
+        fbBox=document.getElementById("tippFallback");
+  const KO=new Date(TIPP.kickoff).getTime();
+  if(fbBtn) fbBtn.href=TIPP.fb||"https://www.facebook.com/";
+  const pad=n=>String(n).padStart(2,"0");
+
+  function tick(){ const t=I18N[LANG], d=KO-Date.now();
+    if(d<=0){ if(cd) cd.innerHTML='<span class="tm-live">● '+t.tipp_kickoff+'</span>'; lock(); return; }
+    const h=Math.floor(d/3.6e6), m=Math.floor(d%3.6e6/6e4), s=Math.floor(d%6e4/1e3);
+    if(cd) cd.innerHTML='<span class="cd-pre">'+t.tipp_cd+'</span> <b>'+h+'h '+pad(m)+'m '+pad(s)+'s</b>'; }
+  function lock(){ if(!live) return; live.querySelectorAll("input,textarea,button").forEach(x=>x.disabled=true);
+    if(msg){ msg.className="tipp-msg closed"; msg.textContent=I18N[LANG].tipp_closed; } }
+  function fail(m){ msg.className="tipp-msg error"; msg.textContent=m; }
+  function showDone(data, fallback){
+    const dt=done.querySelector("[data-done-tip]"), dn=done.querySelector("[data-done-nick]");
+    if(dt) dt.textContent=data.tipp; if(dn) dn.textContent=data.nick||"–";
+    if(fbBox) fbBox.classList.toggle("hide", !fallback);
+    live.classList.add("hide"); done.classList.remove("hide");
+  }
+
+  let saved=null; try{ saved=JSON.parse(localStorage.getItem(KEY)||"null"); }catch(e){}
+  if(saved && saved.tipp){ if(elN)elN.value=saved.nick||""; if(elT)elT.value=saved.tipp; if(elF)elF.value=saved.fb||""; showDone(saved,false); }
+
+  tick(); setInterval(tick,1000);
+
+  const edit=document.getElementById("tippEdit");
+  if(edit) edit.addEventListener("click", function(){ done.classList.add("hide"); live.classList.remove("hide"); if(elT) elT.focus(); });
+
+  form.addEventListener("submit", async function(e){
+    e.preventDefault(); const t=I18N[LANG];
+    if(Date.now()>=KO){ lock(); return; }
+    msg.className="tipp-msg"; msg.textContent="";
+    const nick=(elN.value||"").trim(), tip=(elT.value||"").trim(), fbv=(elF.value||"").trim();
+    if(!tip){ fail(t.tipp_e_tip); elT.focus(); return; }
+    if(!/^(https?:\/\/)?([a-z0-9-]+\.)*(facebook\.com|fb\.com|fb\.me|instagram\.com|instagr\.am)\/.+/i.test(fbv)){ fail(t.tipp_e_fb); elF.focus(); return; }
+    if(!elC.checked){ fail(t.tipp_e_consent); return; }
+    const data={nick:nick, tipp:tip, fb:fbv, match:TIPP.match, ts:new Date().toISOString()};
+    try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(_){}
+    let delivered=false;
+    if(TIPP.endpoint){
+      btn.classList.add("loading"); btn.disabled=true;
+      try{ const r=await fetch(TIPP.endpoint,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},
+        body:JSON.stringify({Spiel:data.match, Tipp:tip, Spitzname:(nick||"–"), Facebook:fbv})}); delivered=r.ok; }catch(_){ delivered=false; }
+      btn.classList.remove("loading"); btn.disabled=false;
+    }
+    if(!delivered){
+      const text=TIPP.match+"\n"+t.tipp_your+": "+tip+"\n"+t.tipp_name+": "+(nick||"–")+"\nFacebook: "+fbv;
+      try{ await navigator.clipboard.writeText(text); }catch(_){}
+    }
+    showDone(data, !delivered);
+  });
+}
+
 /* ---------- Boot ---------- */
 loadPersisted();
 (function(){
@@ -2229,6 +2527,7 @@ activatePage(PAGE);
 weckerLoad();
 renderAll();
 wmInit();
+tippInit();
 function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
 if(PAGE==="live"){
   /* Startseite: bewusste, kurze Marken-Intro */

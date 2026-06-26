@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Highlights & Re-Live — TVFussball.de</title>
-<meta name="description" content="Zusammenfassungen und kostenlose Re-Lives der letzten Fußballspiele — Quellen von ARD, ZDF und offiziellen Kanälen.">
+<title>Tippspiel: Norwegen – Frankreich tippen | TVFussball.de</title>
+<meta name="description" content="Wo läuft Fußball heute legal? Alle Spiele mit Sendern für Deutschland, Österreich und die Schweiz — mit Free-TV-Fokus.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -730,7 +730,7 @@
   .tsoc:hover{filter:brightness(1.06)}
 </style>
 </head>
-<body data-page="hl">
+<body data-page="tippspiel">
 
 <div class="loader" id="loader" aria-hidden="true">
   <div class="court">
@@ -765,7 +765,7 @@
     <p class="note" id="liveNote"></p>
   </section>
 
-  <section class="tabpane active" id="pane-hl" role="tabpanel">
+  <section class="tabpane" id="pane-hl" role="tabpanel">
     <div class="fsearch"><span class="ic">⌕</span><input id="hlSearch" type="text" placeholder="Mannschaft suchen … (z. B. Frankreich)"></div>
     <div class="filters" id="hlFilters"></div>
     <div class="section-eyebrow"><h2 data-i18n="recent">Vergangene Spiele</h2><span class="cnt mono" id="hlCount"></span></div>
@@ -780,7 +780,7 @@
     <div class="news" id="newsList"></div>
   </section>
 
-  <section class="tabpane" id="pane-tippspiel" role="tabpanel">
+  <section class="tabpane active" id="pane-tippspiel" role="tabpanel">
     <div class="tipp-hero">
       <span class="tipp-eyebrow">🎯 <span data-i18n="tipp_eyebrow">Tippspiel</span></span>
       <h1 class="tipp-h1" data-i18n="tipp_title">Tippe das Spiel – und gewinne</h1>
@@ -928,13 +928,13 @@
   <a class="navitem" role="tab" aria-selected="false" data-tab="live" href="index.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/><path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/></svg>
     <span data-i18n="nav_live">Heute</span></a>
-  <a class="navitem" role="tab" aria-selected="false" data-tab="tippspiel" href="tippspiel.html">
+  <a class="navitem" role="tab" aria-selected="true" data-tab="tippspiel" href="tippspiel.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"/></svg>
     <span data-i18n="nav_tipp">Tippspiel</span></a>
   <a class="navitem" role="tab" aria-selected="false" data-tab="news" href="news.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h12.5v15H6.2A2.2 2.2 0 0 1 4 17.3z"/><path d="M16.5 8.5h3.5v9a2 2 0 0 1-2 2"/><path d="M7 8.5h6.5M7 12h6.5M7 15.5h4"/></svg>
     <span data-i18n="nav_news">News</span></a>
-  <a class="navitem" role="tab" aria-selected="true" data-tab="hl" href="highlights.html">
+  <a class="navitem" role="tab" aria-selected="false" data-tab="hl" href="highlights.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M10.2 8.6l4.8 3.4-4.8 3.4z" fill="currentColor" stroke="none"/></svg>
     <span data-i18n="nav_hl">Highlights</span></a>
   <a class="navitem" role="tab" aria-selected="false" data-tab="anbieter" href="anbieter.html">
