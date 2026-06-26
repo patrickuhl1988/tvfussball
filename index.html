@@ -641,6 +641,8 @@
   #liveFilters .fchip[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink); box-shadow:var(--elev-1)}
   #liveFilters .fchip .fcount{font-family:"JetBrains Mono",monospace; font-weight:600; font-size:11.5px; color:var(--faint)}
   #liveFilters .fchip[aria-pressed="true"] .fcount{color:inherit; opacity:.55}
+  .slabel.kicker{color:#C81E1E; border-color:rgba(200,30,30,.42); background:rgba(200,30,30,.12)}
+  html[data-theme="dark"] .slabel.kicker{color:#FF6B6B}
 </style>
 </head>
 <body data-page="live">
@@ -910,6 +912,8 @@ const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Fran
 
 /* WM 2026 — echte Partien, Zeiten (MEZ), Sender (DE/AT/CH via fussballgucken.info, UK via BBC/ITV) */
 const MATCHES = [
+  {day:"Sonntag, 28.06.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Südafrika", a:"Kanada", tv:{DE:[MAG]}},
+  {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Gruppendritter (A/B/C/D/F)", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}},
   {day:"Dienstag, 23.06.2026", time:"19:00", live:true, comp:"WM 2026 · Gruppe K · 2. Spieltag",
    h:"Portugal", a:"Usbekistan", tv:{DE:[ARD,MAG],AT:[SERV],CH:[SRFg],UK:[UKg]}},
   {day:"Dienstag, 23.06.2026", time:"22:00", comp:"WM 2026 · Gruppe L · 2. Spieltag",
@@ -995,6 +999,12 @@ const ARD_HUB="https://www.ardmediathek.de/sport-fifa-weltmeisterschaft";
 const ZDF_YT="https://www.youtube.com/@sportstudiofussball/videos";
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
+ {h:"Türkei",a:"USA",s:"3:2",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231441/video"},
+ {h:"Japan",a:"Schweden",s:"1:1",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231420/video"},
+ {h:"Paraguay",a:"Australien",s:"0:0",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231439/video"},
+ {h:"Tunesien",a:"Niederlande",s:"1:3",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231413/video"},
+ {h:"Ecuador",a:"Deutschland",s:"2:1",g:"WM 2026 · Gruppe E",date:"Do, 25.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231391/video"},
+ {h:"Curaçao",a:"Elfenbeinküste",s:"0:2",g:"WM 2026 · Gruppe E",date:"Do, 25.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231396/video"},
  {h:"Panama",a:"Kroatien",s:"0:1",g:"WM 2026 · Gruppe L",date:"Mi, 24.06.",zdf:null,full:null},
  {h:"Kolumbien",a:"DR Kongo",s:"1:0",g:"WM 2026 · Gruppe K",date:"Mi, 24.06.",zdf:null,full:null},
  {h:"Portugal",a:"Usbekistan",s:"5:0",g:"WM 2026 · Gruppe K",date:"Di, 23.06.",zdf:null,full:["ARD Relive","","noch 6 Tage","https://www.zdf.de/mediathek/esi/fussball/wm/ma10713929/"]},
@@ -1058,6 +1068,9 @@ const TEAMS = [
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  {team:"bayern",date:"2026-06-26",title:"Brown-Transfer perfekt: Bayern und Frankfurt einig",teaser:"55 Millionen Euro Ablöse und ein Vertrag bis 2031: Der FC Bayern hat sich mit Eintracht Frankfurt auf den Wechsel von Nationalspieler Nathaniel Brown geeinigt; zehn Prozent gehen an Ex-Klub Nürnberg.",src:"kicker",url:"https://www.kicker.de/einigung-erzielt-brown-vor-bayern-wechsel-4000000075967/transfermeldung"},
+  {team:"dfb",date:"2026-06-26",title:"Dämpfer zum Abschluss: 1:2 gegen Ecuador",teaser:"Trotz früher Führung durch Leroy Sané verliert Deutschland das letzte Gruppenspiel mit 1:2; als Gruppensieger geht es am Montag (29.06., 22:30 Uhr, ZDF) im Sechzehntelfinale in Boston weiter – der Gegner steht noch nicht fest.",src:"ZDFheute",url:"https://www.zdfheute.de/sport/fussball-wm/video/wm-2026-ecuador-deutschland-highlights-zusammenfassung-100.html"},
+  {team:"dfb",date:"2026-06-25",title:"Sané-Führungstor gegen Ecuador war irregulär",teaser:"Vor dem Blitztor in der 2. Minute trifft Aleksandar Pavlovic den Gegenspieler am Kopf – laut kicker hätte die Szene als Foul abgepfiffen werden müssen, statt zum 1:0 zu führen.",src:"kicker",url:"https://www.kicker.de/warum-deutschlands-1-0-nicht-haette-zaehlen-duerfen-1231367/artikel"},
   {team:"bvb",date:"2026-06-25",title:"Kabar drängt auf einen Abgang",teaser:"Beim früheren U17-Weltmeister stehen die Zeichen auf Trennung: Sowohl der BVB als auch der junge Linksverteidiger sollen einen Wechsel forcieren.",src:"Sport.de",url:"https://sport.de/news/ne16909762/transfer-ticker-fc-bayern-jagt-leipzig-star"},
   {team:"bayern",date:"2026-06-25",title:"Olise-Poker: Jetzt mischt auch PSG mit",teaser:"Nach Reals dementiertem Kontakt soll nun Champions-League-Sieger Paris Saint-Germain bei Michael Olise angreifen; München hält den Flügelstürmer weiter für unverkäuflich.",src:"Sport.de / kicker",url:"https://sport.de/news/ne16909762/transfer-ticker-fc-bayern-jagt-leipzig-star"},
   {team:"sve",date:"2026-06-25",title:"Darvich kommt per Leihe vom VfB",teaser:"Aufsteiger Elversberg verstärkt das Mittelfeld: Noah Darvich wechselt für ein Jahr auf Leihbasis vom VfB Stuttgart ins Saarland.",src:"Sport.de",url:"https://sport.de/news/ne16909762/transfer-ticker-fc-bayern-jagt-leipzig-star"},
@@ -1564,6 +1577,8 @@ function hlRow(m,t){
   const tot=hlGoals(m.s);
   // Zusammenfassungen
   let sums="";
+  if(m.kicker) sums+='<div class="sumrow"><span class="slabel kicker">kicker</span><span class="sname">kicker.de · Highlights</span>'+
+    '<span class="sright"><a class="swatch" href="'+m.kicker+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
   if(m.zdf) sums+='<div class="sumrow"><span class="slabel zdf">ZDF</span><span class="sname">sportstudio · '+t.hl_checked+'</span>'+
     '<span class="sright"><span class="slen">'+locMin(m.zdf[0])+'</span><a class="swatch" href="'+m.zdf[1]+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
   sums+='<div class="sumrow"><span class="slabel ard">ARD</span><span class="sname">Sportschau / Mediathek</span>'+
