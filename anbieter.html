@@ -1256,7 +1256,7 @@ const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
 const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"},
   RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
   CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"};
-const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[MONO29,MONOMAX], CA:[CTV,TSN], US:[FOX,TELE] };
+const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[BEIN], CA:[CTV,TSN], US:[FOX,TELE] };
 
 const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",ES:"🇪🇸",NL:"🇳🇱",TH:"🇹🇭",CA:"🇨🇦",US:"🇺🇸"};
 const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Frankreich",IT:"Italien",ES:"Spanien",NL:"Niederlande",TH:"Thailand",CA:"Kanada",US:"USA"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK",FR:"France",IT:"Italy",ES:"Spain",NL:"Netherlands",TH:"Thailand",CA:"Canada",US:"USA"}};
@@ -1398,6 +1398,9 @@ const HL_SRC={
   IT:[["RAI","RaiPlay","https://www.raiplay.it/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
   FR:[["TF1","TF1+","https://www.tf1.fr/"],["M6","M6+","https://www.6play.fr/"]],
   NL:[["NOS","NOS Sport","https://nos.nl/sport/voetbal"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  US:[["FOX","FOX Sports","https://www.foxsports.com/soccer/fifa-world-cup"],["TELE","Telemundo Deportes","https://www.telemundodeportes.com/"]],
+  CA:[["TSN","TSN","https://www.tsn.ca/fifa-world-cup"],["CTV","CTV","https://www.ctv.ca/"]],
+  TH:[["beIN","beIN Sports","https://www.beinsports.com/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
   _en:[["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]]
 };
 const MAGENTA="https://www.magentasport.de/";
@@ -1835,12 +1838,12 @@ function chList(list){
   if(!list || !list.length) return '<div class="chrow"><span class="none">— keine Übertragung gelistet —</span></div>';
   return list.map(s=>'<div class="chrow"><span class="nm">'+chNm(s)+'</span>'+qBadge(s.q)+tagFor(s.t)+'</div>').join("");
 }
-const RADIO_C={DE:"ARD WM-Radio",AT:"Ö3 (ORF)",CH:"Radio SRF",UK:"BBC Radio 5 Live",ES:"RNE Radio Nacional",IT:"Rai Radio 1",FR:"RMC Sport",NL:"NPO Radio 1"};
-const TICKER_C={DE:"kicker WM-Ticker",AT:"LAOLA1",CH:"blue Sport",UK:"BBC Sport",ES:"Marca",IT:"La Gazzetta",FR:"L'Équipe",NL:"NOS Sport"};
-function getRadio(m){ if(m.radio) return m.radio; return [RADIO_C[COUNTRY]||"BBC Radio 5 Live"]; }
+const RADIO_C={DE:"ARD WM-Radio",AT:"Ö3 (ORF)",CH:"Radio SRF",UK:"BBC Radio 5 Live",ES:"RNE Radio Nacional",IT:"Rai Radio 1",FR:"RMC Sport",NL:"NPO Radio 1",US:"Westwood One",CA:"TSN Radio"};
+const TICKER_C={DE:"kicker WM-Ticker",AT:"LAOLA1",CH:"blue Sport",UK:"BBC Sport",ES:"Marca",IT:"La Gazzetta",FR:"L'Équipe",NL:"NOS Sport",US:"FOX Sports",CA:"TSN",TH:"beIN Sports"};
+function getRadio(m){ if(m.radio) return m.radio; return RADIO_C[COUNTRY]?[RADIO_C[COUNTRY]]:[]; }
 function getTicker(m){ if(m.ticker) return m.ticker; return [TICKER_C[COUNTRY]||"FIFA.com"]; }
-const RADIO_URL={"ARD WM-Radio":"https://www.ardaudiothek.de/","Ö3 (ORF)":"https://oe3.orf.at/","Radio SRF":"https://www.srf.ch/radio-srf-3","BBC Radio 5 Live":"https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live","RNE Radio Nacional":"https://www.rtve.es/play/radio/","Rai Radio 1":"https://www.raiplaysound.it/radio1","RMC Sport":"https://rmc.bfmtv.com/","NPO Radio 1":"https://www.nporadio1.nl/"};
-const TICKER_URL={"kicker WM-Ticker":"https://www.kicker.de/","LAOLA1":"https://www.laola1.at/","blue Sport":"https://www.blue.ch/de/sport","BBC Sport":"https://www.bbc.co.uk/sport/football","Marca":"https://www.marca.com/futbol/mundial.html","La Gazzetta":"https://www.gazzetta.it/","L'Équipe":"https://www.lequipe.fr/Football/","NOS Sport":"https://nos.nl/sport","FIFA.com":"https://www.fifa.com/"};
+const RADIO_URL={"ARD WM-Radio":"https://www.ardaudiothek.de/","Ö3 (ORF)":"https://oe3.orf.at/","Radio SRF":"https://www.srf.ch/radio-srf-3","BBC Radio 5 Live":"https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live","RNE Radio Nacional":"https://www.rtve.es/play/radio/","Rai Radio 1":"https://www.raiplaysound.it/radio1","RMC Sport":"https://rmc.bfmtv.com/","NPO Radio 1":"https://www.nporadio1.nl/","Westwood One":"https://westwoodonesports.com/","TSN Radio":"https://www.tsn.ca/radio"};
+const TICKER_URL={"kicker WM-Ticker":"https://www.kicker.de/","LAOLA1":"https://www.laola1.at/","blue Sport":"https://www.blue.ch/de/sport","BBC Sport":"https://www.bbc.co.uk/sport/football","Marca":"https://www.marca.com/futbol/mundial.html","La Gazzetta":"https://www.gazzetta.it/","L'Équipe":"https://www.lequipe.fr/Football/","NOS Sport":"https://nos.nl/sport","FIFA.com":"https://www.fifa.com/","FOX Sports":"https://www.foxsports.com/soccer/fifa-world-cup","TSN":"https://www.tsn.ca/fifa-world-cup","beIN Sports":"https://www.beinsports.com/"};
 function auxLink(x,u){ return u?'<a class="streamlink" href="'+esc(u)+'" target="_blank" rel="noopener">'+x+'</a>':x; }
 function auxRows(m){ const t=I18N[LANG];
   const r=getRadio(m).map(x=>'<div class="chrow"><span class="nm">'+auxLink(x,RADIO_URL[x])+'</span><span class="tag aux">'+t.aux_radio+'</span></div>');
@@ -1860,20 +1863,31 @@ function adSlotHTML(){ const t=I18N[LANG]; if(ADS_ENABLED) return '<div class="a
   return '<div class="adslot"><div class="lbl">'+t.ad_label+'</div><div class="sub">'+t.ad_sub+'</div></div>'; }
 
 /* ---------- Render: Live (day-grouped) ---------- */
+var USER_TZ=(function(){ try{ return Intl.DateTimeFormat().resolvedOptions().timeZone||"Europe/Berlin"; }catch(e){ return "Europe/Berlin"; } })();
+function _tzParts(tz,ms){ try{ return new Intl.DateTimeFormat("en-CA",{timeZone:tz,hour12:false,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(new Date(ms)).reduce(function(a,x){a[x.type]=x.value;return a;},{}); }catch(e){ return null; } }
+function _tzOffMin(tz,ms){ var p=_tzParts(tz,ms); if(!p) return 0; var h=(p.hour==="24"?0:+p.hour); var asUTC=Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute); return Math.round((asUTC-ms)/60000); }
+function matchUTCms(m){ var dm=String(m.day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(m.time).match(/(\d{1,2}):(\d{2})/); if(!dm||!tm) return null;
+  var guess=Date.UTC(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]); var off=_tzOffMin("Europe/Berlin",guess); return guess-off*60000; }
+var WD_DE=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+function locMatch(m){ var ms=matchUTCms(m); if(ms==null) return {day:m.day,time:m.time,ms:null};
+  var p=_tzParts(USER_TZ,ms); if(!p) return {day:m.day,time:m.time,ms:ms};
+  var hh=(p.hour==="24"?"00":p.hour);
+  var wd=WD_DE[new Date(Date.UTC(+p.year,+p.month-1,+p.day)).getUTCDay()];
+  return {day:wd+", "+p.day+"."+p.month+"."+p.year, time:hh+":"+p.minute, ms:ms}; }
+function tzLabel(ms){ try{ var parts=new Intl.DateTimeFormat(LANG==="de"?"de-DE":"en-US",{timeZone:USER_TZ,timeZoneName:"short",hour:"2-digit"}).formatToParts(new Date(ms)); var z=parts.find(function(p){return p.type==="timeZoneName";}); return z?z.value:I18N[LANG].tz; }catch(e){ return I18N[LANG].tz; } }
+function timeCellHTML(m){ var lm=locMatch(m); var lbl=(lm.ms!=null)?tzLabel(lm.ms):I18N[LANG].tz; return '<div class="time">'+esc(lm.time)+'<small>'+esc(lbl)+'</small></div>'; }
 function dayKey(s){const x=String(s).match(/(\d{2})\.(\d{2})\.(\d{4})/); return x?(+x[3])*10000+(+x[2])*100+(+x[1]):0;}
 function catOf(m){ if(m.cat) return m.cat; const c=m.comp||""; if(/^WM/i.test(c)) return "wm"; if(/DFB/i.test(c)) return "dfb"; if(/Bundesliga/i.test(c)) return "bl"; if(/Champions/i.test(c)) return "cl"; return "other"; }
 function soonHint(t,cat){ let title=t.soon_title, sub=t.soon_sub; if(cat==="bl"){ title=t.soon_bl_t; sub=t.soon_bl; } return '<div class="soonbox"><span class="ic">🗓️</span><div><b>'+title+'</b><span>'+sub+'</span></div></div>'; }
 function isFreeTV(m){ return !m.tba && ((tvOf(m,COUNTRY)||[]).some(s=>s.t==="fta")); }
 function todayKeyNow(){ const d=new Date(); return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate(); }
-function matchStart(m){ const dm=String(m.day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(m.time).match(/(\d{1,2}):(\d{2})/);
-  if(!dm||!tm) return null; return new Date(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]); }
+function matchStart(m){ var ms=matchUTCms(m); return ms==null?null:new Date(ms); }
 function isLiveNow(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return !!m.live;
   const now=Date.now(); return now>=s.getTime() && now<=s.getTime()+115*60000; }
-function isTonight(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return false;
-  return dayKey(m.day)===todayKeyNow() && s.getHours()>=18; }
-function isTonightFmt(f){ const dm=String(f.day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(f.time).match(/(\d{1,2}):(\d{2})/);
-  if(!dm||!tm) return false; const s=new Date(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]);
-  return dayKey(f.day)===todayKeyNow() && s.getHours()>=18; }
+function isTonight(m){ if(m.tba) return false; var lm=locMatch(m); if(lm.ms==null) return false;
+  return dayKey(lm.day)===todayKeyNow() && parseInt(lm.time,10)>=18; }
+function isTonightFmt(f){ var lm=locMatch(f); if(lm.ms==null) return false;
+  return dayKey(lm.day)===todayKeyNow() && parseInt(lm.time,10)>=18; }
 function isFinished(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return false; return Date.now() > s.getTime()+115*60000; }
 function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
 function renderLiveFilters(){ const t=I18N[LANG];
@@ -1927,8 +1941,8 @@ function renderLive(){
   if(SEL.has("tonight")) fList = fList.filter(isTonightFmt);
   if(q) fList = fList.filter(f=>((f.name+" "+f.ch+" "+(LANG==="de"?f.when_de:f.when_en)).toLowerCase().includes(q)));
   // Spiele + Formate mischen, nach Datum & Uhrzeit sortieren
-  let items = mList.map(m=>({day:m.day,sk:skOf(m.day,m.time),k:"m",o:m}))
-                   .concat(fList.map(f=>({day:f.day,sk:skOf(f.day,f.time),k:"f",o:f})));
+  let items = mList.map(m=>{var lm=locMatch(m); return {day:lm.day,sk:skOf(lm.day,lm.time),k:"m",o:m};})
+                   .concat(fList.map(f=>{var lf=locMatch(f); return {day:lf.day,sk:skOf(lf.day,lf.time),k:"f",o:f};}));
   function skOf(day,time){ var mm=String(time).match(/(\d{1,2}):(\d{2})/); return dayKey(day)*10000+(mm?(+mm[1])*60+(+mm[2]):9998); }
   if(wantFmt && typeof FORMATS_OD!=="undefined" && FORMATS_OD.length){
     let odl=FORMATS_OD.slice();
@@ -1991,7 +2005,7 @@ function tbaRow(m,t){
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" (TVFussball.de)", "https://tvfussball.de");
   return '<div class="row tba" data-k="'+rowKey(m)+'">'+
     '<button class="rowhead" aria-expanded="false">'+
-      '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>'+
+      timeCellHTML(m)+
       '<div class="teams">'+
         '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
         '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
@@ -2113,7 +2127,7 @@ function matchRow(m){
   const t=I18N[LANG];
   if(m.tba) return tbaRow(m,t);
   const free=(tvOf(m,COUNTRY)||[]).some(s=>s.t==="fta"); const rail=railClass(m);
-  const timeCell = '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>';
+  const timeCell = timeCellHTML(m);
   const isWM = /^WM/i.test(m.comp||"");
   const sccs = ["DE","AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US"]:[]).filter(cc=>cc!==COUNTRY);
   const groups = sccs.map(cc=>{ const list = tvOf(m,cc); return list?sendRow(cc,list):""; }).filter(Boolean).join("");
