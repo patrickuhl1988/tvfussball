@@ -196,6 +196,9 @@
   .lh-tn{display:block; font-size:11px; font-weight:700; color:var(--muted); margin-bottom:4px}
   .lh-mrow{display:flex; gap:6px; flex-wrap:wrap}
   .lh-match{display:inline-flex; align-items:center; gap:5px; border:1px solid var(--line); border-radius:7px; padding:4px 7px; font-size:11.5px}
+  a.lh-match.lh-link{ color:inherit; cursor:pointer; text-decoration:none; transition:border-color .15s ease, background .15s ease }
+  a.lh-match.lh-link:hover{ border-color:var(--green); background:var(--green-soft) }
+  a.lh-match.lh-link .lh-opp{ text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px }
   .lh-out{font:800 10px "JetBrains Mono",monospace; width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; border-radius:4px; color:#fff}
   .lh-out.win{background:#16a34a}
   .lh-out.draw{background:#9ca3af}
@@ -2049,16 +2052,32 @@ function lhQuoten(q,t){ if(!q||!q.werte||!q.werte.length||!q.stand) return "";
     '<div class="lh-odds">'+cells+'</div>'+
     '<div class="lh-upd">'+t.lh_odds_upd+' '+locISO(q.stand)+'</div>'+
     '<div class="lh-disc"><span class="lh-18">18+</span><span>'+esc(biln(ODDS_DISCLAIMER))+'</span></div></div>'; }
-function lhLast(list){ if(!list||!list.length) return "";
+function hlKey(m){ return m.h+"__"+m.a; }
+function hlLinkFor(x,y){ if(!x||!y||typeof HL==="undefined") return null;
+  for(var i=0;i<HL.length;i++){ var e=HL[i]; if((e.h===x&&e.a===y)||(e.h===y&&e.a===x)) return "highlights.html?m="+encodeURIComponent(hlKey(e)); }
+  return null; }
+function openDeepLinkHL(){ try{
+  var pr=new URLSearchParams(location.search); var key=pr.get("m"); if(!key) return; key=decodeURIComponent(key);
+  var board=document.getElementById("hlBoard"); if(!board) return;
+  var rows=board.querySelectorAll(".row[data-hl]"), target=null;
+  for(var i=0;i<rows.length;i++){ if(rows[i].getAttribute("data-hl")===key){ target=rows[i]; break; } }
+  if(!target) return;
+  board.querySelectorAll(".row.open").forEach(function(r){ if(r!==target){ r.classList.remove("open"); var hh=r.querySelector(".rowhead"); if(hh) hh.setAttribute("aria-expanded","false"); } });
+  target.classList.add("open"); var h=target.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true");
+  target.scrollIntoView({behavior:"smooth",block:"center"});
+}catch(e){} }
+function lhLast(list,teamX){ if(!list||!list.length) return "";
   return list.slice(0,5).map(function(p){
     const cls=p.ausgang==="S"?"win":(p.ausgang==="N"?"loss":"draw");
     const dt=p.datum?'<span class="lh-pd">'+locISO(p.datum)+'</span>':'';
-    return '<span class="lh-match"><span class="lh-out '+cls+'">'+esc(p.ausgang||"")+'</span><span class="lh-res">'+esc(p.ergebnis||"")+'</span><span class="lh-opp">'+esc(p.gegner||"")+'</span>'+dt+'</span>';
+    const inner='<span class="lh-out '+cls+'">'+esc(p.ausgang||"")+'</span><span class="lh-res">'+esc(p.ergebnis||"")+'</span><span class="lh-opp">'+esc(p.gegner||"")+'</span>'+dt;
+    const lnk=hlLinkFor(teamX,p.gegner);
+    return lnk?('<a class="lh-match lh-link" href="'+esc(lnk)+'">'+inner+'</a>'):('<span class="lh-match">'+inner+'</span>');
   }).join(""); }
 function lhLetzte(lp,m,t){ if(!lp||(!lp.teamA&&!lp.teamB)) return "";
   let out='<div class="lh-sec"><div class="lh-h">'+t.lh_last+'</div>';
-  if(lp.teamA&&lp.teamA.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.h)+'</span><div class="lh-mrow">'+lhLast(lp.teamA)+'</div></div>';
-  if(lp.teamB&&lp.teamB.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.a)+'</span><div class="lh-mrow">'+lhLast(lp.teamB)+'</div></div>';
+  if(lp.teamA&&lp.teamA.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.h)+'</span><div class="lh-mrow">'+lhLast(lp.teamA,m.h)+'</div></div>';
+  if(lp.teamB&&lp.teamB.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.a)+'</span><div class="lh-mrow">'+lhLast(lp.teamB,m.a)+'</div></div>';
   return out+'</div>'; }
 function lhScore(s,t){ if(s==null) return ""; const v=Math.max(0,Math.min(100,Math.round(s)));
   const col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626"));
@@ -2217,7 +2236,7 @@ function hlRow(m,t){
       '<a href="'+MAGENTA+'" target="_blank" rel="noopener">MagentaTV</a> '+t.hl_pay_suffix+'</span></div>';
   }
   const share = shareBar(m.h+" "+m.s+" "+m.a, m.h+" "+m.s+" "+m.a+" · "+(LANG==="de"?"Highlights & Relive":"highlights & replay")+" (TVFussball.de)", m.full?m.full[3]:(m.zdf?m.zdf[1]:"https://tvfussball.de"));
-  return '<div class="row">'+
+  return '<div class="row" data-hl="'+esc(hlKey(m))+'">'+
     '<button class="rowhead" aria-expanded="false">'+
       '<div class="time">'+m.s+'<small>'+t.ft+'</small></div>'+
       '<div class="teams">'+
@@ -2999,6 +3018,7 @@ renderAll();
 geoInit();
 wmInit();
 tippInit();
+openDeepLinkHL(); setTimeout(openDeepLinkHL,800);
 function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
 if(PAGE==="live"){
   /* Startseite: bewusste, kurze Marken-Intro */
