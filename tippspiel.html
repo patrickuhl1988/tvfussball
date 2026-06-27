@@ -1010,7 +1010,7 @@
 
 <script>
 const ADS_ENABLED = false;
-const COUNTRY = "DE"; // Standardmarkt (in Produktion per Geo-IP); alle Länder unter „Mehr Sender"
+let COUNTRY = "DE"; // Standardmarkt (per Geo-IP überschrieben); alle weiteren Länder unter „Mehr Sender"
 const TODAY_KEY = 20260624; // Stichtag: Spiele davor erscheinen nicht mehr in der Senderliste (sondern in Highlights)
 
 const I18N = {
@@ -1533,7 +1533,7 @@ const PROVIDERS = [
    en:"UK pay provider (via discovery+) with Champions League, Europa League and Premier League games."}
 ];
 
-let LANG="de", LIVE_SEL=new Set([]), LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+let LANG="de", LANG_LOCKED=false, LIVE_SEL=new Set([]), LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
 const FORMATS = [
   {id:"ard-wm", day:"Donnerstag, 25.06.2026", time:"21:00", name:"Sportschau live – WM 2026", ch:"Das Erste (ARD)", icon:"📡", kind:"live", live:true,
    when_de:"WM 2026 · Live-Spiele & Studio", when_en:"World Cup 2026 · live games & studio",
@@ -1614,7 +1614,7 @@ const FOLLOW = new Set();   // gefolgte Teams (jetzt mit localStorage-Persistenz
 
 /* ---------- Persistenz: funktionaler localStorage (kein Tracking) ---------- */
 const LS_OK=(function(){ try{ const k="tvf:v1:__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
-const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme" };
+const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme", geo:"tvf:v1:geo" };
 function lsGet(k){ if(!LS_OK) return null; try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function lsSet(k,v){ if(!LS_OK) return; try{ localStorage.setItem(k,v); }catch(e){} }
 function saveFollow(){ lsSet(LS_KEY.follow, JSON.stringify([...FOLLOW])); }
@@ -1623,7 +1623,7 @@ function saveLang(){ lsSet(LS_KEY.lang, JSON.stringify(LANG)); }
 function loadPersisted(){
   try{ const raw=lsGet(LS_KEY.follow); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ FOLLOW.clear(); a.forEach(x=>FOLLOW.add(x)); } } }catch(e){}
   try{ const raw=lsGet(LS_KEY.filters); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ LIVE_SEL.clear(); a.forEach(x=>LIVE_SEL.add(x)); } } }catch(e){}
-  try{ const raw=lsGet(LS_KEY.lang); if(raw!==null){ const v=JSON.parse(raw); if(v==="de"||v==="en") LANG=v; } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.lang); if(raw!==null){ const v=JSON.parse(raw); if(v==="de"||v==="en"){ LANG=v; LANG_LOCKED=true; } } }catch(e){}
 }
 const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
 
@@ -1697,7 +1697,7 @@ function shareBar(title,text,url){const t=I18N[LANG];
 function followBtn(team){ const on=FOLLOW.has(team), t=I18N[LANG];
   return '<button class="sharebtn folbtn'+(on?' done':'')+'" data-follow="'+esc(team)+'" title="'+esc(team)+' '+(on?t.following:t.follow)+'">'+(on?'★ ':'☆ ')+'<span>'+esc(team)+'</span></button>'; }
 function liveActions(m){const t=I18N[LANG];
-  const ch=((m.tv&&m.tv[COUNTRY])||[]).map(s=>s.n).join(", ");
+  const ch=(tvOf(m,COUNTRY)||[]).map(s=>s.n).join(", ");
   const cal='<button class="sharebtn calbtn" data-cal data-day="'+esc(m.day)+'" data-time="'+esc(m.time)+'" data-h="'+esc(m.h)+'" data-a="'+esc(m.a)+'" data-comp="'+esc(m.comp||"")+'" data-ch="'+esc(ch)+'">'+CAL_ICON+'<span>'+t.cal_add+'</span></button>';
   const share='<button class="sharebtn" data-share data-share-title="'+esc(m.h+" – "+m.a)+'" data-share-text="'+esc(m.h+" – "+m.a+" · "+(m.comp||"")+" (TVFussball.de)")+'" data-share-url="https://tvfussball.de">'+SHARE_ICON+'<span>'+t.share+'</span></button>';
   return '<div class="actwrap">'+
@@ -1728,9 +1728,11 @@ function auxRows(m){ const t=I18N[LANG];
   const r=getRadio(m).map(x=>'<div class="chrow"><span class="nm">'+auxLink(x,RADIO_URL[x])+'</span><span class="tag aux">'+t.aux_radio+'</span></div>');
   const k=getTicker(m).map(x=>'<div class="chrow"><span class="nm">'+auxLink(x,TICKER_URL[x])+'</span><span class="tag aux">'+t.aux_ticker+'</span></div>');
   return r.concat(k).join(""); }
-function railClass(m){ const list=m.tv[COUNTRY]||[]; if(list.some(s=>s.t==="fta")) return "free"; if(getRadio(m).length) return "radio"; return "pay"; }
+function isWMm(m){ return /^WM/i.test(m.comp||""); }
+function tvOf(m,cc){ return (m.tv && m.tv[cc]) || (isWMm(m)?(WM_INTL[cc]||null):null) || null; }
+function railClass(m){ const list=tvOf(m,COUNTRY)||[]; if(list.some(s=>s.t==="fta")) return "free"; if(getRadio(m).length) return "radio"; return "pay"; }
 function bestFree(m){
-  const t=I18N[LANG], list=m.tv[COUNTRY]||[];
+  const t=I18N[LANG], list=tvOf(m,COUNTRY)||[];
   const fta=list.find(s=>s.t==="fta");
   if(fta) return '<span class="freebest tv">▣ '+t.best_free+' · '+fta.n+'</span>';
   const r=getRadio(m); if(r.length) return '<span class="freebest radio">♪ '+t.best_radio+' · '+r[0]+'</span>';
@@ -1743,7 +1745,7 @@ function adSlotHTML(){ const t=I18N[LANG]; if(ADS_ENABLED) return '<div class="a
 function dayKey(s){const x=String(s).match(/(\d{2})\.(\d{2})\.(\d{4})/); return x?(+x[3])*10000+(+x[2])*100+(+x[1]):0;}
 function catOf(m){ if(m.cat) return m.cat; const c=m.comp||""; if(/^WM/i.test(c)) return "wm"; if(/DFB/i.test(c)) return "dfb"; if(/Bundesliga/i.test(c)) return "bl"; if(/Champions/i.test(c)) return "cl"; return "other"; }
 function soonHint(t,cat){ let title=t.soon_title, sub=t.soon_sub; if(cat==="bl"){ title=t.soon_bl_t; sub=t.soon_bl; } return '<div class="soonbox"><span class="ic">🗓️</span><div><b>'+title+'</b><span>'+sub+'</span></div></div>'; }
-function isFreeTV(m){ return !m.tba && (m.tv && (m.tv[COUNTRY]||[]).some(s=>s.t==="fta")); }
+function isFreeTV(m){ return !m.tba && ((tvOf(m,COUNTRY)||[]).some(s=>s.t==="fta")); }
 function todayKeyNow(){ const d=new Date(); return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate(); }
 function matchStart(m){ const dm=String(m.day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(m.time).match(/(\d{1,2}):(\d{2})/);
   if(!dm||!tm) return null; return new Date(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]); }
@@ -1892,11 +1894,11 @@ function sendRow(cc,list){
 function matchRow(m){
   const t=I18N[LANG];
   if(m.tba) return tbaRow(m,t);
-  const free=(m.tv[COUNTRY]||[]).some(s=>s.t==="fta"); const rail=railClass(m);
+  const free=(tvOf(m,COUNTRY)||[]).some(s=>s.t==="fta"); const rail=railClass(m);
   const timeCell = '<div class="time">'+m.time+'<small>'+t.tz+'</small></div>';
   const isWM = /^WM/i.test(m.comp||"");
-  const sccs = ["AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US"]:[]);
-  const groups = sccs.map(cc=>{ const list = m.tv[cc] || (isWM?WM_INTL[cc]:null); return list?sendRow(cc,list):""; }).filter(Boolean).join("");
+  const sccs = ["DE","AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US"]:[]).filter(cc=>cc!==COUNTRY);
+  const groups = sccs.map(cc=>{ const list = tvOf(m,cc); return list?sendRow(cc,list):""; }).filter(Boolean).join("");
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" — "+(LANG==="de"?"wo läuft das Spiel?":"where to watch?")+" (TVFussball.de)", "https://tvfussball.de");
   return '<div class="row'+(rail?' '+rail:'')+'" data-k="'+rowKey(m)+'">'+
     '<button class="rowhead" aria-expanded="false">'+timeCell+
@@ -1909,7 +1911,7 @@ function matchRow(m){
     '</button>'+
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="dh"><span class="ff">'+CFLAG[COUNTRY]+'</span>'+t.where+' '+CNAME[LANG][COUNTRY]+'</div>'+
-      '<div class="chlist">'+chList(m.tv[COUNTRY])+auxRows(m)+'</div>'+
+      '<div class="chlist">'+chList(tvOf(m,COUNTRY))+auxRows(m)+'</div>'+
       (groups?'<button class="morebtn" data-more aria-expanded="false"><span class="mlbl">'+t.more+'</span><svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="morewrap"><div class="sendlist">'+groups+'</div></div>':"")+
       liveActions(m)+
     '</div></div></div>'+
@@ -2272,7 +2274,7 @@ document.addEventListener("click", e=>{
     location.href = navUrl(dest); return; }
   const lb=e.target.closest("[data-lang]");
   if(lb){document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed","false"));
-    lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; saveLang(); renderAll(); return;}
+    lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; LANG_LOCKED=true; saveLang(); renderAll(); return;}
   const lf=e.target.closest("[data-livef]");
   if(lf){ const k=lf.dataset.livef;
     if(k==="all") LIVE_SEL.clear();
@@ -2506,24 +2508,30 @@ const LEGAL={
    '<h4>Verantwortlicher</h4>'+
    '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim<br>E-Mail: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
    '<h4>Überblick</h4>'+
-   '<p>TVFussball.de ist eine statische Website ohne Nutzerkonten und ohne Werbung. Ohne Ihre Einwilligung setzen wir keine Analyse-Cookies. Zur Reichweitenmessung nutzen wir Cloudflare Web Analytics (cookiefrei) sowie – nach Ihrer Einwilligung – Google Analytics (siehe „Web-Analyse"). Darüber hinaus speichern wir selbst keine personenbezogenen Daten.</p>'+
+   '<p>TVFussball.de ist eine statische Website ohne Nutzerkonten. Ohne Ihre Einwilligung setzen wir keine Analyse-Cookies. Zur Reichweitenmessung nutzen wir das cookiefreie Cloudflare Web Analytics sowie – nur nach Ihrer Einwilligung – Google Analytics (siehe „Web-Analyse"). Damit die Seite in Ihrer Sprache und mit den Sendern Ihres Landes erscheint, ermitteln wir beim Aufruf einmalig Ihr Land anhand der IP-Adresse (siehe „Standort-/Ländererkennung"). Darüber hinaus speichern wir selbst keine personenbezogenen Daten.</p>'+
    '<h4>Hosting &amp; Server-Logfiles</h4>'+
    '<p>Die Seite wird über GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) bereitgestellt. Beim Aufruf verarbeitet der Hoster technisch notwendige Verbindungsdaten wie IP-Adresse, Datum und Uhrzeit, abgerufene Datei und Browsertyp. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer, störungsfreier Betrieb).</p>'+
    '<h4>Schriftarten (Google Fonts)</h4>'+
    '<p>Zur einheitlichen Darstellung werden Schriftarten von Google Fonts nachgeladen. Dabei wird Ihre IP-Adresse an Google übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Eine lokale Einbindung der Schriften ist für eine spätere Version vorgesehen.</p>'+
+   '<h4>Standort-/Ländererkennung (Geo-IP)</h4>'+
+   '<p>Damit die Seite automatisch in der passenden Sprache (Deutsch für Deutschland, Österreich, die Schweiz und Liechtenstein, sonst Englisch) und mit den TV-Sendern Ihres Landes erscheint, ermitteln wir beim ersten Seitenaufruf Ihr Land anhand Ihrer IP-Adresse. Dazu wird Ihre IP-Adresse an einen Geo-IP-Dienst übermittelt: vorrangig country.is (API-Dienst, bereitgestellt über Cloudflare, Inc., USA), ersatzweise GeoJS (geojs.io). Ausgewertet wird ausschließlich das Länderkürzel; es werden keine Cookies gesetzt, keine Nutzerprofile gebildet und Ihre IP-Adresse wird von uns nicht gespeichert. Das ermittelte Land wird für 24 Stunden lokal in Ihrem Browser zwischengespeichert, um wiederholte Abfragen zu vermeiden. Die automatisch gewählte Sprache können Sie jederzeit oben rechts manuell ändern; Ihre Wahl bleibt dann erhalten. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Interesse an einer sprachlich und regional passenden Darstellung).</p>'+
    '<h4>Web-Analyse (Cloudflare Web Analytics)</h4>'+
    '<p>Zur anonymen Reichweitenmessung nutzen wir Cloudflare Web Analytics (Cloudflare, Inc., USA). Das Tool kommt ohne Cookies aus und erstellt keine geräteübergreifenden Nutzerprofile; erfasst werden aggregierte Daten wie aufgerufene Seiten, Verweisquelle und ungefährer Browser-/Gerätetyp. Dabei wird Ihre IP-Adresse verarbeitet, von Cloudflare aber nicht dauerhaft gespeichert. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Interesse an einer datensparsamen Reichweitenmessung).</p>'+
    '<h4>Web-Analyse (Google Analytics)</h4>'+
    '<p>Nach Ihrer Einwilligung über den Cookie-Hinweis nutzen wir Google Analytics 4 (Google Ireland Ltd.). Dabei werden Cookies gesetzt und Nutzungsdaten verarbeitet (u. a. gekürzte IP-Adresse, aufgerufene Seiten, Verweisquelle, ungefähre Region sowie Gerät und Browser), teils auf Servern von Google – auch in den USA. Vor der Einwilligung ist die Analyse per Consent Mode deaktiviert (analytics_storage: denied). Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO; Sie können sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>'+
    '<h4>Preisdeal-Wecker (E-Mail-Benachrichtigung)</h4>'+
    '<p>Wenn Sie den Preisdeal-Wecker nutzen, öffnet sich Ihr E-Mail-Programm mit einer vorbereiteten Nachricht an uns, die die von Ihnen gewählten Anbieter und Ihre E-Mail-Adresse enthält. Erst durch das Absenden dieser E-Mail übermitteln Sie uns die Daten; wir verwenden sie ausschließlich, um Sie über passende Angebote zu benachrichtigen. Ihre Auswahl wird zusätzlich nur lokal in Ihrem Browser gespeichert (kein Server). Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO; ein Widerruf ist jederzeit per Antwort-Mail möglich.</p>'+
+   '<h4>Tippspiel</h4>'+
+   '<p>Wenn Sie am Tippspiel teilnehmen, verarbeiten wir Ihren abgegebenen Tipp, einen optionalen Spitznamen sowie den von Ihnen angegebenen Facebook- oder Instagram-Profil-Link, um Sie im Gewinnfall kontaktieren zu können. Die Übermittlung erfolgt über einen Formular-Dienstleister (Formspree, Formspree Inc., USA); zusätzlich werden Ihre Eingaben lokal in Ihrem Browser gespeichert. Wir geben diese Daten nicht zu Werbezwecken an Dritte weiter und löschen sie nach Abschluss des jeweiligen Gewinnspiels. Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die Sie über das Kontrollkästchen erteilen und jederzeit für die Zukunft widerrufen können.</p>'+
+   '<h4>Lokale Speicherung (localStorage)</h4>'+
+   '<p>Für Komfortfunktionen speichern wir – ohne Cookies und ohne Übertragung an uns – einige Einstellungen lokal in Ihrem Browser: gewählte Sprache, Hell-/Dunkel-Modus, gefolgte Teams, gesetzte Filter, das per Geo-IP ermittelte Land (24 Stunden), Ihre Tippspiel-Eingaben sowie Ihre Entscheidung zum Analyse-Hinweis. Diese Angaben verbleiben auf Ihrem Gerät und können jederzeit über die Einstellungen Ihres Browsers gelöscht werden. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Bereitstellung der von Ihnen genutzten Funktionen).</p>'+
    '<h4>Externe Links und Inhalte</h4>'+
    '<p>Highlights, Relives und Quellen werden nicht eingebettet, sondern nur verlinkt. Erst wenn Sie einen Link anklicken (etwa zu ARD, ZDF, YouTube oder MagentaTV), gelangen Sie zum jeweiligen Anbieter, auf dessen Seite dessen eigene Datenschutzerklärung gilt.</p>'+
    '<h4>Teilen-Funktion</h4>'+
    '<p>Die Teilen-Schaltfläche nutzt die Web-Share-Funktion Ihres Geräts bzw. – als Rückfalloption – die Zwischenablage. Dabei werden keine Daten an uns übertragen.</p>'+
    '<h4>Ihre Rechte</h4>'+
    '<p>Sie haben nach DSGVO das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde. Wenden Sie sich dazu an die oben genannte Kontaktadresse.</p>'+
-   '<p style="color:var(--faint);font-size:11.5px">Stand: Juni 2026</p>'},
+   '<p style="color:var(--faint);font-size:11.5px">Stand: 27. Juni 2026</p>'},
   about:{t:"Über uns",h:
    '<p>TVFussball.de beantwortet eine einfache Frage: <b>Wo läuft das Spiel?</b> Durch die zersplitterten Übertragungsrechte ist genau das oft unübersichtlich – mal Free-TV, mal Pay, mal nur im Stream oder Radio.</p>'+
    '<p>Wir bündeln diese Angaben pro Spiel und Land (Deutschland, Österreich, Schweiz, UK) an einem Ort: Anstoßzeiten, Sender, kostenlose Zusammenfassungen und Relives sowie kompakte News.</p>'+
@@ -2552,24 +2560,30 @@ const LEGAL={
    '<h4>Controller</h4>'+
    '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim, Germany<br>Email: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
    '<h4>Overview</h4>'+
-   '<p>TVFussball.de is a static website with no user accounts and no advertising. Without your consent we set no analytics cookies. For audience measurement we use Cloudflare Web Analytics (cookieless) and — after your consent — Google Analytics (see “Web analytics”). Beyond that we store no personal data ourselves.</p>'+
+   '<p>TVFussball.de is a static website with no user accounts. Without your consent we set no analytics cookies. For audience measurement we use cookieless Cloudflare Web Analytics and — only after your consent — Google Analytics (see “Web analytics”). So the site can appear in your language and with the channels of your country, we determine your country once on load from your IP address (see “Location/country detection”). Beyond that we store no personal data ourselves.</p>'+
    '<h4>Hosting &amp; server log files</h4>'+
    '<p>The site is served via GitHub Pages (GitHub Inc., San Francisco, USA). On access the host processes technically necessary connection data such as IP address, date and time, the file requested and the browser type. Legal basis: Art. 6 (1) (f) GDPR (secure, fault-free operation).</p>'+
    '<h4>Fonts (Google Fonts)</h4>'+
    '<p>For a consistent look, fonts are loaded from Google Fonts, which transfers your IP address to Google. Legal basis: Art. 6 (1) (f) GDPR. Self-hosting of the fonts is planned for a future version.</p>'+
+   '<h4>Location/country detection (geo-IP)</h4>'+
+   '<p>So the site automatically appears in the right language (German for Germany, Austria, Switzerland and Liechtenstein; otherwise English) and with the TV channels of your country, we determine your country from your IP address on your first visit. For this, your IP address is sent to a geo-IP service: primarily country.is (an API service provided via Cloudflare, Inc., USA), with GeoJS (geojs.io) as a fallback. Only the country code is evaluated; no cookies are set, no user profiles are created, and we do not store your IP address. The detected country is cached locally in your browser for 24 hours to avoid repeated lookups. You can change the automatically selected language manually at any time (top right); your choice is then kept. Legal basis: Art. 6 (1) (f) GDPR (interest in a linguistically and regionally appropriate presentation).</p>'+
    '<h4>Web analytics (Cloudflare Web Analytics)</h4>'+
    '<p>For anonymous audience measurement we use Cloudflare Web Analytics (Cloudflare, Inc., USA). It works without cookies and builds no cross-device user profiles; it records aggregated data such as pages viewed, referrer and approximate browser/device type. Your IP address is processed but not stored permanently by Cloudflare. Legal basis: Art. 6 (1) (f) GDPR (interest in privacy-friendly audience measurement).</p>'+
    '<h4>Web analytics (Google Analytics)</h4>'+
    '<p>After your consent via the cookie notice, we use Google Analytics 4 (Google Ireland Ltd.). It sets cookies and processes usage data (e.g. truncated IP address, pages viewed, referrer, approximate region, device and browser), partly on Google servers, including in the USA. Before consent, analytics is disabled via Consent Mode (analytics_storage: denied). The legal basis is your consent under Art. 6 (1) (a) GDPR; you can withdraw it at any time with effect for the future.</p>'+
    '<h4>Price-deal alert (email notification)</h4>'+
    '<p>When you use the price-deal alert, your email app opens with a prepared message to us containing the providers you selected and your email address. Only by sending this email do you transmit the data to us; we use it solely to notify you about matching deals. Your selection is additionally stored only locally in your browser (no server). Legal basis is your consent under Art. 6 (1) (a) GDPR; you can withdraw at any time by replying.</p>'+
+   '<h4>Prediction game</h4>'+
+   '<p>If you take part in the prediction game, we process your submitted prediction, an optional nickname and the Facebook or Instagram profile link you provide, so we can contact you if you win. Submission is handled via a form provider (Formspree, Formspree Inc., USA); your entries are additionally stored locally in your browser. We do not share this data with third parties for advertising and delete it after the respective prize draw ends. The legal basis is your consent under Art. 6 (1) (a) GDPR, given via the checkbox and revocable at any time with effect for the future.</p>'+
+   '<h4>Local storage (localStorage)</h4>'+
+   '<p>For convenience features we store some settings locally in your browser — without cookies and without transmission to us: chosen language, light/dark mode, followed teams, active filters, the country detected via geo-IP (24 hours), your prediction-game entries and your choice regarding the analytics notice. This data stays on your device and can be deleted at any time via your browser settings. Legal basis: Art. 6 (1) (f) GDPR (provision of the features you use).</p>'+
    '<h4>External links and content</h4>'+
    '<p>Highlights, replays and sources are not embedded, only linked. Only when you click a link (e.g. to ARD, ZDF, YouTube or MagentaTV) do you reach the respective provider, where its own privacy policy applies.</p>'+
    '<h4>Share function</h4>'+
    '<p>The share button uses your device Web Share feature or, as a fallback, the clipboard. No data is transmitted to us.</p>'+
    '<h4>Your rights</h4>'+
    '<p>Under the GDPR you have the right to access, rectification, erasure, restriction of processing, data portability and objection, plus the right to lodge a complaint with a supervisory authority. Please use the contact address above.</p>'+
-   '<p style="color:var(--faint);font-size:11.5px">As of June 2026</p>'},
+   '<p style="color:var(--faint);font-size:11.5px">As of 27 June 2026</p>'},
   about:{t:"About us",h:
    '<p>TVFussball.de answers one simple question: <b>where is the match on?</b> Fragmented broadcasting rights make that surprisingly hard to track – sometimes free TV, sometimes pay, sometimes stream or radio only.</p>'+
    '<p>We bring those details together per match and country (Germany, Austria, Switzerland, UK) in one place: kick-off times, channels, free summaries and replays, plus concise news.</p>'+
@@ -2683,11 +2697,38 @@ function tippInit(){
   });
 }
 
+/* ---------- Geo-IP: Standardland & -sprache (funktional, kein Tracking) ---------- */
+const GEO_MARKET={DE:"DE",AT:"AT",CH:"CH",LI:"DE",GB:"UK",UK:"UK",FR:"FR",IT:"IT",ES:"ES",NL:"NL",TH:"TH",CA:"CA",US:"US"};
+const GEO_DE=new Set(["DE","AT","CH","LI"]);
+function geoCacheGet(){ try{ const r=lsGet(LS_KEY.geo); if(r){ const o=JSON.parse(r); if(o&&o.cc&&o.ts&&(Date.now()-o.ts<86400000)) return o.cc; } }catch(e){} return null; }
+function geoCacheSet(cc){ lsSet(LS_KEY.geo, JSON.stringify({cc:cc,ts:Date.now()})); }
+function applyGeo(cc){ cc=(cc||"").toUpperCase(); if(!cc) return;
+  const nc=GEO_MARKET[cc]||"DE";
+  const nl=LANG_LOCKED?LANG:(GEO_DE.has(cc)?"de":"en");
+  if(nc===COUNTRY && nl===LANG) return;
+  COUNTRY=nc; LANG=nl;
+  document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed", x.dataset.lang===LANG?"true":"false"));
+  renderAll();
+}
+function geoInit(){
+  const cached=geoCacheGet(); if(cached){ applyGeo(cached); return; }
+  if(typeof fetch!=="function") return;
+  const eps=[{u:"https://api.country.is/",f:d=>d&&d.country},{u:"https://get.geojs.io/v1/ip/country.json",f:d=>d&&d.country}];
+  let i=0;
+  (function next(){ if(i>=eps.length) return; const ep=eps[i++];
+    let ctl=null,to=null; try{ ctl=("AbortController"in window)?new AbortController():null; }catch(e){}
+    if(ctl) to=setTimeout(()=>{ try{ctl.abort();}catch(e){} },2500);
+    fetch(ep.u, ctl?{signal:ctl.signal}:undefined).then(r=>r.ok?r.json():Promise.reject()).then(d=>{ if(to)clearTimeout(to);
+      const cc=ep.f(d); if(cc){ geoCacheSet(cc); applyGeo(cc); } else next();
+    }).catch(()=>{ if(to)clearTimeout(to); next(); });
+  })();
+}
+
 /* ---------- Boot ---------- */
 loadPersisted();
 (function(){
   const p=new URLSearchParams(location.search);
-  const lp=p.get("lang"); if(lp==="en"||lp==="de") LANG=lp;
+  const lp=p.get("lang"); if(lp==="en"||lp==="de"){ LANG=lp; LANG_LOCKED=true; }
   document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed", x.dataset.lang===LANG?"true":"false"));
   const tp=p.get("theme");
   let stp=null; try{ const r=lsGet(LS_KEY.theme); if(r!==null){ const v=JSON.parse(r); if(v==="dark"||v==="light") stp=v; } }catch(e){}
@@ -2696,6 +2737,7 @@ loadPersisted();
 activatePage(PAGE);
 weckerLoad();
 renderAll();
+geoInit();
 wmInit();
 tippInit();
 function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
