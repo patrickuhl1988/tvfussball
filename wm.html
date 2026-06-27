@@ -672,6 +672,7 @@
   .tipp-form{margin-bottom:6px}
   .tf-field{margin-bottom:14px; display:flex; flex-direction:column; gap:6px}
   .tf-label{font-size:13px; font-weight:700; color:var(--ink)}
+  .tf-sublabel{display:block; font-size:12px; font-weight:600; color:var(--muted); margin:8px 0 4px}
   .tf-input{width:100%; box-sizing:border-box; font-family:"Inter",sans-serif; font-size:15px; color:var(--ink); background:var(--surface); border:1.5px solid var(--line); border-radius:13px; padding:12px 13px; transition:border-color .15s, box-shadow .15s; resize:vertical}
   .tf-input::placeholder{color:var(--faint)}
   .tf-input:focus{outline:none; border-color:var(--green); box-shadow:0 0 0 4px var(--green-soft)}
@@ -829,13 +830,18 @@
     </div>
 
     <div class="tipp-match">
-      <div class="tm-comp">WM 2026 · Gruppe I · 3. Spieltag</div>
+      <div class="tm-comp">WM 2026 · Gruppe L · 3. Spieltag · heute 23:00 Uhr</div>
       <div class="tm-teams">
-        <div class="tm-side"><span class="tm-flag">🇳🇴</span><span class="tm-name">Norwegen</span></div>
-        <div class="tm-mid"><span class="tm-time">21:00</span><span class="tm-vs">vs</span></div>
-        <div class="tm-side"><span class="tm-flag">🇫🇷</span><span class="tm-name">Frankreich</span></div>
+        <div class="tm-side"><span class="tm-flag">🇵🇦</span><span class="tm-name">Panama</span></div>
+        <div class="tm-mid"><span class="tm-time">23:00</span><span class="tm-vs">vs</span></div>
+        <div class="tm-side"><span class="tm-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="tm-name">England</span></div>
       </div>
-      <div class="tm-meta"><span class="tm-badge free">▣ Free-TV · ZDF</span><span class="tm-badge">📍 Boston</span></div>
+      <div class="tm-teams" style="margin-top:8px">
+        <div class="tm-side"><span class="tm-flag">🇭🇷</span><span class="tm-name">Kroatien</span></div>
+        <div class="tm-mid"><span class="tm-time">23:00</span><span class="tm-vs">vs</span></div>
+        <div class="tm-side"><span class="tm-flag">🇬🇭</span><span class="tm-name">Ghana</span></div>
+      </div>
+      <div class="tm-meta"><span class="tm-badge pay">📺 MagentaTV</span><span class="tm-badge">📍 New Jersey · Philadelphia</span></div>
       <div class="tm-count" id="tippCountdown"></div>
     </div>
 
@@ -854,8 +860,11 @@
     <form class="tipp-form" id="tippForm" novalidate>
       <div id="tippLive">
         <div class="tf-field">
-          <label class="tf-label" for="tippText" data-i18n="tipp_tip_label">Dein Tipp</label>
-          <textarea id="tippText" class="tf-input" rows="2" maxlength="280" data-i18n-ph="tipp_tip_ph" placeholder="z. B. 2:1 für Frankreich – Mbappé trifft doppelt"></textarea>
+          <label class="tf-label" data-i18n="tipp_tip_label">Deine Tipps – genaues Endergebnis</label>
+          <label class="tf-sublabel" for="tippS1">🇵🇦 Panama – England 🏴󠁧󠁢󠁥󠁮󠁧󠁿</label>
+          <input id="tippS1" class="tf-input" type="text" maxlength="7" inputmode="numeric" autocomplete="off" data-i18n-ph="tipp_tip_ph" placeholder="z. B. 0:2">
+          <label class="tf-sublabel" for="tippS2" style="margin-top:9px">🇭🇷 Kroatien – Ghana 🇬🇭</label>
+          <input id="tippS2" class="tf-input" type="text" maxlength="7" inputmode="numeric" autocomplete="off" data-i18n-ph="tipp_tip_ph" placeholder="z. B. 1:1">
         </div>
         <div class="tf-field">
           <label class="tf-label" for="tippNick" data-i18n="tipp_nick">Spitzname (optional)</label>
@@ -866,15 +875,18 @@
           <input id="tippFb" class="tf-input" type="url" inputmode="url" data-i18n-ph="tipp_fb_ph" placeholder="Link zu deinem Insta- oder FB-Profil">
           <span class="tf-help" data-i18n="tipp_fb_help">Nur zur Kontaktaufnahme, falls du gewinnst.</span>
         </div>
+        <label class="tf-consent"><input id="tippFollow" type="checkbox"><span data-i18n="tipp_req_follow">Ich folge tvfussball.de auf Facebook oder Instagram.</span></label>
+        <label class="tf-consent"><input id="tippShared" type="checkbox"><span data-i18n="tipp_req_share">Ich habe tvfussball.de mit mindestens einem Freund geteilt (z. B. per WhatsApp).</span></label>
         <label class="tf-consent"><input id="tippConsent" type="checkbox"><span data-i18n="tipp_consent">Ich bin einverstanden, dass mein Tipp und mein Profil-Link zur Kontaktaufnahme im Gewinnfall gespeichert und verarbeitet werden.</span></label>
         <div class="tipp-msg" id="tippMsg" role="alert"></div>
         <button type="submit" class="tipp-submit" id="tippSubmit"><span data-i18n="tipp_submit">Tipp abgeben</span></button>
         <div class="tipp-rules">
           <div class="tr-t" data-i18n="tipp_rules_t">So funktioniert's</div>
           <ul>
-            <li data-i18n="tipp_rule1">Tippe das Endergebnis – Freitext genügt.</li>
-            <li data-i18n="tipp_rule2">Teilnahmeschluss ist der Anpfiff um 21:00 Uhr.</li>
-            <li data-i18n="tipp_rule3">Ein Tipp pro Person. Bei Gewinn melden wir uns über Facebook.</li>
+            <li data-i18n="tipp_rule1">Tippe beide Spiele aufs genaue Endergebnis.</li>
+            <li data-i18n="tipp_rule2">Teilnahmeschluss ist der Anpfiff um 23:00 Uhr.</li>
+            <li data-i18n="tipp_rule3">Teilnahme nur mit Follow (Facebook oder Instagram) + geteilter Seite.</li>
+            <li data-i18n="tipp_rule4">Verlost werden 1× 20 € und 1× 10 € Amazon-Gutschein. Bei Gewinn melden wir uns über Facebook oder Instagram.</li>
           </ul>
         </div>
       </div>
@@ -1004,20 +1016,22 @@ const TODAY_KEY = 20260624; // Stichtag: Spiele davor erscheinen nicht mehr in d
 const I18N = {
   de:{ nav_live:"Heute", nav_hl:"Highlights", nav_news:"News", nav_prov:"Anbieter", nav_wm:"WM", nav_tipp:"Tippspiel",
     tipp_eyebrow:"Tippspiel", tipp_title:"Tippe das Spiel – und gewinne",
-    tipp_sub:"Gib deinen Tipp zum heutigen WM-Spiel ab. Gewinnst du, melden wir uns über Facebook bei dir.",
+    tipp_sub:"Tippe die zwei heutigen WM-Spiele. Gewinnst du, melden wir uns über Facebook oder Instagram bei dir.",
     tipp_nick:"Spitzname (optional)", tipp_nick_ph:"Wie sollen wir dich nennen?",
-    tipp_tip_label:"Dein Tipp", tipp_tip_ph:"z. B. 2:1 für Frankreich – Mbappé trifft doppelt",
+    tipp_tip_label:"Deine Tipps – genaues Endergebnis", tipp_tip_ph:"z. B. 0:2",
     tipp_fb_label:"Dein Insta- oder Facebook-Profil", tipp_fb_ph:"Link zu deinem Insta- oder FB-Profil",
     tipp_fb_help:"Nur zur Kontaktaufnahme, falls du gewinnst.",
     tipp_consent:"Ich bin einverstanden, dass mein Tipp und mein Profil-Link zur Kontaktaufnahme im Gewinnfall gespeichert und verarbeitet werden.",
     tipp_submit:"Tipp abgeben", tipp_rules_t:"So funktioniert's",
-    tipp_rule1:"Tippe das Endergebnis – Freitext genügt.",
-    tipp_rule2:"Teilnahmeschluss ist der Anpfiff um 21:00 Uhr.",
-    tipp_rule3:"Ein Tipp pro Person. Bei Gewinn melden wir uns über Facebook.",
+    tipp_rule1:"Tippe beide Spiele aufs genaue Endergebnis.",
+    tipp_rule2:"Teilnahmeschluss ist der Anpfiff um 23:00 Uhr.",
+    tipp_rule3:"Teilnahme nur mit Follow (Facebook oder Instagram) + geteilter Seite.",
+    tipp_rule4:"Verlost werden 1× 20 € und 1× 10 € Amazon-Gutschein. Bei Gewinn melden wir uns über Facebook oder Instagram.",
+    tipp_req_follow:"Ich folge tvfussball.de auf Facebook oder Instagram.", tipp_req_share:"Ich habe tvfussball.de mit mindestens einem Freund geteilt (z. B. per WhatsApp).",
     tipp_cd:"Anpfiff in", tipp_kickoff:"Anpfiff – Tippabgabe geschlossen",
     tipp_closed:"Das Spiel hat begonnen – die Tippabgabe ist geschlossen.",
     tipp_e_tip:"Bitte gib deinen Tipp ein.", tipp_e_fb:"Bitte gib einen gültigen Instagram- oder Facebook-Link ein.",
-    tipp_e_consent:"Bitte stimme der Verarbeitung zu, um teilzunehmen.",
+    tipp_e_consent:"Bitte stimme der Verarbeitung zu, um teilzunehmen.", tipp_e_follow:"Bitte bestätige, dass du uns auf Facebook oder Instagram folgst.", tipp_e_share:"Bitte bestätige, dass du die Seite geteilt hast.",
     tipp_done_t:"Dein Tipp ist eingegangen!", tipp_done_s:"Viel Glück! Bei Gewinn melden wir uns über Facebook.",
     tipp_your:"Dein Tipp", tipp_name:"Name",
     tipp_fallback:"Damit dein Tipp uns sicher erreicht, schick ihn uns kurz per Facebook – wir haben ihn schon für dich kopiert.",
@@ -1067,20 +1081,22 @@ const I18N = {
     hl_note:"Quellen: ZDF-Mediathek, ARD/Sportschau, offizielle YouTube-Kanäle (abgerufen 23.06.2026). Ganze Spiele („Relive“) gibt es nur für ARD/ZDF-Partien und nur zeitlich begrenzt gratis; sonst ausschließlich Pay (MagentaTV, alle 104 Spiele). TVFussball verlinkt nur, überträgt selbst nicht." },
   en:{ nav_live:"Today", nav_hl:"Highlights", nav_news:"News", nav_prov:"Providers", nav_wm:"WM", nav_tipp:"Predictions",
     tipp_eyebrow:"Prediction game", tipp_title:"Predict the match – and win",
-    tipp_sub:"Submit your prediction for today's World Cup match. If you win, we'll reach out via Facebook.",
+    tipp_sub:"Predict today's two World Cup matches. If you win, we'll reach out via Facebook or Instagram.",
     tipp_nick:"Nickname (optional)", tipp_nick_ph:"What should we call you?",
-    tipp_tip_label:"Your prediction", tipp_tip_ph:"e.g. 2:1 France – Mbappé scores twice",
+    tipp_tip_label:"Your predictions – exact final score", tipp_tip_ph:"e.g. 0:2",
     tipp_fb_label:"Your Instagram or Facebook profile", tipp_fb_ph:"Link to your Instagram or FB profile",
     tipp_fb_help:"Only used to contact you if you win.",
     tipp_consent:"I agree that my prediction and profile link may be stored and processed so you can be contacted if you win.",
     tipp_submit:"Submit prediction", tipp_rules_t:"How it works",
-    tipp_rule1:"Predict the final score – free text is fine.",
-    tipp_rule2:"Entries close at kick-off, 9:00 pm CEST.",
-    tipp_rule3:"One entry per person. If you win, we'll contact you via Facebook.",
+    tipp_rule1:"Predict the exact final score of both games.",
+    tipp_rule2:"Entries close at kick-off, 11:00 pm CEST.",
+    tipp_rule3:"Entry requires a follow (Facebook or Instagram) + sharing the site.",
+    tipp_rule4:"Prizes: 1× €20 and 1× €10 Amazon voucher. If you win, we'll contact you via Facebook or Instagram.",
+    tipp_req_follow:"I follow tvfussball.de on Facebook or Instagram.", tipp_req_share:"I've shared tvfussball.de with at least one friend (e.g. via WhatsApp).",
     tipp_cd:"Kick-off in", tipp_kickoff:"Kick-off – entries closed",
     tipp_closed:"The match has started – entries are now closed.",
     tipp_e_tip:"Please enter your prediction.", tipp_e_fb:"Please enter a valid Instagram or Facebook link.",
-    tipp_e_consent:"Please accept the processing to take part.",
+    tipp_e_consent:"Please accept the processing to take part.", tipp_e_follow:"Please confirm you follow us on Facebook or Instagram.", tipp_e_share:"Please confirm you've shared the site.",
     tipp_done_t:"Your prediction is in!", tipp_done_s:"Good luck! If you win, we'll reach out via Facebook.",
     tipp_your:"Your prediction", tipp_name:"Name",
     tipp_fallback:"To make sure your entry reaches us, please send it via Facebook – we've already copied it for you.",
@@ -1131,7 +1147,7 @@ const I18N = {
 };
 
 /* Flaggen (Emoji) */
-const FL = {Portugal:"🇵🇹",Usbekistan:"🇺🇿",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Ghana:"🇬🇭",Panama:"🇵🇦",Kroatien:"🇭🇷",
+const FL = {"Saudi-Arabien":"🇸🇦",Portugal:"🇵🇹",Usbekistan:"🇺🇿",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Ghana:"🇬🇭",Panama:"🇵🇦",Kroatien:"🇭🇷",
   Kolumbien:"🇨🇴","DR Kongo":"🇨🇩",Schweiz:"🇨🇭",Kanada:"🇨🇦","Bosnien-H.":"🇧🇦",Katar:"🇶🇦",
   Marokko:"🇲🇦",Haiti:"🇭🇹",Schottland:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",Brasilien:"🇧🇷",Tschechien:"🇨🇿",Mexiko:"🇲🇽",
   "Südafrika":"🇿🇦","Südkorea":"🇰🇷",Ecuador:"🇪🇨",Deutschland:"🇩🇪","Curaçao":"🇨🇼","Elfenbeinküste":"🇨🇮",
@@ -1189,19 +1205,19 @@ const MATCHES = [
   {day:"Sonntag, 28.06.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Südafrika", a:"Kanada", tv:{DE:[MAG]}},
   {day:"Montag, 29.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Brasilien", a:"Japan", tv:{DE:[ZDF,JOYN,MAG]}},
   {day:"Dienstag, 30.06.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Niederlande", a:"Marokko", tv:{DE:[MAG]}},
-  {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"2. Gruppe I", tv:{DE:[MAG]}},
-  {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe I", a:"3. Gruppe C/D/F/G/H", tv:{DE:[MAG]}},
+  {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"Norwegen", tv:{DE:[MAG]}},
+  {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"Frankreich", a:"Schweden", tv:{DE:[MAG]}},
   {day:"Mittwoch, 01.07.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Mexiko", a:"3. Gruppe C/E/F/H/I", tv:{DE:[MAG]}},
   {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe L", a:"3. Gruppe E/H/I/J/K", tv:{DE:[MAG]}},
-  {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe G", a:"3. Gruppe A/E/H/I/J", tv:{DE:[MAG]}},
+  {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"Belgien", a:"3. Gruppe A/E/H/I/J", tv:{DE:[MAG]}},
   {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", tv:{DE:[MAG]}},
-  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe H", a:"2. Gruppe J", tv:{DE:[MAG]}},
+  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"2. Gruppe J", tv:{DE:[MAG]}},
   {day:"Freitag, 03.07.2026", time:"01:00", comp:"WM 2026 · Sechzehntelfinale", h:"2. Gruppe K", a:"2. Gruppe L", tv:{DE:[MAG]}},
   {day:"Freitag, 03.07.2026", time:"05:00", comp:"WM 2026 · Sechzehntelfinale", h:"Schweiz", a:"3. Gruppe E/F/G/I/J", tv:{DE:[MAG]}},
-  {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"2. Gruppe G", tv:{DE:[MAG]}},
-  {day:"Samstag, 04.07.2026", time:"00:00", comp:"WM 2026 · Sechzehntelfinale", h:"Argentinien", a:"2. Gruppe H", tv:{DE:[MAG]}},
+  {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"Ägypten", tv:{DE:[MAG]}},
+  {day:"Samstag, 04.07.2026", time:"00:00", comp:"WM 2026 · Sechzehntelfinale", h:"Argentinien", a:"Kap Verde", tv:{DE:[MAG]}},
   {day:"Samstag, 04.07.2026", time:"03:30", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe K", a:"3. Gruppe D/E/I/J/L", tv:{DE:[MAG]}},
-  {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Gruppendritter (A/B/C/D/F)", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}},
+  {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Paraguay", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}},
   {day:"Dienstag, 23.06.2026", time:"19:00", live:true, comp:"WM 2026 · Gruppe K · 2. Spieltag",
    h:"Portugal", a:"Usbekistan", tv:{DE:[ARD,MAG],AT:[SERV],CH:[SRFg],UK:[UKg]}},
   {day:"Dienstag, 23.06.2026", time:"22:00", comp:"WM 2026 · Gruppe L · 2. Spieltag",
@@ -1287,10 +1303,16 @@ const ARD_HUB="https://www.ardmediathek.de/sport-fifa-weltmeisterschaft";
 const ZDF_YT="https://www.youtube.com/@sportstudiofussball/videos";
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
- {h:"Türkei",a:"USA",s:"3:2",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231441/video"},
- {h:"Japan",a:"Schweden",s:"1:1",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231420/video"},
- {h:"Paraguay",a:"Australien",s:"0:0",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231439/video"},
- {h:"Tunesien",a:"Niederlande",s:"1:3",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231413/video"},
+ {h:"Neuseeland",a:"Belgien",s:"1:5",g:"WM 2026 · Gruppe G",date:"Sa, 27.06.",zdf:null,full:null,kicker:null},
+ {h:"Ägypten",a:"Iran",s:"1:1",g:"WM 2026 · Gruppe G",date:"Sa, 27.06.",zdf:["Video",ZDFV+"wm-2026-aegypten-iran-highlights-zusammenfassung-100"],full:null,kicker:null},
+ {h:"Uruguay",a:"Spanien",s:"0:1",g:"WM 2026 · Gruppe H",date:"Sa, 27.06.",zdf:["Video","https://www.youtube.com/watch?v=5kqAn4y6qW4"],full:null,kicker:null},
+ {h:"Kap Verde",a:"Saudi-Arabien",s:"0:0",g:"WM 2026 · Gruppe H",date:"Sa, 27.06.",zdf:["Video","https://www.zdfheute.de/sport/fussball-wm/video/wm-2026-kap-verde-saudi-arabien-highlights-zusammenfassung-100.html"],full:null,kicker:null},
+ {h:"Norwegen",a:"Frankreich",s:"1:4",g:"WM 2026 · Gruppe I",date:"Fr, 26.06.",zdf:["Video","https://www.youtube.com/watch?v=hlYztAtcXcQ"],full:null,kicker:null},
+ {h:"Senegal",a:"Irak",s:"5:0",g:"WM 2026 · Gruppe I",date:"Fr, 26.06.",zdf:["Video","https://www.youtube.com/watch?v=0JOHVAeZJ_I"],full:null,kicker:null},
+ {h:"Türkei",a:"USA",s:"3:2",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:["9 Min.",ZDFV+"wm-2026-tuerkei-usa-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231441/video"},
+ {h:"Japan",a:"Schweden",s:"1:1",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:["9 Min.",ZDFV+"wm-2026-japan-schweden-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231420/video"},
+ {h:"Paraguay",a:"Australien",s:"0:0",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:["6 Min.",ZDFV+"wm-2026-paraguay-australien-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231439/video"},
+ {h:"Tunesien",a:"Niederlande",s:"1:3",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:["7 Min.",ZDFV+"wm-2026-tunesien-niederlande-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231413/video"},
  {h:"Ecuador",a:"Deutschland",s:"2:1",g:"WM 2026 · Gruppe E",date:"Do, 25.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231391/video"},
  {h:"Curaçao",a:"Elfenbeinküste",s:"0:2",g:"WM 2026 · Gruppe E",date:"Do, 25.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231396/video"},
  {h:"Panama",a:"Kroatien",s:"0:1",g:"WM 2026 · Gruppe L",date:"Mi, 24.06.",zdf:null,full:null},
@@ -1334,6 +1356,7 @@ const HL = [
 /* News — DFB-Team + 18 Bundesligavereine (Teamliste mit Farben/Kürzel) */
 const TEAMS = [
   {id:"dfb",name:"DFB-Team",short:"DFB",color:"#c7a008",nat:true},
+  {id:"wm",name:"WM 2026",short:"WM",color:"#0b9d6e",fg:"#fff"},
   {id:"bayern",name:"FC Bayern München",short:"FCB",color:"#dc052d"},
   {id:"bvb",name:"Borussia Dortmund",short:"BVB",color:"#f4c400",fg:"#1a1a1a"},
   {id:"rbl",name:"RB Leipzig",short:"RBL",color:"#d4023a"},
@@ -1356,6 +1379,11 @@ const TEAMS = [
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  {team:"wm",date:"2026-06-27",title:"Gruppe G entschieden: Belgien Erster, Ägypten Zweiter",teaser:"Mit dem 5:1 gegen Neuseeland sichert sich Belgien Platz eins in Gruppe G, Ägypten zieht nach dem 1:1 gegen Iran als Zweiter ins Sechzehntelfinale ein – Iran hofft als Gruppendritter auf eines der acht Tickets.",src:"kicker",url:"https://www.kicker.de/weltmeisterschaft/spieltag"},
+  {team:"wm",date:"2026-06-27",title:"Heute Abend fällt die Entscheidung in Gruppe L",teaser:"Um 23:00 Uhr geht es parallel um alles: Panama – England und Kroatien – Ghana entscheiden über Gruppensieg und die Sechzehntelfinal-Plätze. Beide Partien laufen exklusiv bei MagentaTV – und sind heute Gegenstand unseres Tippspiels.",src:"TVFussball.de",url:"https://tvfussball.de/tippspiel.html"},
+  {team:"dfb",date:"2026-06-27",title:"Sechzehntelfinale: Deutschland trifft auf Paraguay",teaser:"Der K.-o.-Gegner steht fest: Als Gruppensieger spielt die DFB-Elf am Montag (29.06., 22:30 Uhr, ZDF) in Foxborough gegen Paraguay, das sich als einer der besten Gruppendritten qualifiziert hat.",src:"Sky Sport",url:"https://www.skysports.com/football/news/11095/13556636/world-cup-2026-bracket-and-knockout-fixtures-whos-facing-who-in-the-last-32-and-route-to-final"},
+  {team:"wm",date:"2026-06-27",title:"Spanien dank Yamal weiter – Uruguay raus",teaser:"Lamine Yamal trifft beim 1:0 in seiner Geburtsstadt Guadalajara zum ersten WM-Tor; Uruguay scheidet nach einer Roten Karte aus, Spanien gewinnt Gruppe H. Belgien deklassiert Neuseeland 5:1.",src:"FOX Sports",url:"https://www.foxsports.com/stories/soccer/world-cup-bracket-scenarios-standings"},
+  {team:"bayern",date:"2026-06-27",title:"Bayern offenbar einig mit PSV über Saibari",teaser:"Der FC Bayern und die PSV Eindhoven sollen sich über einen Transfer von Mittelfeldspieler Ismael Saibari einig sein – er gilt als Wunschspieler von Trainer Vincent Kompany und wäre Eindhovens Rekordverkauf.",src:"SPORT1",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
   {team:"bayern",date:"2026-06-26",title:"Brown-Transfer perfekt: Bayern und Frankfurt einig",teaser:"55 Millionen Euro Ablöse und ein Vertrag bis 2031: Der FC Bayern hat sich mit Eintracht Frankfurt auf den Wechsel von Nationalspieler Nathaniel Brown geeinigt; zehn Prozent gehen an Ex-Klub Nürnberg.",src:"kicker",url:"https://www.kicker.de/einigung-erzielt-brown-vor-bayern-wechsel-4000000075967/transfermeldung"},
   {team:"dfb",date:"2026-06-26",title:"Dämpfer zum Abschluss: 1:2 gegen Ecuador",teaser:"Trotz früher Führung durch Leroy Sané verliert Deutschland das letzte Gruppenspiel mit 1:2; als Gruppensieger geht es am Montag (29.06., 22:30 Uhr, ZDF) im Sechzehntelfinale in Boston weiter – der Gegner steht noch nicht fest.",src:"ZDFheute",url:"https://www.zdfheute.de/sport/fussball-wm/video/wm-2026-ecuador-deutschland-highlights-zusammenfassung-100.html"},
   {team:"dfb",date:"2026-06-25",title:"Sané-Führungstor gegen Ecuador war irregulär",teaser:"Vor dem Blitztor in der 2. Minute trifft Aleksandar Pavlovic den Gegenspieler am Kopf – laut kicker hätte die Szene als Foul abgepfiffen werden müssen, statt zum 1:0 zu führen.",src:"kicker",url:"https://www.kicker.de/warum-deutschlands-1-0-nicht-haette-zaehlen-duerfen-1231367/artikel"},
@@ -1978,7 +2006,7 @@ function renderNews(){
   document.getElementById("newsUpdated").textContent="["+list.length+"]";
   if(!list.length){box.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
   box.innerHTML=list.map(n=>{
-    const tm=T[n.team], fg=tm.fg||"#fff", name=tm.nat?"★ "+tm.name:tm.name;
+    const tm=T[n.team]||{name:n.team,short:"•",color:"#0b9d6e",fg:"#fff"}, fg=tm.fg||"#fff", name=tm.nat?"★ "+tm.name:tm.name;
     return '<a class="ncard" href="'+n.url+'" target="_blank" rel="noopener" style="--club:'+tm.color+'">'+
       '<div class="nhead"><span class="nsrc"><span class="dot" style="background:'+tm.color+';color:'+fg+';border-color:transparent">'+tm.short+'</span>'+name+'</span><span class="ntime">'+fmtNewsDate(n.date)+'</span></div>'+
       '<h3>'+n.title+'</h3><p>'+n.teaser+'</p>'+
@@ -2563,14 +2591,11 @@ document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLegal
 
 /* ---------- Tippspiel ---------- */
 const TIPP = {
-  h:"Norwegen", a:"Frankreich", match:"Norwegen – Frankreich",
-  kickoff:"2026-06-26T21:00:00+02:00",
-  /* >>> EINSTELLUNGEN <<<
-     endpoint: kostenlose Formspree-URL eintragen (formspree.io) -> dann landen alle Tipps
-       automatisch in deinem Postfach. Solange "" : Tipp wird lokal gespeichert + in die
-       Zwischenablage kopiert und kann per Facebook gesendet werden.
-     fb: Link zu eurer Facebook-Seite (Button "Auf Facebook senden"). */
-  prizes:["1× 50 € Amazon-Gutschein","3× 10 € Amazon-Gutschein"],
+  games:[{h:"Panama",a:"England"},{h:"Kroatien",a:"Ghana"}],
+  match:"Panama – England & Kroatien – Ghana",
+  kickoff:"2026-06-27T23:00:00+02:00",
+  /* >>> EINSTELLUNGEN <<< endpoint: optionale Formspree-URL (formspree.io); fb/ig: eure Seiten. */
+  prizes:["1× 20 € Amazon-Gutschein","1× 10 € Amazon-Gutschein"],
   endpoint:"",
   fb:"https://www.facebook.com/share/18y8ZKLNdG/",
   ig:"https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA=="
@@ -2597,7 +2622,7 @@ function tippInit(){
       }
     })();
   const live=document.getElementById("tippLive"), done=document.getElementById("tippDone"),
-        elN=document.getElementById("tippNick"), elT=document.getElementById("tippText"),
+        elN=document.getElementById("tippNick"), elS1=document.getElementById("tippS1"), elS2=document.getElementById("tippS2"), elFollow=document.getElementById("tippFollow"), elShared=document.getElementById("tippShared"),
         elF=document.getElementById("tippFb"), elC=document.getElementById("tippConsent"),
         msg=document.getElementById("tippMsg"), cd=document.getElementById("tippCountdown"),
         btn=document.getElementById("tippSubmit"), fbBtn=document.getElementById("tippFbSend"),
@@ -2621,22 +2646,27 @@ function tippInit(){
   }
 
   let saved=null; try{ saved=JSON.parse(localStorage.getItem(KEY)||"null"); }catch(e){}
-  if(saved && saved.tipp){ if(elN)elN.value=saved.nick||""; if(elT)elT.value=saved.tipp; if(elF)elF.value=saved.fb||""; showDone(saved,false); }
+  if(saved && saved.tipp){ if(elN)elN.value=saved.nick||""; if(elS1)elS1.value=saved.s1||""; if(elS2)elS2.value=saved.s2||""; if(elF)elF.value=saved.fb||""; showDone(saved,false); }
 
   tick(); setInterval(tick,1000);
 
   const edit=document.getElementById("tippEdit");
-  if(edit) edit.addEventListener("click", function(){ done.classList.add("hide"); live.classList.remove("hide"); if(elT) elT.focus(); });
+  if(edit) edit.addEventListener("click", function(){ done.classList.add("hide"); live.classList.remove("hide"); if(elS1) elS1.focus(); });
 
   form.addEventListener("submit", async function(e){
     e.preventDefault(); const t=I18N[LANG];
     if(Date.now()>=KO){ lock(); return; }
     msg.className="tipp-msg"; msg.textContent="";
-    const nick=(elN.value||"").trim(), tip=(elT.value||"").trim(), fbv=(elF.value||"").trim();
-    if(!tip){ fail(t.tipp_e_tip); elT.focus(); return; }
+    const nick=(elN.value||"").trim(), s1=(elS1.value||"").trim(), s2=(elS2.value||"").trim(), fbv=(elF.value||"").trim();
+    const _re=/^\d{1,2}\s*[:\-]\s*\d{1,2}$/, G=TIPP.games||[];
+    if(!_re.test(s1)){ fail(t.tipp_e_tip); elS1.focus(); return; }
+    if(!_re.test(s2)){ fail(t.tipp_e_tip); elS2.focus(); return; }
     if(!/^(https?:\/\/)?([a-z0-9-]+\.)*(facebook\.com|fb\.com|fb\.me|instagram\.com|instagr\.am)\/.+/i.test(fbv)){ fail(t.tipp_e_fb); elF.focus(); return; }
+    if(!elFollow.checked){ fail(t.tipp_e_follow); return; }
+    if(!elShared.checked){ fail(t.tipp_e_share); return; }
     if(!elC.checked){ fail(t.tipp_e_consent); return; }
-    const data={nick:nick, tipp:tip, fb:fbv, match:TIPP.match, ts:new Date().toISOString()};
+    const tip=(G[0]?G[0].h+"–"+G[0].a:"Spiel 1")+": "+s1+"  ·  "+(G[1]?G[1].h+"–"+G[1].a:"Spiel 2")+": "+s2;
+    const data={nick:nick, tipp:tip, s1:s1, s2:s2, fb:fbv, match:TIPP.match, ts:new Date().toISOString()};
     try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(_){}
     let delivered=false;
     if(TIPP.endpoint){
