@@ -132,6 +132,14 @@
   .row.open .panel{grid-template-rows:1fr}
   .panel-in{overflow:hidden; min-height:0}
   .panel-pad{padding:2px 15px 14px; border-top:1px solid var(--line)}
+  .ytembed{position:relative; width:100%; aspect-ratio:16/9; border-radius:11px; overflow:hidden; background:#000; margin:2px 0 14px; cursor:pointer; border:1px solid var(--line2)}
+  .ytembed img.thumb{width:100%; height:100%; object-fit:cover; display:block}
+  .ytembed .pbtn{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.34))}
+  .ytembed .pbtn svg{width:60px; height:42px; filter:drop-shadow(0 2px 10px rgba(0,0,0,.5)); transition:transform .12s}
+  .ytembed:hover .pbtn svg{transform:scale(1.08)}
+  .ytembed .plabel{position:absolute; left:10px; bottom:9px; font-size:11px; font-weight:700; color:#fff; background:rgba(0,0,0,.62); padding:4px 8px; border-radius:6px; letter-spacing:.02em}
+  .ytembed iframe{width:100%; height:100%; border:0; display:block}
+  .ytembed:focus-visible{outline:2px solid var(--green); outline-offset:2px}
   .dh{font:700 10.5px "Inter",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:13px 0 4px; display:flex; align-items:center; gap:6px}
   .dh .ff{font-size:14px}
   .chlist{}
@@ -161,6 +169,83 @@
   .cgroup .ctitle{display:flex; align-items:center; gap:7px; font:700 12.5px "Inter",sans-serif; color:var(--ink); margin-bottom:2px}
   .cgroup .ctitle .ff{font-size:15px}
   .sendlist{margin-top:10px; border-top:1px solid var(--line)}
+  .lohntwrap,.analysewrap{margin-top:10px; border-top:1px solid var(--line); padding-top:6px}
+  .lh-sec,.an-sec{margin:11px 0}
+  .lh-h,.an-h{font:700 10.5px "Inter",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0 0 6px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .lh-txt{font-size:13px; color:var(--ink); margin:8px 0; line-height:1.5}
+  .tvf-note{display:inline-block; font:700 9.5px "JetBrains Mono",monospace; letter-spacing:.04em; color:#7A5AF8; border:1px solid rgba(122,90,248,.4); background:rgba(122,90,248,.1); border-radius:5px; padding:2px 6px; text-transform:uppercase}
+  html[data-theme="dark"] .tvf-note{color:#B9A6FF}
+  .lh-rate,.an-rate{display:flex; align-items:center; gap:9px}
+  .lh-rv{font:800 18px "JetBrains Mono",monospace; color:var(--ink)}
+  .lh-rl{font-size:12.5px; color:var(--muted); font-weight:600}
+  .lh-voice{padding:8px 0; border-bottom:1px solid var(--line)}
+  .lh-voice:last-child{border-bottom:0}
+  .lh-qt{display:block; font-size:13.5px; font-style:italic; color:var(--ink); line-height:1.5}
+  .lh-by{display:block; font-size:11px; color:var(--faint); margin-top:3px}
+  .lh-tag{display:inline-block; font:700 9px "JetBrains Mono",monospace; color:var(--green); border:1px solid var(--line2); border-radius:4px; padding:1px 5px; margin-right:6px; text-transform:uppercase; vertical-align:middle}
+  .lh-src{color:var(--green); text-decoration:none; font-weight:600}
+  .lh-src:hover{text-decoration:underline}
+  .lh-prov{font:600 10px "Inter",sans-serif; color:var(--faint); text-transform:none; letter-spacing:0}
+  .lh-odds{display:flex; gap:7px; flex-wrap:wrap}
+  .lh-od{flex:1 1 0; min-width:60px; display:flex; flex-direction:column; align-items:center; gap:2px; border:1px solid var(--line2); border-radius:8px; padding:7px 4px; font:700 14px "JetBrains Mono",monospace; color:var(--ink)}
+  .lh-od b{font:700 10px "Inter",sans-serif; color:var(--muted)}
+  .lh-upd{font-size:11px; color:var(--faint); margin-top:6px}
+  .lh-disc{font-size:10.5px; color:var(--faint); margin-top:5px; line-height:1.45; display:flex; gap:6px; align-items:flex-start}
+  .lh-18{flex:0 0 auto; font:800 9px "JetBrains Mono",monospace; color:#C81E1E; border:1px solid rgba(200,30,30,.4); border-radius:4px; padding:1px 4px}
+  .lh-team{margin:7px 0}
+  .lh-tn{display:block; font-size:11px; font-weight:700; color:var(--muted); margin-bottom:4px}
+  .lh-mrow{display:flex; gap:6px; flex-wrap:wrap}
+  .lh-match{display:inline-flex; align-items:center; gap:5px; border:1px solid var(--line); border-radius:7px; padding:4px 7px; font-size:11.5px}
+  .lh-out{font:800 10px "JetBrains Mono",monospace; width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; border-radius:4px; color:#fff}
+  .lh-out.win{background:#16a34a}
+  .lh-out.draw{background:#9ca3af}
+  .lh-out.loss{background:#dc2626}
+  .lh-res{font-weight:700; color:var(--ink)}
+  .lh-opp{color:var(--muted)}
+  .lh-pd{color:var(--faint); font-size:10px}
+  .analyse2{margin-top:8px; border-top:1px solid var(--line); padding-top:6px}
+  .an-li{display:flex; align-items:center; gap:9px; padding:4px 0; font-size:13px}
+  .an-min{font:700 11px "JetBrains Mono",monospace; color:var(--green); min-width:30px}
+  .an-pl{color:var(--ink); font-weight:600}
+  .an-fl{color:var(--faint); font-size:11px; font-weight:600}
+  .an-sub{color:var(--muted); font-size:11.5px}
+  .an-card{width:11px; height:15px; border-radius:2px; flex:0 0 auto}
+  .an-card.yel{background:#f5c518}
+  .an-card.red{background:#dc2626}
+  .an-card.yr{background:linear-gradient(135deg,#f5c518 0 50%,#dc2626 50% 100%)}
+  .an-motm{display:flex; gap:10px; align-items:flex-start}
+  .an-mimg{width:46px; height:46px; border-radius:50%; object-fit:cover; flex:0 0 auto}
+  .an-mname{font-weight:700; color:var(--ink)}
+  .an-mnote,.an-rnote{display:inline-block; margin-left:8px; font:700 10px "JetBrains Mono",monospace; color:#7A5AF8}
+  html[data-theme="dark"] .an-mnote,html[data-theme="dark"] .an-rnote{color:#B9A6FF}
+  .an-mwhy{display:block; font-size:12px; color:var(--muted); margin-top:3px; line-height:1.45}
+  .an-ref{font-size:13px; color:var(--ink)}
+  .an-bar{display:flex; height:22px; border-radius:6px; overflow:hidden; font:700 11px "Inter",sans-serif}
+  .an-ba{background:var(--green); color:#fff; display:flex; align-items:center; padding:0 7px; min-width:0}
+  .an-bb{background:var(--line2); color:var(--ink); display:flex; align-items:center; justify-content:flex-end; padding:0 7px; min-width:0}
+  .an-cmp{display:flex; align-items:center; gap:10px; font:800 18px "JetBrains Mono",monospace; color:var(--ink)}
+  .an-cmp span{color:var(--faint)}
+  .an-run{font-size:13px; color:var(--ink)}
+  .an-srcline{font-size:10.5px; color:var(--faint); margin-top:8px}
+  .lh-score{margin:4px 0 12px}
+  .lh-sc-top{display:flex; align-items:baseline; gap:5px}
+  .lh-sc-lbl{font:700 10.5px "Inter",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-right:auto}
+  .lh-sc-val{font:800 26px "JetBrains Mono",monospace; line-height:1}
+  .lh-sc-max{font-size:12px; color:var(--faint); font-weight:700}
+  .lh-sc-bar{margin-top:6px; height:7px; border-radius:5px; background:var(--line2); overflow:hidden}
+  .lh-sc-bar span{display:block; height:100%; border-radius:5px}
+  .an-ev{display:flex; align-items:center; gap:8px; padding:4px 0; font-size:13px}
+  .an-eic{flex:0 0 auto; width:20px; text-align:center; font-size:13px}
+  .an-emin{font:700 11px "JetBrains Mono",monospace; color:var(--muted); min-width:30px}
+  .an-etm{flex:0 0 auto}
+  .an-epl{color:var(--ink); font-weight:600}
+  .an-noterow{display:inline-flex; align-items:center; gap:7px; margin:8px 0 2px}
+  .an-noteic{color:#F5B301; font-size:18px; line-height:1}
+  .an-noteval{font:800 18px "JetBrains Mono",monospace; color:var(--ink)}
+  .an-notelbl{font-size:12.5px; color:var(--muted); font-weight:600}
+  .an-notetag{font:700 8.5px "JetBrains Mono",monospace; letter-spacing:.04em; color:#7A5AF8; border:1px solid rgba(122,90,248,.4); background:rgba(122,90,248,.1); border-radius:4px; padding:2px 5px; text-transform:uppercase}
+  html[data-theme="dark"] .an-notetag{color:#B9A6FF}
+  .an-fazit{font-size:13px; color:var(--ink); line-height:1.55; margin:4px 0 0}
   .sendrow{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:9px 2px; border-bottom:1px solid var(--line)}
   .sendrow .sflag{font-size:18px; line-height:1; flex:0 0 auto}
   .sendrow .schans{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:5px 9px}
@@ -298,6 +383,7 @@
   .wm-att .d{font-size:12px; color:var(--muted); margin-top:2px}
   .wm-play{flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-size:12px; font-weight:700; color:#fff; background:#CC0000; border-radius:9px; padding:8px 11px; white-space:nowrap}
   .wm-play svg{width:14px; height:14px}
+  .wm-anthem-embed{max-width:360px; margin:-2px 0 15px 34px}
   .wm-empty{padding:22px 6px; text-align:center; color:var(--faint); font-size:13px}
 
   .wm-introtext{font-size:12.5px; color:var(--muted); margin:2px 2px 8px}
@@ -1052,6 +1138,7 @@ const I18N = {
     wm_wip:"Diese Sektion ist noch in Bearbeitung — Inhalte und Bilder folgen.",
     wm_meme_note:"Bilder sind Platzhalter. Die Likes gelten nur für diese Sitzung.",
     where:"Sender in", more:"Sender in weiteren Ländern", less:"Weniger anzeigen", running:"Läuft",
+    lohnt_t:"Lohnt sich’s?", tvf_rating:"TVFussball-Note", lh_voices:"Stimmen", lh_tip:"Tipp", lh_odds:"Wettquoten", lh_odds_upd:"Stand:", lh_last:"Letzte Spiele", lh_src:"Quelle", an_t:"Spielanalyse", an_more:"mehr Details", an_goals:"Tore", an_cards:"Karten", an_rating:"Spielnote", an_motm:"Spieler des Spiels", an_inj:"Verletzungen", an_ref:"Schiedsrichter", an_poss:"Ballbesitz", an_chances:"Chancen", an_run:"Laufwunder", an_pen:"Elfmeter", an_og:"Eigentor", an_src:"Statistik-Quelle", lohnt_score:"Lohnt-Score", an_events:"Tore & Karten", an_summary:"Fazit",
     fta:"Free-TV", pay:"Pay", recent:"Vergangene Spiele", top_news:"Aktuelle News", prov_title:"Anbieter & Preise",
     best_free:"Free-TV", best_radio:"Radio", best_pay:"Nur Pay", source:"Quelle", goals:"Tore", read:"Zur Quelle",
     tz:"MEZ", share:"Teilen", shared:"Link kopiert", shared_btn:"Kopiert!", cal_add:"In Kalender", cal_done:"Termin als .ics gespeichert 📅",
@@ -1076,7 +1163,7 @@ const I18N = {
     prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
     live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Sender DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
     f_relive:"Ganzes Spiel gratis", hl_summaries:"Zusammenfassungen", hl_full:"Komplettes Spiel",
-    hl_watch:"ansehen", hl_whole:"Ganze Partie", hl_free_stream:"kostenlos im Stream", hl_checked:"geprüft",
+    hl_watch:"ansehen", hl_whole:"Ganze Partie", hl_free_stream:"kostenlos im Stream", hl_checked:"geprüft", hl_preview:"Video-Highlights",
     hl_pay_only:"Kein kostenloses Komplettspiel — nur bei", hl_pay_suffix:"(Pay · alle 104 Spiele)",
     hl_note:"Quellen: ZDF-Mediathek, ARD/Sportschau, offizielle YouTube-Kanäle (abgerufen 23.06.2026). Ganze Spiele („Relive“) gibt es nur für ARD/ZDF-Partien und nur zeitlich begrenzt gratis; sonst ausschließlich Pay (MagentaTV, alle 104 Spiele). TVFussball verlinkt nur, überträgt selbst nicht." },
   en:{ nav_live:"Today", nav_hl:"Highlights", nav_news:"News", nav_prov:"Providers", nav_wm:"WM", nav_tipp:"Predictions",
@@ -1117,6 +1204,7 @@ const I18N = {
     wm_wip:"This section is still in progress — content and images to follow.",
     wm_meme_note:"Images are placeholders. Likes are for this session only.",
     where:"Channels in", more:"Channels in other countries", less:"Show less", running:"Live",
+    lohnt_t:"Worth watching?", tvf_rating:"TVFussball rating", lh_voices:"Voices", lh_tip:"Tip", lh_odds:"Betting odds", lh_odds_upd:"Last updated:", lh_last:"Recent matches", lh_src:"Source", an_t:"Match Analysis", an_more:"more details", an_goals:"Goals", an_cards:"Cards", an_rating:"Match rating", an_motm:"Player of the match", an_inj:"Injuries", an_ref:"Referee", an_poss:"Possession", an_chances:"Chances", an_run:"Distance leader", an_pen:"Penalty", an_og:"Own goal", an_src:"Stats source", lohnt_score:"Worth-it score", an_events:"Goals & cards", an_summary:"Summary",
     fta:"Free TV", pay:"Pay", recent:"Past matches", top_news:"Latest news", prov_title:"Providers & Prices",
     best_free:"Free TV", best_radio:"Radio", best_pay:"Pay only", source:"Source", goals:"goals", read:"Read at source",
     tz:"CET", share:"Share", shared:"Link copied", shared_btn:"Copied!", cal_add:"Add to calendar", cal_done:"Saved as .ics 📅",
@@ -1141,7 +1229,7 @@ const I18N = {
     prov_note:"Prices approx., as of June 2026 — offers, bundles and terms vary. Please check with the provider before subscribing.",
     live_note:"Kick-off times in Central European Time (CET). Channels DE/AT/CH via fussballgucken.info, UK via BBC/ITV. Quality: 4K = UHD (MagentaTV), HD = HD broadcast; below HD no symbol. Domestic leagues (Bundesliga, Premier League, Serie A, La Liga, Champions/Europa League) are currently on summer break.",
     f_relive:"Free full match", hl_summaries:"Summaries", hl_full:"Full match",
-    hl_watch:"watch", hl_whole:"Full match", hl_free_stream:"free stream", hl_checked:"verified",
+    hl_watch:"watch", hl_whole:"Full match", hl_free_stream:"free stream", hl_checked:"verified", hl_preview:"Video highlights",
     hl_pay_only:"No free full match — only on", hl_pay_suffix:"(pay · all 104 games)",
     hl_note:"Sources: ZDF Mediathek, ARD/Sportschau, official YouTube channels (retrieved 23 June 2026). Full-match replays are only available free for ARD/ZDF games and only for a limited time; otherwise pay only (MagentaTV, all 104 games). TVFussball only links, it does not broadcast." }
 };
@@ -1202,22 +1290,22 @@ const MATCHES = [
   {cat:"es", day:"Samstag, 15.08.2026", time:"—", comp:"LaLiga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt · Spielplan ab 30.06.", tba:true},
   {cat:"es", day:"Mittwoch, 28.10.2026", time:"—", comp:"Copa del Rey · 1. Runde", h:"Saison 2026/27", a:"Start ca. Ende Oktober", tba:true},
   {cat:"test", day:"Samstag, 18.07.2026", time:"—", comp:"Freundschaftsspiele · Bundesligisten", h:"Testspiele", a:"Vorbereitung Juli/August 2026", tba:true},
-  {day:"Sonntag, 28.06.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Südafrika", a:"Kanada", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Montag, 29.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Brasilien", a:"Japan", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Dienstag, 30.06.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Niederlande", a:"Marokko", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"Norwegen", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"Frankreich", a:"Schweden", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Mittwoch, 01.07.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Mexiko", a:"3. Gruppe C/E/F/H/I", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe L", a:"3. Gruppe E/H/I/J/K", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"Belgien", a:"3. Gruppe A/E/H/I/J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"2. Gruppe J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Freitag, 03.07.2026", time:"01:00", comp:"WM 2026 · Sechzehntelfinale", h:"2. Gruppe K", a:"2. Gruppe L", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Freitag, 03.07.2026", time:"05:00", comp:"WM 2026 · Sechzehntelfinale", h:"Schweiz", a:"3. Gruppe E/F/G/I/J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"Ägypten", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Samstag, 04.07.2026", time:"00:00", comp:"WM 2026 · Sechzehntelfinale", h:"Argentinien", a:"Kap Verde", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Samstag, 04.07.2026", time:"03:30", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe K", a:"3. Gruppe D/E/I/J/L", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Paraguay", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}},
+  {day:"Sonntag, 28.06.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Südafrika", a:"Kanada", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:58,einordnung:{de:"Zwei Überraschungs-Achtelfinalisten: Südafrika steht erstmals in der K.o.-Runde, Kanada hat als Co-Gastgeber den Heimrückenwind. Offen – aber ohne große Namen.",en:"Two surprise last-16 sides: South Africa reach the knockouts for the first time, Canada have home advantage as co-hosts. Wide open – but short on stars."},letztePartien:{teamA:[{gegner:"Südkorea",ergebnis:"1:0",ausgang:"S",datum:"2026-06-24"},{gegner:"Tschechien",ergebnis:"1:1",ausgang:"U",datum:"2026-06-18"},{gegner:"Mexiko",ergebnis:"0:2",ausgang:"N",datum:"2026-06-11"}],teamB:[{gegner:"Schweiz",ergebnis:"1:2",ausgang:"N",datum:"2026-06-24"},{gegner:"Katar",ergebnis:"6:0",ausgang:"S",datum:"2026-06-18"},{gegner:"Bosnien",ergebnis:"1:1",ausgang:"U",datum:"2026-06-12"}]}}},
+  {day:"Montag, 29.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Brasilien", a:"Japan", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:82,einordnung:{de:"Rekordweltmeister gegen den Geheimfavoriten der Fans. Japan hielt die Niederlande 2:2 und stellte einen Gruppen-Torrekord auf – Brasilien ist gewarnt. Großes Kino.",en:"Five-time champions against many fans' dark horse. Japan held the Netherlands 2-2 and set a group scoring record – Brazil are warned. Box office."},letztePartien:{teamA:[{gegner:"Schottland",ergebnis:"3:0",ausgang:"S",datum:"2026-06-24"},{gegner:"Haiti",ergebnis:"3:0",ausgang:"S",datum:"2026-06-19"},{gegner:"Marokko",ergebnis:"1:1",ausgang:"U",datum:"2026-06-13"}],teamB:[{gegner:"Schweden",ergebnis:"1:1",ausgang:"U",datum:"2026-06-25"},{gegner:"Tunesien",ergebnis:"4:0",ausgang:"S",datum:"2026-06-20"},{gegner:"Niederlande",ergebnis:"2:2",ausgang:"U",datum:"2026-06-14"}]}}},
+  {day:"Dienstag, 30.06.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Niederlande", a:"Marokko", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:80,einordnung:{de:"Oranje gegen den WM-Vierten von 2022. Beide ungeschlagen durch die Gruppe, Marokko mit viel individueller Klasse. Ein Achtelfinale auf Augenhöhe.",en:"The Dutch against the 2022 semi-finalists. Both unbeaten in the group, Morocco loaded with individual quality. A last-16 tie between near-equals."},letztePartien:{teamA:[{gegner:"Tunesien",ergebnis:"3:1",ausgang:"S",datum:"2026-06-26"},{gegner:"Schweden",ergebnis:"5:1",ausgang:"S",datum:"2026-06-20"},{gegner:"Japan",ergebnis:"2:2",ausgang:"U",datum:"2026-06-14"}],teamB:[{gegner:"Haiti",ergebnis:"4:2",ausgang:"S",datum:"2026-06-24"},{gegner:"Schottland",ergebnis:"1:0",ausgang:"S",datum:"2026-06-19"},{gegner:"Brasilien",ergebnis:"1:1",ausgang:"U",datum:"2026-06-13"}]}}},
+  {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"Norwegen", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:74,einordnung:{de:"Norwegen mit dem zuletzt geschonten Erling Haaland trifft auf eine kompakte Elfenbeinküste. Die „Elefanten“ überzeugten mit zwei Zu-null-Siegen – Norwegen ist Favorit, aber nicht klar.",en:"Norway, with Erling Haaland rested last time out, face a compact Ivory Coast. The Elephants impressed with two clean-sheet wins – Norway favoured, but not by much."},letztePartien:{teamA:[{gegner:"Curaçao",ergebnis:"2:0",ausgang:"S",datum:"2026-06-25"},{gegner:"Deutschland",ergebnis:"1:2",ausgang:"N",datum:"2026-06-20"},{gegner:"Ecuador",ergebnis:"1:0",ausgang:"S",datum:"2026-06-14"}],teamB:[{gegner:"Frankreich",ergebnis:"1:4",ausgang:"N",datum:"2026-06-26"},{gegner:"Senegal",ergebnis:"3:2",ausgang:"S",datum:"2026-06-21"},{gegner:"Irak",ergebnis:"4:1",ausgang:"S",datum:"2026-06-16"}]}}},
+  {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"Frankreich", a:"Schweden", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:84,einordnung:{de:"Frankreich präsentierte sich mit Dembélé und Mbappé in Galaform (4:1 gegen Norwegen). Schweden um Gyökeres und Elanga ist als bester Gruppendritter Außenseiter – aber offensiv jederzeit gefährlich.",en:"France looked devastating with Dembélé and Mbappé (4-1 over Norway). Sweden, with Gyökeres and Elanga, are underdogs as a best third-placed team – but always a threat going forward."},letztePartien:{teamA:[{gegner:"Norwegen",ergebnis:"4:1",ausgang:"S",datum:"2026-06-26"},{gegner:"Irak",ergebnis:"3:0",ausgang:"S",datum:"2026-06-21"},{gegner:"Senegal",ergebnis:"3:1",ausgang:"S",datum:"2026-06-16"}],teamB:[{gegner:"Japan",ergebnis:"1:1",ausgang:"U",datum:"2026-06-25"},{gegner:"Niederlande",ergebnis:"1:5",ausgang:"N",datum:"2026-06-20"},{gegner:"Tunesien",ergebnis:"5:1",ausgang:"S",datum:"2026-06-14"}]}}},
+  {day:"Mittwoch, 01.07.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Mexiko", a:"3. Gruppe C/E/F/H/I", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:66,einordnung:{de:"Co-Gastgeber Mexiko, mit drei Siegen souveräner Gruppensieger und ohne Gegentor, startet ins Achtelfinale. Der Gegner (ein Gruppendritter) steht noch nicht fest.",en:"Co-hosts Mexico, comfortable group winners with three wins and no goals conceded, begin the knockouts. Their opponent (a third-placed team) is still to be decided."},letztePartien:{teamA:[{gegner:"Tschechien",ergebnis:"3:0",ausgang:"S",datum:"2026-06-24"},{gegner:"Südkorea",ergebnis:"1:0",ausgang:"S",datum:"2026-06-18"},{gegner:"Südafrika",ergebnis:"2:0",ausgang:"S",datum:"2026-06-11"}]}}},
+  {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe L", a:"3. Gruppe E/H/I/J/K", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{einordnung:{de:"Achtelfinale: Der Sieger der Gruppe L trifft auf einen der besten Gruppendritten. Die Teilnehmer stehen erst nach Abschluss der Gruppenphase fest.",en:"Round of 32: the Group L winner meets one of the best third-placed teams. The participants are confirmed only once the group stage is complete."}}},
+  {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"Belgien", a:"3. Gruppe A/E/H/I/J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:70,einordnung:{de:"Belgien fand mit dem 5:1 gegen Neuseeland spät zu seiner Form (De Bruyne, Lukaku, Trossard). Der Gegner steht noch nicht fest – die „Roten Teufel“ sind aber in jedem Fall einen Blick wert.",en:"Belgium found form late with a 5-1 over New Zealand (De Bruyne, Lukaku, Trossard). The opponent is still to be confirmed – but the Red Devils are worth a watch regardless."},letztePartien:{teamA:[{gegner:"Neuseeland",ergebnis:"5:1",ausgang:"S",datum:"2026-06-26"},{gegner:"Iran",ergebnis:"0:0",ausgang:"U",datum:"2026-06-21"},{gegner:"Ägypten",ergebnis:"1:1",ausgang:"U",datum:"2026-06-15"}]}}},
+  {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:72,einordnung:{de:"Co-Gastgeber USA, getragen von der Heim-Euphorie, gegen Bosnien-Herzegowina, das erstmals das WM-Achtelfinale erreichte. Pulisic ist zurück – die USA sind Favorit, Bosnien giftig.",en:"Co-hosts USA, carried by home euphoria, against a Bosnia-Herzegovina side reaching the last 16 for the first time. Pulisic is back – the USA favoured, Bosnia awkward."},letztePartien:{teamA:[{gegner:"Türkei",ergebnis:"2:3",ausgang:"N",datum:"2026-06-25"},{gegner:"Australien",ergebnis:"2:0",ausgang:"S",datum:"2026-06-19"},{gegner:"Paraguay",ergebnis:"4:1",ausgang:"S",datum:"2026-06-12"}],teamB:[{gegner:"Katar",ergebnis:"3:1",ausgang:"S",datum:"2026-06-24"},{gegner:"Schweiz",ergebnis:"1:4",ausgang:"N",datum:"2026-06-18"},{gegner:"Kanada",ergebnis:"1:1",ausgang:"U",datum:"2026-06-12"}]}}},
+  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"2. Gruppe J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:78,einordnung:{de:"Europameister Spanien überstand die Gruppe ohne Gegentor (Yamal, Pedri). Der Gegner ist der Zweite der Gruppe J (Algerien oder Österreich). Hochkarätig.",en:"European champions Spain came through the group without conceding (Yamal, Pedri). Their opponent is the Group J runner-up (Algeria or Austria). High class."},letztePartien:{teamA:[{gegner:"Uruguay",ergebnis:"1:0",ausgang:"S",datum:"2026-06-27"},{gegner:"Saudi-Arabien",ergebnis:"4:0",ausgang:"S",datum:"2026-06-21"},{gegner:"Kap Verde",ergebnis:"0:0",ausgang:"U",datum:"2026-06-15"}]}}},
+  {day:"Freitag, 03.07.2026", time:"01:00", comp:"WM 2026 · Sechzehntelfinale", h:"2. Gruppe K", a:"2. Gruppe L", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{einordnung:{de:"Achtelfinale zwischen den Gruppenzweiten der Gruppen K und L. Die genaue Paarung steht erst nach der Gruppenphase fest.",en:"Round of 32 between the runners-up of Groups K and L. The exact pairing is set only after the group stage."}}},
+  {day:"Freitag, 03.07.2026", time:"05:00", comp:"WM 2026 · Sechzehntelfinale", h:"Schweiz", a:"3. Gruppe E/F/G/I/J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:64,einordnung:{de:"Die Schweiz gewann Gruppe B mit drei Siegen in Serie und trifft im Achtelfinale auf einen Gruppendritten. Solide und effizient – ein unangenehmer Gegner für jeden.",en:"Switzerland won Group B with three straight wins and face a third-placed team in the last 16. Solid and efficient – an awkward opponent for anyone."},letztePartien:{teamA:[{gegner:"Kanada",ergebnis:"2:1",ausgang:"S",datum:"2026-06-24"},{gegner:"Bosnien",ergebnis:"4:1",ausgang:"S",datum:"2026-06-18"},{gegner:"Katar",ergebnis:"1:1",ausgang:"U",datum:"2026-06-13"}]}}},
+  {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"Ägypten", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:60,einordnung:{de:"Australien (defensiv stark, hielt Paraguay 0:0) gegen Ägypten um Mohamed Salah, das erstmals überhaupt im WM-Achtelfinale steht. Kein Star-Spektakel, aber ein enges Duell.",en:"Australia (defensively solid, held Paraguay 0-0) against Egypt and Mohamed Salah, in the last 16 for the very first time. No starry spectacle, but a tight duel."},letztePartien:{teamA:[{gegner:"Paraguay",ergebnis:"0:0",ausgang:"U",datum:"2026-06-25"},{gegner:"USA",ergebnis:"0:2",ausgang:"N",datum:"2026-06-19"},{gegner:"Türkei",ergebnis:"2:0",ausgang:"S",datum:"2026-06-13"}],teamB:[{gegner:"Iran",ergebnis:"1:1",ausgang:"U",datum:"2026-06-26"},{gegner:"Neuseeland",ergebnis:"3:1",ausgang:"S",datum:"2026-06-21"},{gegner:"Belgien",ergebnis:"1:1",ausgang:"U",datum:"2026-06-15"}]}}},
+  {day:"Samstag, 04.07.2026", time:"00:00", comp:"WM 2026 · Sechzehntelfinale", h:"Argentinien", a:"Kap Verde", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:79,einordnung:{de:"Titelverteidiger Argentinien mit Rekord-WM-Torschütze Lionel Messi (18 Tore) gegen das Märchen-Team Kap Verde, das als einer der kleinsten Staaten der WM-Geschichte das Achtelfinale erreichte. Klarer Favorit – aber ein Fest.",en:"Holders Argentina with all-time World Cup top scorer Lionel Messi (18 goals) against fairytale Cape Verde, one of the smallest nations ever to reach the knockouts. Clear favourites – but a celebration."},letztePartien:{teamA:[{gegner:"Österreich",ergebnis:"2:0",ausgang:"S",datum:"2026-06-22"},{gegner:"Algerien",ergebnis:"3:0",ausgang:"S",datum:"2026-06-17"}],teamB:[{gegner:"Saudi-Arabien",ergebnis:"0:0",ausgang:"U",datum:"2026-06-26"},{gegner:"Uruguay",ergebnis:"2:2",ausgang:"U",datum:"2026-06-21"},{gegner:"Spanien",ergebnis:"0:0",ausgang:"U",datum:"2026-06-15"}]}}},
+  {day:"Samstag, 04.07.2026", time:"03:30", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe K", a:"3. Gruppe D/E/I/J/L", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{einordnung:{de:"Achtelfinale: Der Sieger der Gruppe K gegen einen der besten Gruppendritten. Die Teilnehmer stehen noch nicht fest.",en:"Round of 32: the Group K winner against one of the best third-placed teams. Participants still to be confirmed."}}},
+  {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Paraguay", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}, lohnt:{score:78,einordnung:{de:"Für deutsche Fans das Pflichtspiel schlechthin. Das DFB-Team kassierte zum Gruppenabschluss eine Pleite gegen Ecuador und muss sich steigern; Paraguay überstand die Gruppe defensivstark.",en:"For German fans the must-watch tie. Germany lost their final group game to Ecuador and need to improve; Paraguay came through on the back of a stout defence."},letztePartien:{teamA:[{gegner:"Ecuador",ergebnis:"1:2",ausgang:"N",datum:"2026-06-25"},{gegner:"Elfenbeinküste",ergebnis:"2:1",ausgang:"S",datum:"2026-06-20"},{gegner:"Curaçao",ergebnis:"7:1",ausgang:"S",datum:"2026-06-14"}],teamB:[{gegner:"Australien",ergebnis:"0:0",ausgang:"U",datum:"2026-06-25"},{gegner:"Türkei",ergebnis:"1:0",ausgang:"S",datum:"2026-06-19"},{gegner:"USA",ergebnis:"1:4",ausgang:"N",datum:"2026-06-12"}]}}},
   {day:"Dienstag, 23.06.2026", time:"19:00", live:true, comp:"WM 2026 · Gruppe K · 2. Spieltag",
    h:"Portugal", a:"Usbekistan", tv:{DE:[ARD,MAG],AT:[SERV],CH:[SRFg],UK:[UKg]}},
   {day:"Dienstag, 23.06.2026", time:"22:00", comp:"WM 2026 · Gruppe L · 2. Spieltag",
@@ -1254,12 +1342,12 @@ const MATCHES = [
   {day:"Samstag, 27.06.2026", time:"02:00", comp:"WM 2026 · Gruppe H · 3. Spieltag", h:"Kap Verde", a:"Saudi-Arabien", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
   {day:"Samstag, 27.06.2026", time:"05:00", comp:"WM 2026 · Gruppe G · 3. Spieltag", h:"Neuseeland", a:"Belgien", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
   {day:"Samstag, 27.06.2026", time:"05:00", comp:"WM 2026 · Gruppe G · 3. Spieltag", h:"Ägypten", a:"Iran", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Samstag, 27.06.2026", time:"23:00", comp:"WM 2026 · Gruppe L · 3. Spieltag", h:"Panama", a:"England", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Samstag, 27.06.2026", time:"23:00", comp:"WM 2026 · Gruppe L · 3. Spieltag", h:"Kroatien", a:"Ghana", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Sonntag, 28.06.2026", time:"01:30", comp:"WM 2026 · Gruppe K · 3. Spieltag", h:"Kolumbien", a:"Portugal", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Sonntag, 28.06.2026", time:"01:30", comp:"WM 2026 · Gruppe K · 3. Spieltag", h:"DR Kongo", a:"Usbekistan", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Sonntag, 28.06.2026", time:"04:00", comp:"WM 2026 · Gruppe J · 3. Spieltag", h:"Jordanien", a:"Argentinien", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
-  {day:"Sonntag, 28.06.2026", time:"04:00", comp:"WM 2026 · Gruppe J · 3. Spieltag", h:"Algerien", a:"Österreich", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Samstag, 27.06.2026", time:"23:00", comp:"WM 2026 · Gruppe L · 3. Spieltag", h:"Panama", a:"England", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:66,einordnung:{de:"England will Gruppe L als Sieger abschließen (4:2 gegen Kroatien zum Auftakt). Das bereits ausgeschiedene Panama ist Außenseiter – für England- und Premier-League-Fans dennoch ein Pflichttermin.",en:"England want to top Group L (4-2 over Croatia to start). Already-eliminated Panama are underdogs – but a must-watch for England and Premier League fans."},letztePartien:{teamA:[{gegner:"Kroatien",ergebnis:"0:1",ausgang:"N",datum:"2026-06-23"},{gegner:"Ghana",ergebnis:"0:1",ausgang:"N",datum:"2026-06-17"}],teamB:[{gegner:"Ghana",ergebnis:"0:0",ausgang:"U",datum:"2026-06-23"},{gegner:"Kroatien",ergebnis:"4:2",ausgang:"S",datum:"2026-06-17"}]}}},
+  {day:"Samstag, 27.06.2026", time:"23:00", comp:"WM 2026 · Gruppe L · 3. Spieltag", h:"Kroatien", a:"Ghana", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:70,einordnung:{de:"Kroatien und Ghana kämpfen um Platz zwei in Gruppe L. Kroatien mit Turnier-Erfahrung, Ghana giftig und gut organisiert – ein offenes Duell mit K.o.-Charakter.",en:"Croatia and Ghana fight for second in Group L. Croatia with tournament pedigree, Ghana sharp and well-drilled – an open contest with knockout feel."},letztePartien:{teamA:[{gegner:"Panama",ergebnis:"1:0",ausgang:"S",datum:"2026-06-23"},{gegner:"England",ergebnis:"2:4",ausgang:"N",datum:"2026-06-17"}],teamB:[{gegner:"England",ergebnis:"0:0",ausgang:"U",datum:"2026-06-23"},{gegner:"Panama",ergebnis:"1:0",ausgang:"S",datum:"2026-06-17"}]}}},
+  {day:"Sonntag, 28.06.2026", time:"01:30", comp:"WM 2026 · Gruppe K · 3. Spieltag", h:"Kolumbien", a:"Portugal", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:80,einordnung:{de:"Spitzenspiel der Gruppe K: Kolumbien und Portugal (mit Cristiano Ronaldo) machen den Gruppensieg unter sich aus. Zwei formstarke Teams – großes Kino.",en:"Group K's top game: Colombia and Portugal (with Cristiano Ronaldo) decide the group winner between them. Two in-form sides – box office."},letztePartien:{teamA:[{gegner:"DR Kongo",ergebnis:"1:0",ausgang:"S",datum:"2026-06-23"},{gegner:"Usbekistan",ergebnis:"3:1",ausgang:"S",datum:"2026-06-17"}],teamB:[{gegner:"Usbekistan",ergebnis:"5:0",ausgang:"S",datum:"2026-06-23"},{gegner:"DR Kongo",ergebnis:"1:1",ausgang:"U",datum:"2026-06-17"}]}}},
+  {day:"Sonntag, 28.06.2026", time:"01:30", comp:"WM 2026 · Gruppe K · 3. Spieltag", h:"DR Kongo", a:"Usbekistan", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:52,einordnung:{de:"Ein echtes Endspiel um Platz drei in Gruppe K: Beide Teams brauchen einen Sieg, um auf das Weiterkommen als bester Gruppendritter zu hoffen. Kein Star-Aufgebot, aber viel auf dem Spiel.",en:"A real shoot-out for third in Group K: both need a win to keep best-third-placed hopes alive. No star line-ups, but plenty at stake."},letztePartien:{teamA:[{gegner:"Kolumbien",ergebnis:"0:1",ausgang:"N",datum:"2026-06-23"},{gegner:"Portugal",ergebnis:"1:1",ausgang:"U",datum:"2026-06-17"}],teamB:[{gegner:"Portugal",ergebnis:"0:5",ausgang:"N",datum:"2026-06-23"},{gegner:"Kolumbien",ergebnis:"1:3",ausgang:"N",datum:"2026-06-17"}]}}},
+  {day:"Sonntag, 28.06.2026", time:"04:00", comp:"WM 2026 · Gruppe J · 3. Spieltag", h:"Jordanien", a:"Argentinien", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:70,einordnung:{de:"Titelverteidiger Argentinien hat die K.o.-Runde sicher und dürfte rotieren – Lionel Messi womöglich geschont. Der ausgeschiedene Debütant Jordanien hat nichts mehr zu verlieren. Reizvoll vor allem wegen der Albiceleste.",en:"Holders Argentina are through and likely to rotate – Lionel Messi possibly rested. Eliminated debutants Jordan have nothing to lose. Worth it mainly for the Albiceleste."},letztePartien:{teamA:[{gegner:"Algerien",ergebnis:"1:2",ausgang:"N",datum:"2026-06-22"},{gegner:"Österreich",ergebnis:"1:3",ausgang:"N",datum:"2026-06-16"}],teamB:[{gegner:"Österreich",ergebnis:"2:0",ausgang:"S",datum:"2026-06-22"},{gegner:"Algerien",ergebnis:"3:0",ausgang:"S",datum:"2026-06-16"}]}}},
+  {day:"Sonntag, 28.06.2026", time:"04:00", comp:"WM 2026 · Gruppe J · 3. Spieltag", h:"Algerien", a:"Österreich", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:66,einordnung:{de:"Algerien und Österreich (unter Ralf Rangnick) spielen um Platz zwei in Gruppe J – ein Duell mit Endspielcharakter und offenem Ausgang.",en:"Algeria and Austria (under Ralf Rangnick) play for second in Group J – a winner-takes-second duel with an open outcome."},letztePartien:{teamA:[{gegner:"Jordanien",ergebnis:"2:1",ausgang:"S",datum:"2026-06-22"},{gegner:"Argentinien",ergebnis:"0:3",ausgang:"N",datum:"2026-06-16"}],teamB:[{gegner:"Argentinien",ergebnis:"0:2",ausgang:"N",datum:"2026-06-22"},{gegner:"Jordanien",ergebnis:"3:1",ausgang:"S",datum:"2026-06-16"}]}}},
   {cat:"dfb", day:"Freitag, 21.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SC Preußen Münster", a:"Karlsruher SC", tba:true},
   {cat:"dfb", day:"Freitag, 21.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SV Waldhof Mannheim", a:"1. FC Kaiserslautern", tba:true},
   {cat:"dfb", day:"Freitag, 21.08.2026", time:"18:00", comp:"DFB-Pokal · 1. Runde", h:"SC St. Tönis 1911/20", a:"Eintracht Frankfurt", tba:true},
@@ -1314,16 +1402,16 @@ const HL_SRC={
 };
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
- {h:"Neuseeland",a:"Belgien",s:"1:5",g:"WM 2026 · Gruppe G",date:"Sa, 27.06.",zdf:null,full:null,kicker:null},
- {h:"Ägypten",a:"Iran",s:"1:1",g:"WM 2026 · Gruppe G",date:"Sa, 27.06.",zdf:["Video",ZDFV+"wm-2026-aegypten-iran-highlights-zusammenfassung-100"],full:null,kicker:null},
- {h:"Uruguay",a:"Spanien",s:"0:1",g:"WM 2026 · Gruppe H",date:"Sa, 27.06.",zdf:["Video","https://www.youtube.com/watch?v=5kqAn4y6qW4"],full:null,kicker:null},
- {h:"Kap Verde",a:"Saudi-Arabien",s:"0:0",g:"WM 2026 · Gruppe H",date:"Sa, 27.06.",zdf:["Video","https://www.zdfheute.de/sport/fussball-wm/video/wm-2026-kap-verde-saudi-arabien-highlights-zusammenfassung-100.html"],full:null,kicker:null},
- {h:"Norwegen",a:"Frankreich",s:"1:4",g:"WM 2026 · Gruppe I",date:"Fr, 26.06.",zdf:["Video","https://www.youtube.com/watch?v=hlYztAtcXcQ"],full:null,kicker:null},
- {h:"Senegal",a:"Irak",s:"5:0",g:"WM 2026 · Gruppe I",date:"Fr, 26.06.",zdf:["Video","https://www.youtube.com/watch?v=0JOHVAeZJ_I"],full:null,kicker:null},
- {h:"Türkei",a:"USA",s:"3:2",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:["9 Min.",ZDFV+"wm-2026-tuerkei-usa-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231441/video"},
- {h:"Japan",a:"Schweden",s:"1:1",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:["9 Min.",ZDFV+"wm-2026-japan-schweden-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231420/video"},
- {h:"Paraguay",a:"Australien",s:"0:0",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:["6 Min.",ZDFV+"wm-2026-paraguay-australien-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231439/video"},
- {h:"Tunesien",a:"Niederlande",s:"1:3",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:["7 Min.",ZDFV+"wm-2026-tunesien-niederlande-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231413/video"},
+ {h:"Neuseeland",a:"Belgien",s:"1:5",g:"WM 2026 · Gruppe G",date:"Sa, 27.06.",zdf:null,full:null,kicker:null, analyse:{tore:[{minute:84,spieler:"Just",team:"A"},{minute:28,spieler:"Trossard",team:"B"},{minute:50,spieler:"Trossard",team:"B"},{minute:66,spieler:"De Bruyne",team:"B"},{minute:86,spieler:"Lukaku",team:"B"},{minute:"90+4",spieler:"Saelemaekers",team:"B"}],spielnote:{wert:7.0,label:{de:"Galavorstellung",en:"Statement win"}},spielerDesSpiels:{name:"Leandro Trossard",team:"B",note:8.6,begruendung:{de:"Doppelpack – eröffnete am Eckball und legte per Volley nach.",en:"A brace – opened from a corner and added a volley."}},fazit:{de:"Nach zwei Remis brauchte Belgien den Sieg – und lieferte mit 35 Torschüssen eine Machtdemonstration. Trossards Doppelpack und Lukakus später Kopfball sicherten Platz 1 der Gruppe G, Neuseeland schied als Tabellenletzter aus. Verdienter geht es kaum.",en:"After two draws Belgium needed the win and delivered a statement with 35 shots. Trossard's brace and Lukaku's late header sealed top spot in Group G; New Zealand went out bottom. Hard to be more deserved."}}},
+ {h:"Ägypten",a:"Iran",s:"1:1",g:"WM 2026 · Gruppe G",date:"Sa, 27.06.",zdf:["Video",ZDFV+"wm-2026-aegypten-iran-highlights-zusammenfassung-100"],full:null,kicker:null, analyse:{tore:[{minute:5,spieler:"Saber",team:"A"},{minute:14,spieler:"Rezaeian",team:"B"}],spielnote:{wert:6.8,label:{de:"Drama bis zur Schlussminute",en:"Drama to the last minute"}},spielerDesSpiels:{name:"Mohamed Shobeir",team:"A",note:7.6,begruendung:{de:"Ägyptens Keeper parierte einen Foulelfmeter von Taremi und hielt das Remis fest.",en:"Egypt's keeper saved a Taremi penalty and preserved the draw."}},fazit:{de:"Ein Remis, das Ägypten als Gruppenzweiter erstmals überhaupt ins WM-Achtelfinale brachte und Iran zittern ließ. Irans später Treffer zählte wegen Abseits nicht, ein Foulelfmeter blieb ungenutzt. Unterm Strich leistungsgerecht.",en:"A draw that sent Egypt through as group runners-up – their first ever World Cup knockout berth – and left Iran sweating. Iran's late goal was ruled out for offside and a penalty went begging. Fair overall."},schiri:{name:"Szymon Marciniak",land:"Polen",note:7.0}}},
+ {h:"Uruguay",a:"Spanien",s:"0:1",g:"WM 2026 · Gruppe H",date:"Sa, 27.06.",zdf:["Video","https://www.youtube.com/watch?v=5kqAn4y6qW4"],full:null,kicker:null, analyse:{tore:[{minute:42,spieler:"Baena",team:"B"}],karten:[{minute:"90+4",spieler:"Canobbio",team:"A",typ:"rot"}],spielnote:{wert:6.0,label:{de:"Zähe Kost",en:"A grind"}},spielerDesSpiels:{name:"Álex Baena",team:"B",note:7.5,begruendung:{de:"Erzielte sein erstes WM-Tor und entschied die Partie.",en:"Scored his first World Cup goal to decide the game."}},fazit:{de:"Spanien gewann ohne zu glänzen durch Baenas Tor nach einem Muslera-Patzer und stand als Gruppensieger ohne Gegentor da. Uruguay zerlegte sich selbst – Torwartfehler und später Platzverweis. Verdient, aber unspektakulär.",en:"Spain won without sparkling through Baena's goal after a Muslera error, topping the group without conceding. Uruguay undid themselves – keeper error and a late red. Deserved, if unspectacular."},chancen:{a:5,b:6}}},
+ {h:"Kap Verde",a:"Saudi-Arabien",s:"0:0",g:"WM 2026 · Gruppe H",date:"Sa, 27.06.",zdf:["Video","https://www.zdfheute.de/sport/fussball-wm/video/wm-2026-kap-verde-saudi-arabien-highlights-zusammenfassung-100.html"],full:null,kicker:null, analyse:{spielnote:{wert:5.5,label:{de:"Historisches Remis",en:"Historic draw"}},fazit:{de:"Ein torloses Remis mit riesiger Wirkung: Kap Verde zog als einer der kleinsten Staaten der WM-Geschichte erstmals ins Achtelfinale ein, Saudi-Arabien schied aus. Spielerisch wenig, emotional ein Meilenstein.",en:"A goalless draw with huge meaning: Cape Verde, one of the smallest nations in World Cup history, reached the knockouts for the first time; Saudi Arabia went out. Little football, but an emotional milestone."}}},
+ {h:"Norwegen",a:"Frankreich",s:"1:4",g:"WM 2026 · Gruppe I",date:"Fr, 26.06.",zdf:["Video","https://www.youtube.com/watch?v=hlYztAtcXcQ"],full:null,kicker:null, analyse:{tore:[{minute:21,spieler:"Aasgaard",team:"A"},{minute:7,spieler:"Dembélé",team:"B"},{minute:20,spieler:"Dembélé",team:"B"},{minute:32,spieler:"Dembélé",team:"B"},{minute:"90+4",spieler:"Doué",team:"B"}],spielnote:{wert:8.0,label:{de:"Dembélé-Show",en:"The Dembélé show"}},spielerDesSpiels:{name:"Ousmane Dembélé",team:"B",note:9.2,begruendung:{de:"Erster-Halbzeit-Hattrick – der zweitschnellste der WM-Geschichte.",en:"First-half hat-trick – the second-fastest in World Cup history."}},fazit:{de:"Frankreich zerlegte mit Bestbesetzung ein auf zehn Positionen rotiertes Norwegen. Dembélés Hattrick entschied das Spiel schon vor der Pause, Maignan hielt zudem einen Foulelfmeter. Frankreich Gruppensieger mit makelloser Bilanz – klar verdient.",en:"A full-strength France took apart a Norway side with 10 changes. Dembélé's hat-trick settled it before half-time and Maignan saved a penalty too. France topped the group with a perfect record – clearly deserved."}}},
+ {h:"Senegal",a:"Irak",s:"5:0",g:"WM 2026 · Gruppe I",date:"Fr, 26.06.",zdf:["Video","https://www.youtube.com/watch?v=0JOHVAeZJ_I"],full:null,kicker:null, analyse:{tore:[{minute:4,spieler:"Diarra",team:"A"},{minute:56,spieler:"Sarr",team:"A"},{minute:59,spieler:"P. Gueye",team:"A"},{minute:71,spieler:"P. Gueye",team:"A"},{minute:82,spieler:"Ndiaye",team:"A"}],karten:[{minute:13,spieler:"Sulaka",team:"B",typ:"rot"}],spielnote:{wert:8.0,label:{de:"Galavorstellung",en:"A goal feast"}},spielerDesSpiels:{name:"Pape Gueye",team:"A",note:8.8,begruendung:{de:"Doppelpack als Joker – zwei sehenswerte Distanzschüsse.",en:"A brace off the bench – two stunning long-range strikes."}},fazit:{de:"Senegal musste hoch gewinnen und lieferte den höchsten WM-Sieg einer afrikanischen Nation. Die frühe Rote Karte gegen Irak ebnete den Weg, Pape Gueyes Doppelpack krönte den Auftritt. Als bester Gruppendritter ging es ins Achtelfinale. Hochverdient.",en:"Senegal needed a big win and produced the biggest World Cup victory by an African nation. Iraq's early red opened the door and Pape Gueye's brace crowned it. They went through as a best third-placed team. Thoroughly deserved."},schiri:{name:"Anthony Taylor",land:"England",note:7.0},chancen:{a:28,b:6}}},
+ {h:"Türkei",a:"USA",s:"3:2",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:["9 Min.",ZDFV+"wm-2026-tuerkei-usa-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231441/video", analyse:{tore:[{minute:3,spieler:"Trusty",team:"B"},{minute:10,spieler:"Güler",team:"A"},{minute:31,spieler:"B. Yilmaz",team:"A"},{minute:49,spieler:"Berhalter",team:"B"},{minute:"90+8",spieler:"Ayhan",team:"A"}],spielnote:{wert:8.5,label:{de:"Last-Minute-Krimi",en:"Last-gasp thriller"}},spielerDesSpiels:{name:"Arda Güler",team:"A",note:8.7,begruendung:{de:"Erzielte sein erstes WM-Tor und dirigierte Türkeis Comeback.",en:"Scored his first World Cup goal and orchestrated Türkiye's comeback."}},fazit:{de:"Ein Fünf-Tore-Krimi, den das bereits ausgeschiedene Türkei mit dem letzten Angriff gewann – Ayhan traf in der 98. Minute. Die zuvor in 62 Schüssen torlose Türkei netzte mit ihren ersten beiden Versuchen. Die US-Reserve (neun Wechsel) hielt mit, verlor aber erstmals im Turnier. Spektakel pur.",en:"A five-goal thriller won by already-eliminated Türkiye with the last attack – Ayhan struck in the 98th minute. Having failed to score in 62 shots, Türkiye netted their first two here. The USA's reserves kept up but lost for the first time. Pure spectacle."},chancen:{a:9,b:18}}},
+ {h:"Japan",a:"Schweden",s:"1:1",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:["9 Min.",ZDFV+"wm-2026-japan-schweden-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231420/video", analyse:{tore:[{minute:56,spieler:"Maeda",team:"A"},{minute:62,spieler:"Elanga",team:"B"}],spielnote:{wert:6.5,label:{de:"Umkämpftes Remis",en:"Hard-fought draw"}},spielerDesSpiels:{name:"Anthony Elanga",team:"B",note:7.6,begruendung:{de:"Glich mit einem sehenswerten Schlenzer aus.",en:"Levelled with a jaw-dropping curler."}},fazit:{de:"Ein intensives Remis, das beiden reichte: Japan zog als Gruppenzweiter mit einem Gruppen-Torrekord ins Achtelfinale ein, Schweden als bester Gruppendritter. Maedas feiner Mannschaftstreffer, Elangas Traumschuss zum 1:1. Leistungsgerecht geteilt.",en:"An intense draw that suited both: Japan advanced as runners-up with a record group haul, Sweden as a best third-placed team. Maeda's slick team goal, Elanga's stunner for 1-1. A fair share of the spoils."}}},
+ {h:"Paraguay",a:"Australien",s:"0:0",g:"WM 2026 · Gruppe D",date:"Fr, 26.06.",zdf:["6 Min.",ZDFV+"wm-2026-paraguay-australien-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231439/video", analyse:{spielnote:{wert:5.5,label:{de:"Zweckmäßiges 0:0",en:"A useful goalless draw"}},fazit:{de:"Ein zerfahrenes 0:0, mit dem beide Teams das Achtelfinale erreichten: Australien als Gruppenzweiter dank besserer Tordifferenz, Paraguay als Gruppendritter. Wenig Highlights, viel Taktik – für beide ein zufriedenstellendes Ergebnis.",en:"A scrappy goalless draw that took both teams through: Australia as runners-up on goal difference, Paraguay as a third-placed side. Few highlights, plenty of tactics – a satisfactory result for both."}}},
+ {h:"Tunesien",a:"Niederlande",s:"1:3",g:"WM 2026 · Gruppe F",date:"Fr, 26.06.",zdf:["7 Min.",ZDFV+"wm-2026-tunesien-niederlande-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/1231413/video", analyse:{tore:[{minute:3,spieler:"Skhiri",team:"B",eigentor:true},{minute:7,spieler:"Brobbey",team:"B"},{minute:54,spieler:"Mastouri",team:"A"},{minute:62,spieler:"van Hecke",team:"B"}],spielnote:{wert:6.5,label:{de:"Souveräner Gruppensieg",en:"Comfortable group win"}},spielerDesSpiels:{name:"Brian Brobbey",team:"B",note:7.8,begruendung:{de:"Früher Kopfballtreffer – bestätigte seine starke Turnierform.",en:"Early headed goal – confirmed his strong tournament form."}},fazit:{de:"Die Niederlande kontrollierten das Spiel von Beginn an: Skhiris Eigentor und Brobbeys Kopfball stellten früh die Weichen, van Heckes Kopfball sorgte nach der Pause für die Entscheidung. Tunesien gelang nur der zwischenzeitliche Anschluss und schied punktlos aus. Verdienter Gruppensieg.",en:"The Netherlands controlled it from the start: Skhiri's own goal and Brobbey's header set the tone early, van Hecke's header after the break settled it. Tunisia only managed a brief reply and went out pointless. A deserved group win."}}},
  {h:"Ecuador",a:"Deutschland",s:"2:1",g:"WM 2026 · Gruppe E",date:"Do, 25.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231391/video"},
  {h:"Curaçao",a:"Elfenbeinküste",s:"0:2",g:"WM 2026 · Gruppe E",date:"Do, 25.06.",zdf:null,full:null,kicker:"https://www.kicker.de/1231396/video"},
  {h:"Panama",a:"Kroatien",s:"0:1",g:"WM 2026 · Gruppe L",date:"Mi, 24.06.",zdf:null,full:null},
@@ -1921,6 +2009,106 @@ function sendRow(cc,list){
   const chans=(list&&list.length)?list.map(s=>'<span class="ch '+(s.t==="fta"?"fta":"pay")+'">'+chNm(s)+'</span>').join(""):'<span class="none">'+(LANG==="de"?"k. A.":"n/a")+'</span>';
   return '<div class="sendrow"><span class="sflag">'+(CFLAG[cc]||"🏳️")+'</span><span class="schans">'+chans+'</span></div>';
 }
+const MCHEV='<svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+const ODDS_DISCLAIMER={de:"Gl\u00fccksspiel kann s\u00fcchtig machen. Hilfe unter check-dein-spiel.de. Teilnahme ab 18.",en:"Gambling can be addictive. 18+ only."};
+function biln(x){ if(x==null) return ""; if(typeof x==="string") return x; return x[LANG]||x.de||x.en||""; }
+function locISO(iso){ if(!iso) return ""; const p=String(iso).split("-"); if(p.length!==3) return String(iso);
+  if(LANG==="de") return p[2]+"."+p[1]+"."+p[0];
+  const M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return (M[parseInt(p[1],10)-1]||p[1])+" "+p[2]+", "+p[0]; }
+function fmtKm(n){ const s=String(n); return LANG==="de"?s.replace(".",","):s.replace(",","."); }
+function fmtNote(n){ if(n==null) return ""; const s=Number(n).toFixed(1); return LANG==="de"?s.replace(".",","):s; }
+/* ---- Feature A: Lohnt sich's? ---- */
+function lhStimmen(arr,t){ if(!arr||!arr.length) return "";
+  const rows=arr.slice(0,3).map(function(s){
+    if(!s||!s.text||!s.person||!s.datum) return "";
+    const tip=(s.typ==="tipp")?'<span class="lh-tag">'+t.lh_tip+'</span>':'';
+    const rolle=s.rolle?', '+esc(biln(s.rolle)):'';
+    const src=s.quelle?' <a class="lh-src" href="'+esc(s.quelle)+'" target="_blank" rel="noopener">'+t.lh_src+' \u2197</a>':'';
+    return '<div class="lh-voice">'+tip+'<span class="lh-qt">'+esc(biln(s.text))+'</span><span class="lh-by">\u2014 '+esc(s.person)+rolle+' \u00b7 '+locISO(s.datum)+src+'</span></div>';
+  }).filter(Boolean).join("");
+  return rows?('<div class="lh-sec"><div class="lh-h">'+t.lh_voices+'</div>'+rows+'</div>'):""; }
+function lhQuoten(q,t){ if(!q||!q.werte||!q.werte.length||!q.stand) return "";
+  const cells=q.werte.map(function(w){ return '<span class="lh-od"><b>'+esc(w.sel)+'</b>'+esc(w.wert)+'</span>'; }).join("");
+  const prov=q.anbieter?'<span class="lh-prov">'+esc(q.anbieter)+'</span>':'';
+  return '<div class="lh-sec"><div class="lh-h">'+t.lh_odds+prov+'</div>'+
+    '<div class="lh-odds">'+cells+'</div>'+
+    '<div class="lh-upd">'+t.lh_odds_upd+' '+locISO(q.stand)+'</div>'+
+    '<div class="lh-disc"><span class="lh-18">18+</span><span>'+esc(biln(ODDS_DISCLAIMER))+'</span></div></div>'; }
+function lhLast(list){ if(!list||!list.length) return "";
+  return list.slice(0,5).map(function(p){
+    const cls=p.ausgang==="S"?"win":(p.ausgang==="N"?"loss":"draw");
+    const dt=p.datum?'<span class="lh-pd">'+locISO(p.datum)+'</span>':'';
+    return '<span class="lh-match"><span class="lh-out '+cls+'">'+esc(p.ausgang||"")+'</span><span class="lh-res">'+esc(p.ergebnis||"")+'</span><span class="lh-opp">'+esc(p.gegner||"")+'</span>'+dt+'</span>';
+  }).join(""); }
+function lhLetzte(lp,m,t){ if(!lp||(!lp.teamA&&!lp.teamB)) return "";
+  let out='<div class="lh-sec"><div class="lh-h">'+t.lh_last+'</div>';
+  if(lp.teamA&&lp.teamA.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.h)+'</span><div class="lh-mrow">'+lhLast(lp.teamA)+'</div></div>';
+  if(lp.teamB&&lp.teamB.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.a)+'</span><div class="lh-mrow">'+lhLast(lp.teamB)+'</div></div>';
+  return out+'</div>'; }
+function lhScore(s,t){ if(s==null) return ""; const v=Math.max(0,Math.min(100,Math.round(s)));
+  const col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626"));
+  return '<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">'+t.lohnt_score+'</span><b class="lh-sc-val" style="color:'+col+'">'+v+'</b><span class="lh-sc-max">/100</span></div><div class="lh-sc-bar"><span style="width:'+v+'%;background:'+col+'"></span></div></div>'; }
+function renderLohnt(m){ const L=m.lohnt; if(!L) return ""; const t=I18N[LANG];
+  let inner=lhScore(L.score,t);
+  if(L.einordnung) inner+='<p class="lh-txt">'+esc(biln(L.einordnung))+'</p>';
+  if(L.story) inner+='<p class="lh-txt">'+esc(biln(L.story))+'</p>';
+  inner+=lhStimmen(L.stimmen,t)+lhLetzte(L.letztePartien,m,t);
+  if(!inner) return "";
+  return '<button class="morebtn lh-btn" data-more data-lo="'+esc(t.lohnt_t)+'" data-lc="'+esc(t.lohnt_t)+'" aria-expanded="false"><span class="mlbl">'+t.lohnt_t+'</span>'+MCHEV+'</button><div class="morewrap"><div class="lohntwrap">'+inner+'</div></div>'; }
+/* ---- Feature B: Spielanalyse ---- */
+function anGoals(arr,t){ if(!arr||!arr.length) return "";
+  const rows=arr.map(function(g){
+    const fl=(g.elfmeter?' <span class="an-fl">('+t.an_pen+')</span>':'')+(g.eigentor?' <span class="an-fl">('+t.an_og+')</span>':'');
+    return '<div class="an-li"><span class="an-min">'+esc(String(g.minute))+'\u2032</span><span class="an-pl">'+esc(g.spieler||"")+'</span>'+fl+'</div>';
+  }).join("");
+  return '<div class="an-sec"><div class="an-h">'+t.an_goals+'</div>'+rows+'</div>'; }
+function anCards(arr,t){ if(!arr||!arr.length) return "";
+  const rows=arr.map(function(c){
+    const cl=c.typ==="rot"?"red":(c.typ==="gelbrot"?"yr":"yel");
+    return '<div class="an-li"><span class="an-min">'+esc(String(c.minute))+'\u2032</span><span class="an-card '+cl+'"></span><span class="an-pl">'+esc(c.spieler||"")+'</span></div>';
+  }).join("");
+  return '<div class="an-sec"><div class="an-h">'+t.an_cards+'</div>'+rows+'</div>'; }
+function anNote(sp,t){ if(!sp||sp.wert==null) return "";
+  return '<div class="an-noterow"><span class="an-noteic" title="'+esc(t.tvf_rating)+'">\u2605</span><b class="an-noteval">'+esc(fmtNote(sp.wert))+'</b>'+(sp.label?'<span class="an-notelbl">'+esc(biln(sp.label))+'</span>':'')+'<span class="an-notetag">'+t.tvf_rating+'</span></div>'; }
+function anMotm(p,t,m){ if(!p||!p.name) return "";
+  const img=(p.bildRechte===true&&p.bild)?'<img class="an-mimg" src="'+esc(p.bild)+'" alt="">':'';
+  const tn=(p.team==="A"&&m)?m.h:((p.team==="B"&&m)?m.a:(p.team||"")); const team=tn?' \u00b7 '+esc(tn):'';
+  const note=(p.note!=null)?'<span class="an-mnote">'+t.tvf_rating+' '+esc(fmtNote(p.note))+'</span>':'';
+  const why=p.begruendung?'<span class="an-mwhy">'+esc(biln(p.begruendung))+'</span>':'';
+  return '<div class="an-sec"><div class="an-h">'+t.an_motm+'</div><div class="an-motm">'+img+'<div class="an-mbody"><span class="an-mname">'+esc(p.name)+team+'</span>'+note+why+'</div></div></div>'; }
+function anInjuries(arr,t){ if(!arr||!arr.length) return "";
+  const rows=arr.map(function(v){ return '<div class="an-li"><span class="an-min">'+esc(String(v.minute))+'\u2032</span><span class="an-pl">'+esc(v.spieler||"")+'</span>'+(v.art?'<span class="an-sub">'+esc(biln(v.art))+'</span>':'')+'</div>'; }).join("");
+  return '<div class="an-sec"><div class="an-h">'+t.an_inj+'</div>'+rows+'</div>'; }
+function anRef(r,t){ if(!r||!r.name) return "";
+  const land=r.land?' ('+esc(r.land)+')':'';
+  const note=(r.note!=null)?'<span class="an-rnote">'+t.tvf_rating+' '+esc(fmtNote(r.note))+'</span>':'';
+  return '<div class="an-sec"><div class="an-h">'+t.an_ref+'</div><div class="an-ref">'+esc(r.name)+land+note+'</div></div>'; }
+function anBar(poss,t){ if(!poss||poss.a==null||poss.b==null) return "";
+  return '<div class="an-sec"><div class="an-h">'+t.an_poss+'</div><div class="an-bar"><span class="an-ba" style="width:'+esc(String(poss.a))+'%">'+esc(String(poss.a))+'%</span><span class="an-bb" style="width:'+esc(String(poss.b))+'%">'+esc(String(poss.b))+'%</span></div></div>'; }
+function anChances(ch,t){ if(!ch||ch.a==null||ch.b==null) return "";
+  return '<div class="an-sec"><div class="an-h">'+t.an_chances+'</div><div class="an-cmp"><b>'+esc(String(ch.a))+'</b><span>:</span><b>'+esc(String(ch.b))+'</b></div></div>'; }
+function anRun(r,t){ if(!r||!r.spieler) return "";
+  return '<div class="an-sec"><div class="an-h">'+t.an_run+'</div><div class="an-run">'+esc(r.spieler)+(r.team?' \u00b7 '+esc(r.team):'')+' \u2014 <b>'+fmtKm(r.km)+' km</b></div></div>'; }
+function anEvents(A,t,m){ const ev=[];
+  (A.tore||[]).forEach(function(g){ ev.push({min:g.minute, ic:"\u26BD", who:g.spieler, team:g.team, ex:(g.elfmeter?" ("+t.an_pen+")":"")+(g.eigentor?" ("+t.an_og+")":"")}); });
+  (A.karten||[]).forEach(function(c){ var ic=c.typ==="rot"?"\uD83D\uDFE5":(c.typ==="gelbrot"?"\uD83D\uDFE8\uD83D\uDFE5":"\uD83D\uDFE8"); ev.push({min:c.minute, ic:ic, who:c.spieler, team:c.team, ex:""}); });
+  if(!ev.length) return "";
+  ev.sort(function(a,b){ return (parseInt(a.min)||0)-(parseInt(b.min)||0); });
+  const rows=ev.map(function(e){ const tm=(e.team==="A")?m.h:(e.team==="B"?m.a:""); const fl=tm?'<span class="an-etm">'+flag(tm)+'</span>':'';
+    return '<div class="an-ev"><span class="an-eic">'+e.ic+'</span>'+((e.min!=null&&e.min!=="")?'<span class="an-emin">'+esc(String(e.min))+'\u2032</span>':"")+fl+'<span class="an-epl">'+esc(e.who||"")+'</span>'+(e.ex?'<span class="an-fl">'+esc(e.ex)+'</span>':'')+'</div>'; }).join("");
+  return '<div class="an-sec"><div class="an-h">'+t.an_events+'</div>'+rows+'</div>'; }
+function anFazit(txt,t){ if(!txt) return "";
+  return '<div class="an-sec"><div class="an-h">'+t.an_summary+'</div><p class="an-fazit">'+esc(biln(txt))+'</p></div>'; }
+function renderAnalyse(m,t){ const A=m.analyse; if(!A) return "";
+  let e1=anEvents(A,t,m)+anNote(A.spielnote,t)+anMotm(A.spielerDesSpiels,t,m)+anFazit(A.fazit,t);
+  let e2=anInjuries(A.verletzungen,t)+anRef(A.schiri,t)+anBar(A.ballbesitz,t)+anChances(A.chancen,t)+anRun(A.laufwunder,t);
+  if(A.quelleStatistik) e2+='<div class="an-srcline">'+t.an_src+': '+esc(A.quelleStatistik)+'</div>';
+  if(!e1&&!e2) return "";
+  let html='<button class="morebtn an-btn" data-more data-lo="'+esc(t.an_t)+'" data-lc="'+esc(t.an_t)+'" aria-expanded="false"><span class="mlbl">'+t.an_t+'</span>'+MCHEV+'</button><div class="morewrap"><div class="analysewrap">'+e1;
+  if(e2) html+='<button class="morebtn an-sub2" data-more data-lo="'+esc(t.an_more)+'" data-lc="'+esc(t.an_more)+'" aria-expanded="false"><span class="mlbl">'+t.an_more+'</span>'+MCHEV+'</button><div class="morewrap"><div class="analyse2">'+e2+'</div></div>';
+  html+='</div></div>';
+  return html; }
 function matchRow(m){
   const t=I18N[LANG];
   if(m.tba) return tbaRow(m,t);
@@ -1943,6 +2131,7 @@ function matchRow(m){
       '<div class="dh"><span class="ff">'+CFLAG[COUNTRY]+'</span>'+t.where+' '+CNAME[LANG][COUNTRY]+'</div>'+
       '<div class="chlist">'+chList(tvOf(m,COUNTRY))+auxRows(m)+'</div>'+
       (groups?'<button class="morebtn" data-more aria-expanded="false"><span class="mlbl">'+t.more+'</span><svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="morewrap"><div class="sendlist">'+groups+'</div></div>':"")+
+      renderLohnt(m)+
       liveActions(m)+
     '</div></div></div>'+
   '</div>';
@@ -1975,6 +2164,21 @@ function renderHL(){
   /*hl-auto-open*/ const _hf=board.querySelector(".row");
   if(_hf){ _hf.classList.add("open"); const _hh=_hf.querySelector(".rowhead"); if(_hh) _hh.setAttribute("aria-expanded","true"); }
 }
+const YT_PLAY_SVG='<svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7c-.8-3-2.5-5.4-5.5-6.2C55.6.1 34 0 34 0S12.4.1 7 1.5C4 2.3 2.3 4.7 1.5 7.7 0 13.1 0 24 0 24s0 10.9 1.5 16.3c.8 3 2.5 5.4 5.5 6.2C12.4 47.9 34 48 34 48s21.6-.1 27-1.5c3-.8 4.7-3.2 5.5-6.2C68 34.9 68 24 68 24s0-10.9-1.5-16.3z" fill="#f00"/><path d="M27 34.5l18-10.5-18-10.5z" fill="#fff"/></svg>';
+function ytEmbed(id,label){
+  return '<div class="ytembed" data-yt="'+id+'" role="button" tabindex="0" aria-label="'+(label||"Video")+'">'+
+    '<img class="thumb" loading="lazy" src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt="">'+
+    '<span class="pbtn">'+YT_PLAY_SVG+'</span>'+
+    (label?'<span class="plabel">'+label+'</span>':'')+'</div>';
+}
+function ytEmbedPlay(el){
+  if(!el||el.dataset.loaded) return;
+  var id=el.getAttribute("data-yt"); if(!id) return;
+  el.dataset.loaded="1";
+  el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+}
+document.addEventListener("click",function(e){var el=e.target.closest?e.target.closest(".ytembed[data-yt]"):null; if(el) ytEmbedPlay(el);});
+document.addEventListener("keydown",function(e){if(e.key!=="Enter"&&e.key!==" ")return; var el=e.target.closest?e.target.closest(".ytembed[data-yt]"):null; if(el){e.preventDefault(); ytEmbedPlay(el);}});
 function hlRow(m,t){
   const tot=hlGoals(m.s);
   // Zusammenfassungen
@@ -2013,6 +2217,7 @@ function hlRow(m,t){
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="dh">'+t.hl_summaries+'</div><div class="chlist">'+sums+'</div>'+
       '<div class="dh">'+t.hl_full+'</div>'+full+
+      renderAnalyse(m,t)+
       share+
     '</div></div></div>'+
   '</div>';
@@ -2305,7 +2510,7 @@ document.addEventListener("click", e=>{
     row.classList.toggle("open"); head.setAttribute("aria-expanded",willOpen); return;}
   const more=e.target.closest("[data-more]");
   if(more){const w=more.nextElementSibling; const show=w.classList.toggle("show");
-    more.setAttribute("aria-expanded",show); const lbl=more.querySelector(".mlbl"); if(lbl) lbl.textContent=(show?I18N[LANG].less:I18N[LANG].more); return;}
+    more.setAttribute("aria-expanded",show); const lbl=more.querySelector(".mlbl"); if(lbl){const lo=more.getAttribute("data-lo"),lc=more.getAttribute("data-lc"); lbl.textContent=show?(lc||I18N[LANG].less):(lo||I18N[LANG].more);} return;}
   const tab=e.target.closest(".navitem");
   if(tab){ e.preventDefault();
     const dest=tab.dataset.tab;
@@ -2371,13 +2576,13 @@ const WM_R32=[
  {d:"Sa 04.07.",t:"03:30",city:"Kansas City",st:"Arrowhead Stadium",a:null,aph:"Erster K",b:null,bph:"Dritter D/E/I/J/L",fav:0}
 ];
 const WM_ANTHEMS=[
- ["Deutschland","🇩🇪","Deutschlandlied (3. Strophe)","Melodie von Joseph Haydn (1797), Text von Hoffmann von Fallersleben."],
- ["Frankreich","🇫🇷","La Marseillaise","Revolutionslied von 1792 — eine der kämpferischsten Hymnen der Welt."],
+ ["Deutschland","🇩🇪","Deutschlandlied (3. Strophe)","Melodie von Joseph Haydn (1797), Text von Hoffmann von Fallersleben.","e6eXyYJ4h5o"],
+ ["Frankreich","🇫🇷","La Marseillaise","Revolutionslied von 1792 — eine der kämpferischsten Hymnen der Welt.","6U35RpP7XEc"],
  ["Brasilien","🇧🇷","Hino Nacional Brasileiro","Melodisch verspielt und textlich dicht — Fans summen oft a cappella weiter."],
  ["Argentinien","🇦🇷","Himno Nacional Argentino","Fast opernhaft und ungewöhnlich lang, mit langer Instrumental-Einleitung."],
- ["Spanien","🇪🇸","Marcha Real","Eine der wenigen Hymnen ganz ohne offiziellen Text."],
- ["England","🏴󠁧󠁢󠁥󠁮󠁧󠁿","God Save the King","Königshymne — kurz, getragen, monarchisch."],
- ["Niederlande","🇳🇱","Het Wilhelmus","Gilt als eine der ältesten Nationalhymnen der Welt."],
+ ["Spanien","🇪🇸","Marcha Real","Eine der wenigen Hymnen ganz ohne offiziellen Text.","nxyL1Y-WIQU"],
+ ["England","🏴󠁧󠁢󠁥󠁮󠁧󠁿","God Save the King","Königshymne — kurz, getragen, monarchisch.","2WPxqTraBYY"],
+ ["Niederlande","🇳🇱","Het Wilhelmus","Gilt als eine der ältesten Nationalhymnen der Welt.","gwBrR_G70RE"],
  ["Portugal","🇵🇹","A Portuguesa","Marschartige Hymne mit maritimem Stolz."],
  ["Belgien","🇧🇪","La Brabançonne","Wird je nach Landesteil auf Französisch, Niederländisch oder Deutsch gesungen."],
  ["Kroatien","🇭🇷","Lijepa naša domovino","Lyrische Liebeserklärung an die Heimat („Unser schönes Vaterland“)."],
@@ -2385,10 +2590,10 @@ const WM_ANTHEMS=[
  ["Japan","🇯🇵","Kimigayo","Einer der kürzesten Hymnentexte der Welt — getragen und sehr ruhig."],
  ["Südkorea","🇰🇷","Aegukga","„Patriotisches Lied“ — feierlich und gefühlvoll."],
  ["Mexiko","🇲🇽","Himno Nacional Mexicano","Pompös und kriegerisch, mit kraftvollem Refrain."],
- ["USA","🇺🇸","The Star-Spangled Banner","Berühmt-schwierig zu singen wegen des großen Tonumfangs."],
- ["Kanada","🇨🇦","O Canada","Zweisprachig (Englisch/Französisch), ruhig und hymnisch."],
- ["Schweiz","🇨🇭","Schweizerpsalm","Eher ein Gebet als ein Marsch — feierlich und besinnlich."],
- ["Österreich","🇦🇹","Land der Berge, Land am Strome","Melodie aus dem Umfeld Mozarts, geschlechtergerecht überarbeiteter Text."],
+ ["USA","🇺🇸","The Star-Spangled Banner","Berühmt-schwierig zu singen wegen des großen Tonumfangs.","N8PYuM6wrvE"],
+ ["Kanada","🇨🇦","O Canada","Zweisprachig (Englisch/Französisch), ruhig und hymnisch.","rEOzJ6yEDIg"],
+ ["Schweiz","🇨🇭","Schweizerpsalm","Eher ein Gebet als ein Marsch — feierlich und besinnlich.","KIyHNnASv64"],
+ ["Österreich","🇦🇹","Land der Berge, Land am Strome","Melodie aus dem Umfeld Mozarts, geschlechtergerecht überarbeiteter Text.","coXCFX61SBQ"],
  ["Marokko","🇲🇦","Hymne Chérifien","Königliche Hymne mit feierlichem Charakter."],
  ["Senegal","🇸🇳","Pincez tous vos koras","Benannt nach der Kora, der westafrikanischen Stegharfe."],
  ["Elfenbeinküste","🇨🇮","L'Abidjanaise","Patriotisches Lied an die größte Stadt Abidjan."],
@@ -2462,9 +2667,10 @@ function wmRenderAnthems(q){
   const box=document.getElementById("wm-anthemList");
   if(!list.length){box.innerHTML='<div class="wm-empty">'+(LANG==="de"?"Kein Land gefunden.":"No country found.")+'</div>';return;}
   box.innerHTML=list.map(a=>{
-    const yt="https://www.youtube.com/results?search_query="+encodeURIComponent(a[0]+" Nationalhymne");
+    const vid=a[4]||"";
+    const href=vid?("https://www.youtube.com/watch?v="+vid):("https://www.youtube.com/results?search_query="+encodeURIComponent(a[0]+" Nationalhymne"));
     return '<div class="wm-anthem"><span class="fl">'+a[1]+'</span><div class="wm-att"><div class="n">'+a[0]+' <em>· '+a[2]+'</em></div><div class="d">'+a[3]+'</div></div>'+
-      '<a class="wm-play" href="'+yt+'" target="_blank" rel="noopener">'+WM_YT+' '+t.wm_listen+'</a></div>';
+      '<a class="wm-play" href="'+href+'" target="_blank" rel="noopener">'+WM_YT+' '+t.wm_listen+'</a></div>';
   }).join("");
 }
 let WM_ANSWERED={}, WM_CORRECT=0;
@@ -2565,7 +2771,7 @@ const LEGAL={
    '<h4>Lokale Speicherung (localStorage)</h4>'+
    '<p>Für Komfortfunktionen speichern wir – ohne Cookies und ohne Übertragung an uns – einige Einstellungen lokal in Ihrem Browser: gewählte Sprache, Hell-/Dunkel-Modus, gefolgte Teams, gesetzte Filter, das per Geo-IP ermittelte Land (24 Stunden), Ihre Tippspiel-Eingaben sowie Ihre Entscheidung zum Analyse-Hinweis. Diese Angaben verbleiben auf Ihrem Gerät und können jederzeit über die Einstellungen Ihres Browsers gelöscht werden. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Bereitstellung der von Ihnen genutzten Funktionen).</p>'+
    '<h4>Externe Links und Inhalte</h4>'+
-   '<p>Highlights, Relives und Quellen werden nicht eingebettet, sondern nur verlinkt. Erst wenn Sie einen Link anklicken (etwa zu ARD, ZDF, YouTube oder MagentaTV), gelangen Sie zum jeweiligen Anbieter, auf dessen Seite dessen eigene Datenschutzerklärung gilt.</p>'+
+   '<p>Für Video-Highlights und die Team-Hymnen binden wir YouTube-Vorschauen ein. Beim Laden der Seite wird dazu zunächst nur ein Vorschaubild von YouTube/Google geladen. Das eigentliche Video wird erst nachgeladen, wenn Sie auf den Play-Button klicken; dabei verbindet sich Ihr Browser mit YouTube (Google Ireland Limited), wobei u. a. Ihre IP-Adresse an Google übermittelt werden kann. Für die Einbettung nutzen wir den erweiterten Datenschutzmodus (youtube-nocookie.com); es gilt dann zusätzlich die Datenschutzerklärung von Google. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO bzw. Ihre Einwilligung durch den Klick auf das Video. Relives und sonstige Quellen (z. B. ARD, ZDF, MagentaTV) werden nicht eingebettet, sondern nur verlinkt; erst beim Anklicken gelangen Sie zum jeweiligen Anbieter, auf dessen Seite dessen eigene Datenschutzerklärung gilt.</p>'+
    '<h4>Teilen-Funktion</h4>'+
    '<p>Die Teilen-Schaltfläche nutzt die Web-Share-Funktion Ihres Geräts bzw. – als Rückfalloption – die Zwischenablage. Dabei werden keine Daten an uns übertragen.</p>'+
    '<h4>Ihre Rechte</h4>'+
@@ -2617,7 +2823,7 @@ const LEGAL={
    '<h4>Local storage (localStorage)</h4>'+
    '<p>For convenience features we store some settings locally in your browser — without cookies and without transmission to us: chosen language, light/dark mode, followed teams, active filters, the country detected via geo-IP (24 hours), your prediction-game entries and your choice regarding the analytics notice. This data stays on your device and can be deleted at any time via your browser settings. Legal basis: Art. 6 (1) (f) GDPR (provision of the features you use).</p>'+
    '<h4>External links and content</h4>'+
-   '<p>Highlights, replays and sources are not embedded, only linked. Only when you click a link (e.g. to ARD, ZDF, YouTube or MagentaTV) do you reach the respective provider, where its own privacy policy applies.</p>'+
+   '<p>For video highlights and the team anthems we embed YouTube previews. When the page loads, only a thumbnail is loaded from YouTube/Google. The video itself is loaded only when you click the play button; your browser then connects to YouTube (Google Ireland Limited), which may transmit your IP address to Google. We use the enhanced privacy mode (youtube-nocookie.com) for the embed; Google’s privacy policy then additionally applies. Legal basis: Art. 6(1)(f) GDPR or your consent by clicking the video. Replays and other sources (e.g. ARD, ZDF, MagentaTV) are not embedded, only linked; only when you click do you reach the respective provider, where its own privacy policy applies.</p>'+
    '<h4>Share function</h4>'+
    '<p>The share button uses your device Web Share feature or, as a fallback, the clipboard. No data is transmitted to us.</p>'+
    '<h4>Your rights</h4>'+
