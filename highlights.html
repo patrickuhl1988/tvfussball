@@ -1178,8 +1178,8 @@ const MATCHES = [
   {cat:"wm", day:"Samstag, 04.07.2026", time:"—", comp:"WM 2026 · Achtelfinale", h:"Achtelfinale", a:"8 Spiele · 04.–07. Juli", tba:true},
   {cat:"wm", day:"Donnerstag, 09.07.2026", time:"—", comp:"WM 2026 · Viertelfinale", h:"Viertelfinale", a:"4 Spiele · 09.–11. Juli", tba:true},
   {cat:"wm", day:"Dienstag, 14.07.2026", time:"—", comp:"WM 2026 · Halbfinale", h:"Halbfinale", a:"14./15. Juli · Dallas & Atlanta", tba:true},
-  {cat:"wm", day:"Samstag, 18.07.2026", time:"23:00", comp:"WM 2026 · Spiel um Platz 3", h:"Verlierer HF 1", a:"Verlierer HF 2", tv:{DE:[ZDF,JOYN,MAG]}},
-  {cat:"wm", day:"Sonntag, 19.07.2026", time:"21:00", comp:"WM 2026 · Finale", h:"Finalist 1", a:"Finalist 2", tv:{DE:[ZDF,JOYN,MAG]}},
+  {cat:"wm", day:"Samstag, 18.07.2026", time:"23:00", comp:"WM 2026 · Spiel um Platz 3", h:"Verlierer HF 1", a:"Verlierer HF 2", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {cat:"wm", day:"Sonntag, 19.07.2026", time:"21:00", comp:"WM 2026 · Finale", h:"Finalist 1", a:"Finalist 2", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
   {cat:"bl", day:"Freitag, 28.08.2026", time:"20:30", comp:"Bundesliga · 1. Spieltag", h:"Saison 2026/27", a:"Eröffnungsspiel · Spielplan ab 02.07.", tba:true},
   {cat:"bl2", day:"Freitag, 07.08.2026", time:"—", comp:"2. Bundesliga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt · Spielplan folgt", tba:true},
   {cat:"bl3", day:"Freitag, 31.07.2026", time:"—", comp:"3. Liga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt (vsl.) · Termine folgen", tba:true},
@@ -1202,21 +1202,21 @@ const MATCHES = [
   {cat:"es", day:"Samstag, 15.08.2026", time:"—", comp:"LaLiga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt · Spielplan ab 30.06.", tba:true},
   {cat:"es", day:"Mittwoch, 28.10.2026", time:"—", comp:"Copa del Rey · 1. Runde", h:"Saison 2026/27", a:"Start ca. Ende Oktober", tba:true},
   {cat:"test", day:"Samstag, 18.07.2026", time:"—", comp:"Freundschaftsspiele · Bundesligisten", h:"Testspiele", a:"Vorbereitung Juli/August 2026", tba:true},
-  {day:"Sonntag, 28.06.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Südafrika", a:"Kanada", tv:{DE:[MAG]}},
-  {day:"Montag, 29.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Brasilien", a:"Japan", tv:{DE:[ZDF,JOYN,MAG]}},
-  {day:"Dienstag, 30.06.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Niederlande", a:"Marokko", tv:{DE:[MAG]}},
-  {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"Norwegen", tv:{DE:[MAG]}},
-  {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"Frankreich", a:"Schweden", tv:{DE:[MAG]}},
-  {day:"Mittwoch, 01.07.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Mexiko", a:"3. Gruppe C/E/F/H/I", tv:{DE:[MAG]}},
-  {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe L", a:"3. Gruppe E/H/I/J/K", tv:{DE:[MAG]}},
-  {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"Belgien", a:"3. Gruppe A/E/H/I/J", tv:{DE:[MAG]}},
-  {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", tv:{DE:[MAG]}},
-  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"2. Gruppe J", tv:{DE:[MAG]}},
-  {day:"Freitag, 03.07.2026", time:"01:00", comp:"WM 2026 · Sechzehntelfinale", h:"2. Gruppe K", a:"2. Gruppe L", tv:{DE:[MAG]}},
-  {day:"Freitag, 03.07.2026", time:"05:00", comp:"WM 2026 · Sechzehntelfinale", h:"Schweiz", a:"3. Gruppe E/F/G/I/J", tv:{DE:[MAG]}},
-  {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"Ägypten", tv:{DE:[MAG]}},
-  {day:"Samstag, 04.07.2026", time:"00:00", comp:"WM 2026 · Sechzehntelfinale", h:"Argentinien", a:"Kap Verde", tv:{DE:[MAG]}},
-  {day:"Samstag, 04.07.2026", time:"03:30", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe K", a:"3. Gruppe D/E/I/J/L", tv:{DE:[MAG]}},
+  {day:"Sonntag, 28.06.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Südafrika", a:"Kanada", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Montag, 29.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Brasilien", a:"Japan", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Dienstag, 30.06.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Niederlande", a:"Marokko", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"Norwegen", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"Frankreich", a:"Schweden", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Mittwoch, 01.07.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Mexiko", a:"3. Gruppe C/E/F/H/I", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe L", a:"3. Gruppe E/H/I/J/K", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"Belgien", a:"3. Gruppe A/E/H/I/J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"2. Gruppe J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Freitag, 03.07.2026", time:"01:00", comp:"WM 2026 · Sechzehntelfinale", h:"2. Gruppe K", a:"2. Gruppe L", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Freitag, 03.07.2026", time:"05:00", comp:"WM 2026 · Sechzehntelfinale", h:"Schweiz", a:"3. Gruppe E/F/G/I/J", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"Ägypten", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Samstag, 04.07.2026", time:"00:00", comp:"WM 2026 · Sechzehntelfinale", h:"Argentinien", a:"Kap Verde", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
+  {day:"Samstag, 04.07.2026", time:"03:30", comp:"WM 2026 · Sechzehntelfinale", h:"1. Gruppe K", a:"3. Gruppe D/E/I/J/L", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
   {day:"Montag, 29.06.2026", time:"22:30", comp:"WM 2026 · Sechzehntelfinale", h:"Deutschland", a:"Paraguay", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[BBC]}},
   {day:"Dienstag, 23.06.2026", time:"19:00", live:true, comp:"WM 2026 · Gruppe K · 2. Spieltag",
    h:"Portugal", a:"Usbekistan", tv:{DE:[ARD,MAG],AT:[SERV],CH:[SRFg],UK:[UKg]}},
@@ -1301,6 +1301,17 @@ const ZDFV="https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-liv
 const ARD_RL="https://www.zdf.de/video/livestreams/collection-index-page-ard-collection-ard-dxjuomfyzdpzag93ojkynwmxymi0zdc3nzbimdc-104/";
 const ARD_HUB="https://www.ardmediathek.de/sport-fifa-weltmeisterschaft";
 const ZDF_YT="https://www.youtube.com/@sportstudiofussball/videos";
+const HL_SRC={
+  DE:[["ARD","Sportschau / Mediathek",ARD_HUB,"ard"],["YT","sportstudio fußball",ZDF_YT,"yt"]],
+  AT:[["ORF","ORF ON · Sport","https://on.orf.at/sport"],["ARD","ARD Sportschau",ARD_HUB,"ard"]],
+  CH:[["SRF","SRF Sport","https://www.srf.ch/sport"],["ARD","ARD Sportschau",ARD_HUB,"ard"]],
+  UK:[["BBC","BBC Sport · World Cup","https://www.bbc.co.uk/sport/football/world-cup"],["ITV","ITVX","https://www.itv.com/"]],
+  ES:[["RTVE","RTVE Play","https://www.rtve.es/play/"],["DAZN","DAZN España","https://www.dazn.com/es-ES/"]],
+  IT:[["RAI","RaiPlay","https://www.raiplay.it/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  FR:[["TF1","TF1+","https://www.tf1.fr/"],["M6","M6+","https://www.6play.fr/"]],
+  NL:[["NOS","NOS Sport","https://nos.nl/sport/voetbal"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  _en:[["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]]
+};
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
  {h:"Neuseeland",a:"Belgien",s:"1:5",g:"WM 2026 · Gruppe G",date:"Sa, 27.06.",zdf:null,full:null,kicker:null},
@@ -1374,11 +1385,28 @@ const TEAMS = [
   {id:"svw",name:"SV Werder Bremen",short:"SVW",color:"#169b62"},
   {id:"s04",name:"FC Schalke 04",short:"S04",color:"#004d9d"},
   {id:"sve",name:"SV Elversberg",short:"SVE",color:"#c8102e"},
-  {id:"scp",name:"SC Paderborn",short:"SCP",color:"#005ca9"}
+  {id:"scp",name:"SC Paderborn",short:"SCP",color:"#005ca9"},
+  {id:"esp",name:"Spain",short:"ESP",color:"#c60b1e",fg:"#fff",nat:true},
+  {id:"laliga",name:"LaLiga",short:"LL",color:"#ee8707",fg:"#fff"},
+  {id:"fra",name:"France",short:"FRA",color:"#1e40af",fg:"#fff",nat:true},
+  {id:"eng",name:"England",short:"ENG",color:"#cf142b",fg:"#fff",nat:true},
+  {id:"epl",name:"Premier League",short:"PL",color:"#37003c",fg:"#fff"},
+  {id:"seriea",name:"Serie A",short:"SA",color:"#1f4e9c",fg:"#fff"},
+  {id:"wc",name:"World Cup 2026",short:"WC",color:"#0b9d6e",fg:"#fff"}
 ];
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  {team:"wc",mkt:["EN"],date:"2026-06-27",title:"World Cup round of 32 takes shape",teaser:"The 48-team World Cup's new round of 32 begins on 28 June. Mexico, Spain, Switzerland, Argentina and Brazil are among the group winners; the eight best third-placed teams complete the bracket.",src:"FIFA",url:"https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026"},
+  {team:"wc",mkt:["EN"],date:"2026-06-27",title:"Spain through unbeaten; France to meet Sweden",teaser:"Spain won Group H without conceding a goal, while France beat Norway 4\u20131 and will face Sweden in the last 32. Germany play Paraguay on 29 June.",src:"Sky Sports",url:"https://www.skysports.com/football/news/12098/13556636"},
+  {team:"esp",mkt:["ES"],date:"2026-06-27",title:"Spain top Group H and into the last 32",teaser:"La Roja sealed first place with a 1\u20130 win over Uruguay \u2013 Lamine Yamal scoring in his birthplace Guadalajara \u2013 without conceding a single goal in the group. Spain face the Group J runner-up (Austria or Algeria) on 2 July.",src:"Marca",url:"https://www.marca.com/futbol/mundial.html"},
+  {team:"laliga",mkt:["ES"],date:"2026-06-27",title:"LaLiga 2026/27 fixtures out 30 June",teaser:"The new LaLiga season kicks off on 15 August; the full schedule is released on 30 June. The summer transfer window is open, with Atl\u00e9tico among the most active clubs.",src:"AS",url:"https://as.com/futbol/primera/"},
+  {team:"fra",mkt:["FR"],date:"2026-06-27",title:"France beat Norway 4\u20131, face Sweden next",teaser:"Les Bleus topped Group I after a 4\u20131 win over Norway and meet Sweden in the round of 32 on Tuesday 30 June in New Jersey. It is Didier Deschamps' final tournament in charge of France.",src:"France Info",url:"https://www.francetvinfo.fr/sports/foot/coupe-du-monde/"},
+  {team:"fra",mkt:["FR"],date:"2026-06-26",title:"Mbapp\u00e9 closing in on France records",teaser:"Captain Kylian Mbapp\u00e9 could win his 100th cap at this World Cup and needs one goal to equal Just Fontaine's French World Cup record of 13 goals.",src:"UEFA",url:"https://fr.uefa.com/"},
+  {team:"eng",mkt:["UK"],date:"2026-06-27",title:"England chase top spot against Panama",teaser:"Already through to the last 32, Thomas Tuchel's England face Panama tonight (22:00 BST, ITV1) needing a win to top Group L. As things stand they would meet Senegal in the round of 32.",src:"Sky Sports",url:"https://www.skysports.com/football/news/12098/13556636"},
+  {team:"epl",mkt:["UK"],date:"2026-06-27",title:"Premier League returns 21 August",teaser:"The 2026/27 Premier League season opens on Friday 21 August with Arsenal hosting Coventry City. The summer transfer window is in full swing across the top flight.",src:"Premier League",url:"https://www.premierleague.com/fixtures"},
+  {team:"seriea",mkt:["IT"],date:"2026-06-27",title:"Milan land Gon\u00e7alo Ramos; Lazio appoint Gattuso",teaser:"AC Milan have signed Portugal striker Gon\u00e7alo Ramos from PSG, while Lazio named Gennaro Gattuso as head coach. The Serie A summer window runs from 29 June to 1 September.",src:"Sky / Di Marzio",url:"https://www.gianlucadimarzio.com/"},
+  {team:"seriea",mkt:["IT"],date:"2026-06-26",title:"Como keep Nico Paz in record deal",teaser:"Como are keeping playmaker Nico Paz in a club-record operation despite financial fair play limits, while Juventus must register player sales before the 30 June accounting deadline.",src:"Calciomercato",url:"https://www.calciomercato.com/"},
   {team:"wm",date:"2026-06-27",title:"Gruppe G entschieden: Belgien Erster, Ägypten Zweiter",teaser:"Mit dem 5:1 gegen Neuseeland sichert sich Belgien Platz eins in Gruppe G, Ägypten zieht nach dem 1:1 gegen Iran als Zweiter ins Sechzehntelfinale ein – Iran hofft als Gruppendritter auf eines der acht Tickets.",src:"kicker",url:"https://www.kicker.de/weltmeisterschaft/spieltag"},
   {team:"wm",date:"2026-06-27",title:"Heute Abend fällt die Entscheidung in Gruppe L",teaser:"Um 23:00 Uhr geht es parallel um alles: Panama – England und Kroatien – Ghana entscheiden über Gruppensieg und die Sechzehntelfinal-Plätze. Beide Partien laufen exklusiv bei MagentaTV – und sind heute Gegenstand unseres Tippspiels.",src:"TVFussball.de",url:"https://tvfussball.de/tippspiel.html"},
   {team:"dfb",date:"2026-06-27",title:"Sechzehntelfinale: Deutschland trifft auf Paraguay",teaser:"Der K.-o.-Gegner steht fest: Als Gruppensieger spielt die DFB-Elf am Montag (29.06., 22:30 Uhr, ZDF) in Foxborough gegen Paraguay, das sich als einer der besten Gruppendritten qualifiziert hat.",src:"Sky Sport",url:"https://www.skysports.com/football/news/11095/13556636/world-cup-2026-bracket-and-knockout-fixtures-whos-facing-who-in-the-last-32-and-route-to-final"},
@@ -1719,10 +1747,12 @@ function chList(list){
   if(!list || !list.length) return '<div class="chrow"><span class="none">— keine Übertragung gelistet —</span></div>';
   return list.map(s=>'<div class="chrow"><span class="nm">'+chNm(s)+'</span>'+qBadge(s.q)+tagFor(s.t)+'</div>').join("");
 }
-function getRadio(m){ return m.radio || ["ARD WM-Radio"]; }
-function getTicker(m){ return m.ticker || ["kicker WM-Ticker"]; }
-const RADIO_URL={"ARD WM-Radio":"https://www.ardaudiothek.de/"};
-const TICKER_URL={"kicker WM-Ticker":"https://www.kicker.de/"};
+const RADIO_C={DE:"ARD WM-Radio",AT:"Ö3 (ORF)",CH:"Radio SRF",UK:"BBC Radio 5 Live",ES:"RNE Radio Nacional",IT:"Rai Radio 1",FR:"RMC Sport",NL:"NPO Radio 1"};
+const TICKER_C={DE:"kicker WM-Ticker",AT:"LAOLA1",CH:"blue Sport",UK:"BBC Sport",ES:"Marca",IT:"La Gazzetta",FR:"L'Équipe",NL:"NOS Sport"};
+function getRadio(m){ if(m.radio) return m.radio; return [RADIO_C[COUNTRY]||"BBC Radio 5 Live"]; }
+function getTicker(m){ if(m.ticker) return m.ticker; return [TICKER_C[COUNTRY]||"FIFA.com"]; }
+const RADIO_URL={"ARD WM-Radio":"https://www.ardaudiothek.de/","Ö3 (ORF)":"https://oe3.orf.at/","Radio SRF":"https://www.srf.ch/radio-srf-3","BBC Radio 5 Live":"https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live","RNE Radio Nacional":"https://www.rtve.es/play/radio/","Rai Radio 1":"https://www.raiplaysound.it/radio1","RMC Sport":"https://rmc.bfmtv.com/","NPO Radio 1":"https://www.nporadio1.nl/"};
+const TICKER_URL={"kicker WM-Ticker":"https://www.kicker.de/","LAOLA1":"https://www.laola1.at/","blue Sport":"https://www.blue.ch/de/sport","BBC Sport":"https://www.bbc.co.uk/sport/football","Marca":"https://www.marca.com/futbol/mundial.html","La Gazzetta":"https://www.gazzetta.it/","L'Équipe":"https://www.lequipe.fr/Football/","NOS Sport":"https://nos.nl/sport","FIFA.com":"https://www.fifa.com/"};
 function auxLink(x,u){ return u?'<a class="streamlink" href="'+esc(u)+'" target="_blank" rel="noopener">'+x+'</a>':x; }
 function auxRows(m){ const t=I18N[LANG];
   const r=getRadio(m).map(x=>'<div class="chrow"><span class="nm">'+auxLink(x,RADIO_URL[x])+'</span><span class="tag aux">'+t.aux_radio+'</span></div>');
@@ -1949,14 +1979,15 @@ function hlRow(m,t){
   const tot=hlGoals(m.s);
   // Zusammenfassungen
   let sums="";
-  if(m.kicker) sums+='<div class="sumrow"><span class="slabel kicker">kicker</span><span class="sname">kicker.de · Highlights</span>'+
+  const deMkt=(COUNTRY==="DE"||COUNTRY==="AT"||COUNTRY==="CH");
+  if(deMkt && m.kicker) sums+='<div class="sumrow"><span class="slabel kicker">kicker</span><span class="sname">kicker.de · Highlights</span>'+
     '<span class="sright"><a class="swatch" href="'+m.kicker+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
-  if(m.zdf) sums+='<div class="sumrow"><span class="slabel zdf">ZDF</span><span class="sname">sportstudio · '+t.hl_checked+'</span>'+
+  if(deMkt && m.zdf) sums+='<div class="sumrow"><span class="slabel zdf">ZDF</span><span class="sname">sportstudio · '+t.hl_checked+'</span>'+
     '<span class="sright"><span class="slen">'+locMin(m.zdf[0])+'</span><a class="swatch" href="'+m.zdf[1]+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
-  sums+='<div class="sumrow"><span class="slabel ard">ARD</span><span class="sname">Sportschau / Mediathek</span>'+
-    '<span class="sright"><a class="swatch" href="'+ARD_HUB+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
-  sums+='<div class="sumrow"><span class="slabel yt">YT</span><span class="sname">sportstudio fußball</span>'+
-    '<span class="sright"><a class="swatch" href="'+ZDF_YT+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
+  (HL_SRC[COUNTRY]||HL_SRC._en).forEach(function(s){
+    sums+='<div class="sumrow"><span class="slabel '+(s[3]||"")+'">'+s[0]+'</span><span class="sname">'+s[1]+'</span>'+
+      '<span class="sright"><a class="swatch" href="'+s[2]+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
+  });
   // Komplettes Spiel
   let full;
   if(m.full){
@@ -1988,8 +2019,15 @@ function hlRow(m,t){
 }
 
 /* ---------- Render: News ---------- */
+const NEWS_OWN=new Set(["DE","AT","CH","ES","FR","UK","IT"]);
+function newsRelevant(n){ const mk=n.mkt;
+  if(mk){ if(mk.indexOf("*")>=0) return true; if(mk.indexOf(COUNTRY)>=0) return true; if(mk.indexOf("EN")>=0 && !NEWS_OWN.has(COUNTRY)) return true; return false; }
+  return COUNTRY==="DE"||COUNTRY==="AT"||COUNTRY==="CH"; }
 function renderNewsFilters(){
-  const chips=[["",I18N[LANG].f_all], ...TEAMS.map(tm=>[tm.id,tm.name])];
+  const present=new Set(NEWS.filter(newsRelevant).map(n=>n.team));
+  if(NEWS_TEAM && !present.has(NEWS_TEAM)) NEWS_TEAM="";
+  const ids=TEAMS.map(tm=>tm.id).filter(id=>present.has(id));
+  const chips=[["",I18N[LANG].f_all], ...ids.map(id=>[id,(T[id]?T[id].name:id)])];
   document.getElementById("newsFilters").innerHTML = chips.map(c=>{
     const tm=c[0]?T[c[0]]:null;
     const dot=tm?'<span class="cdot" style="background:'+tm.color+'"></span>':'';
@@ -2000,6 +2038,7 @@ function fmtNewsDate(iso){const p=iso.split("-"); return p[2]+"."+p[1]+"."+p[0];
 function renderNews(){
   const t=I18N[LANG], box=document.getElementById("newsList");
   let list=NEWS.filter(n=>{
+    if(!newsRelevant(n)) return false;
     if(NEWS_TEAM && n.team!==NEWS_TEAM) return false;
     if(NEWS_Q){const q=NEWS_Q.toLowerCase(); const tm=T[n.team];
       if(!((n.title+" "+n.teaser+" "+n.src+" "+(tm?tm.name:"")).toLowerCase().includes(q))) return false;}
