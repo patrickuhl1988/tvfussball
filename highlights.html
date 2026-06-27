@@ -103,7 +103,7 @@
   /* Match / card rows */
   .board{display:flex; flex-direction:column; gap:8px}
   .row{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); transition:border-color .18s}
-  .row.open{border-color:var(--line2)}
+  .row.open{border-color:var(--line2)}.row.open .rowhead{background:radial-gradient(150px 90px at 16% -30%, rgba(91,140,255,.10), transparent 72%),radial-gradient(150px 90px at 84% -30%, rgba(91,140,255,.09), transparent 72%)}html[data-theme="dark"] .row.open .rowhead{background:radial-gradient(175px 120px at 14% -35%, rgba(140,185,255,.22), transparent 68%),radial-gradient(175px 120px at 86% -35%, rgba(140,185,255,.18), transparent 68%),radial-gradient(95px 70px at 50% -55%, rgba(255,255,255,.12), transparent 70%),linear-gradient(180deg, rgba(120,150,210,.08), rgba(10,16,32,0) 60%)}html[data-theme="dark"] .row.open{border-color:rgba(140,185,255,.30); box-shadow:0 0 0 1px rgba(140,185,255,.06), 0 8px 30px rgba(0,0,0,.38)}
   .row.free{box-shadow:inset 3px 0 0 var(--free), var(--shadow)}
   .rowhead{width:100%; border:none; background:none; display:grid; grid-template-columns:52px 1fr auto; align-items:center; gap:12px; padding:13px 14px 13px 15px; text-align:left}
   .rowhead:hover{background:var(--hover)}
@@ -1258,11 +1258,15 @@ const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, SKY={n:"Sky",t:"
 const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
 const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"},
   RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
-  CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"};
-const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[BEIN], CA:[CTV,TSN], US:[FOX,TELE] };
+  CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"},
+  RTE={n:"RTÉ 2",t:"fta",q:"HD"}, YLE={n:"Yle TV2",t:"fta",q:"HD"}, MTV3={n:"MTV3",t:"fta",q:"HD"},
+  MEDIA={n:"Mediacorp",t:"fta",q:"HD"}, TSPT={n:"T Sports",t:"fta",q:"HD"}, BTV={n:"BTV",t:"fta",q:"HD"},
+  TRT={n:"TRT 1",t:"fta",q:"HD"}, SVT={n:"SVT1",t:"fta",q:"HD"}, TV4={n:"TV4",t:"fta",q:"HD"},
+  CAN5={n:"Canal 5",t:"fta",q:"HD"}, AZT={n:"Azteca 7",t:"fta",q:"HD"};
+const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[BEIN], CA:[CTV,TSN], US:[FOX,TELE], IE:[RTE], FI:[YLE,MTV3], SG:[MEDIA], BD:[TSPT,BTV], TR:[TRT], SE:[SVT,TV4], MX:[CAN5,AZT] };
 
-const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",ES:"🇪🇸",NL:"🇳🇱",TH:"🇹🇭",CA:"🇨🇦",US:"🇺🇸"};
-const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Frankreich",IT:"Italien",ES:"Spanien",NL:"Niederlande",TH:"Thailand",CA:"Kanada",US:"USA"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK",FR:"France",IT:"Italy",ES:"Spain",NL:"Netherlands",TH:"Thailand",CA:"Canada",US:"USA"}};
+const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",ES:"🇪🇸",NL:"🇳🇱",TH:"🇹🇭",CA:"🇨🇦",US:"🇺🇸",IE:"🇮🇪",FI:"🇫🇮",SG:"🇸🇬",BD:"🇧🇩",TR:"🇹🇷",SE:"🇸🇪",MX:"🇲🇽"};
+const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Frankreich",IT:"Italien",ES:"Spanien",NL:"Niederlande",TH:"Thailand",CA:"Kanada",US:"USA",IE:"Irland",FI:"Finnland",SG:"Singapur",BD:"Bangladesch",TR:"Türkei",SE:"Schweden",MX:"Mexiko"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK",FR:"France",IT:"Italy",ES:"Spain",NL:"Netherlands",TH:"Thailand",CA:"Canada",US:"USA",IE:"Ireland",FI:"Finland",SG:"Singapore",BD:"Bangladesh",TR:"Turkey",SE:"Sweden",MX:"Mexico"}};
 
 /* WM 2026 — echte Partien, Zeiten (MEZ), Sender (DE/AT/CH via fussballgucken.info, UK via BBC/ITV) */
 const MATCHES = [
@@ -2148,7 +2152,7 @@ function matchRow(m){
   const free=(tvOf(m,COUNTRY)||[]).some(s=>s.t==="fta"); const rail=railClass(m);
   const timeCell = timeCellHTML(m);
   const isWM = /^WM/i.test(m.comp||"");
-  const sccs = ["DE","AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US"]:[]).filter(cc=>cc!==COUNTRY);
+  const sccs = ["DE","AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US","IE","FI","SG","BD","TR","SE","MX"]:[]).filter(cc=>cc!==COUNTRY);
   const groups = sccs.map(cc=>{ const list = tvOf(m,cc); return list?sendRow(cc,list):""; }).filter(Boolean).join("");
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" — "+(LANG==="de"?"wo läuft das Spiel?":"where to watch?")+" (TVFussball.de)", "https://tvfussball.de");
   return '<div class="row'+(rail?' '+rail:'')+'" data-k="'+rowKey(m)+'">'+
@@ -2976,7 +2980,7 @@ function tippInit(){
 }
 
 /* ---------- Geo-IP: Standardland & -sprache (funktional, kein Tracking) ---------- */
-const GEO_MARKET={DE:"DE",AT:"AT",CH:"CH",LI:"DE",GB:"UK",UK:"UK",FR:"FR",IT:"IT",ES:"ES",NL:"NL",TH:"TH",CA:"CA",US:"US"};
+const GEO_MARKET={DE:"DE",AT:"AT",CH:"CH",LI:"DE",GB:"UK",UK:"UK",FR:"FR",IT:"IT",ES:"ES",NL:"NL",TH:"TH",CA:"CA",US:"US",IE:"IE",FI:"FI",SG:"SG",BD:"BD",TR:"TR",SE:"SE",MX:"MX"};
 const GEO_DE=new Set(["DE","AT","CH","LI"]);
 function geoCacheGet(){ try{ const r=lsGet(LS_KEY.geo); if(r){ const o=JSON.parse(r); if(o&&o.cc&&o.ts&&(Date.now()-o.ts<86400000)) return o.cc; } }catch(e){} return null; }
 function geoCacheSet(cc){ lsSet(LS_KEY.geo, JSON.stringify({cc:cc,ts:Date.now()})); }
