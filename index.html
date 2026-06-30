@@ -859,7 +859,7 @@
   html[data-theme="dark"] .freebest.radio{ color:var(--faint); border-color:var(--line2) }
   /* Segmented-Control etwas klarer abgesetzt */
   html[data-theme="dark"] .seg{ background:rgba(255,255,255,.035) }
-.navitem[data-tab="tippspiel"]{display:none}</style>
+.navitem[data-tab="tippspiel"]{display:none}.social{display:inline-flex;gap:9px;align-items:center;margin-left:6px;vertical-align:middle}.social a{display:inline-flex;opacity:.65;transition:opacity .15s}.social a:hover{opacity:1}</style>
 </head>
 <body data-page="live">
 
@@ -1999,7 +1999,7 @@ function renderLive(){
   items.sort((a,b)=> a.sk-b.sk);
   let html="", curDay="";
   items.forEach(it=>{
-    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); html += '<div class="daybar"><span class="d">'+dlabel+'</span><span class="ln"></span></div>'; }
+    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); html += '<div class="daybar"><span class="d">'+dlabel+'</span><span class="ln"></span>'+(html===""?'<span class="social"><a href="https://www.facebook.com/share/17qkMgZEbd/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg></a><a href="https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></span>':"")+'</div>'; }
     html += it.k==="m" ? matchRow(it.o) : formatRow(it.o);
   });
   let hint="";
