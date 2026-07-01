@@ -117,6 +117,7 @@
   .teams .t{font-weight:600; font-size:15px; display:flex; align-items:center; gap:8px}
   .teams .t .sc{font-family:"JetBrains Mono",monospace; font-weight:700; margin-left:auto; font-size:14px; color:var(--ink)}
   .flag{font-size:16px; line-height:1; flex:0 0 auto; width:1.25em; text-align:center}
+  .flag .cball{width:1.18em; height:1.18em; display:block; margin:0 auto}
   .teams .meta{display:flex; align-items:center; gap:8px; margin-top:7px; flex-wrap:wrap}
   .comp{font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.05em; text-transform:uppercase; border-left:1.5px solid var(--line2); padding-left:7px}
   .freebest{font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; letter-spacing:.02em; padding:2.5px 7px; border-radius:6px; display:inline-flex; gap:4px; align-items:center; white-space:nowrap}
@@ -1271,7 +1272,35 @@ const FL = {"Saudi-Arabien":"🇸🇦",Portugal:"🇵🇹",Usbekistan:"🇺🇿"
   Argentinien:"🇦🇷","Österreich":"🇦🇹",Spanien:"🇪🇸","Saudi-Arabien":"🇸🇦",Tunesien:"🇹🇳",Japan:"🇯🇵",
   Niederlande:"🇳🇱",Schweden:"🇸🇪","Türkei":"🇹🇷",Paraguay:"🇵🇾",USA:"🇺🇸",Australien:"🇦🇺",Iran:"🇮🇷",
   Neuseeland:"🇳🇿",Uruguay:"🇺🇾",Belgien:"🇧🇪","Ägypten":"🇪🇬","Kap Verde":"🇨🇻","Bosnien-Herzegowina":"🇧🇦"};
-function flag(n){ return FL[n] || "⚽"; }
+/* Vereinsfarben (Primaer, Sekundaer) fuer getoente Baelle – nur 1. Bundesliga 2026/27; rechtlich sichere Alternative zu Wappen */
+const CLUB_BALL={
+ "FC Bayern München":["#DC052D","#FFFFFF"],"Bayern München":["#DC052D","#FFFFFF"],
+ "Borussia Dortmund":["#FDE100","#000000"],"BVB":["#FDE100","#000000"],
+ "RB Leipzig":["#FFFFFF","#D2003C"],
+ "Bayer 04 Leverkusen":["#E32219","#000000"],"Bayer Leverkusen":["#E32219","#000000"],
+ "VfB Stuttgart":["#FFFFFF","#E30613"],
+ "Eintracht Frankfurt":["#101010","#E1000F"],
+ "SC Freiburg":["#E2001A","#000000"],
+ "Werder Bremen":["#159A5B","#FFFFFF"],"SV Werder Bremen":["#159A5B","#FFFFFF"],
+ "1. FSV Mainz 05":["#C3141E","#FFFFFF"],"FSV Mainz 05":["#C3141E","#FFFFFF"],"Mainz 05":["#C3141E","#FFFFFF"],
+ "FC Augsburg":["#BA0C2F","#FFFFFF"],
+ "TSG Hoffenheim":["#1961AC","#FFFFFF"],"TSG 1899 Hoffenheim":["#1961AC","#FFFFFF"],"1899 Hoffenheim":["#1961AC","#FFFFFF"],
+ "1. FC Union Berlin":["#E00521","#FFFFFF"],"Union Berlin":["#E00521","#FFFFFF"],
+ "Borussia Mönchengladbach":["#FFFFFF","#00A651"],"Mönchengladbach":["#FFFFFF","#00A651"],
+ "1. FC Köln":["#E1000A","#FFFFFF"],"FC Köln":["#E1000A","#FFFFFF"],
+ "Hamburger SV":["#003087","#FFFFFF"],"HSV":["#003087","#FFFFFF"],
+ "FC Schalke 04":["#004E95","#FFFFFF"],"Schalke 04":["#004E95","#FFFFFF"],
+ "SV Elversberg":["#E30613","#000000"],"Elversberg":["#E30613","#000000"],
+ "SC Paderborn 07":["#005CA9","#000000"],"SC Paderborn":["#005CA9","#000000"]
+};
+function clubBall(c1,c2){
+ return '<svg class="cball" viewBox="0 0 24 24" aria-hidden="true">'
+  +'<circle cx="12" cy="12" r="10.5" fill="'+c1+'" stroke="rgba(0,0,0,.32)" stroke-width="1"/>'
+  +'<path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="'+c2+'"/>'
+  +'<path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="'+c2+'" stroke-width="1.2" stroke-linecap="round" fill="none"/>'
+  +'</svg>';
+}
+function flag(n){ if(FL[n]) return FL[n]; var c=CLUB_BALL[n]; return c?clubBall(c[0],c[1]):"⚽"; }
 
 /* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
 const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
