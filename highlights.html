@@ -25,7 +25,7 @@
   /* LIGHT = Standard */
   :root{
     --bg:#F4F6FB; --bg2:#E9EDF6; --surface:#FFFFFF; --surface2:#F0F3FA;
-    --line:#E6EAF2; --line2:#D8DEEA;
+    --line:#E0E4EE; --line2:#CCD3E1;
     --ink:#0B1220; --muted:#5A6B86; --faint:#8593AC;
     --green:#2563EB; --green-soft:rgba(37,99,235,.10); --green-line:rgba(37,99,235,.26);
     --free:#15A554; --free-soft:rgba(21,165,84,.12); --free-line:rgba(21,165,84,.30);
@@ -35,8 +35,8 @@
     --header-bg:rgba(244,246,251,.82); --hover:rgba(11,18,32,.035);
     --ball-circle:#1B3A8A; --ball-panel:#FFFFFF;
     --shadow:0 1px 2px rgba(11,18,32,.04), 0 6px 20px -8px rgba(11,18,32,.10);
-    --header-shadow:0 4px 20px rgba(11,18,32,.05);
-    --r:20px;
+    --header-shadow:0 1px 0 rgba(11,18,32,.05), 0 8px 22px -14px rgba(11,18,32,.10);
+    --r:14px;
   }
   /* DARK = professionell überarbeitet */
   html[data-theme="dark"]{
@@ -57,7 +57,7 @@
   *{box-sizing:border-box; margin:0; padding:0}
   html{-webkit-text-size-adjust:100%}
   body{background:var(--bg); color:var(--ink); font-family:"Inter",system-ui,sans-serif;
-    line-height:1.45; min-height:100vh; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+    line-height:1.42; letter-spacing:-.01em; text-rendering:optimizeLegibility; min-height:100vh; -webkit-font-smoothing:antialiased; overflow-x:hidden}
   body::before{content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
     background:radial-gradient(820px 460px at 12% -10%, var(--glow1), transparent 62%),
       radial-gradient(760px 420px at 96% -6%, var(--glow2), transparent 60%)}
@@ -103,7 +103,7 @@
   /* Match / card rows */
   .board{display:flex; flex-direction:column; gap:8px}
   .row{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); transition:border-color .18s}
-  .row.open{border-color:var(--line2)}.row.open .rowhead{background:radial-gradient(150px 90px at 16% -30%, rgba(91,140,255,.10), transparent 72%),radial-gradient(150px 90px at 84% -30%, rgba(91,140,255,.09), transparent 72%)}html[data-theme="dark"] .row.open .rowhead{background:radial-gradient(175px 120px at 14% -35%, rgba(140,185,255,.22), transparent 68%),radial-gradient(175px 120px at 86% -35%, rgba(140,185,255,.18), transparent 68%),radial-gradient(95px 70px at 50% -55%, rgba(255,255,255,.12), transparent 70%),linear-gradient(180deg, rgba(120,150,210,.08), rgba(10,16,32,0) 60%)}html[data-theme="dark"] .row.open{border-color:rgba(140,185,255,.30); box-shadow:0 0 0 1px rgba(140,185,255,.06), 0 8px 30px rgba(0,0,0,.38)}
+  .row.open{border-color:var(--line2)}.row.open .rowhead{background:radial-gradient(150px 90px at 16% -30%, rgba(91,140,255,.06), transparent 72%),radial-gradient(150px 90px at 84% -30%, rgba(91,140,255,.05), transparent 72%)}html[data-theme="dark"] .row.open .rowhead{background:radial-gradient(175px 120px at 14% -35%, rgba(140,185,255,.22), transparent 68%),radial-gradient(175px 120px at 86% -35%, rgba(140,185,255,.18), transparent 68%),radial-gradient(95px 70px at 50% -55%, rgba(255,255,255,.12), transparent 70%),linear-gradient(180deg, rgba(120,150,210,.08), rgba(10,16,32,0) 60%)}html[data-theme="dark"] .row.open{border-color:rgba(140,185,255,.30); box-shadow:0 0 0 1px rgba(140,185,255,.06), 0 8px 30px rgba(0,0,0,.38)}
   .row.free{box-shadow:inset 3px 0 0 var(--free), var(--shadow)}
   .rowhead{width:100%; border:none; background:none; display:grid; grid-template-columns:52px 1fr auto; align-items:center; gap:12px; padding:13px 14px 13px 15px; text-align:left}
   .rowhead:hover{background:var(--hover)}
@@ -119,7 +119,7 @@
   .flag{font-size:16px; line-height:1; flex:0 0 auto; width:1.25em; text-align:center}
   .teams .meta{display:flex; align-items:center; gap:8px; margin-top:7px; flex-wrap:wrap}
   .comp{font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.05em; text-transform:uppercase; border-left:1.5px solid var(--line2); padding-left:7px}
-  .freebest{font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; padding:2.5px 7px; border-radius:6px; display:inline-flex; gap:4px; align-items:center; white-space:nowrap}
+  .freebest{font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; letter-spacing:.02em; padding:2.5px 7px; border-radius:6px; display:inline-flex; gap:4px; align-items:center; white-space:nowrap}
   .freebest.tv{background:var(--free); color:var(--on-accent)}
   .freebest.radio{background:transparent; color:var(--free); border:1px solid var(--free-line)}
   .freebest.pay{background:transparent; color:var(--muted); border:1px solid var(--line2)}
@@ -859,7 +859,19 @@
   html[data-theme="dark"] .freebest.radio{ color:var(--faint); border-color:var(--line2) }
   /* Segmented-Control etwas klarer abgesetzt */
   html[data-theme="dark"] .seg{ background:rgba(255,255,255,.035) }
-.navitem[data-tab="tippspiel"]{display:none}</style>
+.navitem[data-tab="tippspiel"]{display:none}.social{display:inline-flex;gap:9px;align-items:center;margin-left:6px;vertical-align:middle}.social a{display:inline-flex;opacity:.65;transition:opacity .15s}.social a:hover{opacity:1}
+  /* ===== Live-Scores ===== */
+  .livewrap{display:flex; align-items:center; gap:8px; margin-top:6px; font-family:"JetBrains Mono",monospace; line-height:1}
+  .livewrap:empty{display:none}
+  .lv-score{font-weight:800; font-size:13.5px; letter-spacing:.02em; color:var(--ink)}
+  .lv-min{font-size:10px; font-weight:700; color:var(--muted)}
+  .lv-badge{font-size:8.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:2.5px 7px; border-radius:5px; display:inline-flex; align-items:center}
+  .lv-badge.live{color:#fff; background:var(--red)}
+  .lv-badge.live::before{content:""; width:5px; height:5px; border-radius:50%; background:#fff; display:inline-block; margin-right:5px; animation:lvpulse 1.4s ease-in-out infinite}
+  .lv-badge.done{color:var(--muted); background:var(--bg2); border:1px solid var(--line)}
+  @keyframes lvpulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  </style>
 </head>
 <body data-page="hl">
 
@@ -1302,7 +1314,7 @@ const MATCHES = [
   {day:"Dienstag, 30.06.2026", time:"19:00", comp:"WM 2026 · Sechzehntelfinale", h:"Elfenbeinküste", a:"Norwegen", komm:"Tom Bartels", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:74,einordnung:{de:"Norwegen mit dem zuletzt geschonten Erling Haaland trifft auf eine kompakte Elfenbeinküste. Die „Elefanten“ überzeugten mit zwei Zu-null-Siegen – Norwegen ist Favorit, aber nicht klar.",en:"Norway, with Erling Haaland rested last time out, face a compact Ivory Coast. The Elephants impressed with two clean-sheet wins – Norway favoured, but not by much."},letztePartien:{teamA:[{gegner:"Curaçao",ergebnis:"2:0",ausgang:"S",datum:"2026-06-25"},{gegner:"Deutschland",ergebnis:"1:2",ausgang:"N",datum:"2026-06-20"},{gegner:"Ecuador",ergebnis:"1:0",ausgang:"S",datum:"2026-06-14"}],teamB:[{gegner:"Frankreich",ergebnis:"1:4",ausgang:"N",datum:"2026-06-26"},{gegner:"Senegal",ergebnis:"3:2",ausgang:"S",datum:"2026-06-21"},{gegner:"Irak",ergebnis:"4:1",ausgang:"S",datum:"2026-06-16"}]}}},
   {day:"Dienstag, 30.06.2026", time:"23:00", comp:"WM 2026 · Sechzehntelfinale", h:"Frankreich", a:"Schweden", komm:"Christian Straßburger", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:84,einordnung:{de:"Frankreich präsentierte sich mit Dembélé und Mbappé in Galaform (4:1 gegen Norwegen). Schweden um Gyökeres und Elanga ist als bester Gruppendritter Außenseiter – aber offensiv jederzeit gefährlich.",en:"France looked devastating with Dembélé and Mbappé (4-1 over Norway). Sweden, with Gyökeres and Elanga, are underdogs as a best third-placed team – but always a threat going forward."},letztePartien:{teamA:[{gegner:"Norwegen",ergebnis:"4:1",ausgang:"S",datum:"2026-06-26"},{gegner:"Irak",ergebnis:"3:0",ausgang:"S",datum:"2026-06-21"},{gegner:"Senegal",ergebnis:"3:1",ausgang:"S",datum:"2026-06-16"}],teamB:[{gegner:"Japan",ergebnis:"1:1",ausgang:"U",datum:"2026-06-25"},{gegner:"Niederlande",ergebnis:"1:5",ausgang:"N",datum:"2026-06-20"},{gegner:"Tunesien",ergebnis:"5:1",ausgang:"S",datum:"2026-06-14"}]}}},
   {day:"Mittwoch, 01.07.2026", time:"03:00", comp:"WM 2026 · Sechzehntelfinale", h:"Mexiko", a:"Ecuador", komm:"Julian Engelhard", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:70,einordnung:{de:"Co-Gastgeber Mexiko (drei Siege, kein Gegentor) trifft auf Ecuador, das als Gruppendritter weiterkam und zum Abschluss überraschend Deutschland 2:1 schlug. Heim-Euphorie im Aztekenstadion gegen einen formstarken Außenseiter.",en:"Co-hosts Mexico (three wins, no goals conceded) face Ecuador, who advanced as a third-placed team and stunned Germany 2-1 in their final group game. Home euphoria at the Azteca against an in-form underdog."},letztePartien:{teamA:[{gegner:"Tschechien",ergebnis:"3:0",ausgang:"S",datum:"2026-06-24"},{gegner:"Südkorea",ergebnis:"1:0",ausgang:"S",datum:"2026-06-18"},{gegner:"Südafrika",ergebnis:"2:0",ausgang:"S",datum:"2026-06-11"}],teamB:[{gegner:"Deutschland",ergebnis:"2:1",ausgang:"S",datum:"2026-06-25"},{gegner:"Curaçao",ergebnis:"0:0",ausgang:"U",datum:"2026-06-21"},{gegner:"Elfenbeinküste",ergebnis:"0:1",ausgang:"N",datum:"2026-06-15"}]}}},
-  {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"England", a:"DR Kongo", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:74,einordnung:{de:"England gewann Gruppe L, tat sich aber phasenweise schwer. Die DR Kongo ist die Überraschung des Turniers – erstmals in der K.-o.-Runde, mit dem späten 3:1 gegen Usbekistan im Rücken. Favorit England, doch die Kongolesen sind unbequem.",en:"England won Group L but laboured at times. DR Congo are the tournament's surprise package – in the knockouts for the first time, buoyed by a late 3-1 over Uzbekistan. England favoured, but Congo are awkward."},letztePartien:{teamA:[{gegner:"Panama",ergebnis:"2:0",ausgang:"S",datum:"2026-06-27"},{gegner:"Ghana",ergebnis:"0:0",ausgang:"U",datum:"2026-06-23"},{gegner:"Kroatien",ergebnis:"4:2",ausgang:"S",datum:"2026-06-17"}],teamB:[{gegner:"Usbekistan",ergebnis:"3:1",ausgang:"S",datum:"2026-06-27"},{gegner:"Kolumbien",ergebnis:"0:1",ausgang:"N",datum:"2026-06-23"},{gegner:"Portugal",ergebnis:"1:1",ausgang:"U",datum:"2026-06-17"}]}}},
+  {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"England", a:"DR Kongo", komm:"Christina Graf", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:74,einordnung:{de:"England gewann Gruppe L, tat sich aber phasenweise schwer. Die DR Kongo ist die Überraschung des Turniers – erstmals in der K.-o.-Runde, mit dem späten 3:1 gegen Usbekistan im Rücken. Favorit England, doch die Kongolesen sind unbequem.",en:"England won Group L but laboured at times. DR Congo are the tournament's surprise package – in the knockouts for the first time, buoyed by a late 3-1 over Uzbekistan. England favoured, but Congo are awkward."},letztePartien:{teamA:[{gegner:"Panama",ergebnis:"2:0",ausgang:"S",datum:"2026-06-27"},{gegner:"Ghana",ergebnis:"0:0",ausgang:"U",datum:"2026-06-23"},{gegner:"Kroatien",ergebnis:"4:2",ausgang:"S",datum:"2026-06-17"}],teamB:[{gegner:"Usbekistan",ergebnis:"3:1",ausgang:"S",datum:"2026-06-27"},{gegner:"Kolumbien",ergebnis:"0:1",ausgang:"N",datum:"2026-06-23"},{gegner:"Portugal",ergebnis:"1:1",ausgang:"U",datum:"2026-06-17"}]}}},
   {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"Belgien", a:"Senegal", komm:"Philipp Sohmer", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:75,einordnung:{de:"Belgien fand mit dem 5:1 gegen Neuseeland spät zu seiner Form (De Bruyne, Lukaku, Trossard). Senegal kam als bester Gruppendritter weiter und fegte Irak 5:0 weg. Zwei Topteams aus Europa und Afrika – brisant.",en:"Belgium found form late with a 5-1 over New Zealand (De Bruyne, Lukaku, Trossard). Senegal advanced as a best third-placed team and thrashed Iraq 5-0. Two heavyweights of Europe and Africa – spicy."},letztePartien:{teamA:[{gegner:"Neuseeland",ergebnis:"5:1",ausgang:"S",datum:"2026-06-26"},{gegner:"Iran",ergebnis:"0:0",ausgang:"U",datum:"2026-06-21"},{gegner:"Ägypten",ergebnis:"1:1",ausgang:"U",datum:"2026-06-15"}],teamB:[{gegner:"Irak",ergebnis:"5:0",ausgang:"S",datum:"2026-06-26"},{gegner:"Norwegen",ergebnis:"2:3",ausgang:"N",datum:"2026-06-23"},{gegner:"Frankreich",ergebnis:"1:3",ausgang:"N",datum:"2026-06-16"}]}}},
   {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:72,einordnung:{de:"Co-Gastgeber USA, getragen von der Heim-Euphorie, gegen Bosnien-Herzegowina, das erstmals das WM-Achtelfinale erreichte. Pulisic ist zurück – die USA sind Favorit, Bosnien giftig.",en:"Co-hosts USA, carried by home euphoria, against a Bosnia-Herzegovina side reaching the last 16 for the first time. Pulisic is back – the USA favoured, Bosnia awkward."},letztePartien:{teamA:[{gegner:"Türkei",ergebnis:"2:3",ausgang:"N",datum:"2026-06-25"},{gegner:"Australien",ergebnis:"2:0",ausgang:"S",datum:"2026-06-19"},{gegner:"Paraguay",ergebnis:"4:1",ausgang:"S",datum:"2026-06-12"}],teamB:[{gegner:"Katar",ergebnis:"3:1",ausgang:"S",datum:"2026-06-24"},{gegner:"Schweiz",ergebnis:"1:4",ausgang:"N",datum:"2026-06-18"},{gegner:"Kanada",ergebnis:"1:1",ausgang:"U",datum:"2026-06-12"}]}}},
   {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"Österreich", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:76,einordnung:{de:"Europameister Spanien überstand die Gruppe ohne Gegentor (Yamal, Pedri). Österreich (unter Ralf Rangnick) zog nach einem irren 3:3 gegen Algerien als Gruppenzweiter weiter. Klasse gegen Leidenschaft.",en:"European champions Spain came through without conceding (Yamal, Pedri). Austria (under Ralf Rangnick) advanced as group runners-up after a wild 3-3 with Algeria. Class against passion."},letztePartien:{teamA:[{gegner:"Uruguay",ergebnis:"1:0",ausgang:"S",datum:"2026-06-27"},{gegner:"Saudi-Arabien",ergebnis:"4:0",ausgang:"S",datum:"2026-06-21"},{gegner:"Kap Verde",ergebnis:"0:0",ausgang:"U",datum:"2026-06-15"}],teamB:[{gegner:"Algerien",ergebnis:"3:3",ausgang:"U",datum:"2026-06-27"},{gegner:"Argentinien",ergebnis:"0:2",ausgang:"N",datum:"2026-06-22"},{gegner:"Jordanien",ergebnis:"3:1",ausgang:"S",datum:"2026-06-17"}]}}},
@@ -1419,6 +1431,8 @@ const HL_SRC={
 };
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
+ {h:"Mexiko",a:"Ecuador",s:"2:0",g:"WM 2026 · Sechzehntelfinale",date:"Mi, 01.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-mexiko-ecuador-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/mexiko-gegen-ecuador-2026-weltmeisterschaft-4908434/spielinfo",magenta:"https://www.youtube.com/watch?v=0ay3fUQBhTo", analyse:{tore:[{minute:22,spieler:"Quiñones",team:"A"},{minute:31,spieler:"Jiménez",team:"A"}],fazit:{de:"Mexiko steht im WM-Achtelfinale — und beendet einen jahrzehntelangen K.-o.-Fluch. Nach einem wegen Unwetters um eine Stunde verspäteten Anpfiff drehte der Gastgeber im tobenden Aztekenstadion früh auf: Julián Quiñones traf nach Sololauf zur Führung (22.), Raúl Jiménez legte mit einem strammen Schuss in den Winkel nach (31.). Ecuador hatte nach der Pause zwar mehr Ball, blieb aber weitgehend harmlos und beendete die Partie nach Piero Hincapiés Rot in Unterzahl. Für Mexiko ist es erst der zweite K.-o.-Sieg bei einer WM überhaupt — im Achtelfinale wartet England oder die DR Kongo.",en:"Mexico are into the World Cup round of 16 — ending a decades-long knockout curse. After a storm delayed kick-off by an hour, the hosts struck early in a roaring Azteca: Julián Quiñones finished a solo run for the opener (22'), Raúl Jiménez rifled in the second (31'). Ecuador saw more of the ball after the break but rarely threatened, and finished a man down after Piero Hincapié's stoppage-time red card. It is only Mexico's second knockout win at a World Cup — England or DR Congo await in the last 16."}}},
+ {h:"Frankreich",a:"Schweden",s:"3:0",g:"WM 2026 · Sechzehntelfinale",date:"Di, 30.06.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-frankreich-schweden-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/frankreich-gegen-schweden-2026-weltmeisterschaft-4908432/spielinfo",magenta:"https://www.youtube.com/watch?v=tEsTuOTKGMg", analyse:{tore:[{minute:45,spieler:"Mbappé",team:"A"},{minute:53,spieler:"Barcola",team:"A"},{minute:74,spieler:"Mbappé",team:"A"}],fazit:{de:"Frankreich marschiert souverän ins Achtelfinale. Beim 3:0 (1:0) gegen Schweden war einmal mehr Kylian Mbappé der Mann des Abends: Der Weltmeister von 2018 traf doppelt (45./74.) und zog mit sechs Turniertoren an die Spitze der WM-Torjägerliste — gleichauf mit Lionel Messi. Dazwischen erhöhte Bradley Barcola nach feiner Vorlage von Michael Olise (53.). Die Équipe Tricolore, bei der Trainer Didier Deschamps nach einem Trauerfall zurückgekehrt war, dominierte in East Rutherford und wirkte noch längst nicht am Limit. Im Achtelfinale wartet Paraguay, der Bezwinger Deutschlands.",en:"France stroll into the round of 16. In a 3-0 (1-0) win over Sweden, Kylian Mbappé was again the star: the 2018 world champion scored twice (45', 74') and moved to six goals at the tournament, level with Lionel Messi atop the scoring charts. In between, Bradley Barcola converted a fine Michael Olise assist (53'). Les Bleus — with coach Didier Deschamps back after a bereavement — dominated in East Rutherford and looked far from their ceiling. Paraguay, the side that knocked out Germany, are next."}}},
  {h:"Elfenbeinküste",a:"Norwegen",s:"1:2",g:"WM 2026 · Sechzehntelfinale",date:"Di, 30.06.",zdf:["","https://www.zdfheute.de/sport/fussball-wm/video/wm-2026-elfenbeinkueste-norwegen-highlights-zusammenfassung-100.html"],full:null,kicker:"https://www.kicker.de/elfenbeinkueste-gegen-norwegen-2026-weltmeisterschaft-4908433/spielinfo",magenta:"https://www.youtube.com/watch?v=kn3Smgiz-48", analyse:{tore:[{minute:39,spieler:"Nusa",team:"B"},{minute:74,spieler:"Amad Diallo",team:"A"},{minute:86,spieler:"Haaland",team:"B"}],fazit:{de:"Norwegen steht erstmals seit 1998 im WM-Achtelfinale. Antonio Nusa traf per Traumschlenzer zur Führung (39.), Amad Diallo glich nach starker Einzelaktion aus (74.), ehe Erling Haaland in der 86. Minute den umjubelten Siegtreffer erzielte. Die Elfenbeinküste war über weite Strecken überlegen, scheiterte aber an der Chancenverwertung — und haderte mit einer strittigen Elfmeter-Szene (78.).",en:"Norway reach the World Cup round of 16 for the first time since 1998. Antonio Nusa curled in a stunning opener (39'), Amad Diallo equalised after a brilliant solo run (74'), before Erling Haaland struck the celebrated winner in the 86th minute. Ivory Coast were the better side for long stretches but were let down by their finishing — and were left to rue a contentious penalty-box incident (78')."}}},
  {h:"Niederlande",a:"Marokko",s:"1:1 (2:3 n.E.)",g:"WM 2026 · Sechzehntelfinale",date:"Di, 30.06.",zdf:null,full:null,kicker:null,magenta:"https://www.youtube.com/watch?v=Pr2_qUdzL8Y", analyse:{tore:[{minute:72,spieler:"Gakpo",team:"A"},{minute:"90+1",spieler:"Diop",team:"B"}],spielnote:{wert:7.2,label:{de:"Marokko im Elfmeter-Krimi weiter",en:"Morocco win another shootout"}},spielerDesSpiels:{name:"Issa Diop",team:"B",note:7.8,begruendung:{de:"Köpfte Marokko in der Nachspielzeit in die Verlängerung.",en:"Headed Morocco level deep in stoppage time to force extra time."}},fazit:{de:"Das Topspiel der Runde wurde zum Krimi: Cody Gakpo brachte die Niederlande in der 72. Minute in Führung, doch Issa Diop köpfte Marokko in der ersten Minute der Nachspielzeit nach einer Talbi-Flanke zurück ins Spiel. Nach torloser Verlängerung behielt Marokko im Elfmeterschießen mit 3:2 die Nerven – Ismael Saibari verwandelte den entscheidenden Versuch. Oranje scheidet aus, Marokko trifft im Achtelfinale auf Kanada.",en:"The tie of the round became a thriller: Cody Gakpo put the Netherlands ahead in the 72nd minute, but Issa Diop headed Morocco level in the first minute of stoppage time from a Talbi cross. After a goalless extra time, Morocco held their nerve to win the shootout 3-2 – Ismael Saibari converting the decisive kick. The Dutch are out; Morocco face Canada in the round of 16."}}},
  {h:"Deutschland",a:"Paraguay",s:"1:1 (3:4 n.E.)",g:"WM 2026 · Sechzehntelfinale",date:"Mo, 29.06.",zdf:null,full:null,kicker:null,magenta:"https://www.youtube.com/watch?v=xpAcYQT_Mmo", analyse:{tore:[{minute:42,spieler:"Enciso",team:"B"},{minute:54,spieler:"Havertz",team:"A"}],spielnote:{wert:6.8,label:{de:"Drama von Boston – Deutschland raus",en:"Boston drama – Germany out"}},spielerDesSpiels:{name:"Orlando Gill",team:"B",note:8.3,begruendung:{de:"Paraguays Torhüter hielt im Elfmeterschießen den Achtelfinaleinzug fest.",en:"Paraguay's keeper saved the shootout to send them through."}},fazit:{de:"Die nächste WM-Blamage: Gegen tief stehende Paraguayer geriet Deutschland durch Julio Enciso (42.) sogar in Rückstand, ehe Kai Havertz nach der Pause per Kopf ausglich (54.). Mehr gelang der Nagelsmann-Elf über 120 Minuten nicht – ein vermeintlicher Tah-Treffer in der Verlängerung zählte nach VAR nicht. Im Elfmeterschießen vergaben Havertz, Tah und Woltemade; Paraguay gewann 4:3 und steht erstmals seit dem Viertelfinale 2010 wieder in der WM-K.-o.-Runde. Deutschland scheidet bereits im Sechzehntelfinale aus.",en:"Another World Cup humiliation: against a deep-sitting Paraguay, Germany fell behind to Julio Enciso (42') before Kai Havertz headed the equaliser after the break (54'). Nagelsmann's side created little over 120 minutes – a Tah ‘goal’ in extra time was ruled out by VAR. In the shootout Havertz, Tah and Woltemade all missed; Paraguay won 4-3 to reach their first World Cup knockout round since 2010. Germany are out in the round of 32."}}},
@@ -1513,10 +1527,12 @@ const TEAMS = [
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  {team:"wm",date:"2026-07-01",title:"Mexiko im Achtelfinale: Quiñones und Jiménez erlösen das Azteca",teaser:"Co-Gastgeber Mexiko zieht ins Achtelfinale ein und beendet einen jahrzehntelangen K.-o.-Fluch. Beim 2:0 gegen Ecuador trafen Julián Quiñones (22.) und Raúl Jiménez (31.) früh im wegen Unwetters verspätet angepfiffenen Aztekenstadion. Ecuador beendete die Partie nach Piero Hincapiés Roter Karte in Unterzahl. Im Achtelfinale wartet England oder die DR Kongo.",src:"sportschau / kicker",url:"https://www.zdfheute.de/sport/fussball-wm/mexiko-ecuador-sechzehntelfinale-fussball-wm-2026-100.html"},
+  {team:"wm",date:"2026-07-01",title:"Mbappé-Doppelpack: Frankreich schießt Schweden 3:0 aus dem Turnier",teaser:"Mitfavorit Frankreich marschiert souverän ins Achtelfinale. Beim 3:0 gegen Schweden traf Kylian Mbappé doppelt (45./74.) und zog mit sechs Turniertoren gleich mit Lionel Messi an die Spitze der Torjägerliste; dazwischen erhöhte Bradley Barcola (53.). Im Achtelfinale trifft die Équipe Tricolore auf Deutschland-Bezwinger Paraguay.",src:"ZDF / kicker",url:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-frankreich-schweden-highlights-zusammenfassung-100"},
   {team:"wm",date:"2026-06-30",title:"Haaland schießt Norwegen ins Achtelfinale – Elfenbeinküste raus",teaser:"Norwegen gewinnt das Sechzehntelfinale gegen die Elfenbeinküste mit 2:1: Antonio Nusa (39., RB Leipzig) trifft sehenswert, Amad Diallo gleicht aus (74.), ehe Erling Haaland in der 86. Minute mit seinem 5. WM-Tor entscheidet. Im Achtelfinale trifft Norwegen – erstmals seit 1998 bei einer WM – auf Brasilien.",src:"ZDF / kicker",url:"https://www.zdfheute.de/sport/fussball-wm"},
   {team:"dfb",date:"2026-06-30",title:"WM-Aus im Elfmeterschießen: Deutschland scheitert an Paraguay",teaser:"Die nächste WM-Enttäuschung: Die DFB-Elf kommt gegen tief stehende Paraguayer nicht über ein 1:1 hinaus (Enciso; Havertz) und verliert das Sechzehntelfinale im Elfmeterschießen mit 3:4 – Havertz, Tah und Woltemade verschießen. Deutschland ist nach 2018 und 2022 erneut früh draußen.",src:"ZDF / kicker",url:"https://www.zdfheute.de/sport/fussball-wm"},
   {team:"wm",date:"2026-06-30",title:"Elfer-Krimis: Marokko wirft Niederlande raus, Brasilien zittert sich weiter",teaser:"Marokko gewinnt das Topspiel gegen die Niederlande mit 3:2 im Elfmeterschießen (1:1 n.V., Saibari verwandelt den entscheidenden Elfer) und trifft im Achtelfinale auf Kanada. Brasilien drehte gegen Japan einen Rückstand und siegte spät durch Martinelli (90.+5) mit 2:1.",src:"FIFA",url:"https://www.fifa.com/de/tournaments/mens/worldcup/canadamexicousa2026"},
-  {team:"wm",date:"2026-06-30",title:"Sechzehntelfinale: heute Nacht Frankreich–Schweden, morgen England und Belgien",teaser:"Nach Haalands Norwegen geht es weiter: Heute um 23:00 Uhr trifft Frankreich auf Schweden – exklusiv bei MagentaTV. Am Mittwoch folgen Mexiko–Ecuador (03:00, MagentaTV), England–DR Kongo (18:00, ARD) und Belgien–Senegal (22:00, ARD).",src:"Sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026"},
+  {team:"wm",date:"2026-07-01",title:"Heute im Free-TV: England–DR Kongo und Belgien–Senegal",teaser:"Weiter geht die K.-o.-Runde: England trifft um 18:00 Uhr auf Außenseiter DR Kongo (ARD, Kommentar: Christina Graf), ab 22:00 Uhr folgt Belgien–Senegal (ARD, Philipp Sohmer). Beide Sechzehntelfinals laufen zusätzlich bei MagentaTV.",src:"Sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026"},
   {team:"bayern",date:"2026-06-30",title:"Künftiger Bayern-Profi Saibari schießt Marokko weiter",teaser:"Ismael Saibari, vor einem Wechsel von der PSV Eindhoven zum FC Bayern (rund 50 Mio. Euro, PSV-Rekordverkauf), verwandelte den entscheidenden Elfmeter beim 3:2-Sieg Marokkos gegen die Niederlande. Der Medizincheck soll noch in den USA stattfinden.",src:"SPORT1 / Sky",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
   {team:"b04",date:"2026-06-30",title:"Grimaldo vor Atlético-Wechsel – Leverkusen prüft Guerreiro",teaser:"Alejandro Grimaldo ist sich laut „Marca“ und „Sky“ grundsätzlich mit Atlético Madrid einig (bis zu 30 Mio. Euro Ablöse). Als möglichen ablösefreien Ersatz prüft Bayer Leverkusen unter anderem Ex-Bayern-Profi Raphael Guerreiro.",src:"Marca / Sky",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
   {team:"epl",mkt:["UK"],date:"2026-06-29",title:"Man City: Maresca folgt auf Guardiola, Rekord-Transfer Anderson",teaser:"Manchester City hat Enzo Maresca als neuen Cheftrainer vorgestellt (Vertrag bis 2029). Zudem steht der Wechsel von Elliot Anderson (Nottingham Forest) für rund 135 Mio. Euro vor dem Abschluss – es wäre der teuerste Zugang der Vereinsgeschichte.",src:"Sky Sports",url:"https://www.skysports.com/football"},
@@ -1801,6 +1817,47 @@ const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
      AFFILIATE_ENABLED = true. Default AUS -> es werden neutrale url-Links genutzt.
    ========================================================================= */
 const AFFILIATE_ENABLED = false; // Feature-Flag: Affiliate-Links AUS (Standard)
+
+/* =========================================================================
+   LIVE-SCORES (ESPN, keyless, graceful fallback)
+   - Zeigt Ergebnis + Minute + Status in bestehende Karten; ergaenzt nur,
+     ersetzt nie. Bei Fehler/CORS/Timeout: still nichts tun.
+   - LIVE_SOURCE als Konstante -> spaeter Cloudflare-Worker-Proxy moeglich,
+     ohne Codeaenderung. LIVE_LEAGUE="ger.1" fuer die Bundesliga-Saison.
+   ========================================================================= */
+const LIVE_ENABLED = true;
+const LIVE_LEAGUE  = "fifa.world";
+const LIVE_SOURCE  = "https://site.api.espn.com/apis/site/v2/sports/soccer/" + LIVE_LEAGUE + "/scoreboard";
+const LIVE_POLL_MS = 45000;
+const LIVE_ALIAS = {
+  "Ivory Coast":"Elfenbeinküste","Côte d'Ivoire":"Elfenbeinküste","Cote d'Ivoire":"Elfenbeinküste",
+  "Netherlands":"Niederlande","Germany":"Deutschland","Morocco":"Marokko","Sweden":"Schweden",
+  "South Africa":"Südafrika","Canada":"Kanada","Norway":"Norwegen","France":"Frankreich",
+  "Mexico":"Mexiko","Belgium":"Belgien","Spain":"Spanien","Austria":"Österreich",
+  "Brazil":"Brasilien","Switzerland":"Schweiz","Algeria":"Algerien","Australia":"Australien",
+  "Egypt":"Ägypten","Colombia":"Kolumbien","Croatia":"Kroatien","Argentina":"Argentinien",
+  "DR Congo":"DR Kongo","Congo DR":"DR Kongo","Democratic Republic of the Congo":"DR Kongo",
+  "United States":"USA","USA":"USA",
+  "Bosnia and Herzegovina":"Bosnien-Herzegowina","Bosnia & Herzegovina":"Bosnien-Herzegowina",
+  "Bosnia-Herzegovina":"Bosnien-Herzegowina","Bosnien-H.":"Bosnien-Herzegowina",
+  "Cape Verde":"Kap Verde","Cabo Verde":"Kap Verde","Qatar":"Katar","Saudi Arabia":"Saudi-Arabien",
+  "Uzbekistan":"Usbekistan","Turkey":"Türkei","Türkiye":"Türkei","South Korea":"Südkorea",
+  "Italy":"Italien","England":"England","Senegal":"Senegal","Ghana":"Ghana","Japan":"Japan",
+  "Paraguay":"Paraguay","Ecuador":"Ecuador","Portugal":"Portugal","Iran":"Iran","Curaçao":"Curaçao"
+};
+let LIVE_CACHE = {};
+let _livePoll = null, _liveBusy = false;
+function liveNorm(s){ s=String(s||"").trim(); return LIVE_ALIAS[s]||s; }
+function livePairKey(a,b){ return [a,b].sort().join("~"); }
+function _berlinKey(ms){ try{ var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(ms)); var o={}; p.forEach(function(x){ o[x.type]=x.value; }); return (+o.year)*10000+(+o.month)*100+(+o.day); }catch(e){ return 0; } }
+function liveKey(m){ return livePairKey(liveNorm(m.h),liveNorm(m.a))+"@"+dayKey(m.day); }
+function _liveAnyMatchedIn(){ for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var d=LIVE_CACHE[liveKey(m)]; if(d&&d.state==="in") return true; } return false; }
+function liveSchedule(){ if(!LIVE_ENABLED) return; if(_liveAnyMatchedIn()){ if(!_livePoll) _livePoll=setInterval(liveFetch, LIVE_POLL_MS); } else if(_livePoll){ clearInterval(_livePoll); _livePoll=null; } }
+function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Beendet":"Full time")+'</span>'; } return ""; }
+function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; if(!d||d.state==="pre"){ el.innerHTML=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); } }catch(e){} }
+async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var r=await fetch(LIVE_SOURCE,{signal:ac.signal,cache:"no-store"}); if(!r||!r.ok) throw 0; var j=await r.json(); var evs=(j&&j.events)||[]; var next={}; for(var i=0;i<evs.length;i++){ try{ var ev=evs[i]; var comp=ev.competitions&&ev.competitions[0]; if(!comp) continue; var cs=comp.competitors||[]; if(cs.length<2) continue; var home=null,away=null; for(var k=0;k<cs.length;k++){ if(cs[k].homeAway==="home") home=cs[k]; else if(cs[k].homeAway==="away") away=cs[k]; } if(!home||!away) continue; var hn=liveNorm(home.team&&home.team.displayName), an=liveNorm(away.team&&away.team.displayName); if(!hn||!an) continue; var st=ev.status&&ev.status.type&&ev.status.type.state; var key=livePairKey(hn,an)+"@"+_berlinKey(Date.parse(ev.date)); next[key]={ state:st, hn:hn, an:an, hs:(home.score!=null?String(home.score):""), as:(away.score!=null?String(away.score):""), clock:(ev.status&&ev.status.displayClock)||"" }; }catch(e){} } LIVE_CACHE=next; liveApplyDOM(); liveSchedule(); }catch(e){ /* graceful: Seite bleibt unveraendert */ } finally{ clearTimeout(to); _liveBusy=false; } }
+/* ===== /LIVE-SCORES ===== */
+
 const ABO_PROVIDERS = {
   ard_zdf:{name:"ARD / ZDF",          free:true,  price:0,     note:{de:"Beitragsfinanziert, frei empfangbar", en:"Licence-funded, free to air"}, url:"https://www.sportschau.de",        aff:""},
   magenta:{name:"MagentaTV",          free:false, price:9.95,  note:{de:"MagentaSport · WM-Paket separat",      en:"MagentaSport · WC package separate"}, url:"https://www.telekom.de/magenta-tv", aff:""},
@@ -1933,7 +1990,7 @@ function isTonight(m){ if(m.tba) return false; var lm=locMatch(m); if(lm.ms==nul
   return dayKey(lm.day)===todayKeyNow() && parseInt(lm.time,10)>=18; }
 function isTonightFmt(f){ var lm=locMatch(f); if(lm.ms==null) return false;
   return dayKey(lm.day)===todayKeyNow() && parseInt(lm.time,10)>=18; }
-function isFinished(m){ if(m.tba) return false; const s=matchStart(m); if(!s) return false; return Date.now() > s.getTime()+115*60000; }
+function isFinished(m){ if(m.tba) return false; if(LIVE_ENABLED){ var _ld=LIVE_CACHE[liveKey(m)]; if(_ld&&_ld.state==="in") return false; } const s=matchStart(m); if(!s) return false; return Date.now() > s.getTime()+115*60000; }
 function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
 function renderLiveFilters(){ const t=I18N[LANG];
   const up=MATCHES.filter(m=>!isFinished(m)), upF=FORMATS.filter(f=>!isFinished(f));
@@ -1999,7 +2056,7 @@ function renderLive(){
   items.sort((a,b)=> a.sk-b.sk);
   let html="", curDay="";
   items.forEach(it=>{
-    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); html += '<div class="daybar"><span class="d">'+dlabel+'</span><span class="ln"></span></div>'; }
+    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); html += '<div class="daybar"><span class="d">'+dlabel+'</span><span class="ln"></span>'+(html===""?'<span class="social"><a href="https://www.facebook.com/share/17qkMgZEbd/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg></a><a href="https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></span>':"")+'</div>'; }
     html += it.k==="m" ? matchRow(it.o) : formatRow(it.o);
   });
   let hint="";
@@ -2009,7 +2066,7 @@ function renderLive(){
     else if(cond || wantFmt || catSel.length) hint='<div class="empty">'+t.filt_empty+'</div>';
     else hint = q ? soonHint(t) : '<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
   }
-  board.innerHTML = html + hint;
+  board.innerHTML = html + hint; try{liveApplyDOM();}catch(e){}
   /*auto-open*/ let _restored=false;
   openKeys.forEach(k=>{ const r=board.querySelector('.row[data-k="'+CSS.escape(k)+'"]');
     if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); _restored=true; } });
@@ -2201,7 +2258,7 @@ function matchRow(m){
       '<div class="teams">'+
         '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
         '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
-        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+
+        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+(LIVE_ENABLED?('<div class="livewrap" data-live="'+esc(liveKey(m))+'" data-lh="'+esc(liveNorm(m.h))+'"></div>'):"")+
       '</div>'+
       '<div class="rh-right">'+lhMini(m)+'<span class="chev">'+CHEV+'</span></div>'+
     '</button>'+
@@ -3067,6 +3124,7 @@ tippInit();
 openDeepLinkHL(); setTimeout(openDeepLinkHL,800);
 function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
 if(PAGE==="live"){
+  if(LIVE_ENABLED){ try{ liveFetch(); }catch(e){} }
   /* Startseite: bewusste, kurze Marken-Intro */
   window.addEventListener("load",()=>{
     setTimeout(()=>{ hideLoader();
