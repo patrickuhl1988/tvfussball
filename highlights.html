@@ -248,6 +248,14 @@
   .an-notelbl{font-size:12.5px; color:var(--muted); font-weight:600}
   .an-notetag{font:700 8.5px "JetBrains Mono",monospace; letter-spacing:.04em; color:#7A5AF8; border:1px solid rgba(122,90,248,.4); background:rgba(122,90,248,.1); border-radius:4px; padding:2px 5px; text-transform:uppercase}
   html[data-theme="dark"] .an-notetag{color:#B9A6FF}
+  /* --- Spielanalyse: Notenzeile & Spieler des Spiels --- */
+  .an-noterow.v2{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:6px 0 8px}
+  .an-noterow.v2 .an-noteic{font-size:17px}
+  .an-noterow.v2 .an-notelbl{flex-basis:100%; width:100%; margin-top:1px; font-size:10px; font-weight:600; color:var(--muted); text-transform:none; letter-spacing:0}
+  .an-motm.v2 .an-mtop{align-items:center; gap:7px}
+  .an-motm.v2 .an-mflag{font-size:15px; width:auto; line-height:1}
+  .an-motm.v2 .an-mname{font-size:13px; font-weight:700}
+  .an-motm.v2 .an-mtop .an-mnote{margin-left:6px}
   .an-fazit{font-size:13px; color:var(--ink); line-height:1.55; margin:4px 0 0}
   .sendrow{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:9px 2px; border-bottom:1px solid var(--line)}
   .sendrow .sflag{font-size:18px; line-height:1; flex:0 0 auto}
@@ -2206,13 +2214,14 @@ function anCards(arr,t){ if(!arr||!arr.length) return "";
   }).join("");
   return '<div class="an-sec"><div class="an-h">'+t.an_cards+'</div>'+rows+'</div>'; }
 function anNote(sp,t){ if(!sp||sp.wert==null) return "";
-  return '<div class="an-noterow"><span class="an-noteic" title="'+esc(t.tvf_rating)+'">\u2605</span><b class="an-noteval">'+esc(fmtNote(sp.wert))+'</b>'+(sp.label?'<span class="an-notelbl">'+esc(biln(sp.label))+'</span>':'')+'<span class="an-notetag">'+t.tvf_rating+'</span></div>'; }
+  return '<div class="an-noterow v2"><span class="an-noteic" title="'+esc(t.tvf_rating)+'">\u2605</span><b class="an-noteval">'+esc(fmtNote(sp.wert))+'</b><span class="an-notetag">'+t.tvf_rating+'</span>'+(sp.label?'<span class="an-notelbl">'+esc(biln(sp.label))+'</span>':'')+'</div>'; }
 function anMotm(p,t,m){ if(!p||!p.name) return "";
   const img=(p.bildRechte===true&&p.bild)?'<img class="an-mimg" src="'+esc(p.bild)+'" alt="">':'';
-  const tn=(p.team==="A"&&m)?m.h:((p.team==="B"&&m)?m.a:(p.team||"")); const team=tn?' \u00b7 '+esc(tn):'';
+  const tn=(p.team==="A"&&m)?m.h:((p.team==="B"&&m)?m.a:(p.team||""));
   const note=(p.note!=null)?'<span class="an-mnote">'+t.tvf_rating+' '+esc(fmtNote(p.note))+'</span>':'';
   const why=p.begruendung?'<span class="an-mwhy">'+esc(biln(p.begruendung))+'</span>':'';
-  return '<div class="an-sec"><div class="an-h">'+t.an_motm+'</div><div class="an-motm">'+img+'<div class="an-mbody"><div class="an-mtop"><span class="an-mname">'+esc(p.name)+team+'</span>'+note+'</div>'+why+'</div></div></div>'; }
+  const fl=tn?'<span class="flag an-mflag">'+flag(tn)+'</span>':'';
+  return '<div class="an-sec"><div class="an-h">'+t.an_motm+'</div><div class="an-motm v2">'+img+'<div class="an-mbody"><div class="an-mtop">'+fl+'<span class="an-mname">'+esc(p.name)+'</span>'+note+'</div>'+why+'</div></div></div>'; }
 function anInjuries(arr,t){ if(!arr||!arr.length) return "";
   const rows=arr.map(function(v){ return '<div class="an-li"><span class="an-min">'+esc(String(v.minute))+'\u2032</span><span class="an-pl">'+esc(v.spieler||"")+'</span>'+(v.art?'<span class="an-sub">'+esc(biln(v.art))+'</span>':'')+'</div>'; }).join("");
   return '<div class="an-sec"><div class="an-h">'+t.an_inj+'</div>'+rows+'</div>'; }
