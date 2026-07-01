@@ -683,7 +683,7 @@
   .auxlinks{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px}
   .auxlinks a{justify-content:center; padding:9px 10px; border-radius:11px}
   /* Favoriten-Stern direkt am Verein (Übersicht) */
-  .favstar{cursor:pointer; font-size:16px; line-height:1; color:var(--faint); flex:0 0 auto; padding:2px; border-radius:6px; transition:transform .12s ease, color .15s ease; -webkit-tap-highlight-color:transparent; user-select:none}.rh-right{display:flex; align-items:center; gap:8px; justify-self:end}.lh-mini{display:inline-flex; align-items:center; justify-content:center; min-width:27px; height:22px; padding:0 5px; border:1px solid; border-radius:7px; font:800 12px "JetBrains Mono",monospace; line-height:1}.hl-note{display:inline-flex; align-items:center; gap:3px; height:22px; padding:0 7px; border-radius:7px; font:800 12px "JetBrains Mono",monospace; line-height:1; white-space:nowrap; color:#F5B301; border:1px solid rgba(245,179,1,.4); background:rgba(245,179,1,.10)}
+  .favstar{cursor:pointer; font-size:16px; line-height:1; color:var(--faint); flex:0 0 auto; padding:2px; border-radius:6px; transition:transform .12s ease, color .15s ease; -webkit-tap-highlight-color:transparent; user-select:none}.rh-right{display:flex; align-items:center; gap:8px; justify-self:end; align-self:stretch}.hl-note{display:inline-flex; align-items:center; gap:3px; height:22px; padding:0 7px; border-radius:7px; font:800 12px "JetBrains Mono",monospace; line-height:1; white-space:nowrap; color:#F5B301; border:1px solid rgba(245,179,1,.4); background:rgba(245,179,1,.10)}
   .favstar:hover{color:var(--wm); transform:scale(1.12)}
   .favstar.on{color:var(--wm)}
   .favstar:active{transform:scale(.88)}
@@ -1501,6 +1501,7 @@ const TEAMS = [
   {id:"dfb",name:"DFB-Team",short:"DFB",color:"#c7a008",nat:true},
   {id:"wm",name:"WM 2026",short:"WM",color:"#0b9d6e",fg:"#fff"},
   {id:"bayern",name:"FC Bayern München",short:"FCB",color:"#dc052d"},
+  {id:"psg",name:"Paris Saint-Germain",short:"PSG",color:"#004170",fg:"#fff"},
   {id:"bvb",name:"Borussia Dortmund",short:"BVB",color:"#f4c400",fg:"#1a1a1a"},
   {id:"rbl",name:"RB Leipzig",short:"RBL",color:"#d4023a"},
   {id:"vfb",name:"VfB Stuttgart",short:"VfB",color:"#e32219"},
@@ -1536,6 +1537,9 @@ const NEWS = [
   {team:"wm",date:"2026-06-30",title:"Haaland schießt Norwegen ins Achtelfinale – Elfenbeinküste raus",teaser:"Norwegen gewinnt das Sechzehntelfinale gegen die Elfenbeinküste mit 2:1: Antonio Nusa (39., RB Leipzig) trifft sehenswert, Amad Diallo gleicht aus (74.), ehe Erling Haaland in der 86. Minute mit seinem 5. WM-Tor entscheidet. Im Achtelfinale trifft Norwegen – erstmals seit 1998 bei einer WM – auf Brasilien.",src:"ZDF / kicker",url:"https://www.zdfheute.de/sport/fussball-wm"},
   {team:"dfb",date:"2026-06-30",title:"WM-Aus im Elfmeterschießen: Deutschland scheitert an Paraguay",teaser:"Die nächste WM-Enttäuschung: Die DFB-Elf kommt gegen tief stehende Paraguayer nicht über ein 1:1 hinaus (Enciso; Havertz) und verliert das Sechzehntelfinale im Elfmeterschießen mit 3:4 – Havertz, Tah und Woltemade verschießen. Deutschland ist nach 2018 und 2022 erneut früh draußen.",src:"ZDF / kicker",url:"https://www.zdfheute.de/sport/fussball-wm"},
   {team:"wm",date:"2026-06-30",title:"Elfer-Krimis: Marokko wirft Niederlande raus, Brasilien zittert sich weiter",teaser:"Marokko gewinnt das Topspiel gegen die Niederlande mit 3:2 im Elfmeterschießen (1:1 n.V., Saibari verwandelt den entscheidenden Elfer) und trifft im Achtelfinale auf Kanada. Brasilien drehte gegen Japan einen Rückstand und siegte spät durch Martinelli (90.+5) mit 2:1.",src:"FIFA",url:"https://www.fifa.com/de/tournaments/mens/worldcup/canadamexicousa2026"},
+  {team:"psg",date:"2026-07-01",title:"PSG greift nach RB-Leipzig-Juwel Diomandé",teaser:"Paris Saint-Germain steht offenbar kurz vor der Verpflichtung von Yan Diomandé: Der 19-jährige Flügelstürmer von RB Leipzig soll für rund 100 Mio. Euro nach Paris wechseln, Leipzig sei zur Freigabe bereit. Laut David Ornstein bevorzugt Diomandé einen Wechsel zu PSG gegenüber dem ebenfalls interessierten FC Liverpool.",src:"ESPN / The Athletic",url:"https://www.espn.com/soccer/team/transfers/_/id/160/paris-saint-germain"},
+  {team:"psg",date:"2026-06-30",title:"Gonçalo Ramos verlässt PSG Richtung AC Milan",teaser:"Der Wechsel ist so gut wie perfekt: Stürmer Gonçalo Ramos schließt sich für rund 70 Mio. Euro (inkl. Boni) dem AC Milan an und hat den Medizincheck bereits absolviert – für Milan ein Vereinsrekord. Bei PSG wird damit ein Sturmplatz frei; als möglicher Nachfolger wird unter anderem US-Angreifer Folarin Balogun (AS Monaco) gehandelt.",src:"transferfeed / BBC",url:"https://www.transferfeed.com/clubs/paris-saint-germain/456"},
+  {team:"psg",date:"2026-06-30",title:"Barcola drängt bei PSG auf einen Abschied",teaser:"WM-Torschütze Bradley Barcola hat Paris Saint-Germain Berichten zufolge über seinen Wechselwunsch informiert. Der 23-jährige Franzose zieht offenbar die Premier League vor; Arsenal führt das Rennen an, auch der FC Liverpool beobachtet die Lage. Sollte PSG Diomandé holen, gilt ein Verkauf Barcolas als wahrscheinlicher.",src:"ESPN / Sky",url:"https://www.espn.com/soccer/story/_/id/49223257"},
   {team:"wm",date:"2026-07-01",title:"Heute im Free-TV: England–DR Kongo und Belgien–Senegal",teaser:"Weiter geht die K.-o.-Runde: England trifft um 18:00 Uhr auf Außenseiter DR Kongo (ARD, Kommentar: Christina Graf), ab 22:00 Uhr folgt Belgien–Senegal (ARD, Philipp Sohmer). Beide Sechzehntelfinals laufen zusätzlich bei MagentaTV.",src:"Sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026"},
   {team:"bayern",date:"2026-06-30",title:"Künftiger Bayern-Profi Saibari schießt Marokko weiter",teaser:"Ismael Saibari, vor einem Wechsel von der PSV Eindhoven zum FC Bayern (rund 50 Mio. Euro, PSV-Rekordverkauf), verwandelte den entscheidenden Elfmeter beim 3:2-Sieg Marokkos gegen die Niederlande. Der Medizincheck soll noch in den USA stattfinden.",src:"SPORT1 / Sky",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
   {team:"b04",date:"2026-06-30",title:"Grimaldo vor Atlético-Wechsel – Leverkusen prüft Guerreiro",teaser:"Alejandro Grimaldo ist sich laut „Marca“ und „Sky“ grundsätzlich mit Atlético Madrid einig (bis zu 30 Mio. Euro Ablöse). Als möglichen ablösefreien Ersatz prüft Bayer Leverkusen unter anderem Ex-Bayern-Profi Raphael Guerreiro.",src:"Marca / Sky",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
@@ -2118,7 +2122,7 @@ function tbaRow(m,t){
         '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
         '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span><span class="freebest pay">'+t.tba_chip+'</span></div>'+
       '</div>'+
-      '<div class="rh-right">'+lhMini(m)+'<span class="chev">'+CHEV+'</span></div>'+
+      '<div class="rh-right"><span class="chev">'+CHEV+'</span></div>'+
     '</button>'+
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="soonbox sm"><span class="ic">📺</span><div><b>'+t.tba_note_t+'</b><span>'+t.tba_note_s+'</span></div></div>'+
@@ -2187,7 +2191,6 @@ function lhLetzte(lp,m,t){ if(!lp||(!lp.teamA&&!lp.teamB)) return "";
 function lhScore(s,t){ if(s==null) return ""; const v=Math.max(0,Math.min(100,Math.round(s)));
   const col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626"));
   return '<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">'+t.lohnt_score+'</span><b class="lh-sc-val" style="color:'+col+'">'+v+'</b><span class="lh-sc-max">/100</span></div><div class="lh-sc-bar"><span style="width:'+v+'%;background:'+col+'"></span></div></div>'; }
-function lhMini(m){ if(!m.lohnt||m.lohnt.score==null) return ""; var v=Math.max(0,Math.min(100,Math.round(m.lohnt.score))); var col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626")); return '<span class="lh-mini" title="'+esc(I18N[LANG].lohnt_score)+'" style="color:'+col+';border-color:'+col+'66">'+v+'</span>'; }
 function hlNote(m){ var sp=m.analyse&&m.analyse.spielnote; if(!sp||sp.wert==null) return ""; return '<span class="hl-note" title="'+esc(I18N[LANG].tvf_rating)+'">\u2605 '+esc(fmtNote(sp.wert))+'</span>'; }
 function renderLohnt(m){ const L=m.lohnt; if(!L) return ""; const t=I18N[LANG];
   let inner=lhScore(L.score,t);
@@ -2265,7 +2268,7 @@ function matchRow(m){
         '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
         '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+
       '</div>'+
-      '<div class="rh-right">'+lhMini(m)+'<span class="chev">'+CHEV+'</span></div>'+
+      '<div class="rh-right"><span class="chev">'+CHEV+'</span></div>'+
     '</button>'+
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="dh"><span class="ff">'+CFLAG[COUNTRY]+'</span>'+t.where+' '+CNAME[LANG][COUNTRY]+'</div>'+
