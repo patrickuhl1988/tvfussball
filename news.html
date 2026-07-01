@@ -683,7 +683,7 @@
   .auxlinks{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px}
   .auxlinks a{justify-content:center; padding:9px 10px; border-radius:11px}
   /* Favoriten-Stern direkt am Verein (Übersicht) */
-  .favstar{cursor:pointer; font-size:16px; line-height:1; color:var(--faint); flex:0 0 auto; padding:2px; border-radius:6px; transition:transform .12s ease, color .15s ease; -webkit-tap-highlight-color:transparent; user-select:none}.rh-right{display:flex; align-items:center; gap:8px; justify-self:end}.lh-mini{display:inline-flex; align-items:center; justify-content:center; min-width:27px; height:22px; padding:0 5px; border:1px solid; border-radius:7px; font:800 12px "JetBrains Mono",monospace; line-height:1}.hl-note{display:inline-flex; align-items:center; gap:3px; height:22px; padding:0 7px; border-radius:7px; font:800 12px "JetBrains Mono",monospace; line-height:1; white-space:nowrap; color:#F5B301; border:1px solid rgba(245,179,1,.4); background:rgba(245,179,1,.10)}
+  .favstar{cursor:pointer; font-size:16px; line-height:1; color:var(--faint); flex:0 0 auto; padding:2px; border-radius:6px; transition:transform .12s ease, color .15s ease; -webkit-tap-highlight-color:transparent; user-select:none}.rh-right{display:flex; align-items:center; gap:8px; justify-self:end; align-self:stretch}.lh-ball{width:30px; height:30px; flex:0 0 auto; align-self:flex-start; margin-top:1px}.lh-ball svg{width:100%; height:100%; display:block; overflow:visible}.lh-track{fill:none; stroke:var(--line); stroke-width:3}.lh-gauge{fill:none; stroke-width:3; stroke-linecap:round; transition:stroke-dasharray .45s ease}.lh-face{fill:#f1f4f9}.lh-shine{fill:#fff; opacity:.6}.lh-spot{fill:#2a3346; opacity:.15}.lh-num{font:800 11px "JetBrains Mono",monospace; text-anchor:middle; dominant-baseline:central}.hl-note{display:inline-flex; align-items:center; gap:3px; height:22px; padding:0 7px; border-radius:7px; font:800 12px "JetBrains Mono",monospace; line-height:1; white-space:nowrap; color:#F5B301; border:1px solid rgba(245,179,1,.4); background:rgba(245,179,1,.10)}
   .favstar:hover{color:var(--wm); transform:scale(1.12)}
   .favstar.on{color:var(--wm)}
   .favstar:active{transform:scale(.88)}
@@ -861,17 +861,18 @@
   html[data-theme="dark"] .seg{ background:rgba(255,255,255,.035) }
 .navitem[data-tab="tippspiel"]{display:none}.social{display:inline-flex;gap:9px;align-items:center;margin-left:6px;vertical-align:middle}.social a{display:inline-flex;opacity:.65;transition:opacity .15s}.social a:hover{opacity:1}
   /* ===== Live-Scores ===== */
-  .livewrap{display:flex; align-items:center; gap:8px; margin-top:6px; font-family:"JetBrains Mono",monospace; line-height:1}
+  .livewrap{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; margin-top:0; font-family:"JetBrains Mono",monospace; line-height:1}
   .livewrap:empty{display:none}
-  .lv-score{font-weight:800; font-size:13.5px; letter-spacing:.02em; color:var(--ink)}
+  .lv-score{font-weight:800; font-size:15px; letter-spacing:.02em; color:var(--ink)}
   .lv-min{font-size:10px; font-weight:700; color:var(--muted)}
-  .lv-badge{font-size:8.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:2.5px 7px; border-radius:5px; display:inline-flex; align-items:center}
+  .lv-badge{font-size:7.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:1.5px 5px; border-radius:5px; display:inline-flex; align-items:center}
   .lv-badge.live{color:#fff; background:var(--red)}
-  .lv-badge.live::before{content:""; width:5px; height:5px; border-radius:50%; background:#fff; display:inline-block; margin-right:5px; animation:lvpulse 1.4s ease-in-out infinite}
+  .lv-badge.live::before{content:""; width:4px; height:4px; border-radius:50%; background:#fff; display:inline-block; margin-right:3px; animation:lvpulse 1.4s ease-in-out infinite}
   .lv-badge.done{color:var(--muted); background:var(--bg2); border:1px solid var(--line)}
   @keyframes lvpulse{0%,100%{opacity:1}50%{opacity:.3}}
 
   .komm{font-family:"JetBrains Mono",monospace;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.01em;white-space:nowrap}
+.time-clock{display:block}
 </style>
 </head>
 <body data-page="news">
@@ -1500,6 +1501,7 @@ const TEAMS = [
   {id:"dfb",name:"DFB-Team",short:"DFB",color:"#c7a008",nat:true},
   {id:"wm",name:"WM 2026",short:"WM",color:"#0b9d6e",fg:"#fff"},
   {id:"bayern",name:"FC Bayern München",short:"FCB",color:"#dc052d"},
+  {id:"psg",name:"Paris Saint-Germain",short:"PSG",color:"#004170",fg:"#fff"},
   {id:"bvb",name:"Borussia Dortmund",short:"BVB",color:"#f4c400",fg:"#1a1a1a"},
   {id:"rbl",name:"RB Leipzig",short:"RBL",color:"#d4023a"},
   {id:"vfb",name:"VfB Stuttgart",short:"VfB",color:"#e32219"},
@@ -1535,6 +1537,9 @@ const NEWS = [
   {team:"wm",date:"2026-06-30",title:"Haaland schießt Norwegen ins Achtelfinale – Elfenbeinküste raus",teaser:"Norwegen gewinnt das Sechzehntelfinale gegen die Elfenbeinküste mit 2:1: Antonio Nusa (39., RB Leipzig) trifft sehenswert, Amad Diallo gleicht aus (74.), ehe Erling Haaland in der 86. Minute mit seinem 5. WM-Tor entscheidet. Im Achtelfinale trifft Norwegen – erstmals seit 1998 bei einer WM – auf Brasilien.",src:"ZDF / kicker",url:"https://www.zdfheute.de/sport/fussball-wm"},
   {team:"dfb",date:"2026-06-30",title:"WM-Aus im Elfmeterschießen: Deutschland scheitert an Paraguay",teaser:"Die nächste WM-Enttäuschung: Die DFB-Elf kommt gegen tief stehende Paraguayer nicht über ein 1:1 hinaus (Enciso; Havertz) und verliert das Sechzehntelfinale im Elfmeterschießen mit 3:4 – Havertz, Tah und Woltemade verschießen. Deutschland ist nach 2018 und 2022 erneut früh draußen.",src:"ZDF / kicker",url:"https://www.zdfheute.de/sport/fussball-wm"},
   {team:"wm",date:"2026-06-30",title:"Elfer-Krimis: Marokko wirft Niederlande raus, Brasilien zittert sich weiter",teaser:"Marokko gewinnt das Topspiel gegen die Niederlande mit 3:2 im Elfmeterschießen (1:1 n.V., Saibari verwandelt den entscheidenden Elfer) und trifft im Achtelfinale auf Kanada. Brasilien drehte gegen Japan einen Rückstand und siegte spät durch Martinelli (90.+5) mit 2:1.",src:"FIFA",url:"https://www.fifa.com/de/tournaments/mens/worldcup/canadamexicousa2026"},
+  {team:"psg",date:"2026-07-01",title:"PSG greift nach RB-Leipzig-Juwel Diomandé",teaser:"Paris Saint-Germain steht offenbar kurz vor der Verpflichtung von Yan Diomandé: Der 19-jährige Flügelstürmer von RB Leipzig soll für rund 100 Mio. Euro nach Paris wechseln, Leipzig sei zur Freigabe bereit. Laut David Ornstein bevorzugt Diomandé einen Wechsel zu PSG gegenüber dem ebenfalls interessierten FC Liverpool.",src:"ESPN / The Athletic",url:"https://www.espn.com/soccer/team/transfers/_/id/160/paris-saint-germain"},
+  {team:"psg",date:"2026-06-30",title:"Gonçalo Ramos verlässt PSG Richtung AC Milan",teaser:"Der Wechsel ist so gut wie perfekt: Stürmer Gonçalo Ramos schließt sich für rund 70 Mio. Euro (inkl. Boni) dem AC Milan an und hat den Medizincheck bereits absolviert – für Milan ein Vereinsrekord. Bei PSG wird damit ein Sturmplatz frei; als möglicher Nachfolger wird unter anderem US-Angreifer Folarin Balogun (AS Monaco) gehandelt.",src:"transferfeed / BBC",url:"https://www.transferfeed.com/clubs/paris-saint-germain/456"},
+  {team:"psg",date:"2026-06-30",title:"Barcola drängt bei PSG auf einen Abschied",teaser:"WM-Torschütze Bradley Barcola hat Paris Saint-Germain Berichten zufolge über seinen Wechselwunsch informiert. Der 23-jährige Franzose zieht offenbar die Premier League vor; Arsenal führt das Rennen an, auch der FC Liverpool beobachtet die Lage. Sollte PSG Diomandé holen, gilt ein Verkauf Barcolas als wahrscheinlicher.",src:"ESPN / Sky",url:"https://www.espn.com/soccer/story/_/id/49223257"},
   {team:"wm",date:"2026-07-01",title:"Heute im Free-TV: England–DR Kongo und Belgien–Senegal",teaser:"Weiter geht die K.-o.-Runde: England trifft um 18:00 Uhr auf Außenseiter DR Kongo (ARD, Kommentar: Christina Graf), ab 22:00 Uhr folgt Belgien–Senegal (ARD, Philipp Sohmer). Beide Sechzehntelfinals laufen zusätzlich bei MagentaTV.",src:"Sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026"},
   {team:"bayern",date:"2026-06-30",title:"Künftiger Bayern-Profi Saibari schießt Marokko weiter",teaser:"Ismael Saibari, vor einem Wechsel von der PSV Eindhoven zum FC Bayern (rund 50 Mio. Euro, PSV-Rekordverkauf), verwandelte den entscheidenden Elfmeter beim 3:2-Sieg Marokkos gegen die Niederlande. Der Medizincheck soll noch in den USA stattfinden.",src:"SPORT1 / Sky",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
   {team:"b04",date:"2026-06-30",title:"Grimaldo vor Atlético-Wechsel – Leverkusen prüft Guerreiro",teaser:"Alejandro Grimaldo ist sich laut „Marca“ und „Sky“ grundsätzlich mit Atlético Madrid einig (bis zu 30 Mio. Euro Ablöse). Als möglichen ablösefreien Ersatz prüft Bayer Leverkusen unter anderem Ex-Bayern-Profi Raphael Guerreiro.",src:"Marca / Sky",url:"https://www.sport1.de/news/transfermarkt/2026/04/fussballtransfers-geruechte-und-news-im-transferticker"},
@@ -1856,8 +1861,8 @@ function _berlinKey(ms){ try{ var p=new Intl.DateTimeFormat("en-CA",{timeZone:"E
 function liveKey(m){ return livePairKey(liveNorm(m.h),liveNorm(m.a))+"@"+dayKey(m.day); }
 function _liveAnyMatchedIn(){ for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var d=LIVE_CACHE[liveKey(m)]; if(d&&d.state==="in") return true; } return false; }
 function liveSchedule(){ if(!LIVE_ENABLED) return; if(_liveAnyMatchedIn()){ if(!_livePoll) _livePoll=setInterval(liveFetch, LIVE_POLL_MS); } else if(_livePoll){ clearInterval(_livePoll); _livePoll=null; } }
-function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Beendet":"Full time")+'</span>'; } return ""; }
-function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; if(!d||d.state==="pre"){ el.innerHTML=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); } }catch(e){} }
+function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Ende":"FT")+'</span>'; } return ""; }
+function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; var clk=el.parentNode?el.parentNode.querySelector(".time-clock"):null; if(!d||d.state==="pre"){ el.innerHTML=""; if(clk) clk.style.display=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); if(clk) clk.style.display="none"; } }catch(e){} }
 async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var r=await fetch(LIVE_SOURCE,{signal:ac.signal,cache:"no-store"}); if(!r||!r.ok) throw 0; var j=await r.json(); var evs=(j&&j.events)||[]; var next={}; for(var i=0;i<evs.length;i++){ try{ var ev=evs[i]; var comp=ev.competitions&&ev.competitions[0]; if(!comp) continue; var cs=comp.competitors||[]; if(cs.length<2) continue; var home=null,away=null; for(var k=0;k<cs.length;k++){ if(cs[k].homeAway==="home") home=cs[k]; else if(cs[k].homeAway==="away") away=cs[k]; } if(!home||!away) continue; var hn=liveNorm(home.team&&home.team.displayName), an=liveNorm(away.team&&away.team.displayName); if(!hn||!an) continue; var st=ev.status&&ev.status.type&&ev.status.type.state; var key=livePairKey(hn,an)+"@"+_berlinKey(Date.parse(ev.date)); next[key]={ state:st, hn:hn, an:an, hs:(home.score!=null?String(home.score):""), as:(away.score!=null?String(away.score):""), clock:(ev.status&&ev.status.displayClock)||"" }; }catch(e){} } LIVE_CACHE=next; liveApplyDOM(); liveSchedule(); }catch(e){ /* graceful: Seite bleibt unveraendert */ } finally{ clearTimeout(to); _liveBusy=false; } }
 /* ===== /LIVE-SCORES ===== */
 
@@ -1981,7 +1986,7 @@ function locMatch(m){ var ms=matchUTCms(m); if(ms==null) return {day:m.day,time:
   var wd=WD_DE[new Date(Date.UTC(+p.year,+p.month-1,+p.day)).getUTCDay()];
   return {day:wd+", "+p.day+"."+p.month+"."+p.year, time:hh+":"+p.minute, ms:ms}; }
 function tzLabel(ms){ try{ var parts=new Intl.DateTimeFormat(LANG==="de"?"de-DE":"en-US",{timeZone:USER_TZ,timeZoneName:"short",hour:"2-digit"}).formatToParts(new Date(ms)); var z=parts.find(function(p){return p.type==="timeZoneName";}); return z?z.value:I18N[LANG].tz; }catch(e){ return I18N[LANG].tz; } }
-function timeCellHTML(m){ var lm=locMatch(m); var lbl=(lm.ms!=null)?tzLabel(lm.ms):I18N[LANG].tz; return '<div class="time">'+esc(lm.time)+'<small>'+esc(lbl)+'</small></div>'; }
+function timeCellHTML(m){ var lm=locMatch(m); var lbl=(lm.ms!=null)?tzLabel(lm.ms):I18N[LANG].tz; return '<div class="time">'+(LIVE_ENABLED?('<div class="livewrap" data-live="'+esc(liveKey(m))+'" data-lh="'+esc(liveNorm(m.h))+'"></div>'):"")+'<span class="time-clock">'+esc(lm.time)+'<small>'+esc(lbl)+'</small></span></div>'; }
 function dayKey(s){const x=String(s).match(/(\d{2})\.(\d{2})\.(\d{4})/); return x?(+x[3])*10000+(+x[2])*100+(+x[1]):0;}
 function catOf(m){ if(m.cat) return m.cat; const c=m.comp||""; if(/^WM/i.test(c)) return "wm"; if(/DFB/i.test(c)) return "dfb"; if(/Bundesliga/i.test(c)) return "bl"; if(/Champions/i.test(c)) return "cl"; return "other"; }
 function soonHint(t,cat){ let title=t.soon_title, sub=t.soon_sub; if(cat==="bl"){ title=t.soon_bl_t; sub=t.soon_bl; } return '<div class="soonbox"><span class="ic">🗓️</span><div><b>'+title+'</b><span>'+sub+'</span></div></div>'; }
@@ -2186,7 +2191,7 @@ function lhLetzte(lp,m,t){ if(!lp||(!lp.teamA&&!lp.teamB)) return "";
 function lhScore(s,t){ if(s==null) return ""; const v=Math.max(0,Math.min(100,Math.round(s)));
   const col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626"));
   return '<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">'+t.lohnt_score+'</span><b class="lh-sc-val" style="color:'+col+'">'+v+'</b><span class="lh-sc-max">/100</span></div><div class="lh-sc-bar"><span style="width:'+v+'%;background:'+col+'"></span></div></div>'; }
-function lhMini(m){ if(!m.lohnt||m.lohnt.score==null) return ""; var v=Math.max(0,Math.min(100,Math.round(m.lohnt.score))); var col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626")); return '<span class="lh-mini" title="'+esc(I18N[LANG].lohnt_score)+'" style="color:'+col+';border-color:'+col+'66">'+v+'</span>'; }
+function lhMini(m){ if(!m.lohnt||m.lohnt.score==null) return ""; var v=Math.max(0,Math.min(100,Math.round(m.lohnt.score))); var col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626")); var dash=(v/100*97.39).toFixed(1); var lbl=esc(I18N[LANG].lohnt_score)+": "+v; return '<span class="lh-ball" title="'+lbl+'" aria-label="'+lbl+'">'+'<svg viewBox="0 0 36 36" aria-hidden="true">'+'<circle class="lh-track" cx="18" cy="18" r="15.5"/>'+'<circle class="lh-gauge" cx="18" cy="18" r="15.5" stroke="'+col+'" stroke-dasharray="'+dash+' 97.39" transform="rotate(-90 18 18)"/>'+'<circle class="lh-face" cx="18" cy="18" r="13"/>'+'<circle class="lh-shine" cx="13" cy="13" r="4"/>'+'<g class="lh-spot"><polygon points="18.0,5.9 20.4,7.6 19.5,10.5 16.5,10.5 15.6,7.6"/><polygon points="29.6,14.2 28.6,17.1 25.6,17.1 24.7,14.2 27.1,12.5"/><polygon points="25.1,27.8 22.1,27.8 21.2,25.0 23.6,23.2 26.1,25.0"/><polygon points="10.9,27.8 9.9,25.0 12.4,23.2 14.8,25.0 13.9,27.8"/><polygon points="6.4,14.2 8.9,12.5 11.3,14.2 10.4,17.1 7.4,17.1"/></g>'+'<text class="lh-num" x="18" y="18" fill="'+col+'">'+v+'</text>'+'</svg></span>'; }
 function hlNote(m){ var sp=m.analyse&&m.analyse.spielnote; if(!sp||sp.wert==null) return ""; return '<span class="hl-note" title="'+esc(I18N[LANG].tvf_rating)+'">\u2605 '+esc(fmtNote(sp.wert))+'</span>'; }
 function renderLohnt(m){ const L=m.lohnt; if(!L) return ""; const t=I18N[LANG];
   let inner=lhScore(L.score,t);
@@ -2262,7 +2267,7 @@ function matchRow(m){
       '<div class="teams">'+
         '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
         '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
-        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+(LIVE_ENABLED?('<div class="livewrap" data-live="'+esc(liveKey(m))+'" data-lh="'+esc(liveNorm(m.h))+'"></div>'):"")+
+        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+
       '</div>'+
       '<div class="rh-right">'+lhMini(m)+'<span class="chev">'+CHEV+'</span></div>'+
     '</button>'+
