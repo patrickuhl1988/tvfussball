@@ -527,14 +527,17 @@
   .soonbox span{font-size:12.5px; line-height:1.45}
   .soonbox.sm{padding:13px 14px; margin:0 0 10px}
   .soonbox.sm .ic{font-size:18px}
-  .blhint{display:flex; align-items:center; gap:11px; padding:11px 14px; margin:2px 0 14px; border:1px solid var(--green-line); border-radius:var(--r); background:var(--green-soft); cursor:pointer; transition:box-shadow .15s, border-color .15s, transform .05s}
-  .blhint:hover{box-shadow:var(--shadow); border-color:var(--green)}
+  .blhint{display:flex; align-items:center; gap:12px; padding:13px 14px; margin:2px 0 15px; background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--green); border-radius:var(--r); box-shadow:var(--shadow); cursor:pointer; transition:box-shadow .18s ease, border-color .18s ease, transform .06s ease}
+  .blhint:hover{border-color:var(--green-line); box-shadow:0 2px 4px rgba(11,18,32,.05), 0 14px 30px -12px rgba(11,18,32,.22)}
   .blhint:active{transform:translateY(1px)}
-  .blhint .ic{font-size:18px; flex:0 0 auto}
-  .blhint .tx{flex:1; min-width:0}
-  .blhint .tx b{display:block; color:var(--ink); font-size:13px; font-weight:800; line-height:1.2}
-  .blhint .tx span{display:block; font-size:11.5px; color:var(--muted); line-height:1.4; margin-top:1px}
-  .blhint .cta{flex:0 0 auto; font-size:12px; font-weight:800; color:var(--green); white-space:nowrap}
+  .blhint-badge{flex:0 0 auto; width:38px; height:38px; border-radius:11px; display:grid; place-items:center; color:#fff; background:linear-gradient(140deg, rgba(255,255,255,.20), rgba(0,0,0,.14)), var(--green); box-shadow:0 5px 12px -4px var(--green-line)}
+  .blhint-badge svg{width:20px; height:20px}
+  .blhint-tx{flex:1 1 auto; min-width:0}
+  .blhint-tx b{display:block; font-size:13.5px; font-weight:800; letter-spacing:-.012em; color:var(--ink); line-height:1.2}
+  .blhint-tx span{display:block; margin-top:2px; font-size:11.5px; color:var(--muted); line-height:1.35}
+  .blhint-cta{flex:0 0 auto; display:inline-flex; align-items:center; gap:5px; padding:8px 13px; border-radius:999px; background:var(--green); color:#fff; font-size:12px; font-weight:800; white-space:nowrap; box-shadow:0 4px 12px -4px var(--green-line); transition:filter .15s ease}
+  .blhint:hover .blhint-cta{filter:brightness(1.07)}
+  .blhint-cta svg{width:13px; height:13px}
   .row.tba .time{color:var(--muted)}
 
   /* Abo-Rechner */
@@ -1179,7 +1182,7 @@ const I18N = {
     abo_free_keeps:"Gratis dabei (ARD/ZDF)", abo_need:"Dafür brauchst du", abo_full:"komplett", abo_partial:"Teil",
     abo_complete:"Für die komplette Abdeckung zusätzlich:", abo_visit:"Zum Anbieter", abo_reset:"Zurücksetzen",
     abo_aff_note:"Anbieter-Links sind neutral (kein Affiliate aktiv). Preise ca., Stand Juni 2026 — bitte beim Anbieter prüfen.",
-    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Liga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_test:"Tests", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", blhint_t:"Bundesliga-Auftakt terminiert", blhint_s:"Erste Partien der 1. & 2. Bundesliga stehen fest – einfach nach Bundesliga filtern.", blhint_cta:"Anzeigen ▸", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
+    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Liga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_test:"Tests", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", blhint_t:"Bundesliga-Auftakt terminiert", blhint_s:"1. & 2. Bundesliga · Spieltermine stehen fest", blhint_cta:"Anzeigen", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
@@ -1245,7 +1248,7 @@ const I18N = {
     abo_free_keeps:"Free with ARD/ZDF", abo_need:"You'll need", abo_full:"full", abo_partial:"part",
     abo_complete:"For full coverage also add:", abo_visit:"Visit provider", abo_reset:"Reset",
     abo_aff_note:"Provider links are neutral (no affiliate active). Prices approx., as of June 2026 — please verify with the provider.",
-    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Bundesliga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_test:"Friendlies", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", blhint_t:"Bundesliga kick-off scheduled", blhint_s:"The opening fixtures of the Bundesliga & 2. Bundesliga are set – just filter by Bundesliga.", blhint_cta:"Show ▸", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
+    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Bundesliga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_test:"Friendlies", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", blhint_t:"Bundesliga kick-off scheduled", blhint_s:"Bundesliga & 2. Bundesliga · fixtures confirmed", blhint_cta:"View", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
@@ -2088,7 +2091,7 @@ function renderLive(){
   }
   let blHint="";
   if(SEL.size===0 && !q && MATCHES.some(m=>!isFinished(m) && (catOf(m)==="bl"||catOf(m)==="bl2"))){
-    blHint='<div class="blhint" data-blhint="1" role="button" tabindex="0"><span class="ic">🗓️</span><span class="tx"><b>'+t.blhint_t+'</b><span>'+t.blhint_s+'</span></span><span class="cta">'+t.blhint_cta+'</span></div>';
+    blHint='<div class="blhint" data-blhint="1" role="button" tabindex="0"><span class="blhint-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18"/><path d="M8 3v3M16 3v3"/><path d="M8.4 14.6l2.3 2.3 4.9-4.8"/></svg></span><span class="blhint-tx"><b>'+t.blhint_t+'</b><span>'+t.blhint_s+'</span></span><span class="blhint-cta">'+t.blhint_cta+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12.5M11.5 5.5l6.5 6.5-6.5 6.5"/></svg></span></div>';
   }
   board.innerHTML = blHint + html + hint; try{liveApplyDOM();}catch(e){}
   /*auto-open*/ let _restored=false;
