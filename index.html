@@ -93,9 +93,11 @@
   .navitem:active{transform:scale(.95)}
 
   /* Day separators */
-  .daybar{display:flex; align-items:center; gap:11px; margin:20px 2px 11px}
-  .daybar .d{font-family:"Archivo",sans-serif; font-weight:800; font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+  .daybar{display:flex; align-items:center; gap:9px; margin:14px 0 10px; position:sticky; top:58px; z-index:6; background:var(--bg); padding:10px 2px 9px}
+  .daybar .d{font-family:"Archivo",sans-serif; font-weight:800; font-size:12px; letter-spacing:.045em; text-transform:uppercase; color:var(--ink)}
   .daybar .ln{flex:1; height:1px; background:var(--line)}
+  .daybar .dtag{flex:0 0 auto; font:800 10px "JetBrains Mono",monospace; letter-spacing:.07em; color:#fff; background:var(--green); border-radius:5px; padding:3px 6px 2px}
+  .daybar .dtag.tm{background:transparent; color:var(--green); border:1px solid var(--green-line); padding:2px 5px 1px}
   .section-eyebrow{display:flex; align-items:baseline; gap:9px; margin:18px 2px 9px}
   .section-eyebrow h2{font-family:"Archivo",sans-serif; font-weight:800; font-size:17px; letter-spacing:-.02em}
   .section-eyebrow .cnt{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--faint)}
@@ -616,6 +618,8 @@
   .row.open{ box-shadow:inset 0 1px 0 var(--hairline-top), var(--elev-2) }
   .row.free{ box-shadow:inset 3px 0 0 var(--free), inset 0 1px 0 var(--hairline-top), var(--elev-1) }
   .row.free:hover, .row.free.open{ box-shadow:inset 3px 0 0 var(--free), inset 0 1px 0 var(--hairline-top), var(--elev-2) }
+  .row.onair{ box-shadow:inset 3px 0 0 var(--red), inset 0 1px 0 var(--hairline-top), var(--elev-1) }
+  .row.onair:hover, .row.onair.open{ box-shadow:inset 3px 0 0 var(--red), inset 0 1px 0 var(--hairline-top), var(--elev-2) }
   .rowhead:active{ background:var(--hover) }
 
   /* Kohärenter Akzent-Verlauf: Logo-Pill & primäre Aktionen */
@@ -2127,7 +2131,7 @@ function renderLive(){
   items.sort((a,b)=> a.sk-b.sk);
   let html="", curDay="";
   items.forEach(it=>{
-    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); html += '<div class="daybar"><span class="d">'+dlabel+'</span><span class="ln"></span>'+(html===""?'<span class="social"><a href="https://www.facebook.com/share/17qkMgZEbd/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg></a><a href="https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></span>':"")+'</div>'; }
+    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); let dtag=""; if(it.day!=="__od__"){ const dk=dayKey(it.day), tk=todayKeyNow(); const tmr=new Date(Date.now()+864e5), tmk=tmr.getFullYear()*10000+(tmr.getMonth()+1)*100+tmr.getDate(); if(dk===tk) dtag='<span class="dtag">'+(LANG==="de"?"HEUTE":"TODAY")+'</span>'; else if(dk===tmk) dtag='<span class="dtag tm">'+(LANG==="de"?"MORGEN":"TOMORROW")+'</span>'; } html += '<div class="daybar">'+dtag+'<span class="d">'+dlabel+'</span><span class="ln"></span>'+(html===""?'<span class="social"><a href="https://www.facebook.com/share/17qkMgZEbd/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg></a><a href="https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></span>':"")+'</div>'; }
     html += it.k==="m" ? matchRow(it.o) : formatRow(it.o);
   });
   let hint="";
@@ -2321,7 +2325,7 @@ function renderAnalyse(m,t){ const A=m.analyse; if(!A) return "";
 function matchRow(m){
   const t=I18N[LANG];
   if(m.tba) return tbaRow(m,t);
-  const free=(tvOf(m,COUNTRY)||[]).some(s=>s.t==="fta"); const rail=railClass(m);
+  const free=(tvOf(m,COUNTRY)||[]).some(s=>s.t==="fta"); let rail=railClass(m); if(isLiveNow(m)) rail+=(rail?" ":"")+"onair";
   const timeCell = timeCellHTML(m);
   const isWM = /^WM/i.test(m.comp||"");
   const sccs = ["DE","AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US","IE","FI","SG","BD","TR","SE","MX"]:[]).filter(cc=>cc!==COUNTRY);
