@@ -861,17 +861,18 @@
   html[data-theme="dark"] .seg{ background:rgba(255,255,255,.035) }
 .navitem[data-tab="tippspiel"]{display:none}.social{display:inline-flex;gap:9px;align-items:center;margin-left:6px;vertical-align:middle}.social a{display:inline-flex;opacity:.65;transition:opacity .15s}.social a:hover{opacity:1}
   /* ===== Live-Scores ===== */
-  .livewrap{display:flex; align-items:center; gap:8px; margin-top:6px; font-family:"JetBrains Mono",monospace; line-height:1}
+  .livewrap{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; margin-top:0; font-family:"JetBrains Mono",monospace; line-height:1}
   .livewrap:empty{display:none}
-  .lv-score{font-weight:800; font-size:13.5px; letter-spacing:.02em; color:var(--ink)}
+  .lv-score{font-weight:800; font-size:15px; letter-spacing:.02em; color:var(--ink)}
   .lv-min{font-size:10px; font-weight:700; color:var(--muted)}
-  .lv-badge{font-size:8.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:2.5px 7px; border-radius:5px; display:inline-flex; align-items:center}
+  .lv-badge{font-size:7.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:1.5px 5px; border-radius:5px; display:inline-flex; align-items:center}
   .lv-badge.live{color:#fff; background:var(--red)}
-  .lv-badge.live::before{content:""; width:5px; height:5px; border-radius:50%; background:#fff; display:inline-block; margin-right:5px; animation:lvpulse 1.4s ease-in-out infinite}
+  .lv-badge.live::before{content:""; width:4px; height:4px; border-radius:50%; background:#fff; display:inline-block; margin-right:3px; animation:lvpulse 1.4s ease-in-out infinite}
   .lv-badge.done{color:var(--muted); background:var(--bg2); border:1px solid var(--line)}
   @keyframes lvpulse{0%,100%{opacity:1}50%{opacity:.3}}
 
   .komm{font-family:"JetBrains Mono",monospace;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.01em;white-space:nowrap}
+.time-clock{display:block}
 </style>
 </head>
 <body data-page="live">
@@ -1856,8 +1857,8 @@ function _berlinKey(ms){ try{ var p=new Intl.DateTimeFormat("en-CA",{timeZone:"E
 function liveKey(m){ return livePairKey(liveNorm(m.h),liveNorm(m.a))+"@"+dayKey(m.day); }
 function _liveAnyMatchedIn(){ for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var d=LIVE_CACHE[liveKey(m)]; if(d&&d.state==="in") return true; } return false; }
 function liveSchedule(){ if(!LIVE_ENABLED) return; if(_liveAnyMatchedIn()){ if(!_livePoll) _livePoll=setInterval(liveFetch, LIVE_POLL_MS); } else if(_livePoll){ clearInterval(_livePoll); _livePoll=null; } }
-function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Beendet":"Full time")+'</span>'; } return ""; }
-function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; if(!d||d.state==="pre"){ el.innerHTML=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); } }catch(e){} }
+function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Ende":"FT")+'</span>'; } return ""; }
+function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; var clk=el.parentNode?el.parentNode.querySelector(".time-clock"):null; if(!d||d.state==="pre"){ el.innerHTML=""; if(clk) clk.style.display=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); if(clk) clk.style.display="none"; } }catch(e){} }
 async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var r=await fetch(LIVE_SOURCE,{signal:ac.signal,cache:"no-store"}); if(!r||!r.ok) throw 0; var j=await r.json(); var evs=(j&&j.events)||[]; var next={}; for(var i=0;i<evs.length;i++){ try{ var ev=evs[i]; var comp=ev.competitions&&ev.competitions[0]; if(!comp) continue; var cs=comp.competitors||[]; if(cs.length<2) continue; var home=null,away=null; for(var k=0;k<cs.length;k++){ if(cs[k].homeAway==="home") home=cs[k]; else if(cs[k].homeAway==="away") away=cs[k]; } if(!home||!away) continue; var hn=liveNorm(home.team&&home.team.displayName), an=liveNorm(away.team&&away.team.displayName); if(!hn||!an) continue; var st=ev.status&&ev.status.type&&ev.status.type.state; var key=livePairKey(hn,an)+"@"+_berlinKey(Date.parse(ev.date)); next[key]={ state:st, hn:hn, an:an, hs:(home.score!=null?String(home.score):""), as:(away.score!=null?String(away.score):""), clock:(ev.status&&ev.status.displayClock)||"" }; }catch(e){} } LIVE_CACHE=next; liveApplyDOM(); liveSchedule(); }catch(e){ /* graceful: Seite bleibt unveraendert */ } finally{ clearTimeout(to); _liveBusy=false; } }
 /* ===== /LIVE-SCORES ===== */
 
@@ -1981,7 +1982,7 @@ function locMatch(m){ var ms=matchUTCms(m); if(ms==null) return {day:m.day,time:
   var wd=WD_DE[new Date(Date.UTC(+p.year,+p.month-1,+p.day)).getUTCDay()];
   return {day:wd+", "+p.day+"."+p.month+"."+p.year, time:hh+":"+p.minute, ms:ms}; }
 function tzLabel(ms){ try{ var parts=new Intl.DateTimeFormat(LANG==="de"?"de-DE":"en-US",{timeZone:USER_TZ,timeZoneName:"short",hour:"2-digit"}).formatToParts(new Date(ms)); var z=parts.find(function(p){return p.type==="timeZoneName";}); return z?z.value:I18N[LANG].tz; }catch(e){ return I18N[LANG].tz; } }
-function timeCellHTML(m){ var lm=locMatch(m); var lbl=(lm.ms!=null)?tzLabel(lm.ms):I18N[LANG].tz; return '<div class="time">'+esc(lm.time)+'<small>'+esc(lbl)+'</small></div>'; }
+function timeCellHTML(m){ var lm=locMatch(m); var lbl=(lm.ms!=null)?tzLabel(lm.ms):I18N[LANG].tz; return '<div class="time">'+(LIVE_ENABLED?('<div class="livewrap" data-live="'+esc(liveKey(m))+'" data-lh="'+esc(liveNorm(m.h))+'"></div>'):"")+'<span class="time-clock">'+esc(lm.time)+'<small>'+esc(lbl)+'</small></span></div>'; }
 function dayKey(s){const x=String(s).match(/(\d{2})\.(\d{2})\.(\d{4})/); return x?(+x[3])*10000+(+x[2])*100+(+x[1]):0;}
 function catOf(m){ if(m.cat) return m.cat; const c=m.comp||""; if(/^WM/i.test(c)) return "wm"; if(/DFB/i.test(c)) return "dfb"; if(/Bundesliga/i.test(c)) return "bl"; if(/Champions/i.test(c)) return "cl"; return "other"; }
 function soonHint(t,cat){ let title=t.soon_title, sub=t.soon_sub; if(cat==="bl"){ title=t.soon_bl_t; sub=t.soon_bl; } return '<div class="soonbox"><span class="ic">🗓️</span><div><b>'+title+'</b><span>'+sub+'</span></div></div>'; }
@@ -2262,7 +2263,7 @@ function matchRow(m){
       '<div class="teams">'+
         '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
         '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
-        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+(LIVE_ENABLED?('<div class="livewrap" data-live="'+esc(liveKey(m))+'" data-lh="'+esc(liveNorm(m.h))+'"></div>'):"")+
+        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span>'+bestFree(m)+'</div>'+
       '</div>'+
       '<div class="rh-right">'+lhMini(m)+'<span class="chev">'+CHEV+'</span></div>'+
     '</button>'+
