@@ -16,7 +16,7 @@
 <meta name="description" content="Wo läuft Fußball heute legal? Alle Spiele mit Sendern für Deutschland, Österreich und die Schweiz — mit Free-TV-Fokus.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -104,10 +104,10 @@
 
   /* Match / card rows */
   .board{display:flex; flex-direction:column; gap:8px}
-  .row{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); transition:border-color .18s}
+  .row{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow); transition:border-color .18s}
   .row.open{border-color:var(--line2)}.row.open .rowhead{background:radial-gradient(150px 90px at 16% -30%, rgba(91,140,255,.06), transparent 72%),radial-gradient(150px 90px at 84% -30%, rgba(91,140,255,.05), transparent 72%)}html[data-theme="dark"] .row.open .rowhead{background:radial-gradient(175px 120px at 14% -35%, rgba(140,185,255,.22), transparent 68%),radial-gradient(175px 120px at 86% -35%, rgba(140,185,255,.18), transparent 68%),radial-gradient(95px 70px at 50% -55%, rgba(255,255,255,.12), transparent 70%),linear-gradient(180deg, rgba(120,150,210,.08), rgba(10,16,32,0) 60%)}html[data-theme="dark"] .row.open{border-color:rgba(140,185,255,.30); box-shadow:0 0 0 1px rgba(140,185,255,.06), 0 8px 30px rgba(0,0,0,.38)}
   .row.free{box-shadow:inset 3px 0 0 var(--free), var(--shadow)}
-  .rowhead{width:100%; border:none; background:none; display:grid; grid-template-columns:52px 1fr auto; align-items:center; gap:12px; padding:13px 14px 13px 15px; text-align:left}
+  .rowhead{width:100%; border:none; background:none; display:grid; grid-template-columns:62px 1fr auto; align-items:center; gap:12px; padding:13px 14px 13px 15px; text-align:left}
   .rowhead:hover{background:var(--hover)}
   .time{font-family:"JetBrains Mono",monospace; font-weight:700; font-size:16px; color:var(--ink); text-align:center; line-height:1.05}
   .time small{display:block; font-size:8px; color:var(--faint); font-weight:400; letter-spacing:.06em; margin-top:3px}
@@ -522,7 +522,7 @@
   .consent button{border-radius:9px; padding:8px 13px; font-size:12px; font-weight:700; border:1px solid var(--line2); background:var(--bg2); color:var(--ink)}
   .consent button.ok{background:var(--green); color:var(--on-accent); border-color:var(--green)}
 
-  @media (max-width:480px){.seg button{padding:6px 7px}.rowhead{grid-template-columns:46px 1fr auto; gap:10px}}
+  @media (max-width:480px){.seg button{padding:6px 7px}.rowhead{grid-template-columns:54px 1fr auto; gap:10px}}
   @media (prefers-reduced-motion:reduce){.ball,.shadow,.live-flag b{animation:none !important}.ball{transform:translateY(22px)}*{transition:none !important}}
   .soonbox{display:flex; align-items:center; gap:12px; padding:22px 18px; border:1px dashed var(--line); border-radius:14px; background:var(--bg2); color:var(--muted); margin:6px 0}
   .soonbox .ic{font-size:22px; flex:0 0 auto}
@@ -889,6 +889,55 @@
 
   .komm{font-family:"JetBrains Mono",monospace;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.01em;white-space:nowrap}
 .time-clock{display:block}
+
+  /* ===== Redesign-Port: Variante A (hell) = Trikot-Verlauf + Mittelkreis ===== */
+  .row::before{content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+    background:linear-gradient(115deg, var(--c1,transparent) 0%, transparent 46%), linear-gradient(295deg, var(--c2,transparent) 0%, transparent 42%);
+    opacity:.10}
+  .row::after{content:""; position:absolute; right:-46px; top:50%; transform:translateY(-50%); width:150px; height:150px;
+    border:1.5px solid rgba(11,18,32,.06); border-radius:50%; pointer-events:none; z-index:0}
+  .row>.rowhead, .row>.morewrap{position:relative; z-index:1}
+  html[data-theme="dark"] .row::before{opacity:.17}
+  html[data-theme="dark"] .row::after{border-color:rgba(255,255,255,.09)}
+  /* ===== Anzeigetafel-Zeitblock ===== */
+  .rowhead .time{background:rgba(11,18,32,.05); border:1px solid var(--line); border-radius:11px; padding:7px 3px; align-self:center; font-size:15px}
+  html[data-theme="dark"] .rowhead .time{background:rgba(0,0,0,.32); border-color:rgba(255,255,255,.08)}
+  /* ===== Team-Typo: Anzeigetafel-Versalien ===== */
+  .teams .t{font-family:"Barlow Condensed","Archivo",sans-serif; font-weight:600; font-size:18.5px; letter-spacing:.035em; text-transform:uppercase; gap:9px}
+  .daybar .d{font-family:"Barlow Condensed","Archivo",sans-serif; font-weight:700; font-size:16px; letter-spacing:.08em}
+
+  /* ===== Harmonisierung: ein Typo-System (Condensed = plakativ, Mono = Daten, Inter = Fliesstext) ===== */
+  /* Logo */
+  .logo{font-family:"Barlow Condensed","Archivo",sans-serif; font-weight:700; letter-spacing:.02em; font-size:23px}
+  .logo .tv{font-style:normal; padding:2px 7px 3px; border-radius:7px; margin-right:4px; font-size:19px}
+  .logo .de{font-size:14px; font-weight:600}
+  /* Filterchips */
+  #liveFilters .fchip{font-family:"Barlow Condensed",sans-serif; font-weight:600; font-size:15.5px; letter-spacing:.05em; text-transform:uppercase; padding:9px 16px}
+  #liveFilters .fchip .fcount{font-size:11px; font-weight:700}
+  /* Suchfeld */
+  .fsearch{padding:11px 14px}
+  .fsearch input{font-size:14px}
+  /* Bundesliga-Hinweis */
+  .blhint-tx b{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:16px; letter-spacing:.04em; text-transform:uppercase}
+  /* Sektions-Titel (News, Highlights, Anbieter, WM) */
+  .section-eyebrow h2{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:18px; letter-spacing:.05em; text-transform:uppercase}
+  /* Karten-Details nachziehen */
+  .comp{font-size:10.5px}
+  .freebest{font-size:10px}
+  .chrow .tag{font-size:10px}
+  .daybar .dtag{font-size:10.5px; padding:3px 7px 2px}
+
+  /* ===== Farbige Einbindung: Filter-Deck + Bundesliga-Banner im Karten-Stil ===== */
+  #liveFilters{background:linear-gradient(115deg, var(--green-soft) 0%, rgba(37,99,235,0) 72%), var(--surface);
+    border:1px solid var(--line); border-radius:var(--r); padding:9px 10px; box-shadow:var(--elev-1)}
+  html[data-theme="dark"] #liveFilters{background:linear-gradient(115deg, rgba(91,140,255,.14) 0%, rgba(91,140,255,0) 72%), linear-gradient(180deg,#1A2540 0%,#141C31 100%)}
+  .blhint{position:relative; overflow:hidden;
+    background:linear-gradient(115deg, var(--green-soft) 0%, rgba(37,99,235,0) 58%), var(--surface)}
+  html[data-theme="dark"] .blhint{background:linear-gradient(115deg, rgba(91,140,255,.16) 0%, rgba(91,140,255,0) 58%), linear-gradient(180deg,#1A2540 0%,#141C31 100%)}
+  .blhint::after{content:""; position:absolute; right:-46px; top:50%; transform:translateY(-50%); width:130px; height:130px;
+    border:1.5px solid rgba(11,18,32,.06); border-radius:50%; pointer-events:none}
+  html[data-theme="dark"] .blhint::after{border-color:rgba(255,255,255,.09)}
+  .blhint-badge, .blhint-tx, .blhint-cta{position:relative; z-index:1}
 </style>
 </head>
 <body data-page="live">
@@ -1324,6 +1373,20 @@ function clubBall(c1,c2){
   +'</svg>';
 }
 function flag(n){ if(FL[n]) return FL[n]; var c=CLUB_BALL[n]; return c?clubBall(c[0],c[1]):"⚽"; }
+/* Primaerfarben (Flagge) fuer Trikot-Verlauf der Karten (Variante A, hell) */
+const NAT_TINT={Belgien:"#EF3340",Senegal:"#00853F",Spanien:"#C60B1E","Österreich":"#EF3340",Portugal:"#DA291C",Kroatien:"#ED1C24",
+ Schweiz:"#DA291C",Algerien:"#006233",Australien:"#FFCD00","Ägypten":"#CE1126",Argentinien:"#75AADB","Kap Verde":"#003DA5",
+ USA:"#B31942","Bosnien-Herzegowina":"#002F6C",Ghana:"#CE1126",Panama:"#DA121A",Norwegen:"#BA0C2F",Frankreich:"#0055A4",
+ Brasilien:"#009739",Japan:"#BC002D",Marokko:"#C1272D",Niederlande:"#FF6C00",Schweden:"#005293",Paraguay:"#D52B1E",
+ Deutschland:"#DD0000",Mexiko:"#006341",Ecuador:"#FFD100",England:"#CE1124",Uruguay:"#5CB8E4","Türkei":"#E30A17",
+ Iran:"#239F40",Neuseeland:"#101010",Usbekistan:"#0099B5","Saudi-Arabien":"#006C35",Tunesien:"#E70013",Jordanien:"#CE1126",
+ Irak:"#CE1126","Elfenbeinküste":"#F77F00",Kolumbien:"#FCD116",Chile:"#D52B1E",Kanada:"#D80621",Katar:"#8A1538",
+ Südkorea:"#CD2E3A",Nigeria:"#008751",Kamerun:"#007A5E",Polen:"#DC143C",Italien:"#008C45",Dänemark:"#C8102E",Schottland:"#0065BF"};
+function tintStyle(m){
+  function pc(n){ if(CLUB_BALL[n]) return CLUB_BALL[n][0]; if(NAT_TINT[n]) return NAT_TINT[n]; return null; }
+  var a=pc(m.h), b=pc(m.a); if(!a&&!b) return "";
+  a=a||b; b=b||a; return ' style="--c1:'+a+';--c2:'+b+'"';
+}
 
 /* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
 const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
@@ -2331,7 +2394,7 @@ function matchRow(m){
   const sccs = ["DE","AT","CH","UK"].concat(isWM?["FR","IT","ES","NL","TH","CA","US","IE","FI","SG","BD","TR","SE","MX"]:[]).filter(cc=>cc!==COUNTRY);
   const groups = sccs.map(cc=>{ const list = tvOf(m,cc); return list?sendRow(cc,list):""; }).filter(Boolean).join("");
   const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" — "+(LANG==="de"?"wo läuft das Spiel?":"where to watch?")+" (TVFussball.de)", "https://tvfussball.de");
-  return '<div class="row'+(rail?' '+rail:'')+'" data-k="'+rowKey(m)+'">'+
+  return '<div class="row'+(rail?' '+rail:'')+'"'+tintStyle(m)+' data-k="'+rowKey(m)+'">'+
     '<button class="rowhead" aria-expanded="false">'+timeCell+
       '<div class="teams">'+
         '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
