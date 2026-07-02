@@ -945,6 +945,60 @@
   .abo-h, .wk-h{font-family:"Barlow Condensed","Archivo",sans-serif; font-weight:700; font-size:20px; letter-spacing:.03em; text-transform:uppercase}
   .wm-eyebrow{color:var(--green); border-color:var(--green-line); background:var(--green-soft)}
   .wk-soon{color:var(--green); background:var(--green-soft); border-color:var(--green-line)}
+
+  /* ===== Farbschema-Ausbau: Highlights, News, TBA, Uebersichtskarten ===== */
+  .row>.panel{position:relative; z-index:1}
+  /* Spielnote unten in der Anzeigetafel-Box (Scoreboard-Zeile) */
+  .rowhead .time .hl-note{display:flex; align-items:center; justify-content:center; gap:3px; height:auto; padding:4px 2px 0; margin-top:5px;
+    border:none; border-top:1px solid rgba(245,179,1,.4); border-radius:0; background:transparent;
+    font:800 10.5px "JetBrains Mono",monospace; color:#F5B301}
+  /* TBA-Spiele: mysterioeses Schiefer-Schema + Fragezeichen-Wasserzeichen */
+  .row.tba::before{background:linear-gradient(115deg,#64748C 0%,transparent 46%),linear-gradient(295deg,#64748C 0%,transparent 42%); opacity:.10}
+  html[data-theme="dark"] .row.tba::before{opacity:.16}
+  /* News-Karten: Vereinsfarben-Schimmer (nutzt vorhandenes --club) */
+  .ncard{position:relative; overflow:hidden}
+  .ncard::before{content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(115deg, var(--club,transparent) 0%, transparent 52%); opacity:.08}
+  html[data-theme="dark"] .ncard::before{opacity:.14}
+  .ncard>*{position:relative}
+  /* WM-Uebersichtskarten (Quiz, Hymnen) im Deck-Stil */
+  details.wmsec{position:relative; background:linear-gradient(115deg, var(--green-soft) 0%, rgba(37,99,235,0) 62%), var(--surface)}
+  html[data-theme="dark"] details.wmsec{background:linear-gradient(115deg, rgba(91,140,255,.14) 0%, rgba(91,140,255,0) 62%), linear-gradient(180deg,#1A2540 0%,#141C31 100%)}
+  details.wmsec::after{content:""; position:absolute; right:-46px; top:50%; transform:translateY(-50%); width:130px; height:130px;
+    border:1.5px solid rgba(11,18,32,.06); border-radius:50%; pointer-events:none}
+  html[data-theme="dark"] details.wmsec::after{border-color:rgba(255,255,255,.09)}
+  details.wmsec>*{position:relative}
+  /* Anbieter-Uebersichtskarten: Abo-Rechner blau, Preisdeal-Wecker gruen */
+  .abo{position:relative; overflow:hidden; background:linear-gradient(115deg, var(--green-soft) 0%, rgba(37,99,235,0) 62%), var(--surface)}
+  html[data-theme="dark"] .abo{background:linear-gradient(115deg, rgba(91,140,255,.14) 0%, rgba(91,140,255,0) 62%), linear-gradient(180deg,#1A2540 0%,#141C31 100%)}
+  .wecker{position:relative; overflow:hidden; background:linear-gradient(115deg, var(--free-soft) 0%, rgba(21,165,84,0) 62%), var(--surface)}
+  html[data-theme="dark"] .wecker{background:linear-gradient(115deg, rgba(39,196,111,.13) 0%, rgba(39,196,111,0) 62%), linear-gradient(180deg,#1A2540 0%,#141C31 100%)}
+  .abo::after, .wecker::after{content:""; position:absolute; right:-46px; top:50%; transform:translateY(-50%); width:130px; height:130px;
+    border:1.5px solid rgba(11,18,32,.06); border-radius:50%; pointer-events:none}
+  html[data-theme="dark"] .abo::after, html[data-theme="dark"] .wecker::after{border-color:rgba(255,255,255,.09)}
+  .abo>*, .wecker>*{position:relative}
+
+  /* ===== Hell = wie Dunkel: Free-TV in Markenblau, Pay/Stream violett ===== */
+  :root{--free:#2563EB; --free-soft:rgba(37,99,235,.10); --free-line:rgba(37,99,235,.30);
+    --free-grad:linear-gradient(135deg,#4F86F7,#2563EB 62%,#1D4ED8); --pay:#7C5CF6}
+  .row.pay{box-shadow:inset 3px 0 0 var(--pay), inset 0 1px 0 var(--hairline-top), var(--elev-1)}
+  .row.pay:hover, .row.pay.open{box-shadow:inset 3px 0 0 var(--pay), inset 0 1px 0 var(--hairline-top), var(--elev-2)}
+  .tag.pay{color:#6D5BD0; border-color:rgba(124,92,246,.4)}
+  .freebest.pay{color:#6D5BD0; border-color:rgba(124,92,246,.4)}
+  .sendrow .schans .ch.pay{color:#6D5BD0}
+  html[data-theme="dark"] .tag.pay{color:#C9BBFF; border-color:var(--pay-line)}
+  html[data-theme="dark"] .freebest.pay{color:#C9BBFF; border-color:var(--pay-line)}
+  html[data-theme="dark"] .sendrow .schans .ch.pay{color:#BCABF7}
+  /* Wecker-Schimmer folgt jetzt den Tokens (hell blau, dunkel blau) */
+  .wecker{background:linear-gradient(115deg, var(--free-soft) 0%, transparent 62%), var(--surface)}
+  html[data-theme="dark"] .wecker{background:linear-gradient(115deg, var(--free-soft) 0%, transparent 62%), linear-gradient(180deg,#1A2540 0%,#141C31 100%)}
+  /* ===== Kopfbereich: einheitlicher 12px-Rhythmus ===== */
+  #liveFilters{margin:12px 0 0}
+  .fsearch{margin:12px 0}
+  .blhint{margin:0}
+  .blhint + .daybar{margin-top:-6px}
+  #liveBoard > .daybar:first-child{margin-top:-10px}
+  .blhint + .daybar:first-child{margin-top:-6px}
 </style>
 </head>
 <body data-page="live">
@@ -1453,7 +1507,7 @@ const MATCHES = [
   {day:"Mittwoch, 01.07.2026", time:"18:00", comp:"WM 2026 · Sechzehntelfinale", h:"England", a:"DR Kongo", komm:"Christina Graf", kommMag:"Wolff Fuss", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:74,einordnung:{de:"England gewann Gruppe L, tat sich aber phasenweise schwer. Die DR Kongo ist die Überraschung des Turniers – erstmals in der K.-o.-Runde, mit dem späten 3:1 gegen Usbekistan im Rücken. Favorit England, doch die Kongolesen sind unbequem.",en:"England won Group L but laboured at times. DR Congo are the tournament's surprise package – in the knockouts for the first time, buoyed by a late 3-1 over Uzbekistan. England favoured, but Congo are awkward."},letztePartien:{teamA:[{gegner:"Panama",ergebnis:"2:0",ausgang:"S",datum:"2026-06-27"},{gegner:"Ghana",ergebnis:"0:0",ausgang:"U",datum:"2026-06-23"},{gegner:"Kroatien",ergebnis:"4:2",ausgang:"S",datum:"2026-06-17"}],teamB:[{gegner:"Usbekistan",ergebnis:"3:1",ausgang:"S",datum:"2026-06-27"},{gegner:"Kolumbien",ergebnis:"0:1",ausgang:"N",datum:"2026-06-23"},{gegner:"Portugal",ergebnis:"1:1",ausgang:"U",datum:"2026-06-17"}]}}},
   {day:"Mittwoch, 01.07.2026", time:"22:00", comp:"WM 2026 · Sechzehntelfinale", h:"Belgien", a:"Senegal", komm:"Philipp Sohmer", kommMag:"Christina Rann", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:75,einordnung:{de:"Belgien fand mit dem 5:1 gegen Neuseeland spät zu seiner Form (De Bruyne, Lukaku, Trossard). Senegal kam als bester Gruppendritter weiter und fegte Irak 5:0 weg. Zwei Topteams aus Europa und Afrika – brisant.",en:"Belgium found form late with a 5-1 over New Zealand (De Bruyne, Lukaku, Trossard). Senegal advanced as a best third-placed team and thrashed Iraq 5-0. Two heavyweights of Europe and Africa – spicy."},letztePartien:{teamA:[{gegner:"Neuseeland",ergebnis:"5:1",ausgang:"S",datum:"2026-06-26"},{gegner:"Iran",ergebnis:"0:0",ausgang:"U",datum:"2026-06-21"},{gegner:"Ägypten",ergebnis:"1:1",ausgang:"U",datum:"2026-06-15"}],teamB:[{gegner:"Irak",ergebnis:"5:0",ausgang:"S",datum:"2026-06-26"},{gegner:"Norwegen",ergebnis:"2:3",ausgang:"N",datum:"2026-06-23"},{gegner:"Frankreich",ergebnis:"1:3",ausgang:"N",datum:"2026-06-16"}]}}},
   {day:"Donnerstag, 02.07.2026", time:"02:00", comp:"WM 2026 · Sechzehntelfinale", h:"USA", a:"Bosnien-Herzegowina", komm:"Benni Zander", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:72,einordnung:{de:"Co-Gastgeber USA, getragen von der Heim-Euphorie, gegen Bosnien-Herzegowina, das erstmals das WM-Achtelfinale erreichte. Pulisic ist zurück – die USA sind Favorit, Bosnien giftig.",en:"Co-hosts USA, carried by home euphoria, against a Bosnia-Herzegovina side reaching the last 16 for the first time. Pulisic is back – the USA favoured, Bosnia awkward."},letztePartien:{teamA:[{gegner:"Türkei",ergebnis:"2:3",ausgang:"N",datum:"2026-06-25"},{gegner:"Australien",ergebnis:"2:0",ausgang:"S",datum:"2026-06-19"},{gegner:"Paraguay",ergebnis:"4:1",ausgang:"S",datum:"2026-06-12"}],teamB:[{gegner:"Katar",ergebnis:"3:1",ausgang:"S",datum:"2026-06-24"},{gegner:"Schweiz",ergebnis:"1:4",ausgang:"N",datum:"2026-06-18"},{gegner:"Kanada",ergebnis:"1:1",ausgang:"U",datum:"2026-06-12"}]}}},
-  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"Österreich", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:76,einordnung:{de:"Europameister Spanien überstand die Gruppe ohne Gegentor (Yamal, Pedri). Österreich (unter Ralf Rangnick) zog nach einem irren 3:3 gegen Algerien als Gruppenzweiter weiter. Klasse gegen Leidenschaft.",en:"European champions Spain came through without conceding (Yamal, Pedri). Austria (under Ralf Rangnick) advanced as group runners-up after a wild 3-3 with Algeria. Class against passion."},letztePartien:{teamA:[{gegner:"Uruguay",ergebnis:"1:0",ausgang:"S",datum:"2026-06-27"},{gegner:"Saudi-Arabien",ergebnis:"4:0",ausgang:"S",datum:"2026-06-21"},{gegner:"Kap Verde",ergebnis:"0:0",ausgang:"U",datum:"2026-06-15"}],teamB:[{gegner:"Algerien",ergebnis:"3:3",ausgang:"U",datum:"2026-06-27"},{gegner:"Argentinien",ergebnis:"0:2",ausgang:"N",datum:"2026-06-22"},{gegner:"Jordanien",ergebnis:"3:1",ausgang:"S",datum:"2026-06-17"}]}}},
+  {day:"Donnerstag, 02.07.2026", time:"21:00", comp:"WM 2026 · Sechzehntelfinale", h:"Spanien", a:"Österreich", komm:"Tom Bartels", kommMag:"Christian Straßburger", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:76,einordnung:{de:"Europameister Spanien überstand die Gruppe ohne Gegentor (Yamal, Pedri). Österreich (unter Ralf Rangnick) zog nach einem irren 3:3 gegen Algerien als Gruppenzweiter weiter. Klasse gegen Leidenschaft.",en:"European champions Spain came through without conceding (Yamal, Pedri). Austria (under Ralf Rangnick) advanced as group runners-up after a wild 3-3 with Algeria. Class against passion."},letztePartien:{teamA:[{gegner:"Uruguay",ergebnis:"1:0",ausgang:"S",datum:"2026-06-27"},{gegner:"Saudi-Arabien",ergebnis:"4:0",ausgang:"S",datum:"2026-06-21"},{gegner:"Kap Verde",ergebnis:"0:0",ausgang:"U",datum:"2026-06-15"}],teamB:[{gegner:"Algerien",ergebnis:"3:3",ausgang:"U",datum:"2026-06-27"},{gegner:"Argentinien",ergebnis:"0:2",ausgang:"N",datum:"2026-06-22"},{gegner:"Jordanien",ergebnis:"3:1",ausgang:"S",datum:"2026-06-17"}]}}},
   {day:"Freitag, 03.07.2026", time:"01:00", comp:"WM 2026 · Sechzehntelfinale", h:"Portugal", a:"Kroatien", komm:"Alexander Klich", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:84,einordnung:{de:"Das Duell der Routiniers: Cristiano Ronaldo gegen Luka Modrić, Portugal gegen Kroatien. Beide wurden Gruppenzweite, beide haben individuelle Klasse in Hülle und Fülle. Ein echtes Schwergewicht im Sechzehntelfinale.",en:"A clash of veterans: Cristiano Ronaldo against Luka Modrić, Portugal against Croatia. Both finished runners-up, both packed with individual quality. A genuine heavyweight in the round of 32."},letztePartien:{teamA:[{gegner:"Kolumbien",ergebnis:"0:0",ausgang:"U",datum:"2026-06-27"},{gegner:"Usbekistan",ergebnis:"5:0",ausgang:"S",datum:"2026-06-23"},{gegner:"DR Kongo",ergebnis:"1:1",ausgang:"U",datum:"2026-06-17"}],teamB:[{gegner:"Ghana",ergebnis:"2:1",ausgang:"S",datum:"2026-06-27"},{gegner:"Panama",ergebnis:"1:0",ausgang:"S",datum:"2026-06-24"},{gegner:"England",ergebnis:"2:4",ausgang:"N",datum:"2026-06-17"}]}}},
   {day:"Freitag, 03.07.2026", time:"05:00", comp:"WM 2026 · Sechzehntelfinale", h:"Schweiz", a:"Algerien", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:66,einordnung:{de:"Die Schweiz gewann Gruppe B mit drei Siegen in Serie und ist defensiv kaum zu knacken. Algerien überstand als bester Gruppendritter ein irres 3:3 gegen Österreich. Schweizer Effizienz gegen algerische Offensivlust.",en:"Switzerland won Group B with three straight wins and are hard to break down. Algeria advanced as a best third-placed team after a wild 3-3 with Austria. Swiss efficiency against Algerian attacking flair."},letztePartien:{teamA:[{gegner:"Kanada",ergebnis:"2:1",ausgang:"S",datum:"2026-06-24"},{gegner:"Bosnien",ergebnis:"4:1",ausgang:"S",datum:"2026-06-18"},{gegner:"Katar",ergebnis:"1:1",ausgang:"U",datum:"2026-06-13"}],teamB:[{gegner:"Österreich",ergebnis:"3:3",ausgang:"U",datum:"2026-06-27"},{gegner:"Jordanien",ergebnis:"2:1",ausgang:"S",datum:"2026-06-23"},{gegner:"Argentinien",ergebnis:"0:3",ausgang:"N",datum:"2026-06-17"}]}}},
   {day:"Freitag, 03.07.2026", time:"20:00", comp:"WM 2026 · Sechzehntelfinale", h:"Australien", a:"Ägypten", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:60,einordnung:{de:"Australien (defensiv stark, hielt Paraguay 0:0) gegen Ägypten um Mohamed Salah, das erstmals überhaupt im WM-Achtelfinale steht. Kein Star-Spektakel, aber ein enges Duell.",en:"Australia (defensively solid, held Paraguay 0-0) against Egypt and Mohamed Salah, in the last 16 for the very first time. No starry spectacle, but a tight duel."},letztePartien:{teamA:[{gegner:"Paraguay",ergebnis:"0:0",ausgang:"U",datum:"2026-06-25"},{gegner:"USA",ergebnis:"0:2",ausgang:"N",datum:"2026-06-19"},{gegner:"Türkei",ergebnis:"2:0",ausgang:"S",datum:"2026-06-13"}],teamB:[{gegner:"Iran",ergebnis:"1:1",ausgang:"U",datum:"2026-06-26"},{gegner:"Neuseeland",ergebnis:"3:1",ausgang:"S",datum:"2026-06-21"},{gegner:"Belgien",ergebnis:"1:1",ausgang:"U",datum:"2026-06-15"}]}}},
@@ -1463,9 +1517,9 @@ const MATCHES = [
   {cat:"wm", day:"Samstag, 04.07.2026", time:"19:00", comp:"WM 2026 · Achtelfinale", h:"Kanada", a:"Marokko", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:64,einordnung:{de:"Der erste fixe Achtelfinal-Kracher: Co-Gastgeber Kanada (Last-Minute-Sieg gegen Südafrika) trifft auf das formstarke Marokko, das die Niederlande im Elfmeterschießen ausschaltete. Alphonso Davies ist zurück – ein offenes Duell. Free-TV-Sender noch offen, live bei MagentaTV.",en:"The first confirmed last-16 tie: co-hosts Canada (last-gasp win over South Africa) against an in-form Morocco, who knocked out the Netherlands on penalties. Alphonso Davies is back – a wide-open duel. Free-TV broadcaster still open, live on MagentaTV."},letztePartien:{teamA:[{gegner:"Südafrika",ergebnis:"1:0",ausgang:"S",datum:"2026-06-28"},{gegner:"Schweiz",ergebnis:"1:2",ausgang:"N",datum:"2026-06-24"},{gegner:"Katar",ergebnis:"6:0",ausgang:"S",datum:"2026-06-18"}],teamB:[{gegner:"Niederlande",ergebnis:"1:1 n.E.",ausgang:"S",datum:"2026-06-30"},{gegner:"Haiti",ergebnis:"4:2",ausgang:"S",datum:"2026-06-24"},{gegner:"Schottland",ergebnis:"1:0",ausgang:"S",datum:"2026-06-19"}]}}},
   {cat:"wm", day:"Samstag, 04.07.2026", time:"23:00", comp:"WM 2026 · Achtelfinale", h:"Paraguay", a:"Frankreich", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:78,einordnung:{de:"Titelmitfavorit Frankreich (Mbappé, Dembélé) trifft auf die Turnier-Überraschung Paraguay, die Deutschland im Elfmeterschießen aus dem Turnier warf. Auf dem Papier klar verteilt – doch Paraguay verteidigt leidenschaftlich und hat nichts zu verlieren. Live bei MagentaTV, Free-TV-Sender noch offen.",en:"Title contenders France (Mbappé, Dembélé) meet the tournament's surprise package Paraguay, who dumped Germany out on penalties. Clear on paper – but Paraguay defend with heart and have nothing to lose. Live on MagentaTV, free-TV broadcaster still to be confirmed."},letztePartien:{teamA:[{gegner:"Deutschland",ergebnis:"1:1 n.E.",ausgang:"S",datum:"2026-06-30"},{gegner:"Australien",ergebnis:"0:0",ausgang:"U",datum:"2026-06-25"},{gegner:"Türkei",ergebnis:"1:0",ausgang:"S",datum:"2026-06-19"}],teamB:[{gegner:"Schweden",ergebnis:"3:0",ausgang:"S",datum:"2026-06-30"},{gegner:"Norwegen",ergebnis:"4:1",ausgang:"S",datum:"2026-06-26"},{gegner:"Irak",ergebnis:"3:0",ausgang:"S",datum:"2026-06-21"}]}}},
   {cat:"wm", day:"Sonntag, 05.07.2026", time:"22:00", comp:"WM 2026 · Achtelfinale", h:"Brasilien", a:"Norwegen", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:82,einordnung:{de:"Rekordweltmeister Brasilien gegen Erling Haalands Norwegen – ein Achtelfinale mit Star-Appeal. Die Seleção zitterte sich gegen Japan weiter (2:1), Norwegen rang die Elfenbeinküste mit 2:1 nieder. Samba-Offensive gegen nordische Wucht. Live bei MagentaTV, Free-TV-Sender noch offen.",en:"Record champions Brazil against Erling Haaland's Norway – a last-16 tie with genuine star power. The Seleção survived a scare against Japan (2-1); Norway edged Ivory Coast 2-1. Samba flair against Nordic power. Live on MagentaTV, free-TV broadcaster still to be confirmed."},letztePartien:{teamA:[{gegner:"Japan",ergebnis:"2:1",ausgang:"S",datum:"2026-06-29"},{gegner:"Schottland",ergebnis:"3:0",ausgang:"S",datum:"2026-06-24"},{gegner:"Haiti",ergebnis:"3:0",ausgang:"S",datum:"2026-06-19"}],teamB:[{gegner:"Elfenbeinküste",ergebnis:"2:1",ausgang:"S",datum:"2026-06-30"},{gegner:"Frankreich",ergebnis:"1:4",ausgang:"N",datum:"2026-06-26"},{gegner:"Senegal",ergebnis:"3:2",ausgang:"S",datum:"2026-06-21"}]}}},
-  {cat:"wm", day:"Montag, 06.07.2026", time:"02:00", comp:"WM 2026 · Achtelfinale", h:"Mexiko", a:"Sieger England/DR Kongo", tba:true},
+  {cat:"wm", day:"Montag, 06.07.2026", time:"02:00", comp:"WM 2026 · Achtelfinale", h:"Mexiko", a:"England", tba:true},
   {cat:"wm", day:"Montag, 06.07.2026", time:"21:00", comp:"WM 2026 · Achtelfinale", h:"Sieger Spanien/Österreich", a:"Sieger Portugal/Kroatien", tba:true},
-  {cat:"wm", day:"Dienstag, 07.07.2026", time:"02:00", comp:"WM 2026 · Achtelfinale", h:"Sieger Belgien/Senegal", a:"Sieger USA/Bosnien", tba:true},
+  {cat:"wm", day:"Dienstag, 07.07.2026", time:"02:00", comp:"WM 2026 · Achtelfinale", h:"Belgien", a:"USA", tba:true},
   {cat:"wm", day:"Dienstag, 07.07.2026", time:"18:00", comp:"WM 2026 · Achtelfinale", h:"Sieger Argentinien/Kap Verde", a:"Sieger Australien/Ägypten", tba:true},
   {cat:"wm", day:"Dienstag, 07.07.2026", time:"22:00", comp:"WM 2026 · Achtelfinale", h:"Sieger Schweiz/Algerien", a:"Sieger Kolumbien/Ghana", tba:true},
   {day:"Dienstag, 23.06.2026", time:"19:00", live:true, comp:"WM 2026 · Gruppe K · 2. Spieltag",
@@ -2476,31 +2530,29 @@ function hlRow(m,t){
     sums+='<div class="sumrow"><span class="slabel '+(s[3]||"")+'">'+s[0]+'</span><span class="sname">'+s[1]+'</span>'+
       '<span class="sright"><a class="swatch" href="'+s[2]+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
   });
-  // Komplettes Spiel
-  let full;
+  // Komplettes Spiel — nur zeigen, wenn es kostenlos (Free-TV/Relive) nachschaubar ist
+  let full="";
   if(m.full){
-    full='<a class="fullm" href="'+m.full[3]+'" target="_blank" rel="noopener">'+
+    full='<div class="dh">'+t.hl_full+'</div>'+
+      '<a class="fullm" href="'+m.full[3]+'" target="_blank" rel="noopener">'+
       '<span class="fic">▶</span><span class="ftx"><b>'+t.hl_whole+'</b><span>'+t.hl_free_stream+'</span></span>'+
       '<span class="fmeta"><b>'+m.full[0]+'</b>'+(m.full[1]?locMin(m.full[1])+' · ':'')+locAvail(m.full[2])+'</span></a>';
-  } else {
-    full='<div class="paybox"><span class="pic">🔒</span><span>'+t.hl_pay_only+' '+
-      '<a href="'+MAGENTA+'" target="_blank" rel="noopener">MagentaTV</a> '+t.hl_pay_suffix+'</span></div>';
   }
   const share = shareBar(m.h+" "+m.s+" "+m.a, m.h+" "+m.s+" "+m.a+" · "+(LANG==="de"?"Highlights & Relive":"highlights & replay")+" (TVFussball.de)", m.full?m.full[3]:(m.zdf?m.zdf[1]:"https://tvfussball.de"));
-  return '<div class="row" data-hl="'+esc(hlKey(m))+'">'+
+  return '<div class="row"'+tintStyle(m)+' data-hl="'+esc(hlKey(m))+'">'+
     '<button class="rowhead" aria-expanded="false">'+
-      '<div class="time">'+m.s+'<small>'+t.ft+'</small></div>'+
+      '<div class="time">'+m.s+'<small>'+t.ft+'</small>'+hlNote(m)+'</div>'+
       '<div class="teams">'+
         '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
         '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
         '<div class="meta"><span class="comp">'+locComp(m.g)+'</span><span class="freebest pay">'+locDate(m.date)+'</span>'+
           (tot>=3?'<span class="freebest tv">'+tot+' '+t.goals+'</span>':"")+
           (m.full?'<span class="freebest radio">▶ '+t.f_relive+'</span>':"")+'</div>'+
-      '</div><div class="rh-right">'+hlNote(m)+'<span class="chev">'+CHEV+'</span></div>'+
+      '</div><div class="rh-right"><span class="chev">'+CHEV+'</span></div>'+
     '</button>'+
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
       '<div class="dh">'+t.hl_summaries+'</div><div class="chlist">'+sums+'</div>'+
-      '<div class="dh">'+t.hl_full+'</div>'+full+
+      full+
       renderAnalyse(m,t)+
       share+
     '</div></div></div>'+
