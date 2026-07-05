@@ -1001,6 +1001,13 @@
   .blhint + .daybar{margin-top:-6px}
   #liveBoard > .daybar:first-child{margin-top:-10px}
   .blhint + .daybar:first-child{margin-top:-6px}
+
+  /* Land-wählen-Chip */
+  .fchip-mkt{display:inline-flex; align-items:center; gap:5px; cursor:pointer; padding-right:9px}
+  .fchip-mkt .mkt-ico{font-size:14px; line-height:1}
+  .fchip-mkt select{appearance:none; -webkit-appearance:none; border:none; background:transparent; font:inherit; color:inherit; cursor:pointer; max-width:132px; padding:0}
+  .fchip-mkt select:focus{outline:none}
+  .fchip-mkt .mkt-caret{font-size:10px; opacity:.55}
 </style>
 </head>
 <body data-page="news">
@@ -1242,6 +1249,7 @@
 <script>
 const ADS_ENABLED = false;
 let COUNTRY = "DE"; // Standardmarkt (per Geo-IP überschrieben); alle weiteren Länder unter „Mehr Sender"
+let MARKET_LOCKED = false; // true = Nutzer hat Land manuell gewählt (Geo-IP wird ignoriert)
 const TODAY_KEY = 20260624; // Stichtag: Spiele davor erscheinen nicht mehr in der Senderliste (sondern in Highlights)
 
 const I18N = {
@@ -1473,7 +1481,8 @@ const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Fran
 
 /* WM 2026 — echte Partien, Zeiten (MEZ), Sender (DE/AT/CH via fussballgucken.info, UK via BBC/ITV) */
 const MATCHES = [
-  {cat:"wm", day:"Donnerstag, 09.07.2026", time:"—", comp:"WM 2026 · Viertelfinale", h:"Viertelfinale", a:"4 Spiele · 09.–11. Juli", tba:true},
+  {cat:"wm", day:"Donnerstag, 09.07.2026", time:"22:00", comp:"WM 2026 · Viertelfinale", h:"Marokko", a:"Frankreich", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:86,einordnung:{de:"Revanche des WM-Halbfinals von 2022, diesmal in Boston: Marokkos eiskaltes Umschaltspiel (Ounahi-Doppelpack gegen Kanada) trifft auf Mbappés Frankreich. Sicher live bei MagentaTV – ob ARD oder ZDF übertragen, ist noch offen.",en:"A rematch of the 2022 semi-final, this time in Boston: Morocco’s ice-cold counter game (Ounahi brace vs Canada) meets Mbappé’s France. Confirmed live on MagentaTV – ARD/ZDF free-TV coverage still open."}}},
+  {cat:"wm", day:"Freitag, 10.07.2026", time:"—", comp:"WM 2026 · Viertelfinale", h:"Viertelfinale", a:"3 weitere Spiele · 10.–12. Juli", tba:true},
   {cat:"wm", day:"Dienstag, 14.07.2026", time:"—", comp:"WM 2026 · Halbfinale", h:"Halbfinale", a:"14./15. Juli · Dallas & Atlanta", tba:true},
   {cat:"wm", day:"Samstag, 18.07.2026", time:"23:00", comp:"WM 2026 · Spiel um Platz 3", h:"Verlierer HF 1", a:"Verlierer HF 2", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
   {cat:"wm", day:"Sonntag, 19.07.2026", time:"21:00", comp:"WM 2026 · Finale", h:"Finalist 1", a:"Finalist 2", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
@@ -2270,6 +2279,8 @@ const HL_SRC={
 };
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
+ {h:"Paraguay",a:"Frankreich",s:"0:1",g:"WM 2026 · Achtelfinale",date:"Sa, 04.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-paraguay-frankreich-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:70,spieler:"Mbappé (FE)",team:"B"}],fazit:{de:"Zäher Abnutzungskampf in der Hitze von Philadelphia: Paraguay verteidigte lange ohne eigenen Torschuss (23 % Ballbesitz), erst der eingewechselte Doué belebte die Partie. Nach VAR-Eingriff verwandelte Mbappé den fälligen Elfmeter souverän (70.) und vergab in der Nachspielzeit zwei weitere Großchancen. Frankreich müht sich weiter – Donnerstag wartet das Viertelfinale gegen Marokko.",en:"A grinding battle in the Philadelphia heat: Paraguay defended for long spells without a shot (23% possession) until substitute Doué sparked the game. After a VAR review, Mbappé coolly converted the penalty (70’) and spurned two stoppage-time chances. France grind on – Morocco await in Thursday’s quarter-final."},spielnote:{wert:5.6,label:{de:"Zäher Kampf – Mbappé eiskalt vom Punkt",en:"A grind – Mbappé ice-cold from the spot"}}}},
+ {h:"Kanada",a:"Marokko",s:"0:3",g:"WM 2026 · Achtelfinale",date:"Sa, 04.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-kanada-marokko-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:50,spieler:"Ounahi",team:"B"},{minute:82,spieler:"Ounahi",team:"B"},{minute:98,spieler:"Rahimi",team:"B"}],fazit:{de:"Marokko ist erster Viertelfinalist der WM 2026 – und beendet Kanadas Heimtraum. Der Co-Gastgeber war vor der Pause das bessere Team (Oluwaseyi scheiterte an Bono), doch nach einem Standard über Hakimi schlug Ounahi eiskalt zu (50.) und legte nach (82.), Joker Rahimi setzte den Schlusspunkt (90.+8). Wermutstropfen: Bayern-Neuzugang Saibari musste verletzt raus. Donnerstag steigt die 2022er-Revanche gegen Frankreich.",en:"Morocco are the first quarter-finalists of 2026 – ending Canada’s home dream. The co-hosts were the better side before the break (Oluwaseyi denied by Bono), but Ounahi struck ice-cold after a Hakimi set-piece routine (50’) and doubled up (82’), sub Rahimi adding the late third (90+8’). One worry: Bayern signing Saibari went off injured. Thursday brings the 2022 rematch with France."},spielnote:{wert:6.6,label:{de:"Ounahi brillant – erster Viertelfinalist steht",en:"Ounahi brilliant – first quarter-finalists"}}}},
  {h:"Kolumbien",a:"Ghana",s:"1:0",g:"WM 2026 · Sechzehntelfinale",date:"Sa, 04.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-kolumbien-ghana-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:14,spieler:"Arias",team:"A"}],fazit:{de:"Kolumbien löst das letzte Achtelfinalticket – leise und effizient. Jhon Arias verwertete früh eine präzise Suárez-Hereingabe (14.), der Joker war erst Minuten zuvor für den verletzten Córdoba gekommen. Danach kontrollierte das Bollwerk von Néstor Lorenzo die Partie, Díaz’ vermeintliches 2:0 zählte wegen Abseits nicht. Kolumbien bleibt ungeschlagen – und trifft jetzt auf die Schweiz.",en:"Colombia claim the final round-of-16 ticket – quietly and efficiently. Jhon Arias converted a precise Suárez delivery early (14'), moments after the sub replaced the injured Córdoba. Néstor Lorenzo's block controlled the rest, with Díaz's ‘second’ ruled out for offside. Colombia remain unbeaten – Switzerland are next."},spielnote:{wert:5.8,label:{de:"Arias trifft früh, Kolumbien kontrolliert",en:"Arias strikes early, Colombia control"}}}},
  {h:"Argentinien",a:"Kap Verde",s:"3:2",g:"WM 2026 · Sechzehntelfinale",date:"Sa, 04.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-argentinien-kap-verde-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:29,spieler:"Messi",team:"A"},{minute:59,spieler:"Deroy Duarte",team:"B"},{minute:93,spieler:"Li. Martínez",team:"A"},{minute:103,spieler:"Lopes Cabral",team:"B"},{minute:111,spieler:"Borges (ET)",team:"A"}],fazit:{de:"Das Kap-Verde-Märchen endet erst in Minute 111: Messi traf zum 20. Mal bei einer WM (29.), doch der Debütant glich durch Deroy Duarte aus (59.) und antwortete auch auf Lisandro Martínez’ 2:1 in der Verlängerung (93.) – Lopes Cabrals Winkel-Traumtor (103.) war einer der Treffer des Turniers. Die Entscheidung: Nach Messi-Ecke prallte Romeros Kopfball via Diney Borges ins Netz (Eigentor, 111.). Der Weltmeister wankt weiter – Dienstag wartet Salahs Ägypten.",en:"Cape Verde's fairytale only ends in minute 111: Messi scored his 20th World Cup goal (29') but the debutants levelled through Deroy Duarte (59') and answered Lisandro Martínez's extra-time 2-1 (93') with Lopes Cabral's top-corner stunner (103') – one of the goals of the tournament. The decider: Romero's header from a Messi corner went in off Diney Borges (own goal, 111'). The holders stumble on – Salah's Egypt await Tuesday."},spielnote:{wert:8.4,label:{de:"Kap-Verde-Märchen endet in Minute 111",en:"Cape Verde's fairytale ends in minute 111"}}}},
  {h:"Australien",a:"Ägypten",s:"1:1 (2:4 n.E.)",g:"WM 2026 · Sechzehntelfinale",date:"Fr, 03.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-australien-aegypten-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:13,spieler:"Ashour",team:"B"},{minute:55,spieler:"Hany (ET)",team:"A"}],fazit:{de:"Ägypten schreibt Geschichte: der erste K.-o.-Sieg der Pharaonen bei einer WM – nach 92 Jahren wieder ein Achtelfinale. Ashour köpfte früh ein (13.), ein Hany-Eigentor brachte Australien zurück (55.). Im Elfmeterschießen blieb Ägypten mit vier Treffern makellos – inklusive lässiger Salah-Panenka –, während Souttar und Herrington vergaben; Abdelmaguid verwandelte den entscheidenden. Jetzt kommt es zu Messi gegen Salah.",en:"Egypt make history: the Pharaohs' first-ever World Cup knockout win – and a first round of 16 in 92 years. Ashour headed them ahead (13') before a Hany own goal levelled it (55'). Egypt were flawless from the spot – including Salah's cool Panenka – while Souttar and Herrington missed; Abdelmaguid converted the clincher. Next up: Messi vs Salah."},spielnote:{wert:7.2,label:{de:"Salah-Panenka – Pharaonen schreiben Geschichte",en:"Salah Panenka – Pharaohs make history"}}}},
@@ -2373,6 +2384,8 @@ const TEAMS = [
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  {team:"wm",date:"2026-07-05",title:"Ounahi-Gala: Marokko wirft Co-Gastgeber Kanada raus – erster Viertelfinalist",teaser:"0:3 aus Kanadas Sicht: Nach starker erster Hälfte der Canucks schlägt Marokko eiskalt zu – Ounahi trifft doppelt (50./82.), Rahimi legt spät nach (90.+8). Bayern-Neuzugang Saibari verletzt sich. Im Viertelfinale kommt es Donnerstag (22 Uhr) zur Revanche des 2022er-Halbfinals gegen Frankreich.",src:"ZDFheute",url:"https://www.zdfheute.de/sport/fussball-wm/kanada-marokko-fussball-wm-2026-achtelfinale-liveticker-102.html"},
+  {team:"wm",date:"2026-07-05",title:"Mbappé vom Punkt: Frankreich müht sich an Paraguay vorbei",teaser:"0:1 in der Hitze von Philadelphia: Der Deutschland-Bezwinger verteidigt leidenschaftlich, doch nach VAR-Elfmeter trifft Mbappé (70.). Frankreich steht im Viertelfinale – dort wartet Donnerstag um 22 Uhr Marokko. Der Free-TV-Sender dafür ist noch offen, sicher ist die Übertragung bei MagentaTV.",src:"t-online",url:"https://www.t-online.de/sport/fussball/wm/id_101323704/paraguay-vs-frankreich-heute-live-so-sehen-sie-das-wm-achtelfinale.html"},
   {team:"wm",date:"2026-07-04",title:"Eigentor in Minute 111: Argentinien überlebt das Kap-Verde-Märchen",teaser:"3:2 nach Verlängerung: Messi trifft zum 20. Mal bei einer WM (29.), doch der Debütant gleicht zweimal aus – Lopes Cabrals Winkel-Traumtor (103.) ist einer der Treffer des Turniers. Die Entscheidung fällt per Eigentor von Borges nach Messi-Ecke (111.). Im Achtelfinale wartet Dienstag das Gigantenduell Messi gegen Salah (18 Uhr, ARD).",src:"ZDFheute",url:"https://www.zdfheute.de/sport/fussball-wm/argentinien-kap-verde-fussball-wm-2026-sechzehntelfinale-liveticker-102.html"},
   {team:"wm",date:"2026-07-04",title:"Salah-Panenka: Ägypten gewinnt erstmals ein WM-K.-o.-Spiel",teaser:"1:1 nach 120 Minuten, 4:2 im Elfmeterschießen gegen Australien: Die Pharaonen stehen nach 92 Jahren wieder in einem Achtelfinale – der erste K.-o.-Sieg ihrer WM-Geschichte. Der angeschlagene Salah spielt durch und verwandelt lässig per Panenka, Abdelmaguid macht den Deckel drauf.",src:"kicker",url:"https://www.kicker.de/weltmeisterschaft/spieltag"},
   {team:"wm",date:"2026-07-04",title:"Arias reicht: Kolumbien zieht ungeschlagen ins Achtelfinale – gegen die Schweiz",teaser:"1:0 gegen Ghana: Jhon Arias verwertet früh eine Suárez-Hereingabe (14.), danach lässt das Bollwerk von Néstor Lorenzo kaum noch etwas zu. Am Dienstag (22 Uhr, ARD) trifft Kolumbien in Vancouver auf die Schweiz.",src:"sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026/wm-2026-das-war-die-nacht,das-war-die-nacht-100.html"},
@@ -2651,7 +2664,7 @@ const FOLLOW = new Set();   // gefolgte Teams (jetzt mit localStorage-Persistenz
 
 /* ---------- Persistenz: funktionaler localStorage (kein Tracking) ---------- */
 const LS_OK=(function(){ try{ const k="tvf:v1:__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
-const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme", geo:"tvf:v1:geo" };
+const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme", geo:"tvf:v1:geo", market:"tvf:v1:market" };
 function lsGet(k){ if(!LS_OK) return null; try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function lsSet(k,v){ if(!LS_OK) return; try{ localStorage.setItem(k,v); }catch(e){} }
 function saveFollow(){ lsSet(LS_KEY.follow, JSON.stringify([...FOLLOW])); }
@@ -2661,6 +2674,7 @@ function loadPersisted(){
   try{ const raw=lsGet(LS_KEY.follow); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ FOLLOW.clear(); a.forEach(x=>FOLLOW.add(x)); } } }catch(e){}
   try{ const raw=lsGet(LS_KEY.filters); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ LIVE_SEL.clear(); a.forEach(x=>LIVE_SEL.add(x)); } } }catch(e){}
   try{ const raw=lsGet(LS_KEY.lang); if(raw!==null){ const v=JSON.parse(raw); if(v==="de"||v==="en"){ LANG=v; LANG_LOCKED=true; } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.market); if(raw!==null){ const v=JSON.parse(raw); if(typeof v==="string"&&v){ COUNTRY=v; MARKET_LOCKED=true; } } }catch(e){}
 }
 const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
 
@@ -2875,11 +2889,43 @@ function renderLiveFilters(){ const t=I18N[LANG];
   const defs=[["all",t.f_all],["mine",t.f_mine]].concat(blChip)
     .concat([["free",t.f_free],["tonight",t.f_tonight],["format",t.f_format]])
     .concat([["wm",t.f_wm],["dfb",t.f_dfb],["bl2",t.f_bl2],["bl3",t.f_bl3],["cl",t.f_cl],["el",t.f_el],["pl",t.f_pl],["facup",t.f_facup],["it",t.f_it],["es",t.f_es],["test",t.f_test]].filter(d=>cnt[d[0]]>0));
-  document.getElementById("liveFilters").innerHTML = defs.map(d=>{
+  const chips = defs.map(d=>{
     const c=cnt[d[0]];
     return '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(d[0]==="all"?LIVE_SEL.size===0:LIVE_SEL.has(d[0]))+'">'+d[1]+(c?'<span class="fcount">'+c+'</span>':'')+'</button>';
-  }).join("");
+  });
+  chips.splice(2, 0, mktChip());
+  document.getElementById("liveFilters").innerHTML = chips.join("");
 }
+
+/* ---------- Land wählen (Markt manuell setzen, z.B. auf Reisen) ---------- */
+const MKT_LIST=["DE","AT","CH","UK","IE","FR","IT","ES","NL","SE","FI","TR","US","CA","MX","TH","SG","BD"];
+const MKT_FLAG={DE:"\uD83C\uDDE9\uD83C\uDDEA",AT:"\uD83C\uDDE6\uD83C\uDDF9",CH:"\uD83C\uDDE8\uD83C\uDDED",UK:"\uD83C\uDDEC\uD83C\uDDE7",IE:"\uD83C\uDDEE\uD83C\uDDEA",FR:"\uD83C\uDDEB\uD83C\uDDF7",IT:"\uD83C\uDDEE\uD83C\uDDF9",ES:"\uD83C\uDDEA\uD83C\uDDF8",NL:"\uD83C\uDDF3\uD83C\uDDF1",SE:"\uD83C\uDDF8\uD83C\uDDEA",FI:"\uD83C\uDDEB\uD83C\uDDEE",TR:"\uD83C\uDDF9\uD83C\uDDF7",US:"\uD83C\uDDFA\uD83C\uDDF8",CA:"\uD83C\uDDE8\uD83C\uDDE6",MX:"\uD83C\uDDF2\uD83C\uDDFD",TH:"\uD83C\uDDF9\uD83C\uDDED",SG:"\uD83C\uDDF8\uD83C\uDDEC",BD:"\uD83C\uDDE7\uD83C\uDDE9"};
+function mktName(cc){ try{ const n=new Intl.DisplayNames([LANG==="de"?"de":"en"],{type:"region"}).of(cc==="UK"?"GB":cc); if(n) return n; }catch(e){} return cc; }
+function mktChip(){
+  const de=LANG==="de";
+  const opts=MKT_LIST.map(c=>'<option value="'+c+'"'+(c===COUNTRY?" selected":"")+'>'+MKT_FLAG[c]+' '+mktName(c)+'</option>').join("");
+  const auto='<option value="__auto">'+(de?"\uD83C\uDF10 Automatisch (Standort)":"\uD83C\uDF10 Automatic (location)")+'</option>';
+  return '<label class="fchip fchip-mkt" title="'+(de?"Land w\u00e4hlen \u2013 Sender f\u00fcr diesen Markt anzeigen":"Choose country \u2013 show broadcasters for this market")+'">'+
+    '<span class="mkt-ico" aria-hidden="true">'+(MKT_FLAG[COUNTRY]||"\uD83C\uDF10")+'</span>'+
+    '<select id="mktSel" aria-label="'+(de?"Land w\u00e4hlen":"Choose country")+'">'+opts+auto+'</select>'+
+    '<span class="mkt-caret" aria-hidden="true">\u25BE</span></label>';
+}
+document.addEventListener("change", function(e){
+  if(!e.target || e.target.id!=="mktSel") return;
+  const v=e.target.value;
+  if(v==="__auto"){
+    MARKET_LOCKED=false;
+    try{ localStorage.removeItem(LS_KEY.market); }catch(_){}
+    const c=geoCacheGet();
+    if(c){ applyGeo(c); } else { geoInit(); }
+    renderAll();
+  } else {
+    COUNTRY=v; MARKET_LOCKED=true;
+    lsSet(LS_KEY.market, JSON.stringify(v));
+    renderAll();
+  }
+});
+
 function renderLive(){
   const t=I18N[LANG], board=document.getElementById("liveBoard");
   document.getElementById("liveNote").innerHTML = t.live_note;
@@ -3946,7 +3992,7 @@ const GEO_MARKET={DE:"DE",AT:"AT",CH:"CH",LI:"DE",GB:"UK",UK:"UK",FR:"FR",IT:"IT
 const GEO_DE=new Set(["DE","AT","CH","LI"]);
 function geoCacheGet(){ try{ const r=lsGet(LS_KEY.geo); if(r){ const o=JSON.parse(r); if(o&&o.cc&&o.ts&&(Date.now()-o.ts<86400000)) return o.cc; } }catch(e){} return null; }
 function geoCacheSet(cc){ lsSet(LS_KEY.geo, JSON.stringify({cc:cc,ts:Date.now()})); }
-function applyGeo(cc){ cc=(cc||"").toUpperCase(); if(!cc) return;
+function applyGeo(cc){ if(MARKET_LOCKED) return; cc=(cc||"").toUpperCase(); if(!cc) return;
   const nc=GEO_MARKET[cc]||"DE";
   const nl=LANG_LOCKED?LANG:(GEO_DE.has(cc)?"de":"en");
   if(nc===COUNTRY && nl===LANG) return;
