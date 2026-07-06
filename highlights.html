@@ -1008,6 +1008,7 @@
   .fchip-mkt select{appearance:none; -webkit-appearance:none; border:none; background:transparent; font:inherit; color:inherit; cursor:pointer; max-width:132px; padding:0}
   .fchip-mkt select:focus{outline:none}
   .fchip-mkt .mkt-caret{font-size:10px; opacity:.55}
+  .freebest.none{color:var(--muted); border:1px solid var(--line); background:transparent}
 </style>
 </head>
 <body data-page="hl">
@@ -1293,7 +1294,7 @@ const I18N = {
     where:"Sender in", more:"Sender in weiteren Ländern", less:"Weniger anzeigen", running:"Läuft",
     lohnt_t:"Lohnt sich’s?", tvf_rating:"TVFussball-Note", lh_voices:"Stimmen", lh_tip:"Tipp", lh_odds:"Wettquoten", lh_odds_upd:"Stand:", lh_last:"Letzte Spiele", lh_src:"Quelle", an_t:"Spielanalyse", an_more:"mehr Details", an_goals:"Tore", an_cards:"Karten", an_rating:"Spielnote", an_motm:"Spieler des Spiels", an_inj:"Verletzungen", an_ref:"Schiedsrichter", an_poss:"Ballbesitz", an_chances:"Chancen", an_run:"Laufwunder", an_pen:"Elfmeter", an_og:"Eigentor", an_src:"Statistik-Quelle", lohnt_score:"Lohnt-Score", an_events:"Tore & Karten", an_summary:"Fazit",
     fta:"Free-TV", pay:"Pay", recent:"Vergangene Spiele", top_news:"Aktuelle News", prov_title:"Anbieter & Preise",
-    best_free:"Free-TV", best_radio:"Radio", best_pay:"Nur Pay", source:"Quelle", goals:"Tore", read:"Zur Quelle",
+    best_free:"Free-TV", best_radio:"Radio", best_pay:"Nur Pay", best_none:"Kein dt. TV-Sender", source:"Quelle", goals:"Tore", read:"Zur Quelle",
     tz:"MEZ", share:"Teilen", shared:"Link kopiert", shared_btn:"Kopiert!", cal_add:"In Kalender", cal_done:"Termin als .ics gespeichert 📅",
     ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
     price_from:"ab", price_approx:"ca.",
@@ -1359,7 +1360,7 @@ const I18N = {
     where:"Channels in", more:"Channels in other countries", less:"Show less", running:"Live",
     lohnt_t:"Worth watching?", tvf_rating:"TVFussball rating", lh_voices:"Voices", lh_tip:"Tip", lh_odds:"Betting odds", lh_odds_upd:"Last updated:", lh_last:"Recent matches", lh_src:"Source", an_t:"Match Analysis", an_more:"more details", an_goals:"Goals", an_cards:"Cards", an_rating:"Match rating", an_motm:"Player of the match", an_inj:"Injuries", an_ref:"Referee", an_poss:"Possession", an_chances:"Chances", an_run:"Distance leader", an_pen:"Penalty", an_og:"Own goal", an_src:"Stats source", lohnt_score:"Worth-it score", an_events:"Goals & cards", an_summary:"Summary",
     fta:"Free TV", pay:"Pay", recent:"Past matches", top_news:"Latest news", prov_title:"Providers & Prices",
-    best_free:"Free TV", best_radio:"Radio", best_pay:"Pay only", source:"Source", goals:"goals", read:"Read at source",
+    best_free:"Free TV", best_radio:"Radio", best_pay:"Pay only", best_none:"No German TV", source:"Source", goals:"goals", read:"Read at source",
     tz:"CET", share:"Share", shared:"Link copied", shared_btn:"Copied!", cal_add:"Add to calendar", cal_done:"Saved as .ics 📅",
     ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
     price_from:"from", price_approx:"approx.",
@@ -1482,7 +1483,9 @@ const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Fran
 /* WM 2026 — echte Partien, Zeiten (MEZ), Sender (DE/AT/CH via fussballgucken.info, UK via BBC/ITV) */
 const MATCHES = [
   {cat:"wm", day:"Donnerstag, 09.07.2026", time:"22:00", comp:"WM 2026 · Viertelfinale", h:"Marokko", a:"Frankreich", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:86,einordnung:{de:"Revanche des WM-Halbfinals von 2022, diesmal in Boston: Marokkos eiskaltes Umschaltspiel (Ounahi-Doppelpack gegen Kanada) trifft auf Mbappés Frankreich. Sicher live bei MagentaTV – ob ARD oder ZDF übertragen, ist noch offen.",en:"A rematch of the 2022 semi-final, this time in Boston: Morocco’s ice-cold counter game (Ounahi brace vs Canada) meets Mbappé’s France. Confirmed live on MagentaTV – ARD/ZDF free-TV coverage still open."}}},
-  {cat:"wm", day:"Freitag, 10.07.2026", time:"—", comp:"WM 2026 · Viertelfinale", h:"Viertelfinale", a:"3 weitere Spiele · 10.–12. Juli", tba:true},
+  {cat:"wm", day:"Samstag, 11.07.2026", time:"23:00", comp:"WM 2026 · Viertelfinale", h:"Norwegen", a:"England", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:88,einordnung:{de:"Das Torjäger-Duell von Miami: Haaland (7 Turniertore, Doppelpack gegen Brasilien) gegen Kane (6 Tore, eiskalt im Azteca). Norwegen im ersten Viertelfinale seiner Geschichte, England nach dem Unterzahl-Krimi gegen Mexiko. Sicher live bei MagentaTV – ob ARD oder ZDF übertragen, ist noch offen.",en:"The striker summit in Miami: Haaland (7 tournament goals, brace vs Brazil) against Kane (6 goals, ice-cold at the Azteca). Norway in their first-ever quarter-final, England after the ten-man thriller in Mexico. Confirmed live on MagentaTV – ARD/ZDF free-TV coverage still open."}}},
+  {cat:"wm", day:"10.-12.07.2026", time:"—", comp:"WM 2026 · Viertelfinale", h:"Sieger Portugal/Spanien", a:"Sieger USA/Belgien", tba:true},
+  {cat:"wm", day:"10.-12.07.2026", time:"—", comp:"WM 2026 · Viertelfinale", h:"Sieger Argentinien/Ägypten", a:"Sieger Schweiz/Kolumbien", tba:true},
   {cat:"wm", day:"Dienstag, 14.07.2026", time:"—", comp:"WM 2026 · Halbfinale", h:"Halbfinale", a:"14./15. Juli · Dallas & Atlanta", tba:true},
   {cat:"wm", day:"Samstag, 18.07.2026", time:"23:00", comp:"WM 2026 · Spiel um Platz 3", h:"Verlierer HF 1", a:"Verlierer HF 2", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
   {cat:"wm", day:"Sonntag, 19.07.2026", time:"21:00", comp:"WM 2026 · Finale", h:"Finalist 1", a:"Finalist 2", tv:{DE:[ZDF,JOYN,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}},
@@ -2138,10 +2141,73 @@ const MATCHES = [
   {cat:"bl2", day:"Sonntag, 23.05.2027", time:"15:30", comp:"2. Bundesliga · 34. Spieltag", h:"Energie Cottbus", a:"1. FC Kaiserslautern", tv:{DE:[SKY]}, radio:["1FCK Fanradio","ARD Audiothek"], ticker:[], lohnt:{score:49}},
   {cat:"bl3", day:"Freitag, 31.07.2026", time:"—", comp:"3. Liga · 1. Spieltag", h:"Saison 2026/27", a:"Auftakt (vsl.) · Termine folgen", tba:true},
   {cat:"cl", day:"Mittwoch, 12.08.2026", time:"21:00", comp:"UEFA Supercup", h:"Sieger Champions League", a:"Sieger Europa League", tba:true},
-  {cat:"cl", day:"Dienstag, 07.07.2026", time:"—", comp:"Champions League · 1. Qualifikationsrunde", h:"Hinspiele", a:"07./08. Juli · Rückspiele 14./15.07.", tba:true},
-  {cat:"cl", day:"Dienstag, 21.07.2026", time:"—", comp:"Champions League · 2. Qualifikationsrunde", h:"Hinspiele", a:"21./22. Juli · Rückspiele 28./29.07.", tba:true},
+  /* CL-Qualifikation 2026/27 — Auslosung 16./17.06. (uefa.com). In DE keine TV-Übertragung der frühen Quali-Runden. */
+  {cat:"cl", day:"07./08.07.2026", time:"17:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Kairat Almaty", a:"Sutjeska Nikšić", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"18:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Flora Tallinn", a:"Iberia Tiflis", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"19:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Vitebsk", a:"Universitatea Craiova", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"19:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Petrocub", a:"Egnatia", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"18:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Sabah FC", a:"The New Saints", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"18:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Lincoln Red Imps", a:"Inter Escaldes", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"18:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Ararat-Armenia", a:"Riga FC", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"18:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Kauno Žalgiris", a:"FC Drita", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"19:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Vardar Skopje", a:"KuPS Kuopio", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"19:30", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Floriana", a:"Shamrock Rovers", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"20:30", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Tre Fiori", a:"Larne FC", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"20:30", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Borac Banja Luka", a:"Levski Sofia", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"20:45", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"KÍ Klaksvík", a:"Atert Bissen", radio:[], ticker:[]},
+  {cat:"cl", day:"07./08.07.2026", time:"21:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Víkingur Reykjavík", a:"ETO Győr", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Sutjeska Nikšić", a:"Kairat Almaty", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Iberia Tiflis", a:"Flora Tallinn", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Universitatea Craiova", a:"Vitebsk", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Egnatia", a:"Petrocub", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"The New Saints", a:"Sabah FC", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Inter Escaldes", a:"Lincoln Red Imps", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Riga FC", a:"Ararat-Armenia", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"FC Drita", a:"Kauno Žalgiris", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"KuPS Kuopio", a:"Vardar Skopje", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Shamrock Rovers", a:"Floriana", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Larne FC", a:"Tre Fiori", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Levski Sofia", a:"Borac Banja Luka", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Atert Bissen", a:"KÍ Klaksvík", radio:[], ticker:[]},
+  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"ETO Győr", a:"Víkingur Reykjavík", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Mjällby AIF", a:"Sieger Lincoln/Escaldes", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Tre Fiori/Larne", a:"Crvena Zvezda", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Sabah/New Saints", a:"Sieger Vardar/KuPS", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Klaksvík/Atert", a:"Sieger Kauno/Drita", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Aarhus GF", a:"Lech Posen", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Ararat/Riga", a:"Sieger Floriana/Shamrock", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Borac/Levski", a:"Sieger Vitebsk/Craiova", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Omonia Nikosia", a:"Sieger Kairat/Sutjeska", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"FC Thun", a:"Dinamo Zagreb", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Víkingur/Győr", a:"Hapoel Be'er Sheva", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Flora/Iberia", a:"Slovan Bratislava", radio:[], ticker:[]},
+  {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Petrocub/Egnatia", a:"NK Celje", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Sieger Lincoln/Escaldes", a:"Mjällby AIF", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Crvena Zvezda", a:"Sieger Tre Fiori/Larne", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Sieger Vardar/KuPS", a:"Sieger Sabah/New Saints", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Sieger Kauno/Drita", a:"Sieger Klaksvík/Atert", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Lech Posen", a:"Aarhus GF", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Sieger Floriana/Shamrock", a:"Sieger Ararat/Riga", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Sieger Vitebsk/Craiova", a:"Sieger Borac/Levski", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Sieger Kairat/Sutjeska", a:"Omonia Nikosia", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Dinamo Zagreb", a:"FC Thun", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Hapoel Be'er Sheva", a:"Sieger Víkingur/Győr", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"Slovan Bratislava", a:"Sieger Flora/Iberia", radio:[], ticker:[]},
+  {cat:"cl", day:"28./29.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Rückspiel", h:"NK Celje", a:"Sieger Petrocub/Egnatia", radio:[], ticker:[]},
   {cat:"cl", day:"Dienstag, 04.08.2026", time:"—", comp:"Champions League · 3. Qualifikationsrunde", h:"Hinspiele", a:"04./05. Aug. · Rückspiele 11.08.", tba:true},
-  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Qualifikationsrunde", h:"Hinspiele", a:"09. Juli · Rückspiele 16.07.", tba:true},
+  /* EL-Qualifikation 2026/27 — Hauptweg, Auslosung 17.06. */
+  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Hinspiel", h:"Dynamo Kiew", a:"Universitatea Cluj", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Hinspiel", h:"Qarabağ Agdam", a:"Vestri", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Hinspiel", h:"Hajduk Split", a:"MSK Žilina", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Hinspiel", h:"ZSKA Sofia", a:"Derry City", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Hinspiel", h:"Sheriff Tiraspol", a:"Aluminij", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 09.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Hinspiel", h:"Vojvodina", a:"Ferencváros", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 16.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Rückspiel", h:"Universitatea Cluj", a:"Dynamo Kiew", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 16.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Rückspiel", h:"Vestri", a:"Qarabağ Agdam", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 16.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Rückspiel", h:"MSK Žilina", a:"Hajduk Split", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 16.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Rückspiel", h:"Derry City", a:"ZSKA Sofia", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 16.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Rückspiel", h:"Aluminij", a:"Sheriff Tiraspol", radio:[], ticker:[]},
+  {cat:"el", day:"Donnerstag, 16.07.2026", time:"—", comp:"Europa League · 1. Quali-Runde · Rückspiel", h:"Ferencváros", a:"Vojvodina", radio:[], ticker:[]},
   {cat:"el", day:"Donnerstag, 23.07.2026", time:"—", comp:"Europa League · 2. Qualifikationsrunde", h:"Hinspiele", a:"23. Juli · Rückspiele 30.07.", tba:true},
   {cat:"el", day:"Donnerstag, 06.08.2026", time:"—", comp:"Europa League · 3. Qualifikationsrunde", h:"Hinspiele", a:"06. Aug. · Rückspiele 13.08.", tba:true},
   {cat:"cl", day:"Dienstag, 18.08.2026", time:"—", comp:"Champions League · Playoffs", h:"Playoff-Hinspiele", a:"18./19. August", tba:true},
@@ -2279,6 +2345,7 @@ const HL_SRC={
 };
 const MAGENTA="https://www.magentasport.de/";
 const HL = [
+ {h:"Mexiko",a:"England",s:"2:3",g:"WM 2026 · Achtelfinale",date:"Mo, 06.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-mexiko-england-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:36,spieler:"Bellingham",team:"B"},{minute:38,spieler:"Bellingham",team:"B"},{minute:42,spieler:"Quiñones",team:"A"},{minute:60,spieler:"Kane (FE)",team:"B"},{minute:69,spieler:"Jiménez (FE)",team:"A"}],fazit:{de:"Ein Spiel fürs Geschichtsbuch im Azteca: Nach Gewitter-Verzögerung schnürte Bellingham binnen 98 Sekunden einen Doppelpack (36./38.) – als erster Spieler seit Maradona mit zwei Toren in diesem Stadion bei einer WM. Quiñones antwortete per Volley (42.), nach Rot gegen Quansah (54., VAR) erhöhte Kane vom Punkt (60.), ehe Jiménez per Gegen-Elfmeter verkürzte (69.). In Unterzahl überstand England elf Minuten Nachspielzeit vor 80.824 Zuschauern – Mexikos Heim-WM ist beendet. Samstag steigt das Torjäger-Duell: Haaland gegen Kane.",en:"One for the history books at the Azteca: after a storm delay, Bellingham struck twice in 98 seconds (36\u2019/38\u2019) – the first player since Maradona to score two in this stadium at a World Cup. Quiñones volleyed back (42\u2019), Kane converted from the spot after Quansah\u2019s VAR red card (54\u2019/60\u2019), before Jiménez pulled one back from a penalty (69\u2019). Ten-man England survived eleven minutes of stoppage time in front of 80,824 – Mexico\u2019s home World Cup is over. Saturday brings Haaland vs Kane."},spielnote:{wert:8.6,label:{de:"Fünf Tore, zwei Elfer, Rot – Azteca-Spektakel",en:"Five goals, two pens, a red – Azteca thriller"}}}},
  {h:"Brasilien",a:"Norwegen",s:"1:2",g:"WM 2026 · Achtelfinale",date:"So, 05.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-brasilien-norwegen-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{fazit:{de:"Das Erdbeben von New York: Norwegen wirft den Rekordweltmeister raus – und steht zum ersten Mal in seiner Geschichte in einem WM-Viertelfinale. Der überragende Erling Haaland wuchtete die Skandinavier per Doppelpack weiter und zog mit nun sieben Turniertoren mit Messi gleich; Brasiliens Anschluss blieb Ergebniskosmetik. Kapitän Ødegaard trommelte beim legendären Ruder-Jubel den Takt. Im Viertelfinale wartet der Sieger aus Mexiko/England.",en:"The New York earthquake: Norway knock out the record world champions – and reach a World Cup quarter-final for the first time in their history. An immense Erling Haaland powered them through with a brace, drawing level with Messi on seven tournament goals; Brazil’s reply was mere consolation. Captain Ødegaard drummed the beat for the iconic rowing celebration. The Mexico/England winner awaits."},spielnote:{wert:8.0,label:{de:"Erdbeben! Haaland wirft Brasilien raus",en:"Earthquake! Haaland knocks out Brazil"}}}},
  {h:"Paraguay",a:"Frankreich",s:"0:1",g:"WM 2026 · Achtelfinale",date:"Sa, 04.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-paraguay-frankreich-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:70,spieler:"Mbappé (FE)",team:"B"}],fazit:{de:"Zäher Abnutzungskampf in der Hitze von Philadelphia: Paraguay verteidigte lange ohne eigenen Torschuss (23 % Ballbesitz), erst der eingewechselte Doué belebte die Partie. Nach VAR-Eingriff verwandelte Mbappé den fälligen Elfmeter souverän (70.) und vergab in der Nachspielzeit zwei weitere Großchancen. Frankreich müht sich weiter – Donnerstag wartet das Viertelfinale gegen Marokko.",en:"A grinding battle in the Philadelphia heat: Paraguay defended for long spells without a shot (23% possession) until substitute Doué sparked the game. After a VAR review, Mbappé coolly converted the penalty (70’) and spurned two stoppage-time chances. France grind on – Morocco await in Thursday’s quarter-final."},spielnote:{wert:5.6,label:{de:"Zäher Kampf – Mbappé eiskalt vom Punkt",en:"A grind – Mbappé ice-cold from the spot"}}}},
  {h:"Kanada",a:"Marokko",s:"0:3",g:"WM 2026 · Achtelfinale",date:"Sa, 04.07.",zdf:["","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-kanada-marokko-highlights-zusammenfassung-100"],full:null,kicker:"https://www.kicker.de/weltmeisterschaft/spieltag", analyse:{tore:[{minute:50,spieler:"Ounahi",team:"B"},{minute:82,spieler:"Ounahi",team:"B"},{minute:98,spieler:"Rahimi",team:"B"}],fazit:{de:"Marokko ist erster Viertelfinalist der WM 2026 – und beendet Kanadas Heimtraum. Der Co-Gastgeber war vor der Pause das bessere Team (Oluwaseyi scheiterte an Bono), doch nach einem Standard über Hakimi schlug Ounahi eiskalt zu (50.) und legte nach (82.), Joker Rahimi setzte den Schlusspunkt (90.+8). Wermutstropfen: Bayern-Neuzugang Saibari musste verletzt raus. Donnerstag steigt die 2022er-Revanche gegen Frankreich.",en:"Morocco are the first quarter-finalists of 2026 – ending Canada’s home dream. The co-hosts were the better side before the break (Oluwaseyi denied by Bono), but Ounahi struck ice-cold after a Hakimi set-piece routine (50’) and doubled up (82’), sub Rahimi adding the late third (90+8’). One worry: Bayern signing Saibari went off injured. Thursday brings the 2022 rematch with France."},spielnote:{wert:6.6,label:{de:"Ounahi brillant – erster Viertelfinalist steht",en:"Ounahi brilliant – first quarter-finalists"}}}},
@@ -2385,6 +2452,7 @@ const TEAMS = [
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  {team:"wm",date:"2026-07-06",title:"Azteca-Spektakel: England übersteht in Unterzahl – Mexikos Heim-WM ist vorbei",teaser:"3:2 nach Gewitter-Verzögerung: Bellingham trifft binnen 98 Sekunden doppelt (als Erster seit Maradona im Azteca), Quiñones und Jiménez antworten, dazwischen Rot für Quansah und ein Kane-Elfmeter. Zu zehnt rettet England elf Minuten Nachspielzeit – im Viertelfinale wartet Samstag (23 Uhr, Miami) das Torjäger-Duell mit Haalands Norwegen.",src:"sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026/anpfiff-zwischen-mexiko-und-england-nach-hinten-verlegt,wm-spielbericht-mexiko-england-100.html"},
   {team:"wm",date:"2026-07-06",title:"Erdbeben von New York: Haaland schießt Brasilien raus – Norwegen erstmals im Viertelfinale",teaser:"1:2 aus Sicht der Seleção: Ein Doppelpack des überragenden Erling Haaland (jetzt 7 Turniertore, gleichauf mit Messi) katapultiert Norwegen ins erste WM-Viertelfinale seiner Geschichte. Dort wartet der Sieger aus Mexiko gegen England – das Spiel im Aztekenstadion startete wegen Gewitter mit Verspätung.",src:"sportschau",url:"https://www.sportschau.de/fussball/fifa-wm-2026/der-unglaubliche-haaland-wuchtet-norwegen-ins-viertelfinale,wm-spielbericht-brasilien-norwegen-100.html"},
   {team:"wm",date:"2026-07-05",title:"Ounahi-Gala: Marokko wirft Co-Gastgeber Kanada raus – erster Viertelfinalist",teaser:"0:3 aus Kanadas Sicht: Nach starker erster Hälfte der Canucks schlägt Marokko eiskalt zu – Ounahi trifft doppelt (50./82.), Rahimi legt spät nach (90.+8). Bayern-Neuzugang Saibari verletzt sich. Im Viertelfinale kommt es Donnerstag (22 Uhr) zur Revanche des 2022er-Halbfinals gegen Frankreich.",src:"ZDFheute",url:"https://www.zdfheute.de/sport/fussball-wm/kanada-marokko-fussball-wm-2026-achtelfinale-liveticker-102.html"},
   {team:"wm",date:"2026-07-05",title:"Mbappé vom Punkt: Frankreich müht sich an Paraguay vorbei",teaser:"0:1 in der Hitze von Philadelphia: Der Deutschland-Bezwinger verteidigt leidenschaftlich, doch nach VAR-Elfmeter trifft Mbappé (70.). Frankreich steht im Viertelfinale – dort wartet Donnerstag um 22 Uhr Marokko. Der Free-TV-Sender dafür ist noch offen, sicher ist die Übertragung bei MagentaTV.",src:"t-online",url:"https://www.t-online.de/sport/fussball/wm/id_101323704/paraguay-vs-frankreich-heute-live-so-sehen-sie-das-wm-achtelfinale.html"},
@@ -2827,13 +2895,14 @@ function auxRows(m){ const t=I18N[LANG];
   return r.concat(k).join(""); }
 function isWMm(m){ return /^WM/i.test(m.comp||""); }
 function tvOf(m,cc){ return (m.tv && m.tv[cc]) || (isWMm(m)?(WM_INTL[cc]||null):null) || null; }
-function railClass(m){ const list=tvOf(m,COUNTRY)||[]; if(list.some(s=>s.t==="fta")) return "free"; if(getRadio(m).length) return "radio"; return "pay"; }
+function railClass(m){ const list=tvOf(m,COUNTRY)||[]; if(list.some(s=>s.t==="fta")) return "free"; if(getRadio(m).length) return "radio"; if(!list.length) return "none"; return "pay"; }
 function bestFree(m){
   const t=I18N[LANG], list=tvOf(m,COUNTRY)||[];
   const fta=list.find(s=>s.t==="fta");
   if(fta) return '<span class="freebest tv">▣ '+t.best_free+' · '+fta.n+(m.komm?(' · 🎙️ '+m.komm):'')+'</span>';
   const pay=list.find(s=>s.t==="pay"); const r=getRadio(m); let payout=""; if(pay) payout+='<span class="freebest pay">'+pay.n+(m.komm?(' · 🎙️ '+m.komm):'')+'</span>'; if(r.length) payout+='<span class="freebest radio">♪ '+t.best_radio+' · '+r[0]+(m.kommRadio?(' · 🎙️ '+m.kommRadio):'')+'</span>';
-  return payout || '<span class="freebest pay">'+t.best_pay+'</span>';
+  const none=!list.length;
+  return payout || '<span class="freebest '+(none?'none':'pay')+'">'+(none?t.best_none:t.best_pay)+'</span>';
 }
 function adSlotHTML(){ const t=I18N[LANG]; if(ADS_ENABLED) return '<div class="adslot"><div class="lbl">'+t.ad_on+'</div></div>';
   return '<div class="adslot"><div class="lbl">'+t.ad_label+'</div><div class="sub">'+t.ad_sub+'</div></div>'; }
