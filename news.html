@@ -2979,7 +2979,7 @@ function isTonight(m){ if(m.tba) return false; var lm=locMatch(m); if(lm.ms==nul
   return dayKey(lm.day)===todayKeyNow() && parseInt(lm.time,10)>=18; }
 function isTonightFmt(f){ var lm=locMatch(f); if(lm.ms==null) return false;
   return dayKey(lm.day)===todayKeyNow() && parseInt(lm.time,10)>=18; }
-function isFinished(m){ if(m.tba) return false; if(LIVE_ENABLED){ var _ld=LIVE_CACHE[liveKey(m)]; if(_ld&&_ld.state==="in") return false; } const s=matchStart(m); if(!s) return false; /* Spielende ~Anpfiff+115min; danach noch 60min sichtbar lassen */ return Date.now() > s.getTime()+175*60000; }
+function isFinished(m){ if(m.tba) return false; if(LIVE_ENABLED){ var _ld=LIVE_CACHE[liveKey(m)]; if(_ld&&_ld.state==="in") return false; } const s=matchStart(m); if(!s){ /* ohne Anstosszeit: Karte gilt als beendet, wenn ihr letztes Datum vor heute liegt */ let mx=0,re=/(\d{2})\.(\d{2})\.(\d{4})/g,x; while((x=re.exec(String(m.day)))) mx=Math.max(mx,(+x[3])*10000+(+x[2])*100+(+x[1])); return mx>0 && mx<todayKeyNow(); } /* Spielende ~Anpfiff+115min; danach noch 60min sichtbar lassen */ return Date.now() > s.getTime()+175*60000; }
 function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
 function renderLiveFilters(){ const t=I18N[LANG];
   const up=MATCHES.filter(m=>!isFinished(m)), upF=FORMATS.filter(f=>!isFinished(f));
