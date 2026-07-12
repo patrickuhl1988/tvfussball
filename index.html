@@ -4638,9 +4638,10 @@ function renderLiveFilters(){ const t=I18N[LANG];
     test: up.filter(m=>catOf(m)==="test").length
   };
   const blChip = cnt.bl>0 ? [["bl",t.f_bl]] : [];
-  const defs=[["all",t.f_all],["mine",t.f_mine]].concat(blChip)
+  const wmChip = cnt.wm>0 ? [["wm",t.f_wm]] : [];
+  const defs=wmChip.concat([["all",t.f_all],["mine",t.f_mine]]).concat(blChip)
     .concat([["free",t.f_free],["tonight",t.f_tonight],["format",t.f_format]])
-    .concat([["wm",t.f_wm],["dfb",t.f_dfb],["bl2",t.f_bl2],["bl3",t.f_bl3],["cl",t.f_cl],["el",t.f_el],["pl",t.f_pl],["facup",t.f_facup],["it",t.f_it],["es",t.f_es],["l1",t.f_l1],["test",t.f_test]].filter(d=>cnt[d[0]]>0));
+    .concat([["dfb",t.f_dfb],["bl2",t.f_bl2],["bl3",t.f_bl3],["cl",t.f_cl],["el",t.f_el],["pl",t.f_pl],["facup",t.f_facup],["it",t.f_it],["es",t.f_es],["l1",t.f_l1],["test",t.f_test]].filter(d=>cnt[d[0]]>0));
   const chips = defs.map(d=>{
     const c=cnt[d[0]];
     return '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(d[0]==="all"?LIVE_SEL.size===0:LIVE_SEL.has(d[0]))+'">'+d[1]+(c?'<span class="fcount">'+c+'</span>':'')+'</button>';
