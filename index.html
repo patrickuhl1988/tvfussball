@@ -490,39 +490,44 @@
   .clubchip[aria-pressed="true"]{border-color:var(--green); color:var(--green); background:var(--green-soft)}
   .clubchip .cdot{width:8px; height:8px; border-radius:50%; display:inline-block; box-shadow:0 0 0 1px rgba(0,0,0,.12) inset}
   .tnote{font-size:10.5px; color:var(--faint); display:flex; align-items:center; gap:6px; margin:2px 2px 0}
-  .tlist{display:flex; flex-direction:column; gap:8px; margin-top:2px}
-  .tcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:12px 13px; box-shadow:var(--shadow); display:flex; gap:11px; align-items:flex-start; transition:border-color .16s}
-  .tcard:hover{border-color:var(--line2)}
-  .trank{font-family:"JetBrains Mono",monospace; font-weight:800; font-size:13px; color:var(--faint); min-width:22px; text-align:center; padding-top:3px}
-  .tmain{flex:1; min-width:0}
-  .tp{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-  .tp .nm{font-family:"Archivo",sans-serif; font-weight:700; font-size:15px; letter-spacing:-.01em; color:var(--ink)}
-  .tp .pa{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--faint); font-weight:700}
-  .tstatus{font-family:"JetBrains Mono",monospace; font-size:8.5px; font-weight:700; padding:2px 6px; border-radius:5px; text-transform:uppercase; letter-spacing:.03em; white-space:nowrap}
+  .tlist{display:flex; flex-direction:column; gap:7px; margin-top:2px}
+  .tcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden; transition:border-color .16s}
+  .tcard:hover,.tcard[open]{border-color:var(--line2)}
+  .tsum{list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px; padding:10px 12px}
+  .tsum::-webkit-details-marker{display:none}
+  .tsum:focus-visible{outline:2px solid var(--green); outline-offset:-2px}
+  .trank{font-family:"JetBrains Mono",monospace; font-weight:800; font-size:12px; color:var(--faint); min-width:18px; text-align:center; flex:none}
+  .tsum-b{flex:1; min-width:0; display:block}
+  .tp{display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+  .tp .nm{font-family:"Archivo",sans-serif; font-weight:700; font-size:14.5px; letter-spacing:-.01em; color:var(--ink)}
+  .tp .pa{font-family:"JetBrains Mono",monospace; font-size:9.5px; color:var(--faint); font-weight:700}
+  .tstatus{font-family:"JetBrains Mono",monospace; font-size:8px; font-weight:700; padding:1.5px 5px; border-radius:5px; text-transform:uppercase; letter-spacing:.03em; white-space:nowrap}
   .tstatus.fix{color:var(--free); border:1px solid var(--free-line); background:var(--free-soft)}
   .tstatus.einig{color:var(--green); border:1px solid var(--green-line); background:var(--green-soft)}
   .tstatus.ger{color:var(--muted); border:1px solid var(--line2)}
-  .tflow{display:flex; align-items:center; gap:6px; margin-top:6px; font-size:12.5px; color:var(--ink); flex-wrap:wrap}
-  .tflow .cl{display:inline-flex; align-items:center; gap:5px; font-weight:600}
-  .tflow .cl .cdot{width:9px; height:9px; border-radius:50%; display:inline-block; box-shadow:0 0 0 1px rgba(0,0,0,.12) inset}
-  .tflow .arr{color:var(--faint); font-weight:700}
-  .tlg{font-family:"JetBrains Mono",monospace; font-size:8.5px; font-weight:700; color:var(--muted); border:1px solid var(--line2); border-radius:5px; padding:1px 5px}
-  .tmet{display:flex; gap:6px; margin-top:9px}
+  .tflow{display:flex; align-items:center; gap:5px; margin-top:4px; font-size:11.5px; min-width:0; overflow:hidden}
+  .tflow .cl{display:inline-flex; align-items:center; gap:4px; font-weight:600; color:var(--ink); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .tflow .cl .cdot{width:8px; height:8px; border-radius:50%; display:inline-block; flex:none; box-shadow:0 0 0 1px rgba(0,0,0,.12) inset}
+  .tflow .tlg{font-family:"JetBrains Mono",monospace; font-size:8.5px; font-weight:700; color:var(--faint); flex:none}
+  .tflow .arr{color:var(--faint); font-weight:700; flex:none}
+  .tfee{display:flex; flex-direction:column; align-items:flex-end; text-align:right; flex:none; gap:1px}
+  .tfee-k{font:700 8px "Inter",sans-serif; letter-spacing:.05em; text-transform:uppercase; color:var(--faint)}
+  .tfee-v{font-family:"JetBrains Mono",monospace; font-weight:800; font-size:14px; color:var(--ink); white-space:nowrap}
+  .tfee-v.free{color:var(--free); font-size:11.5px}
+  .tchev{flex:none; color:var(--faint); display:inline-flex; transition:transform .18s}
+  .tchev svg{width:15px; height:15px}
+  .tcard[open] .tchev{transform:rotate(90deg)}
+  .tbody{padding:11px 12px 12px 40px; display:flex; flex-direction:column; gap:9px; border-top:1px solid var(--line)}
+  .tmet{display:flex; gap:7px}
   .tmetric{flex:1; border:1px solid var(--line); border-radius:9px; padding:6px 9px; background:var(--bg2); min-width:0}
-  .tmetric.act{border-color:var(--green-line); background:var(--green-soft)}
-  .tmetric .k{font:700 8.5px "Inter",sans-serif; letter-spacing:.04em; text-transform:uppercase; color:var(--faint)}
-  .tmetric.act .k{color:var(--green)}
-  .tmetric .v{font-family:"JetBrains Mono",monospace; font-weight:800; font-size:12.5px; color:var(--ink); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .tmetric .k{display:block; font:700 8.5px "Inter",sans-serif; letter-spacing:.04em; text-transform:uppercase; color:var(--faint)}
+  .tmetric .v{display:block; font-family:"JetBrains Mono",monospace; font-weight:800; font-size:12.5px; color:var(--ink); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   .tmetric .v.free{color:var(--free)}
-  .tsub{margin-top:7px; font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--faint)}
-  .tknown{margin-top:9px; font-size:12px; color:var(--ink); line-height:1.4}
-  .tknown b{color:var(--muted); font-weight:700}
-  .tdet{margin-top:7px}
-  .tdet>summary{list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; font:700 11px "Inter",sans-serif; color:var(--green); padding:3px 0}
-  .tdet>summary::-webkit-details-marker{display:none}
-  .tdet>summary::before{content:"\25B8"; font-size:10px; transition:transform .15s}
-  .tdet[open]>summary::before{transform:rotate(90deg)}
-  .tdet p{margin:6px 0 2px; font-size:12.5px; color:var(--muted); line-height:1.55}
+  .tk-row{display:flex; gap:8px; align-items:baseline; font-size:12px; line-height:1.45}
+  .tk-lbl{font:700 9px "Inter",sans-serif; letter-spacing:.04em; text-transform:uppercase; color:var(--faint); flex:none; padding-top:1px}
+  .tk-val{color:var(--ink)}
+  .timp{margin:0; font-size:12.5px; color:var(--muted); line-height:1.55}
+  .tsub{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--faint)}
 
   /* Providers */
   .provlist{display:flex; flex-direction:column; gap:8px}
@@ -1086,6 +1091,11 @@
   .faq-h{font-family:'Barlow Condensed',sans-serif; font-size:19px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:0 0 10px}
   .faq-item{margin-bottom:8px}
   .faq-a{margin:10px 2px 4px; font-size:14.5px; line-height:1.55; color:var(--txt)}
+.showmore-wrap{display:flex;justify-content:center;margin:14px 0 4px}
+.showmore{appearance:none;cursor:pointer;font:700 13px "Inter",sans-serif;color:var(--ink);background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:9px 18px;display:inline-flex;align-items:center;gap:7px;transition:background .15s,border-color .15s}
+.showmore:hover{background:var(--green-soft);border-color:var(--green-line);color:var(--green)}
+.showmore .sm-n{font-family:"JetBrains Mono",monospace;font-weight:800;font-size:11px;color:var(--faint)}
+.showmore:hover .sm-n{color:var(--green)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "TVFussball.de", "url": "https://tvfussball.de/", "description": "Wo läuft Fußball heute legal? Alle Spiele mit Sendern für Deutschland, Österreich und die Schweiz – mit Free-TV-Fokus.", "inLanguage": "de"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Wo läuft Fußball heute im Free-TV?", "acceptedAnswer": {"@type": "Answer", "text": "Bei der WM 2026 teilen sich ARD und ZDF die Free-TV-Spiele, MagentaTV zeigt alle 104 Partien (44 davon exklusiv). In der Bundesliga-Saison 2026/27 laufen im Free-TV nur ausgewählte Spiele bei Sat.1 (Eröffnung, 17. und 18. Spieltag, Supercup, Relegation). TVFussball.de zeigt für jedes Spiel zuerst die kostenlose Free-TV- oder Radio-Option."}}, {"@type": "Question", "name": "Wer überträgt die Bundesliga 2026/27?", "acceptedAnswer": {"@type": "Answer", "text": "Sky zeigt das Freitagsspiel (20:30) sowie alle Samstagsspiele inklusive Topspiel (18:30). DAZN überträgt die Samstags-Konferenz (15:30) und alle Sonntagsspiele. Die Zuordnung der einzelnen Partien zu den Tagen legt die DFL mit der zeitgenauen Terminierung fest."}}, {"@type": "Question", "name": "Wer zeigt die 2. Bundesliga im TV?", "acceptedAnswer": {"@type": "Answer", "text": "Sky überträgt alle 306 Spiele der 2. Bundesliga live. Das Topspiel am Samstagabend (20:30) läuft zusätzlich frei empfangbar bei RTL."}}, {"@type": "Question", "name": "Was ist die Bundesliga-Konferenz und wo läuft sie?", "acceptedAnswer": {"@type": "Answer", "text": "Die Konferenz zeigt alle fünf Samstag-15:30-Spiele parallel in einer Sendung. Ab der Saison 2026/27 läuft die Original-Konferenz exklusiv bei DAZN, die Einzelspiele zeigt parallel Sky. TVFussball.de listet die Konferenz für jeden Spieltag."}}, {"@type": "Question", "name": "Kann ich Bundesliga kostenlos und legal im Radio hören?", "acceptedAnswer": {"@type": "Answer", "text": "Ja: sportschau.de und die ARD Audiothek streamen jedes Einzelspiel der 1. und 2. Bundesliga als kostenlose Audio-Vollreportage. Viele Vereine bieten zusätzlich eigene Fanradios an, etwa BVB Netradio, VfB Radio oder HSVnetradio – alle bei TVFussball.de direkt am Spiel verlinkt."}}, {"@type": "Question", "name": "Was kosten Sky und DAZN für die Bundesliga?", "acceptedAnswer": {"@type": "Answer", "text": "Die Preise ändern sich je nach Aktion. Unser Abo-Rechner auf der Anbieter-Seite vergleicht Sky, DAZN, MagentaTV, Prime Video und Co. tagesaktuell danach, welche Wettbewerbe dir wichtig sind – inklusive der günstigsten Kombination."}}, {"@type": "Question", "name": "Zeigt Sky oder DAZN die Champions League?", "acceptedAnswer": {"@type": "Answer", "text": "Sky hat seit 2018 keine Champions-League-Rechte mehr. Ab der Ligaphase 2026/27 teilen sich DAZN und Amazon Prime Video die Spiele, das Finale läuft frei im ZDF. Die frühen Qualifikationsrunden im Juli überträgt in Deutschland kein Sender."}}, {"@type": "Question", "name": "Welche WM-2026-Spiele laufen kostenlos?", "acceptedAnswer": {"@type": "Answer", "text": "ARD und ZDF zeigen einen Großteil der WM live und kostenlos – vom Eröffnungsspiel bis zum Finale. MagentaTV überträgt als einziger Anbieter alle 104 Spiele, 44 davon exklusiv. Welche Partie wo läuft, zeigt TVFussball.de tagesaktuell mit Kommentatoren und Anpfiffzeiten."}}]}</script>
@@ -1390,7 +1400,7 @@ const I18N = {
     ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
     price_from:"ab", price_approx:"ca.",
     result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Topspiele",
-    f_free:"Nur Free-TV", f_tonight:"Heute Abend", f_now:"Läuft jetzt", f_format:"Formate", f_mine:"★ Meine", fmt_head:"Sendungen & Magazine", fmt_live:"live", fmt_more:"Zur Sendung", fk_highlights:"Highlights", fk_magazin:"Magazin", fk_talk:"Talk", fk_vorbericht:"Vorbericht", fk_live:"Live-Studio", fk_podcast:"Podcast", fk_video:"Video",
+    f_free:"Nur Free-TV", f_tonight:"Demnächst", f_now:"Läuft jetzt", f_format:"Formate", f_mine:"★ Meine", fmt_head:"Sendungen & Magazine", fmt_live:"live", fmt_more:"Zur Sendung", fk_highlights:"Highlights", fk_magazin:"Magazin", fk_talk:"Talk", fk_vorbericht:"Vorbericht", fk_live:"Live-Studio", fk_podcast:"Podcast", fk_video:"Video",
     mine_empty:"Noch keinem Team gefolgt — tippe in einem Spiel auf „folgen“.", filt_empty:"Keine Spiele für diesen Filter.",
     follow:"folgen", following:"folge ich", follow_hint:"Folge Teams, um nur deine Spiele zu sehen — Kalender-Erinnerung inklusive.",
     abo_title:"Welches Abo brauche ich?", abo_sub:"Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.",
@@ -1456,7 +1466,7 @@ const I18N = {
     ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
     price_from:"from", price_approx:"approx.",
     result:"Final", ft:"FT", nohits:"No results", f_all:"All", f_3goals:"3+ goals", f_top:"Top games",
-    f_free:"Free TV only", f_tonight:"Tonight", f_now:"Live now", f_format:"Shows", f_mine:"★ Mine", fmt_head:"Shows & magazines", fmt_live:"live", fmt_more:"Show page", fk_highlights:"Highlights", fk_magazin:"Magazine", fk_talk:"Talk", fk_vorbericht:"Preview", fk_live:"Live studio", fk_podcast:"Podcast", fk_video:"Video",
+    f_free:"Free TV only", f_tonight:"Upcoming", f_now:"Live now", f_format:"Shows", f_mine:"★ Mine", fmt_head:"Shows & magazines", fmt_live:"live", fmt_more:"Show page", fk_highlights:"Highlights", fk_magazin:"Magazine", fk_talk:"Talk", fk_vorbericht:"Preview", fk_live:"Live studio", fk_podcast:"Podcast", fk_video:"Video",
     mine_empty:"Not following any team yet — tap “follow” on a match.", filt_empty:"No matches for this filter.",
     follow:"follow", following:"following", follow_hint:"Follow teams to see only your matches — calendar reminder included.",
     abo_title:"Which subscription do I need?", abo_sub:"Pick what you want to watch — we show the cheapest combination and what stays free.",
@@ -4109,10 +4119,10 @@ const HL = [
 
 /* News — DFB-Team + 18 Bundesligavereine (Teamliste mit Farben/Kürzel) */
 const TEAMS = [
-  {id:"dfb",name:"DFB-Team",short:"DFB",color:"#c7a008",nat:true},
   {id:"wm",name:"WM 2026",short:"WM",color:"#0b9d6e",fg:"#fff"},
   {id:"bayern",name:"FC Bayern München",short:"FCB",color:"#dc052d"},
   {id:"psg",name:"Paris Saint-Germain",short:"PSG",color:"#004170",fg:"#fff"},
+  {id:"dfb",name:"DFB-Team",short:"DFB",color:"#c7a008",nat:true},
   {id:"bvb",name:"Borussia Dortmund",short:"BVB",color:"#f4c400",fg:"#1a1a1a"},
   {id:"rbl",name:"RB Leipzig",short:"RBL",color:"#d4023a"},
   {id:"vfb",name:"VfB Stuttgart",short:"VfB",color:"#e32219"},
@@ -4377,7 +4387,8 @@ const PROVIDERS = [
 ];
 
 let LANG="de", LANG_LOCKED=false, LIVE_SEL=new Set([]), FILTER_USERSET=false, LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
-let NEWS_MODE="transfers", TR_SORT="fee", TR_LEAGUE="", TR_CLUB="", TR_Q="", TR_RUMORS=false;
+let NEWS_MODE="transfers", TR_SORT="fee", TR_LEAGUE="", TR_CLUB="", TR_Q="", TR_SHOW="fix";
+let LIVE_SHOWN=20, HL_SHOWN=20, NEWS_SHOWN=20, TR_SHOWN=20; const PAGE_SIZE=20;
 const FORMATS = [
   {id:"ard-wm", day:"Donnerstag, 25.06.2026", time:"21:00", name:"Sportschau live – WM 2026", ch:"Das Erste (ARD)", icon:"📡", kind:"live", live:true,
    when_de:"WM 2026 · Live-Spiele & Studio", when_en:"World Cup 2026 · live games & studio",
@@ -4764,6 +4775,7 @@ document.addEventListener("change", function(e){
   }
 });
 
+function smBtn(kind,total,shown){ if(total<=shown) return ""; var rest=total-shown, add=Math.min(PAGE_SIZE,rest); var lbl=(LANG==="de"?"Mehr anzeigen":"Show more"); return '<div class="showmore-wrap"><button class="showmore" data-showmore="'+kind+'">'+lbl+' <span class="sm-n">+'+add+'</span></button></div>'; }
 function renderLive(){
   renderMineQuick();
   const t=I18N[LANG], board=document.getElementById("liveBoard");
@@ -4799,6 +4811,7 @@ function renderLive(){
     items=items.concat(odl.map(f=>({day:"__od__",sk:anchor*10000+9999,k:"f",o:f})));
   }
   items.sort((a,b)=> a.sk-b.sk);
+  var _liveTotal=items.length; if(items.length>LIVE_SHOWN) items=items.slice(0,LIVE_SHOWN);
   let html="", curDay="";
   items.forEach(it=>{
     if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==="__od__"?(LANG==="de"?"\uD83C\uDFA7 Podcasts & Abruf \u00b7 jederzeit":"\uD83C\uDFA7 Podcasts & on-demand \u00b7 anytime"):locDay(it.day); let dtag=""; if(it.day!=="__od__"){ const dk=dayKey(it.day), tk=todayKeyNow(); const tmr=new Date(Date.now()+864e5), tmk=tmr.getFullYear()*10000+(tmr.getMonth()+1)*100+tmr.getDate(); if(dk===tk) dtag='<span class="dtag">'+(LANG==="de"?"HEUTE":"TODAY")+'</span>'; else if(dk===tmk) dtag='<span class="dtag tm">'+(LANG==="de"?"MORGEN":"TOMORROW")+'</span>'; } html += '<div class="daybar">'+dtag+'<span class="d">'+dlabel+'</span><span class="ln"></span>'+(html===""?'<span class="social"><a href="https://www.facebook.com/share/17qkMgZEbd/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg></a><a href="https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></span>':"")+'</div>'; }
@@ -4815,7 +4828,7 @@ function renderLive(){
   if(SEL.size===0 && !q && MATCHES.some(m=>!isFinished(m) && (catOf(m)==="bl"||catOf(m)==="bl2"))){
     blHint='<div class="blhint" data-blhint="1" role="button" tabindex="0"><span class="blhint-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18"/><path d="M8 3v3M16 3v3"/><path d="M8.4 14.6l2.3 2.3 4.9-4.8"/></svg></span><span class="blhint-tx"><b>'+t.blhint_t+'</b><span>'+t.blhint_s+'</span></span><span class="blhint-cta">'+t.blhint_cta+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12.5M11.5 5.5l6.5 6.5-6.5 6.5"/></svg></span></div>';
   }
-  board.innerHTML = blHint + html + hint; try{liveApplyDOM();}catch(e){}
+  board.innerHTML = blHint + html + hint + smBtn("live",_liveTotal,LIVE_SHOWN); try{liveApplyDOM();}catch(e){}
   /*auto-open*/ let _restored=false;
   openKeys.forEach(k=>{ const r=board.querySelector('.row[data-k="'+CSS.escape(k)+'"]');
     if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); _restored=true; } });
@@ -5042,13 +5055,14 @@ function renderHL(){
     return true;
   });
   document.getElementById("hlCount").textContent="["+list.length+"]";
+  var _hlTotal=list.length; list=list.slice(0,HL_SHOWN);
   if(!list.length){board.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
   let html="", curDate="";
   list.forEach(m=>{
     if(m.date!==curDate){curDate=m.date; html+='<div class="daybar"><span class="d">'+locDate(m.date)+' 2026</span><span class="ln"></span></div>';}
     html+=hlRow(m,t);
   });
-  board.innerHTML=html;
+  board.innerHTML=html+smBtn("hl",_hlTotal,HL_SHOWN);
   /*hl-auto-open*/ const _hf=board.querySelector(".row");
   if(_hf){ _hf.classList.add("open"); const _hh=_hf.querySelector(".rowhead"); if(_hh) _hh.setAttribute("aria-expanded","true"); }
 }
@@ -5133,9 +5147,9 @@ const CLUB_COL={
   "Paris SG":"#004170","Olympique Marseille":"#2faee0","Paris FC":"#12235e","AS Monaco":"#e51b22","RC Lens":"#ffed00",
   "AC Milan":"#fb090b","Juventus":"#111111","Napoli":"#12a0d7","Inter":"#0b1560","Lazio":"#5aa7dc","Fiorentina":"#59319c","Udinese":"#1a1a1a","Genoa":"#c8102e",
   "PSV Eindhoven":"#ed1c24","FC Utrecht":"#e5001a","Feyenoord":"#e30613",
-  "Sporting Braga":"#b3151a","RSC Anderlecht":"#4d1f8c","Club Brugge":"#0057b8","Besiktas":"#111111","Galatasaray":"#e00c17","Orlando City":"#633492","RB Salzburg":"#d2001f","Sanfrecce Hiroshima":"#5a2d81",
-  "Roma":"#8e1f2f","FC Porto":"#005bab","Sporting CP":"#008057","Atalanta":"#1d1d1b","CA Osasuna":"#0a346f","Toulouse":"#6a1f7a","Stade Rennes":"#e23026","Stade Reims":"#c81a2b","Ajax":"#d2122e","Strasbourg":"#0089cf","AIK":"#16223f","Middlesbrough":"#e21b22","Benfica":"#e2001a",
-  "Aston Villa":"#670e36","Everton":"#003399","Ipswich":"#3a64a3","Sunderland":"#eb172b","Leeds":"#1d428a","Brentford":"#e30613","Fulham":"#111111","Crystal Palace":"#1b458f","Al-Hilal":"#003f7d","Chicago Fire":"#c8102e"
+  "Sporting Braga":"#b3151a","RSC Anderlecht":"#4d1f8c","Club Brugge":"#0057b8","Besiktas":"#111111","Galatasaray":"#e00c17","Fenerbahce":"#00296b","Trabzonspor":"#8a1538","Orlando City":"#633492","RB Salzburg":"#d2001f","Sanfrecce Hiroshima":"#5a2d81",
+  "Roma":"#8e1f2f","FC Porto":"#005bab","Sporting CP":"#008057","Atalanta":"#1d1d1b","Bologna":"#a81e2c","Cagliari":"#b01e28","Grêmio":"#0d80c1","AZ Alkmaar":"#d4021d","FC Twente":"#e2261b","OGC Nice":"#c8102e","Go Ahead Eagles":"#e2001a","CA Osasuna":"#0a346f","Toulouse":"#6a1f7a","Stade Rennes":"#e23026","Stade Reims":"#c81a2b","Ajax":"#d2122e","Strasbourg":"#0089cf","AIK":"#16223f","Middlesbrough":"#e21b22","Benfica":"#e2001a",
+  "Aston Villa":"#670e36","Everton":"#003399","Ipswich":"#3a64a3","Sunderland":"#eb172b","Leeds":"#1d428a","Brentford":"#e30613","Fulham":"#111111","Crystal Palace":"#1b458f","Al-Hilal":"#003f7d","Al-Ittihad":"#f2a900","Al-Ahli":"#009639","Columbus Crew":"#fedd00","Los Angeles FC":"#111111","Sporting Kansas City":"#93b1d7","Inter Miami":"#f5b5cd","Chicago Fire":"#c8102e"
 };
 function clubColor(n){ if(CLUB_COL[n]) return CLUB_COL[n]; var h=0; for(var i=0;i<n.length;i++){h=(h*31+n.charCodeAt(i))>>>0;} return "hsl("+(h%360)+" 42% 52%)"; }
 function fmtM(n){ var s=(Math.round(n*10)/10).toString(); if(LANG==="de") s=s.replace(".",","); return s; }
@@ -5144,7 +5158,7 @@ function fmtM(n){ var s=(Math.round(n*10)/10).toString(); if(LANG==="de") s=s.re
    Marktwerte: transfermarkt.de | uebergreifend: Fabrizio Romano. Abloesen ca., MV & Gehalt geschaetzt. */
 const TRANSFERS=[
   /* ===== Bundesliga (offizielle DFL-Liste, Stand Juli 2026) ===== */
-  {p:"Nathaniel Brown",pos:"LV",age:22,from:"Eintracht Frankfurt",fl:"bl1",to:"Bayern München",tl:"bl1",fee:55,mv:30,sal:6,date:"2026-06-26",st:"fix",known:"Antritt, Zweikampf, moderne Ein- und Überlaufwege",imp:"Bayern besetzt die Problemzone links langfristig mit einem WM-Fahrer. Frankfurt kann die Klasse kaum ersetzen, sichert sich aber eine der höchsten Linksverteidiger-Ablösen überhaupt."},
+  {p:"Nathaniel Brown",pos:"LV",age:22,from:"Eintracht Frankfurt",fl:"bl1",to:"Bayern München",tl:"bl1",fee:55,mv:30,sal:6,date:"2026-06-26",st:"fix",known:"Antritt, Zweikampf, moderne Ein- und Überlaufwege",imp:"Bayern besetzt die Problemzone links langfristig mit einem WM-Fahrer. Frankfurt kann die Klasse kaum ersetzen, sichert sich aber eine der höchsten Linksverteidiger-Ablösen überhaupt. Für München bleibt die Eintracht ein gern und regelmäßig besuchter Transfermarkt."},
   {p:"Ismael Saibari",pos:"OM",age:24,from:"PSV Eindhoven",fl:"ere",to:"Bayern München",tl:"bl1",fee:50,mv:40,sal:7,date:"2026-06-30",st:"fix",known:"Tiefe Läufe, Torgefahr, Ballfestmachen",imp:"Bayern holt einen Kane-Backup, der ins Kombinationsspiel passt; für PSV ein Rekordverkauf. Eine WM-Verletzung bremst den Start."},
   {p:"Noel Aseko",pos:"ZM",age:19,from:"Hannover 96",fl:"bl2",to:"Bayern München",tl:"bl1",fee:5,mv:6,sal:1.5,date:"2026-07-01",st:"fix",known:"Physis, Ballgewinne, Dynamik",imp:"Bayern sichert sich ein deutsches Mittelfeldtalent aus Hannover."},
   {p:"Alexander Nübel",pos:"TW",age:29,from:"Bayern München",fl:"bl1",to:"Besiktas",tl:"tsl",fee:5,mv:12,sal:6,date:"2026-07-08",st:"fix",known:"Strafraum, Fußspiel, Reaktion",imp:"Nübel sucht als Dauer-Ersatz von Neuer und Urbig Spielzeit; Besiktas holt einen erfahrenen Keeper (>5 Mio. netto)."},
@@ -5204,17 +5218,17 @@ const TRANSFERS=[
   {p:"Maurice Krattenmacher",pos:"OM",age:20,from:"Bayern München",fl:"bl1",to:"SV Elversberg",tl:"bl2",fee:3,mv:4,sal:1,date:"2026-07-01",st:"fix",known:"Kreativität, Standards",imp:"Elversberg holt ein Bayern-Talent für die Zweitliga-Saison."},
   {p:"Noah Darvich",pos:"ZM",age:19,from:"VfB Stuttgart",fl:"bl1",to:"SV Elversberg",tl:"bl2",fee:0,mv:5,sal:1,date:"2026-06-25",st:"fix",loan:true,known:"Technik, Ballkontrolle, Kreativität",imp:"Leihe für Spielpraxis; Elversberg bekommt ein VfB-Juwel."},
   /* ===== Premier League ===== */
-  {p:"Elliot Anderson",pos:"ZM",age:23,from:"Nottingham Forest",fl:"pl",to:"Manchester City",tl:"pl",fee:135,mv:70,sal:10,date:"2026-07-02",st:"einig",known:"Box-to-box-Power, Ballgewinne, Zug nach vorn",imp:"City ersetzt in der Post-Guardiola-Ära das Kreativzentrum und macht Anderson zum teuersten Mittelfeldspieler der Geschichte. Forest kassiert eine Rekordablöse, verliert aber seinen Motor."},
-  {p:"Mateus Fernandes",pos:"ZM",age:21,from:"West Ham",fl:"pl",to:"Tottenham",tl:"pl",fee:98.6,mv:55,sal:8,date:"2026-07-02",st:"fix",known:"Kompletter Achter, Technik, Übersicht",imp:"Vereinsrekord (85 Mio. £): Mit 21 soll Fernandes das Spurs-Mittelfeld über Jahre prägen. Für West Ham ist es nach zwei Abstiegen ein wichtiger Verkauf."},
-  {p:"Sandro Tonali",pos:"ZM",age:26,from:"Newcastle",fl:"pl",to:"Tottenham",tl:"pl",fee:105,mv:78,sal:11,date:"2026-07-02",st:"einig",known:"Passspiel, Spielaufbau, Physis im Zentrum",imp:"De Zerbi bekommt den Taktgeber für sein Spurs-Projekt (bis zu 100 Mio. £ mit Boni). Newcastle macht Kasse, reißt aber ein Loch ins Zentrum."},
-  {p:"Anthony Gordon",pos:"LA",age:25,from:"Newcastle",fl:"pl",to:"FC Barcelona",tl:"ll",fee:81,mv:60,sal:8,date:"2026-06-28",st:"fix",known:"Tempo, Dribbling, Läufe in die Tiefe",imp:"Flick bekommt Speed für die linke Flügelseite; hohe Beraterkosten (24 Mio. €) sorgten für Diskussionen. Newcastle finanziert damit den eigenen Umbruch."},
+  {p:"Elliot Anderson",pos:"ZM",age:23,from:"Nottingham Forest",fl:"pl",to:"Manchester City",tl:"pl",fee:135,mv:70,sal:10,date:"2026-07-02",st:"einig",known:"Box-to-box-Power, Ballgewinne, Zug nach vorn",imp:"Mit rund 135 Mio. wird Anderson zum teuersten Mittelfeldspieler der Geschichte – die Post-Guardiola-Ära bei City beginnt also nicht gerade mit einem Sparbuch. Der frühere Newcastle-Junge soll das Kreativzentrum neu erfinden; Nottingham Forest kassiert eine Rekordablöse und muss seinen Motor ersetzen. Für 135 Millionen erwartet das Etihad jetzt Tore, Assists und gute Laune."},
+  {p:"Mateus Fernandes",pos:"ZM",age:21,from:"West Ham",fl:"pl",to:"Tottenham",tl:"pl",fee:98.6,mv:55,sal:8,date:"2026-07-02",st:"fix",known:"Kompletter Achter, Technik, Übersicht",imp:"Vereinsrekord (85 Mio. £): Mit 21 soll Fernandes das Spurs-Mittelfeld über Jahre prägen. Für West Ham ist es nach zwei Abstiegskampf-Saisons ein überlebenswichtiger Verkauf. Fast 100 Millionen für einen 21-Jährigen sind eine Wette auf die Zukunft – aber Tottenham sammelt dieses Jahr Mittelfeldspieler wie andere Panini-Bilder."},
+  {p:"Sandro Tonali",pos:"ZM",age:26,from:"Newcastle",fl:"pl",to:"Tottenham",tl:"pl",fee:105,mv:78,sal:11,date:"2026-07-02",st:"einig",known:"Passspiel, Spielaufbau, Physis im Zentrum",imp:"De Zerbi bekommt seinen Taktgeber (bis zu 100 Mio. £ mit Boni) – ein italienischer Regisseur fürs italienische Trainerprojekt, das passt wie Espresso zum Cornetto. Newcastle macht Kasse, reißt aber ein Loch ins Zentrum. Tottenham hofft derweil, dass diesmal nicht wieder im Frühjahr die Luft raus ist."},
+  {p:"Anthony Gordon",pos:"LA",age:25,from:"Newcastle",fl:"pl",to:"FC Barcelona",tl:"ll",fee:81,mv:60,sal:8,date:"2026-06-28",st:"fix",known:"Tempo, Dribbling, Läufe in die Tiefe",imp:"Flick bekommt endlich Tempo für die linke Seite; die üppigen Beraterkosten (24 Mio.) sorgten in Katalonien für hochgezogene Augenbrauen und einen nervösen Taschenrechner. Newcastle finanziert mit dem Verkauf den eigenen Umbruch. Barça und das Financial Fairplay bleiben ein Beziehungsstatus Marke 'es ist kompliziert'."},
   {p:"Rasmus Højlund",pos:"ST",age:23,from:"Manchester United",fl:"pl",to:"Napoli",tl:"sa",fee:44,mv:45,sal:6,date:"2026-07-05",st:"fix",known:"Tempo, Tiefenläufe, Wucht",imp:"Nach starker Leihe (16 Tore) wird der Deal fest (~43 Mio. £) – deutlich günstiger als Uniteds Einkauf 2023. Napoli baut den Sturm um Conte weiter auf."},
   {p:"Manuel Akanji",pos:"IV",age:30,from:"Manchester City",fl:"pl",to:"Inter",tl:"sa",fee:15,mv:20,sal:6,date:"2026-07-04",st:"fix",known:"Spieleröffnung, Tempo, Positionsflexibilität",imp:"Inter holt Champions-League-Erfahrung günstig (15 Mio.); City trennt sich von einem Rotationsverteidiger."},
-  {p:"Jeremy Jacquet",pos:"IV",age:20,from:"Stade Rennes",fl:"l1",to:"Liverpool",tl:"pl",fee:64,mv:35,sal:6,date:"2026-07-01",st:"fix",known:"Tempo, Zweikampf, Physis",imp:"Liverpool investiert ~£55 Mio. in ein französisches Abwehrtalent."},
-  {p:"Marco Palestra",pos:"RV",age:20,from:"Atalanta",fl:"sa",to:"Chelsea",tl:"pl",fee:57,mv:35,sal:6,date:"2026-07-01",st:"fix",known:"Offensivdrang, Tempo, Flanken",imp:"Chelsea holt den italienischen Außenverteidiger (£49 Mio.); Inter/Atalanta kassieren."},
-  {p:"Marc Cucurella",pos:"LV",age:27,from:"Chelsea",fl:"pl",to:"Real Madrid",tl:"ll",fee:60,mv:52,sal:9,date:"2026-07-01",st:"fix",known:"Zweikampf, linke Seite, Einsatz",imp:"Real holt einen kampfstarken Linksverteidiger von Chelsea (~£47,5 Mio.)."},
+  {p:"Jeremy Jacquet",pos:"IV",age:20,from:"Stade Rennes",fl:"l1",to:"Liverpool",tl:"pl",fee:64,mv:35,sal:6,date:"2026-07-01",st:"fix",known:"Tempo, Zweikampf, Physis",imp:"Liverpool investiert rund 55 Mio. £ in einen erst 20-jährigen Abwehrmann – an der Anfield-Devise 'jung, schnell, ordentlich teuer' hat sich wenig geändert. Rennes bleibt Europas verlässlichste Talentschmiede, diesmal mit sattem Kassenbon. Den Druck bei dem Preis gibt es für den jungen Franzosen gratis dazu."},
+  {p:"Marco Palestra",pos:"RV",age:20,from:"Atalanta",fl:"sa",to:"Chelsea",tl:"pl",fee:57,mv:35,sal:6,date:"2026-07-01",st:"fix",known:"Offensivdrang, Tempo, Flanken",imp:"Chelsea schnappt sich den italienischen Außenverteidiger (£49 Mio.) und kapert damit Inters Wunschlösung für die Dumfries-Nachfolge – der erste Transfer der Xabi-Alonso-Ära. Chelsea und teure junge Rechtsverteidiger: eine Fortsetzungsgeschichte mit vielen Kapiteln. Atalanta kassiert und lächelt milde."},
+  {p:"Marc Cucurella",pos:"LV",age:27,from:"Chelsea",fl:"pl",to:"Real Madrid",tl:"ll",fee:60,mv:52,sal:9,date:"2026-07-01",st:"fix",known:"Zweikampf, linke Seite, Einsatz",imp:"Real holt einen kampfstarken Linksverteidiger (~47,5 Mio. £) – die markante Haarpracht gibt es gratis dazu. Nach starker WM mit Spanien gilt Cucurella als sicherer Wert; dass Chelsea bei einem 2022er-Einkauf sogar Gewinn macht, grenzt an der Stamford Bridge fast an ein Wunder."},
   {p:"Geovany Quenda",pos:"RA",age:18,from:"Sporting CP",fl:"pt",to:"Chelsea",tl:"pl",fee:51,mv:40,sal:6,date:"2026-07-01",st:"fix",known:"Dribbling, Tempo, Direktheit",imp:"Chelsea setzt erneut auf ein portugiesisches Toptalent (£44 Mio.)."},
-  {p:"Jan Paul van Hecke",pos:"IV",age:25,from:"Brighton",fl:"pl",to:"Tottenham",tl:"pl",fee:61,mv:45,sal:7,date:"2026-07-01",st:"fix",known:"Aufbau, Kopfball, Ruhe am Ball",imp:"Spurs zahlen ~£52 Mio. für Brightons Abwehrchef; De Zerbi verstärkt die Defensive."},
+  {p:"Jan Paul van Hecke",pos:"IV",age:25,from:"Brighton",fl:"pl",to:"Tottenham",tl:"pl",fee:61,mv:45,sal:7,date:"2026-07-01",st:"fix",known:"Aufbau, Kopfball, Ruhe am Ball",imp:"Spurs zahlen rund 52 Mio. £ für Brightons Abwehrchef – die alte Fußballregel gilt weiter: Wer an der Südküste stark verteidigt, landet früher oder später in London. De Zerbi stabilisiert die Defensive, Brighton macht wie immer Gewinn und scoutet längst den Nachfolger."},
   {p:"Victor Munoz",pos:"ZM",age:19,from:"CA Osasuna",fl:"ll",to:"Liverpool",tl:"pl",fee:40,mv:30,sal:5,date:"2026-07-01",st:"fix",known:"Technik, Passspiel, Übersicht",imp:"Liverpool sichert sich ein spanisches Mittelfeldjuwel (~£34,5 Mio.)."},
   {p:"Emmanuel Emegha",pos:"ST",age:23,from:"Strasbourg",fl:"l1",to:"Chelsea",tl:"pl",fee:30,mv:25,sal:5,date:"2026-07-01",st:"fix",known:"Wucht, Tiefenläufe, Abschluss",imp:"Chelsea verpflichtet den Strasbourg-Stürmer."},
   {p:"Ibrahima Konaté",pos:"IV",age:27,from:"Liverpool",fl:"pl",to:"Real Madrid",tl:"ll",fee:0,mv:55,sal:12,date:"2026-07-01",st:"fix",free:true,known:"Tempo, Zweikampf, Physis",imp:"Konaté verlässt Liverpool nach Vertragsende ablösefrei – ein Coup für Real."},
@@ -5250,7 +5264,7 @@ const TRANSFERS=[
   {p:"Robert Lewandowski",pos:"ST",age:37,from:"FC Barcelona",fl:"ll",to:"Chicago Fire",tl:"mls",fee:0,mv:8,sal:8,date:"2026-06-30",st:"fix",free:true,known:"Torinstinkt, Abschluss, Strafraumgefühl",imp:"Nach vier Jahren und drei Meistertiteln (120 Tore) verlässt Lewandowski Barça ablösefrei und unterschreibt bis 2028 bei Chicago Fire (MLS)."},
   {p:"Dro Fernandez",pos:"ZM",age:18,from:"FC Barcelona",fl:"ll",to:"Paris SG",tl:"l1",fee:8,mv:20,sal:4,date:"2026-07-01",st:"fix",known:"Spielintelligenz, Passspiel, Übersicht",imp:"PSG setzt seinen Jugendkurs fort und lotst das Barça-Toptalent bis 2030 nach Paris – ein Politikum in Katalonien."},
   /* ===== Serie A ===== */
-  {p:"Gonçalo Ramos",pos:"ST",age:25,from:"Paris SG",fl:"l1",to:"AC Milan",tl:"sa",fee:70,mv:55,sal:7,date:"2026-06-30",st:"fix",known:"Strafraumstürmer, Abschluss, Kopfball",imp:"Milan-Rekordeinkauf und erster Transfer unter Amorim: 45 Tore in drei PSG-Jahren sollen die Rückkehr nach Europa sichern. PSG macht Platz für eine neue Nummer 9."},
+  {p:"Gonçalo Ramos",pos:"ST",age:25,from:"Paris SG",fl:"l1",to:"AC Milan",tl:"sa",fee:70,mv:55,sal:7,date:"2026-06-30",st:"fix",known:"Strafraumstürmer, Abschluss, Kopfball",imp:"Milan-Rekordeinkauf und erster Transfer unter Amorim: 45 Tore in drei PSG-Jahren sollen die Rückkehr nach Europa absichern. Nach verpasster CL-Qualifikation ist die neue Nummer 9 zugleich ein Versprechen an die Tifosi – am San Siro will man wieder Tore bejubeln statt Tabellen-Ausreden hören. PSG macht im Gegenzug Platz für die nächste Neun."},
   {p:"Arthur Atta",pos:"ZM",age:22,from:"Udinese",fl:"sa",to:"Fiorentina",tl:"sa",fee:27,mv:25,sal:4,date:"2026-07-08",st:"einig",known:"Ballführung, Dribbling im Zentrum, Dynamik",imp:"Fiorentina zahlt für das Udinese-Juwel (bewertet ~40 Mio., Fixsumme ~25-30 Mio.) und wertet das Mittelfeld auf."},
   {p:"Mario Gila",pos:"IV",age:25,from:"Lazio",fl:"sa",to:"AC Milan",tl:"sa",fee:25,mv:22,sal:4,date:"2026-07-06",st:"fix",known:"Aufbaustärke, Stellungsspiel, Passsicherheit",imp:"Milan verjüngt die Abwehr (25+5 Mio.); die Hälfte fließt an Ex-Klub Real Madrid. Lazio verliert einen Stammverteidiger."},
   {p:"Anan Khalaili",pos:"OM",age:22,from:"Union Saint-Gilloise",fl:"misc",to:"Inter",tl:"sa",fee:25,mv:18,sal:3,date:"2026-07-09",st:"einig",known:"Kreativität, Dribbling, letzter Pass",imp:"Inter holt den belgischen Pokalhelden (25 Mio.+Boni) als Kreativoption; ein Bonus fließt an Ex-Klub Maccabi Haifa."},
@@ -5258,63 +5272,119 @@ const TRANSFERS=[
   {p:"Jeff Ekhator",pos:"ST",age:19,from:"Genoa",fl:"sa",to:"Juventus",tl:"sa",fee:16,mv:14,sal:3,date:"2026-07-01",st:"fix",known:"Wucht, Abschluss, Entwicklungspotenzial",imp:"Juve setzt auf ein italienisches Sturmtalent (16 Mio.). Genoa macht früh Kasse."},
   {p:"Ivan Provedel",pos:"TW",age:31,from:"Lazio",fl:"sa",to:"Inter",tl:"sa",fee:3,mv:6,sal:3,date:"2026-07-02",st:"fix",known:"Reflexe, Strafraum, Fußspiel",imp:"Inter holt einen erfahrenen Keeper als Konkurrenz; Lazio trennt sich vom Stammtorwart."},
   {p:"Noa Lang",pos:"LA",age:26,from:"Napoli",fl:"sa",to:"Galatasaray",tl:"tsl",fee:18,mv:18,sal:4,date:"2026-07-04",st:"fix",known:"Dribbling, Tempo, Direktheit",imp:"Galatasaray holt einen niederländischen Flügelstürmer; Napoli macht Kaderplatz frei."},
+  {p:"Giovanni Fabbian",pos:"ZM",age:23,from:"Bologna",fl:"sa",to:"Fiorentina",tl:"sa",fee:15,mv:14,sal:2.5,date:"2026-05-11",st:"fix",known:"Box-Besetzung, Torgefahr aus dem Zentrum, Physis",imp:"Fiorentina zieht die Kaufpflicht (~15 Mio., verdreifacht die 2023er-Ablöse an Inter); Bologna macht deutlich Gewinn."},
+  {p:"Marco Brescianini",pos:"ZM",age:26,from:"Atalanta",fl:"sa",to:"Fiorentina",tl:"sa",fee:10,mv:12,sal:2.5,date:"2026-05-11",st:"fix",known:"Laufstärke, Zweikampf, Systemflexibilität",imp:"Aus der Leihe wird fix (10 Mio., Vierjahresvertrag); ein Serie-A-erprobter Sechser/Achter für die Viola."},
+  {p:"Viery",pos:"IV",age:20,from:"Grêmio",fl:"misc",to:"Fiorentina",tl:"sa",fee:15,mv:12,sal:2,date:"2026-07-01",st:"fix",known:"Zweikampf, Aufbau, Physis",imp:"Fiorentina investiert 15 Mio. in ein brasilianisches Abwehrtalent für den Neuaufbau unter Paratici."},
+  {p:"Radu Drăgușin",pos:"IV",age:24,from:"Tottenham",fl:"pl",to:"Fiorentina",tl:"sa",fee:0,mv:22,sal:3,date:"2026-07-01",st:"fix",loan:true,known:"Kopfball, Zweikampf, Stellungsspiel",imp:"Leihe für 2026/27: Fiorentina holt nach der Kreuzband-Reha einen Serie-A-Rückkehrer, Spurs sichern Spielpraxis."},
+  {p:"Gianluca Gaetano",pos:"OM",age:26,from:"Cagliari",fl:"sa",to:"Atalanta",tl:"sa",fee:14,mv:14,sal:3,date:"2026-07-01",st:"fix",known:"Kreativität, letzter Pass, Distanzschuss",imp:"Atalanta holt einen kreativen Zehner (~14 Mio. inkl. Boni); Cagliari macht Kasse."},
+  {p:"Nicolò Zaniolo",pos:"OM",age:26,from:"Galatasaray",fl:"tsl",to:"Udinese",tl:"sa",fee:5,mv:12,sal:3,date:"2026-07-01",st:"fix",known:"Dribbling, Tiefenläufe, Torgefahr",imp:"Aus der Leihe wird fix (5 Mio., Dreijahresvertrag; 50 % Weiterverkauf an Galatasaray). Udinese bindet einen Ex-Nationalspieler."},
+  {p:"Sebastiano Esposito",pos:"ST",age:24,from:"Inter",fl:"sa",to:"Cagliari",tl:"sa",fee:4,mv:6,sal:2,date:"2026-07-01",st:"fix",known:"Ballfestmachen, Abschluss, Wandspiel",imp:"Cagliari verpflichtet den Inter-Angreifer fest (4 Mio.); Inter macht Gehalt und Kaderplatz frei."},
   /* ===== Ligue 1 ===== */
   {p:"Quinten Timber",pos:"ZM",age:24,from:"Feyenoord",fl:"ere",to:"Olympique Marseille",tl:"l1",fee:22,mv:28,sal:5,date:"2026-07-03",st:"fix",known:"Ballfestmachen, Dribbling, Zweikampf",imp:"OM holt einen niederländischen Nationalspieler bis 2030 und wertet das Zentrum auf."},
   {p:"Facundo Medina",pos:"IV",age:26,from:"RC Lens",fl:"l1",to:"Olympique Marseille",tl:"l1",fee:18,mv:20,sal:4,date:"2026-07-04",st:"fix",known:"Aggressivität, Kopfball, Linksfuß-Aufbau",imp:"OM verstärkt die Innenverteidigung mit einem robusten Argentinier (18 Mio.); Lens verliert seinen Abwehrchef."},
   {p:"Timothy Weah",pos:"RA",age:26,from:"Juventus",fl:"sa",to:"Olympique Marseille",tl:"l1",fee:14,mv:18,sal:4,date:"2026-07-05",st:"fix",known:"Tempo, Läufe, Positionsflexibilität",imp:"OM holt einen US-Nationalspieler (14 Mio.) für die rechte Seite; Juve macht Kaderplatz frei."},
   {p:"Hamed Traoré",pos:"OM",age:26,from:"Bournemouth",fl:"pl",to:"Olympique Marseille",tl:"l1",fee:7.5,mv:12,sal:3,date:"2026-07-02",st:"fix",known:"Technik, Dribbling zwischen den Linien",imp:"OM ergänzt die Offensive günstig (7,5 Mio.)."},
   {p:"Diego Coppola",pos:"IV",age:22,from:"Brighton",fl:"pl",to:"Paris FC",tl:"l1",fee:20,mv:18,sal:3,date:"2026-07-06",st:"fix",known:"Kopfballstärke, Zweikampf, Aufbau",imp:"Ligue-1-Rückkehrer Paris FC verpflichtet den Italiener fest (18+2 Mio.) und stabilisiert die Abwehr."},
+  {p:"Mads Bidstrup",pos:"ZM",age:25,from:"RB Salzburg",fl:"misc",to:"Olympique Lyon",tl:"l1",fee:10.5,mv:12,sal:2.5,date:"2026-07-01",st:"fix",known:"Balleroberung, Passsicherheit, Ruhe am Ball",imp:"Lyon holt einen defensiven Taktgeber aus Salzburg (~10,5 Mio.) und baut das Zentrum um."},
+  {p:"Noham Kamara",pos:"IV",age:19,from:"Paris SG",fl:"l1",to:"Olympique Lyon",tl:"l1",fee:4.1,mv:6,sal:1.5,date:"2026-07-01",st:"fix",known:"Zweikampf, Tempo, Aufbau",imp:"Aus der Winter-Leihe wird fix (4,1 Mio.+Boni, Vertrag bis 2030); Lyon bindet ein PSG-Talent dauerhaft."},
+  {p:"Sebastian Szymański",pos:"OM",age:26,from:"Fenerbahce",fl:"tsl",to:"Stade Rennes",tl:"l1",fee:10,mv:14,sal:3,date:"2026-07-01",st:"fix",known:"Kreativität, Distanzschuss, letzter Pass",imp:"Rennes verpflichtet den polnischen Nationalspieler (~10 Mio.) für die Europa-Ambitionen."},
+  {p:"Gonçalo Oliveira",pos:"IV",age:19,from:"Benfica",fl:"pt",to:"Stade Rennes",tl:"l1",fee:3.5,mv:5,sal:1.5,date:"2026-07-01",st:"fix",known:"Stellungsspiel, Aufbau, Physis",imp:"Rennes sichert sich ein portugiesisches U21-Talent (3,5 Mio.); Benfica behält eine Rückkaufoption."},
+  {p:"Noah Nartey",pos:"ZM",age:19,from:"Brøndby IF",fl:"misc",to:"Olympique Lyon",tl:"l1",fee:5,mv:6,sal:1.5,date:"2026-07-01",st:"fix",known:"Dynamik, Ballgewinne, Entwicklungspotenzial",imp:"Lyon setzt den Jugendkurs fort und holt ein dänisches Mittelfeldtalent bis 2030."},
+  /* ===== Eredivisie ===== */
+  {p:"Sven Mijnans",pos:"OM",age:26,from:"AZ Alkmaar",fl:"ere",to:"PSV Eindhoven",tl:"ere",fee:12,mv:14,sal:3,date:"2026-07-01",st:"fix",known:"Kreativität, Torgefahr, Verbindungsspiel",imp:"PSV holt einen kreativen Achter/Zehner aus Alkmaar (~12 Mio.) für die Titelverteidigung; AZ verliert einen Führungsspieler."},
+  {p:"Kevin Paredes",pos:"LA",age:23,from:"VfL Wolfsburg",fl:"bl1",to:"FC Utrecht",tl:"ere",fee:0,mv:6,sal:2,date:"2026-06-25",st:"fix",free:true,known:"Tempo, Dribbling, Direktheit",imp:"Nach vier Jahren in Wolfsburg (Abstieg) und auslaufendem Vertrag wechselt der US-Flügelspieler ablösefrei nach Utrecht – ein Neustart nach zwei von Verletzungen geprägten Jahren."},
+  {p:"Ángel Alarcón",pos:"LA",age:21,from:"FC Porto",fl:"pt",to:"FC Utrecht",tl:"ere",fee:2,mv:5,sal:1.5,date:"2026-05-20",st:"fix",known:"Dribbling, Tempo, Abschluss",imp:"Utrecht verpflichtet den spanischen Flügelspieler fest von Porto (~2 Mio.)."},
+  {p:"Wout Weghorst",pos:"ST",age:34,from:"Ajax",fl:"ere",to:"FC Twente",tl:"ere",fee:1,mv:3,sal:2,date:"2026-07-01",st:"fix",known:"Kopfball, Wandspiel, Wucht",imp:"Rückkehr in die Heimat: Der WM-erfahrene Angreifer verlässt Ajax und heuert beim FC Twente an."},
+  {p:"Charles Vanhoutte",pos:"ZM",age:27,from:"OGC Nice",fl:"l1",to:"Feyenoord",tl:"ere",fee:5.5,mv:8,sal:2.5,date:"2026-07-01",st:"fix",known:"Ballgewinne, Laufstärke, Passsicherheit",imp:"Feyenoord holt den Belgier fest aus Nizza (5,5 Mio.) und stabilisiert das Mittelfeld."},
+  {p:"Jari De Busser",pos:"TW",age:24,from:"Go Ahead Eagles",fl:"ere",to:"AZ Alkmaar",tl:"ere",fee:2,mv:3,sal:1,date:"2026-07-01",st:"fix",known:"Reflexe, Fußspiel, Strafraum",imp:"AZ verstärkt den Konkurrenzkampf im Tor mit dem Keeper von Go Ahead Eagles."},
+  /* ===== Primeira Liga ===== */
+  {p:"Diogo Travassos",pos:"IV",age:22,from:"Sporting CP",fl:"pt",to:"Sporting Braga",tl:"pt",fee:5.5,mv:6,sal:2,date:"2026-05-23",st:"fix",known:"Zweikampf, Aufbau, Kopfball",imp:"Braga verpflichtet den jungen Innenverteidiger fest von Sporting (5,5 Mio.)."},
+  {p:"Sergi Altimira",pos:"ZM",age:24,from:"Real Betis",fl:"ll",to:"Sporting CP",tl:"pt",fee:8,mv:10,sal:2.5,date:"2026-07-06",st:"einig",known:"Ballgewinne, Passsicherheit, Laufstärke",imp:"Sporting einigt sich mit Betis; der Transfer soll den Abgang von Kapitän Morten Hjulmand ermöglichen."},
+  {p:"Oskar Pietuszewski",pos:"RA",age:17,from:"Jagiellonia Białystok",fl:"misc",to:"FC Porto",tl:"pt",fee:10,mv:9,sal:2,date:"2026-07-01",st:"fix",known:"Tempo, Technik, Dribbling",imp:"Porto sichert sich ein 17-jähriges polnisches Flügeltalent (~10 Mio., Vierjahresvertrag)."},
+  {p:"Rodrigo Ribeiro",pos:"ST",age:20,from:"Sporting CP",fl:"pt",to:"FC Augsburg",tl:"bl1",fee:5,mv:6,sal:2,date:"2026-05-25",st:"fix",known:"Tiefenläufe, Tempo, Abschluss",imp:"Augsburg holt ein portugiesisches Sturmtalent von Sporting (5 Mio.)."},
+  /* ===== Süper Lig ===== */
+  {p:"Orkun Kökçü",pos:"ZM",age:25,from:"Benfica",fl:"pt",to:"Besiktas",tl:"tsl",fee:30,mv:28,sal:6,date:"2026-06-06",st:"fix",known:"Spielaufbau, Standards, Führung",imp:"Rekordeinkauf für Besiktas (~30 Mio.): Der türkische Nationalspieler kehrt nach Disziplin-Zoff mit Coach Lage in die Heimat zurück und wird zum Herzstück des ambitionierten Projekts."},
+  {p:"Oh Hyeon-gyu",pos:"ST",age:25,from:"KRC Genk",fl:"misc",to:"Besiktas",tl:"tsl",fee:14,mv:12,sal:3,date:"2026-06-15",st:"fix",known:"Tiefenläufe, Kopfball, Abschluss",imp:"Besiktas holt den südkoreanischen Angreifer aus Genk (~14 Mio.) für mehr Durchschlagskraft im Sturm."},
+  {p:"Nathan Aké",pos:"IV",age:31,from:"Manchester City",fl:"pl",to:"Fenerbahce",tl:"tsl",fee:8,mv:15,sal:6,date:"2026-07-02",st:"fix",known:"Zweikampf, Aufbau, Positionsflexibilität (IV/LV)",imp:"Nach sechs Jahren und vier Meistertiteln bei City wechselt der Niederländer für ~7 Mio. £ nach Istanbul – Erfahrung und Ruhe für Fenerbahçes Abwehr."},
+  {p:"Sidiki Cherif",pos:"ST",age:21,from:"Angers SCO",fl:"l1",to:"Fenerbahce",tl:"tsl",fee:18,mv:14,sal:3,date:"2026-06-06",st:"fix",known:"Physis, Tempo, Abschluss",imp:"Fenerbahçe verpflichtet den Angers-Stürmer per Leihe mit Kaufpflicht (~18 Mio.) und setzt auf sein Entwicklungspotenzial."},
+  {p:"Sidny Lopes Cabral",pos:"RV",age:23,from:"Benfica",fl:"pt",to:"Trabzonspor",tl:"tsl",fee:10,mv:9,sal:2.5,date:"2026-06-30",st:"fix",known:"Beidseitig einsetzbar, Tempo, Offensivdrang",imp:"Trabzonspor sichert sich den Kapverdischen WM-Fahrer von Benfica (~10 Mio.) noch vor dem Turnier."},
+  {p:"Ernest Muci",pos:"OM",age:25,from:"Besiktas",fl:"tsl",to:"Trabzonspor",tl:"tsl",fee:11,mv:12,sal:3,date:"2026-06-30",st:"fix",known:"Dribbling, Torgefahr, Kreativität",imp:"Ligainterner Wechsel (~11 Mio.): Der albanische Offensivmann verlässt Besiktas Richtung Schwarzmeerküste."},
+  {p:"Yaser Asprilla",pos:"OM",age:22,from:"Girona",fl:"ll",to:"Galatasaray",tl:"tsl",fee:0,mv:15,sal:3,date:"2026-07-01",st:"fix",loan:true,known:"Dribbling, Kreativität, Distanzschuss",imp:"Meister Galatasaray leiht den kolumbianischen Techniker von Girona (mit Kaufoption) als Verstärkung fürs Titelrennen."},
+  /* ===== MLS ===== */
+  {p:"Brais Méndez",pos:"OM",age:29,from:"Real Sociedad",fl:"ll",to:"Columbus Crew",tl:"mls",fee:8,mv:12,sal:5,date:"2026-07-02",st:"fix",known:"Kreativität, Standards, letzter Pass",imp:"Columbus verpflichtet den spanischen Spielmacher als Designated Player (Dreijahresvertrag) von Real Sociedad."},
+  {p:"Andrés Herrera",pos:"RV",age:27,from:"River Plate",fl:"misc",to:"Columbus Crew",tl:"mls",fee:3,mv:4,sal:2,date:"2026-07-01",st:"fix",known:"Offensivdrang, Tempo, Flanken",imp:"Der argentinische Rechtsverteidiger kommt fest von River Plate (Dreijahresvertrag)."},
+  {p:"Mathieu Choinière",pos:"ZM",age:26,from:"Grasshopper Zürich",fl:"misc",to:"Los Angeles FC",tl:"mls",fee:4,mv:5,sal:2.5,date:"2026-07-06",st:"einig",known:"Passspiel, Übersicht, Dynamik",imp:"MLS-Rückkehr des kanadischen Nationalspielers: LAFC (gleicher Eigentümer wie Grasshopper) holt ihn nach nur einem Jahr in der Schweiz zurück."},
+  {p:"Emir Karic",pos:"LV",age:28,from:"Sturm Graz",fl:"misc",to:"Sporting Kansas City",tl:"mls",fee:2,mv:3,sal:1.5,date:"2026-06-24",st:"fix",known:"Offensivdrang, linker Fuß, Flanken",imp:"Kansas City holt den österreichischen Linksverteidiger fest aus Graz (Zweijahresvertrag)."},
   /* ===== Weitere / International ===== */
   {p:"Sébastien Haller",pos:"ST",age:32,from:"FC Utrecht",fl:"ere",to:"Sanfrecce Hiroshima",tl:"misc",fee:2,mv:4,sal:2,date:"2026-07-07",st:"fix",known:"Wandspiel, Kopfball, Erfahrung",imp:"Der Ex-BVB-Stürmer wagt einen Neuanfang in Japan."},
   /* ===== Gerüchte ===== */
-  {p:"Kylian Mbappé",pos:"ST",age:27,from:"Real Madrid",fl:"ll",to:"Offen",tl:"misc",fee:0,mv:160,sal:25,date:"2026-07-09",st:"ger",known:"Weltklasse-Tempo, Abschluss, 1-gegen-1",imp:"Perez soll Angebote zulassen; Spannungen mit Vinicius und im Team befeuern die Spekulationen. Konkret ist noch nichts."},
-  {p:"Vinicius Junior",pos:"LA",age:25,from:"Real Madrid",fl:"ll",to:"Offen",tl:"misc",fee:0,mv:180,sal:20,date:"2026-07-08",st:"ger",known:"Explosivität, Dribbling, Torgefahr über links",imp:"Vinicius fordert Garantien vom Klub; ein Milliarden-Angebot aus Saudi-Arabien ist abgeflaut, Manchester City wird genannt."},
-  {p:"Michael Olise",pos:"RA",age:24,from:"Bayern München",fl:"bl1",to:"Offen",tl:"misc",fee:90,mv:90,sal:12,date:"2026-07-06",st:"ger",known:"Kreativität, Flanken, Torvorlagen",imp:"PSG und ein PL-Quartett scheiterten bislang; Bayern hält den Flügelstürmer für unverkäuflich."},
-  {p:"Julián Álvarez",pos:"ST",age:26,from:"Atlético Madrid",fl:"ll",to:"FC Barcelona",tl:"ll",fee:80,mv:90,sal:12,date:"2026-07-03",st:"ger",known:"Pressing, Abschluss, Spielintelligenz",imp:"Barça sucht einen Lewandowski-Nachfolger; Álvarez gilt als Wunschkandidat, ein Deal wäre teuer."},
-  {p:"Bradley Barcola",pos:"LA",age:23,from:"Paris SG",fl:"l1",to:"Arsenal",tl:"pl",fee:70,mv:70,sal:9,date:"2026-06-30",st:"ger",known:"Tempo, Dribbling, Direktheit",imp:"Barcola drängt offenbar auf einen Abschied; Arsenal führt das Rennen, Liverpool beobachtet."},
-  {p:"Jules Koundé",pos:"RV",age:27,from:"FC Barcelona",fl:"ll",to:"Liverpool",tl:"pl",fee:65,mv:60,sal:9,date:"2026-07-07",st:"ger",known:"Tempo, Zweikampf, Aufbau (RV/IV)",imp:"Liverpool bereitet ein ~80-Mio.-€-Angebot vor; Barça bräuchte den Verkauf für das Financial Fairplay."},
-  {p:"Yan Diomandé",pos:"RA",age:19,from:"RB Leipzig",fl:"bl1",to:"Paris SG",tl:"l1",fee:100,mv:60,sal:8,date:"2026-07-01",st:"ger",known:"Flügeltempo, 1-gegen-1, Potenzial",imp:"PSG soll rund 100 Mio. bieten; Leipzig wäre zur Freigabe bereit."},
-  {p:"Rafael Leão",pos:"LA",age:26,from:"AC Milan",fl:"sa",to:"Manchester United",tl:"pl",fee:50,mv:60,sal:10,date:"2026-07-04",st:"ger",known:"Tempo, Dribbling, Abschluss über links",imp:"Nach verpasster CL-Quali ist Leão für ~43 Mio. £ zu haben; United gilt als Interessent."},
+  {p:"Kylian Mbappé",pos:"ST",age:27,from:"Real Madrid",fl:"ll",to:"Offen",tl:"misc",fee:0,mv:160,sal:25,date:"2026-07-09",st:"ger",known:"Weltklasse-Tempo, Abschluss, 1-gegen-1",imp:"Pérez soll Angebote zulassen; Spannungen mit Vinicius und in der Kabine befeuern die Spekulationen. Ein Mbappé-Abgang ein Jahr nach dem groß inszenierten Bernabéu-Transfer wäre selbst für Real-Verhältnisse eine Telenovela. Ein Sommer ganz ohne Mbappé-Gerücht wäre ohnehin kein richtiger Sommer – handfest ist aber noch nichts."},
+  {p:"Vinicius Junior",pos:"LA",age:25,from:"Real Madrid",fl:"ll",to:"Offen",tl:"misc",fee:0,mv:180,sal:20,date:"2026-07-08",st:"ger",known:"Explosivität, Dribbling, Torgefahr über links",imp:"Vinicius fordert Garantien vom Klub; ein Milliarden-Angebot aus Saudi-Arabien ist abgeflaut, Manchester City wird genannt. Bei 180 Mio. Marktwert und royalen Gehaltsvorstellungen ist die Liste ernsthafter Abnehmer überschaubar – der Poker um Ego und Ablöse ist mindestens so unterhaltsam wie seine Dribblings. Konkret ist bislang: nichts."},
+  {p:"Michael Olise",pos:"RA",age:24,from:"Bayern München",fl:"bl1",to:"Offen",tl:"misc",fee:90,mv:90,sal:12,date:"2026-07-06",st:"ger",known:"Kreativität, Flanken, Torvorlagen",imp:"PSG und ein PL-Quartett bissen bislang auf Granit; Bayern erklärt den Flügelstürmer für unverkäuflich. Und wie immer weiß jeder: Sobald 'unverkäuflich' fällt, geht es nur noch um die Höhe der Schmerzgrenze. Aktuell aber liegt kein Angebot vor, das München ins Wanken bringt."},
+  {p:"Julián Álvarez",pos:"ST",age:26,from:"Atlético Madrid",fl:"ll",to:"FC Barcelona",tl:"ll",fee:80,mv:90,sal:12,date:"2026-07-03",st:"ger",known:"Pressing, Abschluss, Spielintelligenz",imp:"Barça sucht händeringend einen Lewandowski-Nachfolger; Álvarez gilt als Wunschkandidat, ein Deal wäre aber teuer – und ohne kräftige Verkäufe kaum FFP-konform. Der Weltmeister im Camp Nou wäre ein Statement, steht bislang aber vor allem ganz oben auf dem Wunschzettel."},
+  {p:"Bradley Barcola",pos:"LA",age:23,from:"Paris SG",fl:"l1",to:"Arsenal",tl:"pl",fee:70,mv:70,sal:9,date:"2026-06-30",st:"ger",known:"Tempo, Dribbling, Direktheit",imp:"Barcola drängt offenbar auf mehr Spielzeit; Arsenal führt das Rennen, Liverpool schaut zu. Bei PSGs Flügel-Überangebot ist Frust fast Programm – Arteta würde den Tempo-Dribbler nehmen, solange Paris den Preis nicht Richtung Mondmiete treibt."},
+  {p:"Jules Koundé",pos:"RV",age:27,from:"FC Barcelona",fl:"ll",to:"Liverpool",tl:"pl",fee:65,mv:60,sal:9,date:"2026-07-07",st:"ger",known:"Tempo, Zweikampf, Aufbau (RV/IV)",imp:"Liverpool bereitet ein ~80-Mio.-€-Paket vor; Barça bräuchte den Verkauf fürs Financial Fairplay. Ein Rechtsverteidiger, der eigentlich Innenverteidiger ist, für eine Summe, die eigentlich zu hoch ist – sehr Barça, Ausgabe 2026. Unterschrieben ist noch nichts."},
+  {p:"Yan Diomandé",pos:"RA",age:19,from:"RB Leipzig",fl:"bl1",to:"Paris SG",tl:"l1",fee:100,mv:60,sal:8,date:"2026-07-01",st:"ger",known:"Flügeltempo, 1-gegen-1, Potenzial",imp:"PSG soll rund 100 Mio. für das 19-jährige Flügeljuwel bieten; Leipzig wäre zur Freigabe bereit. Paris und dreistellige Millionen für Teenager – die Serie läuft und läuft. Ob RB bei diesem Kurs wirklich Nein sagen würde, darf man getrost bezweifeln."},
+  {p:"Rafael Leão",pos:"LA",age:26,from:"AC Milan",fl:"sa",to:"Manchester United",tl:"pl",fee:50,mv:60,sal:10,date:"2026-07-04",st:"ger",known:"Tempo, Dribbling, Abschluss über links",imp:"Nach verpasster CL-Quali ist Leão für ~43 Mio. £ zu haben; Manchester United gilt als Interessent, zuletzt tauchte auch Galatasaray auf. Ein Spieler, der an guten Tagen unaufhaltbar wirkt und an schlechten unsichtbar – ein sehr United-typisches Wagnis. Fix ist noch gar nichts."},
+  {p:"Randal Kolo Muani",pos:"ST",age:27,from:"Paris SG",fl:"l1",to:"Juventus",tl:"sa",fee:35,mv:45,sal:8,date:"2026-07-09",st:"ger",known:"Tempo, Tiefenläufe, Abschluss",imp:"Spalletti fordert eine neue Nummer 9; Juve arbeitet an einer Leihe mit Kaufpflicht, PSG ruft rund 35 Mio. auf."},
+  {p:"Gleison Bremer",pos:"IV",age:29,from:"Juventus",fl:"sa",to:"Inter",tl:"sa",fee:58,mv:50,sal:8,date:"2026-07-03",st:"ger",known:"Zweikampfhärte, Kopfball, Tempo",imp:"Inter zeigt konkretes Interesse – ausgerechnet drei Jahre, nachdem Juve den Brasilianer den Nerazzurri vor der Nase wegschnappte. Die 58-Mio.-Klausel macht's theoretisch möglich; ein Bremer im Inter-Trikot käme in Turin allerdings etwa so gut an wie kalter Kaffee. Stand jetzt: Gerücht mit reichlich Zündstoff."},
+  {p:"Dušan Vlahović",pos:"ST",age:26,from:"Juventus",fl:"sa",to:"Offen",tl:"misc",fee:0,mv:45,sal:12,date:"2026-07-03",st:"ger",free:true,known:"Abschluss, Kopfball, Wucht im Strafraum",imp:"Nach Vertragsende bei Juve ablösefrei; Barcelona gilt als Favorit, Besiktas bietet ~10 Mio./Jahr, auch eine Juve-Rückkehr wird diskutiert."},
+  {p:"Guéla Doué",pos:"RV",age:23,from:"Strasbourg",fl:"l1",to:"AC Milan",tl:"sa",fee:25,mv:22,sal:4,date:"2026-07-06",st:"ger",known:"Tempo, Offensivdrang, Zweikampf",imp:"Milan macht den Ivorer zur Priorität für rechts (Angebot >23 Mio. vs. 30-Mio.-Forderung); auch Inter beobachtet."},
+  {p:"Mason Greenwood",pos:"RA",age:24,from:"Olympique Marseille",fl:"l1",to:"Offen",tl:"misc",fee:45,mv:45,sal:8,date:"2026-07-05",st:"ger",known:"Abschluss, beidfüßig, Dribbling",imp:"OM hört bei Greenwood alle Angebote an, um Gehalt zu sparen: Fenerbahce (~35 Mio. abgelehnt) buhlt hartnäckig, Roma gilt als Wunschziel des Spielers, auch PSG und Juventus schauen hin. Bei einer Forderung Richtung 50-70 Mio. bleibt es vorerst ein zähes Pokerspiel."},
+  {p:"Folarin Balogun",pos:"ST",age:25,from:"AS Monaco",fl:"l1",to:"Paris SG",tl:"l1",fee:30,mv:30,sal:6,date:"2026-07-04",st:"ger",known:"Tiefenläufe, Tempo, Abschluss",imp:"PSG prüft den US-Stürmer als möglichen Ramos-Nachfolger; Tottenham und Chelsea sollen ebenfalls dran sein. Ein Ligue-1-interner Wechsel zum Meister wäre pikant – konkret ist bislang nur das Interesse."},
+  {p:"Ricardo Pepi",pos:"ST",age:23,from:"PSV Eindhoven",fl:"ere",to:"Offen",tl:"misc",fee:20,mv:22,sal:4,date:"2026-07-05",st:"ger",known:"Strafraumstürmer, Abschluss, Pressing",imp:"Ein Fulham-Wechsel platzte schon im Winter – jetzt gilt ein PSV-Abschied im Sommer als wahrscheinlich. Bei anhaltendem Premier-League-Interesse steht der US-Stürmer erneut auf dem Absprung."},
+  {p:"Ayase Ueda",pos:"ST",age:27,from:"Feyenoord",fl:"ere",to:"Offen",tl:"misc",fee:20,mv:20,sal:4,date:"2026-07-04",st:"ger",known:"Tiefenläufe, Kopfball, Torinstinkt",imp:"Nach starker Saison wird bei Feyenoord mit einem Top-Transfer des Japaners gerechnet; mehrere europäische Klubs sollen die Fühler ausstrecken. Rotterdam würde gut verdienen."},
+  {p:"Sergiño Dest",pos:"RV",age:25,from:"PSV Eindhoven",fl:"ere",to:"Offen",tl:"misc",fee:12,mv:15,sal:4,date:"2026-07-03",st:"ger",known:"Offensivdrang, Technik, Flanken",imp:"PSV sortiert sich offenbar für einen Abgang des US-Außenverteidigers vor; ein Verkauf würde Kaderplatz und Budget schaffen. Noch ist nichts fix."},
+  {p:"Rodrigo Mora",pos:"OM",age:19,from:"FC Porto",fl:"pt",to:"Al-Ittihad",tl:"spl",fee:63,mv:70,sal:8,date:"2026-07-05",st:"ger",known:"Dribbling, Spielwitz, letzter Pass",imp:"Al-Ittihad bot laut Romano 63 Mio. + 10 % Weiterverkauf; Porto ruft rund 70 Mio. für das Juwel auf. Ein Verkauf würde die Kassen füllen – noch aber blockt Porto."},
+  {p:"Diogo Costa",pos:"TW",age:26,from:"FC Porto",fl:"pt",to:"Chelsea",tl:"pl",fee:40,mv:40,sal:7,date:"2026-07-04",st:"ger",known:"Reflexe, Fußspiel, Strafraumbeherrschung",imp:"Chelsea zeigt laut Record erneut Interesse an Portos Nummer eins als möglicher Torwart-Zukunft. Konkret verhandelt wird noch nicht."},
+  {p:"Ousmane Diomande",pos:"IV",age:22,from:"Sporting CP",fl:"pt",to:"Offen",tl:"misc",fee:40,mv:38,sal:6,date:"2026-07-03",st:"ger",known:"Tempo, Zweikampf, Aufbau",imp:"Leeds beobachtet, doch Sporting will nicht verhandeln und pocht auf die Ausstiegsklausel. Der Ivorer bleibt vorerst ein Wunschkandidat mehrerer Klubs."},
+  {p:"Omar Marmoush",pos:"ST",age:27,from:"Manchester City",fl:"pl",to:"Galatasaray",tl:"tsl",fee:40,mv:45,sal:8,date:"2026-07-05",st:"ger",known:"Tempo, Abschluss, Pressing",imp:"Galatasaray plant offenbar eine Leihe mit Kaufpflicht für den ägyptischen Angreifer; Tottenham lauert. Nach Osimhen und Sané wäre es der nächste Star-Coup der Cim Bom."},
+  {p:"Pape Matar Sarr",pos:"ZM",age:23,from:"Tottenham",fl:"pl",to:"Galatasaray",tl:"tsl",fee:35,mv:40,sal:6,date:"2026-07-04",st:"ger",known:"Laufstärke, Ballgewinne, Dynamik",imp:"Galatasaray hat die Bemühungen um den Senegalesen intensiviert und einen Verantwortlichen nach England geschickt; auch Fenerbahçe ist interessiert."},
+  {p:"Nélson Semedo",pos:"RV",age:32,from:"Fenerbahce",fl:"tsl",to:"Al-Ahli",tl:"spl",fee:6,mv:8,sal:8,date:"2026-07-03",st:"ger",known:"Offensivdrang, Tempo, Erfahrung",imp:"Der saudische Klub Al-Ahli soll bei Fenerbahçes portugiesischem Rechtsverteidiger angeklopft haben. Ein lukrativer Wechsel in die Wüste ist denkbar."},
+  {p:"Bruno Fernandes",pos:"OM",age:31,from:"Manchester United",fl:"pl",to:"Al-Hilal",tl:"spl",fee:55,mv:55,sal:22,date:"2026-07-08",st:"ger",known:"Kreativität, Standards, letzter Pass, Führung",imp:"Saudi-Arabien lockt erneut (Romano): Die Entscheidung liegt beim United-Kapitän, Al-Hilal gilt als aussichtsreichster Bewerber. United-Gehalt gegen Saudi-Millionen – das Dauerthema jedes Sommers, entschieden ist nichts."},
+  {p:"Marc Casado",pos:"ZM",age:22,from:"FC Barcelona",fl:"ll",to:"Al-Ittihad",tl:"spl",fee:40,mv:40,sal:12,date:"2026-07-06",st:"ger",known:"Ballgewinne, Passsicherheit, Ruhe am Ball",imp:"Ein saudischer Klub soll ein 40-Mio.-Angebot vorbereiten, während Barça verlängern will. Für den jungen Sechser wäre ein Wüsten-Wechsel ein überraschender Schritt."},
+  {p:"Serhou Guirassy",pos:"ST",age:30,from:"Borussia Dortmund",fl:"bl1",to:"Al-Ahli",tl:"spl",fee:40,mv:45,sal:18,date:"2026-07-05",st:"ger",known:"Abschluss, Kopfball, Wucht",imp:"Neben dem AC Mailand buhlen auch saudische Klubs um den Dortmunder Torjäger. Bei einem passenden Angebot wäre ein Abgang denkbar – das Saudi-Fenster öffnet erst am 18. Juli."},
+  {p:"Paulo Dybala",pos:"OM",age:32,from:"Roma",fl:"sa",to:"Inter Miami",tl:"mls",fee:15,mv:20,sal:12,date:"2026-07-07",st:"ger",known:"Technik, letzter Pass, Abschluss",imp:"Bei Roma auf dem Absprung, in Miami mit offenem DP-Platz und argentinischem Kern: Dybala gilt als Top-Kandidat für einen MLS-Wechsel. Konkret ist noch nichts."},
+  {p:"Abou Ali",pos:"ST",age:26,from:"Al Ahly",fl:"misc",to:"Columbus Crew",tl:"mls",fee:9,mv:9,sal:4,date:"2026-07-05",st:"ger",known:"Abschluss, Tempo, Strafraumpräsenz",imp:"Columbus sucht nach dem Cucho-Verkauf einen neuen DP-Stürmer; der Palästinenser (drei Tore bei der Klub-WM) ist ein Kandidat. Gespräche laufen."},
   {p:"Kai Havertz",pos:"ST",age:26,from:"Arsenal",fl:"pl",to:"Bayer Leverkusen",tl:"bl1",fee:55,mv:55,sal:10,date:"2026-07-05",st:"ger",known:"Vielseitigkeit, Kopfball, Raumgefühl",imp:"Wilde Gerüchte um eine Rückkehr; die Ablöse wäre für Leverkusen sehr hoch."},
-  {p:"Rayan Cherki",pos:"OM",age:22,from:"Manchester City",fl:"pl",to:"Paris SG",tl:"l1",fee:55,mv:55,sal:8,date:"2026-07-05",st:"ger",known:"Technik, Kreativität, Dribbling",imp:"PSG nennt Cherki als Priorität; City müsste einem Verkauf zustimmen."},
-  {p:"Eli Junior Kroupi",pos:"ST",age:19,from:"Bournemouth",fl:"pl",to:"Paris SG",tl:"l1",fee:100,mv:45,sal:6,date:"2026-07-03",st:"ger",known:"Beweglichkeit, Abschluss, Pressing",imp:"PSG sieht Kroupi als Ramos-Nachfolger; Bournemouth ruft rund 100 Mio. auf."},
+  {p:"Rayan Cherki",pos:"OM",age:22,from:"Manchester City",fl:"pl",to:"Paris SG",tl:"l1",fee:55,mv:55,sal:8,date:"2026-07-05",st:"ger",known:"Technik, Kreativität, Dribbling",imp:"PSG nennt Cherki als Priorität fürs offensive Mittelfeld; City müsste einem Verkauf erst zustimmen. Ein Rückkehrer nach Frankreich mit Gala-Technik – wenn die Ablöse stimmt. Citys Preisvorstellungen sind allerdings selten ein Schnäppchen."},
+  {p:"Eli Junior Kroupi",pos:"ST",age:19,from:"Bournemouth",fl:"pl",to:"Paris SG",tl:"l1",fee:100,mv:45,sal:6,date:"2026-07-03",st:"ger",known:"Beweglichkeit, Abschluss, Pressing",imp:"PSG sieht Kroupi als möglichen Ramos-Nachfolger; Bournemouth ruft rund 100 Mio. auf. Die Cherries haben aus dem Talente-Verkaufen längst ein einträgliches Geschäftsmodell gemacht – und Paris zahlt für Neunzehnjährige bekanntlich gern Spitzenpreise. Noch ist es Interesse, kein Deal."},
   {p:"Maghnes Akliouche",pos:"OM",age:23,from:"AS Monaco",fl:"l1",to:"Manchester United",tl:"pl",fee:50,mv:50,sal:7,date:"2026-07-04",st:"ger",known:"Dribbling, Kreativität, Spielmacher-Qualität",imp:"United und Liverpool beobachten; Monaco dürfte den Youngster nur teuer abgeben."},
   {p:"Marcus Rashford",pos:"LA",age:28,from:"Manchester United",fl:"pl",to:"Offen",tl:"misc",fee:40,mv:40,sal:12,date:"2026-07-06",st:"ger",known:"Antritt, Abschluss, Tiefenläufe",imp:"United würde den Engländer zum Schnäppchenpreis abgeben; auch Bayern wurde genannt."},
   {p:"Said El Mala",pos:"LA",age:19,from:"1. FC Köln",fl:"bl1",to:"Borussia Dortmund",tl:"bl1",fee:25,mv:20,sal:3,date:"2026-07-02",st:"ger",known:"Tempo, Dribbling, Torgefahr",imp:"Der Kölner Shootingstar wird beim BVB gehandelt; ein Premier-League-Wechsel wurde zuvor abgelehnt."}
 ];
 function trCard(x,rank,de){
   var fee=x.free?(de?"ablösefrei":"free"):(x.loan?(de?"Leihe":"loan"):(x.fee>0?(fmtM(x.fee)+" Mio. €"):(de?"offen":"open")));
-  var feeCls=(x.free||x.loan)?"free":"";
+  var feeCls=(x.free||x.loan)?" free":"";
+  var feeLbl=(x.st==="ger"&&!x.free&&x.fee>0)?(de?"kolportiert":"reported"):(x.free?(de?"Wechsel":"move"):(x.loan?(de?"Leihe":"loan"):(de?"Ablöse":"Fee")));
   var mv=fmtM(x.mv)+" Mio. €";
-  var sal=x.sal>0?("≈ "+fmtM(x.sal)+" Mio. €"):"–";
+  var sal=x.sal>0?("\u2248 "+fmtM(x.sal)+" Mio. €"):"\u2013";
   var L1=LEAGUES[x.fl]||LEAGUES.misc, L2=LEAGUES[x.tl]||LEAGUES.misc;
   var stTxt=x.st==="fix"?(de?"fix":"done"):(x.st==="einig"?(de?"einig":"agreed"):(de?"Gerücht":"rumour"));
   var stCls=x.st==="fix"?"fix":(x.st==="einig"?"einig":"ger");
-  var feeLbl=(x.st==="ger"&&!x.free&&x.fee>0)?(de?"Kolportiert":"Reported"):(de?"Ablöse":"Fee");
-  var mFee='<div class="tmetric '+(TR_SORT==="fee"?"act":"")+'"><div class="k">'+feeLbl+'</div><div class="v '+feeCls+'">'+fee+'</div></div>';
-  var mMv='<div class="tmetric '+(TR_SORT==="mv"?"act":"")+'"><div class="k">'+(de?"Marktwert":"Value")+'</div><div class="v">'+mv+'</div></div>';
-  var mSal='<div class="tmetric"><div class="k">'+(de?"Gehalt gesch.":"Est. salary")+'</div><div class="v">'+sal+'</div></div>';
-  var known=x.known?'<div class="tknown"><b>'+(de?"Stärken: ":"Strengths: ")+'</b>'+esc(x.known)+'</div>':'';
-  var det=x.imp?'<details class="tdet"><summary>'+(de?"Was der Wechsel bedeutet":"What the move means")+'</summary><p>'+esc(x.imp)+'</p></details>':'';
-  return '<div class="tcard">'
-    +'<div class="trank">'+rank+'</div>'
-    +'<div class="tmain">'
-      +'<div class="tp"><span class="nm">'+esc(x.p)+'</span><span class="pa">'+esc(x.pos)+' · '+x.age+'</span><span class="tstatus '+stCls+'" style="margin-left:auto">'+stTxt+'</span></div>'
-      +'<div class="tflow">'
-        +'<span class="cl"><span class="cdot" style="background:'+clubColor(x.from)+'"></span>'+esc(x.from)+'</span><span class="tlg">'+L1.short+'</span>'
-        +'<span class="arr">→</span>'
-        +'<span class="cl"><span class="cdot" style="background:'+clubColor(x.to)+'"></span>'+esc(x.to)+'</span><span class="tlg">'+L2.short+'</span>'
-      +'</div>'
-      +'<div class="tmet">'+mFee+mMv+mSal+'</div>'
-      +known+det
+  var known=x.known?'<div class="tk-row"><span class="tk-lbl">'+(de?"Stärken":"Strengths")+'</span><span class="tk-val">'+esc(x.known)+'</span></div>':'';
+  var imp=x.imp?'<p class="timp">'+esc(x.imp)+'</p>':'';
+  return '<details class="tcard">'
+    +'<summary class="tsum">'
+      +'<span class="trank">'+rank+'</span>'
+      +'<span class="tsum-b">'
+        +'<span class="tp"><span class="nm">'+esc(x.p)+'</span><span class="pa">'+esc(x.pos)+' \u00b7 '+x.age+'</span><span class="tstatus '+stCls+'">'+stTxt+'</span></span>'
+        +'<span class="tflow"><span class="cl"><span class="cdot" style="background:'+clubColor(x.from)+'"></span>'+esc(x.from)+'</span><span class="tlg">'+L1.short+'</span><span class="arr">\u2192</span><span class="cl"><span class="cdot" style="background:'+clubColor(x.to)+'"></span>'+esc(x.to)+'</span><span class="tlg">'+L2.short+'</span></span>'
+      +'</span>'
+      +'<span class="tfee"><span class="tfee-k">'+feeLbl+'</span><span class="tfee-v'+feeCls+'">'+fee+'</span></span>'
+      +'<span class="tchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>'
+    +'</summary>'
+    +'<div class="tbody">'
+      +'<div class="tmet"><div class="tmetric"><span class="k">'+(de?"Marktwert":"Market value")+'</span><span class="v">'+mv+'</span></div><div class="tmetric"><span class="k">'+(de?"Gehalt gesch.":"Est. salary")+'</span><span class="v">'+sal+'</span></div></div>'
+      +known+imp
       +'<div class="tsub">'+fmtNewsDate(x.date)+'</div>'
     +'</div>'
-  +'</div>';
+  +'</details>';
 }
 function renderTransfers(){
   var wrap=document.getElementById("transferWrap"); if(!wrap) return;
   var de=(LANG==="de");
-  var base=TRANSFERS.filter(function(x){ return TR_RUMORS || x.st!=="ger"; });
+  var base=TRANSFERS.filter(function(x){ if(TR_SHOW==="ger") return x.st==="ger"; if(TR_SHOW==="all") return true; return x.st!=="ger"; });
   var present={}; base.forEach(function(x){present[x.fl]=1; present[x.tl]=1;});
   var lgIds=LEAGUE_ORDER.filter(function(id){return present[id];});
   if(TR_LEAGUE && !present[TR_LEAGUE]) TR_LEAGUE="";
@@ -5326,6 +5396,7 @@ function renderTransfers(){
     return true;
   });
   list.sort(function(a,b){
+    if(TR_SORT==="date"){ if(a.date!==b.date) return a.date<b.date?1:-1; var afd=(a.free||a.loan)?-1:(a.fee||0), bfd=(b.free||b.loan)?-1:(b.fee||0); return bfd-afd; }
     if(TR_SORT==="mv"){ if(b.mv!==a.mv) return b.mv-a.mv; return (b.fee||0)-(a.fee||0); }
     var af=(a.free||a.loan)?-1:(a.fee||0), bf=(b.free||b.loan)?-1:(b.fee||0);
     if(bf!==af) return bf-af; return b.mv-a.mv;
@@ -5343,11 +5414,13 @@ function renderTransfers(){
       +'<div class="tseg">'
         +'<button data-trsort="fee" aria-pressed="'+(TR_SORT==="fee")+'">'+(de?"Ablöse":"Fee")+'</button>'
         +'<button data-trsort="mv" aria-pressed="'+(TR_SORT==="mv")+'">'+(de?"Marktwert":"Value")+'</button>'
+        +'<button data-trsort="date" aria-pressed="'+(TR_SORT==="date")+'">'+(de?"Neueste":"Newest")+'</button>'
       +'</div>'
       +'<span class="tslabel">'+(de?"Anzeigen":"Show")+'</span>'
       +'<div class="tseg">'
-        +'<button data-trrumor="0" aria-pressed="'+(!TR_RUMORS)+'">'+(de?"Bestätigt":"Confirmed")+'</button>'
-        +'<button data-trrumor="1" aria-pressed="'+(TR_RUMORS)+'">'+(de?"+ Gerüchte":"+ Rumours")+'</button>'
+        +'<button data-trshow="fix" aria-pressed="'+(TR_SHOW==="fix")+'">'+(de?"Bestätigt":"Confirmed")+'</button>'
+        +'<button data-trshow="ger" aria-pressed="'+(TR_SHOW==="ger")+'">'+(de?"Gerüchte":"Rumours")+'</button>'
+        +'<button data-trshow="all" aria-pressed="'+(TR_SHOW==="all")+'">'+(de?"Alle":"All")+'</button>'
       +'</div></div>';
   html+='<div class="lgrow"><button class="lgchip" data-trleague="" aria-pressed="'+(TR_LEAGUE==="")+'">'+(de?"Alle Ligen":"All leagues")+'</button>';
   lgIds.forEach(function(id){ var L=LEAGUES[id]; var cnt=base.filter(function(x){return x.fl===id||x.tl===id;}).length;
@@ -5360,10 +5433,10 @@ function renderTransfers(){
     html+='</div>';
   }
   var noteTxt=(de?"Ablösen ca.-Angaben · Marktwerte & Gehälter geschätzt (brutto/Jahr)":"Fees approximate · market values & salaries are estimates (gross/yr)");
-  if(TR_RUMORS) noteTxt+=(de?" · Gerüchte kolportiert, nicht offiziell":" · rumours unconfirmed");
+  if(TR_SHOW!=="fix") noteTxt+=(de?" · Gerüchte kolportiert, nicht offiziell":" · rumours unconfirmed");
   html+='<div class="tnote">ⓘ '+noteTxt+'</div>';
   if(!list.length){ html+='<div class="empty">'+I18N[LANG].nohits+'</div>'; }
-  else { html+='<div class="tlist">'+list.map(function(x,i){return trCard(x,i+1,de);}).join("")+'</div>'; }
+  else { var _trT=list.length; html+='<div class="tlist">'+list.slice(0,TR_SHOWN).map(function(x,i){return trCard(x,i+1,de);}).join("")+'</div>'+smBtn("tr",_trT,TR_SHOWN); }
   wrap.innerHTML=html;
 }
 function applyNewsMode(){
@@ -5385,7 +5458,7 @@ function renderNewsFilters(){
   const present=new Set(NEWS.filter(newsRelevant).map(n=>n.team));
   if(NEWS_TEAM && !present.has(NEWS_TEAM)) NEWS_TEAM="";
   const ids=TEAMS.map(tm=>tm.id).filter(id=>present.has(id));
-  const chips=[["",I18N[LANG].f_all], ...ids.map(id=>[id,(T[id]?T[id].name:id)])];
+  const chips=[["","News"], ...ids.map(id=>[id,(id==="wm"?"WM":(T[id]?T[id].name:id))])];
   var trOn=(NEWS_MODE==="transfers");
   var trChip='<button class="fchip tmode" data-newsmode="transfers" aria-pressed="'+trOn+'"><span class="ic">\u21c4</span>Transfers</button>';
   document.getElementById("newsFilters").innerHTML = trChip + chips.map(c=>{
@@ -5405,6 +5478,7 @@ function renderNews(){
     return true;
   }).sort((a,b)=>b.date.localeCompare(a.date));
   document.getElementById("newsUpdated").textContent="["+list.length+"]";
+  var _nT=list.length; list=list.slice(0,NEWS_SHOWN);
   if(!list.length){box.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
   box.innerHTML=list.map(n=>{
     const tm=T[n.team]||{name:n.team,short:"•",color:"#0b9d6e",fg:"#fff"}, fg=tm.fg||"#fff", name=tm.nat?"★ "+tm.name:tm.name;
@@ -5412,7 +5486,7 @@ function renderNews(){
       '<div class="nhead"><span class="nsrc"><span class="dot" style="background:'+tm.color+';color:'+fg+';border-color:transparent">'+tm.short+'</span>'+name+'</span><span class="ntime">'+fmtNewsDate(n.date)+'</span></div>'+
       '<h3>'+n.title+'</h3><p>'+n.teaser+'</p>'+
       '<div class="nfoot"><span class="nsource">'+t.source+': '+n.src+'</span><span class="nlink">'+t.read+' ↗</span></div></a>';
-  }).join("");
+  }).join("")+smBtn("news",_nT,NEWS_SHOWN);
 }
 function mono(s){const w=s.replace(/[^A-Za-z0-9 ]/g," ").split(" ").filter(Boolean);
   if(w.length>=2) return (w[0][0]+w[1][0]).toUpperCase(); return s.replace(/[^A-Za-z0-9]/g,"").slice(0,2).toUpperCase();}
@@ -5666,6 +5740,13 @@ document.addEventListener("click", e=>{
   const more=e.target.closest("[data-more]");
   if(more){const w=more.nextElementSibling; const show=w.classList.toggle("show");
     more.setAttribute("aria-expanded",show); const lbl=more.querySelector(".mlbl"); if(lbl){const lo=more.getAttribute("data-lo"),lc=more.getAttribute("data-lc"); lbl.textContent=show?(lc||I18N[LANG].less):(lo||I18N[LANG].more);} return;}
+  const smb=e.target.closest("[data-showmore]");
+  if(smb){ var _k=smb.dataset.showmore;
+    if(_k==="live"){LIVE_SHOWN+=PAGE_SIZE; renderLive();}
+    else if(_k==="hl"){HL_SHOWN+=PAGE_SIZE; renderHL();}
+    else if(_k==="news"){NEWS_SHOWN+=PAGE_SIZE; renderNews();}
+    else if(_k==="tr"){TR_SHOWN+=PAGE_SIZE; renderTransfers();}
+    return; }
   const tab=e.target.closest(".navitem");
   if(tab){ e.preventDefault();
     const dest=tab.dataset.tab;
@@ -5675,30 +5756,30 @@ document.addEventListener("click", e=>{
   if(lb){document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed","false"));
     lb.setAttribute("aria-pressed","true"); LANG=lb.dataset.lang; LANG_LOCKED=true; saveLang(); renderAll(); return;}
   const bh=e.target.closest("[data-blhint]");
-  if(bh){ FILTER_USERSET=true; LIVE_SEL.clear(); LIVE_SEL.add("bl"); LIVE_SEL.add("bl2"); saveFilters(); renderLiveFilters(); renderLive(); window.scrollTo({top:0,behavior:"smooth"}); return; }
+  if(bh){ FILTER_USERSET=true; LIVE_SEL.clear(); LIVE_SEL.add("bl"); LIVE_SEL.add("bl2"); saveFilters(); LIVE_SHOWN=20; renderLiveFilters(); renderLive(); window.scrollTo({top:0,behavior:"smooth"}); return; }
   const lf=e.target.closest("[data-livef]");
   if(lf){ const k=lf.dataset.livef; FILTER_USERSET=true;
     if(k==="all") LIVE_SEL.clear();
     else if(k==="tonight"){ if(LIVE_SEL.size===1 && LIVE_SEL.has("tonight")) LIVE_SEL.clear(); else { LIVE_SEL.clear(); LIVE_SEL.add("tonight"); } }
     else { LIVE_SEL.has(k)?LIVE_SEL.delete(k):LIVE_SEL.add(k); }
-    saveFilters();
+    saveFilters(); LIVE_SHOWN=20;
     renderLiveFilters(); renderLive(); return;}
   const hlf=e.target.closest("[data-hlf]");
   if(hlf){const v=hlf.dataset.hlf;
     if(v.indexOf("c:")===0){ HL_COMP=v.slice(2); } else { HL_FILTER=v; }
-    renderHLFilters(); renderHL(); return;}
+    HL_SHOWN=20; renderHLFilters(); renderHL(); return;}
   const nmo=e.target.closest("[data-newsmode]");
-  if(nmo){NEWS_MODE=nmo.dataset.newsmode; renderNewsFilters(); applyNewsMode(); if(NEWS_MODE==="transfers") renderTransfers(); return;}
+  if(nmo){NEWS_MODE=nmo.dataset.newsmode; NEWS_SHOWN=20; TR_SHOWN=20; renderNewsFilters(); applyNewsMode(); if(NEWS_MODE==="transfers") renderTransfers(); return;}
   const nf=e.target.closest("[data-newsf]");
-  if(nf){NEWS_MODE="news"; NEWS_TEAM=nf.dataset.newsf; renderNewsFilters(); applyNewsMode(); renderNews(); return;}
+  if(nf){NEWS_MODE="news"; NEWS_TEAM=nf.dataset.newsf; NEWS_SHOWN=20; renderNewsFilters(); applyNewsMode(); renderNews(); return;}
   const trs=e.target.closest("[data-trsort]");
-  if(trs){TR_SORT=trs.dataset.trsort; renderTransfers(); return;}
+  if(trs){TR_SORT=trs.dataset.trsort; TR_SHOWN=20; renderTransfers(); return;}
   const trl=e.target.closest("[data-trleague]");
-  if(trl){TR_LEAGUE=trl.dataset.trleague; TR_CLUB=""; renderTransfers(); return;}
+  if(trl){TR_LEAGUE=trl.dataset.trleague; TR_CLUB=""; TR_SHOWN=20; renderTransfers(); return;}
   const trc=e.target.closest("[data-trclub]");
-  if(trc){TR_CLUB=trc.dataset.trclub; renderTransfers(); return;}
-  const trr=e.target.closest("[data-trrumor]");
-  if(trr){TR_RUMORS=(trr.dataset.trrumor==="1"); TR_CLUB=""; renderTransfers(); return;}
+  if(trc){TR_CLUB=trc.dataset.trclub; TR_SHOWN=20; renderTransfers(); return;}
+  const trr=e.target.closest("[data-trshow]");
+  if(trr){TR_SHOW=trr.dataset.trshow; TR_CLUB=""; TR_SHOWN=20; renderTransfers(); return;}
   const pf=e.target.closest("[data-provf]");
   if(pf){PROV_FILTER=pf.dataset.provf; renderProvFilters(); renderProviders(); return;}
   if(e.target.closest("#themeToggle")){ setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"); return; }
@@ -5706,9 +5787,9 @@ document.addEventListener("click", e=>{
     consentSet(e.target.id==="consentYes"?"yes":"no");
     if(e.target.id==="consentYes"){ consentApply("yes"); }}
 });
-document.getElementById("liveSearch").addEventListener("input",e=>{LIVE_Q=e.target.value; renderLive();});
-document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; renderHL();});
-document.getElementById("newsSearch").addEventListener("input",e=>{ if(NEWS_MODE==="transfers"){TR_Q=e.target.value; renderTransfers();} else {NEWS_Q=e.target.value; renderNews();} });
+document.getElementById("liveSearch").addEventListener("input",e=>{LIVE_Q=e.target.value; LIVE_SHOWN=20; renderLive();});
+document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; HL_SHOWN=20; renderHL();});
+document.getElementById("newsSearch").addEventListener("input",e=>{ if(NEWS_MODE==="transfers"){TR_Q=e.target.value; TR_SHOWN=20; renderTransfers();} else {NEWS_Q=e.target.value; NEWS_SHOWN=20; renderNews();} });
 document.getElementById("provSearch").addEventListener("input",e=>{PROV_Q=e.target.value; renderProviders();});
 document.getElementById("wm-anthemSearch").addEventListener("input",e=>wmRenderAnthems(e.target.value));
 
