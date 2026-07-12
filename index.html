@@ -90,15 +90,15 @@
   .themebtn:hover{color:var(--ink); border-color:var(--green-line)}
 
   /* Bottom navigation */
-  nav.bottomnav{position:fixed; left:0; right:0; bottom:0; z-index:45; display:flex; justify-content:center; gap:2px;
-    padding:8px 10px calc(8px + env(safe-area-inset-bottom)); background:var(--header-bg);
-    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-top:1px solid var(--line);
-    box-shadow:0 -6px 22px rgba(19,33,58,.06)}
+  nav.bottomnav{position:fixed; left:0; right:0; bottom:0; z-index:45; display:flex; justify-content:center; gap:6px;
+    padding:11px 12px calc(11px + env(safe-area-inset-bottom)); background:var(--header-bg);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-top:1.5px solid var(--line);
+    box-shadow:0 -8px 26px rgba(19,33,58,.10)}
   html[data-theme="dark"] nav.bottomnav{box-shadow:none}
-  .navitem{flex:1 1 0; max-width:140px; border:none; background:none; display:flex; flex-direction:column; align-items:center; gap:4px;
-    padding:6px 2px; border-radius:13px; color:var(--muted); font-family:"Inter",sans-serif; font-weight:600;
-    font-size:10px; white-space:nowrap; transition:color .15s, background .15s, transform .1s}
-  .navitem svg{width:22px; height:22px}
+  .navitem{flex:1 1 0; max-width:170px; border:none; background:none; display:flex; flex-direction:column; align-items:center; gap:5px;
+    padding:9px 6px; border-radius:16px; color:var(--muted); font-family:"Inter",sans-serif; font-weight:700;
+    font-size:12px; white-space:nowrap; transition:color .15s, background .15s, transform .1s}
+  .navitem svg{width:26px; height:26px}
   .navitem[aria-selected="true"]{color:var(--green); background:var(--green-soft)}
   .navitem:active{transform:scale(.95)}
 
@@ -440,6 +440,14 @@
   .fsearch{display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 13px; margin:11px 0 4px; box-shadow:var(--shadow)}
   .fsearch input{flex:1; background:none; border:none; color:var(--ink); font-family:inherit; font-size:13.5px; outline:none}
   .fsearch input::placeholder{color:var(--faint)}
+  .minequick{display:flex; gap:7px; align-items:center; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:1px 2px 5px; margin:2px 0 6px}
+  .minequick::-webkit-scrollbar{display:none}
+  .mq-lbl{flex:0 0 auto; font-size:12px; font-weight:700; color:var(--muted); margin-right:1px}
+  .mq-chip{flex:0 0 auto; border:1px solid var(--line2); background:var(--bg2); color:var(--ink); font-family:"Inter",sans-serif; font-weight:600; font-size:13px; padding:7px 12px; border-radius:999px; white-space:nowrap; cursor:pointer; transition:background .15s,border-color .15s,color .15s,transform .1s}
+  .mq-chip:hover{border-color:var(--green-line)}
+  .mq-chip:active{transform:scale(.96)}
+  .mq-chip.on{background:var(--green-soft); border-color:var(--green-line); color:var(--green)}
+
   .fsearch .ic{color:var(--muted); font-size:16px}
 
   /* News */
@@ -653,7 +661,7 @@
   .navitem svg{ transition:transform .22s cubic-bezier(.34,1.56,.64,1) }
   .navitem[aria-selected="true"] svg{ transform:translateY(-1px) }
   .navitem[aria-selected="true"]::before{ content:""; position:absolute; top:2px; left:50%; transform:translateX(-50%);
-    width:16px; height:3px; border-radius:3px; background:var(--green); box-shadow:0 0 8px -1px var(--green-line) }
+    width:22px; height:3.5px; border-radius:3px; background:var(--green); box-shadow:0 0 8px -1px var(--green-line) }
 
   /* Chevron: geschmeidigeres Easing */
   .chev{ transition:transform .28s cubic-bezier(.34,1.4,.5,1), background .18s, color .18s, border-color .18s }
@@ -1058,6 +1066,7 @@
   <section class="tabpane active" id="pane-live" role="tabpanel">
     <div class="filters" id="liveFilters"></div>
     <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" placeholder="Weitere Wettbewerbe oder Teams suchen …"></div>
+    <div class="minequick" id="mineQuick" style="display:none"></div>
     <div class="board" id="liveBoard"></div>
     <p class="note" id="liveNote"></p>
   </section>
@@ -1261,9 +1270,6 @@
   <a class="navitem" role="tab" aria-selected="false" data-tab="anbieter" href="anbieter.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 3.3l7.1 7.1a2 2 0 0 1 0 2.8l-6.5 6.5a2 2 0 0 1-2.8 0l-7.1-7.1V5.3a2 2 0 0 1 2-2z"/><circle cx="8" cy="8" r="1.5"/></svg>
     <span data-i18n="nav_prov">Anbieter</span></a>
-  <a class="navitem" role="tab" aria-selected="false" data-tab="wm" href="wm.html">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 21.5h16"/><path d="M10 14.6V17c0 .6-.5 1-1 1.2C7.9 18.8 7 20.2 7 21.5"/><path d="M14 14.6V17c0 .6.5 1 1 1.2 1.1.5 2 1.9 2 2.8"/><path d="M18 2.5H6V9a6 6 0 0 0 12 0V2.5z"/></svg>
-    <span data-i18n="nav_wm">WM</span></a>
 </nav>
 
 <div class="consent hide" id="consent">
@@ -1546,7 +1552,28 @@ const CLUB_BALL={
  "Le Havre AC":["#0B2C5C","#5BA4D6"],"Le Havre":["#0B2C5C","#5BA4D6"],
  "Paris FC":["#0033A0","#E2001A"],
  "ESTAC Troyes":["#0E4C92","#FFFFFF"],"Troyes":["#0E4C92","#FFFFFF"],
- "Le Mans FC":["#FFD200","#000000"],"Le Mans":["#FFD200","#000000"]
+ "Le Mans FC":["#FFD200","#000000"],"Le Mans":["#FFD200","#000000"],
+ /* Champions League – Qualifikation 2026/27 */
+ "Kairat Almaty":["#FCD400","#000000"],"Sutjeska Nikšić":["#004A99","#FFFFFF"],
+ "Flora Tallinn":["#009639","#FFFFFF"],"Iberia Tiflis":["#0033A0","#FFFFFF"],
+ "Vitebsk":["#005BAB","#FFFFFF"],"Universitatea Craiova":["#FFFFFF","#0055A4"],
+ "Petrocub":["#F7D417","#0A7D33"],"Egnatia":["#FFFFFF","#C8102E"],
+ "Sabah FC":["#0AAD4E","#FFFFFF"],"The New Saints":["#0B7A3B","#FFFFFF"],
+ "Lincoln Red Imps":["#D50032","#000000"],"Inter Escaldes":["#003DA5","#000000"],
+ "Ararat-Armenia":["#D90000","#FFFFFF"],"Riga FC":["#7A1F2B","#FFFFFF"],
+ "Kauno Žalgiris":["#00843D","#FFFFFF"],"FC Drita":["#E30613","#FFFFFF"],
+ "Vardar Skopje":["#E2001A","#000000"],"KuPS Kuopio":["#FFD200","#000000"],
+ "Floriana":["#008751","#FFFFFF"],"Shamrock Rovers":["#1A7A3D","#FFFFFF"],
+ "Tre Fiori":["#FFD200","#009639"],"Larne FC":["#D50032","#FFFFFF"],
+ "Borac Banja Luka":["#E2001A","#003DA5"],"Levski Sofia":["#0057B8","#FFFFFF"],
+ "KÍ Klaksvík":["#004B87","#FFFFFF"],"Atert Bissen":["#EF3340","#FFFFFF"],
+ "Víkingur Reykjavík":["#E2001A","#000000"],"ETO Győr":["#008C45","#FFFFFF"],
+ /* CL-Quali – ab 2. Runde */
+ "Mjällby AIF":["#FFD200","#000000"],"Crvena Zvezda":["#E2001A","#FFFFFF"],
+ "Aarhus GF":["#005BAB","#FFFFFF"],"Lech Posen":["#004B9B","#FFFFFF"],
+ "Omonia Nikosia":["#00843D","#FFFFFF"],"FC Thun":["#E2001A","#FFFFFF"],
+ "Dinamo Zagreb":["#0067B1","#FFFFFF"],"Hapoel Be'er Sheva":["#E2001A","#FFFFFF"],
+ "Slovan Bratislava":["#004B9B","#FFFFFF"],"NK Celje":["#FFD200","#003DA5"]
 };
 function clubBall(c1,c2){
  return '<svg class="cball" viewBox="0 0 24 24" aria-hidden="true">'
@@ -2284,20 +2311,20 @@ const MATCHES = [
   {cat:"cl", day:"07./08.07.2026", time:"20:30", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Borac Banja Luka", a:"Levski Sofia", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:47,einordnung:{de:"Bosniens Meister empfängt Bulgariens Traditionsklub Levski Sofia – das prominenteste Duell der 1. Runde.",en:"Bosnia’s champions host Bulgarian giants Levski Sofia – the highest-profile tie of round one."}}},
   {cat:"cl", day:"07./08.07.2026", time:"20:45", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"KÍ Klaksvík", a:"Atert Bissen", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:45,einordnung:{de:"Färöers Vorzeigeklub Klaksvík – 2023 sensationell in der Conference-League-Ligaphase – gegen Luxemburgs Meister Atert Bissen.",en:"The Faroes’ flagship club Klaksvík – shock league-phase qualifiers in 2023 – face Luxembourg champions Atert Bissen."}}},
   {cat:"cl", day:"07./08.07.2026", time:"21:00", comp:"Champions League · 1. Quali-Runde · Hinspiel", h:"Víkingur Reykjavík", a:"ETO Győr", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:43,einordnung:{de:"Islands Meister gegen Ungarns Champion Győr – der Sieger fordert in Runde 2 Israels Meister Hapoel Be’er Sheva.",en:"Iceland’s champions vs Hungarian title winners Győr – Hapoel Be’er Sheva await in round two."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Sutjeska Nikšić", a:"Kairat Almaty", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:46,einordnung:{de:"Kasachstans Serienmeister empfängt Montenegros Champion – für Kairat beginnt die Reise früh um 17 Uhr MESZ. Der Sieger trifft in Runde 2 auf Omonia Nikosia.",en:"Kazakhstan’s serial champions host Montenegro’s title holders. The winner meets Omonia Nicosia in round two."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Iberia Tiflis", a:"Flora Tallinn", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Estlands Rekordmeister gegen Georgiens Champion – auf den Sieger wartet in Runde 2 Slovan Bratislava.",en:"Estonia’s record champions face Georgia’s title holders – Slovan Bratislava await the winner in round two."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Universitatea Craiova", a:"Vitebsk", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:45,einordnung:{de:"Belarus’ Meister fordert Rumäniens Champion – Craiova ist der klare Favorit dieser Paarung. Weiter geht es gegen den Sieger aus Borac/Levski.",en:"Belarus’ champions take on Romania’s title winners – Craiova are clear favourites. Next up: the Borac/Levski winner."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Egnatia", a:"Petrocub", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Moldaus Meister gegen Albaniens Champion – der Sieger bekommt es in Runde 2 mit NK Celje zu tun.",en:"Moldova’s champions meet Albania’s title holders – the winner faces NK Celje in round two."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"The New Saints", a:"Sabah FC", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Aserbaidschans Meister empfängt Wales’ Serienchampion TNS – der Sieger trifft auf den Gewinner von Vardar gegen KuPS.",en:"Azerbaijan’s champions host Welsh serial winners TNS – the victor plays the Vardar/KuPS winner."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Inter Escaldes", a:"Lincoln Red Imps", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Duell der Zwergstaaten: Gibraltars Rekordmeister gegen Andorras Champion – den Sieger erwartet Schwedens Meister Mjällby.",en:"Micro-state duel: Gibraltar’s record champions vs Andorra’s title holders – Swedish champions Mjällby await."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Riga FC", a:"Ararat-Armenia", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:42,einordnung:{de:"Armeniens Meister gegen Lettlands Champion – der Sieger spielt in Runde 2 gegen den Gewinner von Floriana/Shamrock Rovers.",en:"Armenia’s champions vs Latvia’s title winners – the winner meets Floriana or Shamrock Rovers next."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"FC Drita", a:"Kauno Žalgiris", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Litauens Meister empfängt Kosovos Champion Drita – weiter geht es gegen den Sieger aus Klaksvík/Atert.",en:"Lithuania’s champions host Kosovo’s Drita – the Klaksvík/Atert winner is next."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"KuPS Kuopio", a:"Vardar Skopje", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:44,einordnung:{de:"Nordmazedoniens Traditionsklub gegen Finnlands Meister KuPS – der Sieger trifft auf Sabah oder The New Saints.",en:"North Macedonia’s famous old club vs Finnish champions KuPS – Sabah or TNS await the winner."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Shamrock Rovers", a:"Floriana", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:47,einordnung:{de:"Maltas Rekordmeister fordert Irlands Serienchampion Shamrock Rovers, den Ligaphasen-Teilnehmer der Conference League 2024/25.",en:"Malta’s record champions take on Irish serial winners Shamrock Rovers, Conference League league-phase regulars."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Larne FC", a:"Tre Fiori", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:41,einordnung:{de:"San Marinos Meister gegen Nordirlands Champion Larne – auf den Sieger wartet das dickste Los: Roter Stern Belgrad.",en:"San Marino’s champions vs Northern Ireland’s Larne – the winner draws the big one: Red Star Belgrade."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Levski Sofia", a:"Borac Banja Luka", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:47,einordnung:{de:"Bosniens Meister empfängt Bulgariens Traditionsklub Levski Sofia – das prominenteste Duell der 1. Runde.",en:"Bosnia’s champions host Bulgarian giants Levski Sofia – the highest-profile tie of round one."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Atert Bissen", a:"KÍ Klaksvík", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:45,einordnung:{de:"Färöers Vorzeigeklub Klaksvík – 2023 sensationell in der Conference-League-Ligaphase – gegen Luxemburgs Meister Atert Bissen.",en:"The Faroes’ flagship club Klaksvík – shock league-phase qualifiers in 2023 – face Luxembourg champions Atert Bissen."}}},
-  {cat:"cl", day:"14./15.07.2026", time:"—", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"ETO Győr", a:"Víkingur Reykjavík", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:43,einordnung:{de:"Islands Meister gegen Ungarns Champion Győr – der Sieger fordert in Runde 2 Israels Meister Hapoel Be’er Sheva.",en:"Iceland’s champions vs Hungarian title winners Győr – Hapoel Be’er Sheva await in round two."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"21:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Sutjeska Nikšić", a:"Kairat Almaty", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:46,einordnung:{de:"Kasachstans Serienmeister empfängt Montenegros Champion – für Kairat beginnt die Reise früh um 17 Uhr MESZ. Der Sieger trifft in Runde 2 auf Omonia Nikosia.",en:"Kazakhstan’s serial champions host Montenegro’s title holders. The winner meets Omonia Nicosia in round two."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"18:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Iberia Tiflis", a:"Flora Tallinn", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Estlands Rekordmeister gegen Georgiens Champion – auf den Sieger wartet in Runde 2 Slovan Bratislava.",en:"Estonia’s record champions face Georgia’s title holders – Slovan Bratislava await the winner in round two."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"19:30", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Universitatea Craiova", a:"Vitebsk", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:45,einordnung:{de:"Belarus’ Meister fordert Rumäniens Champion – Craiova ist der klare Favorit dieser Paarung. Weiter geht es gegen den Sieger aus Borac/Levski.",en:"Belarus’ champions take on Romania’s title winners – Craiova are clear favourites. Next up: the Borac/Levski winner."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"21:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Egnatia", a:"Petrocub", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Moldaus Meister gegen Albaniens Champion – der Sieger bekommt es in Runde 2 mit NK Celje zu tun.",en:"Moldova’s champions meet Albania’s title holders – the winner faces NK Celje in round two."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"19:30", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"The New Saints", a:"Sabah FC", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Aserbaidschans Meister empfängt Wales’ Serienchampion TNS – der Sieger trifft auf den Gewinner von Vardar gegen KuPS.",en:"Azerbaijan’s champions host Welsh serial winners TNS – the victor plays the Vardar/KuPS winner."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"20:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Inter Escaldes", a:"Lincoln Red Imps", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Duell der Zwergstaaten: Gibraltars Rekordmeister gegen Andorras Champion – den Sieger erwartet Schwedens Meister Mjällby.",en:"Micro-state duel: Gibraltar’s record champions vs Andorra’s title holders – Swedish champions Mjällby await."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"19:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Riga FC", a:"Ararat-Armenia", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:42,einordnung:{de:"Armeniens Meister gegen Lettlands Champion – der Sieger spielt in Runde 2 gegen den Gewinner von Floriana/Shamrock Rovers.",en:"Armenia’s champions vs Latvia’s title winners – the winner meets Floriana or Shamrock Rovers next."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"20:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"FC Drita", a:"Kauno Žalgiris", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:38,einordnung:{de:"Litauens Meister empfängt Kosovos Champion Drita – weiter geht es gegen den Sieger aus Klaksvík/Atert.",en:"Lithuania’s champions host Kosovo’s Drita – the Klaksvík/Atert winner is next."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"17:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"KuPS Kuopio", a:"Vardar Skopje", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:44,einordnung:{de:"Nordmazedoniens Traditionsklub gegen Finnlands Meister KuPS – der Sieger trifft auf Sabah oder The New Saints.",en:"North Macedonia’s famous old club vs Finnish champions KuPS – Sabah or TNS await the winner."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"21:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Shamrock Rovers", a:"Floriana", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:47,einordnung:{de:"Maltas Rekordmeister fordert Irlands Serienchampion Shamrock Rovers, den Ligaphasen-Teilnehmer der Conference League 2024/25.",en:"Malta’s record champions take on Irish serial winners Shamrock Rovers, Conference League league-phase regulars."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"21:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Larne FC", a:"Tre Fiori", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:41,einordnung:{de:"San Marinos Meister gegen Nordirlands Champion Larne – auf den Sieger wartet das dickste Los: Roter Stern Belgrad.",en:"San Marino’s champions vs Northern Ireland’s Larne – the winner draws the big one: Red Star Belgrade."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"19:30", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Levski Sofia", a:"Borac Banja Luka", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:47,einordnung:{de:"Bosniens Meister empfängt Bulgariens Traditionsklub Levski Sofia – das prominenteste Duell der 1. Runde.",en:"Bosnia’s champions host Bulgarian giants Levski Sofia – the highest-profile tie of round one."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"20:15", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"Atert Bissen", a:"KÍ Klaksvík", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:45,einordnung:{de:"Färöers Vorzeigeklub Klaksvík – 2023 sensationell in der Conference-League-Ligaphase – gegen Luxemburgs Meister Atert Bissen.",en:"The Faroes’ flagship club Klaksvík – shock league-phase qualifiers in 2023 – face Luxembourg champions Atert Bissen."}}},
+  {cat:"cl", day:"14./15.07.2026", time:"19:00", comp:"Champions League · 1. Quali-Runde · Rückspiel", h:"ETO Győr", a:"Víkingur Reykjavík", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:43,einordnung:{de:"Islands Meister gegen Ungarns Champion Győr – der Sieger fordert in Runde 2 Israels Meister Hapoel Be’er Sheva.",en:"Iceland’s champions vs Hungarian title winners Győr – Hapoel Be’er Sheva await in round two."}}},
   {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Mjällby AIF", a:"Sieger Lincoln/Escaldes", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:44,einordnung:{de:"Schwedens Märchen-Meister Mjällby – erster Titel der Vereinsgeschichte 2025 – steigt hier in die Königsklasse ein.",en:"Sweden’s fairytale champions Mjällby – first-ever title in 2025 – begin their Champions League journey here."}}},
   {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Tre Fiori/Larne", a:"Crvena Zvezda", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:58,einordnung:{de:"Serbiens Rekordmeister Roter Stern Belgrad, Stammgast der Ligaphase, steigt als haushoher Favorit in den Meisterweg ein.",en:"Serbian record champions Red Star Belgrade, league-phase regulars, enter the champions path as overwhelming favourites."}}},
   {cat:"cl", day:"21./22.07.2026", time:"—", comp:"Champions League · 2. Quali-Runde · Hinspiel", h:"Sieger Sabah/New Saints", a:"Sieger Vardar/KuPS", tv:{AT:[SKYAT],CH:[BLUE]}, radio:[], ticker:[], lohnt:{score:44,einordnung:{de:"Offenes Duell zweier Q1-Sieger um ein Ticket für die 3. Runde des Meisterwegs.",en:"An open tie between two round-one winners for a place in the third qualifying round."}}},
@@ -4550,12 +4577,34 @@ function isTonight(m){ if(m.tba) return false; var lm=locMatch(m); if(lm.ms==nul
 function isTonightFmt(f){ var lm=locMatch(f); if(lm.ms==null) return false;
   return dayKey(lm.day)===todayKeyNow() && parseInt(lm.time,10)>=18; }
 function isFinished(m){ if(m.tba) return false; if(LIVE_ENABLED){ var _ld=LIVE_CACHE[liveKey(m)]; if(_ld&&_ld.state==="in") return false; } const s=matchStart(m); if(!s){ /* ohne Anstosszeit: Karte gilt als beendet, wenn ihr letztes Datum vor heute liegt */ let mx=0,re=/(\d{2})\.(\d{2})\.(\d{4})/g,x; while((x=re.exec(String(m.day)))) mx=Math.max(mx,(+x[3])*10000+(+x[2])*100+(+x[1])); return mx>0 && mx<todayKeyNow(); } /* Spielende ~Anpfiff+115min; danach noch 60min sichtbar lassen */ return Date.now() > s.getTime()+175*60000; }
-function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
+function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a)||FOLLOW.has("liga:"+m.cat))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
+/* Länderabhängige Schnellauswahl in der „Meine"-Ansicht (Reihenfolge wie gewünscht) */
+const MINE_QUICK={
+ DE:[["liga:bl","Bundesliga"],["liga:cl","Champions League"],["liga:dfb","DFB-Pokal"],["Deutschland","Deutschland"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"],["Borussia Mönchengladbach","Borussia M'gladbach"]],
+ AT:[["liga:cl","Champions League"],["liga:el","Europa League"],["Deutschland","Deutschland"],["Real Madrid","Real Madrid"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"]],
+ CH:[["liga:cl","Champions League"],["liga:el","Europa League"],["Real Madrid","Real Madrid"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"]],
+ UK:[["liga:pl","Premier League"],["liga:cl","Champions League"],["liga:facup","FA Cup"],["England","England"],["Manchester City","Manchester City"],["FC Liverpool","Liverpool"],["Real Madrid","Real Madrid"]],
+ FR:[["liga:l1","Ligue 1"],["liga:cl","Champions League"],["Frankreich","Frankreich"],["Paris Saint-Germain","Paris Saint-Germain"],["Olympique Marseille","Olympique Marseille"],["Real Madrid","Real Madrid"]],
+ IT:[["liga:it","Serie A"],["liga:cl","Champions League"],["Juventus Turin","Juventus"],["Inter Mailand","Inter"],["AC Mailand","AC Milan"],["Real Madrid","Real Madrid"]],
+ ES:[["liga:es","LaLiga"],["liga:cl","Champions League"],["Spanien","Spanien"],["Real Madrid","Real Madrid"],["FC Barcelona","FC Barcelona"],["Atlético Madrid","Atlético Madrid"]],
+ _default:[["liga:cl","Champions League"],["liga:el","Europa League"],["Real Madrid","Real Madrid"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"],["Manchester City","Manchester City"]]
+};
+function renderMineQuick(){
+  const box=document.getElementById("mineQuick"); if(!box) return;
+  if(!LIVE_SEL.has("mine")){ box.innerHTML=""; box.style.display="none"; return; }
+  box.style.display="flex";
+  const list=MINE_QUICK[COUNTRY]||MINE_QUICK._default;
+  const lbl=LANG==="de"?"Schnell hinzufügen:":"Quick add:";
+  box.innerHTML='<span class="mq-lbl">'+lbl+'</span>'+list.map(function(p){
+    const on=FOLLOW.has(p[0]);
+    return '<button class="mq-chip'+(on?" on":"")+'" data-follow="'+esc(p[0])+'" aria-pressed="'+on+'">'+(on?"★ ":"+ ")+esc(p[1])+'</button>';
+  }).join("");
+}
 function renderLiveFilters(){ const t=I18N[LANG];
   const up=MATCHES.filter(m=>!isFinished(m)), upF=FORMATS.filter(f=>!isFinished(f));
   const cnt={
     all: up.length+upF.length,
-    mine: up.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a)).length + upF.filter(f=>FOLLOW.has(f.id)).length,
+    mine: up.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a)||FOLLOW.has("liga:"+m.cat)).length + upF.filter(f=>FOLLOW.has(f.id)).length,
     free: up.filter(isFreeTV).length,
     tonight: up.filter(isTonight).length + upF.filter(isTonightFmt).length,
     format: upF.length,
@@ -4615,6 +4664,7 @@ document.addEventListener("change", function(e){
 });
 
 function renderLive(){
+  renderMineQuick();
   const t=I18N[LANG], board=document.getElementById("liveBoard");
   document.getElementById("liveNote").innerHTML = t.live_note;
   const openKeys=[...board.querySelectorAll(".row.open")].map(r=>r.dataset.k);
@@ -4627,7 +4677,7 @@ function renderLive(){
   // Spiele filtern
   let mList = (none || catSel.length>0 || condOnly) ? MATCHES.filter(m=>!isFinished(m)) : [];
   if(catSel.length)      mList = mList.filter(m=>catSel.includes(catOf(m)));
-  if(SEL.has("mine"))    mList = mList.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a));
+  if(SEL.has("mine"))    mList = mList.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a)||FOLLOW.has("liga:"+m.cat));
   if(SEL.has("free"))    mList = mList.filter(isFreeTV);
   if(SEL.has("tonight")) mList = mList.filter(isTonight);
   if(q) mList = mList.filter(m=>((m.h+" "+m.a+" "+(m.comp||"")).toLowerCase().includes(q)));
