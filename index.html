@@ -476,8 +476,11 @@
   .tbar{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin:8px 2px 2px}
   .tslabel{font:700 10px "Inter",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--faint)}
   .tseg{display:flex; background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:2px; gap:2px}
-  .tseg button{border:none; background:transparent; color:var(--muted); font:700 12px "Inter",sans-serif; padding:7px 14px; border-radius:8px; white-space:nowrap; cursor:pointer}
+  .tseg button{border:none; background:transparent; color:var(--muted); font:700 12px "Inter",sans-serif; padding:7px 12px; border-radius:8px; white-space:nowrap; cursor:pointer; display:inline-flex; align-items:center; gap:5px}
   .tseg button[aria-pressed="true"]{background:var(--surface); color:var(--green); box-shadow:var(--shadow)}
+  .tdir{display:inline-flex; align-items:center; margin-left:1px}
+  .tdir svg{width:12px; height:12px}
+  .tseg button[aria-pressed="false"] .tdir{opacity:.4}
   .lgrow{display:flex; gap:7px; overflow-x:auto; padding:2px 0; scrollbar-width:none}
   .lgrow::-webkit-scrollbar{display:none}
   .lgchip{flex:0 0 auto; border:1px solid var(--line); background:var(--bg2); color:var(--muted); padding:6px 12px; font-size:11.5px; font-weight:600; white-space:nowrap; border-radius:99px; display:inline-flex; align-items:center; gap:6px; cursor:pointer}
@@ -498,9 +501,9 @@
   .tsum:focus-visible{outline:2px solid var(--green); outline-offset:-2px}
   .trank{font-family:"JetBrains Mono",monospace; font-weight:800; font-size:12px; color:var(--faint); min-width:18px; text-align:center; flex:none}
   .tsum-b{flex:1; min-width:0; display:block}
-  .tp{display:flex; align-items:center; gap:7px; flex-wrap:wrap}
-  .tp .nm{font-family:"Archivo",sans-serif; font-weight:700; font-size:14.5px; letter-spacing:-.01em; color:var(--ink)}
-  .tp .pa{font-family:"JetBrains Mono",monospace; font-size:9.5px; color:var(--faint); font-weight:700}
+  .tp{display:flex; align-items:center; gap:7px; flex-wrap:nowrap; min-width:0}
+  .tp .nm{font-family:"Archivo",sans-serif; font-weight:700; font-size:14.5px; letter-spacing:-.01em; color:var(--ink); flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .tp .pa{font-family:"JetBrains Mono",monospace; font-size:9.5px; color:var(--faint); font-weight:700; flex:none; white-space:nowrap}
   .tstatus{font-family:"JetBrains Mono",monospace; font-size:8px; font-weight:700; padding:1.5px 5px; border-radius:5px; text-transform:uppercase; letter-spacing:.03em; white-space:nowrap}
   .tstatus.fix{color:var(--free); border:1px solid var(--free-line); background:var(--free-soft)}
   .tstatus.einig{color:var(--green); border:1px solid var(--green-line); background:var(--green-soft)}
@@ -512,6 +515,20 @@
   .tflow .arr{color:var(--faint); font-weight:700; flex:none}
   .tfee{display:flex; flex-direction:column; align-items:flex-end; text-align:right; flex:none; gap:1px}
   .tfee-k{font:700 8px "Inter",sans-serif; letter-spacing:.05em; text-transform:uppercase; color:var(--faint)}
+  /* Status als Ampel: farbiger Kartenstreifen links + Statuszeile in der Abloese-Spalte */
+  .st-fix{--stc:#16A34A} html[data-theme="dark"] .st-fix{--stc:#27C46F}
+  .st-einig{--stc:#D97706} html[data-theme="dark"] .st-einig{--stc:#F59E0B}
+  .st-ger{--stc:#8593AC} html[data-theme="dark"] .st-ger{--stc:#76869F}
+  .tcard.st-fix,.tcard.st-einig,.tcard.st-ger{box-shadow:inset 3px 0 0 var(--stc), var(--shadow)}
+  .tfee-st{font:800 8px "Inter",sans-serif; letter-spacing:.05em; text-transform:uppercase; color:var(--stc); white-space:nowrap}
+  @media(max-width:384px){
+    .tsum{gap:7px; padding:10px 9px}
+    .trank{min-width:14px}
+    .tp .nm{font-size:13.5px}
+    .tp .pa{font-size:9px}
+    .tfee-v{font-size:13px}
+    .tfee-st{font-size:7.5px}
+  }
   .tfee-v{font-family:"JetBrains Mono",monospace; font-weight:800; font-size:14px; color:var(--ink); white-space:nowrap}
   .tfee-v.free{color:var(--free); font-size:11.5px}
   .tchev{flex:none; color:var(--faint); display:inline-flex; transition:transform .18s}
@@ -528,6 +545,23 @@
   .tk-val{color:var(--ink)}
   .timp{margin:0; font-size:12.5px; color:var(--muted); line-height:1.55}
   .tsub{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--faint)}
+  /* Staerken als "+"-Icon mit Popover (statt Textzeile) */
+  .tstrength{position:relative; flex:none; width:19px; height:19px; border:1px solid var(--green-line); background:var(--green-soft); color:var(--green); border-radius:7px; display:inline-grid; place-items:center; padding:0; cursor:pointer; line-height:0; transition:background .15s, border-color .15s, color .15s, transform .1s; -webkit-tap-highlight-color:transparent}
+  .tstrength:hover{background:var(--green); color:var(--on-accent); border-color:var(--green)}
+  .tstrength:active{transform:scale(.9)}
+  .tstrength:focus-visible{outline:2px solid var(--green); outline-offset:2px}
+  .tstr-ic{font-family:"Inter",sans-serif; font-weight:800; font-size:15px; line-height:1; transition:transform .18s ease}
+  .tstrength.open{background:var(--green); color:var(--on-accent); border-color:var(--green)}
+  .tstrength.open .tstr-ic{transform:rotate(45deg)}
+  .tstrength-pop{position:absolute; z-index:30; top:calc(100% + 7px); left:50%; min-width:150px; max-width:min(260px,78vw);
+    background:var(--surface); border:1px solid var(--line2); border-radius:11px; box-shadow:var(--shadow);
+    padding:9px 10px; display:flex; flex-direction:column; gap:7px; text-align:left; cursor:default;
+    opacity:0; visibility:hidden; transform:translateX(-50%) translateY(-5px); transition:opacity .16s ease, transform .16s ease, visibility .16s}
+  .tstrength.open .tstrength-pop{opacity:1; visibility:visible; transform:translateX(-50%) translateY(0)}
+  .tstr-h{font:700 8.5px "Inter",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--faint)}
+  .tstr-chips{display:flex; flex-wrap:wrap; gap:5px}
+  .tstr-chip{font-family:"Inter",sans-serif; font-weight:600; font-size:11px; color:var(--ink); background:var(--bg2); border:1px solid var(--line); border-radius:99px; padding:3px 9px; white-space:nowrap; line-height:1.3}
+  .tcard:has(.tstrength.open){overflow:visible; position:relative; z-index:6}
 
   /* Providers */
   .provlist{display:flex; flex-direction:column; gap:8px}
@@ -4391,7 +4425,7 @@ const PROVIDERS = [
 ];
 
 let LANG="de", LANG_LOCKED=false, LIVE_SEL=new Set([]), FILTER_USERSET=false, LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
-let NEWS_MODE="transfers", TR_SORT="fee", TR_LEAGUE="", TR_CLUB="", TR_Q="", TR_SHOW="fix";
+let NEWS_MODE="transfers", TR_SORT="fee", TR_DIR="desc", TR_LEAGUE="", TR_CLUB="", TR_Q="", TR_SHOW="fix";
 let LIVE_SHOWN=20, HL_SHOWN=20, NEWS_SHOWN=20, TR_SHOWN=20; const PAGE_SIZE=20;
 const FORMATS = [
   {id:"ard-wm", day:"Donnerstag, 25.06.2026", time:"21:00", name:"Sportschau live – WM 2026", ch:"Das Erste (ARD)", icon:"📡", kind:"live", live:true,
@@ -5366,24 +5400,34 @@ function trCard(x,rank,de){
   var L1=LEAGUES[x.fl]||LEAGUES.misc, L2=LEAGUES[x.tl]||LEAGUES.misc;
   var stTxt=x.st==="fix"?(de?"fix":"done"):(x.st==="einig"?(de?"einig":"agreed"):(de?"Gerücht":"rumour"));
   var stCls=x.st==="fix"?"fix":(x.st==="einig"?"einig":"ger");
-  var known=x.known?'<div class="tk-row"><span class="tk-lbl">'+(de?"Stärken":"Strengths")+'</span><span class="tk-val">'+esc(x.known)+'</span></div>':'';
+  var _strs=x.known?x.known.split(",").map(function(s){return s.trim();}).filter(Boolean):[];
+  var strBtn=_strs.length?('<button type="button" class="tstrength" aria-expanded="false" aria-label="'+(de?"Stärken anzeigen":"Show strengths")+'">'
+    +'<span class="tstr-ic" aria-hidden="true">+</span>'
+    +'<span class="tstrength-pop" role="group" aria-label="'+(de?"Stärken":"Strengths")+'">'
+      +'<span class="tstr-h">'+(de?"Stärken":"Strengths")+'</span>'
+      +'<span class="tstr-chips">'+_strs.map(function(s){return '<span class="tstr-chip">'+esc(s)+'</span>';}).join("")+'</span>'
+    +'</span></button>'):'';
   var imp=x.imp?'<p class="timp">'+esc(x.imp)+'</p>':'';
-  return '<details class="tcard">'
+  return '<details class="tcard st-'+stCls+'">'
     +'<summary class="tsum">'
       +'<span class="trank">'+rank+'</span>'
       +'<span class="tsum-b">'
-        +'<span class="tp"><span class="nm">'+esc(x.p)+'</span><span class="pa">'+esc(x.pos)+' \u00b7 '+x.age+'</span><span class="tstatus '+stCls+'">'+stTxt+'</span></span>'
+        +'<span class="tp"><span class="nm">'+esc(x.p)+'</span><span class="pa">'+esc(x.pos)+' \u00b7 '+x.age+'</span>'+strBtn+'</span>'
         +'<span class="tflow"><span class="cl"><span class="cdot" style="background:'+clubColor(x.from)+'"></span>'+esc(x.from)+'</span><span class="tlg">'+L1.short+'</span><span class="arr">\u2192</span><span class="cl"><span class="cdot" style="background:'+clubColor(x.to)+'"></span>'+esc(x.to)+'</span><span class="tlg">'+L2.short+'</span></span>'
       +'</span>'
-      +'<span class="tfee"><span class="tfee-k">'+feeLbl+'</span><span class="tfee-v'+feeCls+'">'+fee+'</span></span>'
+      +'<span class="tfee"><span class="tfee-st st-'+stCls+'">'+stTxt+'</span><span class="tfee-v'+feeCls+'">'+fee+'</span></span>'
       +'<span class="tchev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>'
     +'</summary>'
     +'<div class="tbody">'
       +'<div class="tmet"><div class="tmetric"><span class="k">'+(de?"Marktwert":"Market value")+'</span><span class="v">'+mv+'</span></div><div class="tmetric"><span class="k">'+(de?"Gehalt gesch.":"Est. salary")+'</span><span class="v">'+sal+'</span></div></div>'
-      +known+imp
+      +imp
       +'<div class="tsub">'+fmtNewsDate(x.date)+'</div>'
     +'</div>'
   +'</details>';
+}
+function trDirIcon(key){
+  var up=(TR_SORT===key && TR_DIR==="asc");
+  return '<span class="tdir" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">'+(up?'<path d="M12 19V6M7 11l5-5 5 5"/>':'<path d="M12 5v13M7 13l5 5 5-5"/>')+'</svg></span>';
 }
 function renderTransfers(){
   var wrap=document.getElementById("transferWrap"); if(!wrap) return;
@@ -5399,11 +5443,12 @@ function renderTransfers(){
     if(q && (x.p+" "+x.from+" "+x.to+" "+(x.known||"")).toLowerCase().indexOf(q)<0) return false;
     return true;
   });
+  var _dir=(TR_DIR==="asc")?-1:1;
   list.sort(function(a,b){
-    if(TR_SORT==="date"){ if(a.date!==b.date) return a.date<b.date?1:-1; var afd=(a.free||a.loan)?-1:(a.fee||0), bfd=(b.free||b.loan)?-1:(b.fee||0); return bfd-afd; }
-    if(TR_SORT==="mv"){ if(b.mv!==a.mv) return b.mv-a.mv; return (b.fee||0)-(a.fee||0); }
+    if(TR_SORT==="date"){ if(a.date!==b.date) return (a.date<b.date?1:-1)*_dir; var afd=(a.free||a.loan)?-1:(a.fee||0), bfd=(b.free||b.loan)?-1:(b.fee||0); return bfd-afd; }
+    if(TR_SORT==="mv"){ if(b.mv!==a.mv) return (b.mv-a.mv)*_dir; return (b.fee||0)-(a.fee||0); }
     var af=(a.free||a.loan)?-1:(a.fee||0), bf=(b.free||b.loan)?-1:(b.fee||0);
-    if(bf!==af) return bf-af; return b.mv-a.mv;
+    if(bf!==af) return (bf-af)*_dir; return b.mv-a.mv;
   });
   var clubset={};
   base.forEach(function(x){
@@ -5416,9 +5461,9 @@ function renderTransfers(){
   html+='<div class="section-eyebrow"><h2>'+(de?"Transfer-Center":"Transfer Center")+'</h2><span class="cnt mono" style="color:var(--faint)">2026/27 · ['+list.length+']</span></div>';
   html+='<div class="tbar"><span class="tslabel">'+(de?"Sortieren":"Sort")+'</span>'
       +'<div class="tseg">'
-        +'<button data-trsort="fee" aria-pressed="'+(TR_SORT==="fee")+'">'+(de?"Ablöse":"Fee")+'</button>'
-        +'<button data-trsort="mv" aria-pressed="'+(TR_SORT==="mv")+'">'+(de?"Marktwert":"Value")+'</button>'
-        +'<button data-trsort="date" aria-pressed="'+(TR_SORT==="date")+'">'+(de?"Neueste":"Newest")+'</button>'
+        +'<button data-trsort="fee" aria-pressed="'+(TR_SORT==="fee")+'">'+(de?"Ablöse":"Fee")+trDirIcon("fee")+'</button>'
+        +'<button data-trsort="mv" aria-pressed="'+(TR_SORT==="mv")+'">'+(de?"Marktwert":"Value")+trDirIcon("mv")+'</button>'
+        +'<button data-trsort="date" aria-pressed="'+(TR_SORT==="date")+'">'+(de?"Neueste":"Newest")+trDirIcon("date")+'</button>'
       +'</div>'
       +'<span class="tslabel">'+(de?"Anzeigen":"Show")+'</span>'
       +'<div class="tseg">'
@@ -5713,6 +5758,10 @@ document.addEventListener("keydown", e=>{
     renderLiveFilters(); renderLive(); }
 });
 document.addEventListener("click", e=>{
+  if(e.target.closest(".tstrength-pop")){ e.preventDefault(); e.stopPropagation(); return; }
+  var _tstr=e.target.closest(".tstrength");
+  document.querySelectorAll(".tstrength.open").forEach(function(o){ if(o!==_tstr){ o.classList.remove("open"); o.setAttribute("aria-expanded","false"); } });
+  if(_tstr){ e.preventDefault(); e.stopPropagation(); var _op=_tstr.classList.toggle("open"); _tstr.setAttribute("aria-expanded",_op?"true":"false"); return; }
   const ca=e.target.closest("[data-cal]");
   if(ca){ addToCalendar(ca.dataset); return; }
   const sh=e.target.closest("[data-share]");
@@ -5777,7 +5826,7 @@ document.addEventListener("click", e=>{
   const nf=e.target.closest("[data-newsf]");
   if(nf){NEWS_MODE="news"; NEWS_TEAM=nf.dataset.newsf; NEWS_SHOWN=20; renderNewsFilters(); applyNewsMode(); renderNews(); return;}
   const trs=e.target.closest("[data-trsort]");
-  if(trs){TR_SORT=trs.dataset.trsort; TR_SHOWN=20; renderTransfers(); return;}
+  if(trs){ var _ns=trs.dataset.trsort; if(_ns===TR_SORT){ TR_DIR=(TR_DIR==="asc"?"desc":"asc"); } else { TR_SORT=_ns; TR_DIR="desc"; } TR_SHOWN=20; renderTransfers(); return;}
   const trl=e.target.closest("[data-trleague]");
   if(trl){TR_LEAGUE=trl.dataset.trleague; TR_CLUB=""; TR_SHOWN=20; renderTransfers(); return;}
   const trc=e.target.closest("[data-trclub]");
@@ -5791,6 +5840,7 @@ document.addEventListener("click", e=>{
     consentSet(e.target.id==="consentYes"?"yes":"no");
     if(e.target.id==="consentYes"){ consentApply("yes"); }}
 });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ document.querySelectorAll(".tstrength.open").forEach(function(o){ o.classList.remove("open"); o.setAttribute("aria-expanded","false"); }); } });
 document.getElementById("liveSearch").addEventListener("input",e=>{LIVE_Q=e.target.value; LIVE_SHOWN=20; renderLive();});
 document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; HL_SHOWN=20; renderHL();});
 document.getElementById("newsSearch").addEventListener("input",e=>{ if(NEWS_MODE==="transfers"){TR_Q=e.target.value; TR_SHOWN=20; renderTransfers();} else {NEWS_Q=e.target.value; NEWS_SHOWN=20; renderNews();} });
