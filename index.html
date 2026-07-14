@@ -643,6 +643,62 @@
   .soonbox.sm{padding:13px 14px; margin:0 0 10px}
   .soonbox.sm .ic{font-size:18px}
   .blhint{display:flex; align-items:center; gap:12px; padding:13px 14px; margin:2px 0 15px; background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--green); border-radius:var(--r); box-shadow:var(--shadow); cursor:pointer; transition:box-shadow .18s ease, border-color .18s ease, transform .06s ease}
+  /* WM-Abschluss-Hinweis + Feedback */
+  .xhint{margin:18px 0 10px; padding:16px 15px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+  .xhint-h{font-family:"Archivo",sans-serif; font-weight:800; font-size:16px; color:var(--ink); letter-spacing:-.01em}
+  .xhint-s{font-size:12.5px; color:var(--muted); margin:3px 0 12px}
+  .xhint-cards{display:grid; gap:9px}
+  .xhint-card{display:flex; align-items:center; gap:11px; padding:12px 13px; background:var(--bg2); border:1px solid var(--line); border-radius:11px; text-decoration:none; color:inherit; transition:border-color .15s, transform .06s, box-shadow .15s}
+  .xhint-card:hover{border-color:var(--green); box-shadow:var(--shadow); transform:translateY(-1px)}
+  .xhint-ic{flex:none; width:34px; height:34px; display:grid; place-items:center; border-radius:9px; background:var(--green-soft); color:var(--green)}
+  .xhint-ic svg{width:18px; height:18px}
+  .xhint-tx{flex:1; min-width:0; display:flex; flex-direction:column; line-height:1.25}
+  .xhint-tx b{font-family:"Archivo",sans-serif; font-weight:700; font-size:14px; color:var(--ink)}
+  .xhint-tx span{font-size:12px; color:var(--muted)}
+  .xhint-arw{flex:none; color:var(--faint); font-size:20px; font-weight:700}
+  .fbk{margin:10px 0 6px; padding:15px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+  .fbk-h{font-family:"Archivo",sans-serif; font-weight:800; font-size:14.5px; color:var(--ink); margin-bottom:9px}
+  .fbk-stars{display:flex; gap:3px; margin-bottom:9px}
+  .fbk-star{border:none; background:none; cursor:pointer; font-size:22px; line-height:1; color:var(--line2); padding:0 1px; transition:color .12s, transform .08s}
+  .fbk-star:hover{transform:scale(1.12)}
+  .fbk-star.on{color:#F5A623}
+  .fbk-text{width:100%; box-sizing:border-box; resize:vertical; min-height:64px; padding:10px 11px; border:1px solid var(--line); border-radius:10px; background:var(--bg2); color:var(--ink); font:400 13px "Inter",sans-serif; line-height:1.5}
+  .fbk-text:focus{outline:none; border-color:var(--green)}
+  .fbk-text.shake{animation:fbkShake .35s}
+  @keyframes fbkShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  .fbk-row{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:9px}
+  .fbk-hint{font-size:11px; color:var(--faint)}
+  .fbk-send{border:none; background:var(--green); color:var(--on-accent); font:700 13px "Inter",sans-serif; padding:9px 18px; border-radius:9px; cursor:pointer; transition:filter .15s, transform .06s}
+  .fbk-send:hover{filter:brightness(1.06)}
+  .fbk-send:active{transform:scale(.97)}
+  .fbk-done{font-family:"Archivo",sans-serif; font-weight:700; font-size:14px; color:var(--green); padding:6px 0}
+  .fba-ov{position:fixed; inset:0; z-index:9999; background:rgba(10,14,25,.55); backdrop-filter:blur(3px); display:none; align-items:flex-end; justify-content:center}
+  .fba-ov.show{display:flex}
+  .fba-box{width:100%; max-width:560px; max-height:82vh; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line2); border-radius:16px 16px 0 0; box-shadow:0 -8px 30px rgba(0,0,0,.25)}
+  .fba-top{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 15px; border-bottom:1px solid var(--line)}
+  .fba-top b{font-family:"Archivo",sans-serif; font-size:15px; color:var(--ink)}
+  .fba-actions{display:flex; gap:6px; flex-wrap:wrap}
+  .fba-actions button{border:1px solid var(--line); background:var(--bg2); color:var(--muted); font:700 12px "Inter",sans-serif; padding:6px 10px; border-radius:8px; cursor:pointer}
+  .fba-actions button:hover{border-color:var(--green); color:var(--green)}
+  .fba-list{overflow-y:auto; padding:8px 15px 16px}
+  .fba-item{padding:10px 0; border-bottom:1px solid var(--line)}
+  .fba-meta{font:700 11px "JetBrains Mono",monospace; color:var(--faint); margin-bottom:3px}
+  .fba-tx{font-size:13px; color:var(--ink); line-height:1.5; white-space:pre-wrap; word-break:break-word}
+  .fba-empty{padding:24px 0; text-align:center; color:var(--muted)}
+  .sup{margin:10px 0 6px; padding:15px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+  .sup-h{font-family:"Archivo",sans-serif; font-weight:800; font-size:14.5px; color:var(--ink)}
+  .sup-s{font-size:12.5px; color:var(--muted); margin:3px 0 11px}
+  .sup-share{display:flex; align-items:center; justify-content:center; gap:8px; width:100%; border:none; background:var(--green); color:var(--on-accent); font:700 13.5px "Inter",sans-serif; padding:11px 14px; border-radius:10px; cursor:pointer; transition:filter .15s, transform .06s}
+  .sup-share svg{width:17px; height:17px}
+  .sup-share:hover{filter:brightness(1.06)}
+  .sup-share:active{transform:scale(.98)}
+  .sup-social{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:9px}
+  .sup-soc{display:flex; align-items:center; justify-content:center; gap:8px; padding:10px; border-radius:10px; text-decoration:none; font:700 13px "Inter",sans-serif; color:#fff; transition:transform .06s, filter .15s}
+  .sup-soc svg{width:17px; height:17px}
+  .sup-soc:hover{filter:brightness(1.05)}
+  .sup-soc:active{transform:scale(.98)}
+  .sup-soc.fb{background:#1877F2}
+  .sup-soc.ig{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)}
   .blhint:hover{border-color:var(--green-line); box-shadow:0 2px 4px rgba(11,18,32,.05), 0 14px 30px -12px rgba(11,18,32,.22)}
   .blhint:active{transform:translateY(1px)}
   .blhint-badge{flex:0 0 auto; width:38px; height:38px; border-radius:11px; display:grid; place-items:center; color:#fff; background:linear-gradient(140deg, rgba(255,255,255,.20), rgba(0,0,0,.14)), var(--green); box-shadow:0 5px 12px -4px var(--green-line)}
@@ -1170,6 +1226,7 @@
     <div class="filters" id="liveFilters"></div>
     <div class="fsearch"><span class="ic">⌕</span><input id="liveSearch" type="text" placeholder="Weitere Wettbewerbe oder Teams suchen …"></div>
     <div class="minequick" id="mineQuick" style="display:none"></div>
+    <div id="blHintTop"></div>
     <div class="board" id="liveBoard"></div>
     <p class="note" id="liveNote"></p>
   </section>
@@ -1447,7 +1504,7 @@ const I18N = {
     abo_free_keeps:"Gratis dabei (ARD/ZDF)", abo_need:"Dafür brauchst du", abo_full:"komplett", abo_partial:"Teil",
     abo_complete:"Für die komplette Abdeckung zusätzlich:", abo_visit:"Zum Anbieter", abo_reset:"Zurücksetzen",
     abo_aff_note:"Anbieter-Links sind neutral (kein Affiliate aktiv). Preise ca., Stand Juni 2026 — bitte beim Anbieter prüfen.",
-    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Liga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_l1:"Ligue 1", f_test:"Tests", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", blhint_t:"Bundesliga-Auftakt terminiert", blhint_s:"1. & 2. Bundesliga · Spieltermine stehen fest", blhint_cta:"Anzeigen", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
+    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Liga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_l1:"Ligue 1", f_test:"Tests", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", blhint_t:"Bundesliga-Auftakt terminiert", blhint_s:"1. & 2. Bundesliga · Spielplan steht, Anstoßzeiten folgen", blhint_cta:"Anzeigen", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
     visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
     imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
     legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
@@ -1513,7 +1570,7 @@ const I18N = {
     abo_free_keeps:"Free with ARD/ZDF", abo_need:"You'll need", abo_full:"full", abo_partial:"part",
     abo_complete:"For full coverage also add:", abo_visit:"Visit provider", abo_reset:"Reset",
     abo_aff_note:"Provider links are neutral (no affiliate active). Prices approx., as of June 2026 — please verify with the provider.",
-    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Bundesliga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_l1:"Ligue 1", f_test:"Friendlies", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", blhint_t:"Bundesliga kick-off scheduled", blhint_s:"Bundesliga & 2. Bundesliga · fixtures confirmed", blhint_cta:"View", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
+    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Bundesliga", f_bl3:"3. Liga", f_el:"Europa League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_l1:"Ligue 1", f_test:"Friendlies", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", blhint_t:"Bundesliga kick-off scheduled", blhint_s:"Bundesliga & 2. Bundesliga · fixtures out, times to follow", blhint_cta:"View", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
     visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
     imprint:"Imprint", privacy:"Privacy", about:"About",
     legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
@@ -1752,8 +1809,8 @@ const MATCHES = [
   {cat:"wm", day:"Samstag, 11.07.2026", time:"23:00", comp:"WM 2026 · Viertelfinale", h:"Norwegen", a:"England", komm:"Wolff Fuss", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:88,einordnung:{de:"Das Torjäger-Duell von Miami: Erling Haaland (sieben Turniertore, Doppelpack gegen Brasilien) gegen Harry Kane. Norwegen steht erstmals in einem WM-Viertelfinale, England setzte sich mit 3:2 gegen Mexiko durch. In Deutschland exklusiv bei MagentaTV – kein Free-TV.",en:"The striker summit in Miami: Erling Haaland (seven tournament goals, brace vs Brazil) against Harry Kane. Norway reach a first-ever World Cup quarter-final; England came through 3-2 against Mexico. In Germany exclusively on MagentaTV – no free-to-air."}}},
   {cat:"wm", day:"Freitag, 10.07.2026", time:"21:00", comp:"WM 2026 · Viertelfinale", h:"Spanien", a:"Belgien", komm:"Oliver Schmidt", kommMag:"Christian Straßburger", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:82,einordnung:{de:"Der Europameister mit einer der stärksten Defensiven des Turniers gegen Belgiens goldene Generation um Lukaku und Tielemans, die sich in Los Angeles ins Halbfinale träumt. In Deutschland live im Free-TV im ZDF und bei MagentaTV.",en:"The European champions, with one of the tournament\u2019s meanest defences, against Belgium\u2019s golden generation around Lukaku and Tielemans, dreaming of the semis in Los Angeles. In Germany live free-to-air on ZDF and on MagentaTV."}}},
   {cat:"wm", day:"Sonntag, 12.07.2026", time:"03:00", comp:"WM 2026 · Viertelfinale", h:"Argentinien", a:"Schweiz", komm:"Marco Hagemann", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:88,einordnung:{de:"David gegen Goliath in Kansas City: Die Nati steht erstmals seit 1954 wieder in einem WM-Viertelfinale – gegen Titelverteidiger Argentinien um Lionel Messi, der Ägypten in einem 3:2-Krimi niederrang. In Deutschland exklusiv bei MagentaTV – kein Free-TV.",en:"David vs Goliath in Kansas City: Switzerland reach a World Cup quarter-final for the first time since 1954 – against reigning champions Argentina and Lionel Messi, who edged Egypt 3-2 in a thriller. In Germany exclusively on MagentaTV – no free-to-air."}}},
-  {cat:"wm", day:"Dienstag, 14.07.2026", time:"21:00", comp:"WM 2026 · Halbfinale", h:"Frankreich", a:"Spanien", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:92,einordnung:{de:"Halbfinale 1 in Dallas: Titelmitfavorit Frankreich um Mbappé trifft auf Europameister Spanien – die stärkste Offensive gegen eine der besten Defensiven des Turniers. In Deutschland live im Free-TV in der ARD und bei MagentaTV.",en:"Semi-final one in Dallas: title contenders France around Mbappé meet European champions Spain – the tournament\u2019s sharpest attack against one of its meanest defences. In Germany live free-to-air on ARD and on MagentaTV."}}},
-  {cat:"wm", day:"Mittwoch, 15.07.2026", time:"21:00", comp:"WM 2026 · Halbfinale", h:"England", a:"Argentinien", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:91,einordnung:{de:"Halbfinale 2 in Atlanta: England um Doppeltorschütze Jude Bellingham gegen Titelverteidiger Argentinien um Lionel Messi. Die Three Lions wollen zum ersten Mal seit 1966 wieder in ein WM-Finale. In Deutschland live im Free-TV in der ARD und bei MagentaTV.",en:"Semi-final two in Atlanta: England, with two-goal hero Jude Bellingham, against reigning champions Argentina and Lionel Messi. The Three Lions are chasing a first World Cup final since 1966. In Germany live free-to-air on ARD and on MagentaTV."}}},
+  {cat:"wm", day:"Dienstag, 14.07.2026", time:"21:00", comp:"WM 2026 · Halbfinale", h:"Frankreich", a:"Spanien", komm:"Gari Paubandt", kommMag:"Christian Straßburger", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:92,einordnung:{de:"Halbfinale 1 in Dallas: Titelmitfavorit Frankreich um Mbappé trifft auf Europameister Spanien – die stärkste Offensive gegen eine der besten Defensiven des Turniers. In Deutschland live und kostenlos im ZDF (Kommentar: Gari Paubandt) sowie bei MagentaTV (Christian Straßburger).",en:"Semi-final one in Dallas: title contenders France around Mbappé meet European champions Spain – the tournament\u2019s sharpest attack against one of its meanest defences. In Germany live and free-to-air on ZDF (commentary: Gari Paubandt) and on MagentaTV."}}},
+  {cat:"wm", day:"Mittwoch, 15.07.2026", time:"21:00", comp:"WM 2026 · Halbfinale", h:"England", a:"Argentinien", komm:"Tom Bartels", kommMag:"Wolff Fuss", tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:91,einordnung:{de:"Halbfinale 2 in Atlanta: England um Doppeltorschütze Jude Bellingham gegen Titelverteidiger Argentinien um Lionel Messi. Die Three Lions wollen zum ersten Mal seit 1966 wieder in ein WM-Finale. In Deutschland live im Free-TV in der ARD und bei MagentaTV.",en:"Semi-final two in Atlanta: England, with two-goal hero Jude Bellingham, against reigning champions Argentina and Lionel Messi. The Three Lions are chasing a first World Cup final since 1966. In Germany live free-to-air on ARD and on MagentaTV."}}},
   {cat:"wm", day:"Samstag, 18.07.2026", time:"23:00", comp:"WM 2026 · Spiel um Platz 3", h:"Verlierer HF 1", a:"Verlierer HF 2", tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:70,einordnung:{de:"Das kleine Finale in Miami zwischen den beiden Halbfinal-Verlierern. In Deutschland exklusiv bei MagentaTV – kein Free-TV.",en:"The third-place play-off in Miami between the two beaten semi-finalists. In Germany exclusively on MagentaTV – no free-to-air."}}},
   {cat:"wm", day:"Sonntag, 19.07.2026", time:"21:00", comp:"WM 2026 · Finale", h:"Finalist 1", a:"Finalist 2", komm:"Oliver Schmidt", tv:{DE:[ZDF,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, lohnt:{score:95,einordnung:{de:"Das WM-Finale 2026 im MetLife Stadium bei New York. In Deutschland live und kostenlos im ZDF (Kommentar: Oliver Schmidt) sowie bei MagentaTV.",en:"The 2026 World Cup final at MetLife Stadium near New York. In Germany live and free-to-air on ZDF (commentary: Oliver Schmidt) and on MagentaTV."}}},
   {cat:"bl", day:"Freitag, 28.08.2026", time:"20:30", comp:"Bundesliga · 1. Spieltag", h:"FC Bayern München", a:"VfB Stuttgart", tv:{DE:[SAT1,SKY]}, komm:"Jonas Friedrich", radio:["VfB Radio (Senzel/Beisch)","ARD Audiothek"], ticker:[], lohnt:{score:80,einordnung:{de:"Bundesliga-Auftakt und Neuauflage des Pokalfinals: Meister und Double-Sieger FC Bayern München empfängt zum Eröffnungsspiel den VfB Stuttgart in der Allianz Arena. Der erste Höhepunkt der Saison – live im Free-TV bei Sat.1 und bei Sky.",en:"Bundesliga kick-off and a rematch of the cup final: champions and double winners FC Bayern München host VfB Stuttgart at the Allianz Arena to open the season. The season's first highlight – live free-to-air on Sat.1 and on Sky."}}},
@@ -4189,6 +4246,13 @@ const TEAMS = [
 const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
 
 const NEWS = [
+  // === Aktualisierung 14.07.2026 ===
+  {team:"wm",date:"2026-07-14",title:"WM-Halbfinale heute: Frankreich \u2013 Spanien live im ZDF",teaser:"Das erste Halbfinale der WM 2026 steigt heute um 21:00 Uhr in Dallas: Titelmitfavorit Frankreich um Kylian Mbapp\u00e9 trifft auf Europameister Spanien. Im deutschen Free-TV \u00fcbertr\u00e4gt das ZDF (Kommentator: Gari Paubandt), parallel l\u00e4uft die Partie bei MagentaTV (Christian Stra\u00dfburger). Das zweite Halbfinale England \u2013 Argentinien zeigt am Mittwoch die ARD mit Tom Bartels.",src:"ZDF / ARD / MagentaTV",url:"https://www.zdfheute.de/sport/fussball-wm/fussball-wm-2026-wer-uebertraegt-halbfinale-ard-zdf-100.html"},
+  {team:"epl",date:"2026-07-14",title:"Tielemans besteht Medizincheck bei Manchester United",teaser:"Youri Tielemans wechselt von Aston Villa zu Manchester United. Der belgische Nationalspieler absolvierte laut Fabrizio Romano den obligatorischen Medizincheck erfolgreich; United aktivierte die Ausstiegsklausel (rund 41 Mio. Euro). Der 29-J\u00e4hrige soll einen Vertrag bis 2031 unterschreiben.",src:"Fabrizio Romano",url:"https://www.footballtransfers.com/en/transfer-news/uk-premier-league/2026/07"},
+  {team:"epl",date:"2026-07-14",title:"Trossard verl\u00e4sst Arsenal Richtung Be\u015fikta\u015f",teaser:"Leandro Trossard schlie\u00dft sich Be\u015fikta\u015f an. Arsenal und der t\u00fcrkische Topklub sind sich laut Fabrizio Romano einig, f\u00fcr den 31-j\u00e4hrigen Offensivspieler flie\u00dfen samt Boni bis zu 20 Mio. Euro. Trossard unterschreibt einen Vertrag bis 2030; bei Arsenal wird damit Platz f\u00fcr einen neuen Linksau\u00dfen frei.",src:"Fabrizio Romano",url:"https://www.90min.de/categories/transfer-news"},
+  {team:"seriea",date:"2026-07-14",title:"Yann Sommer wechselt abl\u00f6sefrei zum FC Br\u00fcgge",teaser:"Der 37-j\u00e4hrige Schweizer Nationaltorh\u00fcter verl\u00e4sst Inter Mailand und schlie\u00dft sich dem FC Br\u00fcgge an. Wie der belgische Klub vermeldet, unterschreibt Sommer einen Vertrag bis 2029, eine Abl\u00f6se wird nicht f\u00e4llig.",src:"FC Br\u00fcgge",url:"https://www.fussballtransfers.com/transfermarkt-live"},
+  {team:"epl",date:"2026-07-13",title:"Manchester United macht Andrey Santos fix",teaser:"Manchester United hat die Verpflichtung des brasilianischen Mittelfeldspielers Andrey Santos vom FC Chelsea abgeschlossen. Laut Transfermarkt betr\u00e4gt die Abl\u00f6se rund 56 Mio. Euro. Der 22-J\u00e4hrige gilt als dynamischer Sechser f\u00fcr das Umbruch-Projekt an der Old Trafford.",src:"Transfermarkt",url:"https://www.transfermarkt.de/"},
+  {team:"rbl",date:"2026-07-13",title:"RB Leipzig verl\u00e4ngert Leihe von Brajan Gruda",teaser:"Brajan Gruda bleibt eine weitere Saison bei RB Leipzig: Der Bundesligist verl\u00e4ngerte die Leihe des Offensivspielers von Brighton & Hove Albion f\u00fcr 2026/27. Medienberichten zufolge greift bei wenigen Eins\u00e4tzen eine Kaufpflicht von rund 25 Mio. Euro. Baumgartner f\u00e4llt derweil nach einer Oberschenkel-OP mehrere Monate aus.",src:"90min / kicker",url:"https://www.90min.de/categories/transfer-news"},
   // === Aktualisierung 12.07.2026 ===
   {team:"dfb",date:"2026-07-11",title:"DFB-Delegation reist nach New York: Klopp-Gespr\u00e4che laufen",teaser:"Auf der Suche nach dem Nagelsmann-Nachfolger macht der DFB Tempo: Eine Delegation um Pr\u00e4sident Bernd Neuendorf und Sportdirektor Rudi V\u00f6ller ist in die USA gereist, um mit J\u00fcrgen Klopp \u00fcber das Bundestraineramt zu sprechen. Klopp, aktuell bei der WM als TV-Experte im Einsatz, gilt als Wunschkandidat. Bis zum Nations-League-Auftakt am 24. September in Amsterdam gegen die Niederlande soll die Personalie gekl\u00e4rt sein.",src:"Sportschau / bundesliga.com",url:"https://www.sportschau.de/fussball/fifa-wm-2026"},
   {team:"dfb",date:"2026-07-03",title:"Nagelsmann tritt zur\u00fcck \u2013 Klopp soll \u00fcbernehmen",teaser:"Nach dem WM-Aus gegen Paraguay zieht Julian Nagelsmann die Konsequenzen: Der 38-J\u00e4hrige gibt sein Amt als Bundestrainer mit sofortiger Wirkung auf, sein Vertrag lief eigentlich bis zur EM 2028. Auch seine Assistenten Benjamin Gl\u00fcck und Benjamin H\u00fcbner verlassen den DFB. Als Nachfolger favorisiert der Verband J\u00fcrgen Klopp, der seit Jahren als Wunschkandidat gilt.",src:"Sportschau / ZDF",url:"https://www.sportschau.de/fussball/fifa-wm-2026/dfb-nagelsmann-tritt-als-bundestrainer-zurueck,wm-nagelsmann-ruecktritt-dfb-100.html"},
@@ -4507,7 +4571,7 @@ const FOLLOW = new Set();   // gefolgte Teams (jetzt mit localStorage-Persistenz
 
 /* ---------- Persistenz: funktionaler localStorage (kein Tracking) ---------- */
 const LS_OK=(function(){ try{ const k="tvf:v1:__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
-const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v1:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme", geo:"tvf:v1:geo", market:"tvf:v1:market" };
+const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v2:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme", geo:"tvf:v1:geo", market:"tvf:v1:market" };
 function lsGet(k){ if(!LS_OK) return null; try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function lsSet(k,v){ if(!LS_OK) return; try{ localStorage.setItem(k,v); }catch(e){} }
 function saveFollow(){ lsSet(LS_KEY.follow, JSON.stringify([...FOLLOW])); }
@@ -4518,7 +4582,7 @@ function countryDefaultCats(cc){
   const NAT={ DE:["bl","bl2","bl3","dfb"], UK:["pl","facup"], FR:["l1"], IT:["it"], ES:["es"] };
   return base.concat(NAT[cc]||[]);
 }
-function applyCountryDefaultFilter(){ if(FILTER_USERSET) return; LIVE_SEL.clear(); countryDefaultCats(COUNTRY).forEach(c=>LIVE_SEL.add(c)); }
+function applyCountryDefaultFilter(){ if(FILTER_USERSET) return; LIVE_SEL.clear(); LIVE_SEL.add("wm"); }
 function saveLang(){ lsSet(LS_KEY.lang, JSON.stringify(LANG)); }
 function loadPersisted(){
   try{ const raw=lsGet(LS_KEY.follow); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ FOLLOW.clear(); a.forEach(x=>FOLLOW.add(x)); } } }catch(e){}
@@ -4863,10 +4927,11 @@ function renderLive(){
     else hint = q ? soonHint(t) : '<div class="empty">'+(LANG==="de"?"Aktuell keine anstehenden Spiele — vergangene Spiele findest du unter Highlights.":"No upcoming matches right now — past games are under Highlights.")+'</div>';
   }
   let blHint="";
-  if(SEL.size===0 && !q && MATCHES.some(m=>!isFinished(m) && (catOf(m)==="bl"||catOf(m)==="bl2"))){
+  if(!q && MATCHES.some(m=>!isFinished(m) && (catOf(m)==="bl"||catOf(m)==="bl2"))){
     blHint='<div class="blhint" data-blhint="1" role="button" tabindex="0"><span class="blhint-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18"/><path d="M8 3v3M16 3v3"/><path d="M8.4 14.6l2.3 2.3 4.9-4.8"/></svg></span><span class="blhint-tx"><b>'+t.blhint_t+'</b><span>'+t.blhint_s+'</span></span><span class="blhint-cta">'+t.blhint_cta+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12.5M11.5 5.5l6.5 6.5-6.5 6.5"/></svg></span></div>';
   }
-  board.innerHTML = blHint + html + hint + smBtn("live",_liveTotal,LIVE_SHOWN); try{liveApplyDOM();}catch(e){}
+  var wmFooter=(SEL.has("wm") && !q && _liveTotal<=LIVE_SHOWN) ? wmSectionsHint() : "";
+  board.innerHTML = html + hint + smBtn("live",_liveTotal,LIVE_SHOWN) + wmFooter + supportBlock(); try{liveApplyDOM();}catch(e){}
   /*auto-open*/ let _restored=false;
   openKeys.forEach(k=>{ const r=board.querySelector('.row[data-k="'+CSS.escape(k)+'"]');
     if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); _restored=true; } });
@@ -4874,6 +4939,76 @@ function renderLive(){
     if(_nx){ const r=board.querySelector('.row[data-k="'+CSS.escape(rowKey(_nx.o))+'"]');
       if(r){ r.classList.add("open"); const h=r.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true"); } } }
 }
+/* === WM-Abschluss-Hinweis + Feedback ============================== */
+const FEEDBACK_KEY="tvf:v1:feedback";
+/* Optional: Formspree-/FormSubmit-URL eintragen, dann geht Feedback zusaetzlich zentral raus. Leer = nur lokal. */
+const FEEDBACK_ENDPOINT="";
+function renderBlHintTop(){
+  var el=document.getElementById("blHintTop"); if(!el) return;
+  var t=I18N[LANG];
+  var has=MATCHES.some(function(m){ return (catOf(m)==="bl"||catOf(m)==="bl2"); });
+  el.innerHTML = has ? '<div class="blhint" data-blhint="1" role="button" tabindex="0"><span class="blhint-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18"/><path d="M8 3v3M16 3v3"/><path d="M8.4 14.6l2.3 2.3 4.9-4.8"/></svg></span><span class="blhint-tx"><b>'+t.blhint_t+'</b><span>'+t.blhint_s+'</span></span><span class="blhint-cta">'+t.blhint_cta+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12.5M11.5 5.5l6.5 6.5-6.5 6.5"/></svg></span></div>' : "";
+}
+function wmSectionsHint(){
+  var de=LANG==="de", uNews=navUrl("news"), uHl=navUrl("hl");
+  var icT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l4 4-4 4"/><path d="M20 7H8"/><path d="M8 21l-4-4 4-4"/><path d="M4 17h12"/></svg>';
+  var icH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>';
+  return '<div class="xhint">'
+    +'<div class="xhint-h">'+(de?"Das war die WM-\u00dcbersicht":"That\u2019s the World Cup overview")+'</div>'
+    +'<div class="xhint-s">'+(de?"Noch mehr Fu\u00dfball findest du hier:":"More football over here:")+'</div>'
+    +'<div class="xhint-cards">'
+      +'<a class="xhint-card" href="'+uNews+'"><span class="xhint-ic">'+icT+'</span><span class="xhint-tx"><b>'+(de?"Transfer-Center":"Transfer Centre")+'</b><span>'+(de?"Neue Wechsel, Ger\u00fcchte & News":"New deals, rumours & news")+'</span></span><span class="xhint-arw">\u203a</span></a>'
+      +'<a class="xhint-card" href="'+uHl+'"><span class="xhint-ic">'+icH+'</span><span class="xhint-tx"><b>Highlights</b><span>'+(de?"Zusammenfassungen & Analysen":"Recaps & analysis")+'</span></span><span class="xhint-arw">\u203a</span></a>'
+    +'</div></div>';
+}
+function feedbackBlock(){
+  var de=LANG==="de";
+  var stars=[1,2,3,4,5].map(function(n){return '<button type="button" class="fbk-star" data-star="'+n+'" aria-label="'+n+'/5">\u2605</button>';}).join("");
+  return '<div class="fbk">'
+    +'<div class="fbk-h">'+(de?"Feedback? Immer her damit.":"Got feedback? Bring it on.")+'</div>'
+    +'<div class="fbk-stars" data-rating="0" role="radiogroup" aria-label="'+(de?"Bewertung":"Rating")+'">'+stars+'</div>'
+    +'<textarea class="fbk-text" rows="3" placeholder="'+(de?"Was gef\u00e4llt dir, was fehlt, was nervt?":"What do you like, what\u2019s missing, what bugs you?")+'"></textarea>'
+    +'<div class="fbk-row"><span class="fbk-hint">'+(de?"Bleibt lokal auf diesem Ger\u00e4t.":"Stays local on this device.")+'</span><button type="button" class="fbk-send" data-fb-send>'+(de?"Absenden":"Send")+'</button></div>'
+  +'</div>';
+}
+function supportBlock(){
+  var de=LANG==="de";
+  var shI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
+  var fbI='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg>';
+  var igI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>';
+  return '<div class="sup">'
+    +'<div class="sup-h">'+(de?"Unterst\u00fctzt uns":"Support us")+'</div>'
+    +'<div class="sup-s">'+(de?"TVFUSSBALL lebt von euch \u2013 teilt die Seite und folgt uns:":"TVFUSSBALL runs on you \u2013 share the site and follow us:")+'</div>'
+    +'<button type="button" class="sup-share" data-share>'+shI+'<span class="sup-share-tx">'+(de?"Seite mit Freunden teilen":"Share with friends")+'</span></button>'
+    +'<div class="sup-social">'
+      +'<a class="sup-soc fb" href="https://www.facebook.com/share/17qkMgZEbd/" target="_blank" rel="noopener noreferrer">'+fbI+'Facebook</a>'
+      +'<a class="sup-soc ig" href="https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==" target="_blank" rel="noopener noreferrer">'+igI+'Instagram</a>'
+    +'</div></div>';
+}
+function fbLoad(){ try{ var r=lsGet(FEEDBACK_KEY); var a=r?JSON.parse(r):[]; return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function fbSubmit(text,rating){
+  text=(text||"").trim(); if(!text && !rating) return false;
+  var entry={ text:text, rating:rating||0, ts:new Date().toISOString(), page:(location.pathname.split("/").pop()||"index.html"), lang:LANG };
+  var list=fbLoad(); list.push(entry); lsSet(FEEDBACK_KEY, JSON.stringify(list));
+  if(FEEDBACK_ENDPOINT){ try{ fetch(FEEDBACK_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(entry)}); }catch(e){} }
+  return true;
+}
+function fbEscape(v){ return String(v==null?"":v).replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c];}); }
+function fbToCSV(list){
+  var q=function(v){ return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'; };
+  var rows=[["Datum","Bewertung","Seite","Sprache","Text"]].concat(list.map(function(e){return [e.ts,e.rating,e.page,e.lang,e.text];}));
+  return rows.map(function(r){return r.map(q).join(",");}).join("\n");
+}
+function fbAdminOpen(){
+  var de=LANG==="de", list=fbLoad(), rev=list.slice().reverse();
+  var body=rev.length? rev.map(function(e){ return '<div class="fba-item"><div class="fba-meta">'+(e.rating?"\u2605".repeat(e.rating):"\u2013")+' \u00b7 '+new Date(e.ts).toLocaleString()+' \u00b7 '+fbEscape(e.page)+'</div><div class="fba-tx">'+(e.text?fbEscape(e.text):'<i>('+(de?"nur Bewertung":"rating only")+')</i>')+'</div></div>'; }).join("")
+    : '<div class="fba-empty">'+(de?"Noch kein Feedback gespeichert.":"No feedback stored yet.")+'</div>';
+  var ov=document.getElementById("fbAdmin");
+  if(!ov){ ov=document.createElement("div"); ov.id="fbAdmin"; ov.className="fba-ov"; document.body.appendChild(ov); }
+  ov.innerHTML='<div class="fba-box"><div class="fba-top"><b>Feedback ('+list.length+')</b><div class="fba-actions"><button type="button" data-fb-copy>'+(de?"Kopieren":"Copy")+'</button><button type="button" data-fb-csv>CSV</button><button type="button" data-fb-clear>'+(de?"Leeren":"Clear")+'</button><button type="button" data-fb-close aria-label="Close">\u2715</button></div></div><div class="fba-list">'+body+'</div></div>';
+  ov.classList.add("show");
+}
+function fbAdminClose(){ var ov=document.getElementById("fbAdmin"); if(ov) ov.classList.remove("show"); if(location.hash==="#feedback"){ try{history.replaceState(null,"",location.pathname+location.search);}catch(e){} } }
 function rowKey(m){ return esc(m.day+"|"+m.time+"|"+m.h+"|"+m.a); }
 function folMark(team){ const on=FOLLOW.has(team), t=I18N[LANG], lbl=esc(team)+" "+(on?t.following:t.follow);
   return '<span class="favstar'+(on?' on':'')+'" data-follow="'+esc(team)+'" role="button" tabindex="0" aria-pressed="'+on+'" aria-label="'+lbl+'" title="'+lbl+'">'+(on?'★':'☆')+'</span>'; }
@@ -5195,6 +5330,11 @@ function fmtM(n){ var s=(Math.round(n*10)/10).toString(); if(LANG==="de") s=s.re
    Offiziell: bundesliga.com | premierleague.com/football365 | laliga.com | football-italia.net | getfootballnewsfrance.com
    Marktwerte: transfermarkt.de | uebergreifend: Fabrizio Romano. Abloesen ca., MV & Gehalt geschaetzt. */
 const TRANSFERS=[
+  /* ===== Neu 13.\u201314.07.2026 ===== */
+  {p:"Youri Tielemans",pos:"ZM",age:29,from:"Aston Villa",fl:"pl",to:"Manchester United",tl:"pl",fee:41,mv:30,sal:8,date:"2026-07-14",st:"fix",known:"Spielaufbau, \u00dcbersicht, Standards, F\u00fchrung",imp:"United zieht per Ausstiegsklausel einen erfahrenen Achter, der das Zentrum sofort stabilisiert. Der Belgier bestand am 14.07. den Medizincheck und unterschreibt bis 2031. F\u00fcr Villa ist der Klausel-Abgang schwer zu ersetzen."},
+  {p:"Andrey Santos",pos:"ZM",age:22,from:"FC Chelsea",fl:"pl",to:"Manchester United",tl:"pl",fee:56,mv:40,sal:6,date:"2026-07-13",st:"fix",known:"Balleroberung, Dynamik, tiefe L\u00e4ufe",imp:"United macht den brasilianischen Sechser fix und setzt auf Perspektive. Chelsea zieht bei einem Eigengew\u00e4chs eine hohe Abl\u00f6se \u2013 Teil der Kaderplanung rund um die Financial-Fairplay-Vorgaben."},
+  {p:"Leandro Trossard",pos:"LA",age:31,from:"FC Arsenal",fl:"pl",to:"Be\u015fikta\u015f",tl:"tsl",fee:20,mv:22,sal:6,date:"2026-07-14",st:"fix",known:"Abschluss beidf\u00fc\u00dfig, Flexibilit\u00e4t, Standards",imp:"Arsenal kassiert samt Boni bis zu 20 Mio. und schafft Platz f\u00fcr einen neuen Linksau\u00dfen. Be\u015fikta\u015f landet einen Erfahrungs-Coup (Vertrag bis 2030)."},
+  {p:"Lucas Digne",pos:"LV",age:32,from:"Aston Villa",fl:"pl",to:"Paris Saint-Germain",tl:"l1",fee:10,mv:8,sal:5,date:"2026-07-14",st:"einig",known:"Flanken, Vorst\u00f6\u00dfe, Standards",imp:"PSG holt nach der WM per Ausstiegsklausel (~10 Mio.) einen erfahrenen Back-up f\u00fcr die linke Seite; Digne kehrt nach Paris zur\u00fcck (Vertrag bis 2029)."},
   /* ===== Bundesliga (offizielle DFL-Liste, Stand Juli 2026) ===== */
   {p:"Nathaniel Brown",pos:"LV",age:22,from:"Eintracht Frankfurt",fl:"bl1",to:"Bayern München",tl:"bl1",fee:55,mv:30,sal:6,date:"2026-06-26",st:"fix",known:"Antritt, Zweikampf, moderne Ein- und Überlaufwege",imp:"Bayern besetzt die Problemzone links langfristig mit einem WM-Fahrer. Frankfurt kann die Klasse kaum ersetzen, sichert sich aber eine der höchsten Linksverteidiger-Ablösen überhaupt. Für München bleibt die Eintracht ein gern und regelmäßig besuchter Transfermarkt."},
   {p:"Ismael Saibari",pos:"OM",age:24,from:"PSV Eindhoven",fl:"ere",to:"Bayern München",tl:"bl1",fee:50,mv:40,sal:7,date:"2026-06-30",st:"fix",known:"Tiefe Läufe, Torgefahr, Ballfestmachen",imp:"Bayern holt einen Kane-Backup, der ins Kombinationsspiel passt; für PSV ein Rekordverkauf. Eine WM-Verletzung bremst den Start."},
@@ -5748,7 +5888,7 @@ function weckerSubmit(){
   weckerSave(true); WECKER_DONE=true; renderWecker();
   location.href="mailto:"+WECKER_TO+"?subject="+encodeURIComponent(t.wk_mail_subject)+"&body="+encodeURIComponent(body);
 }
-function renderAll(){ renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderTransfers(); applyNewsMode(); renderProvFilters(); renderProviders(); renderAbo(); renderWecker(); applyLang(); }
+function renderAll(){ renderBlHintTop(); renderLiveFilters(); renderLive(); renderHLFilters(); renderHL(); renderNewsFilters(); renderNews(); renderTransfers(); applyNewsMode(); renderProvFilters(); renderProviders(); renderAbo(); renderWecker(); applyLang(); }
 
 /* ---------- Events ---------- */
 document.addEventListener("keydown", e=>{
@@ -5800,6 +5940,27 @@ document.addEventListener("click", e=>{
     else if(_k==="news"){NEWS_SHOWN+=PAGE_SIZE; renderNews();}
     else if(_k==="tr"){TR_SHOWN+=PAGE_SIZE; renderTransfers();}
     return; }
+  var fov=e.target.closest(".fba-ov");
+  if(fov && e.target===fov){ fbAdminClose(); return; }
+  if(e.target.closest("[data-fb-close]")){ fbAdminClose(); return; }
+  var fst=e.target.closest(".fbk-star");
+  if(fst){ var sb=fst.closest(".fbk-stars"); var sv=+fst.dataset.star; sb.dataset.rating=sv; sb.querySelectorAll(".fbk-star").forEach(function(s){ s.classList.toggle("on",(+s.dataset.star)<=sv); }); return; }
+  var fsend=e.target.closest("[data-fb-send]");
+  if(fsend){ var fw=fsend.closest(".fbk"); var fta=fw.querySelector(".fbk-text"); var fsb=fw.querySelector(".fbk-stars"); var frt=fsb?(+fsb.dataset.rating||0):0; var de=LANG==="de";
+    if(fbSubmit(fta?fta.value:"", frt)){ fw.innerHTML='<div class="fbk-done">'+(de?"Danke f\u00fcr dein Feedback! \ud83d\ude4c":"Thanks for your feedback! \ud83d\ude4c")+'</div>'; }
+    else if(fta){ fta.classList.add("shake"); fta.focus(); setTimeout(function(){fta.classList.remove("shake");},400); }
+    return; }
+  var shb=e.target.closest("[data-share]");
+  if(shb){ var su=location.origin+location.pathname; var sd={title:"TVFUSSBALL.de",text:(LANG==="de"?"Fu\u00dfball-TV-Guide \u2013 wer zeigt was? Schau mal:":"Football TV guide \u2013 who shows what? Take a look:"),url:su};
+    if(navigator.share){ navigator.share(sd).catch(function(){}); }
+    else { try{ navigator.clipboard.writeText(su); var stx=shb.querySelector(".sup-share-tx"); if(stx){ var so=stx.textContent; stx.textContent=(LANG==="de"?"Link kopiert!":"Link copied!"); setTimeout(function(){stx.textContent=so;},1400);} }catch(err){} }
+    return; }
+  var fcpy=e.target.closest("[data-fb-copy]");
+  if(fcpy){ try{ navigator.clipboard.writeText(JSON.stringify(fbLoad(),null,2)); var o=fcpy.textContent; fcpy.textContent=(LANG==="de"?"Kopiert!":"Copied!"); setTimeout(function(){fcpy.textContent=o;},1200);}catch(err){} return; }
+  var fcsv=e.target.closest("[data-fb-csv]");
+  if(fcsv){ try{ var bl=new Blob([fbToCSV(fbLoad())],{type:"text/csv;charset=utf-8"}); var a=document.createElement("a"); a.href=URL.createObjectURL(bl); a.download="tvfussball-feedback.csv"; document.body.appendChild(a); a.click(); a.remove(); }catch(err){} return; }
+  var fclr=e.target.closest("[data-fb-clear]");
+  if(fclr){ if(confirm(LANG==="de"?"Alles lokal gespeicherte Feedback l\u00f6schen?":"Delete all locally stored feedback?")){ lsSet(FEEDBACK_KEY,"[]"); fbAdminOpen(); } return; }
   const tab=e.target.closest(".navitem");
   if(tab){ e.preventDefault();
     const dest=tab.dataset.tab;
@@ -6293,6 +6454,8 @@ geoInit();
 wmInit();
 tippInit();
 openDeepLinkHL(); setTimeout(openDeepLinkHL,800);
+if(location.hash==="#feedback") fbAdminOpen();
+window.addEventListener("hashchange",function(){ if(location.hash==="#feedback") fbAdminOpen(); });
 function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
 if(PAGE==="live"){
   if(LIVE_ENABLED){ try{ liveFetch(); }catch(e){} }
