@@ -183,6 +183,27 @@
   .cgroup .ctitle .ff{font-size:15px}
   .sendlist{margin-top:10px; border-top:1px solid var(--line)}
   .lohntwrap,.analysewrap{margin-top:10px; border-top:1px solid var(--line); padding-top:6px}
+  .lvticker:empty{display:none}
+  .lvticker{margin:0 0 11px; padding:10px 11px; background:var(--bg2); border:1px solid var(--line); border-radius:11px}
+  .lvt-head{display:flex; align-items:center; gap:7px; margin-bottom:8px}
+  .lvt-dot{width:7px; height:7px; border-radius:50%; background:#e11; animation:lvtpulse 1.4s infinite}
+  .lvt-dot.off{background:var(--faint); animation:none}
+  @keyframes lvtpulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .lvt-state{font:800 11px "Inter",sans-serif; letter-spacing:.04em; text-transform:uppercase; color:var(--ink)}
+  .lvt-sc{margin-left:auto; font:800 13px "JetBrains Mono",monospace; color:var(--ink)}
+  .lvt-events{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px}
+  .lvt-ev{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--ink)}
+  .lvt-ev.away{flex-direction:row-reverse; text-align:right}
+  .lvt-min{font:700 10.5px "JetBrains Mono",monospace; color:var(--faint); min-width:32px}
+  .lvt-ev.away .lvt-min{text-align:right}
+  .lvt-ic{width:16px; display:inline-flex; justify-content:center; align-items:center}
+  .lvt-goal{font-size:13px}
+  .lvt-who{font-weight:600}
+  .lvt-card{width:10px; height:13px; border-radius:2px; display:inline-block}
+  .lvt-card.yellow{background:#F5C518}
+  .lvt-card.red{background:#E5342B}
+  .lvt-status{text-align:center; font:700 9.5px "Inter",sans-serif; text-transform:uppercase; letter-spacing:.06em; color:var(--faint); padding:3px 0; border-top:1px dashed var(--line); border-bottom:1px dashed var(--line); margin:3px 0}
+  .lvt-empty{font-size:12px; color:var(--muted)}
   .lh-sec,.an-sec{margin:11px 0}
   .lh-h,.an-h{font:700 10.5px "Inter",sans-serif; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0 0 6px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
   .lh-txt{font-size:13px; color:var(--ink); margin:8px 0; line-height:1.5}
@@ -4647,8 +4668,33 @@ function liveKey(m){ return livePairKey(liveNorm(m.h),liveNorm(m.a))+"@"+dayKey(
 function _liveAnyMatchedIn(){ for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var d=LIVE_CACHE[liveKey(m)]; if(d&&d.state==="in") return true; } return false; }
 function liveSchedule(){ if(!LIVE_ENABLED) return; if(_liveAnyMatchedIn()){ if(!_livePoll) _livePoll=setInterval(liveFetch, LIVE_POLL_MS); } else if(_livePoll){ clearInterval(_livePoll); _livePoll=null; } }
 function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Ende":"FT")+'</span>'; } return ""; }
-function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; var clk=el.parentNode?el.parentNode.querySelector(".time-clock"):null; if(!d||d.state==="pre"){ el.innerHTML=""; if(clk) clk.style.display=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); if(clk) clk.style.display="none"; } }catch(e){} }
-async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var srcs=liveSources(); if(!srcs.length){ if(_livePoll){clearInterval(_livePoll);_livePoll=null;} if(Object.keys(LIVE_CACHE).length){ LIVE_CACHE={}; try{liveApplyDOM();}catch(_e){} } return; } var jsons=await Promise.all(srcs.map(function(src){ return fetch(src,{signal:ac.signal,cache:"no-store"}).then(function(r){ return (r&&r.ok)?r.json():null; }).catch(function(){ return null; }); })); var evs=[]; jsons.forEach(function(j){ if(j&&j.events&&j.events.length) evs=evs.concat(j.events); }); var next={}; for(var i=0;i<evs.length;i++){ try{ var ev=evs[i]; var comp=ev.competitions&&ev.competitions[0]; if(!comp) continue; var cs=comp.competitors||[]; if(cs.length<2) continue; var home=null,away=null; for(var k=0;k<cs.length;k++){ if(cs[k].homeAway==="home") home=cs[k]; else if(cs[k].homeAway==="away") away=cs[k]; } if(!home||!away) continue; var hn=liveNorm(home.team&&home.team.displayName), an=liveNorm(away.team&&away.team.displayName); if(!hn||!an) continue; var st=ev.status&&ev.status.type&&ev.status.type.state; var key=livePairKey(hn,an)+"@"+_berlinKey(Date.parse(ev.date)); next[key]={ state:st, hn:hn, an:an, hs:(home.score!=null?String(home.score):""), as:(away.score!=null?String(away.score):""), clock:(ev.status&&ev.status.displayClock)||"" }; }catch(e){} } LIVE_CACHE=next; liveApplyDOM(); liveSchedule(); }catch(e){ /* graceful: Seite bleibt unveraendert */ } finally{ clearTimeout(to); _liveBusy=false; } }
+function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; var clk=el.parentNode?el.parentNode.querySelector(".time-clock"):null; if(!d||d.state==="pre"){ el.innerHTML=""; if(clk) clk.style.display=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); if(clk) clk.style.display="none"; } try{liveApplyTicker();}catch(_e){} }catch(e){} }
+function _lvMin(mn){ var m=String(mn||"").match(/\d+/); return m?+m[0]:9999; }
+function renderLiveTicker(d,home){
+  var de=(LANG==="de");
+  var head;
+  if(d.state==="in"){ head = d.hyd?(de?"Trinkpause":"Hydration break") : (d.half?(de?"Halbzeit":"Half-time") : ((de?"Live":"Live")+(d.clock?(" "+d.clock):""))); }
+  else if(d.state==="post"){ head=(de?"Spielende":"Full-time"); }
+  else head=(de?"Live":"Live");
+  var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs;
+  var evs=(d.events||[]).slice().sort(function(a,b){ return _lvMin(a.min)-_lvMin(b.min); });
+  var out="", lastHalf=0;
+  evs.forEach(function(e){
+    var mn=_lvMin(e.min), h=(mn>45&&mn<9999)?2:1;
+    if(h===2 && lastHalf===1){ out+='<li class="lvt-status">'+(de?"Halbzeit":"Half-time")+'</li>'; }
+    lastHalf=h;
+    var ic = e.t==="goal" ? '<span class="lvt-goal">\u26bd</span>' : '<span class="lvt-card '+(e.t==="red"?"red":"yellow")+'"></span>';
+    var extra = e.t==="goal" ? ((e.og?(de?" (ET)":" (OG)"):"")+(e.pen?(de?" (FE)":" (P)"):"")) : "";
+    var sideCls = e.side==="a"?"away":"home";
+    out+='<li class="lvt-ev '+sideCls+' '+e.t+'"><span class="lvt-min">'+esc(e.min||"")+'</span><span class="lvt-ic">'+ic+'</span><span class="lvt-who">'+esc(e.who||"")+extra+'</span></li>';
+  });
+  var body = out ? ('<ul class="lvt-events">'+out+'</ul>') : ('<div class="lvt-empty">'+(de?"Noch keine Ereignisse":"No events yet")+'</div>');
+  return '<div class="lvt-head"><span class="lvt-dot'+(d.state==="post"?" off":"")+'"></span><span class="lvt-state">'+esc(head)+'</span><span class="lvt-sc">'+esc(hs)+':'+esc(as)+'</span></div>'+body;
+}
+function liveApplyTicker(){
+  try{ var els=document.querySelectorAll("[data-lvt]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-lvt")]; var home=el.getAttribute("data-lh"); el.innerHTML=(d&&d.state&&d.state!=="pre")?renderLiveTicker(d,home):""; } }catch(e){}
+}
+async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var srcs=liveSources(); if(!srcs.length){ if(_livePoll){clearInterval(_livePoll);_livePoll=null;} if(Object.keys(LIVE_CACHE).length){ LIVE_CACHE={}; try{liveApplyDOM();}catch(_e){} } return; } var jsons=await Promise.all(srcs.map(function(src){ return fetch(src,{signal:ac.signal,cache:"no-store"}).then(function(r){ return (r&&r.ok)?r.json():null; }).catch(function(){ return null; }); })); var evs=[]; jsons.forEach(function(j){ if(j&&j.events&&j.events.length) evs=evs.concat(j.events); }); var next={}; for(var i=0;i<evs.length;i++){ try{ var ev=evs[i]; var comp=ev.competitions&&ev.competitions[0]; if(!comp) continue; var cs=comp.competitors||[]; if(cs.length<2) continue; var home=null,away=null; for(var k=0;k<cs.length;k++){ if(cs[k].homeAway==="home") home=cs[k]; else if(cs[k].homeAway==="away") away=cs[k]; } if(!home||!away) continue; var hn=liveNorm(home.team&&home.team.displayName), an=liveNorm(away.team&&away.team.displayName); if(!hn||!an) continue; var st=ev.status&&ev.status.type&&ev.status.type.state; var _stt=(ev.status&&ev.status.type)||{}; var _stn=String(_stt.name||""); var _std=String(_stt.description||_stt.detail||_stt.shortDetail||""); var _half=/HALFTIME/i.test(_stn)||/halftime|half.?time|halbzeit/i.test(_std); var _hyd=/(cooling|hydration|drinks)\s*break|trinkpause|k\u00fchlungspause/i.test(_std); var _hid=(home.team&&home.team.id), _aid=(away.team&&away.team.id); var _evts=[]; var _det=(comp.details||[]); for(var _di=0;_di<_det.length;_di++){ try{ var _d=_det[_di]; var _min=(_d.clock&&_d.clock.displayValue)||""; var _tid=(_d.team&&_d.team.id)||""; var _side=(_tid&&_hid&&_tid===_hid)?"h":((_tid&&_aid&&_tid===_aid)?"a":""); var _who=(_d.athletesInvolved&&_d.athletesInvolved[0]&&(_d.athletesInvolved[0].displayName||_d.athletesInvolved[0].shortName))||""; if(_d.scoringPlay){ _evts.push({t:"goal",min:_min,who:_who,side:_side,og:!!_d.ownGoal,pen:!!_d.penaltyKick}); } else if(_d.redCard){ _evts.push({t:"red",min:_min,who:_who,side:_side}); } else if(_d.yellowCard){ _evts.push({t:"yellow",min:_min,who:_who,side:_side}); } }catch(_e){} } var key=livePairKey(hn,an)+"@"+_berlinKey(Date.parse(ev.date)); next[key]={ state:st, hn:hn, an:an, hs:(home.score!=null?String(home.score):""), as:(away.score!=null?String(away.score):""), clock:(ev.status&&ev.status.displayClock)||"", half:_half, hyd:_hyd, events:_evts }; }catch(e){} } LIVE_CACHE=next; liveApplyDOM(); liveSchedule(); }catch(e){ /* graceful: Seite bleibt unveraendert */ } finally{ clearTimeout(to); _liveBusy=false; } }
 /* ===== /LIVE-SCORES ===== */
 
 const ABO_PROVIDERS = {
@@ -5198,6 +5244,7 @@ function matchRow(m){
       '<div class="rh-right"><span class="chev">'+CHEV+'</span></div>'+
     '</button>'+
     '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
+      '<div class="lvticker" data-lvt="'+esc(liveKey(m))+'" data-lh="'+esc(liveNorm(m.h))+'"></div>'+
       '<div class="dh"><span class="ff">'+CFLAG[COUNTRY]+'</span>'+t.where+' '+CNAME[LANG][COUNTRY]+'</div>'+
       '<div class="chlist">'+chList(tvOf(m,COUNTRY),m)+auxRows(m)+'</div>'+
       (groups?'<button class="morebtn" data-more aria-expanded="false"><span class="mlbl">'+t.more+'</span><svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="morewrap"><div class="sendlist">'+groups+'</div></div>':"")+
