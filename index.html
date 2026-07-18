@@ -4722,7 +4722,7 @@ function countryDefaultCats(cc){
   const NAT={ DE:["bl","bl2","bl3","dfb"], UK:["pl","facup"], FR:["l1"], IT:["it"], ES:["es"] };
   return base.concat(NAT[cc]||[]);
 }
-function applyCountryDefaultFilter(){ if(FILTER_USERSET) return; LIVE_SEL.clear(); LIVE_SEL.add("wm"); }
+function applyCountryDefaultFilter(){ if(FILTER_USERSET) return; LIVE_SEL.clear(); /* Standard: "Alle" (kein Vorfilter) */ }
 function saveLang(){ lsSet(LS_KEY.lang, JSON.stringify(LANG)); }
 function loadPersisted(){
   try{ const raw=lsGet(LS_KEY.follow); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ FOLLOW.clear(); a.forEach(x=>FOLLOW.add(x)); } } }catch(e){}
