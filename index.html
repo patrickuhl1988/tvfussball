@@ -4910,7 +4910,7 @@ function chList(list,m){
 }
 const RADIO_C={DE:"ARD WM-Radio",AT:"Ö3 (ORF)",CH:"Radio SRF",UK:"BBC Radio 5 Live",ES:"RNE Radio Nacional",IT:"Rai Radio 1",FR:"RMC Sport",NL:"NPO Radio 1",US:"Westwood One",CA:"TSN Radio"};
 const TICKER_C={DE:"kicker Liveticker",AT:"LAOLA1",CH:"blue Sport",UK:"BBC Sport",ES:"Marca",IT:"La Gazzetta",FR:"L'Équipe",NL:"NOS Sport",US:"FOX Sports",CA:"TSN",TH:"beIN Sports"};
-function getRadio(m){ if(m.radio) return m.radio; return RADIO_C[COUNTRY]?[RADIO_C[COUNTRY]]:[]; }
+function getRadio(m){ if(m.radio) return m.radio; return (isWMm(m)&&RADIO_C[COUNTRY])?[RADIO_C[COUNTRY]]:[]; } /* WM-Radio-Fallback nur noch für WM-Spiele */
 function getTicker(m){ if(m.ticker) return m.ticker; return [TICKER_C[COUNTRY]||"FIFA.com"]; }
 const RADIO_URL={"ARD WM-Radio":"https://www.ardaudiothek.de/","Ö3 (ORF)":"https://oe3.orf.at/","Radio SRF":"https://www.srf.ch/radio-srf-3","BBC Radio 5 Live":"https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live","RNE Radio Nacional":"https://www.rtve.es/play/radio/","Rai Radio 1":"https://www.raiplaysound.it/radio1","RMC Sport":"https://rmc.bfmtv.com/","NPO Radio 1":"https://www.nporadio1.nl/","Westwood One":"https://westwoodonesports.com/","TSN Radio":"https://www.tsn.ca/radio","VfB Radio (Senzel/Beisch)":"https://www.vfb.de/de/1893/aktuell/vfb-fanradio/","ARD Audiothek":"https://www.sportschau.de/fussball/bundesliga/alle-audiostreams-der-fussball-bundesliga,audiostreams-bundesliga-uebersicht-100.html"};
 const TICKER_URL={"kicker Liveticker":"https://www.kicker.de/","LAOLA1":"https://www.laola1.at/","blue Sport":"https://www.blue.ch/de/sport","BBC Sport":"https://www.bbc.co.uk/sport/football","Marca":"https://www.marca.com/futbol/mundial.html","La Gazzetta":"https://www.gazzetta.it/","L'Équipe":"https://www.lequipe.fr/Football/","NOS Sport":"https://nos.nl/sport","FIFA.com":"https://www.fifa.com/","FOX Sports":"https://www.foxsports.com/soccer/fifa-world-cup","TSN":"https://www.tsn.ca/fifa-world-cup","beIN Sports":"https://www.beinsports.com/"};
@@ -6251,7 +6251,7 @@ document.addEventListener("click", e=>{
   if(lf){ const k=lf.dataset.livef; FILTER_USERSET=true;
     if(k==="all") LIVE_SEL.clear();
     else if(k==="tonight"){ if(LIVE_SEL.size===1 && LIVE_SEL.has("tonight")) LIVE_SEL.clear(); else { LIVE_SEL.clear(); LIVE_SEL.add("tonight"); } }
-    else { LIVE_SEL.has(k)?LIVE_SEL.delete(k):LIVE_SEL.add(k); }
+    else { /* Single-Select: neuer Filter ersetzt den bisherigen; erneuter Klick = zurück zu "Alle" */ if(LIVE_SEL.size===1 && LIVE_SEL.has(k)){ LIVE_SEL.clear(); } else { LIVE_SEL.clear(); LIVE_SEL.add(k); } }
     saveFilters(); LIVE_SHOWN=20;
     renderLiveFilters(); renderLive(); return;}
   const hlf=e.target.closest("[data-hlf]");
