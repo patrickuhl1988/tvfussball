@@ -664,6 +664,7 @@
   .loader .lscore.bl{bottom:max(16px, env(safe-area-inset-bottom)); left:16px; animation-delay:1.9s}
   .loader .lscore.br{bottom:max(16px, env(safe-area-inset-bottom)); right:16px; align-items:flex-end; animation-delay:2.9s}
   @keyframes lscoreIn{0%{opacity:0; transform:translateY(10px) scale(.94)}70%{opacity:1; transform:translateY(-2px) scale(1.03)}100%{opacity:1; transform:none}}
+  .loader .lscore .ltag{font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#fff; background:#2653D9; padding:4px 10px; border-radius:8px; box-shadow:0 2px 6px rgba(38,83,217,.35)}
   .loader .lgoals{display:flex; flex-direction:column; gap:3px; margin-top:7px}
   .loader .lgoals.lg-top{margin-top:0; margin-bottom:7px}
   .loader .lgoals i{font-style:normal; font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.02em; color:var(--ink); font-weight:600; opacity:0; animation:lscoreIn .35s ease-out forwards}
@@ -695,7 +696,7 @@
   .shadow{position:absolute; bottom:2px; left:50%; width:36px; height:9px; margin-left:-18px; background:radial-gradient(ellipse at center, rgba(0,0,0,.5), transparent 72%); border-radius:50%; animation:shadow .6s cubic-bezier(.32,0,.68,1) infinite alternate}
   @keyframes bounce{0%{transform:translateY(0) scale(1,1)}88%{transform:translateY(42px) scale(1,1)}100%{transform:translateY(42px) scale(1.12,.86)}}
   @keyframes shadow{0%{transform:scaleX(.5) scaleY(.7); opacity:.22}100%{transform:scaleX(1.15) scaleY(1.1); opacity:.55}}
-  .loader .ltxt{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--green); letter-spacing:.14em; margin-top:18px}
+  .loader .ltxt{font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:600; color:var(--green); letter-spacing:.13em; margin-top:20px; text-align:center; max-width:320px; line-height:1.5}
 
   .tabpane{display:none}
   .tabpane.active{display:block}
@@ -1304,10 +1305,10 @@
 
 <div class="loader" id="loader" aria-hidden="true">
   <!-- TEMP WM-Finale-Ladescreen: Spielverlauf Frankreich–England (später entfernen) -->
-  <div class="lscore tl"><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln">0</span>:<span class="ln">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
-  <div class="lscore tr" data-h="0" data-a="4" data-delay="1000"><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="lgoals"><i style="animation-delay:1.3s">3′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Rice</i><i style="animation-delay:1.45s">18′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Konsa</i><i style="animation-delay:1.6s">37′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i><i style="animation-delay:1.75s">45′+1 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i></span></div>
-  <div class="lscore bl" data-h="3" data-a="4" data-delay="1900"><span class="lgoals lg-top"><i style="animation-delay:2.2s">48′ 🇫🇷 Mbappé</i><i style="animation-delay:2.35s">54′ 🇫🇷 Barcola</i><i style="animation-delay:2.5s">66′ 🇫🇷 Mbappé</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
-  <div class="lscore br" data-h="4" data-a="6" data-delay="2900"><span class="lgoals lg-top"><i style="animation-delay:3.2s">87′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka (Elfm.)</i><i style="animation-delay:3.35s">90′+6 🇫🇷 Dembélé</i><i style="animation-delay:3.5s">90′+8 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Bellingham</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">3</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
+  <div class="lscore tl"><span class="ltag">Vor dem Spiel</span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln">0</span>:<span class="ln">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
+  <div class="lscore tr" data-h="0" data-a="4" data-delay="1000"><span class="ltag">45′ · Halbzeit</span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="lgoals"><i style="animation-delay:1.3s">3′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Rice</i><i style="animation-delay:1.45s">18′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Konsa</i><i style="animation-delay:1.6s">37′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i><i style="animation-delay:1.75s">45′+1 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i></span></div>
+  <div class="lscore bl" data-h="3" data-a="4" data-delay="1900"><span class="lgoals lg-top"><i style="animation-delay:2.2s">48′ 🇫🇷 Mbappé</i><i style="animation-delay:2.35s">54′ 🇫🇷 Barcola</i><i style="animation-delay:2.5s">66′ 🇫🇷 Mbappé</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="ltag">2nd Hydration Break</span></div>
+  <div class="lscore br" data-h="4" data-a="6" data-delay="2900"><span class="lgoals lg-top"><i style="animation-delay:3.2s">87′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka (Elfm.)</i><i style="animation-delay:3.35s">90′+6 🇫🇷 Dembélé</i><i style="animation-delay:3.5s">90′+8 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Bellingham</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">3</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="ltag">90′+8 · Schlusspfiff</span></div>
   <div class="lconf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <!-- /TEMP -->
   <div class="court">
