@@ -655,38 +655,6 @@
 
   /* Ball loader */
   .loader{position:fixed; inset:0; z-index:60; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center}
-  /* ==== TEMP WM-Finale-Ladescreen (Spielverlauf FR–EN) – später komplett entfernen ==== */
-  .loader .lscore{position:absolute; display:flex; flex-direction:column; align-items:flex-start; gap:5px; opacity:0; animation:lscoreIn .45s ease-out forwards}
-  .loader .lscore .lsc{display:flex; align-items:center; gap:11px; font-weight:800; font-size:36px; color:var(--ink); background:rgba(125,125,125,.10); border:1px solid var(--line); border-radius:16px; padding:9px 18px}
-  .loader .lscore .lfl{font-size:26px; line-height:1}
-  .loader .lscore.tl{top:max(16px, env(safe-area-inset-top)); left:16px; animation:none; opacity:1}
-  .loader .lscore.tr{top:max(16px, env(safe-area-inset-top)); right:16px; align-items:flex-end; animation-delay:1s}
-  .loader .lscore.bl{bottom:max(16px, env(safe-area-inset-bottom)); left:16px; animation-delay:1.9s}
-  .loader .lscore.br{bottom:max(16px, env(safe-area-inset-bottom)); right:16px; align-items:flex-end; animation-delay:2.9s}
-  @keyframes lscoreIn{0%{opacity:0; transform:translateY(10px) scale(.94)}70%{opacity:1; transform:translateY(-2px) scale(1.03)}100%{opacity:1; transform:none}}
-  .loader .lscore .ltag{font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#fff; background:#2653D9; padding:4px 10px; border-radius:8px; box-shadow:0 2px 6px rgba(38,83,217,.35)}
-  .loader .lgoals{display:flex; flex-direction:column; gap:3px; margin-top:7px}
-  .loader .lgoals.lg-top{margin-top:0; margin-bottom:7px}
-  .loader .lgoals i{font-style:normal; font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.02em; color:var(--ink); font-weight:600; opacity:0; animation:lscoreIn .35s ease-out forwards}
-  .loader .lscore.tr .lgoals, .loader .lscore.br .lgoals{align-items:flex-end}
-  .loader .lscore.tl .lgoals, .loader .lscore.bl .lgoals{align-items:flex-start}
-  @media (max-width:420px){ .loader .lgoals i{font-size:10px} }
-  .loader .lscore .ln.tick{animation:lnPop .22s ease-out}
-  @keyframes lnPop{0%{transform:scale(1.45); color:var(--green)}100%{transform:scale(1); color:var(--ink)}}
-  /* Mini-Konfetti zum Schlusspfiff (2,4s) */
-  .loader .lconf{position:absolute; left:50%; top:46%; width:0; height:0; pointer-events:none}
-  .loader .lconf i{position:absolute; width:7px; height:11px; border-radius:2px; opacity:0; animation:lconfFall 1.15s ease-in 3.6s forwards}
-  .loader .lconf i:nth-child(3n){background:#2653D9} .loader .lconf i:nth-child(3n+1){background:#7CF29C} .loader .lconf i:nth-child(3n+2){background:#F4F2EA}
-  .loader .lconf i:nth-child(1){--dx:-92px; animation-delay:3.60s} .loader .lconf i:nth-child(2){--dx:-64px; animation-delay:3.66s}
-  .loader .lconf i:nth-child(3){--dx:-38px; animation-delay:3.62s} .loader .lconf i:nth-child(4){--dx:-16px; animation-delay:3.70s}
-  .loader .lconf i:nth-child(5){--dx:8px; animation-delay:3.64s}  .loader .lconf i:nth-child(6){--dx:30px; animation-delay:3.72s}
-  .loader .lconf i:nth-child(7){--dx:56px; animation-delay:3.61s} .loader .lconf i:nth-child(8){--dx:84px; animation-delay:3.68s}
-  .loader .lconf i:nth-child(9){--dx:-110px; animation-delay:3.75s} .loader .lconf i:nth-child(10){--dx:108px; animation-delay:3.63s}
-  .loader .lconf i:nth-child(11){--dx:-8px; animation-delay:3.78s} .loader .lconf i:nth-child(12){--dx:44px; animation-delay:3.80s}
-  @keyframes lconfFall{0%{opacity:0; transform:translate(var(--dx),-8px) rotate(0)}12%{opacity:1}100%{opacity:0; transform:translate(calc(var(--dx)*1.5),120px) rotate(260deg)}}
-  @media (max-width:420px){ .loader .lscore .lsc{font-size:28px; gap:9px; padding:7px 14px} .loader .lscore .lfl{font-size:21px} }
-  @media (prefers-reduced-motion:reduce){ .loader .lconf i{animation:none; display:none} .loader .lscore{animation-duration:.01s} }
-  /* ==== /TEMP ==== */
   .loader.hide{opacity:0; pointer-events:none; transition:opacity .4s}
   .court{width:54px; height:78px; position:relative}
   .ball{position:absolute; top:0; left:50%; width:36px; height:36px; margin-left:-18px; animation:bounce .6s cubic-bezier(.32,0,.68,1) infinite alternate}
@@ -694,9 +662,9 @@
   .ball svg circle{fill:var(--ball-circle)}
   .ball svg path{fill:var(--ball-panel)}
   .shadow{position:absolute; bottom:2px; left:50%; width:36px; height:9px; margin-left:-18px; background:radial-gradient(ellipse at center, rgba(0,0,0,.5), transparent 72%); border-radius:50%; animation:shadow .6s cubic-bezier(.32,0,.68,1) infinite alternate}
-  @keyframes bounce{0%{transform:translateY(0) scale(1,1)}88%{transform:translateY(42px) scale(1,1)}100%{transform:translateY(42px) scale(1.12,.86)}}
+  @keyframes bounce{0%{transform:translateY(0)}100%{transform:translateY(42px)}}
   @keyframes shadow{0%{transform:scaleX(.5) scaleY(.7); opacity:.22}100%{transform:scaleX(1.15) scaleY(1.1); opacity:.55}}
-  .loader .ltxt{font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:600; color:var(--green); letter-spacing:.13em; margin-top:20px; text-align:center; max-width:320px; line-height:1.5}
+  .loader .ltxt{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--green); letter-spacing:.14em; margin-top:18px}
 
   .tabpane{display:none}
   .tabpane.active{display:block}
@@ -1304,13 +1272,6 @@
 <body data-page="live">
 
 <div class="loader" id="loader" aria-hidden="true">
-  <!-- TEMP WM-Finale-Ladescreen: Spielverlauf Frankreich–England (später entfernen) -->
-  <div class="lscore tl"><span class="ltag">Vor dem Spiel</span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln">0</span>:<span class="ln">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
-  <div class="lscore tr" data-h="0" data-a="4" data-delay="1000"><span class="ltag">45′ · Halbzeit</span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="lgoals"><i style="animation-delay:1.3s">3′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Rice</i><i style="animation-delay:1.45s">18′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Konsa</i><i style="animation-delay:1.6s">37′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i><i style="animation-delay:1.75s">45′+1 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i></span></div>
-  <div class="lscore bl" data-h="3" data-a="4" data-delay="1900"><span class="lgoals lg-top"><i style="animation-delay:2.2s">48′ 🇫🇷 Mbappé</i><i style="animation-delay:2.35s">54′ 🇫🇷 Barcola</i><i style="animation-delay:2.5s">66′ 🇫🇷 Mbappé</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="ltag">2nd Hydration Break</span></div>
-  <div class="lscore br" data-h="4" data-a="6" data-delay="2900"><span class="lgoals lg-top"><i style="animation-delay:3.2s">87′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka (Elfm.)</i><i style="animation-delay:3.35s">90′+6 🇫🇷 Dembélé</i><i style="animation-delay:3.5s">90′+8 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Bellingham</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">3</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="ltag">90′+8 · Schlusspfiff</span></div>
-  <div class="lconf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <!-- /TEMP -->
   <div class="court">
     <div class="ball"><svg width="36" height="36" viewBox="0 0 36 36" fill="none">
       <circle cx="18" cy="18" r="17" fill="#F4F2EA"/>
@@ -1319,43 +1280,8 @@
     </svg></div>
     <div class="shadow"></div>
   </div>
-  <div class="ltxt">ZÄHLE TORE … KANN DAUERN 😅</div>
+  <div class="ltxt">LADE SPIELTAG</div>
 </div>
-<script>
-/* ==== TEMP WM-Finale-Ladescreen-Steuerung – startet mit Sichtbarkeit des Loaders (später entfernen) ==== */
-(function(){
-  window.__ldrT0=performance.now();
-  var red=window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  try{
-    document.querySelectorAll(".loader .lscore[data-h]").forEach(function(card){
-      var h=+card.dataset.h, a=+card.dataset.a, d=+card.dataset.delay;
-      var eh=card.querySelector(".lnh"), ea=card.querySelector(".lna");
-      if(red){ eh.textContent=h; ea.textContent=a; return; }
-      setTimeout(function(){
-        var ch=+eh.textContent, ca=+ea.textContent;
-        var iv=setInterval(function(){
-          var done=true;
-          if(ca<a){ ea.textContent=++ca; ea.classList.remove("tick"); void ea.offsetWidth; ea.classList.add("tick"); done=false; }
-          else if(ch<h){ eh.textContent=++ch; eh.classList.remove("tick"); void eh.offsetWidth; eh.classList.add("tick"); done=false; }
-          if(done) clearInterval(iv);
-        }, 110);
-      }, d+150);
-    });
-  }catch(e){}
-  /* Ausblenden: 3s ab Sichtbarkeit – oder später, falls die Seite dann noch lädt */
-  function doHide(){
-    var l=document.getElementById("loader"); if(l) l.classList.add("hide");
-    try{ if(typeof consentGet==="function" && !consentGet()){ setTimeout(function(){ var c=document.getElementById("consent"); if(c) c.classList.remove("hide"); }, 600); } }catch(e){}
-  }
-  window.addEventListener("load",function(){
-    var wait=Math.max(0, 5000-(performance.now()-window.__ldrT0));
-    setTimeout(doHide, wait);
-  });
-  /* Fallback, falls das load-Event ausbleibt */
-  setTimeout(function(){ var l=document.getElementById("loader"); if(l && !l.classList.contains("hide")) doHide(); }, 12000);
-})();
-/* ==== /TEMP ==== */
-</script>
 
 <header>
   <div class="hbar">
@@ -6912,7 +6838,11 @@ function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classLis
 if(PAGE==="live"){
   if(LIVE_ENABLED){ try{ liveFetch(); }catch(e){} }
   /* Startseite: bewusste, kurze Marken-Intro */
-  /* TEMP: Loader-Steuerung läuft im Früh-Skript direkt nach dem Loader-Markup (3s ab Sichtbarkeit) */
+  window.addEventListener("load",()=>{
+    setTimeout(()=>{ hideLoader();
+      if(!consentGet()){ setTimeout(()=>document.getElementById("consent").classList.remove("hide"), 600); }
+    }, 1100);
+  });
 } else {
   /* Übrige Seiten: kein künstliches Warten – Loader sofort weg, sobald der Inhalt steht.
      Nur bei wirklich langsamem Laden bleibt er bis hierhin sichtbar. */
