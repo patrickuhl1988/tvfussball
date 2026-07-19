@@ -657,15 +657,21 @@
   .loader{position:fixed; inset:0; z-index:60; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center}
   /* ==== TEMP WM-Finale-Ladescreen (Spielverlauf FR–EN) – später komplett entfernen ==== */
   .loader .lscore{position:absolute; display:flex; flex-direction:column; align-items:flex-start; gap:5px; opacity:0; animation:lscoreIn .45s ease-out forwards}
-  .loader .lscore .lsc{display:flex; align-items:center; gap:11px; font-weight:800; font-size:36px; color:#fff; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:9px 18px; text-shadow:0 1px 4px rgba(0,0,0,.6)}
+  .loader .lscore .lsc{display:flex; align-items:center; gap:11px; font-weight:800; font-size:36px; color:var(--ink); background:rgba(125,125,125,.10); border:1px solid var(--line); border-radius:16px; padding:9px 18px}
   .loader .lscore .lfl{font-size:26px; line-height:1}
   .loader .lscore.tl{top:max(16px, env(safe-area-inset-top)); left:16px; animation:none; opacity:1}
   .loader .lscore.tr{top:max(16px, env(safe-area-inset-top)); right:16px; align-items:flex-end; animation-delay:1s}
   .loader .lscore.bl{bottom:max(16px, env(safe-area-inset-bottom)); left:16px; animation-delay:1.9s}
   .loader .lscore.br{bottom:max(16px, env(safe-area-inset-bottom)); right:16px; align-items:flex-end; animation-delay:2.9s}
   @keyframes lscoreIn{0%{opacity:0; transform:translateY(10px) scale(.94)}70%{opacity:1; transform:translateY(-2px) scale(1.03)}100%{opacity:1; transform:none}}
+  .loader .lgoals{display:flex; flex-direction:column; gap:3px; margin-top:7px}
+  .loader .lgoals.lg-top{margin-top:0; margin-bottom:7px}
+  .loader .lgoals i{font-style:normal; font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.02em; color:var(--ink); font-weight:600; opacity:0; animation:lscoreIn .35s ease-out forwards}
+  .loader .lscore.tr .lgoals, .loader .lscore.br .lgoals{align-items:flex-end}
+  .loader .lscore.tl .lgoals, .loader .lscore.bl .lgoals{align-items:flex-start}
+  @media (max-width:420px){ .loader .lgoals i{font-size:10px} }
   .loader .lscore .ln.tick{animation:lnPop .22s ease-out}
-  @keyframes lnPop{0%{transform:scale(1.45); color:#7CF29C}100%{transform:scale(1); color:#fff}}
+  @keyframes lnPop{0%{transform:scale(1.45); color:var(--green)}100%{transform:scale(1); color:var(--ink)}}
   /* Mini-Konfetti zum Schlusspfiff (2,4s) */
   .loader .lconf{position:absolute; left:50%; top:46%; width:0; height:0; pointer-events:none}
   .loader .lconf i{position:absolute; width:7px; height:11px; border-radius:2px; opacity:0; animation:lconfFall 1.15s ease-in 3.6s forwards}
@@ -1299,9 +1305,9 @@
 <div class="loader" id="loader" aria-hidden="true">
   <!-- TEMP WM-Finale-Ladescreen: Spielverlauf Frankreich–England (später entfernen) -->
   <div class="lscore tl"><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln">0</span>:<span class="ln">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
-  <div class="lscore tr" data-h="0" data-a="4" data-delay="1000"><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
-  <div class="lscore bl" data-h="3" data-a="4" data-delay="1900"><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
-  <div class="lscore br" data-h="4" data-a="6" data-delay="2900"><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">3</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
+  <div class="lscore tr" data-h="0" data-a="4" data-delay="1000"><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">0</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span><span class="lgoals"><i style="animation-delay:1.3s">3′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Rice</i><i style="animation-delay:1.45s">18′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Konsa</i><i style="animation-delay:1.6s">37′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i><i style="animation-delay:1.75s">45′+1 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka</i></span></div>
+  <div class="lscore bl" data-h="3" data-a="4" data-delay="1900"><span class="lgoals lg-top"><i style="animation-delay:2.2s">48′ 🇫🇷 Mbappé</i><i style="animation-delay:2.35s">54′ 🇫🇷 Barcola</i><i style="animation-delay:2.5s">66′ 🇫🇷 Mbappé</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">0</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
+  <div class="lscore br" data-h="4" data-a="6" data-delay="2900"><span class="lgoals lg-top"><i style="animation-delay:3.2s">87′ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Saka (Elfm.)</i><i style="animation-delay:3.35s">90′+6 🇫🇷 Dembélé</i><i style="animation-delay:3.5s">90′+8 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Bellingham</i></span><span class="lsc"><span class="lfl">🇫🇷</span><span class="ln lnh">3</span>:<span class="ln lna">4</span><span class="lfl">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></span></div>
   <div class="lconf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <!-- /TEMP -->
   <div class="court">
