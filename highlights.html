@@ -5618,7 +5618,7 @@ function hlComps(){ var seen={},out=[]; HL.forEach(function(m){ var c=hlCompOf(m
 function renderHLFilters(){ const t=I18N[LANG];
   const defs=[["c:*",t.f_all],["top80",t.f_hltop||"\u2605 8,0+"]].concat(hlComps().map(function(c){ return ["c:"+c,c]; })).concat([["relive",t.f_relive]]);
   document.getElementById("hlFilters").innerHTML = defs.map(d=>{
-    const on = d[0].indexOf("c:")===0 ? (HL_COMP===d[0].slice(2)) : (HL_FILTER===d[0]);
+    const on = d[0].indexOf("c:")===0 ? (HL_COMP===d[0].slice(2) && HL_FILTER==="all") : (HL_FILTER===d[0]);
     return '<button class="fchip" data-hlf="'+d[0]+'" aria-pressed="'+on+'">'+d[1]+'</button>';
   }).join("");
 }
@@ -6463,7 +6463,10 @@ document.addEventListener("click", e=>{
     renderLiveFilters(); renderLive(); return;}
   const hlf=e.target.closest("[data-hlf]");
   if(hlf){const v=hlf.dataset.hlf;
-    if(v.indexOf("c:")===0){ HL_COMP=v.slice(2); } else { HL_FILTER=(HL_FILTER===v?"all":v); }
+    /* Single-Select: es ist immer genau ein Filter aktiv */
+    if(v.indexOf("c:")===0){ HL_COMP=v.slice(2); HL_FILTER="all"; }
+    else if(HL_FILTER===v){ HL_FILTER="all"; HL_COMP="*"; }
+    else { HL_FILTER=v; HL_COMP="*"; }
     HL_SHOWN=20; renderHLFilters(); renderHL(); return;}
   const nmo=e.target.closest("[data-newsmode]");
   if(nmo){NEWS_MODE=nmo.dataset.newsmode; NEWS_SHOWN=20; TR_SHOWN=20; renderNewsFilters(); applyNewsMode(); if(NEWS_MODE==="transfers") renderTransfers(); return;}
@@ -6486,7 +6489,10 @@ document.addEventListener("click", e=>{
 });
 document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ document.querySelectorAll(".tstrength.open").forEach(function(o){ o.classList.remove("open"); o.setAttribute("aria-expanded","false"); }); } });
 document.getElementById("liveSearch").addEventListener("input",e=>{LIVE_Q=e.target.value; LIVE_SHOWN=20; renderLive();});
-document.getElementById("hlSearch").addEventListener("input",e=>{HL_Q=e.target.value; HL_SHOWN=20; renderHL();});
+document.getElementById("hlSearch").addEventListener("input",e=>{ HL_Q=e.target.value;
+  /* Tippen ersetzt den aktiven Filter */
+  if(HL_Q){ HL_COMP="*"; HL_FILTER="all"; }
+  HL_SHOWN=20; renderHLFilters(); renderHL();});
 document.getElementById("newsSearch").addEventListener("input",e=>{ if(NEWS_MODE==="transfers"){TR_Q=e.target.value; TR_SHOWN=20; renderTransfers();} else {NEWS_Q=e.target.value; NEWS_SHOWN=20; renderNews();} });
 document.getElementById("provSearch").addEventListener("input",e=>{PROV_Q=e.target.value; renderProviders();});
 document.getElementById("wm-anthemSearch").addEventListener("input",e=>wmRenderAnthems(e.target.value));
