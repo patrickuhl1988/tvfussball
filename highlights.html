@@ -5616,7 +5616,7 @@ let HL_COMP = "*"; // Wettbewerbsfilter der Highlights (voller Wettbewerbsname, 
 function hlCompOf(m){ return String(m.g||"").split(" \u00b7 ")[0]||""; }
 function hlComps(){ var seen={},out=[]; HL.forEach(function(m){ var c=hlCompOf(m); if(c&&!seen[c]){ seen[c]=1; out.push(c); } }); return out; }
 function renderHLFilters(){ const t=I18N[LANG];
-  const defs=[["c:*",t.f_all]].concat(hlComps().map(function(c){ return ["c:"+c,c]; })).concat([["relive",t.f_relive],["top80",t.f_hltop||"\u2605 8,0+"]]);
+  const defs=[["c:*",t.f_all],["top80",t.f_hltop||"\u2605 8,0+"]].concat(hlComps().map(function(c){ return ["c:"+c,c]; })).concat([["relive",t.f_relive]]);
   document.getElementById("hlFilters").innerHTML = defs.map(d=>{
     const on = d[0].indexOf("c:")===0 ? (HL_COMP===d[0].slice(2)) : (HL_FILTER===d[0]);
     return '<button class="fchip" data-hlf="'+d[0]+'" aria-pressed="'+on+'">'+d[1]+'</button>';
