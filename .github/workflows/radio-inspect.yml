@@ -15,35 +15,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract populated radio and score samples
+      - name: Extract radio link mappings
         shell: python
         run: |
           from pathlib import Path
           import re
           text=Path('index.html').read_text(encoding='utf-8',errors='replace')
-          out=['### NONEMPTY RADIOS']
-          seen=[]
-          for m in re.finditer(r'radio\s*:\s*\[([^\]]+)\]',text,re.S):
-              val=m.group(1).strip()
-              if val and val not in seen:
-                  seen.append(val)
-                  out.append(text[max(0,m.start()-350):m.end()+700])
-              if len(seen)>=30: break
-          out.append('\n### RADIO FUNCTIONS')
-          for m in re.finditer(r'function\s+[A-Za-z_$][\w$]*radio[A-Za-z_$\w]*\s*\(|\bradio\b',text,re.I):
-              out.append(text[max(0,m.start()-500):m.start()+2200])
-              if len(out)>55: break
-          out.append('\n### LOHNT SAMPLES')
-          n=0
-          for m in re.finditer(r'lohnt\s*:\s*\{',text):
-              out.append(text[max(0,m.start()-240):m.start()+1600]); n+=1
-              if n>=8: break
+          names=['ARD Audiothek','BVB Netradio','VfB Radio','HSVnetradio','Bullenfunk','FohlenRadio','Werder Live Radio','05er.fm','Werkself Radio','FC Radio']
+          out=['### RADIO LINK CONTEXTS']
+          for name in names:
+              out.append('\n## '+name)
+              pos=0; n=0
+              while n<8:
+                  p=text.find(name,pos)
+                  if p<0: break
+                  chunk=text[max(0,p-1200):p+1800]
+                  if 'http' in chunk or 'href' in chunk or 'radio' in chunk.lower(): out.append(chunk)
+                  pos=p+len(name); n+=1
+          out.append('\n### URL-ish constants/functions around radio')
+          for m in re.finditer(r'(radio|audiothek|netradio|bullenfunk|fohlenradio|05er\.fm|werkself)',text,re.I):
+              chunk=text[max(0,m.start()-1000):m.start()+2500]
+              if 'http' in chunk: out.append(chunk)
+              if len(out)>90: break
           Path('.radio-inspect.txt').write_text('\n\n'.join(out),encoding='utf-8')
       - name: Commit report
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.email '4189828+github-actions[bot]@users.noreply.github.com'
           git add .radio-inspect.txt
           git diff --cached --quiet && exit 0
-          git commit -m 'chore: refresh radio inspection report'
+          git commit -m 'chore: refresh radio link inspection'
           git push
