@@ -1,0 +1,31 @@
+.tvf-card{position:relative!important;isolation:isolate!important}
+.tvf-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(103,168,255,.035),transparent 42%);z-index:-1}
+.tvf-card.tvf-is-live{border-color:#2b684f!important;box-shadow:inset 3px 0 0 var(--tvf-green),0 14px 38px rgba(0,0,0,.16)!important}
+.tvf-card-head{display:flex!important;align-items:center!important;gap:8px!important;min-height:34px!important;padding-top:8px!important;padding-bottom:8px!important;color:#9fb0c8!important;font-size:11px!important;font-weight:850!important;letter-spacing:.025em!important;text-transform:none!important}
+.tvf-card-teams{padding-top:13px!important;padding-bottom:13px!important}
+.tvf-card-teams .club,.tvf-card-teams .team,.tvf-card-teams .team-name{font-size:15px!important;line-height:1.25!important}
+.tvf-card-score{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:58px!important;min-height:36px!important;padding:6px 10px!important;border:1px solid rgba(103,168,255,.20)!important;border-radius:11px!important;background:#071426!important;color:#fff!important;font-size:18px!important;font-weight:950!important;font-variant-numeric:tabular-nums!important;letter-spacing:-.035em!important}
+.tvf-card-broadcast{display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:wrap!important;padding-top:9px!important;padding-bottom:9px!important;background:rgba(0,0,0,.14)!important;border-top:1px solid rgba(255,255,255,.06)!important}
+.tvf-card-broadcast .ch,.tvf-card-broadcast .channel,.tvf-card-broadcast .provider,.tvf-card-broadcast .station,.tvf-card-broadcast a{min-height:30px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}
+.tvf-card-fav{display:inline-grid!important;place-items:center!important;width:34px!important;height:34px!important;border-radius:10px!important;background:#0a1b31!important;border:1px solid #26476f!important;color:#7188a7!important;cursor:pointer!important}
+.tvf-card-fav:hover{border-color:#4778b5!important;color:#fff!important}
+.tvf-card-fav.active,.tvf-card-fav.on{color:var(--tvf-amber)!important;border-color:rgba(255,200,87,.35)!important;background:rgba(255,200,87,.08)!important}
+.tvf-card-ticker{margin:10px 12px 12px!important}
+.tvf-ticker{position:relative!important}
+.tvf-ticker::before{content:"Live-Ticker";display:block;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.07);background:linear-gradient(90deg,rgba(52,209,123,.10),rgba(52,209,123,0));color:#f4fff8;font-size:11px;font-weight:900;letter-spacing:.035em}
+.tvf-ticker-row{position:relative!important;padding-left:58px!important;min-height:42px!important}
+.tvf-ticker-row .time,.tvf-ticker-row .minute{position:absolute!important;left:10px!important;top:10px!important;min-width:36px!important;color:var(--tvf-green)!important;font-weight:950!important}
+.tvf-ticker-goal{background:linear-gradient(90deg,rgba(52,209,123,.075),transparent 65%)!important;color:#fff!important;font-weight:800!important}
+.tvf-ticker-goal::after{content:"⚽";position:absolute;right:11px;top:9px;font-size:13px}
+.tvf-ticker-card{box-shadow:inset 2px 0 0 #f3c84b!important}
+.tvf-ticker-red{box-shadow:inset 2px 0 0 #ef5b64!important}
+@media(max-width:700px){
+ .tvf-card-head{padding-left:11px!important;padding-right:11px!important}
+ .tvf-card-teams{padding-top:11px!important;padding-bottom:11px!important}
+ .tvf-card-teams .club,.tvf-card-teams .team,.tvf-card-teams .team-name{font-size:14px!important}
+ .tvf-card-score{min-width:52px!important;min-height:34px!important;font-size:17px!important;padding:5px 8px!important}
+ .tvf-card-broadcast{gap:6px!important;padding-left:11px!important;padding-right:11px!important}
+ .tvf-card-fav{width:32px!important;height:32px!important}
+ .tvf-card-ticker{margin:8px!important}
+ .tvf-ticker-row{padding-left:53px!important;padding-right:34px!important}
+}
