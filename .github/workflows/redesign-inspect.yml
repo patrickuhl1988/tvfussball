@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract compact redesign report
+      - name: Extract focused redesign reports
         shell: python
         run: |
           from pathlib import Path
@@ -24,55 +24,44 @@ jobs:
           idx = Path('index.html').read_text(encoding='utf-8', errors='replace')
           hl = Path('highlights.html').read_text(encoding='utf-8', errors='replace') if Path('highlights.html').exists() else idx
           anb = Path('anbieter.html').read_text(encoding='utf-8', errors='replace') if Path('anbieter.html').exists() else ''
-          out=[]
-          def section(title):
-              out.append('\n### '+title+'\n')
-          def snippet(text, needle, before=900, after=5000):
-              p=text.lower().find(needle.lower())
-              if p<0: return 'NOT FOUND'
-              return text[max(0,p-before):p+after]
+          p=Path('.redesign-inspect'); p.mkdir(exist_ok=True)
 
-          section('COMPETITIONS')
-          start=idx.find('const MATCHES')
-          end=idx.find('const ZDFV',start)
+          def snippet(text, needle, before=1000, after=10000):
+              pos=text.lower().find(needle.lower())
+              if pos<0: return 'NOT FOUND: '+needle
+              return text[max(0,pos-before):pos+after]
+
+          # Competition values
+          start=idx.find('const MATCHES'); end=idx.find('const ZDFV',start)
           area=idx[start:end if end>start else start+700000]
           comps=[]
           for m in re.finditer(r'\bcomp\s*:\s*["\']([^"\']+)["\']', area):
               v=m.group(1)
               if v not in comps: comps.append(v)
-          out.extend(comps[:300])
+          (p/'competitions.txt').write_text('\n'.join(comps),encoding='utf-8')
 
-          section('CLUB BALL')
-          out.append(snippet(idx,'function clubBall',700,3500))
+          (p/'clubball.txt').write_text(snippet(idx,'function clubBall',900,4500),encoding='utf-8')
+          live='\n\n'.join(snippet(idx,n,1300,12000) for n in ['LIVE_POLL_MS','function renderLiveTicker','function liveApplyTicker','async function liveFetch','liveOldbSources'])
+          (p/'live.txt').write_text(live,encoding='utf-8')
+          (p/'highlights.txt').write_text(snippet(hl,'const HL_SRC',700,18000)+'\n\n'+snippet(hl,'const HL =',500,22000),encoding='utf-8')
+          (p/'providers.txt').write_text(snippet(idx,'const PROVIDERS',700,18000),encoding='utf-8')
+          (p/'anbieter-provider-data.txt').write_text(snippet(anb,'const PROVIDERS',700,18000),encoding='utf-8')
 
-          section('LIVE CORE')
-          for n in ['LIVE_POLL_MS','LIVE_CACHE','OpenLigaDB','renderLive','pollLive','live ticker','liveticker']:
-              out.append('\n--- '+n+' ---\n'+snippet(idx,n,1000,7000))
-
-          section('HIGHLIGHT SOURCE MAP')
-          out.append(snippet(hl,'const HL_SRC',300,10000))
-          section('HIGHLIGHT SAMPLE')
-          out.append(snippet(hl,'const HL =',300,18000))
-
-          section('ANBIETER HEADINGS LINKS')
-          headings=re.findall(r'<h[1-4][^>]*>(.*?)</h[1-4]>',anb,re.I|re.S)
-          for h in headings[:80]:
-              clean=re.sub('<[^>]+>',' ',h); clean=html.unescape(re.sub(r'\s+',' ',clean)).strip()
-              if clean: out.append('H: '+clean)
+          headings=[]
+          for h in re.findall(r'<h[1-4][^>]*>(.*?)</h[1-4]>',anb,re.I|re.S):
+              clean=html.unescape(re.sub(r'\s+',' ',re.sub('<[^>]+>',' ',h))).strip()
+              if clean and clean not in headings: headings.append(clean)
           links=[]
           for href,label in re.findall(r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',anb,re.I|re.S):
-              clean=re.sub('<[^>]+>',' ',label); clean=html.unescape(re.sub(r'\s+',' ',clean)).strip()
-              pair=(clean,href)
-              if pair not in links: links.append(pair)
-          for label,href in links[:180]: out.append('A: '+label+' | '+href)
-
-          p=Path('.redesign-inspect'); p.mkdir(exist_ok=True)
-          (p/'report.txt').write_text('\n'.join(out),encoding='utf-8')
-      - name: Commit report
+              clean=html.unescape(re.sub(r'\s+',' ',re.sub('<[^>]+>',' ',label))).strip()
+              if (clean,href) not in links: links.append((clean,href))
+          text='\n'.join(['H: '+x for x in headings[:120]]+['A: '+a+' | '+b for a,b in links[:220]])
+          (p/'anbieter.txt').write_text(text,encoding='utf-8')
+      - name: Commit reports
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .redesign-inspect/report.txt
+          git add .redesign-inspect
           git diff --cached --quiet && exit 0
-          git commit -m 'chore: add compact redesign inspection report'
+          git commit -m 'chore: refresh focused redesign inspection reports'
           git push
