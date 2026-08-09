@@ -1,0 +1,61 @@
+ FS":["#7A1F2B","#FFFFFF"],"Sporting Braga":["#E2001A","#FFFFFF"],"Zalgiris Vilnius":["#00843D","#FFFFFF"]
+,
+  "Bohemians Prag":["#00843D","#FFFFFF"],"CFR Cluj":["#7A1F2B","#FFFFFF"],"Dinamo Minsk":["#005CA9","#FFFFFF"],"FC Noah":["#000000","#FFD200"],"Feyenoord Rotterdam":["#E2001A","#FFFFFF"],"Galatasaray":["#E2001A","#FFD200"],"Trabzonspor":["#7A1F2B","#0057B8"]
+,
+  "Celtic Glasgow":["#00843D","#FFFFFF"],"Dundee FC":["#0B2A5B","#FFFFFF"]
+,
+  "Jeju United":["#F58220","#005CA9"]
+,
+  "Académico Viseu":["#005CA9","#FFFFFF"],"FC Alverca":["#E2001A","#FFFFFF"],"Hertha BSC II":["#005CA9","#FFFFFF"],"Hibernian FC":["#00843D","#FFFFFF"],"Kilmarnock FC":["#005CA9","#FFFFFF"],"Lok Leipzig":["#005CA9","#FFD200"],"PEC Zwolle":["#005CA9","#FFFFFF"],"SV Ried":["#00843D","#FFFFFF"],"Sparta Rotterdam":["#E2001A","#FFFFFF"],"Wolfsberger AC":["#FFFFFF","#000000"]
+,
+  "FC Porto":["#005CA9","#FFFFFF"]
+};
+function clubBall(c1,c2){
+ return '<svg class="cball" viewBox="0 0 24 24" aria-hidden="true">'
+  +'<circle cx="12" cy="12" r="10.5" fill="'+c1+'" stroke="rgba(0,0,0,.32)" stroke-width="1"/>'
+  +'<path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="'+c2+'"/>'
+  +'<path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="'+c2+'" stroke-width="1.2" stroke-linecap="round" fill="none"/>'
+  +'</svg>';
+}
+function flag(n){ if(FL[n]) return FL[n]; var c=CLUB_BALL[n]; return c?clubBall(c[0],c[1]):"⚽"; }
+/* Primaerfarben (Flagge) fuer Trikot-Verlauf der Karten (Variante A, hell) */
+const NAT_TINT={Belgien:"#EF3340",Senegal:"#00853F",Spanien:"#C60B1E","Österreich":"#EF3340",Portugal:"#DA291C",Kroatien:"#ED1C24",
+ Schweiz:"#DA291C",Algerien:"#006233",Australien:"#FFCD00","Ägypten":"#CE1126",Argentinien:"#75AADB","Kap Verde":"#003DA5",
+ USA:"#B31942","Bosnien-Herzegowina":"#002F6C",Ghana:"#CE1126",Panama:"#DA121A",Norwegen:"#BA0C2F",Frankreich:"#0055A4",
+ Brasilien:"#009739",Japan:"#BC002D",Marokko:"#C1272D",Niederlande:"#FF6C00",Schweden:"#005293",Paraguay:"#D52B1E",
+ Deutschland:"#DD0000",Mexiko:"#006341",Ecuador:"#FFD100",England:"#CE1124",Uruguay:"#5CB8E4","Türkei":"#E30A17",
+ Iran:"#239F40",Neuseeland:"#101010",Usbekistan:"#0099B5","Saudi-Arabien":"#006C35",Tunesien:"#E70013",Jordanien:"#CE1126",
+ Irak:"#CE1126","Elfenbeinküste":"#F77F00",Kolumbien:"#FCD116",Chile:"#D52B1E",Kanada:"#D80621",Katar:"#8A1538",
+ Südkorea:"#CD2E3A",Nigeria:"#008751",Kamerun:"#007A5E",Polen:"#DC143C",Italien:"#008C45",Dänemark:"#C8102E",Schottland:"#0065BF"};
+function tintStyle(m){
+  function pc(n){ if(CLUB_BALL[n]) return CLUB_BALL[n][0]; if(NAT_TINT[n]) return NAT_TINT[n]; return null; }
+  var a=pc(m.h), b=pc(m.a); if(!a&&!b) return "";
+  a=a||b; b=b||a; return ' style="--c1:'+a+';--c2:'+b+'"';
+}
+
+/* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
+const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
+  ORF={n:"ORF 1",t:"fta",q:"HD"}, SERV={n:"ServusTV",t:"fta",q:"HD"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD"},
+  SRF2={n:"SRF zwei",t:"fta",q:"HD"}, SRFi={n:"SRF info",t:"fta",q:"HD"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
+  SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
+  UKg={n:"BBC / ITV",t:"fta",q:"HD"};
+const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, RTL={n:"RTL",t:"fta",q:"HD",u:"https://plus.rtl.de/"}, SKY={n:"Sky",t:"pay",q:"HD"};
+const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
+const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"}, OF={n:"OneFootball",t:"fta",u:"https://onefootball.com/"}, LAOLA={n:"LAOLA1",t:"fta",u:"https://www.laola1.at/"}, CLUBTV={n:"Vereins-/Regional-Stream",t:"fta"}, SKYAT={n:"Sky Sport Austria",t:"pay"}, BLUE={n:"blue Sport",t:"pay"},
+  RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
+  CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"},
+  RTE={n:"RTÉ 2",t:"fta",q:"HD"}, YLE={n:"Yle TV2",t:"fta",q:"HD"}, MTV3={n:"MTV3",t:"fta",q:"HD"},
+  MEDIA={n:"Mediacorp",t:"fta",q:"HD"}, TSPT={n:"T Sports",t:"fta",q:"HD"}, BTV={n:"BTV",t:"fta",q:"HD"},
+  TRT={n:"TRT 1",t:"fta",q:"HD"}, SVT={n:"SVT1",t:"fta",q:"HD"}, TV4={n:"TV4",t:"fta",q:"HD"},
+  CAN5={n:"Canal 5",t:"fta",q:"HD"}, AZT={n:"Azteca 7",t:"fta",q:"HD"};
+/* Klub-/Spezial-Streams Sommer 2026 + MagentaSport (3. Liga) */
+const WERDERTV={n:"WERDER.TV / YouTube",t:"fta",u:"https://www.werder.de/werdertv"};
+const KOELNTV={n:"FC-TV (1. FC Köln)",t:"fta",u:"https://fc.de/fc-tv/"};
+const VFBTV={n:"VfB TV / YouTube",t:"fta",u:"https://www.vfb.de/de/vfb/aktuell/vfbtv/"};
+const BVBTOTAL={n:"BVB Total",t:"pay",u:"https://www.bvb.de/bvb-total"};
+const RTLPLUS={n:"RTL+",t:"pay",u:"https://plus.rtl.de/"};
+const BRTV={n:"BR Fernsehen / BR24 Sport",t:"fta",q:"HD",u:"https://www.br24sport.de/"};
+const FCBPLUS={n:"FC Bayern.tv plus",t:"pay",u:"https://fcbayern.com/fcbayerntv"};
+const FCATV={n:"FCA TV",t:"fta",u:"https://www.fcaugsburg.de/fcatv"};
+const WERKSELF={n:"Werkself-TV",t:"fta",u:"https://www.bayer04.de/de-de/werkself-tv"};
+const S

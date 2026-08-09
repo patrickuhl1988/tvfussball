@@ -1,0 +1,59 @@
+H: Vergangene Spiele
+H: Anbieter & Preise
+H: Häufige Fragen zu Fußball im TV
+H: Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)
+H: Kontakt
+H: Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+H: Art des Angebots
+H: Haftung für Inhalte
+H: Haftung für Links
+H: Urheberrecht
+H: Verantwortlicher
+H: Überblick
+H: Hosting & Server-Logfiles
+H: Schriftarten (Google Fonts)
+H: Standort-/Ländererkennung (Geo-IP)
+H: Web-Analyse (Cloudflare Web Analytics)
+H: Web-Analyse (Google Analytics)
+H: Preisdeal-Wecker (E-Mail-Benachrichtigung)
+H: Tippspiel
+H: Lokale Speicherung (localStorage)
+H: Externe Links und Inhalte
+H: Teilen-Funktion
+H: Ihre Rechte
+H: Kein Streaming-Anbieter
+H: Privates Projekt
+H: Information pursuant to § 5 DDG (German Digital Services Act)
+H: Contact
+H: Responsible for content (§ 18 (2) MStV)
+H: Nature of the service
+H: Liability for content
+H: Liability for links
+H: Copyright
+H: Controller
+H: Overview
+H: Hosting & server log files
+H: Fonts (Google Fonts)
+H: Location/country detection (geo-IP)
+H: Web analytics (Cloudflare Web Analytics)
+H: Web analytics (Google Analytics)
+H: Price-deal alert (email notification)
+H: Prediction game
+H: Local storage (localStorage)
+H: External links and content
+H: Share function
+H: Your rights
+H: Not a streaming service
+H: A private project
+A: TV FUSSBALL .de | index.html
+A: Impressum | #
+A: Datenschutz | #
+A: Über uns | #
+A: Heute | index.html
+A: Highlights | highlights.html
+A: Anbieter | anbieter.html
+A:  | https://www.facebook.com/share/17qkMgZEbd/
+A:  | https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==
+A: '+fbI+'Facebook | https://www.facebook.com/share/17qkMgZEbd/
+A: '+igI+'Instagram | https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==
+A: patrick.uhl1988@googlemail.com | mailto:patrick.uhl1988@googlemail.com
