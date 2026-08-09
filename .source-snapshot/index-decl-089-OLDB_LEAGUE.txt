@@ -1,0 +1,43 @@
+ift nur fuer deutsche Wettbewerbe und nur dort, wo ESPN nichts liefert.
+   Liefert Tore mit Minute/Schuetze, aber keine Karten und keine Spieluhr. */
+const OLDB_LEAGUE = {bl:"bl1", bl2:"bl2", bl3:"bl3", dfb:"dfb"};
+function liveOldbSources(){
+  var tk=todayKeyNow(), set={};
+  for(var i=0;i<MATCHES.length;i++){
+    var m=MATCHES[i]; if(m.tba) continue;
+    var sc=OLDB_LEAGUE[m.cat]; if(!sc) continue;
+    var re=/(\d{2})\.(\d{2})\.(\d{4})/g, x, hit=false;
+    while((x=re.exec(String(m.day)))){ var k=(+x[3])*10000+(+x[2])*100+(+x[1]); if(k>=tk-1&&k<=tk+1){ hit=true; break; } }
+    if(hit) set[sc]=true;
+  }
+  return Object.keys(set).map(function(sc){ return "https://api.openligadb.de/getmatchdata/"+sc; });
+}
+function _oldbEntry(mm){
+  try{
+    var hn=liveNorm(mm.team1&&mm.team1.teamName), an=liveNorm(mm.team2&&mm.team2.teamName);
+    if(!hn||!an) return null;
+    var koMs=Date.parse(mm.matchDateTimeUTC||mm.matchDateTime||"");
+    if(!koMs) return null;
+    var now=Date.now(), state;
+    if(mm.matchIsFinished) state="post";
+    else if(now>=koMs && now<koMs+3.5*3600000) state="in";
+    else state=(now>=koMs)?"post":"pre";
+    var goals=(mm.goals||[]), evs=[], ph=0, pa=0, hs="0", as="0";
+    for(var i=0;i<goals.length;i++){
+      var g=goals[i], gh=+g.scoreTeam1, ga=+g.scoreTeam2;
+      var side=(gh>ph)?"h":((ga>pa)?"a":"");
+      if(g.isOwnGoal && side) side=(side==="h")?"a":"h";   /* Name steht beim Spieler, nicht beim Nutznießer */
+      ph=gh; pa=ga; hs=String(gh); as=String(ga);
+      evs.push({t:"goal", min:(g.matchMinute?String(g.matchMinute)+"'":""), who:g.goalGetterName||"", side:side, og:!!g.isOwnGoal, pen:!!g.isPenalty});
+    }
+    var res=(mm.matchResults||[]);
+    for(var r=0;r<res.length;r++){ if(res[r].resultTypeID===2){ hs=String(res[r].pointsTeam1); as=String(res[r].pointsTeam2); } }
+    return {key:livePairKey(hn,an)+"@"+_berlinKey(koMs),
+            val:{state:state, id:String(mm.matchID||""), hn:hn, an:an, hs:hs, as:as, clock:"", half:false, hyd:false, events:evs, src:"oldb"}};
+  }catch(e){ return null; }
+}
+let LIVE_CACHE = {};
+let _livePoll = null, _liveBusy = false;
+function liveNorm(s){ s=String(s||"").trim(); return LIVE_ALIAS[s]||s; }
+function livePairKey(a,b){ return [a,b].sort().join("~"); }
+function _berlinKey(ms){ try{ var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year

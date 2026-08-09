@@ -1,0 +1,24 @@
+c(m.h), b=pc(m.a); if(!a&&!b) return "";
+  a=a||b; b=b||a; return ' style="--c1:'+a+';--c2:'+b+'"';
+}
+
+/* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
+const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
+  ORF={n:"ORF 1",t:"fta",q:"HD"}, SERV={n:"ServusTV",t:"fta",q:"HD"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD"},
+  SRF2={n:"SRF zwei",t:"fta",q:"HD"}, SRFi={n:"SRF info",t:"fta",q:"HD"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
+  SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
+  UKg={n:"BBC / ITV",t:"fta",q:"HD"};
+const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, RTL={n:"RTL",t:"fta",q:"HD",u:"https://plus.rtl.de/"}, SKY={n:"Sky",t:"pay",q:"HD"};
+const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
+const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"}, OF={n:"OneFootball",t:"fta",u:"https://onefootball.com/"}, LAOLA={n:"LAOLA1",t:"fta",u:"https://www.laola1.at/"}, CLUBTV={n:"Vereins-/Regional-Stream",t:"fta"}, SKYAT={n:"Sky Sport Austria",t:"pay"}, BLUE={n:"blue Sport",t:"pay"},
+  RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
+  CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"},
+  RTE={n:"RTÉ 2",t:"fta",q:"HD"}, YLE={n:"Yle TV2",t:"fta",q:"HD"}, MTV3={n:"MTV3",t:"fta",q:"HD"},
+  MEDIA={n:"Mediacorp",t:"fta",q:"HD"}, TSPT={n:"T Sports",t:"fta",q:"HD"}, BTV={n:"BTV",t:"fta",q:"HD"},
+  TRT={n:"TRT 1",t:"fta",q:"HD"}, SVT={n:"SVT1",t:"fta",q:"HD"}, TV4={n:"TV4",t:"fta",q:"HD"},
+  CAN5={n:"Canal 5",t:"fta",q:"HD"}, AZT={n:"Azteca 7",t:"fta",q:"HD"};
+/* Klub-/Spezial-Streams Sommer 2026 + MagentaSport (3. Liga) */
+const WERDERTV={n:"WERDER.TV / YouTube",t:"fta",u:"https://www.werder.de/werdertv"};
+const KOELNTV={n:"FC-TV (1. FC Köln)",t:"fta",u:"https://fc.de/fc-tv/"};
+const VFBTV={n:"VfB TV / YouTube",t:"fta",u:"https://www.vfb.de/de/vfb/aktuell/vfbtv/"};
+const BRTV={n:"BR Fernsehen / BR24 Sport",t:"fta",q:"HD",u:"https://www.br24sport.de/"};

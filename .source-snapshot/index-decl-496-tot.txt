@@ -1,0 +1,23 @@
+ ")return; var el=e.target.closest?e.target.closest(".ytembed[data-yt]"):null; if(el){e.preventDefault(); ytEmbedPlay(el);}});
+function hlRow(m,t){
+  const tot=hlGoals(m.s);
+  // Zusammenfassungen
+  let sums="";
+  const deMkt=(COUNTRY==="DE"||COUNTRY==="AT"||COUNTRY==="CH");
+  if(m.magenta) sums+='<div class="sumrow"><span class="slabel magenta">MagentaTV</span><span class="sname">YouTube · Highlights</span><span class="sright"><a class="swatch" href="'+m.magenta+'" target="_blank" rel="noopener noreferrer">'+t.hl_watch+' ↗</a></span></div>';
+  if(deMkt && m.kicker) sums+='<div class="sumrow"><span class="slabel kicker">kicker</span><span class="sname">kicker.de · Highlights</span>'+
+    '<span class="sright"><a class="swatch" href="'+m.kicker+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
+  if(deMkt && m.zdf) sums+='<div class="sumrow"><span class="slabel zdf">ZDF</span><span class="sname">sportstudio · '+t.hl_checked+'</span>'+
+    '<span class="sright"><span class="slen">'+locMin(m.zdf[0])+'</span><a class="swatch" href="'+m.zdf[1]+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>';
+  function hlTok(n){ var w=String(n||"").replace(/\b(FC|SK|SV|RW|AFC|NK|FK|ASK|1\.|04|05|07|1907|1999)\b/g,"").trim().split(/\s+/).filter(Boolean); if(!w.length) return String(n||""); return w.reduce(function(a,b){return b.length>=a.length?b:a;},""); }
+  const hlQ=encodeURIComponent(hlTok(m.h)+" "+hlTok(m.a));
+  const hlQF=encodeURIComponent(String(m.h||"")+" "+String(m.a||""));
+  const hlYt=(typeof HL_YT!=="undefined"&&HL_YT[(m.h||"")+"|"+(m.a||"")])||{};
+  const hlFam=String(m.g||"").indexOf("Testspiel")===0?"test":(/^(Champions League|Europa League|Conference League)/.test(String(m.g||""))?"cl":"wm");
+  function srow(label,cls,name,href,direct){
+    /* Regel: nur Direktlinks aufs Spiel - Ausnahme YouTube (Suche dort ist erlaubt) */
+    if(!href) return "";
+    if(!direct && !/^https?:\/\/(www\.)?youtube\.com\//.test(href)) return "";
+    return '<div class="sumrow'+(direct?" is-direct":"")+'"><span class="slabel '+cls+'">'+label+'</span><span class="sname">'+name+(direct?' <span class="sdirect">'+(LANG==="de"?"direkt":"direct")+'</span>':"")+'</span>'+
+    '<span class="sright"><a class="swatch" href="'+href+'" target="_blank" rel="noopener">'+t.hl_watch+' ↗</a></span></div>'; }
+  /* 

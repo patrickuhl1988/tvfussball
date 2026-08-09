@@ -1,0 +1,24 @@
+,1,1,3]]],
+ ["L",[["England","🏴󠁧󠁢󠁥󠁮󠁧󠁿",3,1,1,0,0,4,2],["Ghana","🇬🇭",3,1,1,0,0,1,0],["Panama","🇵🇦",0,1,0,0,1,0,1],["Kroatien","🇭🇷",0,1,0,0,1,2,4]]]
+];
+const WM_R32=[
+ {d:"So 28.06.",t:"21:00",city:"Los Angeles",st:"SoFi Stadium",a:null,aph:"Zweiter A",b:null,bph:"Zweiter B",fav:null},
+ {d:"Mo 29.06.",t:"19:00",city:"Houston",st:"NRG Stadium",a:null,aph:"Erster C",b:null,bph:"Zweiter F",fav:null},
+ {d:"Mo 29.06.",t:"22:30",city:"Boston",st:"Gillette Stadium",a:["Deutschland","🇩🇪"],b:null,bph:"Dritter A/B/C/D/F",fav:0},
+ {d:"Di 30.06.",t:"02:00",city:"Monterrey",st:"Estadio BBVA",a:null,aph:"Erster F",b:null,bph:"Zweiter C",fav:null},
+ {d:"Di 30.06.",t:"19:00",city:"Dallas",st:"AT&T Stadium",a:null,aph:"Zweiter E",b:null,bph:"Zweiter I",fav:null},
+ {d:"Di 30.06.",t:"23:00",city:"New Jersey",st:"MetLife Stadium",a:null,aph:"Erster I",b:null,bph:"Dritter C/D/F/G/H",fav:0},
+ {d:"Mi 01.07.",t:"02:00",city:"Mexiko-Stadt",st:"Aztekenstadion",a:["Mexiko","🇲🇽"],b:null,bph:"Dritter C/E/F/H/I",fav:0},
+ {d:"Mi 01.07.",t:"18:00",city:"Atlanta",st:"Mercedes-Benz Stadium",a:null,aph:"Erster L",b:null,bph:"Dritter E/H/I/J/K",fav:0},
+ {d:"Mi 01.07.",t:"22:00",city:"Seattle",st:"Lumen Field",a:null,aph:"Erster G",b:null,bph:"Dritter A/E/H/I/J",fav:0},
+ {d:"Do 02.07.",t:"02:00",city:"San Francisco",st:"Levi's Stadium",a:["USA","🇺🇸"],b:null,bph:"Dritter B/E/F/I/J",fav:0},
+ {d:"Do 02.07.",t:"21:00",city:"Los Angeles",st:"SoFi Stadium",a:null,aph:"Erster H",b:null,bph:"Zweiter J",fav:0},
+ {d:"Fr 03.07.",t:"01:00",city:"Toronto",st:"BMO Field",a:null,aph:"Zweiter K",b:null,bph:"Zweiter L",fav:null},
+ {d:"Fr 03.07.",t:"05:00",city:"Vancouver",st:"BC Place",a:null,aph:"Erster B",b:null,bph:"Dritter E/F/G/I/J",fav:0},
+ {d:"Fr 03.07.",t:"20:00",city:"Dallas",st:"AT&T Stadium",a:null,aph:"Zweiter D",b:null,bph:"Zweiter G",fav:null},
+ {d:"Sa 04.07.",t:"00:00",city:"Miami",st:"Hard Rock Stadium",a:["Argentinien","🇦🇷"],b:null,bph:"Zweiter H",fav:0},
+ {d:"Sa 04.07.",t:"03:30",city:"Kansas City",st:"Arrowhead Stadium",a:null,aph:"Erster K",b:null,bph:"Dritter D/E/I/J/L",fav:0}
+];
+const WM_ANTHEMS=[
+ ["Deutschland","🇩🇪","Deutschlandlied (3. Strophe)","Melodie von Joseph Haydn (1797), Text von Hoffmann von Fallersleben.","e6eXyYJ4h5o"],
+ ["Frankreich","🇫🇷","La Marseillaise","Revolutionslied von 1792 — eine der kämpferischsten Hymnen der Welt.","

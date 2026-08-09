@@ -1,0 +1,31 @@
+("");
+}
+
+/* ---------- i18n / theme ---------- */
+function applyLang(){
+  const t=I18N[LANG];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(t[k]) el.textContent=t[k];});
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{const k=el.dataset.i18nPh; if(t[k]) el.placeholder=t[k];});
+  document.documentElement.lang=LANG;
+  document.getElementById("hlSearch").placeholder = LANG==="de"?"Mannschaft suchen … (z. B. Frankreich)":"Search team … (e.g. France)";
+  document.getElementById("liveSearch").placeholder = LANG==="de"?"Weitere Wettbewerbe oder Teams suchen …":"Search other competitions or teams …";
+
+  document.getElementById("provSearch").placeholder = LANG==="de"?"Anbieter, Wettbewerb oder Land suchen …":"Search provider, competition or country …";
+
+  if(LEGAL_CUR && document.getElementById("legalOv").classList.contains("show")) openLegal(LEGAL_CUR);
+}
+const ICON_MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.3A8 8 0 1 1 10.7 3.5a6.3 6.3 0 0 0 9.8 9.8z"/></svg>';
+const ICON_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>';
+function setTheme(th){ document.documentElement.dataset.theme=th; const b=document.getElementById("themeToggle"); if(b) b.innerHTML=th==="dark"?ICON_SUN:ICON_MOON; lsSet(LS_KEY.theme, JSON.stringify(th)); }
+
+let TOAST_TIMER;
+function toast(msg){ const el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
+  clearTimeout(TOAST_TIMER); TOAST_TIMER=setTimeout(()=>el.classList.remove("show"),1900); }
+function icsPad(n){return String(n).padStart(2,"0");}
+function icsRange(day,time){
+  const dm=String(day).match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(time).match(/(\d{1,2}):(\d{2})/);
+  if(!dm||!tm) return null;
+  const start=new Date(Date.UTC(+dm[3],+dm[2]-1,+dm[1],+tm[1],+tm[2]));
+  const end=new Date(start.getTime()+120*60000);
+  const f=d=>d.getUTCFullYear()+icsPad(d.getUTCMonth()+1)+icsPad(d.getUTCDate())+"T"+icsPad(d.getUTCHours())+icsPad(d.getUTCMinutes())+"00";
+  return {s:f

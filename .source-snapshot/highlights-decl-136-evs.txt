@@ -1,0 +1,37 @@
+ aria-label="'+esc((de?"Spielminute ":"Minute ")+mnum)+'"><i style="width:'+pct+'%"></i><span></span></div>';
+    }
+  }
+
+  /* --- Ereignisse --- */
+  var evs=(d.events||[]).slice().sort(function(a,b){ return _lvMin(a.min)-_lvMin(b.min); });
+  var hg=0, ag=0, rows="", lastHalf=0;
+  var brk='<div class="lvt-break"><span>'+(de?"Halbzeit":"Half-time")+'</span></div>';
+  evs.forEach(function(e,idx){
+    var mn=_lvMin(e.min), half=(mn>45&&mn<9999)?2:1;
+    if(half===2 && lastHalf===1){ rows+=brk; }
+    lastHalf=half;
+    var run="";
+    if(e.t==="goal"){ var sc=e.og?(e.side==="h"?"a":"h"):e.side; if(sc==="h") hg++; else if(sc==="a") ag++; run='<span class="lvt-run">'+hg+':'+ag+'</span>'; }
+    var isHome=(e.side!=="a");
+    var icon = e.t==="goal" ? '<span class="lvt-ic goal">\u26bd</span>' : '<span class="lvt-ic"><span class="lvt-card '+(e.t==="red"?"red":"yellow")+'"></span></span>';
+    var tags=[]; if(e.t==="goal"){ if(e.og) tags.push(de?"ET":"OG"); if(e.pen) tags.push(de?"FE":"Pen"); }
+    var tag = tags.length?(' <span class="lvt-tag">'+esc(tags.join(" "))+'</span>'):"";
+    var name='<span class="lvt-who">'+esc(_lvtWho(e.who||""))+tag+'</span>';
+    /* Zwischenstand immer innen an der Zeitachse -> laesst sich als Spalte lesen */
+    var content = isHome ? (name+icon+run) : (run+icon+name);
+    var cls='lvt-row '+e.t+((live && idx===evs.length-1)?' is-last':'');
+    rows+='<div class="'+cls+'"><div class="lvt-cell left">'+(isHome?content:"")+'</div><div class="lvt-node"><span class="lvt-min">'+esc(e.min||"")+'</span></div><div class="lvt-cell right">'+(isHome?"":content)+'</div></div>';
+  });
+  if(live && d.half && lastHalf!==2){ rows+=brk; }
+  var emptyTxt = live ? (de?"L\u00e4uft \u2013 noch keine Tore oder Karten.":"Under way \u2013 no goals or cards yet.")
+                      : (de?"Keine Tore, keine Karten.":"No goals or cards.");
+  var body = rows ? ('<div class="lvt-timeline">'+rows+'</div>') : ('<div class="lvt-empty">'+emptyTxt+'</div>');
+  return axis+prog+body;
+}
+/* Anstoss als Zeitstempel (Spielzeiten sind Berliner Zeit, Nutzer koennen anderswo sitzen) */
+function _koMs(day,time){
+  try{
+    var dm=String(day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(time||"").match(/(\d{1,2}):(\d{2})/);
+    if(!dm||!tm) return 0;
+    var y=+dm[3], mo=+dm[2], d=+dm[1], hh=+tm[1], mi=+tm[2];
+    var prob

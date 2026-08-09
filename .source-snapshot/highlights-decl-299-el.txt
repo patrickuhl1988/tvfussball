@@ -1,0 +1,43 @@
+   '<span class="mkt-caret" aria-hidden="true">\u25BE</span></label>';
+}
+/* ---------- Standortwahl im Header ---------- */
+function syncMktFlag(){
+  var el=document.getElementById("mktFlag"); if(!el) return;
+  el.textContent = MKT_FLAG[COUNTRY] || "\uD83C\uDF10";
+  var b=document.getElementById("mktToggle");
+  if(b) b.setAttribute("aria-label",(LANG==="de"?"Standort w\u00e4hlen \u2013 aktuell: ":"Choose location \u2013 currently: ")+mktName(COUNTRY));
+}
+function renderMktMenu(){
+  var de=(LANG==="de");
+  var ttl=document.getElementById("mktPopTitle"); if(ttl) ttl.textContent = de?"W\u00e4hle deinen aktuellen Standort":"Choose your current location";
+  var list=document.getElementById("mktPopList"); if(!list) return;
+  var html=MKT_LIST.map(function(c){
+    return '<button class="mktopt" data-mkt="'+c+'" aria-current="'+((c===COUNTRY&&MARKET_LOCKED)?"true":"false")+'">'
+      +'<span class="fl" aria-hidden="true">'+MKT_FLAG[c]+'</span><span class="nm">'+esc(mktName(c))+'</span></button>';
+  }).join("");
+  html+='<button class="mktopt auto" data-mkt="__auto" aria-current="'+(MARKET_LOCKED?"false":"true")+'">'
+    +'<span class="fl" aria-hidden="true">\uD83C\uDF10</span><span class="nm">'+(de?"Automatisch (Standort)":"Automatic (location)")+'</span></button>';
+  list.innerHTML=html;
+}
+function mktPopOpen(open){
+  var pop=document.getElementById("mktPop"), btn=document.getElementById("mktToggle");
+  if(!pop||!btn) return;
+  if(open){ renderMktMenu(); pop.hidden=false; btn.setAttribute("aria-expanded","true"); }
+  else { pop.hidden=true; btn.setAttribute("aria-expanded","false"); }
+}
+document.addEventListener("click", function(e){
+  var btn=e.target.closest? e.target.closest("#mktToggle") : null;
+  if(btn){ e.preventDefault(); mktPopOpen(document.getElementById("mktPop").hidden); return; }
+  var opt=e.target.closest? e.target.closest(".mktopt") : null;
+  if(opt){
+    var v=opt.getAttribute("data-mkt");
+    mktPopOpen(false);
+    if(v==="__auto"){
+      MARKET_LOCKED=false; try{ localStorage.removeItem(LS_KEY.market); }catch(_){}
+      var c=geoCacheGet(); if(c){ applyGeo(c); } else { geoInit(); }
+      renderAll(); syncMktFlag(); return;
+    }
+    COUNTRY=v; MARKET_LOCKED=true; lsSet(LS_KEY.market, JSON.stringify(v));
+    applyCountryDefaultFilter(); renderAll(); syncMktFlag(); return;
+  }
+  var pop=document.getE

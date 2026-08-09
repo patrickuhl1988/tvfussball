@@ -1,0 +1,42 @@
+Feedback is always welcome: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'}
+ }
+};
+function openLegal(key){
+  const set=LEGAL[LANG]||LEGAL.de, d=set[key]||LEGAL.de[key]; if(!d) return;
+  LEGAL_CUR=key;
+  document.getElementById("legalTitle").textContent=d.t;
+  document.getElementById("legalBody").innerHTML=d.h;
+  const ov=document.getElementById("legalOv"); ov.classList.add("show"); ov.setAttribute("aria-hidden","false"); ov.scrollTop=0;
+}
+function closeLegal(){ const ov=document.getElementById("legalOv"); ov.classList.remove("show"); ov.setAttribute("aria-hidden","true"); LEGAL_CUR=null; }
+document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLegal(); });
+
+/* ---------- Tippspiel ---------- */
+const TIPP = {
+  games:[{h:"Spanien",a:"Argentinien"}],
+  match:"Spanien – Argentinien",
+  kickoff:"2026-07-19T21:00:00+02:00",
+  /* >>> EINSTELLUNGEN <<< endpoint: optionale Formspree-URL (formspree.io); fb/ig: eure Seiten. */
+  prizes:["1× 20 € Amazon-Gutschein","1× 10 € Amazon-Gutschein"],
+  endpoint:"",
+  fb:"https://www.facebook.com/share/18y8ZKLNdG/",
+  ig:"https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA=="
+};
+/* ---------- Geo-IP: Standardland & -sprache (funktional, kein Tracking) ---------- */
+const GEO_MARKET={DE:"DE",AT:"AT",CH:"CH",LI:"DE",GB:"UK",UK:"UK",FR:"FR",IT:"IT",ES:"ES",NL:"NL",TH:"TH",CA:"CA",US:"US",IE:"IE",FI:"FI",SG:"SG",BD:"BD",TR:"TR",SE:"SE",MX:"MX"};
+const GEO_DE=new Set(["DE","AT","CH","LI"]);
+function geoCacheGet(){ try{ const r=lsGet(LS_KEY.geo); if(r){ const o=JSON.parse(r); if(o&&o.cc&&o.ts&&(Date.now()-o.ts<86400000)) return o.cc; } }catch(e){} return null; }
+function geoCacheSet(cc){ lsSet(LS_KEY.geo, JSON.stringify({cc:cc,ts:Date.now()})); }
+function applyGeo(cc){ if(MARKET_LOCKED) return; cc=(cc||"").toUpperCase(); if(!cc) return;
+  const nc=GEO_MARKET[cc]||"DE";
+  const nl=LANG_LOCKED?LANG:(GEO_DE.has(cc)?"de":"en");
+  if(nc===COUNTRY && nl===LANG) return;
+  COUNTRY=nc; LANG=nl;
+  applyCountryDefaultFilter();
+  document.querySelectorAll("[data-lang]").forEach(x=>x.setAttribute("aria-pressed", x.dataset.lang===LANG?"true":"false"));
+  renderAll();
+}
+function geoInit(){
+  const cached=geoCacheGet(); if(cached){ applyGeo(cached); return; }
+  if(typeof fetch!=="function") return;
+  const eps=[{u:"https://api.co

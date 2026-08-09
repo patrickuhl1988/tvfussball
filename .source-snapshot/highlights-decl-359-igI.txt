@@ -1,0 +1,27 @@
+<path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg>';
+  var igI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>';
+  return '<div class="sup">'
+    +'<div class="sup-h">'+(de?"Unterst\u00fctzt uns":"Support us")+'</div>'
+    +'<div class="sup-s">'+(de?"TVFUSSBALL lebt von euch \u2013 teilt die Seite und folgt uns:":"TVFUSSBALL runs on you \u2013 share the site and follow us:")+'</div>'
+    +'<button type="button" class="sup-share" data-share>'+shI+'<span class="sup-share-tx">'+(de?"Seite mit Freunden teilen":"Share with friends")+'</span></button>'
+    +'<div class="sup-social">'
+      +'<a class="sup-soc fb" href="https://www.facebook.com/share/17qkMgZEbd/" target="_blank" rel="noopener noreferrer">'+fbI+'Facebook</a>'
+      +'<a class="sup-soc ig" href="https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==" target="_blank" rel="noopener noreferrer">'+igI+'Instagram</a>'
+    +'</div></div>';
+}
+function fbLoad(){ try{ var r=lsGet(FEEDBACK_KEY); var a=r?JSON.parse(r):[]; return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function fbSubmit(text,rating){
+  text=(text||"").trim(); if(!text && !rating) return false;
+  var entry={ text:text, rating:rating||0, ts:new Date().toISOString(), page:(location.pathname.split("/").pop()||"index.html"), lang:LANG };
+  var list=fbLoad(); list.push(entry); lsSet(FEEDBACK_KEY, JSON.stringify(list));
+  if(FEEDBACK_ENDPOINT){ try{ fetch(FEEDBACK_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(entry)}); }catch(e){} }
+  return true;
+}
+function fbEscape(v){ return String(v==null?"":v).replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c];}); }
+function fbToCSV(list){
+  var q=function(v){ return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'; };
+  var rows=[["Datum","Bewertung","Seite","Sprache","Text"]].concat(list.map(function(e){return [e.ts,e.rating,e.page,e.lang,e.text];}));
+  return rows.map(function(r){return r.map(q).join(",");}).join("\n");
+}
+function fbAdminOpen(){
+  var de=

@@ -1,0 +1,31 @@
+ }
+/* Standardfilter je Land: CL, EL, alle WM-Spiele + nationale Liga(en) & nationaler Pokal (sofern vorhanden) */
+function countryDefaultCats(cc){
+  const base=["wm","cl","el"];
+  const NAT={ DE:["bl","bl2","bl3","dfb"], UK:["pl","facup"], FR:["l1"], IT:["it"], ES:["es"] };
+  return base.concat(NAT[cc]||[]);
+}
+function applyCountryDefaultFilter(){ if(FILTER_USERSET) return; LIVE_SEL.clear(); /* Standard: "Alle" (kein Vorfilter) */ }
+function saveLang(){ lsSet(LS_KEY.lang, JSON.stringify(LANG)); }
+function loadPersisted(){
+  try{ const raw=lsGet(LS_KEY.follow); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ FOLLOW.clear(); a.forEach(x=>FOLLOW.add(x)); } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.filters); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ LIVE_SEL.clear(); a.forEach(x=>LIVE_SEL.add(x)); FILTER_USERSET=true; if(LIVE_SEL.has("wm")){ LIVE_SEL.delete("wm"); } ["tonight","format","bl2","bl3","el","facup","test"].forEach(function(k){ LIVE_SEL.delete(k); }); } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.lang); if(raw!==null){ const v=JSON.parse(raw); if(v==="de"||v==="en"){ LANG=v; LANG_LOCKED=true; } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.market); if(raw!==null){ const v=JSON.parse(raw); if(typeof v==="string"&&v){ COUNTRY=v; MARKET_LOCKED=true; } } }catch(e){}
+}
+const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
+
+/* =========================================================================
+   ABO-RECHNER · Anbieter-, Preis- & Rechte-Daten   (Markt: Deutschland)
+   ▸ EINZIGE Quelle für den Rechner — hier Preise/Rechte pflegen.
+   ▸ price = günstigster regulärer Einstieg pro Monat (ca.), Stand Juni 2026.
+     DAZN 34,99 (Jahresabo) · Sky/WOW 29,99 · MagentaSport 9,95 ·
+     Prime 8,99 · RTL+ 6,99 · ARD/ZDF beitragsfinanziert = 0.
+   ▸ AFFILIATE: Das Feld "aff" ist ein Platzhalter und greift NUR, wenn
+     AFFILIATE_ENABLED = true. Default AUS -> es werden neutrale url-Links genutzt.
+   ========================================================================= */
+const AFFILIATE_ENABLED = false; // Feature-Flag: Affiliate-Links AUS (Standard)
+
+/* =========================================================================
+   LIVE-SCORES (ESPN, keyless, graceful fallback)
+   - Zeigt Ergebnis + Minute + Status in bestehende Karten; ergaenzt nur,

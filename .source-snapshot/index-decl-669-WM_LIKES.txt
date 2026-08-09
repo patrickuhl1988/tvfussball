@@ -1,0 +1,28 @@
+elsmann","Rudi Völler","Jürgen Klopp"],1],
+ ["Wo steigt das Finale am 19. Juli?",["Los Angeles","Miami","New York / New Jersey","Mexiko-Stadt"],2]
+];
+const WM_LIKES={};
+/* ---------- Impressum / Datenschutz / Über uns ---------- */
+let LEGAL_CUR=null;
+const LEGAL={
+ de:{
+  imprint:{t:"Impressum",h:
+   '<h4>Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)</h4>'+
+   '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim<br>Deutschland</p>'+
+   '<h4>Kontakt</h4>'+
+   '<p>E-Mail: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
+   '<h4>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h4>'+
+   '<p>Patrick Uhl (Anschrift wie oben)</p>'+
+   '<h4>Art des Angebots</h4>'+
+   '<p>TVFussball.de ist ein privat betriebenes, nicht-kommerzielles Informationsangebot. Es werden keine Umsätze erzielt; eine Umsatzsteuer-Identifikationsnummer besteht nicht.</p>'+
+   '<h4>Haftung für Inhalte</h4>'+
+   '<p>Die Inhalte wurden mit größter Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität – insbesondere bei Sendeangaben und Ergebnissen – kann keine Gewähr übernommen werden.</p>'+
+   '<h4>Haftung für Links</h4>'+
+   '<p>Dieses Angebot enthält Links zu externen Websites Dritter (z. B. ARD, ZDF, YouTube, MagentaTV). Auf deren Inhalte haben wir keinen Einfluss; dafür ist stets der jeweilige Anbieter verantwortlich.</p>'+
+   '<h4>Urheberrecht</h4>'+
+   '<p>TVFussball.de überträgt selbst keine Spiele und hostet keine Videoinhalte, sondern verweist ausschließlich auf die offiziellen, legalen Angebote der Rechteinhaber. Marken-, Vereins- und Wettbewerbsnamen sind Eigentum der jeweiligen Inhaber.</p>'},
+  privacy:{t:"Datenschutzerklärung",h:
+   '<h4>Verantwortlicher</h4>'+
+   '<p class="addr">Patrick Uhl<br>Im Frondel 19<br>55424 Münster-Sarmsheim<br>E-Mail: <a href="mailto:patrick.uhl1988@googlemail.com">patrick.uhl1988@googlemail.com</a></p>'+
+   '<h4>Überblick</h4>'+
+   '<p>TVFussball.de ist eine statische Website ohne Nutzerkonten. Ohne Ihre Einwilligung setzen wir keine Analyse-Cookies. Zur Reichweitenmessung nutzen wir das cookiefreie Cloudflare Web Analytics sowie – nur nach Ihrer Einwilligung – Google Analytics (siehe „Web-Analyse"). Damit die Seite in Ihrer Sprache und mit den Sendern Ihres Landes erscheint, ermitteln wir beim Aufruf einmalig Ihr Land anhand

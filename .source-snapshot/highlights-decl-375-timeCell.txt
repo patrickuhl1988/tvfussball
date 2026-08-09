@@ -1,0 +1,32 @@
+sc=LANG==="de"?f.desc_de:f.desc_en;
+  const kindlbl=t["fk_"+f.kind]||f.kind;
+  const live=f.live?'<span class="fmt-live">'+t.fmt_live+'</span>':'';
+  const timeCell=f.od?'<div class="time"><span class="odtime">'+(LANG==="de"?"Abruf":"On-dem.")+'</span></div>':'<div class="time">'+esc(f.time)+'<small>'+t.tz+'</small></div>';
+  const star='<span class="favstar'+(on?' on':'')+'" data-follow="'+esc(f.id)+'" role="button" tabindex="0" aria-pressed="'+on+'" aria-label="'+esc(f.name)+'" title="'+esc(f.name)+'">'+(on?'★':'☆')+'</span>';
+  return '<div class="row fmt free" data-k="fmt-'+esc(f.id)+'">'+
+    '<button class="rowhead" aria-expanded="false">'+timeCell+
+      '<div class="teams">'+
+        '<div class="t"><span class="fmticon">'+(f.icon||'📺')+'</span><span>'+esc(f.name)+'</span>'+star+live+'</div>'+
+        '<div class="meta"><span class="comp">'+esc(f.ch)+'</span>'+(f.od?'<span class="freebest '+(f.kind==="video"?"tv":"radio")+'">'+(f.kind==="video"?"▶ Video":"🎧 Podcast")+'</span>':'<span class="freebest tv">▣ '+t.best_free+'</span>')+'</div>'+
+        '<div class="fmtwhen">'+esc(when)+'</div>'+
+      '</div>'+
+      '<span class="chev">'+CHEV+'</span>'+
+    '</button>'+
+    '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
+      '<div class="fmtkind"><span class="tag">'+esc(kindlbl)+'</span></div>'+
+      '<p class="fmtdesc">'+esc(desc)+'</p>'+
+      '<div class="chlist"><div class="chrow"><span class="nm">'+esc(f.ch)+'</span><span class="tag '+(f.od?"aux":"fta")+'">'+(f.od?(f.kind==="video"?"Video":"Podcast"):t.best_free)+'</span></div>'+
+        (f.stream?'<div class="chrow"><span class="nm">'+esc(f.stream)+'</span><span class="tag aux">Stream</span></div>':'')+'</div>'+
+      (f.url?'<a class="fmtlink" href="'+esc(f.url)+'" target="_blank" rel="noopener">'+t.fmt_more+' ↗</a>':'')+
+    '</div></div></div>'+
+  '</div>';
+}
+
+function tbaRow(m,t){
+  const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" (TVFussball.de)", "https://tvfussball.de");
+  return '<div class="row tba" data-k="'+rowKey(m)+'">'+
+    '<button class="rowhead" aria-expanded="false">'+
+      timeCellHTML(m)+
+      '<div class="teams">'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">

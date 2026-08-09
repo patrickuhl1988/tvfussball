@@ -1,0 +1,24 @@
+eturn Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function fbSubmit(text,rating){
+  text=(text||"").trim(); if(!text && !rating) return false;
+  var entry={ text:text, rating:rating||0, ts:new Date().toISOString(), page:(location.pathname.split("/").pop()||"index.html"), lang:LANG };
+  var list=fbLoad(); list.push(entry); lsSet(FEEDBACK_KEY, JSON.stringify(list));
+  if(FEEDBACK_ENDPOINT){ try{ fetch(FEEDBACK_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(entry)}); }catch(e){} }
+  return true;
+}
+function fbEscape(v){ return String(v==null?"":v).replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c];}); }
+function fbToCSV(list){
+  var q=function(v){ return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'; };
+  var rows=[["Datum","Bewertung","Seite","Sprache","Text"]].concat(list.map(function(e){return [e.ts,e.rating,e.page,e.lang,e.text];}));
+  return rows.map(function(r){return r.map(q).join(",");}).join("\n");
+}
+function fbAdminOpen(){
+  var de=LANG==="de", list=fbLoad(), rev=list.slice().reverse();
+  var body=rev.length? rev.map(function(e){ return '<div class="fba-item"><div class="fba-meta">'+(e.rating?"\u2605".repeat(e.rating):"\u2013")+' \u00b7 '+new Date(e.ts).toLocaleString()+' \u00b7 '+fbEscape(e.page)+'</div><div class="fba-tx">'+(e.text?fbEscape(e.text):'<i>('+(de?"nur Bewertung":"rating only")+')</i>')+'</div></div>'; }).join("")
+    : '<div class="fba-empty">'+(de?"Noch kein Feedback gespeichert.":"No feedback stored yet.")+'</div>';
+  var ov=document.getElementById("fbAdmin");
+  if(!ov){ ov=document.createElement("div"); ov.id="fbAdmin"; ov.className="fba-ov"; document.body.appendChild(ov); }
+  ov.innerHTML='<div class="fba-box"><div class="fba-top"><b>Feedback ('+list.length+')</b><div class="fba-actions"><button type="button" data-fb-copy>'+(de?"Kopieren":"Copy")+'</button><button type="button" data-fb-csv>CSV</button><button type="button" data-fb-clear>'+(de?"Leeren":"Clear")+'</button><button type="button" data-fb-close aria-label="Close">\u2715</button></div></div><div class="fba-list">'+body+'</div></div>';
+  ov.classList.add("show");
+}
+function fbAdminClose(){ var ov=document.getElementById("fbAdmin"); if(ov) ov.classList.remove("show"); if(location.hash==="#feedback"){ try{history.replaceState(null,

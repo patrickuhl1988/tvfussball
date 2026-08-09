@@ -1,0 +1,41 @@
+28th minute to give Scotland their first World Cup win since 1990."}}}
+];
+
+/* News — DFB-Team + 18 Bundesligavereine (Teamliste mit Farben/Kürzel) */
+const TEAMS = [
+  {id:"wm",name:"WM 2026",short:"WM",color:"#0b9d6e",fg:"#fff"},
+  {id:"bayern",name:"FC Bayern München",short:"FCB",color:"#dc052d"},
+  {id:"psg",name:"Paris Saint-Germain",short:"PSG",color:"#004170",fg:"#fff"},
+  {id:"dfb",name:"DFB-Team",short:"DFB",color:"#c7a008",nat:true},
+  {id:"bvb",name:"Borussia Dortmund",short:"BVB",color:"#f4c400",fg:"#1a1a1a"},
+  {id:"rbl",name:"RB Leipzig",short:"RBL",color:"#d4023a"},
+  {id:"vfb",name:"VfB Stuttgart",short:"VfB",color:"#e32219"},
+  {id:"b04",name:"Bayer Leverkusen",short:"B04",color:"#b1080f"},
+  {id:"scf",name:"SC Freiburg",short:"SCF",color:"#e1000f"},
+  {id:"sge",name:"Eintracht Frankfurt",short:"SGE",color:"#1a1a1a"},
+  {id:"tsg",name:"TSG Hoffenheim",short:"TSG",color:"#1c63b7"},
+  {id:"fca",name:"FC Augsburg",short:"FCA",color:"#ba3733"},
+  {id:"m05",name:"1. FSV Mainz 05",short:"M05",color:"#c3141e"},
+  {id:"fcu",name:"1. FC Union Berlin",short:"FCU",color:"#d4011d"},
+  {id:"bmg",name:"Bor. Mönchengladbach",short:"BMG",color:"#00a859"},
+  {id:"hsv",name:"Hamburger SV",short:"HSV",color:"#003da5"},
+  {id:"koeln",name:"1. FC Köln",short:"KOE",color:"#e2001a"},
+  {id:"svw",name:"SV Werder Bremen",short:"SVW",color:"#169b62"},
+  {id:"s04",name:"FC Schalke 04",short:"S04",color:"#004d9d"},
+  {id:"sve",name:"SV Elversberg",short:"SVE",color:"#c8102e"},
+  {id:"scp",name:"SC Paderborn",short:"SCP",color:"#005ca9"},
+  {id:"esp",name:"Spain",short:"ESP",color:"#c60b1e",fg:"#fff",nat:true},
+  {id:"laliga",name:"LaLiga",short:"LL",color:"#ee8707",fg:"#fff"},
+  {id:"fra",name:"France",short:"FRA",color:"#1e40af",fg:"#fff",nat:true},
+  {id:"eng",name:"England",short:"ENG",color:"#cf142b",fg:"#fff",nat:true},
+  {id:"epl",name:"Premier League",short:"PL",color:"#37003c",fg:"#fff"},
+  {id:"seriea",name:"Serie A",short:"SA",color:"#1f4e9c",fg:"#fff"},
+  {id:"wc",name:"World Cup 2026",short:"WC",color:"#0b9d6e",fg:"#fff"}
+];
+const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
+
+
+
+const PROVIDERS = [
+  {name:"DAZN", kind:"pay", countries:["DE","AT","CH"], price:"34,99 €/Mon", sub:"Jahresabo · 44,99 € monatl. · Super Sports ab 19,99 €",
+   comps:["Bundesliga","Champions League","La Liga","Serie A","Ligue 1"], 

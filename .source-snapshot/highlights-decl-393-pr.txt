@@ -1,0 +1,28 @@
+e.h===x&&e.a===y)||(e.h===y&&e.a===x)) return "highlights.html?m="+encodeURIComponent(hlKey(e)); }
+  return null; }
+function openDeepLinkHL(){ try{
+  var pr=new URLSearchParams(location.search); var key=pr.get("m"); if(!key) return; key=decodeURIComponent(key);
+  var board=document.getElementById("hlBoard"); if(!board) return;
+  var rows=board.querySelectorAll(".row[data-hl]"), target=null;
+  for(var i=0;i<rows.length;i++){ if(rows[i].getAttribute("data-hl")===key){ target=rows[i]; break; } }
+  if(!target) return;
+  board.querySelectorAll(".row.open").forEach(function(r){ if(r!==target){ r.classList.remove("open"); var hh=r.querySelector(".rowhead"); if(hh) hh.setAttribute("aria-expanded","false"); } });
+  target.classList.add("open"); var h=target.querySelector(".rowhead"); if(h) h.setAttribute("aria-expanded","true");
+  target.scrollIntoView({behavior:"smooth",block:"center"});
+}catch(e){} }
+function lhLast(list,teamX){ if(!list||!list.length) return "";
+  return list.slice(0,5).map(function(p){
+    const cls=p.ausgang==="S"?"win":(p.ausgang==="N"?"loss":"draw");
+    const dt=p.datum?'<span class="lh-pd">'+locISO(p.datum)+'</span>':'';
+    const inner='<span class="lh-out '+cls+'">'+esc(p.ausgang||"")+'</span><span class="lh-res">'+esc(p.ergebnis||"")+'</span><span class="lh-opp">'+esc(p.gegner||"")+'</span>'+dt;
+    const lnk=hlLinkFor(teamX,p.gegner);
+    return lnk?('<a class="lh-match lh-link" href="'+esc(lnk)+'">'+inner+'</a>'):('<span class="lh-match">'+inner+'</span>');
+  }).join(""); }
+function lhLetzte(lp,m,t){ if(!lp||(!lp.teamA&&!lp.teamB)) return "";
+  let out='<div class="lh-sec"><div class="lh-h">'+t.lh_last+'</div>';
+  if(lp.teamA&&lp.teamA.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.h)+'</span><div class="lh-mrow">'+lhLast(lp.teamA,m.h)+'</div></div>';
+  if(lp.teamB&&lp.teamB.length) out+='<div class="lh-team"><span class="lh-tn">'+esc(m.a)+'</span><div class="lh-mrow">'+lhLast(lp.teamB,m.a)+'</div></div>';
+  return out+'</div>'; }
+function lhScore(s,t){ if(s==null) return ""; const v=Math.max(0,Math.min(100,Math.round(s)));
+  const col=v>=75?"#16a34a":(v>=55?"#84cc16":(v>=35?"#f59e0b":"#dc2626"));
+  return '<div class="lh-score"><div class="lh-sc-top"><span class="lh-sc-lbl">'+t.lohnt_score+'</span><b class="lh-sc-val" style="color:'+col+'">'+v+'</b><span class="lh-sc-max

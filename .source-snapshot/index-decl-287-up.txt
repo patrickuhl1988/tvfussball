@@ -1,0 +1,45 @@
+&& m.lohnt.score>=55);   /* Sommerpause: nur die groesseren Quali-Duelle */
+  }
+  return false;
+}
+function renderLiveFilters(){ const t=I18N[LANG];
+  const up=MATCHES.filter(m=>!isFinished(m)), upF=FORMATS.filter(f=>!isFinished(f));
+  const cnt={
+    all: up.length+upF.length,
+    top: up.filter(isTopMatch).length,
+    mine: up.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a)||FOLLOW.has("liga:"+m.cat)).length + upF.filter(f=>FOLLOW.has(f.id)).length,
+    free: up.filter(isFreeTV).length,
+    tonight: up.filter(isTonight).length + upF.filter(isTonightFmt).length,
+    format: upF.length,
+    wm: up.filter(m=>catOf(m)==="wm").length,
+    dfb: up.filter(m=>catOf(m)==="dfb").length,
+    bl: up.filter(m=>catOf(m)==="bl").length,
+    bl2: up.filter(m=>catOf(m)==="bl2").length,
+    bl3: up.filter(m=>catOf(m)==="bl3").length,
+    cl: up.filter(m=>catOf(m)==="cl").length,
+    el: up.filter(m=>catOf(m)==="el").length,
+    pl: up.filter(m=>catOf(m)==="pl").length,
+    facup: up.filter(m=>catOf(m)==="facup").length,
+    it: up.filter(m=>catOf(m)==="it").length,
+    es: up.filter(m=>catOf(m)==="es").length,
+    l1: up.filter(m=>catOf(m)==="l1").length,
+    ecl: up.filter(m=>catOf(m)==="ecl").length,
+    test: up.filter(m=>catOf(m)==="test").length
+  };
+  const blChip = cnt.bl>0 ? [["bl",t.f_bl]] : [];
+  const wmChip = []; /* WM 2026 beendet – Chip entfernt */
+  const dfbChip = cnt.dfb>0 ? [["dfb",t.f_dfb]] : [];
+  const defs=[["all",t.f_all],["top",t.f_top||"Top"]].concat(wmChip).concat(blChip).concat(dfbChip)
+    .concat([["mine",t.f_mine],["free",t.f_free]])
+    .concat([["cl",t.f_cl],["ecl",t.f_ecl||"Conference League"],["pl",t.f_pl],["it",t.f_it],["es",t.f_es],["l1",t.f_l1]].filter(d=>cnt[d[0]]>0));
+  const chips = defs.map(d=>{
+    const c=cnt[d[0]];
+    return '<button class="fchip" data-livef="'+d[0]+'" aria-pressed="'+(d[0]==="all"?LIVE_SEL.size===0:LIVE_SEL.has(d[0]))+'">'+d[1]+(c?'<span class="fcount">'+c+'</span>':'')+'</button>';
+  });
+  syncMktFlag();
+  document.getElementById("liveFilters").innerHTML = chips.join("");
+}
+
+/* ---------- Land wählen (Markt manuell setzen, z.B. auf Reisen) ---------- */
+const MKT_LIST=["DE","AT","CH","UK","IE","FR","IT","ES","NL","SE","FI","TR","US","CA","MX","TH","SG","BD"];
+const MKT_FLAG={DE:"\uD83C\uDDE9\uD83C\uDDEA",AT:"\uD83C\uDDE6\uD83C\uDDF9",CH:"\uD83C\uDDE8\uD83C\uDDED",UK:"

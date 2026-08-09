@@ -1,0 +1,36 @@
+ink" href="'+esc(f.url)+'" target="_blank" rel="noopener">'+t.fmt_more+' ↗</a>':'')+
+    '</div></div></div>'+
+  '</div>';
+}
+
+function tbaRow(m,t){
+  const share = shareBar(m.h+" – "+m.a, m.h+" – "+m.a+" · "+m.comp+" (TVFussball.de)", "https://tvfussball.de");
+  return '<div class="row tba" data-k="'+rowKey(m)+'">'+
+    '<button class="rowhead" aria-expanded="false">'+
+      timeCellHTML(m)+
+      '<div class="teams">'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span>'+folMark(m.h)+'</div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span>'+folMark(m.a)+'</div>'+
+        '<div class="meta"><span class="comp">'+locComp(m.comp)+'</span><span class="freebest pay">'+t.tba_chip+'</span></div>'+
+      '</div>'+
+      '<div class="rh-right"><span class="chev">'+CHEV+'</span></div>'+
+    '</button>'+
+    '<div class="panel"><div class="panel-in"><div class="panel-pad">'+
+      '<div class="soonbox sm"><span class="ic">📺</span><div><b>'+t.tba_note_t+'</b><span>'+t.tba_note_s+'</span></div></div>'+
+      renderLohnt(m)+
+      liveActions(m)+
+    '</div></div></div>'+
+  '</div>';
+}
+function sendRow(cc,list){
+  const chans=(list&&list.length)?list.map(s=>'<span class="ch '+(s.t==="fta"?"fta":"pay")+'">'+chNm(s)+'</span>').join(""):'<span class="none">'+(LANG==="de"?"k. A.":"n/a")+'</span>';
+  return '<div class="sendrow"><span class="sflag">'+(CFLAG[cc]||"🏳️")+'</span><span class="schans">'+chans+'</span></div>';
+}
+const MCHEV='<svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+const ODDS_DISCLAIMER={de:"Gl\u00fccksspiel kann s\u00fcchtig machen. Hilfe unter check-dein-spiel.de. Teilnahme ab 18.",en:"Gambling can be addictive. 18+ only."};
+function biln(x){ if(x==null) return ""; if(typeof x==="string") return x; return x[LANG]||x.de||x.en||""; }
+function locISO(iso){ if(!iso) return ""; const p=String(iso).split("-"); if(p.length!==3) return String(iso);
+  if(LANG==="de") return p[2]+"."+p[1]+"."+p[0];
+  const M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return (M[parseInt(p[1],10)-1]||p[1])+" "+p[2]+", "+p[0]; }
+function fmtKm(n){ const s=String(n); return LANG==="de"?s.repla

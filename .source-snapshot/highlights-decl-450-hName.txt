@@ -1,0 +1,23 @@
+eturn list.map(function(p){ return '<span class="lu-sub"><span class="lu-no sm">'+esc(_luNo(p))+'</span>'+esc(_luName(p))+'</span>'; }).join(""); }
+  var hName=esc((H.team&&(H.team.shortDisplayName||H.team.displayName))||"");
+  var aName=esc((A.team&&(A.team.shortDisplayName||A.team.displayName))||"");
+  var hForm=H.formation?(' <span class="lu-form">'+esc(H.formation)+'</span>'):"";
+  var aForm=A.formation?('<span class="lu-form">'+esc(A.formation)+'</span> '):"";
+  var out='<div class="lu"><div class="lu-head"><span class="lu-t">'+hName+hForm+'</span><span class="lu-t right">'+aForm+aName+'</span></div>'+grid;
+  if(hBench.length||aBench.length){
+    out+='<div class="lu-bank"><div class="lu-bank-h">'+(de?"Bank":"Bench")+'</div><div class="lu-bank-grid"><div class="lu-bank-col">'+bench(hBench)+'</div><div class="lu-bank-col right">'+bench(aBench)+'</div></div></div>';
+  }
+  return out+'</div>';
+}
+async function loadLineup(host){
+  if(!host || host.dataset.loaded==="1" || host.dataset.loading==="1") return;
+  host.dataset.loading="1";
+  var de=(LANG==="de");
+  host.innerHTML='<div class="lu-note">'+(de?"Aufstellung wird geladen \u2026":"Loading line-ups \u2026")+'</div>';
+  try{
+    var key=host.getAttribute("data-lu"), lg=host.getAttribute("data-lg");
+    var hn=host.getAttribute("data-hn"), an=host.getAttribute("data-an");
+    var id=(LIVE_CACHE[key]&&LIVE_CACHE[key].id)||"";
+    if(!id && lg){ try{ var sb=await fetch("https://site.api.espn.com/apis/site/v2/sports/soccer/"+lg+"/scoreboard",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}); if(sb&&sb.events){ var hnn=liveNorm(hn), ann=liveNorm(an); for(var i=0;i<sb.events.length;i++){ var ev=sb.events[i], cs=(ev.competitions&&ev.competitions[0]&&ev.competitions[0].competitors)||[]; var nm=cs.map(function(c){return liveNorm(c.team&&c.team.displayName);}); if(nm.indexOf(hnn)>=0&&nm.indexOf(ann)>=0){ id=ev.id; break; } } } }catch(_e){} }
+    if(!id){ host.innerHTML='<div class="lu-note">'+(de?"Aufstellung noch nicht verf\u00fcgbar \u2013 erscheint meist rund um den Anpfiff.":"Line-ups not available yet \u2013 usually posted around kick-off.")+'</div>'; host.dataset.loading=""; return; }
+    var sum=await fetch("https://site.api.espn.com/apis/site/v2/sports/soccer/"+lg+"/summary?event="+id,{cache:"no-store"}).then(function(r){return r.ok?r.json()

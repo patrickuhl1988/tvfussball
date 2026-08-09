@@ -1,0 +1,51 @@
+y{
+    var day=(m.day||"");
+    if(/\d\.\/\d/.test(day)) return null;
+    var dm=day.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/); if(!dm) return null;
+    var tm=(m.time||"").match(/(\d{1,2}):(\d{2})/); var hh=tm?tm[1]:"20", mm=tm?tm[2]:"00";
+    return dm[3]+"-"+("0"+dm[2]).slice(-2)+"-"+("0"+dm[1]).slice(-2)+"T"+("0"+hh).slice(-2)+":"+mm+":00+02:00";
+  }catch(e){ return null; }
+}
+/* ---------- Strukturierte Daten: bewusst knapp halten ----------
+   Nur die fuenf hoechstbewerteten Spiele der naechsten 7 Tage bzw.
+   die fuenf besten Highlights der letzten 7 Tage. Alles Weitere lebt
+   ausschliesslich im JavaScript und gehoert nicht in den Suchindex. */
+const SEO_MAX = 5, SEO_DAYS = 7;
+function seoPickMatches(){
+  var now=Date.now(), bis=now+SEO_DAYS*86400000, out=[];
+  for(var i=0;i<MATCHES.length;i++){
+    var m=MATCHES[i];
+    if(!m||!m.lohnt||!m.lohnt.einordnung) continue;
+    var d=m.lohnt.einordnung.de||m.lohnt.einordnung.en;
+    if(!d||d.length<40) continue;
+    if(/folgen mit der Terminierung|folgt mit der/.test(d)) continue;
+    var sd=seoStartDate(m); if(!sd) continue;
+    var ko=_koMs(m.day,m.time); if(!ko||ko<now-7200000||ko>bis) continue;
+    out.push({m:m, sd:sd, ko:ko, score:(+m.lohnt.score||0), desc:d});
+  }
+  out.sort(function(a,b){ return (b.score-a.score) || (a.ko-b.ko); });
+  return out.slice(0,SEO_MAX);
+}
+function seoPickHighlights(){
+  var now=Date.now(), ab=now-SEO_DAYS*86400000, out=[];
+  for(var i=0;i<HL.length;i++){
+    var m=HL[i];
+    if(!m||!m.analyse||!m.analyse.fazit) continue;
+    var f=m.analyse.fazit.de||m.analyse.fazit.en; if(!f) continue;
+    var dm=(m.date||"").match(/(\d{1,2})\.(\d{1,2})\./); if(!dm) continue;
+    var sd="2026-"+("0"+dm[2]).slice(-2)+"-"+("0"+dm[1]).slice(-2);
+    var t=Date.parse(sd+"T20:00:00+02:00");
+    if(!t||t<ab||t>now+86400000) continue;
+    var note=(m.analyse.spielnote&&+m.analyse.spielnote.wert)||0;
+    out.push({m:m, sd:sd, t:t, note:note, desc:f});
+  }
+  out.sort(function(a,b){ return (b.note-a.note) || (b.t-a.t); });
+  return out.slice(0,SEO_MAX);
+}
+function injectSeoJsonLd(){
+  try{
+    var items=[];
+    if(PAGE==="hl" && typeof HL!=="undefined"){
+      seoPickHighlights().forEach(function(x){
+        var m=x.m;
+        items.push({"@type":"SportsEvent","name":((m.h||"")+" \u2013 "+(m.a||"")+(m.g?(" ("+m.g+")"):"")),"description":x.desc,"sport":

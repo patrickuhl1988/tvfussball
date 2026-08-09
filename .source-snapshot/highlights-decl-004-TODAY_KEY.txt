@@ -1,0 +1,24 @@
+eiteren Länder unter „Mehr Sender"
+let MARKET_LOCKED = false; // true = Nutzer hat Land manuell gewählt (Geo-IP wird ignoriert)
+const _tk=new Date(); const TODAY_KEY = _tk.getFullYear()*10000+(_tk.getMonth()+1)*100+_tk.getDate(); // dynamisch: Spiele vor heute erscheinen nicht mehr in der Senderliste (sondern in Highlights)
+
+const I18N = {
+  de:{ nav_live:"Heute", nav_hl:"Highlights", nav_news:"Transfers", nav_prov:"Anbieter", nav_wm:"WM", nav_tipp:"Tippspiel",
+    tipp_eyebrow:"Tippspiel", tipp_title:"Tippe das Spiel – und gewinne",
+    tipp_sub:"Tippe das WM-Finale heute Abend: Spanien – Argentinien (21:00 Uhr, ZDF & MagentaTV). Gewinnst du, melden wir uns über Facebook oder Instagram bei dir.",
+    tipp_nick:"Spitzname (optional)", tipp_nick_ph:"Wie sollen wir dich nennen?",
+    tipp_tip_label:"Deine Tipps – genaues Endergebnis", tipp_tip_ph:"z. B. 0:2",
+    tipp_fb_label:"Dein Insta- oder Facebook-Profil", tipp_fb_ph:"Link zu deinem Insta- oder FB-Profil",
+    tipp_fb_help:"Nur zur Kontaktaufnahme, falls du gewinnst.",
+    tipp_consent:"Ich bin einverstanden, dass mein Tipp und mein Profil-Link zur Kontaktaufnahme im Gewinnfall gespeichert und verarbeitet werden.",
+    tipp_submit:"Tipp abgeben", tipp_rules_t:"So funktioniert's",
+    tipp_rule1:"Tippe beide Spiele aufs genaue Endergebnis.",
+    tipp_rule2:"Teilnahmeschluss ist der Anpfiff des ersten Spiels (Mo, 29.06., 19:00 Uhr).",
+    tipp_rule3:"Teilnahme nur mit Follow (Facebook oder Instagram) + geteilter Seite.",
+    tipp_rule4:"Verlost werden 1× 20 € und 1× 10 € Amazon-Gutschein. Bei Gewinn melden wir uns über Facebook oder Instagram.",
+    tipp_req_follow:"Ich folge tvfussball.de auf Facebook oder Instagram.", tipp_req_share:"Ich habe tvfussball.de mit mindestens einem Freund geteilt (z. B. per WhatsApp).",
+    tipp_cd:"Anpfiff in", tipp_kickoff:"Anpfiff – Tippabgabe geschlossen",
+    tipp_closed:"Das Spiel hat begonnen – die Tippabgabe ist geschlossen.",
+    tipp_e_tip:"Bitte gib deinen Tipp ein.", tipp_e_fb:"Bitte gib einen gültigen Instagram- oder Facebook-Link ein.",
+    tipp_e_consent:"Bitte stimme der Verarbeitung zu, um teilzunehmen.", tipp_e_follow:"Bitte bestätige, dass du uns auf Facebook oder Instagram folgst.", tipp_e_share:"Bitte bestätige, dass du die Seite geteilt hast.",
+    tipp_done_t:"Dein Tipp ist eingegangen!", tipp_done_s:"Vi

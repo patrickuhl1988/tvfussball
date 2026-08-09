@@ -1,0 +1,51 @@
+S;
+}
+/* Laufen in den naechsten Tagen ueberhaupt Top-Ligaspiele? Sonst: Sommerpause */
+let _quietCache=null, _quietAt=0;
+function topSeasonQuiet(){
+  var now=Date.now();
+  if(_quietCache!==null && now-_quietAt<600000) return _quietCache;
+  var hit=MATCHES.some(function(m){
+    if(["bl","pl","es","it","l1"].indexOf(catOf(m))<0) return false;
+    var ko=_koMs(m.day,m.time);
+    return ko && ko>now-10800000 && ko<now+4*86400000;
+  });
+  _quietCache=!hit; _quietAt=now; return _quietCache;
+}
+function isTopMatch(m){
+  var c=catOf(m), comp=String(m.comp||"");
+  if(["bl","pl","es","it","l1","dfb","facup","wm"].indexOf(c)>=0) return true;   /* Top-Ligen, Pokale, Laenderspiele */
+  if((c==="cl"||c==="el") && !/Quali/i.test(comp)) return true;                  /* CL/EL ab Playoff & Gruppenphase */
+  var big=topClubs();
+  if(c==="test") return big.has(m.h)||big.has(m.a);                              /* Testspiel nur mit Top-Klub */
+  if(["cl","el","ecl"].indexOf(c)>=0){
+    if(big.has(m.h)||big.has(m.a)) return true;
+    return topSeasonQuiet() && !!(m.lohnt && m.lohnt.score>=55);   /* Sommerpause: nur die groesseren Quali-Duelle */
+  }
+  return false;
+}
+function renderLiveFilters(){ const t=I18N[LANG];
+  const up=MATCHES.filter(m=>!isFinished(m)), upF=FORMATS.filter(f=>!isFinished(f));
+  const cnt={
+    all: up.length+upF.length,
+    top: up.filter(isTopMatch).length,
+    mine: up.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a)||FOLLOW.has("liga:"+m.cat)).length + upF.filter(f=>FOLLOW.has(f.id)).length,
+    free: up.filter(isFreeTV).length,
+    tonight: up.filter(isTonight).length + upF.filter(isTonightFmt).length,
+    format: upF.length,
+    wm: up.filter(m=>catOf(m)==="wm").length,
+    dfb: up.filter(m=>catOf(m)==="dfb").length,
+    bl: up.filter(m=>catOf(m)==="bl").length,
+    bl2: up.filter(m=>catOf(m)==="bl2").length,
+    bl3: up.filter(m=>catOf(m)==="bl3").length,
+    cl: up.filter(m=>catOf(m)==="cl").length,
+    el: up.filter(m=>catOf(m)==="el").length,
+    pl: up.filter(m=>catOf(m)==="pl").length,
+    facup: up.filter(m=>catOf(m)==="facup").length,
+    it: up.filter(m=>catOf(m)==="it").length,
+    es: up.filter(m=>catOf(m)==="es").length,
+    l1: up.filter(m=>catOf(m)==="l1").length,
+    ecl: up.filter(m=>catOf(m)==="ecl").length,
+    test: up.filter(m=>catOf(m)==="test").length
+  };
+  const blChip = cnt.bl>0 ? [["bl

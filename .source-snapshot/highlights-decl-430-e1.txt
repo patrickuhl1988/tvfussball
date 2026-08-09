@@ -1,0 +1,31 @@
+"an-h">'+t.an_summary+'</div><p class="an-fazit">'+esc(biln(txt))+'</p></div>'; }
+function renderAnalyse(m,t){ const A=m.analyse; if(!A) return "";
+  let e1=anNote(A.spielnote,t)+anEvents(A,t,m)+anMotm(A.spielerDesSpiels,t,m)+anFazit(A.fazit,t);
+  let e2=anInjuries(A.verletzungen,t)+anRef(A.schiri,t)+anBar(A.ballbesitz,t)+anChances(A.chancen,t)+anRun(A.laufwunder,t);
+  if(A.quelleStatistik) e2+='<div class="an-srcline">'+t.an_src+': '+esc(A.quelleStatistik)+'</div>';
+  if(!e1&&!e2) return "";
+  let html='<button class="morebtn an-btn" data-more data-lo="'+esc(t.an_t)+'" data-lc="'+esc(t.an_t)+'" aria-expanded="false"><span class="mlbl">'+t.an_t+'</span>'+MCHEV+'</button><div class="morewrap"><div class="analysewrap">'+e1;
+  if(e2) html+='<button class="morebtn an-sub2" data-more data-lo="'+esc(t.an_more)+'" data-lc="'+esc(t.an_more)+'" aria-expanded="false"><span class="mlbl">'+t.an_more+'</span>'+MCHEV+'</button><div class="morewrap"><div class="analyse2">'+e2+'</div></div>';
+  html+='</div></div>';
+  return html; }
+function lineupSection(m){
+  if(m.tba) return "";
+  var lg=espnLeagueFor(m); if(!lg) return "";
+  var lbl=(LANG==="de")?"Aufstellung":"Line-ups";
+  return '<button class="morebtn lu-btn" data-more data-lineup="1" data-lo="'+esc(lbl)+'" data-lc="'+esc(lbl)+'" aria-expanded="false"><span class="mlbl">'+esc(lbl)+'</span>'+MCHEV+'</button>'+
+    '<div class="morewrap"><div class="lineupwrap" data-lu="'+esc(liveKey(m))+'" data-lg="'+esc(lg)+'" data-hn="'+esc(m.h)+'" data-an="'+esc(m.a)+'"></div></div>';
+}
+function _luName(p){ var a=p.athlete||{}; return a.displayName||a.shortName||a.fullName||""; }
+function _luNo(p){ return p.jersey||(p.athlete&&p.athlete.jersey)||""; }
+function _luLine(p){
+  var pos=(p.position||{}); var s=String(pos.name||pos.displayName||pos.abbreviation||"").toLowerCase(); var ab=String(pos.abbreviation||"").toLowerCase();
+  if(/keeper|goalie/.test(s)||ab==="g"||ab==="gk") return 0;
+  if(/back|defen/.test(s)||/^(d|cb|lb|rb|lwb|rwb|wb|sw)$/.test(ab)) return 1;
+  if(/midfield/.test(s)||/^(m|cm|dm|am|lm|rm|cdm|cam|rdm|ldm|rcm|lcm)$/.test(ab)) return 2;
+  if(/forward|strik|wing|attack/.test(s)||/^(f|cf|st|lw|rw|w|ss)$/.test(ab)) return 3;
+  return -1;
+}
+function renderLineup(rosters){
+  if(!rosters||rosters.length<2) return "";
+  var de=(LANG==="de"), H=null, A=null;
+  rosters.forEach

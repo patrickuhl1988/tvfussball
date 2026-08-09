@@ -1,0 +1,14 @@
+_evts.push({t:"red",min:_min,who:_who,side:_side}); } else if(_d.yellowCard){ _evts.push({t:"yellow",min:_min,who:_who,side:_side}); } }catch(_e){} } var key=livePairKey(hn,an)+"@"+_berlinKey(Date.parse(ev.date)); next[key]={ state:st, id:(ev.id||""), hn:hn, an:an, hs:(home.score!=null?String(home.score):""), as:(away.score!=null?String(away.score):""), clock:(ev.status&&ev.status.displayClock)||"", half:_half, hyd:_hyd, events:_evts }; }catch(e){} } if(osrcs.length){ var ojs=await Promise.all(osrcs.map(function(u){ return fetch(u,{signal:ac.signal,cache:"no-store"}).then(function(r){ return (r&&r.ok)?r.json():null; }).catch(function(){ return null; }); }));
+   ojs.forEach(function(arr){ if(!arr||!arr.length) return; for(var i=0;i<arr.length;i++){ var e=_oldbEntry(arr[i]); if(e && e.val.state!=="pre" && !next[e.key]) next[e.key]=e.val; } }); }
+ LIVE_CACHE=next; liveApplyDOM(); liveSchedule(); }catch(e){ /* graceful: Seite bleibt unveraendert */ } finally{ clearTimeout(to); _liveBusy=false; } }
+/* ===== /LIVE-SCORES ===== */
+
+const ABO_PROVIDERS = {
+  ard_zdf:{name:"ARD / ZDF",          free:true,  price:0,     note:{de:"Beitragsfinanziert, frei empfangbar", en:"Licence-funded, free to air"}, url:"https://www.sportschau.de",        aff:""},
+  magenta:{name:"MagentaTV",          free:false, price:9.95,  note:{de:"MagentaSport · WM-Paket separat",      en:"MagentaSport · WC package separate"}, url:"https://www.telekom.de/magenta-tv", aff:""},
+  sky:    {name:"Sky / WOW",          free:false, price:29.99, note:{de:"WOW Live-Sport oder Sky Bundesliga",   en:"WOW Live-Sport or Sky Bundesliga"},   url:"https://www.wow.de",               aff:""},
+  dazn:   {name:"DAZN",               free:false, price:34.99, note:{de:"Unlimited · Jahresabo",               en:"Unlimited · annual plan"},           url:"https://www.dazn.com",             aff:""},
+  prime:  {name:"Amazon Prime Video", free:false, price:8.99,  note:{de:"in der Prime-Mitgliedschaft",          en:"part of Prime membership"},          url:"https://www.amazon.de/prime",      aff:""},
+  rtl:    {name:"RTL+",               free:false, price:6.99,  note:{de:"RTL+ Premium",                        en:"RTL+ Premium"},                      url:"https://plus.rtl.de",              aff:""}
+};
+/* Wettbewerb -> Carrier · cov: "full" (zeigt alle Spiele) | "part" (nur Ausw

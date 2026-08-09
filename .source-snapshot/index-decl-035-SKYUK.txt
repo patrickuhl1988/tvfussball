@@ -1,0 +1,26 @@
+olfc.com/"}, SKYYT={n:"skysport.de / YouTube",t:"fta",u:"https://sport.sky.de/"};
+/* Premier-League-Auslandssender 2025–28 (Rechteinhaber je Land) */
+const SKYUK={n:"Sky Sports",t:"pay",q:"HD"}, TNT={n:"TNT Sports",t:"pay",q:"HD"}, BBCHL={n:"BBC (Highlights)",t:"fta",q:"HD"},
+  CANALP={n:"Canal+",t:"pay",q:"HD"}, SKYIT={n:"Sky Italia",t:"pay",q:"HD"}, VIAPLAY={n:"Viaplay",t:"pay",q:"HD"},
+  PEACOCK={n:"NBC / Peacock",t:"pay",q:"HD"}, FUBO={n:"Fubo",t:"pay",q:"HD"}, SKYIE={n:"Sky Sports / Premier Sports",t:"pay",q:"HD"},
+  STARHUB={n:"StarHub",t:"pay",q:"HD"}, FOXMX={n:"Fox Sports / Tubi",t:"pay",q:"HD"}, JASTH={n:"trueID / JAS",t:"pay",q:"HD"}, TAPMAD={n:"tapmad",t:"pay",q:"HD"};
+/* La-Liga-Auslandssender 2026/27 (Rechteinhaber je Land) */
+const MOVI={n:"Movistar+ / DAZN",t:"pay",q:"HD"}, PREMSP={n:"Premier Sports",t:"pay",q:"HD"}, DISNEY={n:"Disney+",t:"pay",q:"HD"},
+  ESPNPLUS={n:"ESPN+ / ESPN",t:"pay",q:"HD"}, ZIGGO={n:"Ziggo Sport",t:"pay",q:"HD"};
+/* Serie-A-Auslandssender 2026/27 (Rechteinhaber je Land) */
+const PARA={n:"Paramount+ / CBS Sports",t:"pay",q:"HD"}, CMORE={n:"C More",t:"pay",q:"HD"}, SSPORT={n:"S Sport",t:"pay",q:"HD"};
+/* Ligue-1-Sender 2026/27 */
+const LIGUE1PLUS={n:"Ligue 1+",t:"pay",q:"HD"};
+const UEFATV={n:"UEFA.tv",t:"fta",q:"HD",u:"https://www.uefa.tv/"};
+
+
+
+
+const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[BEIN], CA:[CTV,TSN], US:[FOX,TELE], IE:[RTE], FI:[YLE,MTV3], SG:[MEDIA], BD:[TSPT,BTV], TR:[TRT], SE:[SVT,TV4], MX:[CAN5,AZT] };
+
+const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",ES:"🇪🇸",NL:"🇳🇱",TH:"🇹🇭",CA:"🇨🇦",US:"🇺🇸",IE:"🇮🇪",FI:"🇫🇮",SG:"🇸🇬",BD:"🇧🇩",TR:"🇹🇷",SE:"🇸🇪",MX:"🇲🇽"};
+const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Frankreich",IT:"Italien",ES:"Spanien",NL:"Niederlande",TH:"Thailand",CA:"Kanada",US:"USA",IE:"Irland",FI:"Finnland",SG:"Singapur",BD:"Bangladesch",TR:"Türkei",SE:"Schweden",MX:"Mexiko"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK",FR:"France",IT:"Italy",ES:"Spain",NL:"Netherlands",TH:"Thailand",CA:"Canada",US:"USA",IE:"Ireland",FI:"Finland",SG:"Singapore",BD:"Bangladesh",TR:"Turkey",SE:"Sweden",MX:"Mexico"}};
+
+/* WM 2026 — echte Partien, Zeiten (MEZ) */
+const MATCHES = [
+{cat:"wm", day:"Donnerstag, 09.07.2026", time:"22:00", comp:"WM 2026 · Viertelfinale", h:"Marokko", a:"Frankreich", kom

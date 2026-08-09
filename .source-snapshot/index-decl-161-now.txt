@@ -1,0 +1,18 @@
+="'+esc(list[i].u)+'"'; }
+  }catch(e){}
+  return "";
+}
+function liveNoDataNote(el){
+  var ko=+(el.getAttribute("data-lvko")||0); if(!ko) return "";
+  var now=Date.now(); if(now < ko+90000 || now > ko+5*3600000) return "";
+  var de=(LANG==="de");
+  var sn=el.getAttribute("data-lvsn"), su=el.getAttribute("data-lvsu");
+  var link = (sn&&su) ? ('<a class="lvt-nd-link" href="'+su+'" target="_blank" rel="noopener">'+(de?"Live bei ":"Watch on ")+sn+' \u2197</a>') : "";
+  return '<div class="lvt-nodata"><span class="lvt-nd-ic">\u26A1</span><span>'+(de
+    ? "Zu diesem Spiel liefert unsere Live-Quelle keine Daten \u2013 Ergebnis und Analyse folgen nach Abpfiff unter Highlights."
+    : "Our live data source doesn\u2019t cover this match \u2013 result and analysis will follow under Highlights after the final whistle.")+link+'</span></div>';
+}
+function liveApplyTicker(){
+  try{ var els=document.querySelectorAll("[data-lvt]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-lvt")]; var home=el.getAttribute("data-lh"); el.innerHTML=(d&&d.state&&d.state!=="pre")?renderLiveTicker(d,home):liveNoDataNote(el); } }catch(e){}
+}
+async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var srcs=liveSources(); var osrcs=liveOldbSources(); if(!srcs.length&&!osrcs.length){ if(_livePoll){clearInterval(_livePoll);_livePoll=null;} if(Object.keys(LIVE_CACHE).length){ LIVE_CACHE={}; try{liveApplyDOM();}catch(_e){} } return; } var jsons=await Promise.all(srcs.map(function(src){ return fetch(src,{signal:ac.signal,cache:"no-store"}).then(function(r){ return (r&&r.ok)?r.json():null; }).catch(function(){ return null; }); })); var evs=[]; jsons.forEach(function(j){ if(j&&j.events&&j.events.length) evs=evs.concat(j.events); }); var next={}; for(var i=0;i<evs.length;i++){ try{ var ev=evs[i]; var comp=ev.competitions&&ev.competitions[0]; if(!comp) continue; var cs=comp.competitors||[]; if(cs.length<2) continue; var home=null,away=null; for(var k=0;k<cs.length;k++){ if(cs[k].homeAway==="home") home=cs[k]; else if(cs[k].homeAway==="away") away=cs[k]; } if(!home||!away) continue; var hn=liveNorm(home.team&&home.team.displayName), an=liveNorm(away.team&&away.team.displayName); if(!hn||!an) 

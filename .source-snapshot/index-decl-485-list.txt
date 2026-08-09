@@ -1,0 +1,37 @@
+0); }
+function renderHL(){
+  const t=I18N[LANG], board=document.getElementById("hlBoard");
+  document.getElementById("hlNote").innerHTML=t.hl_note;
+  let list=HL.filter(m=>{
+    if(HL_COMP!=="*" && hlCompOf(m)!==HL_COMP) return false;
+    if(HL_FILTER==="relive" && !m.full) return false;
+    if(HL_FILTER==="top80"){ var _w=m.analyse&&m.analyse.spielnote&&m.analyse.spielnote.wert; if(!(_w>=8)) return false; }
+    if(HL_Q){const q=HL_Q.toLowerCase(); if(!((m.h+" "+m.a).toLowerCase().includes(q))) return false;}
+    return true;
+  });
+  document.getElementById("hlCount").textContent="["+list.length+"]";
+  var _hlTotal=list.length; list=list.slice(0,HL_SHOWN);
+  if(!list.length){board.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
+  let html="", curDate="";
+  list.forEach(m=>{
+    if(m.date!==curDate){curDate=m.date; html+='<div class="daybar"><span class="d">'+locDate(m.date)+' 2026</span><span class="ln"></span></div>';}
+    html+=hlRow(m,t);
+  });
+  board.innerHTML=html+smBtn("hl",_hlTotal,HL_SHOWN);
+  /*hl-auto-open*/ const _hf=board.querySelector(".row");
+  if(_hf){ _hf.classList.add("open"); const _hh=_hf.querySelector(".rowhead"); if(_hh) _hh.setAttribute("aria-expanded","true"); }
+}
+const YT_PLAY_SVG='<svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7c-.8-3-2.5-5.4-5.5-6.2C55.6.1 34 0 34 0S12.4.1 7 1.5C4 2.3 2.3 4.7 1.5 7.7 0 13.1 0 24 0 24s0 10.9 1.5 16.3c.8 3 2.5 5.4 5.5 6.2C12.4 47.9 34 48 34 48s21.6-.1 27-1.5c3-.8 4.7-3.2 5.5-6.2C68 34.9 68 24 68 24s0-10.9-1.5-16.3z" fill="#f00"/><path d="M27 34.5l18-10.5-18-10.5z" fill="#fff"/></svg>';
+function ytEmbed(id,label){
+  return '<div class="ytembed" data-yt="'+id+'" role="button" tabindex="0" aria-label="'+(label||"Video")+'">'+
+    '<img class="thumb" loading="lazy" src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt="">'+
+    '<span class="pbtn">'+YT_PLAY_SVG+'</span>'+
+    (label?'<span class="plabel">'+label+'</span>':'')+'</div>';
+}
+function ytEmbedPlay(el){
+  if(!el||el.dataset.loaded) return;
+  var id=el.getAttribute("data-yt"); if(!id) return;
+  el.dataset.loaded="1";
+  el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+}
+document.addEventListener("click",function(e){var el=e.

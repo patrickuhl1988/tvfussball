@@ -1,0 +1,79 @@
+r every football fan."}}}
+];
+
+/* Highlights — echte WM-2026-Ergebnisse + offizielle Quellen (Stand 23.06.2026).
+   zdf:[Länge, URL] | null · full:[Anbieter, Länge, Verfügbarkeit, URL] | null (=nur Pay) */
+const ZDFV="https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/";
+const ARD_RL="https://www.zdf.de/video/livestreams/collection-index-page-ard-collection-ard-dxjuomfyzdpzag93ojkynwmxymi0zdc3nzbimdc-104/";
+const ARD_HUB="https://www.ardmediathek.de/suche/{q}";
+const ZDF_YT="https://www.youtube.com/@sportstudiofussball/search?query={q}";
+/* Verifizierte Direktlinks aufs jeweilige Spiel-Video.
+   Format: "Heim|Gast":[[Kuerzel, Anzeigename, URL], ...] */
+const HL_YT={
+  "FC Basel|Juventus Turin":[["JUV","Juventus · Highlights (YouTube)","https://www.youtube.com/watch?v=PndXQhhU0_w"]],
+  "Hammarby IF|RSC Anderlecht":[
+    ["RSCA","RSC Anderlecht · Highlights (YouTube)","https://www.youtube.com/watch?v=amTKB40RTqY"],
+    ["YT","Highlights (YouTube)","https://www.youtube.com/watch?v=rOvJHUb2TGo"],
+    ["UEFA","UEFA.com · Spielseite","https://www.uefa.com/uefaeuropaleague/match/2048741--hammarby-vs-anderlecht/"]
+  ],
+  "Aarhus GF|Lech Posen":[
+    ["YT","Skrót meczu · Highlights (YouTube)","https://www.youtube.com/watch?v=qVoNpUXU3xs"],
+    ["YT","Alle Tore (YouTube)","https://www.youtube.com/watch?v=ZwMJPEAXfwI"],
+    ["MEC","Meczyki.pl · Skrót zum Spiel","https://www.meczyki.pl/wyniki-na-zywo/agf-aarhus-lech-poznan/6079187/skrot"],
+    ["TVP","TVP Sport · Skrót (8 Min.)","https://kkslech.com/2026/07/21/gole-i-skrot-meczu-aarhus-lech-14/"]
+  ],
+  "Dynamo Kiew|PAOK Saloniki":[
+    ["YT","Στιγμιότυπα · Highlights (YouTube)","https://www.youtube.com/watch?v=GtL2Hzo8huI"],
+    ["FCD","fcdynamo.com · Spielbericht","https://fcdynamo.com/en/news/liga-jevropi-dinamo-paok-23-zvit-pro-matc"],
+    ["DK","dynamo.kiev.ua · Videoüberblick","https://dynamo.kiev.ua/uk/news/732059-dynamo-paok-23-videoohliad-matchu"]
+  ],
+  "Besiktas|FC Midtjylland":[
+    ["YT","Maç Özeti · Highlights (YouTube)","https://www.youtube.com/watch?v=PgjqNXmKvCo"],
+    ["YS","Yeni Şafak · Maç Özeti (Video)","https://www.yenisafak.com/galeri/spor/besiktas-1-0-midtjylland-mac-ozeti-izle-video-4842604"]
+  ],
+  "Hajduk Split|Pafos FC":[
+    ["HAJ","Hajduk · Sažetak / Highlights (YouTube)","https://www.youtube.com/watch?v=1dzEfaXFMbc"],
+    ["UEFA","UEFA.com · Spielseite","https://www.uefa.com/uefaeuropaleague/match/2048746--hajduk-split-vs-pafos/"]
+  ],
+  "FC Thun|Dinamo Zagreb":[
+    ["SRF","SRF Sport · Highlights (YouTube)","https://www.youtube.com/watch?v=i1AzBZd7XmM"],
+    ["SRF","SRF · Video-Highlights zum Spiel","https://www.srf.ch/sport/resultcenter/live/football/1845164"],
+    ["SRF","SRF · Spielbericht","https://www.srf.ch/sport/fussball/champions-league/1-1-in-der-2-cl-quali-runde-thun-kassiert-gegen-dinamo-zagreb-spaet-den-ausgleich"]
+  ],
+  "FC Lugano|KF Dukagjini":[
+    ["SRF","SRF Sport · Highlights (YouTube)","https://www.youtube.com/watch?v=2IWoXWeu-yY"],
+    ["SRF","SRF · Video-Highlights zum Spiel","https://www.srf.ch/sport/resultcenter/live/football/1845191"],
+    ["SRF","SRF · Spielbericht","https://www.srf.ch/sport/fussball/conference-league/2-quali-runde-conf-league-lugano-sieg-gegen-dukagjini-faellt-zu-knapp-aus"]
+  ],
+  "SK Rapid Wien|Hamburger SV":[
+    ["HSV","HSVtv · Highlights (YouTube)","https://www.youtube.com/watch?v=b9HeQ2xDv7Q"],
+    ["SKR","SK Rapid · Highlights (YouTube)","https://www.youtube.com/watch?v=VJCCVtjkvDc"],
+    ["HSV","HSVtv · Re-Live des Spiels","https://www.youtube.com/watch?v=Uchp3CTikXE"],
+    ["ORF","ORF ON · Spielaufzeichnung","https://on.orf.at/video/14331699/fussball-freundschaftsspiel-sk-rapid-hamburger-sv-aus-wien"]
+  ],
+  "Werder Bremen|Fagiano Okayama":[
+    ["SVW","WERDER.TV · Highlights (YouTube)","https://www.youtube.com/watch?v=yL1C2SYJqqA"],
+    ["SVW","WERDER.TV · Re-Live des Spiels","https://www.youtube.com/watch?v=7AZK-ENIQdc"],
+    ["SVW","werder.de · Spielbericht","https://www.werder.de/news/maenner/2026-2027/spielbericht-okayama-220726"]
+  ],
+  "Twente Enschede|Ferencváros":[
+    ["UEFA","UEFA · Highlights (YouTube)","https://www.youtube.com/watch?v=y3KYgliUDgU"],
+    ["XS","Melhores Momentos · Highlights (YouTube)","https://www.youtube.com/watch?v=pPx4kEAhfZ0"]
+  ],
+  "RW Oberhausen|Borussia Dortmund":[
+    ["BVB","BVB · Highlights (YouTube)","https://www.youtube.com/watch?v=oPUrJCxa-cg"],
+    ["SKY","Sky Sport Bundesliga · Highlights (YouTube)","https://www.youtube.com/watch?v=fNwahrqSaiM"],
+    ["BVB","BVB · Re-Live, dt. Kommentar","https://www.youtube.com/watch?v=YirU8BSTjuw"],
+    ["SKY","Sky Sport · Re-Live","https://www.youtube.com/watch?v=2VFQ7Tbo7ws"]
+  ],
+  "Fenerbahçe|Górnik Zabrze":[
+    ["YT","Maç Özeti · Highlights (YouTube)","https://www.youtube.com/watch?v=eFLWghtbSYQ"],
+    ["KIC","kicker · Spielinfo zum Spiel","https://www.kicker.de/fenerbahce-gegen-zabrze-2026-champions-league-qualifikation-5210692/spielinfo"]
+  ],
+  "Spanien|Argentinien":[
+    ["ZDF","ZDF sportstudio · Highlights (12:47)","https://www.zdfheute.de/sport/video/das-aktuelle-sportstudio/wm-2026-spanien-argentinien-highlights-zusammenfassung-100.html"],
+    ["S1","SPORT1 · Tore & Highlights","https://www.sport1.de/tv-video/video/wm-2026-spanien-argentinien-tore-highlights-im-video__2EE70A40-D21D-4A58-B3D9-8BBEC427C4F6"],
+    ["ZDF","ZDF · Das Siegtor von Ferran Torres","https://www.zdfheute.de/sport/fussball-wm/video/wm-2026-torres-tor-finale-100.html"]
+  ],
+  "Frankreich|England":[
+    ["ZDF","ZDF · Highlights (13:33)","https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/wm-2026-frankreich-england-spiel-um-platz-dr

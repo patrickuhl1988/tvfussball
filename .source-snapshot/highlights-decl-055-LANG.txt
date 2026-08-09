@@ -1,0 +1,16 @@
+opa League und Premier-League-Spielen.",
+   en:"UK pay provider (via discovery+) with Champions League, Europa League and Premier League games."}
+];
+
+let LANG="de", LANG_LOCKED=false, LIVE_SEL=new Set([]), FILTER_USERSET=false, LIVE_Q="", HL_FILTER="all", HL_Q="", NEWS_TEAM="", NEWS_Q="", PROV_FILTER="all", PROV_Q="";
+let NEWS_MODE="transfers", TR_SORT="fee", TR_DIR="desc", TR_LEAGUE="", TR_CLUB="", TR_Q="", TR_SHOW="fix";
+let LIVE_SHOWN=20, HL_SHOWN=20, NEWS_SHOWN=20, TR_SHOWN=20; const PAGE_SIZE=20;
+const FORMATS = [
+  {id:"deadline-day", day:"Dienstag, 01.09.2026", time:"09:00", name:"Deadline Day – Transferschluss live", ch:"Sky Sport News", icon:"📞", kind:"live", live:true,
+   when_de:"Letzter Tag der Sommer-Transferperiode", when_en:"Final day of the summer transfer window",
+   desc_de:"Sky Sport News sendet ab etwa 9 Uhr durchgehend live bis zum Transferschluss: In Deutschland müssen alle Unterlagen bis 18 Uhr bei der DFL liegen. Der Sender kommt wie jedes Jahr ganz in Gelb, mit Schalten zu den Reportern sowie zu Sky UK und Sky Italia. Am Abend folgt die Sendung „Transfer Update – die Deadline Day Show“. Wie im Vorjahr fällt der Termin nicht auf den 31. August, sondern einen Tag später – weil in England der letzte Montag im August ein Feiertag ist und sich die Top-5-Ligen auf einen gemeinsamen Stichtag verständigt haben.",
+   desc_en:"Sky Sport News goes live from around 9am until the window shuts – in Germany all paperwork must reach the DFL by 6pm. The channel turns yellow as every year, with links to reporters and to Sky UK and Sky Italia; the evening brings \u201cTransfer Update \u2013 the Deadline Day Show\u201d. As last year the date falls a day later than usual because of the English bank holiday.",
+   stream:"skysport.de / Sky Sport App", url:"https://sport.sky.de/fussball/artikel/deadlineday/11129720/34240"},
+  {id:"cl-po-los", day:"Montag, 03.08.2026", time:"12:00", name:"Champions League · Play-off-Auslosung", ch:"UEFA.tv / uefa.com", icon:"🎱", kind:"auslosung", live:true,
+   when_de:"Play-off-Runde · Auslosung in Nyon", when_en:"Play-off round · draw in Nyon",
+   desc_de:"Im Haus des Europäischen Fußballs in Nyon werden die letzten 14 Teams den Play-offs zugeordnet – Hinspiele am 18./19. August, Rückspiele am 25./26. August. Die UEFA veröffentlicht Setzlisten und Ablauf ab 8:30 Uhr, Die Zie

@@ -1,0 +1,37 @@
+"+p.price.slice(3) : t.price_approx+" "+p.price);
+  document.getElementById("provNote").textContent=t.prov_note;
+  let list=PROVIDERS.filter(p=>{
+    const f=PROV_FILTER;
+    if(f && f!=="all"){
+      if(["DE","AT","CH","UK"].includes(f)){ if(!p.countries.includes(f)) return false; }
+      else if(f==="free"||f==="pay"){ if(p.kind!==f) return false; }
+      else { if(!p.comps.includes(f)) return false; }
+    }
+    if(PROV_Q){ const q=PROV_Q.toLowerCase();
+      if(!((p.name+" "+p[LANG]+" "+p.comps.join(" ")+" "+p.countries.join(" ")+" "+p.kind).toLowerCase().includes(q))) return false; }
+    return true;
+  });
+  document.getElementById("provCount").textContent="["+list.length+"]";
+  if(!list.length){box.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
+  box.innerHTML=list.map(p=>{
+    const badge=p.kind==="free"?'<span class="tag fta">'+t.p_free+'</span>':'<span class="tag pay">'+t.p_pay+'</span>';
+    const comps='<div class="pcomps">'+p.comps.map(c=>'<span class="pcomp">'+c+'</span>').join("")+'</div>';
+    return '<div class="pcard"><div class="phead">'+
+      '<div class="plogo '+(p.kind==="free"?"free":"")+'">'+mono(p.name)+'</div>'+
+      '<div style="min-width:0"><div class="pname">'+p.name+'</div><div class="pcc">'+p.countries.join(" · ")+'</div></div>'+badge+'</div>'+
+      '<p>'+p[LANG]+'</p>'+comps+
+      '<div class="pfoot"><div class="pprice">'+fmt(p)+'<small>'+p.sub+'</small><small class="pcheck">'+t.prov_check+' ↗</small></div>'+
+        '<a class="pvisit" href="'+p.url+'" target="_blank" rel="noopener">'+t.visit+' ↗</a></div></div>';
+  }).join("");
+}
+
+/* ---------- i18n / theme ---------- */
+function applyLang(){
+  const t=I18N[LANG];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(t[k]) el.textContent=t[k];});
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{const k=el.dataset.i18nPh; if(t[k]) el.placeholder=t[k];});
+  document.documentElement.lang=LANG;
+  document.getElementById("hlSearch").placeholder = LANG==="de"?"Mannschaft suchen … (z. B. Frankreich)":"Search team … (e.g. France)";
+  document.getElementById("liveSearch").placeholder = LANG==="de"?"Weitere Wettbewerbe oder Teams suchen …":"Search other competitions or teams …";
+
+  document.getElementById("provSearch").placeholder = LANG==="de"?"Anbieter, Wettbewerb oder Land suchen

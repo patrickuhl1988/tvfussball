@@ -1,0 +1,19 @@
+ i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var re=/(\d{2})\.(\d{2})\.(\d{4})/g,x,hit=false; while((x=re.exec(String(m.day)))){ var k=(+x[3])*10000+(+x[2])*100+(+x[1]); if(k>=tk-1&&k<=tk+1){ hit=true; break; } } if(!hit) continue; var lg=espnLeagueFor(m); if(lg) set[lg]=true; } return Object.keys(set); }
+function liveSources(){ return liveLeaguesToday().map(function(lg){ return "https://site.api.espn.com/apis/site/v2/sports/soccer/"+lg+"/scoreboard"; }); }
+const LIVE_POLL_MS = 45000;
+const LIVE_ALIAS = {
+  "Ivory Coast":"Elfenbeinküste","Côte d'Ivoire":"Elfenbeinküste","Cote d'Ivoire":"Elfenbeinküste",
+  "Netherlands":"Niederlande","Germany":"Deutschland","Morocco":"Marokko","Sweden":"Schweden",
+  "South Africa":"Südafrika","Canada":"Kanada","Norway":"Norwegen","France":"Frankreich",
+  "Mexico":"Mexiko","Belgium":"Belgien","Spain":"Spanien","Austria":"Österreich",
+  "Brazil":"Brasilien","Switzerland":"Schweiz","Algeria":"Algerien","Australia":"Australien",
+  "Egypt":"Ägypten","Colombia":"Kolumbien","Croatia":"Kroatien","Argentina":"Argentinien",
+  "DR Congo":"DR Kongo","Congo DR":"DR Kongo","Democratic Republic of the Congo":"DR Kongo",
+  "United States":"USA","USA":"USA",
+  "Bosnia and Herzegovina":"Bosnien-Herzegowina","Bosnia & Herzegovina":"Bosnien-Herzegowina",
+  "Bosnia-Herzegovina":"Bosnien-Herzegowina","Bosnien-H.":"Bosnien-Herzegowina",
+  "Cape Verde":"Kap Verde","Cabo Verde":"Kap Verde","Qatar":"Katar","Saudi Arabia":"Saudi-Arabien",
+  "Uzbekistan":"Usbekistan","Turkey":"Türkei","Türkiye":"Türkei","South Korea":"Südkorea",
+  "Italy":"Italien","England":"England","Senegal":"Senegal","Ghana":"Ghana","Japan":"Japan",
+  "Paraguay":"Paraguay","Ecuador":"Ecuador","Portugal":"Portugal","Iran":"Iran","Curaçao":"Curaçao",
+  "Vardar":"Vardar Skopje","Iberia 1999":"Iberia Tiflis","Flora":"Flora Tallinn","Inter D'Escaldes":"Inter Escaldes","Györi ETO FC":"ETO Győr","Vikingur Reykjavik":"Víkingur Reykjavík","Sabah FK":"Sabah FC","Drita Gjilan":"FC Drita","Kauno Zalgiris":"Kauno Žalgiris","Larne":"Larne FC","Floriana FC":"Floriana","Sutjeska":"Sutjeska Nikšić","Klaksvik":"KÍ Klaksvík","KI Klaksvik":"KÍ Klaksvík","FK Vitebsk":"Vitebsk","U Craiova":"Universitatea Craiova","Petrocub Hincesti":"Petrocub","Egnatia Rrogozhine":"Egnatia","FK Qarabag":"Qarabağ Agdam","Qarabag":"Qarabağ Agdam","Dynam

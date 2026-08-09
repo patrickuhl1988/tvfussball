@@ -1,0 +1,32 @@
+nd only for a limited time; otherwise pay only (MagentaTV, all 104 games). TVFussball only links, it does not broadcast." }
+};
+
+/* Flaggen (Emoji) */
+const FL = {"Saudi-Arabien":"🇸🇦",Portugal:"🇵🇹",Usbekistan:"🇺🇿",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Ghana:"🇬🇭",Panama:"🇵🇦",Kroatien:"🇭🇷",
+  Kolumbien:"🇨🇴","DR Kongo":"🇨🇩",Schweiz:"🇨🇭",Kanada:"🇨🇦","Bosnien-H.":"🇧🇦",Katar:"🇶🇦",
+  Marokko:"🇲🇦",Haiti:"🇭🇹",Schottland:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",Brasilien:"🇧🇷",Tschechien:"🇨🇿",Mexiko:"🇲🇽",
+  "Südafrika":"🇿🇦","Südkorea":"🇰🇷",Ecuador:"🇪🇨",Deutschland:"🇩🇪","Curaçao":"🇨🇼","Elfenbeinküste":"🇨🇮",
+  Norwegen:"🇳🇴",Senegal:"🇸🇳",Jordanien:"🇯🇴",Algerien:"🇩🇿",Frankreich:"🇫🇷",Irak:"🇮🇶",
+  Argentinien:"🇦🇷","Österreich":"🇦🇹",Spanien:"🇪🇸","Saudi-Arabien":"🇸🇦",Tunesien:"🇹🇳",Japan:"🇯🇵",
+  Niederlande:"🇳🇱",Schweden:"🇸🇪","Türkei":"🇹🇷",Paraguay:"🇵🇾",USA:"🇺🇸",Australien:"🇦🇺",Iran:"🇮🇷",
+  Neuseeland:"🇳🇿",Uruguay:"🇺🇾",Belgien:"🇧🇪","Ägypten":"🇪🇬","Kap Verde":"🇨🇻","Bosnien-Herzegowina":"🇧🇦"};
+/* Vereinsfarben (Primaer, Sekundaer) fuer getoente Baelle – nur 1. Bundesliga 2026/27; rechtlich sichere Alternative zu Wappen */
+const CLUB_BALL={
+ "FC Bayern München":["#DC052D","#FFFFFF"],"Bayern München":["#DC052D","#FFFFFF"],
+ "Borussia Dortmund":["#FDE100","#000000"],"BVB":["#FDE100","#000000"],
+ "RB Leipzig":["#FFFFFF","#D2003C"],
+ "Bayer 04 Leverkusen":["#E32219","#000000"],"Bayer Leverkusen":["#E32219","#000000"],
+ "VfB Stuttgart":["#FFFFFF","#E30613"],
+ "Eintracht Frankfurt":["#101010","#E1000F"],
+ "SC Freiburg":["#E2001A","#000000"],
+ "Werder Bremen":["#159A5B","#FFFFFF"],"SV Werder Bremen":["#159A5B","#FFFFFF"],
+ "1. FSV Mainz 05":["#C3141E","#FFFFFF"],"FSV Mainz 05":["#C3141E","#FFFFFF"],"Mainz 05":["#C3141E","#FFFFFF"],
+ "FC Augsburg":["#BA0C2F","#FFFFFF"],
+ "TSG Hoffenheim":["#1961AC","#FFFFFF"],"TSG 1899 Hoffenheim":["#1961AC","#FFFFFF"],"1899 Hoffenheim":["#1961AC","#FFFFFF"],
+ "1. FC Union Berlin":["#E00521","#FFFFFF"],"Union Berlin":["#E00521","#FFFFFF"],
+ "Borussia Mönchengladbach":["#FFFFFF","#00A651"],"Mönchengladbach":["#FFFFFF","#00A651"],
+ "1. FC Köln":["#E1000A","#FFFFFF"],"FC Köln":["#E1000A","#FFFFFF"],
+ "Hamburger SV":["#003087","#FFFFFF"],"HSV":["#003087","#FFFFFF"],
+ "FC Schalke 04":["#004E95","#FFFFFF"],"Schalke 04":["#004E95","#FFFFFF"],
+ "SV Elversberg":["#E30613","#000000"],"Elversberg":["#E30613","#000000"],
+ "SC Paderborn 07":["#005CA9","#000000"],"SC Pad

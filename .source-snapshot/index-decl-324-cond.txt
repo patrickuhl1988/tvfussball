@@ -1,0 +1,34 @@
+"bl3","cl","el","ecl","pl","facup","it","es","l1","test"].filter(c=>SEL.has(c));
+  const wantFmt=SEL.has("format");
+  const wantTop=SEL.has("top");
+  const cond=SEL.has("mine")||SEL.has("free")||SEL.has("tonight")||wantTop;
+  const condOnly=cond && catSel.length===0 && !wantFmt;
+  // Spiele filtern
+  let mList = (none || catSel.length>0 || condOnly) ? MATCHES.filter(m=>!isFinished(m)) : [];
+  if(catSel.length)      mList = mList.filter(m=>catSel.includes(catOf(m)));
+  if(wantTop)            mList = mList.filter(isTopMatch);
+  if(SEL.has("mine"))    mList = mList.filter(m=>FOLLOW.has(m.h)||FOLLOW.has(m.a)||FOLLOW.has("liga:"+m.cat));
+  if(SEL.has("free"))    mList = mList.filter(isFreeTV);
+  if(SEL.has("tonight")) mList = mList.filter(isTonight);
+  if(q) mList = mList.filter(m=>((m.h+" "+m.a+" "+(m.comp||"")).toLowerCase().includes(q)));
+  // Formate filtern (alle Free-TV)
+  let fList = ((none || wantFmt || condOnly) && !wantTop) ? FORMATS.filter(f=>!isFinished(f)) : [];
+  if(SEL.has("mine"))    fList = fList.filter(f=>FOLLOW.has(f.id));
+  if(SEL.has("tonight")) fList = fList.filter(isTonightFmt);
+  if(q) fList = fList.filter(f=>((f.name+" "+f.ch+" "+(LANG==="de"?f.when_de:f.when_en)).toLowerCase().includes(q)));
+  // Spiele + Formate mischen, nach Datum & Uhrzeit sortieren
+  let items = mList.map(m=>{var lm=locMatch(m); return {day:lm.day,sk:skOf(lm.day,lm.time),k:"m",o:m};})
+                   .concat(fList.map(f=>{var lf=locMatch(f); return {day:lf.day,sk:skOf(lf.day,lf.time),k:"f",o:f};}));
+  function skOf(day,time){ var mm=String(time).match(/(\d{1,2}):(\d{2})/); return dayKey(day)*10000+(mm?(+mm[1])*60+(+mm[2]):9998); }
+  if(wantFmt && typeof FORMATS_OD!=="undefined" && FORMATS_OD.length){
+    let odl=FORMATS_OD.slice();
+    if(SEL.has("mine")) odl=odl.filter(f=>FOLLOW.has(f.id));
+    if(q) odl=odl.filter(f=>((f.name+" "+f.ch+" "+(LANG==="de"?f.desc_de:f.desc_en)).toLowerCase().includes(q)));
+    const anchor=items.length?Math.min.apply(null,items.map(it=>dayKey(it.day))):todayKeyNow();
+    items=items.concat(odl.map(f=>({day:"__od__",sk:anchor*10000+9999,k:"f",o:f})));
+  }
+  items.sort((a,b)=> a.sk-b.sk);
+  var _liveTotal=items.length; if(items.length>LIVE_SHOWN) items=items.slice(0,LIVE_SHOWN);
+  let html="", curDay="";
+  items.forEach(it=>{
+    if(it.day!==curDay){ curDay=it.day; const dlabel=it.day==

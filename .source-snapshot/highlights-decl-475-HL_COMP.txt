@@ -1,0 +1,42 @@
+lineupSection(m)+
+      renderLohnt(m)+
+      liveActions(m)+
+    '</div></div></div>'+
+  '</div>';
+}
+
+/* ---------- Render: Highlights ---------- */
+let HL_COMP = "*"; // Wettbewerbsfilter der Highlights (voller Wettbewerbsname, dynamisch aus den Daten)
+function hlCompOf(m){ return String(m.g||"").split(" \u00b7 ")[0]||""; }
+function hlComps(){ var seen={},out=[]; HL.forEach(function(m){ var c=hlCompOf(m); if(c&&!seen[c]){ seen[c]=1; out.push(c); } }); return out; }
+function renderHLFilters(){ const t=I18N[LANG];
+  const defs=[["c:*",t.f_all],["top80",t.f_hltop||"\u2605 8,0+"]].concat(hlComps().map(function(c){ return ["c:"+c,c]; })).concat([["relive",t.f_relive]]);
+  document.getElementById("hlFilters").innerHTML = defs.map(d=>{
+    const on = d[0].indexOf("c:")===0 ? (HL_COMP===d[0].slice(2) && HL_FILTER==="all") : (HL_FILTER===d[0]);
+    return '<button class="fchip" data-hlf="'+d[0]+'" aria-pressed="'+on+'">'+d[1]+'</button>';
+  }).join("");
+}
+function hlGoals(s){ const p=s.split(":").map(n=>parseInt(n,10)); return (p[0]||0)+(p[1]||0); }
+function renderHL(){
+  const t=I18N[LANG], board=document.getElementById("hlBoard");
+  document.getElementById("hlNote").innerHTML=t.hl_note;
+  let list=HL.filter(m=>{
+    if(HL_COMP!=="*" && hlCompOf(m)!==HL_COMP) return false;
+    if(HL_FILTER==="relive" && !m.full) return false;
+    if(HL_FILTER==="top80"){ var _w=m.analyse&&m.analyse.spielnote&&m.analyse.spielnote.wert; if(!(_w>=8)) return false; }
+    if(HL_Q){const q=HL_Q.toLowerCase(); if(!((m.h+" "+m.a).toLowerCase().includes(q))) return false;}
+    return true;
+  });
+  document.getElementById("hlCount").textContent="["+list.length+"]";
+  var _hlTotal=list.length; list=list.slice(0,HL_SHOWN);
+  if(!list.length){board.innerHTML='<div class="empty">'+t.nohits+'</div>'; return;}
+  let html="", curDate="";
+  list.forEach(m=>{
+    if(m.date!==curDate){curDate=m.date; html+='<div class="daybar"><span class="d">'+locDate(m.date)+' 2026</span><span class="ln"></span></div>';}
+    html+=hlRow(m,t);
+  });
+  board.innerHTML=html+smBtn("hl",_hlTotal,HL_SHOWN);
+  /*hl-auto-open*/ const _hf=board.querySelector(".row");
+  if(_hf){ _hf.classList.add("open"); const _hh=_hf.querySelector(".rowhead"); if(_hh) _hh.setAttribute("aria-expanded","true"); }
+}
+const YT_PLAY_SVG='<svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 

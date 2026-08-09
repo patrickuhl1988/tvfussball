@@ -1,0 +1,36 @@
+sen.push(provIds[i]);
+    if(!comps.every(c=>aboReqCarriers(c).some(ca=>chosen.includes(ca.p)))) continue; // jeder Wettbewerb braucht ≥1 Carrier
+    const cost=chosen.reduce((s,p)=>s+ABO_PROVIDERS[p].price,0);
+    if(!best || cost<best.cost || (cost===best.cost && chosen.length<best.chosen.length)) best={chosen,cost};
+  }
+  return best;
+}
+function aboCompCoverage(c, chosen){
+  const reqIn=c.carriers.filter(ca=>ca.req!==false && chosen.includes(ca.p));
+  const cov=reqIn.some(ca=>ca.cov==="full")?"full":"part";
+  const viaFree=reqIn.some(ca=>ABO_PROVIDERS[ca.p].free);
+  let hint=null;
+  if(cov!=="full"){
+    const fullC=c.carriers.find(ca=>ca.cov==="full" && ca.req!==false && !chosen.includes(ca.p));
+    if(fullC) hint=[fullC.p];
+    else { const miss=c.carriers.filter(ca=>ca.req!==false && !chosen.includes(ca.p)).map(ca=>ca.p); if(miss.length) hint=miss; }
+  }
+  return {cov,viaFree,hint};
+}
+function aboLink(p){ return (AFFILIATE_ENABLED && p.aff) ? p.aff : p.url; }
+function renderAbo(){
+  const t=I18N[LANG], chipsEl=document.getElementById("aboChips"), res=document.getElementById("aboRes");
+  if(!chipsEl||!res) return;
+  chipsEl.innerHTML = ABO_COMPS.map(c=>{ const on=!!ABO_SEL[c.id];
+    return '<button class="abo-chip" data-aboc="'+c.id+'" aria-pressed="'+on+'">'+(on?'<span class="ck">✓</span>':'')+c.name[LANG]+'</button>'; }).join("");
+  const sel=ABO_COMPS.filter(c=>ABO_SEL[c.id]).map(c=>c.id);
+  if(!sel.length){ res.innerHTML='<div class="abo-empty">'+t.abo_pick_none+'</div>'; return; }
+  const best=aboBestCombo(sel), chosen=best.chosen;
+  const ordered=chosen.slice().sort((a,b)=>ABO_PROVIDERS[b].price-ABO_PROVIDERS[a].price); // teuerste zuerst, gratis zuletzt
+  let html="";
+  if(best.cost<=0) html+='<div class="abo-totbar free"><span class="abo-totlbl">'+t.abo_total+'</span><span class="abo-tot free">'+t.abo_free_only+'</span></div>';
+  else html+='<div class="abo-totbar"><span class="abo-totlbl">'+t.abo_total+'</span><span class="abo-tot">'+eur(best.cost)+'<small> '+t.abo_month+'</small></span></div>';
+  html+='<div class="abo-need">'+t.abo_need+'</div>';
+  ordered.forEach(pid=>{ const p=ABO_PROVIDERS[pid];
+    html+='<div class="abo-prov"><div class="abo-plogo'+(p.free?' free':'')+'">'+mono(p.name)+'</div>'+
+      '<div class="abo-pmid"><div class="abo-pname">'+p.name+'</div><div class="abo-pnote">'+

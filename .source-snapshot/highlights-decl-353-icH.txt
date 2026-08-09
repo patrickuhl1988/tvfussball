@@ -1,0 +1,22 @@
+" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l4 4-4 4"/><path d="M20 7H8"/><path d="M8 21l-4-4 4-4"/><path d="M4 17h12"/></svg>';
+  var icH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>';
+  el.innerHTML='<div class="navbanner">'
+    +'<a class="nb-btn" href="'+navUrl("news")+'"><span class="nb-ic">'+icT+'</span><span class="nb-tx"><b>Transfers</b><span>'+(de?"Wechsel & Ger\u00fcchte":"Deals & rumours")+'</span></span>'+arw+'</a>'
+    +'<a class="nb-btn" href="'+navUrl("hl")+'"><span class="nb-ic">'+icH+'</span><span class="nb-tx"><b>Highlights</b><span>'+(de?"Videos & Analysen":"Recaps & analysis")+'</span></span>'+arw+'</a>'
+  +'</div>';
+}
+function feedbackBlock(){
+  var de=LANG==="de";
+  var stars=[1,2,3,4,5].map(function(n){return '<button type="button" class="fbk-star" data-star="'+n+'" aria-label="'+n+'/5">\u2605</button>';}).join("");
+  return '<div class="fbk">'
+    +'<div class="fbk-h">'+(de?"Feedback? Immer her damit.":"Got feedback? Bring it on.")+'</div>'
+    +'<div class="fbk-stars" data-rating="0" role="radiogroup" aria-label="'+(de?"Bewertung":"Rating")+'">'+stars+'</div>'
+    +'<textarea class="fbk-text" rows="3" placeholder="'+(de?"Was gef\u00e4llt dir, was fehlt, was nervt?":"What do you like, what\u2019s missing, what bugs you?")+'"></textarea>'
+    +'<div class="fbk-row"><span class="fbk-hint">'+(de?"Bleibt lokal auf diesem Ger\u00e4t.":"Stays local on this device.")+'</span><button type="button" class="fbk-send" data-fb-send>'+(de?"Absenden":"Send")+'</button></div>'
+  +'</div>';
+}
+function supportBlock(){
+  var de=LANG==="de";
+  var shI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>';
+  var fbI='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h1.8V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5v2.1H7.5v3.1h2.8V22h3.4v-7.1h2.7l.4-3.1h-3.1V9.9c0-.9.3-1.7 1.7-1.7z"/></svg>';
+  var igI='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke

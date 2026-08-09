@@ -1,0 +1,32 @@
+rn.com/fcbayerntv/de/suche?q={q}"};
+    var mm=(typeof MATCHES!=="undefined")?MATCHES.find(function(x){return x.h===m.h&&x.a===m.a&&x.tv;}):null;
+    var senders=(mm&&mm.tv&&(mm.tv.DE||mm.tv.AT||mm.tv.CH))||[];
+    var seen={};
+    senders.forEach(function(sd){ if(!sd||!sd.n||seen[sd.n]) return; seen[sd.n]=1;
+      var pat=HL_SENDER_DEEP[sd.n]; if(!pat) return;   /* nur spielgenaue Links, keine Kanal-Startseiten */
+        var href=pat.replace("{q}",hlQ);
+      sums+=srow(sd.n.slice(0,3).toUpperCase(), (href.indexOf("youtube")>=0?"yt":""), sd.n+(href.indexOf("search?query")>=0?" · Highlights":""), href);
+    });
+    if(hlYt.k) sums+=srow("VID","yt","Highlights · Direktvideo", hlYt.k);
+    if(!senders.length) sums+=srow("YT","yt","YouTube-Suche zum Spiel","https://www.youtube.com/results?search_query="+hlQ+"+highlights");
+  }
+  // Komplettes Spiel — nur zeigen, wenn es kostenlos (Free-TV/Relive) nachschaubar ist
+  let full="";
+  if(m.full){
+    full='<div class="dh">'+t.hl_full+'</div>'+
+      '<a class="fullm" href="'+m.full[3]+'" target="_blank" rel="noopener">'+
+      '<span class="fic">▶</span><span class="ftx"><b>'+t.hl_whole+'</b><span>'+t.hl_free_stream+'</span></span>'+
+      '<span class="fmeta"><b>'+m.full[0]+'</b>'+(m.full[1]?locMin(m.full[1])+' · ':'')+locAvail(m.full[2])+'</span></a>';
+  }
+  const share = shareBar(m.h+" "+m.s+" "+m.a, m.h+" "+m.s+" "+m.a+" · "+(LANG==="de"?"Highlights & Relive":"highlights & replay")+" (TVFussball.de)", m.full?m.full[3]:(m.zdf?m.zdf[1]:"https://tvfussball.de"));
+  return '<div class="row"'+tintStyle(m)+' data-hl="'+esc(hlKey(m))+'">'+
+    '<button class="rowhead" aria-expanded="false">'+
+      '<div class="time">'+m.s+'<small>'+t.ft+'</small>'+hlNote(m)+'</div>'+
+      '<div class="teams">'+
+        '<div class="t"><span class="flag">'+flag(m.h)+'</span><span>'+m.h+'</span></div>'+
+        '<div class="t" style="margin-top:3px"><span class="flag">'+flag(m.a)+'</span><span>'+m.a+'</span></div>'+
+        '<div class="meta"><span class="comp">'+locComp(m.g)+'</span><span class="freebest pay">'+locDate(m.date)+'</span>'+
+          (tot>=3?'<span class="freebest tv">'+tot+' '+t.goals+'</span>':"")+
+          (m.full?'<span class="freebest radio">▶ '+t.f_relive+'</span>':"")+'</div>'+
+      '</div><div class="rh-right"><span class="chev">'+CHEV+'</span></div>'+
+    '</b

@@ -1,0 +1,28 @@
+wBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+const ODDS_DISCLAIMER={de:"Gl\u00fccksspiel kann s\u00fcchtig machen. Hilfe unter check-dein-spiel.de. Teilnahme ab 18.",en:"Gambling can be addictive. 18+ only."};
+function biln(x){ if(x==null) return ""; if(typeof x==="string") return x; return x[LANG]||x.de||x.en||""; }
+function locISO(iso){ if(!iso) return ""; const p=String(iso).split("-"); if(p.length!==3) return String(iso);
+  if(LANG==="de") return p[2]+"."+p[1]+"."+p[0];
+  const M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return (M[parseInt(p[1],10)-1]||p[1])+" "+p[2]+", "+p[0]; }
+function fmtKm(n){ const s=String(n); return LANG==="de"?s.replace(".",","):s.replace(",","."); }
+function fmtNote(n){ if(n==null) return ""; const s=Number(n).toFixed(1); return LANG==="de"?s.replace(".",","):s; }
+/* ---- Feature A: Lohnt sich's? ---- */
+function lhStimmen(arr,t){ if(!arr||!arr.length) return "";
+  const rows=arr.slice(0,3).map(function(s){
+    if(!s||!s.text||!s.person||!s.datum) return "";
+    const tip=(s.typ==="tipp")?'<span class="lh-tag">'+t.lh_tip+'</span>':'';
+    const rolle=s.rolle?', '+esc(biln(s.rolle)):'';
+    const src=s.quelle?' <a class="lh-src" href="'+esc(s.quelle)+'" target="_blank" rel="noopener">'+t.lh_src+' \u2197</a>':'';
+    return '<div class="lh-voice">'+tip+'<span class="lh-qt">'+esc(biln(s.text))+'</span><span class="lh-by">\u2014 '+esc(s.person)+rolle+' \u00b7 '+locISO(s.datum)+src+'</span></div>';
+  }).filter(Boolean).join("");
+  return rows?('<div class="lh-sec"><div class="lh-h">'+t.lh_voices+'</div>'+rows+'</div>'):""; }
+function lhQuoten(q,t){ if(!q||!q.werte||!q.werte.length||!q.stand) return "";
+  const cells=q.werte.map(function(w){ return '<span class="lh-od"><b>'+esc(w.sel)+'</b>'+esc(w.wert)+'</span>'; }).join("");
+  const prov=q.anbieter?'<span class="lh-prov">'+esc(q.anbieter)+'</span>':'';
+  return '<div class="lh-sec"><div class="lh-h">'+t.lh_odds+prov+'</div>'+
+    '<div class="lh-odds">'+cells+'</div>'+
+    '<div class="lh-upd">'+t.lh_odds_upd+' '+locISO(q.stand)+'</div>'+
+    '<div class="lh-disc"><span class="lh-18">18+</span><span>'+esc(biln(ODDS_DISCLAIMER))+'</span></div></div>'; }
+function hlKey(m){ return m.h+"__"+m.a; }
+f

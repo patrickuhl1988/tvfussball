@@ -1,0 +1,25 @@
+);
+  const rows=ev.map(function(e){ const tm=(e.team==="A")?m.h:(e.team==="B"?m.a:""); const fl=tm?'<span class="an-etm">'+flag(tm)+'</span>':'';
+    var tnm=tm?'<span class="an-etn" title="'+esc(tm)+'">'+esc(tm)+'</span>':'';
+    return '<div class="an-ev"><span class="an-eic">'+e.ic+'</span>'+((e.min!=null&&e.min!=="")?'<span class="an-emin">'+esc(String(e.min))+'\u2032</span>':"")+fl+'<span class="an-epl">'+esc(e.who||"")+'</span>'+(e.ex?'<span class="an-fl">'+esc(e.ex)+'</span>':'')+tnm+'</div>'; }).join("");
+  return '<div class="an-sec"><div class="an-h">'+t.an_events+'</div>'+rows+'</div>'; }
+function anFazit(txt,t){ if(!txt) return "";
+  return '<div class="an-sec"><div class="an-h">'+t.an_summary+'</div><p class="an-fazit">'+esc(biln(txt))+'</p></div>'; }
+function renderAnalyse(m,t){ const A=m.analyse; if(!A) return "";
+  let e1=anNote(A.spielnote,t)+anEvents(A,t,m)+anMotm(A.spielerDesSpiels,t,m)+anFazit(A.fazit,t);
+  let e2=anInjuries(A.verletzungen,t)+anRef(A.schiri,t)+anBar(A.ballbesitz,t)+anChances(A.chancen,t)+anRun(A.laufwunder,t);
+  if(A.quelleStatistik) e2+='<div class="an-srcline">'+t.an_src+': '+esc(A.quelleStatistik)+'</div>';
+  if(!e1&&!e2) return "";
+  let html='<button class="morebtn an-btn" data-more data-lo="'+esc(t.an_t)+'" data-lc="'+esc(t.an_t)+'" aria-expanded="false"><span class="mlbl">'+t.an_t+'</span>'+MCHEV+'</button><div class="morewrap"><div class="analysewrap">'+e1;
+  if(e2) html+='<button class="morebtn an-sub2" data-more data-lo="'+esc(t.an_more)+'" data-lc="'+esc(t.an_more)+'" aria-expanded="false"><span class="mlbl">'+t.an_more+'</span>'+MCHEV+'</button><div class="morewrap"><div class="analyse2">'+e2+'</div></div>';
+  html+='</div></div>';
+  return html; }
+function lineupSection(m){
+  if(m.tba) return "";
+  var lg=espnLeagueFor(m); if(!lg) return "";
+  var lbl=(LANG==="de")?"Aufstellung":"Line-ups";
+  return '<button class="morebtn lu-btn" data-more data-lineup="1" data-lo="'+esc(lbl)+'" data-lc="'+esc(lbl)+'" aria-expanded="false"><span class="mlbl">'+esc(lbl)+'</span>'+MCHEV+'</button>'+
+    '<div class="morewrap"><div class="lineupwrap" data-lu="'+esc(liveKey(m))+'" data-lg="'+esc(lg)+'" data-hn="'+esc(m.h)+'" data-an="'+esc(m.a)+'"></div></div>';
+}
+function _luName(p){ var a=p.athlete||{}; return a.displayName||a.shortName||a.fullName||""; }
+function _luNo(p){ retu

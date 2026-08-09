@@ -1,0 +1,13 @@
+ misc:{name:"Weitere Ligen",short:"INT",color:"#5A6B86"}
+};
+const LEAGUE_ORDER=["bl1","bl2","pl","ll","sa","l1","ere","pt","spl","tsl","mls","misc"];
+const CLUB_COL={
+  "Bayern München":"#dc052d","Borussia Dortmund":"#f4c400","Bayer Leverkusen":"#b1080f","Eintracht Frankfurt":"#e1000f","VfL Wolfsburg":"#65b32e","Bor. Mönchengladbach":"#00a859","RB Leipzig":"#d4023a","SC Freiburg":"#e1000f","1. FC Köln":"#e2001a","TSG Hoffenheim":"#1c63b7","Union Berlin":"#d4011d","Werder Bremen":"#169b62","Hamburger SV":"#003da5","VfB Stuttgart":"#e32219","Schalke 04":"#004d9d","SV Elversberg":"#c8102e","Hertha BSC":"#005ca9",
+  "Manchester City":"#6cabdd","Tottenham":"#132257","Newcastle":"#241f20","Arsenal":"#ef0107","Brighton":"#0057b8","West Ham":"#7a263a","Nottingham Forest":"#dd0000","Burnley":"#6c1d45","Manchester United":"#da291c","Bournemouth":"#d31920","Chelsea":"#034694","Liverpool":"#c8102e",
+  "FC Barcelona":"#a50044","Atlético Madrid":"#cb3524","Real Madrid":"#00529f",
+  "Paris SG":"#004170","Olympique Marseille":"#2faee0","Paris FC":"#12235e","AS Monaco":"#e51b22","RC Lens":"#ffed00",
+  "AC Milan":"#fb090b","Juventus":"#111111","Napoli":"#12a0d7","Inter":"#0b1560","Lazio":"#5aa7dc","Fiorentina":"#59319c","Udinese":"#1a1a1a","Genoa":"#c8102e",
+  "PSV Eindhoven":"#ed1c24","FC Utrecht":"#e5001a","Feyenoord":"#e30613",
+  "Sporting Braga":"#b3151a","Hammarby IF":"#00A651","Hradec Králové":"#111111","Tromsø IL":"#E2001A","Twente Enschede":"#E2001A","FC Midtjylland":"#111111","Pafos FC":"#0057B8","Maccabi Tel Aviv":"#FFD200","FC St. Gallen":"#00843D","Benfica Lissabon":"#E2001A","PAOK Saloniki":"#111111","RSC Anderlecht":"#4d1f8c","Club Brugge":"#0057b8","Besiktas":"#111111","Galatasaray":"#e00c17","Fenerbahce":"#00296b","Trabzonspor":"#8a1538","Orlando City":"#633492","RB Salzburg":"#d2001f","Sanfrecce Hiroshima":"#5a2d81",
+  "Roma":"#8e1f2f","FC Porto":"#005bab","Sporting CP":"#008057","Atalanta":"#1d1d1b","Bologna":"#a81e2c","Cagliari":"#b01e28","Grêmio":"#0d80c1","AZ Alkmaar":"#d4021d","FC Twente":"#e2261b","OGC Nice":"#c8102e","Go Ahead Eagles":"#e2001a","CA Osasuna":"#0a346f","Toulouse":"#6a1f7a","Stade Rennes":"#e23026","Stade Reims":"#c81a2b","Ajax":"#d2122e","Strasbourg":"#0089cf","AIK":"#16223f","Middlesbrough":"#e21b22","Benfica":"#e2001a",
+  "Aston Villa":"#670e36","Everton":"#003399","Ipswich":"#3a64a3","

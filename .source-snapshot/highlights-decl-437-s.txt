@@ -1,0 +1,37 @@
+hortName||a.fullName||""; }
+function _luNo(p){ return p.jersey||(p.athlete&&p.athlete.jersey)||""; }
+function _luLine(p){
+  var pos=(p.position||{}); var s=String(pos.name||pos.displayName||pos.abbreviation||"").toLowerCase(); var ab=String(pos.abbreviation||"").toLowerCase();
+  if(/keeper|goalie/.test(s)||ab==="g"||ab==="gk") return 0;
+  if(/back|defen/.test(s)||/^(d|cb|lb|rb|lwb|rwb|wb|sw)$/.test(ab)) return 1;
+  if(/midfield/.test(s)||/^(m|cm|dm|am|lm|rm|cdm|cam|rdm|ldm|rcm|lcm)$/.test(ab)) return 2;
+  if(/forward|strik|wing|attack/.test(s)||/^(f|cf|st|lw|rw|w|ss)$/.test(ab)) return 3;
+  return -1;
+}
+function renderLineup(rosters){
+  if(!rosters||rosters.length<2) return "";
+  var de=(LANG==="de"), H=null, A=null;
+  rosters.forEach(function(r){ if(r.homeAway==="home") H=r; else if(r.homeAway==="away") A=r; });
+  if(!H||!A){ H=rosters[0]; A=rosters[1]; }
+  var hStart=(H.roster||[]).filter(function(p){return p.starter;});
+  var aStart=(A.roster||[]).filter(function(p){return p.starter;});
+  if(!hStart.length && !aStart.length) return "";
+  var hBench=(H.roster||[]).filter(function(p){return !p.starter;});
+  var aBench=(A.roster||[]).filter(function(p){return !p.starter;});
+  function player(p,side){
+    var cap=p.captain?'<span class="lu-c" title="'+(de?"Kapit\u00e4n":"Captain")+'">C</span>':"";
+    return '<div class="lu-p '+side+'"><span class="lu-no">'+esc(_luNo(p))+'</span><span class="lu-nm">'+esc(_luName(p))+cap+'</span></div>';
+  }
+  var canGroup = hStart.concat(aStart).every(function(p){ return _luLine(p)>=0; });
+  var grid;
+  if(canGroup){
+    var LINES=[de?"Tor":"GK", de?"Abwehr":"DEF", de?"Mittelfeld":"MID", de?"Angriff":"FWD"];
+    grid="";
+    for(var li=0; li<4; li++){
+      var hL=hStart.filter(function(p){return _luLine(p)===li;});
+      var aL=aStart.filter(function(p){return _luLine(p)===li;});
+      if(!hL.length && !aL.length) continue;
+      grid+='<div class="lu-line"><div class="lu-line-col home">'+hL.map(function(p){return player(p,"home");}).join("")+'</div><div class="lu-line-lbl">'+LINES[li]+'</div><div class="lu-line-col away">'+aL.map(function(p){return player(p,"away");}).join("")+'</div></div>';
+    }
+  } else {
+    grid='<div class="lu-grid"><div class="lu-line-col home">'+hStart.map(function(p){return player(p,"home");}).join("")+'</div><div class="lu-line-col away">'+aStart.

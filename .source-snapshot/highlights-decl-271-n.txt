@@ -1,0 +1,18 @@
+odayKeyNow(); } /* Spielende ~Anpfiff+115min; danach noch 60min sichtbar lassen */ return Date.now() > s.getTime()+175*60000; }
+function mineCount(){ let n=0; MATCHES.forEach(m=>{ if(!isFinished(m) && (FOLLOW.has(m.h)||FOLLOW.has(m.a)||FOLLOW.has("liga:"+m.cat))) n++; }); FORMATS.forEach(f=>{ if(!isFinished(f) && FOLLOW.has(f.id)) n++; }); return n; }
+/* Länderabhängige Schnellauswahl in der „Meine"-Ansicht (Reihenfolge wie gewünscht) */
+const MINE_QUICK={
+ DE:[["liga:bl","Bundesliga"],["liga:cl","Champions League"],["liga:dfb","DFB-Pokal"],["Deutschland","Deutschland"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"],["Borussia Mönchengladbach","Borussia M'gladbach"]],
+ AT:[["liga:cl","Champions League"],["liga:el","Europa League"],["Deutschland","Deutschland"],["Real Madrid","Real Madrid"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"]],
+ CH:[["liga:cl","Champions League"],["liga:el","Europa League"],["Real Madrid","Real Madrid"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"]],
+ UK:[["liga:pl","Premier League"],["liga:cl","Champions League"],["liga:facup","FA Cup"],["England","England"],["Manchester City","Manchester City"],["FC Liverpool","Liverpool"],["Real Madrid","Real Madrid"]],
+ FR:[["liga:l1","Ligue 1"],["liga:cl","Champions League"],["Frankreich","Frankreich"],["Paris Saint-Germain","Paris Saint-Germain"],["Olympique Marseille","Olympique Marseille"],["Real Madrid","Real Madrid"]],
+ IT:[["liga:it","Serie A"],["liga:cl","Champions League"],["Juventus Turin","Juventus"],["Inter Mailand","Inter"],["AC Mailand","AC Milan"],["Real Madrid","Real Madrid"]],
+ ES:[["liga:es","LaLiga"],["liga:cl","Champions League"],["Spanien","Spanien"],["Real Madrid","Real Madrid"],["FC Barcelona","FC Barcelona"],["Atlético Madrid","Atlético Madrid"]],
+ _default:[["liga:cl","Champions League"],["liga:el","Europa League"],["Real Madrid","Real Madrid"],["FC Bayern München","Bayern München"],["Paris Saint-Germain","Paris Saint-Germain"],["Manchester City","Manchester City"]]
+};
+function renderMineQuick(){
+  const box=document.getElementById("mineQuick"); if(!box) return;
+  if(!LIVE_SEL.has("mine")){ box.innerHTML=""; box.style.display="none"; return; }
+  box.style.display="flex";
+  const list=MINE_QUICK[COUNTRY]||MIN

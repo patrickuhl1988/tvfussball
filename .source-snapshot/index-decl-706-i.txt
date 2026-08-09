@@ -1,0 +1,47 @@
+ore) || (a.ko-b.ko); });
+  return out.slice(0,SEO_MAX);
+}
+function seoPickHighlights(){
+  var now=Date.now(), ab=now-SEO_DAYS*86400000, out=[];
+  for(var i=0;i<HL.length;i++){
+    var m=HL[i];
+    if(!m||!m.analyse||!m.analyse.fazit) continue;
+    var f=m.analyse.fazit.de||m.analyse.fazit.en; if(!f) continue;
+    var dm=(m.date||"").match(/(\d{1,2})\.(\d{1,2})\./); if(!dm) continue;
+    var sd="2026-"+("0"+dm[2]).slice(-2)+"-"+("0"+dm[1]).slice(-2);
+    var t=Date.parse(sd+"T20:00:00+02:00");
+    if(!t||t<ab||t>now+86400000) continue;
+    var note=(m.analyse.spielnote&&+m.analyse.spielnote.wert)||0;
+    out.push({m:m, sd:sd, t:t, note:note, desc:f});
+  }
+  out.sort(function(a,b){ return (b.note-a.note) || (b.t-a.t); });
+  return out.slice(0,SEO_MAX);
+}
+function injectSeoJsonLd(){
+  try{
+    var items=[];
+    if(PAGE==="hl" && typeof HL!=="undefined"){
+      seoPickHighlights().forEach(function(x){
+        var m=x.m;
+        items.push({"@type":"SportsEvent","name":((m.h||"")+" \u2013 "+(m.a||"")+(m.g?(" ("+m.g+")"):"")),"description":x.desc,"sport":"Soccer",
+          "startDate":x.sd,
+          "eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode",
+          "location":{"@type":"VirtualLocation","url":"https://tvfussball.de/highlights.html"},
+          "performer":[{"@type":"SportsTeam","name":(m.h||"")},{"@type":"SportsTeam","name":(m.a||"")}]});
+      });
+    } else if(PAGE==="live" && typeof MATCHES!=="undefined"){
+      seoPickMatches().forEach(function(x){
+        var m=x.m;
+        var ev={"@type":"SportsEvent","name":((m.h||"")+" \u2013 "+(m.a||"")),"description":x.desc,"sport":"Soccer",
+          "startDate":x.sd,
+          "eventStatus":"https://schema.org/EventScheduled",
+          "eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode",
+          "location":{"@type":"VirtualLocation","url":"https://tvfussball.de/"},
+          "performer":[{"@type":"SportsTeam","name":(m.h||"")},{"@type":"SportsTeam","name":(m.a||"")}],
+          "organizer":{"@type":"Organization","name":"TVFussball.de","url":"https://tvfussball.de/"}};
+        try{ var dt=new Date(x.sd); if(!isNaN(dt)) ev.endDate=new Date(dt.getTime()+2*3600*1000).toISOString(); }catch(e){}
+        items.push(ev);
+      });
+    }
+    var old=document.getElementById("tvfSeoData"); if(old) old.remove();
+    if(!items.len

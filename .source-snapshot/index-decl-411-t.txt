@@ -1,0 +1,27 @@
+-note" title="'+esc(I18N[LANG].tvf_rating)+'">\u2605 '+esc(fmtNote(sp.wert))+'</span>'; }
+function renderLohnt(m){ const L=m.lohnt; if(!L) return ""; const t=I18N[LANG];
+  let inner=lhScore(L.score,t);
+  if(L.einordnung) inner+='<p class="lh-txt">'+esc(biln(L.einordnung))+'</p>';
+  if(L.story) inner+='<p class="lh-txt">'+esc(biln(L.story))+'</p>';
+  inner+=lhStimmen(L.stimmen,t)+lhLetzte(L.letztePartien,m,t);
+  if(!inner) return "";
+  return '<button class="morebtn lh-btn" data-more data-lo="'+esc(t.lohnt_t)+'" data-lc="'+esc(t.lohnt_t)+'" aria-expanded="false"><span class="mlbl">'+t.lohnt_t+'</span>'+MCHEV+'</button><div class="morewrap"><div class="lohntwrap">'+inner+'</div></div>'; }
+/* ---- Feature B: Spielanalyse ---- */
+function anGoals(arr,t){ if(!arr||!arr.length) return "";
+  const rows=arr.map(function(g){
+    const fl=(g.elfmeter?' <span class="an-fl">('+t.an_pen+')</span>':'')+(g.eigentor?' <span class="an-fl">('+t.an_og+')</span>':'');
+    return '<div class="an-li"><span class="an-min">'+esc(String(g.minute))+'\u2032</span><span class="an-pl">'+esc(g.spieler||"")+'</span>'+fl+'</div>';
+  }).join("");
+  return '<div class="an-sec"><div class="an-h">'+t.an_goals+'</div>'+rows+'</div>'; }
+function anCards(arr,t){ if(!arr||!arr.length) return "";
+  const rows=arr.map(function(c){
+    const cl=c.typ==="rot"?"red":(c.typ==="gelbrot"?"yr":"yel");
+    return '<div class="an-li"><span class="an-min">'+esc(String(c.minute))+'\u2032</span><span class="an-card '+cl+'"></span><span class="an-pl">'+esc(c.spieler||"")+'</span></div>';
+  }).join("");
+  return '<div class="an-sec"><div class="an-h">'+t.an_cards+'</div>'+rows+'</div>'; }
+function anNote(sp,t){ if(!sp||sp.wert==null) return "";
+  return '<div class="an-noterow"><span class="an-noteic" title="'+esc(t.tvf_rating)+'">\u2605</span><b class="an-noteval">'+esc(fmtNote(sp.wert))+'</b>'+(sp.label?'<span class="an-notelbl">'+esc(biln(sp.label))+'</span>':'')+'</div>'; }
+function anMotm(p,t,m){ if(!p||!p.name) return "";
+  const img=(p.bildRechte===true&&p.bild)?'<img class="an-mimg" src="'+esc(p.bild)+'" alt="">':'';
+  const tn=(p.team==="A"&&m)?m.h:((p.team==="B"&&m)?m.a:(p.team||"")); const team=tn?'<span class="an-mtm">'+flag(tn)+'<span>'+esc(tn)+'</span></span>':'';
+  const note=(p.note!=null)?'<span class="an-mnote">'+esc(fmtNote(p.note))+'</span>':''

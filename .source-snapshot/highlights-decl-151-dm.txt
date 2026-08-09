@@ -1,0 +1,37 @@
+axis+prog+body;
+}
+/* Anstoss als Zeitstempel (Spielzeiten sind Berliner Zeit, Nutzer koennen anderswo sitzen) */
+function _koMs(day,time){
+  try{
+    var dm=String(day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(time||"").match(/(\d{1,2}):(\d{2})/);
+    if(!dm||!tm) return 0;
+    var y=+dm[3], mo=+dm[2], d=+dm[1], hh=+tm[1], mi=+tm[2];
+    var probe=new Date(Date.UTC(y,mo-1,d,12,0,0));
+    var h=+new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Berlin",hour:"2-digit",hour12:false}).format(probe);
+    var off=h-12; if(off<0||off>3) off=2;
+    return Date.UTC(y,mo-1,d,hh-off,mi,0);
+  }catch(e){ return 0; }
+}
+/* Ehrlicher Hinweis, wenn unsere Live-Quelle ein angepfiffenes Spiel nicht abdeckt */
+/* Erster Sender/Stream des Spiels als Rettungsanker im Hinweis */
+function _lvSrcAttr(m){
+  try{
+    var tv=m.tv||{}, list=tv[COUNTRY]||tv.DE||tv.AT||tv.CH||[];
+    for(var i=0;i<list.length;i++){ if(list[i]&&list[i].u&&list[i].n) return ' data-lvsn="'+esc(list[i].n)+'" data-lvsu="'+esc(list[i].u)+'"'; }
+  }catch(e){}
+  return "";
+}
+function liveNoDataNote(el){
+  var ko=+(el.getAttribute("data-lvko")||0); if(!ko) return "";
+  var now=Date.now(); if(now < ko+90000 || now > ko+5*3600000) return "";
+  var de=(LANG==="de");
+  var sn=el.getAttribute("data-lvsn"), su=el.getAttribute("data-lvsu");
+  var link = (sn&&su) ? ('<a class="lvt-nd-link" href="'+su+'" target="_blank" rel="noopener">'+(de?"Live bei ":"Watch on ")+sn+' \u2197</a>') : "";
+  return '<div class="lvt-nodata"><span class="lvt-nd-ic">\u26A1</span><span>'+(de
+    ? "Zu diesem Spiel liefert unsere Live-Quelle keine Daten \u2013 Ergebnis und Analyse folgen nach Abpfiff unter Highlights."
+    : "Our live data source doesn\u2019t cover this match \u2013 result and analysis will follow under Highlights after the final whistle.")+link+'</span></div>';
+}
+function liveApplyTicker(){
+  try{ var els=document.querySelectorAll("[data-lvt]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-lvt")]; var home=el.getAttribute("data-lh"); el.innerHTML=(d&&d.state&&d.state!=="pre")?renderLiveTicker(d,home):liveNoDataNote(el); } }catch(e){}
+}
+async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var srcs=live

@@ -1,0 +1,17 @@
+RA={n:"Paramount+ / CBS Sports",t:"pay",q:"HD"}, CMORE={n:"C More",t:"pay",q:"HD"}, SSPORT={n:"S Sport",t:"pay",q:"HD"};
+/* Ligue-1-Sender 2026/27 */
+const LIGUE1PLUS={n:"Ligue 1+",t:"pay",q:"HD"};
+const UEFATV={n:"UEFA.tv",t:"fta",q:"HD",u:"https://www.uefa.tv/"};
+
+
+
+
+const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[BEIN], CA:[CTV,TSN], US:[FOX,TELE], IE:[RTE], FI:[YLE,MTV3], SG:[MEDIA], BD:[TSPT,BTV], TR:[TRT], SE:[SVT,TV4], MX:[CAN5,AZT] };
+
+const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",ES:"🇪🇸",NL:"🇳🇱",TH:"🇹🇭",CA:"🇨🇦",US:"🇺🇸",IE:"🇮🇪",FI:"🇫🇮",SG:"🇸🇬",BD:"🇧🇩",TR:"🇹🇷",SE:"🇸🇪",MX:"🇲🇽"};
+const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Frankreich",IT:"Italien",ES:"Spanien",NL:"Niederlande",TH:"Thailand",CA:"Kanada",US:"USA",IE:"Irland",FI:"Finnland",SG:"Singapur",BD:"Bangladesch",TR:"Türkei",SE:"Schweden",MX:"Mexiko"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK",FR:"France",IT:"Italy",ES:"Spain",NL:"Netherlands",TH:"Thailand",CA:"Canada",US:"USA",IE:"Ireland",FI:"Finland",SG:"Singapore",BD:"Bangladesh",TR:"Turkey",SE:"Sweden",MX:"Mexico"}};
+
+/* WM 2026 — echte Partien, Zeiten (MEZ) */
+const MATCHES = [
+{cat:"wm", day:"Donnerstag, 09.07.2026", time:"22:00", comp:"WM 2026 · Viertelfinale", h:"Marokko", a:"Frankreich", komm:"Philipp Sohmer", kommMag:"Wolff Fuss", radio:[], tv:{DE:[ARD,MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, ticker:[], lohnt:{score:86,einordnung:{de:"Revanche des WM-Halbfinals von 2022, diesmal in Boston: Marokkos eiskaltes Umschaltspiel um Ounahi trifft auf Mbappés Frankreich. In Deutschland live im Free-TV in der ARD und bei MagentaTV.",en:"A rematch of the 2022 semi-final, this time in Boston: Morocco\u2019s ice-cold transition game around Ounahi meets Mbappé\u2019s France. In Germany live free-to-air on ARD and on MagentaTV."}}},
+{cat:"wm", day:"Samstag, 11.07.2026", time:"23:00", comp:"WM 2026 · Viertelfinale", h:"Norwegen", a:"England", komm:"Wolff Fuss", radio:[], tv:{DE:[MAG],AT:[ATg],CH:[SRFg],UK:[UKg]}, ticker:[], lohnt:{score:88,einordnung:{de:"Das Torjäger-Duell von Miami: Erling Haaland (sieben Turniertore, Doppelpack gegen Brasilien) gegen Harry Kane. Norwegen steht erstmals in einem WM-Viertelfinale, England setzte sich mit 3:2 gegen Mexiko durch. In Deutschland exklusiv bei MagentaTV – kein Free-TV.",en:"The str

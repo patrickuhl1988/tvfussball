@@ -1,0 +1,26 @@
+fff"},
+  {id:"seriea",name:"Serie A",short:"SA",color:"#1f4e9c",fg:"#fff"},
+  {id:"wc",name:"World Cup 2026",short:"WC",color:"#0b9d6e",fg:"#fff"}
+];
+const T = Object.fromEntries(TEAMS.map(t=>[t.id,t]));
+
+
+
+const PROVIDERS = [
+  {name:"DAZN", kind:"pay", countries:["DE","AT","CH"], price:"34,99 €/Mon", sub:"Jahresabo · 44,99 € monatl. · Super Sports ab 19,99 €",
+   comps:["Bundesliga","Champions League","La Liga","Serie A","Ligue 1"], url:"https://www.dazn.com",
+   de:"Größtes Sport-Streaming in DE: Bundesliga am Sonntag plus Samstags-Konferenz, der Großteil der Champions League sowie La Liga, Serie A und Ligue 1.",
+   en:"Germany's biggest sport streamer: Bundesliga on Sunday plus the Saturday Konferenz, most of the Champions League and La Liga, Serie A and Ligue 1."},
+  {name:"Sky / WOW", kind:"pay", countries:["DE","AT"], price:"ab 29,99 €/Mon", sub:"WOW Live-Sport oder Sky Bundesliga-Paket",
+   comps:["Bundesliga","2. Bundesliga","Premier League","DFB-Pokal"], url:"https://www.wow.de",
+   de:"Heimat der Bundesliga: Freitag und Samstag inkl. Topspiel, die komplette 2. Bundesliga und der DFB-Pokal. Flexibel als WOW oder klassisch über Sky.",
+   en:"Home of the Bundesliga: Friday and Saturday incl. the top game, the full 2. Bundesliga and the DFB-Pokal. Flexible as WOW or classic Sky."},
+  {name:"MagentaTV", kind:"pay", countries:["DE"], price:"ab 9,95 €/Mon", sub:"MagentaSport · WM-2026-Paket separat",
+   comps:["WM 2026","3. Liga"], url:"https://www.telekom.de/magenta-tv",
+   de:"Telekom-Plattform mit allen 104 Spielen der WM 2026 (44 davon exklusiv) sowie der 3. Liga — in UHD/4K. Unabhängig vom Internetanbieter nutzbar.",
+   en:"Telekom platform with all 104 matches of the 2026 World Cup (44 exclusive) plus the 3. Liga — in UHD/4K. Usable regardless of your ISP."},
+  {name:"Amazon Prime Video", kind:"pay", countries:["DE","UK"], price:"8,99 €/Mon", sub:"Prime-Mitgliedschaft (89,90 €/Jahr)",
+   comps:["Champions League"], url:"https://www.amazon.de/prime",
+   de:"Zeigt in Deutschland das Dienstags-Topspiel der Champions League. Im Prime-Abo enthalten, das auch Versand und Streaming abdeckt.",
+   en:"Shows the Tuesday top Champions League game in Germany. Included in the Prime membership that also covers delivery and streaming."},
+  {name:"RTL+", kind:"pay", countries:["DE"], price:"ab 6,99 €/Mon", sub:"RTL

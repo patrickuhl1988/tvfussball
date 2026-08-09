@@ -1,0 +1,26 @@
+ll setzen, z.B. auf Reisen) ---------- */
+const MKT_LIST=["DE","AT","CH","UK","IE","FR","IT","ES","NL","SE","FI","TR","US","CA","MX","TH","SG","BD"];
+const MKT_FLAG={DE:"\uD83C\uDDE9\uD83C\uDDEA",AT:"\uD83C\uDDE6\uD83C\uDDF9",CH:"\uD83C\uDDE8\uD83C\uDDED",UK:"\uD83C\uDDEC\uD83C\uDDE7",IE:"\uD83C\uDDEE\uD83C\uDDEA",FR:"\uD83C\uDDEB\uD83C\uDDF7",IT:"\uD83C\uDDEE\uD83C\uDDF9",ES:"\uD83C\uDDEA\uD83C\uDDF8",NL:"\uD83C\uDDF3\uD83C\uDDF1",SE:"\uD83C\uDDF8\uD83C\uDDEA",FI:"\uD83C\uDDEB\uD83C\uDDEE",TR:"\uD83C\uDDF9\uD83C\uDDF7",US:"\uD83C\uDDFA\uD83C\uDDF8",CA:"\uD83C\uDDE8\uD83C\uDDE6",MX:"\uD83C\uDDF2\uD83C\uDDFD",TH:"\uD83C\uDDF9\uD83C\uDDED",SG:"\uD83C\uDDF8\uD83C\uDDEC",BD:"\uD83C\uDDE7\uD83C\uDDE9"};
+function mktName(cc){ try{ const n=new Intl.DisplayNames([LANG==="de"?"de":"en"],{type:"region"}).of(cc==="UK"?"GB":cc); if(n) return n; }catch(e){} return cc; }
+function mktChip(){
+  const de=LANG==="de";
+  const opts=MKT_LIST.map(c=>'<option value="'+c+'"'+(c===COUNTRY?" selected":"")+'>'+MKT_FLAG[c]+' '+mktName(c)+'</option>').join("");
+  const auto='<option value="__auto">'+(de?"\uD83C\uDF10 Automatisch (Standort)":"\uD83C\uDF10 Automatic (location)")+'</option>';
+  return '<label class="fchip fchip-mkt" title="'+(de?"Land w\u00e4hlen \u2013 Sender f\u00fcr diesen Markt anzeigen":"Choose country \u2013 show broadcasters for this market")+'">'+
+    '<span class="mkt-ico" aria-hidden="true">'+(MKT_FLAG[COUNTRY]||"\uD83C\uDF10")+'</span>'+
+    '<select id="mktSel" aria-label="'+(de?"Land w\u00e4hlen":"Choose country")+'">'+opts+auto+'</select>'+
+    '<span class="mkt-caret" aria-hidden="true">\u25BE</span></label>';
+}
+/* ---------- Standortwahl im Header ---------- */
+function syncMktFlag(){
+  var el=document.getElementById("mktFlag"); if(!el) return;
+  el.textContent = MKT_FLAG[COUNTRY] || "\uD83C\uDF10";
+  var b=document.getElementById("mktToggle");
+  if(b) b.setAttribute("aria-label",(LANG==="de"?"Standort w\u00e4hlen \u2013 aktuell: ":"Choose location \u2013 currently: ")+mktName(COUNTRY));
+}
+function renderMktMenu(){
+  var de=(LANG==="de");
+  var ttl=document.getElementById("mktPopTitle"); if(ttl) ttl.textContent = de?"W\u00e4hle deinen aktuellen Standort":"Choose your current location";
+  var list=document.getElementById("mktPopList"); if(!list) return;
+  var html=MKT_LIST.map(function(c){
+    return '<butto

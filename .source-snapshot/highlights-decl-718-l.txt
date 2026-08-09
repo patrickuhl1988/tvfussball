@@ -1,0 +1,20 @@
+#feedback") fbAdminOpen();
+window.addEventListener("hashchange",function(){ if(location.hash==="#feedback") fbAdminOpen(); });
+function hideLoader(){ var l=document.getElementById("loader"); if(l) l.classList.add("hide"); }
+if(PAGE==="live"){
+  if(LIVE_ENABLED){ try{ liveFetch(); }catch(e){} }
+  /* Startseite: bewusste, kurze Marken-Intro */
+  window.addEventListener("load",()=>{
+    setTimeout(()=>{ hideLoader();
+      if(!consentGet()){ setTimeout(()=>document.getElementById("consent").classList.remove("hide"), 600); }
+    }, 1100);
+  });
+} else {
+  /* Übrige Seiten: kein künstliches Warten – Loader sofort weg, sobald der Inhalt steht.
+     Nur bei wirklich langsamem Laden bleibt er bis hierhin sichtbar. */
+  hideLoader();
+}
+</script>
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4849f056f0a74e2982e767e3818c5e25"}'></script>
+</body>
+</html>
