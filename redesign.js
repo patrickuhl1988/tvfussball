@@ -55,14 +55,14 @@
       const map={today:[/^heute$/],live:[/^live$/,/(^| )live( |$)/],mine:[/^meine$/, /favorit/],highlights:[/highlight/]};
       legacyClick(map[action]||[]);
       hero.querySelectorAll('.tvf-focusbtn').forEach(b=>b.classList.toggle('is-active',b===btn));
-      setTimeout(updateStats,80);
+      setTimeout(()=>{updateStats();updateSectionHeads()},100);
     }));
 
     const fresh=hero.querySelector('.tvf-focussearch input');
     fresh.addEventListener('input',()=>{
       const old=[...document.querySelectorAll('input[type="search"],#search')].find(el=>el!==fresh && !el.closest('.tvf-redesign-hero'));
       if(old){old.value=fresh.value;old.dispatchEvent(new Event('input',{bubbles:true}));old.dispatchEvent(new Event('change',{bubbles:true}));}
-      setTimeout(updateStats,50);
+      setTimeout(()=>{updateStats();updateSectionHeads()},70);
     });
   }
 
@@ -71,6 +71,33 @@
     root.querySelectorAll?.('.tabs,.tabbar,.subbar,.m-quicknav').forEach(el=>{el.classList.add('tvf-primary-nav','tvf-simplified-hidden')});
     root.querySelectorAll?.('.toolbar,.m-filters,.filters,.filter-wrap,.filter-panel').forEach(el=>{el.classList.add('tvf-filter-area','tvf-simplified-hidden')});
     root.querySelectorAll?.('.bottomnav,.m-fixed').forEach(el=>el.classList.add('tvf-mobile-dock'));
+  }
+
+  function organizeMatchGrids(){
+    const cards=[...document.querySelectorAll(cardSelectors)];
+    const parents=[...new Set(cards.map(c=>c.parentElement).filter(Boolean))];
+    parents.forEach(parent=>{
+      const direct=[...parent.children].filter(el=>el.matches?.(cardSelectors));
+      if(direct.length<2) return;
+      parent.classList.add('tvf-match-grid');
+      if(!parent.querySelector(':scope > .tvf-match-section-head')){
+        const head=document.createElement('div');
+        head.className='tvf-match-section-head';
+        head.style.gridColumn='1 / -1';
+        head.innerHTML='<h2>Spiele</h2><span data-tvf-section-count></span>';
+        parent.prepend(head);
+      }
+    });
+    updateSectionHeads();
+  }
+
+  function updateSectionHeads(){
+    document.querySelectorAll('.tvf-match-grid').forEach(grid=>{
+      const cards=[...grid.children].filter(el=>el.matches?.(cardSelectors));
+      const visible=cards.filter(c=>getComputedStyle(c).display!=='none');
+      const counter=grid.querySelector(':scope > .tvf-match-section-head [data-tvf-section-count]');
+      if(counter) counter.textContent=`${visible.length} ${visible.length===1?'Partie':'Partien'}`;
+    });
   }
 
   function updateStats(){
@@ -91,8 +118,8 @@
   }
 
   function boot(){
-    buildHero();enhance(document);updateStats();
-    const observer=new MutationObserver(mutations=>{for(const mutation of mutations){for(const node of mutation.addedNodes){if(node.nodeType===1)enhance(node)}}clearTimeout(window.__tvfStatsTimer);window.__tvfStatsTimer=setTimeout(updateStats,60)});
+    buildHero();enhance(document);organizeMatchGrids();updateStats();
+    const observer=new MutationObserver(mutations=>{for(const mutation of mutations){for(const node of mutation.addedNodes){if(node.nodeType===1)enhance(node)}}clearTimeout(window.__tvfLayoutTimer);window.__tvfLayoutTimer=setTimeout(()=>{organizeMatchGrids();updateStats()},80)});
     observer.observe(document.body,{childList:true,subtree:true});
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
