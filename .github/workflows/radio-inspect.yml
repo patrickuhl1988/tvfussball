@@ -15,27 +15,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Extract radio and worth-score samples
+      - name: Extract populated radio and score samples
         shell: python
         run: |
           from pathlib import Path
           import re
           text=Path('index.html').read_text(encoding='utf-8',errors='replace')
-          out=[]
-          for needle in ['radio:[','lohnt:{','function radio','renderRadio','radioHtml','radio:']:
-              out.append('\n### '+needle+'\n')
-              pos=0; n=0
-              while n<20:
-                  p=text.find(needle,pos)
-                  if p<0: break
-                  out.append(text[max(0,p-260):p+1400])
-                  pos=p+len(needle); n+=1
-          p=Path('.radio-inspect.txt'); p.write_text('\n'.join(out),encoding='utf-8')
+          out=['### NONEMPTY RADIOS']
+          seen=[]
+          for m in re.finditer(r'radio\s*:\s*\[([^\]]+)\]',text,re.S):
+              val=m.group(1).strip()
+              if val and val not in seen:
+                  seen.append(val)
+                  out.append(text[max(0,m.start()-350):m.end()+700])
+              if len(seen)>=30: break
+          out.append('\n### RADIO FUNCTIONS')
+          for m in re.finditer(r'function\s+[A-Za-z_$][\w$]*radio[A-Za-z_$\w]*\s*\(|\bradio\b',text,re.I):
+              out.append(text[max(0,m.start()-500):m.start()+2200])
+              if len(out)>55: break
+          out.append('\n### LOHNT SAMPLES')
+          n=0
+          for m in re.finditer(r'lohnt\s*:\s*\{',text):
+              out.append(text[max(0,m.start()-240):m.start()+1600]); n+=1
+              if n>=8: break
+          Path('.radio-inspect.txt').write_text('\n\n'.join(out),encoding='utf-8')
       - name: Commit report
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .radio-inspect.txt
           git diff --cached --quiet && exit 0
-          git commit -m 'chore: add radio inspection report'
+          git commit -m 'chore: refresh radio inspection report'
           git push
