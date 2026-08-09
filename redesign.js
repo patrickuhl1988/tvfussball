@@ -47,7 +47,17 @@
     });
   }
 
+  function enhanceChrome(root=document){
+    root.querySelectorAll?.('.datebar,.date-nav,.dates,.m-datebar').forEach(el=>el.classList.add('tvf-date-nav'));
+    root.querySelectorAll?.('.tabs,.tabbar,.subbar,.m-quicknav').forEach(el=>el.classList.add('tvf-primary-nav'));
+    root.querySelectorAll?.('.toolbar,.m-filters,.filters,.filter-wrap,.filter-panel').forEach(el=>el.classList.add('tvf-filter-area'));
+    root.querySelectorAll?.('.bottomnav,.m-fixed').forEach(el=>el.classList.add('tvf-mobile-dock'));
+    root.querySelectorAll?.('input[type="search"],#search,.btn-search').forEach(el=>el.classList.add('tvf-search'));
+    root.querySelectorAll?.('.tvf-filter-area button,.tvf-filter-area .btn,.tvf-filter-area select').forEach(el=>el.classList.add('tvf-filter-control'));
+  }
+
   function enhance(root=document){
+    enhanceChrome(root);
     if(root.matches?.(cardSelectors)) enhanceCard(root);
     root.querySelectorAll?.(cardSelectors).forEach(enhanceCard);
     if(root.matches?.('.ticker,.live-ticker,.ticker-box,#ticker')) enhanceTicker(root);
