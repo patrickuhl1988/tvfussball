@@ -36,10 +36,18 @@
   }
 
   function legacyClick(matchers){
-    const nodes=[...document.querySelectorAll('button,a,[role="button"],.tab,.btn,.m-btn')].filter(el=>!el.closest('.tvf-redesign-hero'));
+    const nodes=[...document.querySelectorAll('button,a,[role="button"],.tab,.btn,.m-btn')].filter(el=>!el.closest('.tvf-redesign-hero')&&!el.closest('.tvf-mobile-focusdock'));
     const target=nodes.find(el=>matchers.some(rx=>rx.test(norm(el.textContent))));
     if(target){target.click();return true}
     return false;
+  }
+
+  const actionMap={today:[/^heute$/],live:[/^live$/,/(^| )live( |$)/],mine:[/^meine$/, /favorit/],highlights:[/highlight/]};
+
+  function activate(action){
+    legacyClick(actionMap[action]||[]);
+    document.querySelectorAll('[data-tvf-action]').forEach(el=>el.classList.toggle('is-active',el.dataset.tvfAction===action));
+    setTimeout(()=>{updateStats();updateSectionHeads();renderMineEmpty(action)},110);
   }
 
   function buildHero(){
@@ -49,15 +57,7 @@
     hero.className='tvf-redesign-hero';
     hero.innerHTML='<div class="tvf-redesign-eyebrow">Fußball im TV & Stream</div><h1>Kein Spiel mehr verpassen.</h1><p>Alle wichtigen Fußballspiele, Sender und Live-Updates auf einen Blick.</p><div class="tvf-redesign-stats"><div class="tvf-redesign-stat"><strong data-tvf-stat="matches">–</strong><span>Spiele</span></div><div class="tvf-redesign-stat"><strong data-tvf-stat="live">–</strong><span>live</span></div><div class="tvf-redesign-stat"><strong data-tvf-stat="favorites">–</strong><span>Favoriten</span></div></div><div class="tvf-focusbar"><button class="tvf-focusbtn is-active" data-tvf-action="today">Heute</button><button class="tvf-focusbtn" data-tvf-action="live">Live</button><button class="tvf-focusbtn" data-tvf-action="mine">Meine</button><button class="tvf-focusbtn" data-tvf-action="highlights">Highlights</button><label class="tvf-focussearch"><input type="search" placeholder="Team, Wettbewerb oder Sender suchen" aria-label="Spiele durchsuchen"></label></div>';
     if(header?.parentNode) header.insertAdjacentElement('afterend',hero); else document.body.prepend(hero);
-
-    hero.querySelectorAll('.tvf-focusbtn').forEach(btn=>btn.addEventListener('click',()=>{
-      const action=btn.dataset.tvfAction;
-      const map={today:[/^heute$/],live:[/^live$/,/(^| )live( |$)/],mine:[/^meine$/, /favorit/],highlights:[/highlight/]};
-      legacyClick(map[action]||[]);
-      hero.querySelectorAll('.tvf-focusbtn').forEach(b=>b.classList.toggle('is-active',b===btn));
-      setTimeout(()=>{updateStats();updateSectionHeads()},100);
-    }));
-
+    hero.querySelectorAll('.tvf-focusbtn').forEach(btn=>btn.addEventListener('click',()=>activate(btn.dataset.tvfAction)));
     const fresh=hero.querySelector('.tvf-focussearch input');
     fresh.addEventListener('input',()=>{
       const old=[...document.querySelectorAll('input[type="search"],#search')].find(el=>el!==fresh && !el.closest('.tvf-redesign-hero'));
@@ -66,11 +66,21 @@
     });
   }
 
+  function buildMobileDock(){
+    if(document.querySelector('.tvf-mobile-focusdock')) return;
+    const dock=document.createElement('nav');
+    dock.className='tvf-mobile-focusdock';
+    dock.setAttribute('aria-label','Hauptnavigation');
+    dock.innerHTML='<button class="is-active" data-tvf-action="today"><span>⌂</span>Heute</button><button data-tvf-action="live"><span>●</span>Live</button><button data-tvf-action="mine"><span>★</span>Meine</button><button data-tvf-action="highlights"><span>▶</span>Highlights</button>';
+    dock.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>activate(btn.dataset.tvfAction)));
+    document.body.appendChild(dock);
+  }
+
   function simplifyChrome(root=document){
     root.querySelectorAll?.('.datebar,.date-nav,.dates,.m-datebar').forEach(el=>el.classList.add('tvf-date-nav'));
     root.querySelectorAll?.('.tabs,.tabbar,.subbar,.m-quicknav').forEach(el=>{el.classList.add('tvf-primary-nav','tvf-simplified-hidden')});
     root.querySelectorAll?.('.toolbar,.m-filters,.filters,.filter-wrap,.filter-panel').forEach(el=>{el.classList.add('tvf-filter-area','tvf-simplified-hidden')});
-    root.querySelectorAll?.('.bottomnav,.m-fixed').forEach(el=>el.classList.add('tvf-mobile-dock'));
+    root.querySelectorAll?.('.bottomnav,.m-fixed').forEach(el=>el.classList.add('tvf-simplified-hidden'));
   }
 
   function organizeMatchGrids(){
@@ -100,6 +110,19 @@
     });
   }
 
+  function renderMineEmpty(action){
+    document.querySelectorAll('.tvf-empty-mine').forEach(el=>el.remove());
+    if(action!=='mine') return;
+    const visible=[...document.querySelectorAll(cardSelectors)].filter(c=>getComputedStyle(c).display!=='none');
+    if(visible.length) return;
+    const target=document.querySelector('.tvf-match-grid')?.parentElement||document.querySelector('main,.main,.container,.wrap');
+    if(!target) return;
+    const empty=document.createElement('div');
+    empty.className='tvf-empty-mine';
+    empty.innerHTML='<strong>Noch keine Spiele unter „Meine“</strong>Markiere deine Lieblingsmannschaften mit dem Stern. Sobald Partien dieser Teams vorhanden sind, erscheinen sie hier.';
+    target.appendChild(empty);
+  }
+
   function updateStats(){
     const cards=[...document.querySelectorAll(cardSelectors)];
     const visible=cards.filter(c=>getComputedStyle(c).display!=='none');
@@ -118,7 +141,7 @@
   }
 
   function boot(){
-    buildHero();enhance(document);organizeMatchGrids();updateStats();
+    buildHero();buildMobileDock();enhance(document);organizeMatchGrids();updateStats();
     const observer=new MutationObserver(mutations=>{for(const mutation of mutations){for(const node of mutation.addedNodes){if(node.nodeType===1)enhance(node)}}clearTimeout(window.__tvfLayoutTimer);window.__tvfLayoutTimer=setTimeout(()=>{organizeMatchGrids();updateStats()},80)});
     observer.observe(document.body,{childList:true,subtree:true});
   }
