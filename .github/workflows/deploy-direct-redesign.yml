@@ -6,6 +6,10 @@ on:
     paths:
       - 'index.html'
       - 'highlights.html'
+      - 'anbieter.html'
+      - 'app-direct.js'
+      - 'direct.css'
+      - 'favicon.svg'
       - '.github/workflows/deploy-direct-redesign.yml'
   workflow_dispatch:
 
@@ -24,19 +28,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build published HTML from Claude sources
+      - name: Build published HTML from maintained sources
         shell: python
         run: |
           from pathlib import Path
+          import re
 
           out = Path('/tmp/tvfussball-direct')
           out.mkdir(parents=True, exist_ok=True)
-          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="stylesheet" href="direct.css?v=1">'''
-          app = '''<script src="app-direct.js?v=1"></script>'''
+          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=4"><link rel="stylesheet" href="direct.css?v=4">'''
+          app = '''<script src="app-direct.js?v=4"></script>'''
 
-          for name in ('index.html', 'highlights.html'):
+          for name in ('index.html', 'highlights.html', 'anbieter.html'):
               src = Path(name).read_text(encoding='utf-8')
-              # The maintained source HTML remains untouched on main. Only the published copy gets the renderer hooks.
+              # Keep main untouched as Claude's maintained source. The published copies only receive the redesign hooks.
+              src = re.sub(r'<link\b[^>]*rel=["\'](?:shortcut\s+)?icon["\'][^>]*>', '', src, flags=re.I)
+              src = re.sub(r'<link\b[^>]*rel=["\']apple-touch-icon["\'][^>]*>', '', src, flags=re.I)
               if 'tvf-direct-boot' not in src:
                   src = src.replace('<head>', '<head>' + boot, 1)
               if 'app-direct.js' not in src:
@@ -49,13 +56,17 @@ jobs:
           git switch gh-pages
           cp /tmp/tvfussball-direct/index.html index.html
           cp /tmp/tvfussball-direct/highlights.html highlights.html
+          cp /tmp/tvfussball-direct/anbieter.html anbieter.html
+          git show origin/main:app-direct.js > app-direct.js
+          git show origin/main:direct.css > direct.css
+          git show origin/main:favicon.svg > favicon.svg
           git rm -f data-bridge.js app-shell.js app-shell.css 2>/dev/null || true
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html highlights.html
+          git add index.html highlights.html anbieter.html app-direct.js direct.css favicon.svg
           if git diff --cached --quiet; then
             echo 'Nothing to publish.'
             exit 0
           fi
-          git commit -m 'deploy: direct embedded-data redesign'
+          git commit -m 'deploy: complete direct redesign'
           git push origin gh-pages
