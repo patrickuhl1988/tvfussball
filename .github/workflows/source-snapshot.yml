@@ -16,17 +16,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Split large source HTML files into readable chunks
+      - name: Inspect embedded source data
         shell: python
         run: |
           from pathlib import Path
-          import json, shutil
+          import json, re, shutil
 
           out = Path('.source-snapshot')
           if out.exists():
               shutil.rmtree(out)
           out.mkdir()
           manifest = {}
+          report = {}
           for filename in ('index.html', 'highlights.html'):
               p = Path(filename)
               if not p.exists():
@@ -41,12 +42,33 @@ jobs:
                   (out / name).write_text(chunk, encoding='utf-8')
                   names.append(name)
               manifest[filename] = {'chars': len(text), 'chunks': names}
+
+              decls=[]
+              for m in re.finditer(r'\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*', text):
+                  name=m.group(1)
+                  pos=m.start()
+                  sample=text[m.start():m.start()+1400]
+                  decls.append({'name':name,'pos':pos,'sample':sample})
+              needles=['09.08.','10.08.','11.08.','12.08.','2026-08-09','2026-08-10','today','heute','matches','games','spiele','const HL']
+              hits=[]
+              low=text.lower()
+              for needle in needles:
+                  start=0
+                  nlow=needle.lower()
+                  count=0
+                  while count<12:
+                      pos=low.find(nlow,start)
+                      if pos<0: break
+                      hits.append({'needle':needle,'pos':pos,'sample':text[max(0,pos-350):pos+900]})
+                      start=pos+len(needle); count+=1
+              report[filename]={'declarations':decls,'hits':hits}
           (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8')
+          (out / 'structure.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
       - name: Commit snapshot
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .source-snapshot
           git diff --cached --quiet && exit 0
-          git commit -m 'chore: snapshot source HTML for redesign migration'
+          git commit -m 'chore: inspect source HTML data structure'
           git push
