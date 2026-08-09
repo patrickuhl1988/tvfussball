@@ -36,8 +36,8 @@ jobs:
 
           out = Path('/tmp/tvfussball-direct')
           out.mkdir(parents=True, exist_ok=True)
-          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=4"><link rel="stylesheet" href="direct.css?v=4">'''
-          app = '''<script src="app-direct.js?v=4"></script>'''
+          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=5"><link rel="stylesheet" href="direct.css?v=5">'''
+          app = '''<script src="app-direct.js?v=5"></script>'''
 
           for name in ('index.html', 'highlights.html', 'anbieter.html'):
               src = Path(name).read_text(encoding='utf-8')
