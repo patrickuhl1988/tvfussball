@@ -1,0 +1,934 @@
+
+### COMPETITIONS
+
+WM 2026 · Viertelfinale
+WM 2026 · Halbfinale
+WM 2026 · Spiel um Platz 3
+WM 2026 · Finale
+Bundesliga · 1. Spieltag
+2. Bundesliga · 1. Spieltag
+Bundesliga · 2. Spieltag
+Bundesliga · 3. Spieltag
+Bundesliga · 4. Spieltag
+Bundesliga · 5. Spieltag
+Bundesliga · 6. Spieltag
+Bundesliga · 7. Spieltag
+Bundesliga · 8. Spieltag
+Bundesliga · 9. Spieltag
+Bundesliga · 10. Spieltag
+Bundesliga · 11. Spieltag
+Bundesliga · 12. Spieltag
+Bundesliga · 13. Spieltag
+Bundesliga · 14. Spieltag
+Bundesliga · 15. Spieltag
+Bundesliga · 16. Spieltag
+Bundesliga · 17. Spieltag
+Bundesliga · 18. Spieltag
+Bundesliga · 19. Spieltag
+Bundesliga · 20. Spieltag
+Bundesliga · 21. Spieltag
+Bundesliga · 22. Spieltag
+Bundesliga · 23. Spieltag
+Bundesliga · 24. Spieltag
+Bundesliga · 25. Spieltag
+Bundesliga · 26. Spieltag
+Bundesliga · 27. Spieltag
+Bundesliga · 28. Spieltag
+Bundesliga · 29. Spieltag
+Bundesliga · 30. Spieltag
+Bundesliga · 31. Spieltag
+Bundesliga · 32. Spieltag
+Bundesliga · 33. Spieltag
+Bundesliga · 34. Spieltag
+2. Bundesliga · 2. Spieltag
+2. Bundesliga · 3. Spieltag
+2. Bundesliga · 4. Spieltag
+2. Bundesliga · 5. Spieltag
+2. Bundesliga · 6. Spieltag
+2. Bundesliga · 7. Spieltag
+2. Bundesliga · 8. Spieltag
+2. Bundesliga · 9. Spieltag
+2. Bundesliga · 10. Spieltag
+2. Bundesliga · 11. Spieltag
+2. Bundesliga · 12. Spieltag
+2. Bundesliga · 13. Spieltag
+2. Bundesliga · 14. Spieltag
+2. Bundesliga · 15. Spieltag
+2. Bundesliga · 16. Spieltag
+2. Bundesliga · 17. Spieltag
+2. Bundesliga · 18. Spieltag
+2. Bundesliga · 19. Spieltag
+2. Bundesliga · 20. Spieltag
+2. Bundesliga · 21. Spieltag
+2. Bundesliga · 22. Spieltag
+2. Bundesliga · 23. Spieltag
+2. Bundesliga · 24. Spieltag
+2. Bundesliga · 25. Spieltag
+2. Bundesliga · 26. Spieltag
+2. Bundesliga · 27. Spieltag
+2. Bundesliga · 28. Spieltag
+2. Bundesliga · 29. Spieltag
+2. Bundesliga · 30. Spieltag
+2. Bundesliga · 31. Spieltag
+2. Bundesliga · 32. Spieltag
+2. Bundesliga · 33. Spieltag
+2. Bundesliga · 34. Spieltag
+3. Liga · 1. Spieltag · Eröffnungsspiel
+3. Liga · 1. Spieltag
+3. Liga · 2. Spieltag
+3. Liga · 3. Spieltag
+UEFA Supercup
+Champions League · 1. Quali-Runde · Hinspiel
+Champions League · 1. Quali-Runde · Rückspiel
+Champions League · 2. Quali-Runde · Hinspiel
+Champions League · 2. Quali-Runde · Rückspiel
+Champions League · 3. Quali-Runde · Hinspiel
+Champions League · 3. Quali-Runde · Rückspiel
+Europa League · 1. Quali-Runde · Hinspiel
+Europa League · 1. Quali-Runde · Rückspiel
+Europa League · 3. Quali-Runde · Hinspiel
+Conference League · 3. Quali-Runde · Hinspiel
+Champions League · Playoffs
+Champions League · Ligaphase
+Europa League · Playoffs
+Europa League · Ligaphase
+Europa League · 2. Quali-Runde · Hinspiel
+Europa League · 2. Quali-Runde · Rückspiel
+Conference League · 2. Quali-Runde · Hinspiel
+Premier League · 1. Spieltag
+Premier League · 2. Spieltag
+Premier League · 3. Spieltag
+Premier League · 4. Spieltag
+Premier League · 5. Spieltag
+Premier League · 6. Spieltag
+Premier League · 7. Spieltag
+Premier League · 8. Spieltag
+Premier League · 9. Spieltag
+Premier League · 10. Spieltag
+Premier League · 11. Spieltag
+Premier League · 12. Spieltag
+Premier League · 13. Spieltag
+Premier League · 14. Spieltag
+Premier League · 15. Spieltag
+Premier League · 16. Spieltag
+Premier League · 17. Spieltag
+Premier League · 18. Spieltag
+Premier League · 19. Spieltag
+Premier League · 20. Spieltag
+Premier League · 21. Spieltag
+Premier League · 22. Spieltag
+Premier League · 23. Spieltag
+Premier League · 24. Spieltag
+Premier League · 25. Spieltag
+Premier League · 26. Spieltag
+Premier League · 27. Spieltag
+Premier League · 28. Spieltag
+Premier League · 29. Spieltag
+Premier League · 30. Spieltag
+Premier League · 31. Spieltag
+Premier League · 32. Spieltag
+Premier League · 33. Spieltag
+Premier League · 34. Spieltag
+Premier League · 35. Spieltag
+Premier League · 36. Spieltag
+Premier League · 37. Spieltag
+Premier League · 38. Spieltag
+Serie A · 1. Spieltag
+Serie A · 2. Spieltag
+Serie A · 3. Spieltag
+Serie A · 4. Spieltag
+Serie A · 5. Spieltag
+Serie A · 6. Spieltag
+Serie A · 7. Spieltag
+Serie A · 8. Spieltag
+Serie A · 9. Spieltag
+Serie A · 10. Spieltag
+Serie A · 11. Spieltag
+Serie A · 12. Spieltag
+Serie A · 13. Spieltag
+Serie A · 14. Spieltag
+Serie A · 15. Spieltag
+Serie A · 16. Spieltag
+Serie A · 17. Spieltag
+Serie A · 18. Spieltag
+Serie A · 19. Spieltag
+Serie A · 20. Spieltag
+Serie A · 21. Spieltag
+Serie A · 22. Spieltag
+Serie A · 23. Spieltag
+Serie A · 24. Spieltag
+Serie A · 25. Spieltag
+Serie A · 26. Spieltag
+Serie A · 27. Spieltag
+Serie A · 28. Spieltag
+Serie A · 29. Spieltag
+Serie A · 30. Spieltag
+Serie A · 31. Spieltag
+Serie A · 32. Spieltag
+Serie A · 33. Spieltag
+Serie A · 34. Spieltag
+Serie A · 35. Spieltag
+Serie A · 36. Spieltag
+Serie A · 37. Spieltag
+Serie A · 38. Spieltag
+LaLiga · 1. Spieltag
+LaLiga · 2. Spieltag
+LaLiga · 3. Spieltag
+LaLiga · 4. Spieltag
+LaLiga · 5. Spieltag
+LaLiga · 6. Spieltag
+LaLiga · 7. Spieltag
+LaLiga · 8. Spieltag
+LaLiga · 9. Spieltag
+LaLiga · 10. Spieltag
+LaLiga · 11. Spieltag
+LaLiga · 12. Spieltag
+LaLiga · 13. Spieltag
+LaLiga · 14. Spieltag
+LaLiga · 15. Spieltag
+LaLiga · 16. Spieltag
+LaLiga · 17. Spieltag
+LaLiga · 18. Spieltag
+LaLiga · 19. Spieltag
+LaLiga · 20. Spieltag
+LaLiga · 21. Spieltag
+LaLiga · 22. Spieltag
+LaLiga · 23. Spieltag
+LaLiga · 24. Spieltag
+LaLiga · 25. Spieltag
+LaLiga · 26. Spieltag
+LaLiga · 27. Spieltag
+LaLiga · 28. Spieltag
+LaLiga · 29. Spieltag
+LaLiga · 30. Spieltag
+LaLiga · 31. Spieltag
+LaLiga · 32. Spieltag
+LaLiga · 33. Spieltag
+LaLiga · 34. Spieltag
+LaLiga · 35. Spieltag
+LaLiga · 36. Spieltag
+LaLiga · 37. Spieltag
+LaLiga · 38. Spieltag
+Ligue 1 · 1. Spieltag
+Ligue 1 · 2. Spieltag
+Ligue 1 · 3. Spieltag
+Ligue 1 · 4. Spieltag
+Ligue 1 · 5. Spieltag
+Ligue 1 · 6. Spieltag
+Ligue 1 · 7. Spieltag
+Ligue 1 · 8. Spieltag
+Ligue 1 · 9. Spieltag
+Ligue 1 · 10. Spieltag
+Ligue 1 · 11. Spieltag
+Ligue 1 · 12. Spieltag
+Ligue 1 · 13. Spieltag
+Ligue 1 · 14. Spieltag
+Ligue 1 · 15. Spieltag
+Ligue 1 · 16. Spieltag
+Ligue 1 · 17. Spieltag
+Ligue 1 · 18. Spieltag
+Ligue 1 · 19. Spieltag
+Ligue 1 · 20. Spieltag
+Ligue 1 · 21. Spieltag
+Ligue 1 · 22. Spieltag
+Ligue 1 · 23. Spieltag
+Ligue 1 · 24. Spieltag
+Ligue 1 · 25. Spieltag
+Ligue 1 · 26. Spieltag
+Ligue 1 · 27. Spieltag
+Ligue 1 · 28. Spieltag
+Ligue 1 · 29. Spieltag
+Ligue 1 · 30. Spieltag
+Ligue 1 · 31. Spieltag
+Ligue 1 · 32. Spieltag
+Ligue 1 · 33. Spieltag
+Ligue 1 · 34. Spieltag
+Community Shield
+Copa del Rey · 1. Runde
+Testspiel · Sommer 2026
+Conference League · 2. Quali-Runde · Rückspiel
+Belgischer Supercup
+Scottish Premiership
+Österreichische Bundesliga
+Regionalliga Bayern
+Regionalliga Nordost
+Eredivisie
+Primeira Liga
+Tschechische Liga
+DFB-Pokal der Junioren · Finale
+WM 2026 · Sechzehntelfinale
+WM 2026 · Achtelfinale
+WM 2026 · Gruppe K · 2. Spieltag
+WM 2026 · Gruppe L · 2. Spieltag
+WM 2026 · Gruppe B · 3. Spieltag
+WM 2026 · Gruppe C · 3. Spieltag
+WM 2026 · Gruppe A · 3. Spieltag
+WM 2026 · Gruppe E · 3. Spieltag
+WM 2026 · Gruppe F · 3. Spieltag
+WM 2026 · Gruppe D · 3. Spieltag
+WM 2026 · Gruppe I · 3. Spieltag
+WM 2026 · Gruppe H · 3. Spieltag
+WM 2026 · Gruppe G · 3. Spieltag
+WM 2026 · Gruppe L · 3. Spieltag
+WM 2026 · Gruppe K · 3. Spieltag
+WM 2026 · Gruppe J · 3. Spieltag
+DFB-Pokal · 1. Runde
+Franz-Beckenbauer-Supercup
+
+### CLUB BALL
+
+#005CA9","#FFFFFF"],"FC Noah":["#000000","#FFD200"],"Feyenoord Rotterdam":["#E2001A","#FFFFFF"],"Galatasaray":["#E2001A","#FFD200"],"Trabzonspor":["#7A1F2B","#0057B8"]
+,
+  "Celtic Glasgow":["#00843D","#FFFFFF"],"Dundee FC":["#0B2A5B","#FFFFFF"]
+,
+  "Jeju United":["#F58220","#005CA9"]
+,
+  "Académico Viseu":["#005CA9","#FFFFFF"],"FC Alverca":["#E2001A","#FFFFFF"],"Hertha BSC II":["#005CA9","#FFFFFF"],"Hibernian FC":["#00843D","#FFFFFF"],"Kilmarnock FC":["#005CA9","#FFFFFF"],"Lok Leipzig":["#005CA9","#FFD200"],"PEC Zwolle":["#005CA9","#FFFFFF"],"SV Ried":["#00843D","#FFFFFF"],"Sparta Rotterdam":["#E2001A","#FFFFFF"],"Wolfsberger AC":["#FFFFFF","#000000"]
+,
+  "FC Porto":["#005CA9","#FFFFFF"]
+};
+function clubBall(c1,c2){
+ return '<svg class="cball" viewBox="0 0 24 24" aria-hidden="true">'
+  +'<circle cx="12" cy="12" r="10.5" fill="'+c1+'" stroke="rgba(0,0,0,.32)" stroke-width="1"/>'
+  +'<path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="'+c2+'"/>'
+  +'<path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="'+c2+'" stroke-width="1.2" stroke-linecap="round" fill="none"/>'
+  +'</svg>';
+}
+function flag(n){ if(FL[n]) return FL[n]; var c=CLUB_BALL[n]; return c?clubBall(c[0],c[1]):"⚽"; }
+/* Primaerfarben (Flagge) fuer Trikot-Verlauf der Karten (Variante A, hell) */
+const NAT_TINT={Belgien:"#EF3340",Senegal:"#00853F",Spanien:"#C60B1E","Österreich":"#EF3340",Portugal:"#DA291C",Kroatien:"#ED1C24",
+ Schweiz:"#DA291C",Algerien:"#006233",Australien:"#FFCD00","Ägypten":"#CE1126",Argentinien:"#75AADB","Kap Verde":"#003DA5",
+ USA:"#B31942","Bosnien-Herzegowina":"#002F6C",Ghana:"#CE1126",Panama:"#DA121A",Norwegen:"#BA0C2F",Frankreich:"#0055A4",
+ Brasilien:"#009739",Japan:"#BC002D",Marokko:"#C1272D",Niederlande:"#FF6C00",Schweden:"#005293",Paraguay:"#D52B1E",
+ Deutschland:"#DD0000",Mexiko:"#006341",Ecuador:"#FFD100",England:"#CE1124",Uruguay:"#5CB8E4","Türkei":"#E30A17",
+ Iran:"#239F40",Neuseeland:"#101010",Usbekistan:"#0099B5","Saudi-Arabien":"#006C35",Tunesien:"#E70013",Jordanien:"#CE1126",
+ Irak:"#CE1126","Elfenbeinküste":"#F77F00",Kolumbien:"#FCD116",Chile:"#D52B1E",Kanada:"#D80621",Katar:"#8A1538",
+ Südkorea:"#CD2E3A",Nigeria:"#008751",Kamerun:"#007A5E",Polen:"#DC143C",Italien:"#008C45",Dänemark:"#C8102E",Schottland:"#0065BF"};
+function tintStyle(m){
+  function pc(n){ if(CLUB_BALL[n]) return CLUB_BALL[n][0]; if(NAT_TINT[n]) return NAT_TINT[n]; return null; }
+  var a=pc(m.h), b=pc(m.a); if(!a&&!b) return "";
+  a=a||b; b=b||a; return ' style="--c1:'+a+';--c2:'+b+'"';
+}
+
+/* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
+const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
+  ORF={n:"ORF 1",t:"fta",q:"HD"}, SERV={n:"ServusTV",t:"fta",q:"HD"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD"},
+  SRF2={n:"SRF zwei",t:"fta",q:"HD"}, SRFi={n:"SRF info",t:"fta",q:"HD"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
+  SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
+  UKg={n:"BBC / ITV",t:"fta",q:"HD"};
+const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, RTL={n:"RTL",t:"fta",q:"HD",u:"https://plus.rtl.de/"}, SKY={n:"Sky",t:"pay",q:"HD"};
+const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
+const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"}, OF={n:"OneFootball",t:"fta",u:"https://onefootball.com/"}, LAOLA={n:"LAOLA1",t:"fta",u:"https://www.laola1.at/"}, CLUBTV={n:"Vereins-/Regional-Stream",t:"fta"}, SKYAT={n:"Sky Sport Austria",t:"pay"}, BLUE={n:"blue Sport",t:"pay"},
+  RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
+  CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"},
+  RTE={n:"RTÉ 2",t:"fta",q:"HD"}, YLE={n:"Yle TV2",t:"fta",q:"HD"}, MTV3={n:"MTV3",t:"fta",q:"HD"},
+  MEDIA={n:"Mediacorp",t:"fta",q:"HD"}, TSPT={n:"T Sp
+
+### LIVE CORE
+
+
+--- LIVE_POLL_MS ---
+";
+  if(c==="el") return /Quali/.test(m.comp||"") ? "uefa.europa_qual" : "uefa.europa";
+  if(c==="ecl") return /Quali/.test(m.comp||"") ? "uefa.europa.conf_qual" : "uefa.europa.conf";
+  return ({wm:"fifa.world",bl:"ger.1",bl2:"ger.2",bl3:"ger.3",dfb:"ger.dfb_pokal",pl:"eng.1",facup:"eng.fa",it:"ita.1",es:"esp.1",l1:"fra.1",test:"club.friendly"})[c]||null; }
+/* nur die Ligen abfragen, die heute (+/-1 Tag) ein Spiel haben -> spart Requests */
+function liveLeaguesToday(){ var tk=todayKeyNow(), set={}; for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var re=/(\d{2})\.(\d{2})\.(\d{4})/g,x,hit=false; while((x=re.exec(String(m.day)))){ var k=(+x[3])*10000+(+x[2])*100+(+x[1]); if(k>=tk-1&&k<=tk+1){ hit=true; break; } } if(!hit) continue; var lg=espnLeagueFor(m); if(lg) set[lg]=true; } return Object.keys(set); }
+function liveSources(){ return liveLeaguesToday().map(function(lg){ return "https://site.api.espn.com/apis/site/v2/sports/soccer/"+lg+"/scoreboard"; }); }
+const LIVE_POLL_MS = 45000;
+const LIVE_ALIAS = {
+  "Ivory Coast":"Elfenbeinküste","Côte d'Ivoire":"Elfenbeinküste","Cote d'Ivoire":"Elfenbeinküste",
+  "Netherlands":"Niederlande","Germany":"Deutschland","Morocco":"Marokko","Sweden":"Schweden",
+  "South Africa":"Südafrika","Canada":"Kanada","Norway":"Norwegen","France":"Frankreich",
+  "Mexico":"Mexiko","Belgium":"Belgien","Spain":"Spanien","Austria":"Österreich",
+  "Brazil":"Brasilien","Switzerland":"Schweiz","Algeria":"Algerien","Australia":"Australien",
+  "Egypt":"Ägypten","Colombia":"Kolumbien","Croatia":"Kroatien","Argentina":"Argentinien",
+  "DR Congo":"DR Kongo","Congo DR":"DR Kongo","Democratic Republic of the Congo":"DR Kongo",
+  "United States":"USA","USA":"USA",
+  "Bosnia and Herzegovina":"Bosnien-Herzegowina","Bosnia & Herzegovina":"Bosnien-Herzegowina",
+  "Bosnia-Herzegovina":"Bosnien-Herzegowina","Bosnien-H.":"Bosnien-Herzegowina",
+  "Cape Verde":"Kap Verde","Cabo Verde":"Kap Verde","Qatar":"Katar","Saudi Arabia":"Saudi-Arabien",
+  "Uzbekistan":"Usbekistan","Turkey":"Türkei","Türkiye":"Türkei","South Korea":"Südkorea",
+  "Italy":"Italien","England":"England","Senegal":"Senegal","Ghana":"Ghana","Japan":"Japan",
+  "Paraguay":"Paraguay","Ecuador":"Ecuador","Portugal":"Portugal","Iran":"Iran","Curaçao":"Curaçao",
+  "Vardar":"Vardar Skopje","Iberia 1999":"Iberia Tiflis","Flora":"Flora Tallinn","Inter D'Escaldes":"Inter Escaldes","Györi ETO FC":"ETO Győr","Vikingur Reykjavik":"Víkingur Reykjavík","Sabah FK":"Sabah FC","Drita Gjilan":"FC Drita","Kauno Zalgiris":"Kauno Žalgiris","Larne":"Larne FC","Floriana FC":"Floriana","Sutjeska":"Sutjeska Nikšić","Klaksvik":"KÍ Klaksvík","KI Klaksvik":"KÍ Klaksvík","FK Vitebsk":"Vitebsk","U Craiova":"Universitatea Craiova","Petrocub Hincesti":"Petrocub","Egnatia Rrogozhine":"Egnatia","FK Qarabag":"Qarabağ Agdam","Qarabag":"Qarabağ Agdam","Dynamo Kyiv":"Dynamo Kiew","CSKA Sofia":"ZSKA Sofia","MSK Zilina":"MSK Žilina","Zilina":"MSK Žilina","Ferencvaros":"Ferencváros","Ferencvarosi TC":"Ferencváros",
+  "Bayern Munich":"FC Bayern München","Bayer Leverkusen":"Bayer 04 Leverkusen","Borussia Monchengladbach":"Borussia Mönchengladbach","Werder Bremen":"SV Werder Bremen","Union Berlin":"1. FC Union Berlin","FC Cologne":"1. FC Köln","1. FC Koln":"1. FC Köln","Cologne":"1. FC Köln","Mainz":"1. FSV Mainz 05","Mainz 05":"1. FSV Mainz 05","Schalke 04":"FC Schalke 04","Hamburg":"Hamburger SV","Paderborn":"SC Paderborn 07","1899 Hoffenheim":"TSG Hoffenheim","Hoffenheim":"TSG Hoffenheim","Elversberg":"SV Elversberg","Inter Milan":"Inter Mailand","Internazionale":"Inter Mailand","AC Milan":"AC Mailand","Juventus":"Juventus Turin","Napoli":"SSC Neapel","AS Roma":"AS Rom","Roma":"AS Rom","Lazio":"Lazio Rom","Atalanta":"Atalanta Bergamo","Fiorentina":"AC Florenz","Bologna":"FC Bologna","Torino":"FC Turin","Genoa":"CFC Genua","Como":"Como 1907","Udinese":"Udinese Calcio","Cagliari":"Cagliari Calcio","Parma":"Parma Calcio","Lecce":"US Lecce","Sassuolo":"US Sassuolo","Venezia":"FC Venedig","Monza":"AC Monza","Barcelona":"FC Barcelona","Atletico Madrid":"Atlético Madrid","Athletic Club":"Athletic Bilbao","Real Betis":"Betis Sevilla","Villarreal":"FC Villarreal","Valencia":"FC Valencia","Sevilla":"FC Sevilla","Espanyol":"Espanyol Barcelona","Getafe":"FC Getafe","Osasuna":"CA Osasuna","Elche":"FC Elche","Levante":"UD Levante","Alaves":"Deportivo Alavés","Celta Vigo":"Celta Vigo","Marseille":"Olympique Marseille","Lyon":"Olympique Lyon","Lille":"OSC Lille","Nice":"OGC Nizza","Monaco":"AS Monaco","Lens":"RC Lens","Strasbourg":"RC Straßburg","Rennes":"Stade Rennes","Brest":"Stade Brest","Toulouse":"FC Toulouse","Auxerre":"AJ Auxerre","Angers":"SCO Angers","Le Havre":"Le Havre AC","Lorient":"FC Lorient","Liverpool":"FC Liverpool","Chelsea":"FC Chelsea","Arsenal":"FC Arsenal","Everton":"FC Everton","Fulham":"FC Fulham","Brentford":"FC Brentford","Leeds United":"Leeds United","Sunderland":"AFC Sunderland","Bournemouth":"AFC Bournemouth","Brighton & Hove Albion":"Brighton & Hove Albion","Brighton":"Brighton & Hove Albion",
+  "Rapid Vienna":"SK Rapid Wien","SK Rapid Vienna":"SK Rapid Wien",
+  "Mjallby":"Mjällby AIF","Mjallby AIF":"Mjällby AIF","Red Star Belgrade":"Crvena Zvezda","Sabah FK":"Sabah FC","KI Klaksvik":"KÍ Klaksvík","Kauno Zalgiris":"Kauno Žalgiris","AGF":"Aarhus GF","AGF Aarhus":"Aarhus GF","Lech Poznan":"Lech Posen","CSU Craiova":"Universitatea Craiova","Omonia Nicosia":"Omonia Nikosia","Fenerbahce":"Fenerbahçe","Gornik Zabrze":"Górnik Zabrze","SK Sturm Graz":"Sturm Graz","Heart of Midlothian FC":"Heart of Midlothian","Hapoel Be'er":"Hapoel Be'er Sheva","Vikingur Reykjavik":"Víkingur Reykjavík","Iberia 1999":"Iberia Tiflis","Larne":"Larne FC",
+  "CSKA Sofia":"ZSKA Sofia","FK Qarabag":"Qarabağ Agdam","Qarabag":"Qarabağ Agdam","PAOK Salonika":"PAOK Saloniki","Dynamo Kyiv":"Dynamo Kiew","Anderlecht":"RSC Anderlecht","Maccabi Tel-Aviv":"Maccabi Tel Aviv","FC Hradec Králové":"Hradec Králové","Hradec Kralove":"Hradec Králové","Tromso":"Tromsø IL","Ferencvaros":"Ferencváros","FC Twente":"Twente Enschede","Benfica":"Benfica Lissabon","St. Gallen":"FC St. Gallen","Pafos":"Pafos FC","Besiktas JK":"Besiktas","LASK":"Linzer ASK","LASK Linz":"Linzer ASK","Fortuna Dusseldorf":"Fortuna Düsseldorf","Wrexham":"Wrexham AFC","Hamburg SV":"Hamburger SV","Sevilla FC":"FC Sevilla","Eintracht Frankfurt":"Eintracht Frankfurt","Waldhof Mannheim":"SV Waldhof Mannheim",
+  "1860 Munich":"TSV 1860 München","Ajax":"Ajax Amsterdam","Aston Villa":"Aston Villa","Atletic Escaldes":"Atletic Escaldes","Aue":"FC Erzgebirge Aue","Augsburg":"FC Augsburg","Austria Vienna":"FK Austria Wien","BSC Young Boys":"BSC Young Boys","Basel":"FC Basel","Besiktas":"Besiktas","Betis":"Betis Sevilla","Bochum":"VfL Bochum","Braunschweig":"Eintracht Braunschweig","Brondby":"Brøndby IF","Burnley":"FC Burnley","Celtic":"Celtic Glasgow","Cerezo Osaka":"Cerezo Osaka","Club Brugge":"Club Brügge","Crystal Palace":"Crystal Palace","Darmstadt":"SV Darmstadt 98","Duisburg":"MSV Duisburg","Dukagjini":"KF Dukagjini","Dynamo Kiev":"Dynamo Kiew","FC Nordsjaelland":"FC Nordsjaelland","FC Porto":"FC Porto","FC Santa Coloma":"FC Santa Coloma","FC St Pauli":"FC St. Pauli","FK Austria Wien":"FK Austria Wien","FK Liepaja":"FK Liepaja","Fagiano Okayama":"Fagiano Okayama","Fenerbahce SK":"Fenerbahçe","Feyenoord":"Feyenoord Rotterdam","Freiburg":"SC Freiburg","GAIS":"GAIS Göteborg","Galatasaray":"Galatasaray","Genk":"KRC Genk","Girona":"FC Girona","Grasshoppers":"Grasshopper Zürich","Greuther Furth":"SpVgg Greuther Fürth","Hammarby":"Hammarby IF","Hannover 96":"Hannover 96","Hansa Rostock":"F.C. Hansa Rostock","Heidenheim":"1. FC Heidenheim","Hertha BSC":"Hertha BSC","Hertha Berlin":"Hertha BSC","Inter Escaldes":"Atletic Escaldes","Ipswich":"Ipswich Town","Ipswich Town":"Ipswich Town","Kaiserslautern":"1. FC Kaiserslautern","Karlsruhe":"Karlsruher SC","Karlsruher SC":"Karlsruher SC","Kickers Offenbach":"Kickers Offenbach","Leicester":"Leicester City","Leicester City":"Leicester C
+
+--- LIVE_CACHE ---
+ow<koMs+3.5*3600000) state="in";
+    else state=(now>=koMs)?"post":"pre";
+    var goals=(mm.goals||[]), evs=[], ph=0, pa=0, hs="0", as="0";
+    for(var i=0;i<goals.length;i++){
+      var g=goals[i], gh=+g.scoreTeam1, ga=+g.scoreTeam2;
+      var side=(gh>ph)?"h":((ga>pa)?"a":"");
+      if(g.isOwnGoal && side) side=(side==="h")?"a":"h";   /* Name steht beim Spieler, nicht beim Nutznießer */
+      ph=gh; pa=ga; hs=String(gh); as=String(ga);
+      evs.push({t:"goal", min:(g.matchMinute?String(g.matchMinute)+"'":""), who:g.goalGetterName||"", side:side, og:!!g.isOwnGoal, pen:!!g.isPenalty});
+    }
+    var res=(mm.matchResults||[]);
+    for(var r=0;r<res.length;r++){ if(res[r].resultTypeID===2){ hs=String(res[r].pointsTeam1); as=String(res[r].pointsTeam2); } }
+    return {key:livePairKey(hn,an)+"@"+_berlinKey(koMs),
+            val:{state:state, id:String(mm.matchID||""), hn:hn, an:an, hs:hs, as:as, clock:"", half:false, hyd:false, events:evs, src:"oldb"}};
+  }catch(e){ return null; }
+}
+let LIVE_CACHE = {};
+let _livePoll = null, _liveBusy = false;
+function liveNorm(s){ s=String(s||"").trim(); return LIVE_ALIAS[s]||s; }
+function livePairKey(a,b){ return [a,b].sort().join("~"); }
+function _berlinKey(ms){ try{ var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(ms)); var o={}; p.forEach(function(x){ o[x.type]=x.value; }); return (+o.year)*10000+(+o.month)*100+(+o.day); }catch(e){ return 0; } }
+function liveKey(m){ return livePairKey(liveNorm(m.h),liveNorm(m.a))+"@"+dayKey(m.day); }
+function _liveAnyMatchedIn(){ for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var d=LIVE_CACHE[liveKey(m)]; if(d&&d.state==="in") return true; } return false; }
+function liveSchedule(){ if(!LIVE_ENABLED) return; if(_liveAnyMatchedIn()){ if(!_livePoll) _livePoll=setInterval(liveFetch, LIVE_POLL_MS); } else if(_livePoll){ clearInterval(_livePoll); _livePoll=null; } }
+function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Ende":"FT")+'</span>'; } return ""; }
+function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; var clk=el.parentNode?el.parentNode.querySelector(".time-clock"):null; if(!d||d.state==="pre"){ el.innerHTML=""; if(clk) clk.style.display=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); if(clk) clk.style.display="none"; } try{liveApplyTicker();}catch(_e){} }catch(e){} }
+function _lvMin(mn){ var m=String(mn||"").match(/\d+/); return m?+m[0]:9999; }
+/* Spielername kompakt: kuerzt lange Vornamen ab, statt den Namen abzuschneiden */
+function _lvtWho(n){
+  n=String(n||"").trim(); if(n.length<=14) return n;
+  var p=n.split(/\s+/); if(p.length<2) return n;
+  var PART={"van":1,"von":1,"de":1,"del":1,"della":1,"der":1,"den":1,"di":1,"da":1,"dos":1,"do":1,"la":1,"le":1,"el":1,"al":1,"bin":1,"ben":1,"mac":1,"mc":1};
+  var i=p.length-1, last=p[i];
+  while(i-1>=1 && PART[String(p[i-1]).toLowerCase().replace(/[^a-z\u00e4\u00f6\u00fc\u00df]/g,"")]){ last=p[i-1]+" "+last; i--; }
+  var out=p[0].charAt(0).toUpperCase()+". "+last;
+  if(out.length>18){ var bare=p[p.length-1]; if(bare.length<out.length) out=bare; }
+  return out.length<n.length ? out : n;
+}
+/* Teamname als Achsenbeschriftung: kurz und wiedererkennbar */
+function _lvtTeam(n){
+  n=String(n||"").trim(); if(!n) return "";
+  if(n.length<=13) return n;
+  var w=n.replace(/\b(1\.|FC|SV|SK|SC|VfL|VfB|TSG|TSV|RB|AS|AC|SS|SSC|FK|NK|MSK|KF|BSC|AFC|CF|CD|UD|RC|US|SG|CFC|AJ|OGC|OSC|II|04|05|07|09|1907|1911|1921|1999)\b/gi,"").trim().split(/\s+/).filter(Boolean);
+  var best=w.length?w.reduce(function(x,y){ return y.length>=x.length?y:x; },""):n;
+  return best.length>13 ? best.slice(0,12)+"\u2026" : best;
+}
+function renderLiveTicker(d,home){
+  var de=(LANG==="de");
+  var live=(d.state==="in"), post=(d.state==="post");
+  var away=(d.hn===home)?d.an:d.hn;
+
+  /* --- Achse statt Score-Kopf: Score/Minute/LIVE stehen bereits in der Zeile darueber.
+         Hier zaehlt nur, welche Spalte zu welchem Team gehoert. --- */
+  var mid="";
+  if(live && (d.half||d.hyd)){
+    var pauseLbl = d.hyd ? (de?"Trinkpause":"Cooling break") : (de?"Halbzeit":"Half-time");
+    mid='<span class="lvt-pill pause"><span class="lvt-dot"></span>'+esc(pauseLbl)+'</span>';
+  }
+  var axis='<div class="lvt-axis">'
+    +'<span class="lvt-ax home"><b>'+esc(_lvtTeam(home))+'</b><i class="lvt-axb">'+flag(home)+'</i></span>'
+    +'<span class="lvt-mid">'+mid+'</span>'
+    +'<span class="lvt-ax away"><i class="lvt-axb">'+flag(away)+'</i><b>'+esc(_lvtTeam(away))+'</b></span>'
+    +'</div>';
+
+  /* --- Fortschrittsleiste (nur laufendes Spiel) --- */
+  var prog="";
+  if(live){
+    var mnum=parseInt(String(d.clock||"").replace(/[^0-9]/g,""),10);
+    if(d.half) mnum=45;
+    if(isFinite(mnum) && mnum>0){
+      var pct=Math.max(4, Math.min(100, Math.round(mnum/90*100)));
+      prog='<div class="lvt-prog" role="img" aria-label="'+esc((de?"Spielminute ":"Minute ")+mnum)+'"><i style="width:'+pct+'%"></i><span></span></div>';
+    }
+  }
+
+  /* --- Ereignisse --- */
+  var evs=(d.events||[]).slice().sort(function(a,b){ return _lvMin(a.min)-_lvMin(b.min); });
+  var hg=0, ag=0, rows="", lastHalf=0;
+  var brk='<div class="lvt-break"><span>'+(de?"Halbzeit":"Half-time")+'</span></div>';
+  evs.forEach(function(e,idx){
+    var mn=_lvMin(e.min), half=(mn>45&&mn<9999)?2:1;
+    if(half===2 && lastHalf===1){ rows+=brk; }
+    lastHalf=half;
+    var run="";
+    if(e.t==="goal"){ var sc=e.og?(e.side==="h"?"a":"h"):e.side; if(sc==="h") hg++; else if(sc==="a") ag++; run='<span class="lvt-run">'+hg+':'+ag+'</span>'; }
+    var isHome=(e.side!=="a");
+    var icon = e.t==="goal" ? '<span class="lvt-ic goal">\u26bd</span>' : '<span class="lvt-ic"><span class="lvt-card '+(e.t==="red"?"red":"yellow")+'"></span></span>';
+    var tags=[]; if(e.t==="goal"){ if(e.og) tags.push(de?"ET":"OG"); if(e.pen) tags.push(de?"FE":"Pen"); }
+    var tag = tags.length?(' <span class="lvt-tag">'+esc(tags.join(" "))+'</span>'):"";
+    var name='<span class="lvt-who">'+esc(_lvtWho(e.who||""))+tag+'</span>';
+    /* Zwischenstand immer innen an der Zeitachse -> laesst sich als Spalte lesen */
+    var content = isHome ? (name+icon+run) : (run+icon+name);
+    var cls='lvt-row '+e.t+((live && idx===evs.length-1)?' is-last':'');
+    rows+='<div class="'+cls+'"><div class="lvt-cell left">'+(isHome?content:"")+'</div><div class="lvt-node"><span class="lvt-min">'+esc(e.min||"")+'</span></div><div class="lvt-cell right">'+(isHome?"":content)+'</div></div>';
+  });
+  if(live && d.half && lastHalf!==2){ rows+=brk; }
+  var emptyTxt = live ? (de?"L\u00e4uft \u2013 noch keine Tore oder Karten.":"Under way \u2013 no goals or cards yet.")
+                      : (de?"Keine Tore, keine Karten.":"No goals or cards.");
+  var body = rows ? ('<div class="lvt-timeline">'+rows+'</div>') : ('<div class="lvt-empty">'+emptyTxt+'</div>');
+  return axis+prog+body;
+}
+/* Anstoss als Zeitstempel (Spielzeiten sind Berliner Zeit, Nutzer koennen anderswo sitzen) */
+function _koMs(day,time){
+  try{
+    var dm=String(day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(time||"").match(/(\d{1,2}):(\d{2})/);
+    if(!dm||!tm) return 0;
+    var y=+dm[3], mo=+dm[2], d=+dm[1], hh=+tm[1], mi=+tm[2];
+    var probe=new Date(Date.UTC(y,mo-1,d,12,0,0));
+    var h=+new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Berlin",hour:"2-digit",hour12:false}).format(probe);
+    var off=h-12; if(off<0||off>3) off=2;
+    return Date.UTC(y,mo-1,d,h
+
+--- OpenLigaDB ---
+Young Boys":"BSC Young Boys",
+  "1. FC Heidenheim 1846":"1. FC Heidenheim","1. FSV Mainz 05":"1. FSV Mainz 05","Alemannia Aachen":"Alemannia Aachen","Borussia Mönchengladbach":"Borussia Mönchengladbach","Eintracht Braunschweig":"Eintracht Braunschweig","FC Ingolstadt 04":"FC Ingolstadt 04","Fortuna Köln":"SC Fortuna Köln","Jahn Regensburg":"SSV Jahn Regensburg","Preußen Münster":"SC Preußen Münster","SV 07 Elversberg":"SV Elversberg","SV Darmstadt 98":"SV Darmstadt 98","SV Meppen":"SV Meppen","SpVgg Greuther Fürth":"SpVgg Greuther Fürth","TSG 1899 Hoffenheim II":"TSG Hoffenheim II","TSV Havelse":"TSV Havelse","VfB Stuttgart II":"VfB Stuttgart II","Viktoria Köln":"FC Viktoria Köln","Würzburger Kickers":"FC Würzburger Kickers",
+  "DSC Arminia Bielefeld":"Arminia Bielefeld","SC Paderborn 07":"SC Paderborn",
+  "Bodo/Glimt":"FK Bodø/Glimt","NEC":"NEC Nijmegen","Olympiacos":"Olympiakos Piräus","Sparta Prague":"Sparta Prag","Union St.-Gilloise":"Union Saint-Gilloise"
+};
+/* ===== Zweitquelle: OpenLigaDB (kostenlos, ohne Key, CORS offen) =====
+   Greift nur fuer deutsche Wettbewerbe und nur dort, wo ESPN nichts liefert.
+   Liefert Tore mit Minute/Schuetze, aber keine Karten und keine Spieluhr. */
+const OLDB_LEAGUE = {bl:"bl1", bl2:"bl2", bl3:"bl3", dfb:"dfb"};
+function liveOldbSources(){
+  var tk=todayKeyNow(), set={};
+  for(var i=0;i<MATCHES.length;i++){
+    var m=MATCHES[i]; if(m.tba) continue;
+    var sc=OLDB_LEAGUE[m.cat]; if(!sc) continue;
+    var re=/(\d{2})\.(\d{2})\.(\d{4})/g, x, hit=false;
+    while((x=re.exec(String(m.day)))){ var k=(+x[3])*10000+(+x[2])*100+(+x[1]); if(k>=tk-1&&k<=tk+1){ hit=true; break; } }
+    if(hit) set[sc]=true;
+  }
+  return Object.keys(set).map(function(sc){ return "https://api.openligadb.de/getmatchdata/"+sc; });
+}
+function _oldbEntry(mm){
+  try{
+    var hn=liveNorm(mm.team1&&mm.team1.teamName), an=liveNorm(mm.team2&&mm.team2.teamName);
+    if(!hn||!an) return null;
+    var koMs=Date.parse(mm.matchDateTimeUTC||mm.matchDateTime||"");
+    if(!koMs) return null;
+    var now=Date.now(), state;
+    if(mm.matchIsFinished) state="post";
+    else if(now>=koMs && now<koMs+3.5*3600000) state="in";
+    else state=(now>=koMs)?"post":"pre";
+    var goals=(mm.goals||[]), evs=[], ph=0, pa=0, hs="0", as="0";
+    for(var i=0;i<goals.length;i++){
+      var g=goals[i], gh=+g.scoreTeam1, ga=+g.scoreTeam2;
+      var side=(gh>ph)?"h":((ga>pa)?"a":"");
+      if(g.isOwnGoal && side) side=(side==="h")?"a":"h";   /* Name steht beim Spieler, nicht beim Nutznießer */
+      ph=gh; pa=ga; hs=String(gh); as=String(ga);
+      evs.push({t:"goal", min:(g.matchMinute?String(g.matchMinute)+"'":""), who:g.goalGetterName||"", side:side, og:!!g.isOwnGoal, pen:!!g.isPenalty});
+    }
+    var res=(mm.matchResults||[]);
+    for(var r=0;r<res.length;r++){ if(res[r].resultTypeID===2){ hs=String(res[r].pointsTeam1); as=String(res[r].pointsTeam2); } }
+    return {key:livePairKey(hn,an)+"@"+_berlinKey(koMs),
+            val:{state:state, id:String(mm.matchID||""), hn:hn, an:an, hs:hs, as:as, clock:"", half:false, hyd:false, events:evs, src:"oldb"}};
+  }catch(e){ return null; }
+}
+let LIVE_CACHE = {};
+let _livePoll = null, _liveBusy = false;
+function liveNorm(s){ s=String(s||"").trim(); return LIVE_ALIAS[s]||s; }
+function livePairKey(a,b){ return [a,b].sort().join("~"); }
+function _berlinKey(ms){ try{ var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(ms)); var o={}; p.forEach(function(x){ o[x.type]=x.value; }); return (+o.year)*10000+(+o.month)*100+(+o.day); }catch(e){ return 0; } }
+function liveKey(m){ return livePairKey(liveNorm(m.h),liveNorm(m.a))+"@"+dayKey(m.day); }
+function _liveAnyMatchedIn(){ for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var d=LIVE_CACHE[liveKey(m)]; if(d&&d.state==="in") return true; } return false; }
+function liveSchedule(){ if(!LIVE_ENABLED) return; if(_liveAnyMatchedIn()){ if(!_livePoll) _livePoll=setInterval(liveFetch, LIVE_POLL_MS); } else if(_livePoll){ clearInterval(_livePoll); _livePoll=null; } }
+function liveBadge(d, hs, as){ var de=(LANG==="de"); if(d.state==="in"){ var clk=d.clock?('<span class="lv-min">'+esc(d.clock)+'</span>'):""; return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span>'+clk+'<span class="lv-badge live">LIVE</span>'; } if(d.state==="post"){ return '<span class="lv-score">'+esc(hs)+':'+esc(as)+'</span><span class="lv-badge done">'+(de?"Ende":"FT")+'</span>'; } return ""; }
+function liveApplyDOM(){ if(!LIVE_ENABLED) return; try{ var els=document.querySelectorAll("[data-live]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-live")]; var clk=el.parentNode?el.parentNode.querySelector(".time-clock"):null; if(!d||d.state==="pre"){ el.innerHTML=""; if(clk) clk.style.display=""; continue; } var home=el.getAttribute("data-lh"); var hs=(d.hn===home)?d.hs:d.as, as=(d.hn===home)?d.as:d.hs; el.innerHTML=liveBadge(d,hs,as); if(clk) clk.style.display="none"; } try{liveApplyTicker();}catch(_e){} }catch(e){} }
+function _lvMin(mn){ var m=String(mn||"").match(/\d+/); return m?+m[0]:9999; }
+/* Spielername kompakt: kuerzt lange Vornamen ab, statt den Namen abzuschneiden */
+function _lvtWho(n){
+  n=String(n||"").trim(); if(n.length<=14) return n;
+  var p=n.split(/\s+/); if(p.length<2) return n;
+  var PART={"van":1,"von":1,"de":1,"del":1,"della":1,"der":1,"den":1,"di":1,"da":1,"dos":1,"do":1,"la":1,"le":1,"el":1,"al":1,"bin":1,"ben":1,"mac":1,"mc":1};
+  var i=p.length-1, last=p[i];
+  while(i-1>=1 && PART[String(p[i-1]).toLowerCase().replace(/[^a-z\u00e4\u00f6\u00fc\u00df]/g,"")]){ last=p[i-1]+" "+last; i--; }
+  var out=p[0].charAt(0).toUpperCase()+". "+last;
+  if(out.length>18){ var bare=p[p.length-1]; if(bare.length<out.length) out=bare; }
+  return out.length<n.length ? out : n;
+}
+/* Teamname als Achsenbeschriftung: kurz und wiedererkennbar */
+function _lvtTeam(n){
+  n=String(n||"").trim(); if(!n) return "";
+  if(n.length<=13) return n;
+  var w=n.replace(/\b(1\.|FC|SV|SK|SC|VfL|VfB|TSG|TSV|RB|AS|AC|SS|SSC|FK|NK|MSK|KF|BSC|AFC|CF|CD|UD|RC|US|SG|CFC|AJ|OGC|OSC|II|04|05|07|09|1907|1911|1921|1999)\b/gi,"").trim().split(/\s+/).filter(Boolean);
+  var best=w.length?w.reduce(function(x,y){ return y.length>=x.length?y:x; },""):n;
+  return best.length>13 ? best.slice(0,12)+"\u2026" : best;
+}
+function renderLiveTicker(d,home){
+  var de=(LANG==="de");
+  var live=(d.state==="in"), post=(d.state==="post");
+  var away=(d.hn===home)?d.an:d.hn;
+
+  /* --- Achse statt Score-Kopf: Score/Minute/LIVE stehen bereits in der Zeile darueber.
+         Hier zaehlt nur, welche Spalte zu welchem Team gehoert. --- */
+  var mid="";
+  if(live && (d.half||d.hyd)){
+    var pauseLbl = d.hyd ? (de?"Trinkpause":"Cooling break") : (de?"Halbzeit":"Half-time");
+    mid='<span class="lvt-pill pause"><span class="lvt-dot"></span>'+esc(pauseLbl)+'</span>';
+  }
+  var axis='<div class="lvt-axis">'
+    +'<span class="lvt-ax home"><b>'+esc(_lvtTeam(home))+'</b><i class="lvt-axb">'+flag(home)+'</i></span>'
+    +'<span class="lvt-mid">'+mid+'</span>'
+    +'<span class="lvt-ax away"><i class="lvt-axb">'+flag(away)+'</i><b>'+esc(_lvtTeam(away))+'</b></span>'
+    +'</div>';
+
+  /* --- Fortschrittsleiste (nur laufendes Spiel) --- */
+  var prog="";
+  if(live){
+    var mnum=parseInt(String(d.clock||"").replace(/[^0-9]/g,""),10);
+    if(d.half) mnum=45;
+    if(isFinite(mnum) && mnum>0){
+      var pct=Math.max(4, Math.min(100, Math.round(mnum/90*100)));
+      prog='<div class="lvt-prog" role="img" aria-label="'+esc((de?"Spielminute ":"Minute ")+mnum)+'"><i style="width:'+pct+'%"></i><span></span></div>';
+    }
+  }
+
+  /* --- Ereignisse --- */
+  var evs=(d.events||[]).slice().sort(function(a,b){ return _lvMin(a.min)-_lvMin(b.min); });
+  var hg=0, ag=0, rows="", lastHalf=0;
+  var brk='<div class="lvt-break"><span>'+(de?"Halbzeit":"Half-time")+'</span></div>';
+  evs.forEach(function(e,idx){
+    var mn=_lvMin(e.min), half=(mn>45&&mn<9999)?2:1;
+    if
+
+--- renderLive ---
+":1,"von":1,"de":1,"del":1,"della":1,"der":1,"den":1,"di":1,"da":1,"dos":1,"do":1,"la":1,"le":1,"el":1,"al":1,"bin":1,"ben":1,"mac":1,"mc":1};
+  var i=p.length-1, last=p[i];
+  while(i-1>=1 && PART[String(p[i-1]).toLowerCase().replace(/[^a-z\u00e4\u00f6\u00fc\u00df]/g,"")]){ last=p[i-1]+" "+last; i--; }
+  var out=p[0].charAt(0).toUpperCase()+". "+last;
+  if(out.length>18){ var bare=p[p.length-1]; if(bare.length<out.length) out=bare; }
+  return out.length<n.length ? out : n;
+}
+/* Teamname als Achsenbeschriftung: kurz und wiedererkennbar */
+function _lvtTeam(n){
+  n=String(n||"").trim(); if(!n) return "";
+  if(n.length<=13) return n;
+  var w=n.replace(/\b(1\.|FC|SV|SK|SC|VfL|VfB|TSG|TSV|RB|AS|AC|SS|SSC|FK|NK|MSK|KF|BSC|AFC|CF|CD|UD|RC|US|SG|CFC|AJ|OGC|OSC|II|04|05|07|09|1907|1911|1921|1999)\b/gi,"").trim().split(/\s+/).filter(Boolean);
+  var best=w.length?w.reduce(function(x,y){ return y.length>=x.length?y:x; },""):n;
+  return best.length>13 ? best.slice(0,12)+"\u2026" : best;
+}
+function renderLiveTicker(d,home){
+  var de=(LANG==="de");
+  var live=(d.state==="in"), post=(d.state==="post");
+  var away=(d.hn===home)?d.an:d.hn;
+
+  /* --- Achse statt Score-Kopf: Score/Minute/LIVE stehen bereits in der Zeile darueber.
+         Hier zaehlt nur, welche Spalte zu welchem Team gehoert. --- */
+  var mid="";
+  if(live && (d.half||d.hyd)){
+    var pauseLbl = d.hyd ? (de?"Trinkpause":"Cooling break") : (de?"Halbzeit":"Half-time");
+    mid='<span class="lvt-pill pause"><span class="lvt-dot"></span>'+esc(pauseLbl)+'</span>';
+  }
+  var axis='<div class="lvt-axis">'
+    +'<span class="lvt-ax home"><b>'+esc(_lvtTeam(home))+'</b><i class="lvt-axb">'+flag(home)+'</i></span>'
+    +'<span class="lvt-mid">'+mid+'</span>'
+    +'<span class="lvt-ax away"><i class="lvt-axb">'+flag(away)+'</i><b>'+esc(_lvtTeam(away))+'</b></span>'
+    +'</div>';
+
+  /* --- Fortschrittsleiste (nur laufendes Spiel) --- */
+  var prog="";
+  if(live){
+    var mnum=parseInt(String(d.clock||"").replace(/[^0-9]/g,""),10);
+    if(d.half) mnum=45;
+    if(isFinite(mnum) && mnum>0){
+      var pct=Math.max(4, Math.min(100, Math.round(mnum/90*100)));
+      prog='<div class="lvt-prog" role="img" aria-label="'+esc((de?"Spielminute ":"Minute ")+mnum)+'"><i style="width:'+pct+'%"></i><span></span></div>';
+    }
+  }
+
+  /* --- Ereignisse --- */
+  var evs=(d.events||[]).slice().sort(function(a,b){ return _lvMin(a.min)-_lvMin(b.min); });
+  var hg=0, ag=0, rows="", lastHalf=0;
+  var brk='<div class="lvt-break"><span>'+(de?"Halbzeit":"Half-time")+'</span></div>';
+  evs.forEach(function(e,idx){
+    var mn=_lvMin(e.min), half=(mn>45&&mn<9999)?2:1;
+    if(half===2 && lastHalf===1){ rows+=brk; }
+    lastHalf=half;
+    var run="";
+    if(e.t==="goal"){ var sc=e.og?(e.side==="h"?"a":"h"):e.side; if(sc==="h") hg++; else if(sc==="a") ag++; run='<span class="lvt-run">'+hg+':'+ag+'</span>'; }
+    var isHome=(e.side!=="a");
+    var icon = e.t==="goal" ? '<span class="lvt-ic goal">\u26bd</span>' : '<span class="lvt-ic"><span class="lvt-card '+(e.t==="red"?"red":"yellow")+'"></span></span>';
+    var tags=[]; if(e.t==="goal"){ if(e.og) tags.push(de?"ET":"OG"); if(e.pen) tags.push(de?"FE":"Pen"); }
+    var tag = tags.length?(' <span class="lvt-tag">'+esc(tags.join(" "))+'</span>'):"";
+    var name='<span class="lvt-who">'+esc(_lvtWho(e.who||""))+tag+'</span>';
+    /* Zwischenstand immer innen an der Zeitachse -> laesst sich als Spalte lesen */
+    var content = isHome ? (name+icon+run) : (run+icon+name);
+    var cls='lvt-row '+e.t+((live && idx===evs.length-1)?' is-last':'');
+    rows+='<div class="'+cls+'"><div class="lvt-cell left">'+(isHome?content:"")+'</div><div class="lvt-node"><span class="lvt-min">'+esc(e.min||"")+'</span></div><div class="lvt-cell right">'+(isHome?"":content)+'</div></div>';
+  });
+  if(live && d.half && lastHalf!==2){ rows+=brk; }
+  var emptyTxt = live ? (de?"L\u00e4uft \u2013 noch keine Tore oder Karten.":"Under way \u2013 no goals or cards yet.")
+                      : (de?"Keine Tore, keine Karten.":"No goals or cards.");
+  var body = rows ? ('<div class="lvt-timeline">'+rows+'</div>') : ('<div class="lvt-empty">'+emptyTxt+'</div>');
+  return axis+prog+body;
+}
+/* Anstoss als Zeitstempel (Spielzeiten sind Berliner Zeit, Nutzer koennen anderswo sitzen) */
+function _koMs(day,time){
+  try{
+    var dm=String(day||"").match(/(\d{2})\.(\d{2})\.(\d{4})/), tm=String(time||"").match(/(\d{1,2}):(\d{2})/);
+    if(!dm||!tm) return 0;
+    var y=+dm[3], mo=+dm[2], d=+dm[1], hh=+tm[1], mi=+tm[2];
+    var probe=new Date(Date.UTC(y,mo-1,d,12,0,0));
+    var h=+new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Berlin",hour:"2-digit",hour12:false}).format(probe);
+    var off=h-12; if(off<0||off>3) off=2;
+    return Date.UTC(y,mo-1,d,hh-off,mi,0);
+  }catch(e){ return 0; }
+}
+/* Ehrlicher Hinweis, wenn unsere Live-Quelle ein angepfiffenes Spiel nicht abdeckt */
+/* Erster Sender/Stream des Spiels als Rettungsanker im Hinweis */
+function _lvSrcAttr(m){
+  try{
+    var tv=m.tv||{}, list=tv[COUNTRY]||tv.DE||tv.AT||tv.CH||[];
+    for(var i=0;i<list.length;i++){ if(list[i]&&list[i].u&&list[i].n) return ' data-lvsn="'+esc(list[i].n)+'" data-lvsu="'+esc(list[i].u)+'"'; }
+  }catch(e){}
+  return "";
+}
+function liveNoDataNote(el){
+  var ko=+(el.getAttribute("data-lvko")||0); if(!ko) return "";
+  var now=Date.now(); if(now < ko+90000 || now > ko+5*3600000) return "";
+  var de=(LANG==="de");
+  var sn=el.getAttribute("data-lvsn"), su=el.getAttribute("data-lvsu");
+  var link = (sn&&su) ? ('<a class="lvt-nd-link" href="'+su+'" target="_blank" rel="noopener">'+(de?"Live bei ":"Watch on ")+sn+' \u2197</a>') : "";
+  return '<div class="lvt-nodata"><span class="lvt-nd-ic">\u26A1</span><span>'+(de
+    ? "Zu diesem Spiel liefert unsere Live-Quelle keine Daten \u2013 Ergebnis und Analyse folgen nach Abpfiff unter Highlights."
+    : "Our live data source doesn\u2019t cover this match \u2013 result and analysis will follow under Highlights after the final whistle.")+link+'</span></div>';
+}
+function liveApplyTicker(){
+  try{ var els=document.querySelectorAll("[data-lvt]"); for(var i=0;i<els.length;i++){ var el=els[i]; var d=LIVE_CACHE[el.getAttribute("data-lvt")]; var home=el.getAttribute("data-lh"); el.innerHTML=(d&&d.state&&d.state!=="pre")?renderLiveTicker(d,home):liveNoDataNote(el); } }catch(e){}
+}
+async function liveFetch(){ if(!LIVE_ENABLED||_liveBusy) return; _liveBusy=true; var ac=new AbortController(); var to=setTimeout(function(){ try{ ac.abort(); }catch(e){} }, 8000); try{ var srcs=liveSources(); var osrcs=liveOldbSources(); if(!srcs.length&&!osrcs.length){ if(_livePoll){clearInterval(_livePoll);_livePoll=null;} if(Object.keys(LIVE_CACHE).length){ LIVE_CACHE={}; try{liveApplyDOM();}catch(_e){} } return; } var jsons=await Promise.all(srcs.map(function(src){ return fetch(src,{signal:ac.signal,cache:"no-store"}).then(function(r){ return (r&&r.ok)?r.json():null; }).catch(function(){ return null; }); })); var evs=[]; jsons.forEach(function(j){ if(j&&j.events&&j.events.length) evs=evs.concat(j.events); }); var next={}; for(var i=0;i<evs.length;i++){ try{ var ev=evs[i]; var comp=ev.competitions&&ev.competitions[0]; if(!comp) continue; var cs=comp.competitors||[]; if(cs.length<2) continue; var home=null,away=null; for(var k=0;k<cs.length;k++){ if(cs[k].homeAway==="home") home=cs[k]; else if(cs[k].homeAway==="away") away=cs[k]; } if(!home||!away) continue; var hn=liveNorm(home.team&&home.team.displayName), an=liveNorm(away.team&&away.team.displayName); if(!hn||!an) continue; var st=ev.status&&ev.status.type&&ev.status.type.state; var _stt=(ev.status&&ev.status.type)||{}; var _stn=String(_stt.name||""); var _std=String(_stt.description||_stt.detail||_stt.shortDetail||""); var _half=/HALFTIME/i.test(_stn)||/halftime|half.?time|halbzeit/i.test(_std); var _hyd=/(cooling|hydration|drinks)\s*break|trinkpause|k\u00fchlungspause/i.test(_std); var _hid=(home.team&&home.team.id), _aid=(away.team&&away.team.id); var _evts=[]; var _det=(comp.details||[]); for(var 
+
+--- pollLive ---
+NOT FOUND
+
+--- live ticker ---
+NOT FOUND
+
+--- liveticker ---
+ousa2026/articles/frankreich-england-highlights-spielbericht-wm"]
+  ],
+  "Sturm Graz|Heart of Midlothian":[
+    ["PS","Premier Sports · Highlights (YouTube)","https://www.youtube.com/watch?v=LUK9geevVbE"],
+    ["SKA","Sky Sport Austria · Highlights (YouTube)","https://www.youtube.com/watch?v=sIwcmeEnN0U"],
+    ["UEFA","UEFA.com · Spielseite","https://www.uefa.com/uefachampionsleague/match/2048726--sturm-graz-vs-hearts/"]
+  ],
+  "FC Santa Coloma|SK Rapid Wien":[
+    ["YT","Highlights (YouTube)","https://www.youtube.com/watch?v=v9dR8TnkG-g"],
+    ["ABS","abseits.at · Highlights zum Spiel","https://abseits.at/videos/video-rapid-feiert-31-sieg-beim-fc-santa-coloma-highlihgts/"]
+  ],
+  "FK Liepaja|FK Austria Wien":[
+    ["YT","Highlights (YouTube)","https://www.youtube.com/watch?v=Vn0LCaSovy0"]
+  ],
+  "Paide Linnameeskond|SK Rapid Wien":[
+    ["SKA","Sky Sport Austria · Spielbericht","https://www.skysportaustria.at/drei-spaete-tore-rapid-bezwingt-paide-auswaerts/"],
+    ["KIC","kicker.at · Liveticker zum Spiel","https://www.kicker.at/paide-gegen-rapid-wien-2026-uefa-conference-league-qualifikation-5246758/ticker"],
+    ["SKY","Sky Sports · Live Commentary","https://www.skysports.com/football/paide-linnameeskond-vs-sk-rapid-wien/575737"]
+  ],
+  "Fenerbahçe|Sturm Graz":[
+    ["YT","Full Match Highlights (YouTube)","https://www.youtube.com/watch?v=eac5MvYRBuU"],
+    ["UEFA","UEFA.com · Spielseite","https://www.uefa.com/uefachampionsleague/match/2049107--fenerbahce-vs-sturm-graz/"],
+    ["SKY","Sky Sports · Liveticker zum Spiel","https://www.skysports.com/football/fenerbahce-vs-sturm-graz/575702"]
+  ],
+  "Benfica Lissabon|FC St. Gallen":[
+    ["SRF","SRF Sport · Highlights (YouTube)","https://www.youtube.com/watch?v=9WE4LvZAK4k"],
+    ["SLB","Benfica · Highlights (YouTube)","https://www.youtube.com/watch?v=v2P-WCl7FqM"],
+    ["SLB","slbenfica.pt · Spielbericht mit Video","https://www.slbenfica.pt/en-us/agora/noticias/2026/07/30/futebol-pavlidis-pos-jogo-benfica-st-gallen-2-mao-2-pre-eliminatoria-acesso-fase-liga-liga-europa"]
+  ],
+  "FC Liverpool|Leeds United":[
+    ["LFC","Liverpool FC · Extended Highlights (All Red Video)","https://www.liverpoolfc.com/news/liverpool-2-4-leeds-united-watch-highlights-chicago"],
+    ["SKY","Sky Sports · Match Report & Highlights","https://www.skysports.com/football/liverpool-vs-leeds/report/554987"],
+    ["TIA","This Is Anfield · Spielbericht mit allen Toren","https://www.thisisanfield.com/2026/08/liverpool-2-4-leeds-wirtz-goal-pre-season-report/"]
+  ],
+  "FC Rottach-Egern|FC Bayern München":[
+    ["FCB","FC Bayern · Highlights, alle 15 Tore (YouTube)","https://www.youtube.com/watch?v=yxFld3VTRYg"],
+    ["BL","bundesliga.com · Highlights","https://www.bundesliga.com/en/bundesliga/videos/watch/rottach-egern-0-15-bayern-munich-highlights-nkgWSSR0"],
+    ["SKY","Sky Sport · Alle 15 Tore im Video","https://www.youtube.com/watch?v=VAHBslEbLrw"],
+    ["FCB","FC Bayern TV · komplettes Spiel","https://fcbayern.com/fcbayerntv/en/videos/2026/highlights/07/video-fc-rottach-egern-vs.-fc-bayern-full-match"]
+  ],
+  "SG Dynamo Dresden|1. FC Union Berlin":[
+    ["FCU","1. FC Union Berlin · Highlights (YouTube)","https://www.youtube.com/watch?v=d4ZKQnzdkdE"],
+    ["SGD","dynamo-dresden.de · Spielbericht","https://www.dynamo-dresden.de/aktuelles/news/profis/heimsieg-bei-generalprobe-gegen-erstligisten/"],
+    ["KIC","kicker · Liveticker zum Spiel","https://www.kicker.de/dresden-gegen-union-2026-vereine-freundschaftsspiele-5202777/ticker"]
+  ],
+  "Kickers Offenbach|VfB Stuttgart":[
+    ["SKY","Sky Sport · Highlights (6:00)","https://sport.sky.de/fussball/artikel/stuttgarter-tor-show-in-bei-offenbach-jubilaeum/13568240/34868"],
+    ["VFB","vfb.de · Spielbericht mit allen Toren","https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/testspiel-kickers-offenbach-gegen-vfb-stuttgart/"]
+  ],
+  "Karlsruher SC|Inter Mailand":[
+    ["DAZ","DAZN · Highlights (YouTube)","https://www.youtube.com/watch?v=IMFJ9aZ0vG4"],
+    ["OF","OneFootball · Highlights-Video","https://onefootball.com/en/video/spaeter-diouf-doppelpack-inter-dreht-testspiel-gegen-karlsruhe-43191874"],
+    ["SKY","Sky Sport · Spielfilm","https://sport.sky.de/fussball/karlsruhe-vs-inter-mailand/556016"]
+  ],
+  "SV Werder Bremen|VfL Bochum":[
+    ["SVW","WERDER.TV · Highlights (YouTube)","https://www.youtube.com/watch?v=TDrg91bDQjU"],
+    ["SVW","WERDER.TV · Re-Live (YouTube)","https://www.youtube.com/watch?v=EGsZP7cUjJw"],
+    ["SVW","werder.de · Spielbericht","https://www.werder.de/news/maenner/2026-2027/test-bochum-25072026"]
+  ],
+  "Bergisch Gladbach 09|1. FC Köln":[
+    ["FC","FC-TV · Re-Live des Spiels (YouTube)","https://www.youtube.com/watch?v=3Dyn3oJ_eWU"],
+    ["FC","fc.de · Liveticker zum Spiel","https://fc.de/liveticker-sv-bergisch-gladbach-1-fc-koeln"]
+  ],
+  "Fortuna Düsseldorf|Borussia Dortmund":[
+    ["SKY","Sky Sport · Highlights (8:56)","https://sport.sky.de/fussball/artikel/bvb-verliert-mit-b-elf-in-duesseldorf/13566902/34828"],
+    ["BVB","BVB · Re-Live, dt. Kommentar (YouTube)","https://www.youtube.com/watch?v=tEfU2QVkNd4"],
+    ["SKY","Sky Sport · Re-Live (YouTube)","https://www.youtube.com/watch?v=e-m9HDDVlpQ"],
+    ["BVB","BVB · Re-Live, engl. commentary","https://www.youtube.com/watch?v=3i2F3D4qOzc"]
+  ],
+  "FC St. Gallen|Benfica Lissabon":[
+    ["SRF","SRF Sport · Highlights (YouTube)","https://www.youtube.com/watch?v=2MCzz6RWATU"],
+    ["SLB","Benfica · Highlights (YouTube)","https://www.youtube.com/watch?v=5ABK5aAvdD8"],
+    ["BEI","beIN Sports · Highlights (YouTube)","https://www.youtube.com/watch?v=ol12LSYAuFw"]
+  ],
+  "SV Wehen Wiesbaden|FC Bayern München":[
+    ["FCB","FC Bayern · Highlights (YouTube)","https://www.youtube.com/watch?v=RGjJmMpANTU"],
+    ["FCB","FC Bayern TV · Highlights","https://fcbayern.com/fcbayerntv/en/videos/2026/highlights/07/video-highlights-wehen-wiesbaden-bayern-pre-season-friendly"],
+    ["FCB","FC Bayern TV · komplettes Spiel","https://fcbayern.com/fcbayerntv/en/videos/2026/highlights/07/video-wehen-wiesbaden-bayern-watch-the-full-match"]
+  ]
+};
+function hlDirect(m){
+  var e=HL_YT[(m.h||"")+"|"+(m.a||"")];
+  if(!e) return [];
+  if(Array.isArray(e)) return e;
+  var out=[];   /* Altformat {k:...,m:...} weiterhin unterstuetzen */
+  if(e.k) out.push(["VID","Highlights (YouTube)",e.k]);
+  if(e.m) out.push(["MAG","MagentaTV · Highlights",e.m]);
+  return out;
+} /* Direktvideos je Spiel: {"Heim|Gast":{k:"kicker-YouTube-URL",m:"Magenta-YouTube-URL"}} – manuell verifizierte Links eintragen, sonst greift die Kanalsuche */
+const HL_SRC={
+  DE:[["ARD","Sportschau / Mediathek",ARD_HUB,"ard"],["YT","sportstudio fußball",ZDF_YT,"yt"]],
+  AT:[["ORF","ORF ON · Sport","https://on.orf.at/sport"],["ARD","ARD Sportschau",ARD_HUB,"ard"]],
+  CH:[["SRF","SRF Sport","https://www.srf.ch/sport"],["ARD","ARD Sportschau",ARD_HUB,"ard"]],
+  UK:[["BBC","BBC Sport · World Cup","https://www.bbc.co.uk/sport/football/world-cup"],["ITV","ITVX","https://www.itv.com/"]],
+  ES:[["RTVE","RTVE Play","https://www.rtve.es/play/"],["DAZN","DAZN España","https://www.dazn.com/es-ES/"]],
+  IT:[["RAI","RaiPlay","https://www.raiplay.it/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  FR:[["TF1","TF1+","https://www.tf1.fr/"],["M6","M6+","https://www.6play.fr/"]],
+  NL:[["NOS","NOS Sport","https://nos.nl/sport/voetbal"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  US:[["FOX","FOX Sports","https://www.foxsports.com/soccer/fifa-world-cup"],["TELE","Telemundo Deportes","https://www.telemundodeportes.com/"]],
+  CA:[["TSN","TSN","https://www.tsn.ca/fifa-world-cup"],["CTV","CTV","https://www.ctv.ca/"]],
+  TH:[["beIN","beIN Sports","https://www.beinsports.com/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  _en:[["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]]
+};
+const MAGENTA="https://www.magentasport.de/";
+const HL = [
+// === 05./06.08.2026: CL-, EL- & ECL-Quali Runde 3 Hinspiele ===
+{h:"Benfica Lissabon",a:"
+
+### HIGHLIGHT SOURCE MAP
+
+uetzen */
+  if(e.k) out.push(["VID","Highlights (YouTube)",e.k]);
+  if(e.m) out.push(["MAG","MagentaTV · Highlights",e.m]);
+  return out;
+} /* Direktvideos je Spiel: {"Heim|Gast":{k:"kicker-YouTube-URL",m:"Magenta-YouTube-URL"}} – manuell verifizierte Links eintragen, sonst greift die Kanalsuche */
+const HL_SRC={
+  DE:[["ARD","Sportschau / Mediathek",ARD_HUB,"ard"],["YT","sportstudio fußball",ZDF_YT,"yt"]],
+  AT:[["ORF","ORF ON · Sport","https://on.orf.at/sport"],["ARD","ARD Sportschau",ARD_HUB,"ard"]],
+  CH:[["SRF","SRF Sport","https://www.srf.ch/sport"],["ARD","ARD Sportschau",ARD_HUB,"ard"]],
+  UK:[["BBC","BBC Sport · World Cup","https://www.bbc.co.uk/sport/football/world-cup"],["ITV","ITVX","https://www.itv.com/"]],
+  ES:[["RTVE","RTVE Play","https://www.rtve.es/play/"],["DAZN","DAZN España","https://www.dazn.com/es-ES/"]],
+  IT:[["RAI","RaiPlay","https://www.raiplay.it/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  FR:[["TF1","TF1+","https://www.tf1.fr/"],["M6","M6+","https://www.6play.fr/"]],
+  NL:[["NOS","NOS Sport","https://nos.nl/sport/voetbal"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  US:[["FOX","FOX Sports","https://www.foxsports.com/soccer/fifa-world-cup"],["TELE","Telemundo Deportes","https://www.telemundodeportes.com/"]],
+  CA:[["TSN","TSN","https://www.tsn.ca/fifa-world-cup"],["CTV","CTV","https://www.ctv.ca/"]],
+  TH:[["beIN","beIN Sports","https://www.beinsports.com/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  _en:[["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]]
+};
+const MAGENTA="https://www.magentasport.de/";
+const HL = [
+// === 05./06.08.2026: CL-, EL- & ECL-Quali Runde 3 Hinspiele ===
+{h:"Benfica Lissabon",a:"Heart of Midlothian",s:"6:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:8.3,label:{de:"Torfestival an der Luz",en:"A goal feast at the Luz"}},tore:[{minute:3,spieler:"Rafa Silva",team:"A"},{minute:23,spieler:"Araújo",team:"A"},{minute:42,spieler:"Pavlidis (Elfm.)",team:"A"},{minute:59,spieler:"Prestianni",team:"A"},{minute:72,spieler:"Renaud",team:"B"},{minute:87,spieler:"Durán",team:"A"},{minute:"90+4",spieler:"Schjelderup (Elfm.)",team:"A"}],karten:[],spielerDesSpiels:{name:"Andreas Schjelderup",team:"A",note:8.5,begruendung:{de:"Vorlage zum 5:1 und Elfmetertor in der Nachspielzeit – der Norweger krönte einen dominanten Abend.",en:"An assist for the fifth and a stoppage-time penalty crowned a dominant night."}},fazit:{de:"Zwei Wochen nach der Blamage in St. Gallen zeigt Benfica die andere Seite: Rafa Silva traf nach drei Minuten, Araújo per Kopf, Pavlidis vom Punkt. Nach Renauds Ehrentreffer legten Durán und Schjelderup nach. Für Hearts ist die Sache nach dem 1:6 praktisch erledigt.",en:"Two weeks after the embarrassment in St. Gallen, Benfica showed their other side with six goals; Hearts\u2019 tie is all but over."}}},
+{h:"RB Salzburg",a:"Pafos FC",s:"1:0",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.6,label:{de:"Tabakovic trifft zwei Minuten vor Schluss",en:"Tabakovic strikes two minutes from time"}},tore:[{minute:88,spieler:"Tabakovic",team:"A"}],karten:[{minute:"90+3",spieler:"Sema",team:"B",typ:"rot"}],spielerDesSpiels:{name:"Haris Tabakovic",team:"A",note:7.9,begruendung:{de:"Sein später Treffer erlöste Salzburg nach 88 zähen Minuten.",en:"His late goal released Salzburg after 88 laboured minutes."}},fazit:{de:"Lange lief nichts zusammen gegen tief stehende Zyprer, dann traf Tabakovic in der 88. Minute. In der Nachspielzeit sah Pafos' Sema noch Rot. Ein knapper, aber wertvoller Vorsprung fürs Rückspiel.",en:"Little worked against a deep-lying Pafos until Tabakovic struck on 88 minutes; Sema saw red in stoppage time."}}},
+{h:"FC Thun",a:"Víkingur Reykjavík",s:"3:0",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.6,label:{de:"Thun macht es diesmal souverän",en:"Thun get it right this time"}},tore:[{minute:19,spieler:"Bamert",team:"A"},{minute:25,spieler:"Labeau",team:"A"},{minute:"90+4",spieler:"Saiz",team:"A"}],karten:[],spielerDesSpiels:{name:"Brighton Labeau",team:"A",note:8.1,begruendung:{de:"Wieder der Torschütze im Europapokal – der Stürmer bleibt Thuns Lebensversicherung.",en:"The scorer again in Europe; the forward remains Thun\u2019s go-to man."}},fazit:{de:"Nach dem bitteren Aus gegen Dinamo Zagreb meldet sich der Schweizer Meister eindrucksvoll zurück: Bamert köpfte die Führung, Labeau legte nach, Saiz traf in der Nachspielzeit per Volley.",en:"After the painful exit against Dinamo Zagreb, the Swiss champions responded emphatically."}}},
+{h:"Jagiellonia Białystok",a:"Glasgow Rangers",s:"2:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.4,label:{de:"Polens Vizemeister schlägt die Rangers",en:"Poland\u2019s runners-up beat Rangers"}},tore:[{minute:4,spieler:"Montoia (ET)",team:"B"},{minute:13,spieler:"Fernandez (ET)",team:"A"},{minute:21,spieler:"Szmyt",team:"A"}],karten:[],spielerDesSpiels:{name:"Kajetan Szmyt",team:"A",note:7.8,begruendung:{de:"Sein Treffer in der 21. Minute war der einzige reguläre des Spiels – die beiden anderen Tore waren Eigentore.",en:"His 21st-minute strike was the only goal from open play; the other two were own goals."}},fazit:{de:"Kurioser Beginn: Montoia traf schon in der 4. Minute ins eigene Tor, neun Minuten später glich Fernandez per Eigentor für die Rangers aus. Szmyt sorgte in der 21. Minute für den einzigen regulären Treffer – Jagiellonia nimmt ein 2:1 mit nach Glasgow.",en:"Jagiellonia take a 2-1 lead to Glasgow for the return leg."}}},
+{h:"Maccabi Tel Aviv",a:"ZSKA Sofia",s:"0:3",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.2,label:{de:"ZSKA düpiert Maccabi",en:"CSKA stun Maccabi"}},tore:[{minute:9,spieler:"Ebong",team:"B"},{minute:29,spieler:"Godoy",team:"B"},{minute:90,spieler:"Zwarts",team:"B"}],karten:[],spielerDesSpiels:{name:"Max Ebong",team:"B",note:7.9,begruendung:{de:"Sein frühes Tor legte den Grundstein für den überraschend klaren Auswärtssieg.",en:"His early goal laid the foundation for a surprisingly comfortable away win."}},fazit:{de:"Überraschung in Israel: Die Bulgaren, die in Runde 2 zweimal torlos geblieben waren, trafen diesmal dreifach – Ebong (9.), Godoy (29.) und Zwarts (90.) sorgten für ein 3:0 bei Maccabi Tel Aviv.",en:"A surprise in Israel as CSKA, twice goalless in round two, win 3-0 at Maccabi."}}},
+{h:"PAOK Saloniki",a:"RSC Anderlecht",s:"0:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.7,label:{de:"Anderlecht gewinnt in der Toumba",en:"Anderlecht win at the Toumba"}},tore:[{minute:1,spieler:"Cvetkovic",team:"B"}],karten:[],spielerDesSpiels:{name:"Mihajlo Cvetkovic",team:"B",note:7.9,begruendung:{de:"Sein Tor nach 60 Sekunden brachte Anderlecht früh auf die Siegerstraße.",en:"His goal inside 60 seconds put Anderlecht on course early."}},fazit:{de:"Cvetkovic traf schon in der ersten Minute, danach verwaltete Anderlecht den Vorsprung. PAOK vergab in der 36. Minute einen Elfmeter durch Michailidis – vor dem Rückspiel in Brüssel haben die Belgier die besseren Karten.",en:"Anderlecht edge it 1-0 in Thessaloniki and hold the advantage."}}},
+{h:"Hradec Králové",a:"Besiktas",s:"0:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.2,label:{de:"Besiktas mit dem knappen Auswärtserfolg",en:"Besiktas edge it away"}},tore:[{minute:80,spieler:"Kiliçsoy",team:"B"}],karten:[{minute:71,spieler:"Ouattara",team:"B",typ:"rot"}],spielerDesSpiels:{name:"Semih Kiliçsoy",team:"B",note:7.8,begruendung:{de:"Sein Kopfballtreffer in Unterzahl entschied die Partie.",en:"His header with ten men decided the game."}},fazit:{de:"Kurios: Neun Minuten nach der Roten Karte gegen Ouattara (71.) köpfte Kiliçsoy die Türken in Unterzahl zum 1:0-Auswärtssieg.",en:"The Turkish side win 1-0 in the Czech Republic."}}},
+{h:"Lech Posen",a:"KÍ Klaksvík",s:"1:0",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:5.8,label:{de:"Mühsamer Heimsieg für Lech",en:"A laboured home win for Lech"}},tore:[{minute:81,spieler:"Agnero",team:"A"}],karten:[],spielerDesSpiels:{name:"Yannick Agnero",team:"A",note:7.5,begruendung:{de:"Sein Treffer neun Minuten vor Schluss erlöste Polens Meister.",en:"His goal nine minutes from time released Poland\u2019s champions."}},fazit:{de:"Polens Meister rannte lange vergeblich an, ehe Agnero in der 81. Minute traf – ein knappes 1:0 gegen KÍ Klaksvík.",en:"Poland\u2019s champions laboured to a 1-0 win over KÍ Klaksvík."}}},
+{h:"KuPS Kuopio",a:"Universitatea Craiova",s:"1:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.4,label:{de:"Remis in Finnland",en:"A draw in Finland"}},tore:[{minute:38,spieler:"Baiaram",team:"B"},{minute:72,spieler:"Moreno",team:"A"}],karten:[],spielerDesSpiels:{name:"Jaime Moreno",team:"A",note:7.4,begruendung:{de:"Sein Ausgleich in der 72. Minute rettete den Finnen ein Remis.",en:"His 72nd-minute equaliser earned the Finns a draw."}},fazit:{de:"Baiaram brachte Craiova in Führung, Moreno glich in der 72. Minute aus – alles offen vor dem Rückspiel in Rumänien.",en:"KuPS and Craiova draw 1-1 with everything to play for."}}},
+{h:"Lincoln Red Imps",a:"Omonia Nikosia",s:"1:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.5,label:{de:"Gibraltars Meister holt ein Remis",en:"Gibraltar\u2019s champions earn a draw"}},tore:[{minute:71,spieler:"Rutjens",team:"A"},{minute:"90+3",spieler:"Andreou",team:"B"}],karten:[],spielerDesSpiels:{name:"Christian Rutjens",team:"A",note:7.6,begruendung:{de:"Sein Tor brachte Gibraltars Meister bis in die Nachspielzeit in Führung.",en:"His goal had Gibraltar\u2019s champions ahead until stoppage time."}},fazit:{de:"Bitter für Lincoln: Rutjens brachte Gibraltars Meister in der 71. Minute in Führung, doch Andreou glich in der dritten Minute der Nachspielzeit
+
+### HIGHLIGHT SAMPLE
+
+ifa-world-cup"],["CTV","CTV","https://www.ctv.ca/"]],
+  TH:[["beIN","beIN Sports","https://www.beinsports.com/"],["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]],
+  _en:[["FIFA","FIFA Highlights (EN)","https://www.youtube.com/@fifa"]]
+};
+const MAGENTA="https://www.magentasport.de/";
+const HL = [
+// === 05./06.08.2026: CL-, EL- & ECL-Quali Runde 3 Hinspiele ===
+{h:"Benfica Lissabon",a:"Heart of Midlothian",s:"6:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:8.3,label:{de:"Torfestival an der Luz",en:"A goal feast at the Luz"}},tore:[{minute:3,spieler:"Rafa Silva",team:"A"},{minute:23,spieler:"Araújo",team:"A"},{minute:42,spieler:"Pavlidis (Elfm.)",team:"A"},{minute:59,spieler:"Prestianni",team:"A"},{minute:72,spieler:"Renaud",team:"B"},{minute:87,spieler:"Durán",team:"A"},{minute:"90+4",spieler:"Schjelderup (Elfm.)",team:"A"}],karten:[],spielerDesSpiels:{name:"Andreas Schjelderup",team:"A",note:8.5,begruendung:{de:"Vorlage zum 5:1 und Elfmetertor in der Nachspielzeit – der Norweger krönte einen dominanten Abend.",en:"An assist for the fifth and a stoppage-time penalty crowned a dominant night."}},fazit:{de:"Zwei Wochen nach der Blamage in St. Gallen zeigt Benfica die andere Seite: Rafa Silva traf nach drei Minuten, Araújo per Kopf, Pavlidis vom Punkt. Nach Renauds Ehrentreffer legten Durán und Schjelderup nach. Für Hearts ist die Sache nach dem 1:6 praktisch erledigt.",en:"Two weeks after the embarrassment in St. Gallen, Benfica showed their other side with six goals; Hearts\u2019 tie is all but over."}}},
+{h:"RB Salzburg",a:"Pafos FC",s:"1:0",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.6,label:{de:"Tabakovic trifft zwei Minuten vor Schluss",en:"Tabakovic strikes two minutes from time"}},tore:[{minute:88,spieler:"Tabakovic",team:"A"}],karten:[{minute:"90+3",spieler:"Sema",team:"B",typ:"rot"}],spielerDesSpiels:{name:"Haris Tabakovic",team:"A",note:7.9,begruendung:{de:"Sein später Treffer erlöste Salzburg nach 88 zähen Minuten.",en:"His late goal released Salzburg after 88 laboured minutes."}},fazit:{de:"Lange lief nichts zusammen gegen tief stehende Zyprer, dann traf Tabakovic in der 88. Minute. In der Nachspielzeit sah Pafos' Sema noch Rot. Ein knapper, aber wertvoller Vorsprung fürs Rückspiel.",en:"Little worked against a deep-lying Pafos until Tabakovic struck on 88 minutes; Sema saw red in stoppage time."}}},
+{h:"FC Thun",a:"Víkingur Reykjavík",s:"3:0",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.6,label:{de:"Thun macht es diesmal souverän",en:"Thun get it right this time"}},tore:[{minute:19,spieler:"Bamert",team:"A"},{minute:25,spieler:"Labeau",team:"A"},{minute:"90+4",spieler:"Saiz",team:"A"}],karten:[],spielerDesSpiels:{name:"Brighton Labeau",team:"A",note:8.1,begruendung:{de:"Wieder der Torschütze im Europapokal – der Stürmer bleibt Thuns Lebensversicherung.",en:"The scorer again in Europe; the forward remains Thun\u2019s go-to man."}},fazit:{de:"Nach dem bitteren Aus gegen Dinamo Zagreb meldet sich der Schweizer Meister eindrucksvoll zurück: Bamert köpfte die Führung, Labeau legte nach, Saiz traf in der Nachspielzeit per Volley.",en:"After the painful exit against Dinamo Zagreb, the Swiss champions responded emphatically."}}},
+{h:"Jagiellonia Białystok",a:"Glasgow Rangers",s:"2:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.4,label:{de:"Polens Vizemeister schlägt die Rangers",en:"Poland\u2019s runners-up beat Rangers"}},tore:[{minute:4,spieler:"Montoia (ET)",team:"B"},{minute:13,spieler:"Fernandez (ET)",team:"A"},{minute:21,spieler:"Szmyt",team:"A"}],karten:[],spielerDesSpiels:{name:"Kajetan Szmyt",team:"A",note:7.8,begruendung:{de:"Sein Treffer in der 21. Minute war der einzige reguläre des Spiels – die beiden anderen Tore waren Eigentore.",en:"His 21st-minute strike was the only goal from open play; the other two were own goals."}},fazit:{de:"Kurioser Beginn: Montoia traf schon in der 4. Minute ins eigene Tor, neun Minuten später glich Fernandez per Eigentor für die Rangers aus. Szmyt sorgte in der 21. Minute für den einzigen regulären Treffer – Jagiellonia nimmt ein 2:1 mit nach Glasgow.",en:"Jagiellonia take a 2-1 lead to Glasgow for the return leg."}}},
+{h:"Maccabi Tel Aviv",a:"ZSKA Sofia",s:"0:3",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.2,label:{de:"ZSKA düpiert Maccabi",en:"CSKA stun Maccabi"}},tore:[{minute:9,spieler:"Ebong",team:"B"},{minute:29,spieler:"Godoy",team:"B"},{minute:90,spieler:"Zwarts",team:"B"}],karten:[],spielerDesSpiels:{name:"Max Ebong",team:"B",note:7.9,begruendung:{de:"Sein frühes Tor legte den Grundstein für den überraschend klaren Auswärtssieg.",en:"His early goal laid the foundation for a surprisingly comfortable away win."}},fazit:{de:"Überraschung in Israel: Die Bulgaren, die in Runde 2 zweimal torlos geblieben waren, trafen diesmal dreifach – Ebong (9.), Godoy (29.) und Zwarts (90.) sorgten für ein 3:0 bei Maccabi Tel Aviv.",en:"A surprise in Israel as CSKA, twice goalless in round two, win 3-0 at Maccabi."}}},
+{h:"PAOK Saloniki",a:"RSC Anderlecht",s:"0:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.7,label:{de:"Anderlecht gewinnt in der Toumba",en:"Anderlecht win at the Toumba"}},tore:[{minute:1,spieler:"Cvetkovic",team:"B"}],karten:[],spielerDesSpiels:{name:"Mihajlo Cvetkovic",team:"B",note:7.9,begruendung:{de:"Sein Tor nach 60 Sekunden brachte Anderlecht früh auf die Siegerstraße.",en:"His goal inside 60 seconds put Anderlecht on course early."}},fazit:{de:"Cvetkovic traf schon in der ersten Minute, danach verwaltete Anderlecht den Vorsprung. PAOK vergab in der 36. Minute einen Elfmeter durch Michailidis – vor dem Rückspiel in Brüssel haben die Belgier die besseren Karten.",en:"Anderlecht edge it 1-0 in Thessaloniki and hold the advantage."}}},
+{h:"Hradec Králové",a:"Besiktas",s:"0:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.2,label:{de:"Besiktas mit dem knappen Auswärtserfolg",en:"Besiktas edge it away"}},tore:[{minute:80,spieler:"Kiliçsoy",team:"B"}],karten:[{minute:71,spieler:"Ouattara",team:"B",typ:"rot"}],spielerDesSpiels:{name:"Semih Kiliçsoy",team:"B",note:7.8,begruendung:{de:"Sein Kopfballtreffer in Unterzahl entschied die Partie.",en:"His header with ten men decided the game."}},fazit:{de:"Kurios: Neun Minuten nach der Roten Karte gegen Ouattara (71.) köpfte Kiliçsoy die Türken in Unterzahl zum 1:0-Auswärtssieg.",en:"The Turkish side win 1-0 in the Czech Republic."}}},
+{h:"Lech Posen",a:"KÍ Klaksvík",s:"1:0",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:5.8,label:{de:"Mühsamer Heimsieg für Lech",en:"A laboured home win for Lech"}},tore:[{minute:81,spieler:"Agnero",team:"A"}],karten:[],spielerDesSpiels:{name:"Yannick Agnero",team:"A",note:7.5,begruendung:{de:"Sein Treffer neun Minuten vor Schluss erlöste Polens Meister.",en:"His goal nine minutes from time released Poland\u2019s champions."}},fazit:{de:"Polens Meister rannte lange vergeblich an, ehe Agnero in der 81. Minute traf – ein knappes 1:0 gegen KÍ Klaksvík.",en:"Poland\u2019s champions laboured to a 1-0 win over KÍ Klaksvík."}}},
+{h:"KuPS Kuopio",a:"Universitatea Craiova",s:"1:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.4,label:{de:"Remis in Finnland",en:"A draw in Finland"}},tore:[{minute:38,spieler:"Baiaram",team:"B"},{minute:72,spieler:"Moreno",team:"A"}],karten:[],spielerDesSpiels:{name:"Jaime Moreno",team:"A",note:7.4,begruendung:{de:"Sein Ausgleich in der 72. Minute rettete den Finnen ein Remis.",en:"His 72nd-minute equaliser earned the Finns a draw."}},fazit:{de:"Baiaram brachte Craiova in Führung, Moreno glich in der 72. Minute aus – alles offen vor dem Rückspiel in Rumänien.",en:"KuPS and Craiova draw 1-1 with everything to play for."}}},
+{h:"Lincoln Red Imps",a:"Omonia Nikosia",s:"1:1",g:"Europa League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.5,label:{de:"Gibraltars Meister holt ein Remis",en:"Gibraltar\u2019s champions earn a draw"}},tore:[{minute:71,spieler:"Rutjens",team:"A"},{minute:"90+3",spieler:"Andreou",team:"B"}],karten:[],spielerDesSpiels:{name:"Christian Rutjens",team:"A",note:7.6,begruendung:{de:"Sein Tor brachte Gibraltars Meister bis in die Nachspielzeit in Führung.",en:"His goal had Gibraltar\u2019s champions ahead until stoppage time."}},fazit:{de:"Bitter für Lincoln: Rutjens brachte Gibraltars Meister in der 71. Minute in Führung, doch Andreou glich in der dritten Minute der Nachspielzeit für Omonia aus.",en:"A creditable 1-1 for Lincoln against Omonia."}}},
+{h:"Paide Linnameeskond",a:"SK Rapid Wien",s:"1:4",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.5,label:{de:"Rapid dreht in der Schlussphase auf",en:"Rapid take over late"}},tore:[{minute:5,spieler:"Bolla (Elfm.)",team:"B"},{minute:41,spieler:"Luts",team:"A"},{minute:83,spieler:"Haïdara",team:"B"},{minute:85,spieler:"Dahl",team:"B"},{minute:"90+4",spieler:"Haïdara",team:"B"}],karten:[],spielerDesSpiels:{name:"Moulaye Haïdara",team:"B",note:8.3,begruendung:{de:"Doppelpack in der Schlussphase – der Franzose entschied ein lange enges Spiel.",en:"A late brace as the Frenchman settled a tight game."}},fazit:{de:"Alles andere als überzeugend: Bolla verwandelte in der 5. Minute einen nach VAR-Eingriff verhängten Handelfmeter, doch Luts glich nach einer Ecke aus (41.). Erst die eingewechselten Haïdara (83., 90.+4) und Dahl (85.) sorgten für den 4:1-Endstand. Im Rückspiel wartet als Play-off-Gegner voraussichtlich Heart of Midlothian.",en:"It looked like hard work until Rapid scored three times in the last seven minutes for a commanding 4-1."}}},
+{h:"Beitar Jerusalem",a:"FK Austria Wien",s:"1:2",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.3,label:{de:"Austria dreht das Spiel in Israel",en:"Austria turn it around in Israel"}},tore:[{minute:19,spieler:"Muche",team:"A"},{minute:45,spieler:"Markovic",team:"B"},{minute:69,spieler:"Saljic",team:"B"}],karten:[],spielerDesSpiels:{name:"Vasilije Markovic",team:"B",note:7.9,begruendung:{de:"Sein Ausgleich unmittelbar vor der Pause brachte die Wende.",en:"His equaliser right before the break turned the game."}},fazit:{de:"Nach frühem Rückstand durch Muche schlug die Wiener Austria zurück: Markovic glich in der 45. Minute aus, Saljic traf in der 69. zum Sieg. Ein starkes Auswärtsergebnis.",en:"After Muche\u2019s early opener, Austria hit back through Markovic and Saljic for a strong away win."}}},
+{h:"Sheriff Tiraspol",a:"FC St. Gallen",s:"1:3",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.4,label:{de:"St. Gallen dreht nach der Pause auf",en:"St. Gallen come alive after the break"}},tore:[{minute:63,spieler:"Hunziker",team:"B"},{minute:70,spieler:"Frokaj",team:"B"},{minute:89,spieler:"Pineda",team:"A"},{minute:"90+2",spieler:"Witzig",team:"B"}],karten:[],spielerDesSpiels:{name:"Andrin Hunziker",team:"B",note:8.2,begruendung:{de:"Kopfballtor und Vorlage zum 3:1 – der Stürmer prägte die zweite Halbzeit.",en:"A header and an assist for the third; the striker shaped the second half."}},fazit:{de:"Nach dem 0:5 in Lissabon meldet sich St. Gallen im dritten Wettbewerb eindrucksvoll zurück: Hunziker köpfte die Führung, Frokaj legte nach, Witzig traf in der Nachspielzeit.",en:"After the 5-0 in Lisbon, St. Gallen responded in the Conference League with a 3-1 win in Tiraspol."}}},
+{h:"FC Noah",a:"FC Sion",s:"2:2",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.7,label:{de:"Zwei Rote Karten, vier Tore",en:"Two red cards and four goals"}},tore:[{minute:5,spieler:"Castro (Elfm.)",team:"A"},{minute:13,spieler:"Boteli",team:"B"},{minute:20,spieler:"Manvelyan",team:"A"},{minute:57,spieler:"Chouaref",team:"B"}],karten:[{minute:26,spieler:"Hefti",team:"B",typ:"rot"},{minute:64,spieler:"Mambo",team:"A",typ:"rot"}],spielerDesSpiels:{name:"Ylyas Chouaref",team:"B",note:8.0,begruendung:{de:"Sein Volleytreffer in Unterzahl rettete Sion ein wertvolles Remis.",en:"His volley with ten men earned Sion a valuable draw."}},fazit:{de:"Wildes Spiel in Armenien: Vier Tore in den ersten 57 Minuten, dazu je eine Rote Karte auf beiden Seiten. Sion nimmt trotz Unterzahl seit der 26. Minute ein 2:2 mit in die Schweiz.",en:"A wild night in Armenia with four goals and a red card each; Sion take a 2-2 home despite playing an hour with ten men."}}},
+{h:"FC Inter Turku",a:"FC Vaduz",s:"2:1",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.8,label:{de:"Vaduz verliert trotz Eigentor-Führung",en:"Vaduz lose despite an own-goal lead"}},tore:[{minute:22,spieler:"Stark (ET)",team:"A"},{minute:63,spieler:"Sorgic",team:"B"},{minute:68,spieler:"Ahiabu",team:"A"}],karten:[],spielerDesSpiels:{name:"Prosper Ahiabu",team:"A",note:7.6,begruendung:{de:"Sein Treffer fünf Minuten nach dem Ausgleich drehte die Partie endgültig.",en:"His goal five minutes after the equaliser turned the tie."}},fazit:{de:"Ein Eigentor von Starks brachte Vaduz in Front, Sorgic glich für die Liechtensteiner aus – doch Ahiabu traf in der 68. Minute zum finnischen Sieg.",en:"An own goal put Vaduz ahead and Sorgic levelled, but Ahiabu won it for the Finns."}}},
+{h:"FC Lugano",a:"NSI Runavik",s:"2:0",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.3,label:{de:"Lugano ohne Mühe",en:"A comfortable night for Lugano"}},tore:[{minute:7,spieler:"Pihlström",team:"A"},{minute:79,spieler:"Behrens",team:"A"}],karten:[],spielerDesSpiels:{name:"Elias Pihlström",team:"A",note:7.5,begruendung:{de:"Frühes Tor, ruhiges Spiel – Lugano kontrollierte die Partie von Beginn an.",en:"An early goal and a calm game; Lugano were in control throughout."}},fazit:{de:"Pihlström traf schon in der 7. Minute, Behrens erhöhte in der 79. Für die Tessiner ein solides Polster vor dem Rückspiel auf den Färöern.",en:"Pihlström struck on seven minutes and Behrens added a second late on."}}},
+{h:"Ajax Amsterdam",a:"FC Shelbourne",s:"3:1",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:6.9,label:{de:"Ajax souverän gegen Shelbourne",en:"Ajax comfortable against Shelbourne"}},tore:[{minute:6,spieler:"Godts (Elfm.)",team:"A"},{minute:22,spieler:"Wijndal",team:"A"},{minute:50,spieler:"Dolberg",team:"A"},{minute:84,spieler:"Kelly",team:"B"}],karten:[],spielerDesSpiels:{name:"Steven Berghuis",team:"A",note:8.0,begruendung:{de:"Zwei Vorlagen des Routiniers – Berghuis lenkte das Ajax-Spiel nach Belieben.",en:"Two assists as the veteran ran the Ajax attack."}},fazit:{de:"Godts verwandelte früh einen Elfmeter, Wijndal und Dolberg legten nach – beide nach Vorlagen von Berghuis. Kellys später Treffer blieb Ergebniskosmetik.",en:"Ajax beat Ireland\u2019s Shelbourne 3-1 at the Johan Cruijff Arena."}}},
+{h:"Zalgiris Vilnius",a:"Hajduk Split",s:"2:5",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.6,label:{de:"Hajduk feiert Schützenfest in Vilnius",en:"Hajduk run riot in Vilnius"}},tore:[{minute:5,spieler:"Sego (Elfm.)",team:"B"},{minute:34,spieler:"Petkovic",team:"A"},{minute:44,spieler:"Sego",team:"B"},{minute:55,spieler:"Pajaziti",team:"B"},{minute:72,spieler:"Dali",team:"B"},{minute:75,spieler:"Pukstas",team:"B"},{minute:85,spieler:"Capan",team:"A"}],karten:[],spielerDesSpiels:{name:"Michele Sego",team:"B",note:8.4,begruendung:{de:"Doppelpack, davon einer vom Punkt – der Kroate eröffnete und entschied das Torfestival.",en:"A brace including a penalty; the Croatian opened and settled the goal fest."}},fazit:{de:"Sieben Tore in Vilnius: Sego traf früh vom Punkt und legte vor der Pause nach, Pajaziti, Dali und Pukstas erhöhten. Zalgiris vergab in der 14. Minute einen Elfmeter – am Ende steht ein 5:2 für Hajduk.",en:"After their extra-time exit, Hajduk responded with a 5-2 win in Lithuania."}}},
+{h:"CFR Cluj",a:"Tromsø IL",s:"0:5",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:7.5,label:{de:"Tromsø demontiert Cluj",en:"Tromsø dismantle Cluj"}},tore:[{minute:5,spieler:"Larsen",team:"B"},{minute:20,spieler:"Larsen",team:"B"},{minute:27,spieler:"Dahlqvist",team:"B"},{minute:61,spieler:"Dahlqvist",team:"B"},{minute:73,spieler:"Dahlqvist",team:"B"}],karten:[],spielerDesSpiels:{name:"Isak Dahlqvist",team:"B",note:9.0,begruendung:{de:"Ein lupenreiner Hattrick des Schweden – drei Tore in einem Auswärtsspiel dieser Größenordnung sind eine Seltenheit.",en:"A hat-trick from the Swede in a remarkable away performance."}},fazit:{de:"Demontage in Rumänien: Larsen traf zweimal in den ersten 20 Minuten, dann übernahm Dahlqvist mit einem Hattrick (27., 61., 73.). Nach dem 5:0 steht Tromsø mit einem Bein in den Play-offs.",en:"The Norwegians win 5-0 in Romania and have one foot in the play-offs."}}},
+{h:"Raków Częstochowa",a:"Hammarby IF",s:"0:0",g:"Conference League · 3. Quali-Runde · Hinspiel",date:"Do, 06.08.",zdf:null,full:null, analyse:{spielnote:{wert:5.6,label:{de:"Nullnummer in Polen",en:"A goalless night in Poland"}},tore:[],karten:[],spielerDesSpiels:{name:"Hammarby IF",team:"B",note:6.6,begruendung:{de:"Ein torloses Remis in Polen ist für die Schweden ein brauchbares Ergebnis.",en:"A goalless draw in Poland is a workable result for the Swedes."}},fazit:{de:"Raków und Hammarby trennten sich torlos – die Entscheidung fällt im Rückspiel in Stockholm.",en:"Raków and Hammarby drew a blank; Stockholm will decide it."}}},
+{h:"Fenerbahçe",a:"Sturm Graz",s:"2:0",g:"Champions League · 3. Quali-Runde · Hinspiel",date:"Mi, 05.08."
+
+### ANBIETER HEADINGS LINKS
+
+H: Vergangene Spiele
+H: Anbieter & Preise
+H: Häufige Fragen zu Fußball im TV
+H: Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)
+H: Kontakt
+H: Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+H: Art des Angebots
+H: Haftung für Inhalte
+H: Haftung für Links
+H: Urheberrecht
+H: Verantwortlicher
+H: Überblick
+H: Hosting & Server-Logfiles
+H: Schriftarten (Google Fonts)
+H: Standort-/Ländererkennung (Geo-IP)
+H: Web-Analyse (Cloudflare Web Analytics)
+H: Web-Analyse (Google Analytics)
+H: Preisdeal-Wecker (E-Mail-Benachrichtigung)
+H: Tippspiel
+H: Lokale Speicherung (localStorage)
+H: Externe Links und Inhalte
+H: Teilen-Funktion
+H: Ihre Rechte
+H: Kein Streaming-Anbieter
+H: Privates Projekt
+H: Information pursuant to § 5 DDG (German Digital Services Act)
+H: Contact
+H: Responsible for content (§ 18 (2) MStV)
+H: Nature of the service
+H: Liability for content
+H: Liability for links
+H: Copyright
+H: Controller
+H: Overview
+H: Hosting & server log files
+H: Fonts (Google Fonts)
+H: Location/country detection (geo-IP)
+H: Web analytics (Cloudflare Web Analytics)
+H: Web analytics (Google Analytics)
+H: Price-deal alert (email notification)
+H: Prediction game
+H: Local storage (localStorage)
+H: External links and content
+H: Share function
+H: Your rights
+H: Not a streaming service
+H: A private project
+A: TV FUSSBALL .de | index.html
+A: Impressum | #
+A: Datenschutz | #
+A: Über uns | #
+A: Heute | index.html
+A: Highlights | highlights.html
+A: Anbieter | anbieter.html
+A:  | https://www.facebook.com/share/17qkMgZEbd/
+A:  | https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==
+A: '+fbI+'Facebook | https://www.facebook.com/share/17qkMgZEbd/
+A: '+igI+'Instagram | https://www.instagram.com/tvfussballl?igsh=MXFrbGU0N3dlZjJwcA==
+A: patrick.uhl1988@googlemail.com | mailto:patrick.uhl1988@googlemail.com
