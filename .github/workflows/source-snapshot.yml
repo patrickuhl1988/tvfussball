@@ -1,0 +1,52 @@
+name: Source Snapshot
+
+on:
+  push:
+    paths:
+      - '.github/workflows/source-snapshot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Split large source HTML files into readable chunks
+        shell: python
+        run: |
+          from pathlib import Path
+          import json, shutil
+
+          out = Path('.source-snapshot')
+          if out.exists():
+              shutil.rmtree(out)
+          out.mkdir()
+          manifest = {}
+          for filename in ('index.html', 'highlights.html'):
+              p = Path(filename)
+              if not p.exists():
+                  continue
+              text = p.read_text(encoding='utf-8')
+              size = 30000
+              chunks = [text[i:i+size] for i in range(0, len(text), size)]
+              stem = p.stem
+              names = []
+              for n, chunk in enumerate(chunks):
+                  name = f'{stem}-{n:03d}.txt'
+                  (out / name).write_text(chunk, encoding='utf-8')
+                  names.append(name)
+              manifest[filename] = {'chars': len(text), 'chunks': names}
+          (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8')
+      - name: Commit snapshot
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .source-snapshot
+          git diff --cached --quiet && exit 0
+          git commit -m 'chore: snapshot source HTML for redesign migration'
+          git push
