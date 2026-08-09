@@ -1,0 +1,61 @@
+name: Deploy direct redesign
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'highlights.html'
+      - '.github/workflows/deploy-direct-redesign.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tvfussball-direct-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build published HTML from Claude sources
+        shell: python
+        run: |
+          from pathlib import Path
+
+          out = Path('/tmp/tvfussball-direct')
+          out.mkdir(parents=True, exist_ok=True)
+          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="stylesheet" href="direct.css?v=1">'''
+          app = '''<script src="app-direct.js?v=1"></script>'''
+
+          for name in ('index.html', 'highlights.html'):
+              src = Path(name).read_text(encoding='utf-8')
+              # The maintained source HTML remains untouched on main. Only the published copy gets the renderer hooks.
+              if 'tvf-direct-boot' not in src:
+                  src = src.replace('<head>', '<head>' + boot, 1)
+              if 'app-direct.js' not in src:
+                  src = src.replace('</body>', app + '</body>', 1)
+              (out / name).write_text(src, encoding='utf-8')
+
+      - name: Publish to gh-pages
+        run: |
+          git fetch origin gh-pages
+          git switch gh-pages
+          cp /tmp/tvfussball-direct/index.html index.html
+          cp /tmp/tvfussball-direct/highlights.html highlights.html
+          git rm -f data-bridge.js app-shell.js app-shell.css 2>/dev/null || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html highlights.html
+          if git diff --cached --quiet; then
+            echo 'Nothing to publish.'
+            exit 0
+          fi
+          git commit -m 'deploy: direct embedded-data redesign'
+          git push origin gh-pages
