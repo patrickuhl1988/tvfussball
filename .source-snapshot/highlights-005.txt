@@ -1,0 +1,154 @@
+/div><div class="meta"><span class="comp">Testspiel · Sommer 2026</span><span class="freebest pay">So, 02.08.</span><span class="freebest tv">6 Tore</span></div></div><div class="rh-right"><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></div></button><div class="panel"><div class="panel-in"><div class="panel-pad"><div class="dh">Zusammenfassungen</div><div class="chlist"><div class="sumrow is-direct"><span class="slabel yt">LFC</span><span class="sname">Liverpool FC · Extended Highlights (All Red Video) <span class="sdirect">direkt</span></span><span class="sright"><a class="swatch" href="https://www.liverpoolfc.com/news/liverpool-2-4-leeds-united-watch-highlights-chicago" target="_blank" rel="noopener">ansehen ↗</a></span></div><div class="sumrow is-direct"><span class="slabel yt">SKY</span><span class="sname">Sky Sports · Match Report &amp; Highlights <span class="sdirect">direkt</span></span><span class="sright"><a class="swatch" href="https://www.skysports.com/football/liverpool-vs-leeds/report/554987" target="_blank" rel="noopener">ansehen ↗</a></span></div><div class="sumrow is-direct"><span class="slabel yt">TIA</span><span class="sname">This Is Anfield · Spielbericht mit allen Toren <span class="sdirect">direkt</span></span><span class="sright"><a class="swatch" href="https://www.thisisanfield.com/2026/08/liverpool-2-4-leeds-wirtz-goal-pre-season-report/" target="_blank" rel="noopener">ansehen ↗</a></span></div><div class="sumrow"><span class="slabel yt">YT</span><span class="sname">YouTube · Suche zum Spiel</span><span class="sright"><a class="swatch" href="https://www.youtube.com/results?search_query=FC%20Liverpool%20Leeds%20United+Highlights" target="_blank" rel="noopener">ansehen ↗</a></span></div></div><button class="morebtn an-btn" data-more="" data-lo="Spielanalyse" data-lc="Spielanalyse" aria-expanded="false"><span class="mlbl">Spielanalyse</span><svg class="mchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button><div class="morewrap"><div class="analysewrap"><div class="an-noterow"><span class="an-noteic" title="TVFussball-Note">★</span><b class="an-noteval">7,8</b><span class="an-notelbl">Leeds dreht mit vier Toren nach der Pause</span></div><div class="an-sec"><div class="an-h">Tore &amp; Karten</div><div class="an-ev"><span class="an-eic">⚽</span><span class="an-emin">7′</span><span class="an-etm"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#C8102E" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle><path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="#FFFFFF"></path><path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg></span><span class="an-epl">Chambers</span><span class="an-etn" title="FC Liverpool">FC Liverpool</span></div><div class="an-ev"><span class="an-eic">⚽</span><span class="an-emin">40′</span><span class="an-etm"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#C8102E" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle><path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="#FFFFFF"></path><path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg></span><span class="an-epl">Wirtz</span><span class="an-etn" title="FC Liverpool">FC Liverpool</span></div><div class="an-ev"><span class="an-eic">⚽</span><span class="an-emin">60′</span><span class="an-etm"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#FFFFFF" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle><path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="#1D428A"></path><path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="#1D428A" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg></span><span class="an-epl">Aaronson</span><span class="an-etn" title="Leeds United">Leeds United</span></div><div class="an-ev"><span class="an-eic">⚽</span><span class="an-emin">71′</span><span class="an-etm"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#FFFFFF" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle><path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="#1D428A"></path><path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="#1D428A" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg></span><span class="an-epl">Calvert-Lewin</span><span class="an-etn" title="Leeds United">Leeds United</span></div><div class="an-ev"><span class="an-eic">⚽</span><span class="an-emin">73′</span><span class="an-etm"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#FFFFFF" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle><path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="#1D428A"></path><path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="#1D428A" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg></span><span class="an-epl">Longstaff</span><span class="an-etn" title="Leeds United">Leeds United</span></div><div class="an-ev"><span class="an-eic">⚽</span><span class="an-emin">85′</span><span class="an-etm"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#FFFFFF" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle><path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="#1D428A"></path><path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="#1D428A" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg></span><span class="an-epl">Calvert-Lewin</span><span class="an-etn" title="Leeds United">Leeds United</span></div></div><div class="an-sec"><div class="an-h">Spieler des Spiels</div><div class="an-motm"><div class="an-mbody"><div class="an-mtop"><span class="an-mnote">8,4</span><span class="an-mname">Dominic Calvert-Lewin<span class="an-mtm"><svg class="cball" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#FFFFFF" stroke="rgba(0,0,0,.32)" stroke-width="1"></circle><path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="#1D428A"></path><path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="#1D428A" stroke-width="1.2" stroke-linecap="round" fill="none"></path></svg><span>Leeds United</span></span></span></div><span class="an-mwhy">Doppelpack in der Schlussphase – der Stürmer drehte das Spiel im Alleingang.</span></div></div></div><div class="an-sec"><div class="an-h">Fazit</div><p class="an-fazit">Kurioser Verlauf zum Abschluss der US-Reise: Liverpool führte durch Chambers und einen Treffer von Florian Wirtz mit 2:0, ehe Leeds nach der Pause viermal traf. Calvert-Lewin erzielte zwei Tore, Aaronson und Longstaff die anderen beiden.</p></div></div></div><div class="sharebar"><button class="sharebtn" data-share="" data-share-title="FC Liverpool 2:4 Leeds United" data-share-text="FC Liverpool 2:4 Leeds United · Highlights &amp; Relive (TVFussball.de)" data-share-url="https://tvfussball.de"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"></path></svg><span>Teilen</span></button></div></div></div></div></div><div class="daybar"><span class="d">Sa, 01.08. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 02.08. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Fr, 31.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Do, 30.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mi, 29.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 28.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 26.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Sa, 25.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Do, 23.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mi, 22.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 21.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 19.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Sa, 18.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Do, 16.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mi, 15.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 14.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 12.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Sa, 11.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Fr, 10.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mi, 08.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 07.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Do, 09.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 07.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mo, 06.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 05.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Sa, 04.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Fr, 03.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Do, 02.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mi, 01.07. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 30.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mo, 29.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 28.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Sa, 27.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Fr, 26.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Do, 25.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mi, 24.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 23.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mo, 22.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 21.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Sa, 20.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Fr, 19.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Do, 18.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mi, 17.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Di, 16.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">Mo, 15.06. 2026</span><span class="ln"></span></div><div class="daybar"><span class="d">So, 14.06. 2026</span><span class="ln"></span></div></div>
+    <p class="note" id="hlNote"></p>
+  </section>
+
+  >
+
+  >
+
+  <section class="tabpane" id="pane-anbieter" role="tabpanel">
+    <div class="abo" id="aboBox">
+      <div class="abo-h"><span class="em">🧮</span><span data-i18n="abo_title">Welches Abo brauche ich?</span></div>
+      <p class="abo-sub" data-i18n="abo_sub">Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.</p>
+      <div class="abo-pick" data-i18n="abo_pick">Wettbewerbe wählen:</div>
+      <div class="abo-chips" id="aboChips"></div>
+      <div class="abo-res" id="aboRes"></div>
+    </div>
+    <div class="wecker" id="weckerBox"></div>
+    <div class="fsearch"><span class="ic">⌕</span><input id="provSearch" type="text" placeholder="Anbieter, Wettbewerb oder Land suchen …"></div>
+    <div class="filters" id="provFilters"></div>
+    <div class="section-eyebrow"><h2 data-i18n="prov_title">Anbieter &amp; Preise</h2><span class="cnt mono" id="provCount"></span></div>
+    <div class="provlist" id="provList"></div>
+    <p class="note" id="provNote"></p>
+  </section>
+
+  >
+
+
+  
+  <section id="faq" class="faqwrap" aria-label="Häufige Fragen">
+    <h2 class="faq-h">Häufige Fragen zu Fußball im TV</h2>
+    <details class="wmsec faq-item"><summary>Wo läuft Fußball heute im Free-TV?</summary><p class="faq-a">Bei der WM 2026 teilen sich ARD und ZDF die Free-TV-Spiele, MagentaTV zeigt alle 104 Partien (44 davon exklusiv). In der Bundesliga-Saison 2026/27 laufen im Free-TV nur ausgewählte Spiele bei Sat.1 (Eröffnung, 17. und 18. Spieltag, Supercup, Relegation). TVFussball.de zeigt für jedes Spiel zuerst die kostenlose Free-TV- oder Radio-Option.</p></details>
+    <details class="wmsec faq-item"><summary>Wer überträgt die Bundesliga 2026/27?</summary><p class="faq-a">Sky zeigt das Freitagsspiel (20:30) sowie alle Samstagsspiele inklusive Topspiel (18:30). DAZN überträgt die Samstags-Konferenz (15:30) und alle Sonntagsspiele. Die Zuordnung der einzelnen Partien zu den Tagen legt die DFL mit der zeitgenauen Terminierung fest.</p></details>
+    <details class="wmsec faq-item"><summary>Wer zeigt die 2. Bundesliga im TV?</summary><p class="faq-a">Sky überträgt alle 306 Spiele der 2. Bundesliga live. Das Topspiel am Samstagabend (20:30) läuft zusätzlich frei empfangbar bei RTL.</p></details>
+    <details class="wmsec faq-item"><summary>Was ist die Bundesliga-Konferenz und wo läuft sie?</summary><p class="faq-a">Die Konferenz zeigt alle fünf Samstag-15:30-Spiele parallel in einer Sendung. Ab der Saison 2026/27 läuft die Original-Konferenz exklusiv bei DAZN, die Einzelspiele zeigt parallel Sky. TVFussball.de listet die Konferenz für jeden Spieltag.</p></details>
+    <details class="wmsec faq-item"><summary>Kann ich Bundesliga kostenlos und legal im Radio hören?</summary><p class="faq-a">Ja: sportschau.de und die ARD Audiothek streamen jedes Einzelspiel der 1. und 2. Bundesliga als kostenlose Audio-Vollreportage. Viele Vereine bieten zusätzlich eigene Fanradios an, etwa BVB Netradio, VfB Radio oder HSVnetradio – alle bei TVFussball.de direkt am Spiel verlinkt.</p></details>
+    <details class="wmsec faq-item"><summary>Was kosten Sky und DAZN für die Bundesliga?</summary><p class="faq-a">Die Preise ändern sich je nach Aktion. Unser Abo-Rechner auf der Anbieter-Seite vergleicht Sky, DAZN, MagentaTV, Prime Video und Co. tagesaktuell danach, welche Wettbewerbe dir wichtig sind – inklusive der günstigsten Kombination.</p></details>
+    <details class="wmsec faq-item"><summary>Zeigt Sky oder DAZN die Champions League?</summary><p class="faq-a">Sky hat seit 2018 keine Champions-League-Rechte mehr. Ab der Ligaphase 2026/27 teilen sich DAZN und Amazon Prime Video die Spiele, das Finale läuft frei im ZDF. Die frühen Qualifikationsrunden im Juli überträgt in Deutschland kein Sender.</p></details>
+    <details class="wmsec faq-item"><summary>Welche WM-2026-Spiele laufen kostenlos?</summary><p class="faq-a">ARD und ZDF zeigen einen Großteil der WM live und kostenlos – vom Eröffnungsspiel bis zum Finale. MagentaTV überträgt als einziger Anbieter alle 104 Spiele, 44 davon exklusiv. Welche Partie wo läuft, zeigt TVFussball.de tagesaktuell mit Kommentatoren und Anpfiffzeiten.</p></details>
+  </section>
+  <footer>
+    <a href="#" data-legal="imprint" data-i18n="imprint">Impressum</a>
+    <a href="#" data-legal="privacy" data-i18n="privacy">Datenschutz</a>
+    <a href="#" data-legal="about" data-i18n="about">Über uns</a>
+    <span class="lnote" data-i18n="legal_note">TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.</span>
+  </footer>
+
+  <div class="legal-ov" id="legalOv" aria-hidden="true">
+    <div class="legal-card" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+      <div class="legal-head"><h3 id="legalTitle"></h3><button class="legal-x" id="legalClose" aria-label="Schließen">✕</button></div>
+      <div class="legal-body" id="legalBody"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="bottomnav" role="tablist" aria-label="Bereiche">
+  <a class="navitem" role="tab" aria-selected="true" data-tab="live" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12.5" rx="2.6"/><path d="M8 20.5h8M12 17v3.5"/><path d="M10.7 9.1l3.4 2-3.4 2z" fill="currentColor" stroke="none"/></svg>
+    <span data-i18n="nav_live">Heute</span></a>
+  
+  
+  <a class="navitem" role="tab" aria-selected="false" data-tab="hl" href="highlights.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M10.2 8.6l4.8 3.4-4.8 3.4z" fill="currentColor" stroke="none"/></svg>
+    <span data-i18n="nav_hl">Highlights</span></a>
+  <a class="navitem" role="tab" aria-selected="false" data-tab="anbieter" href="anbieter.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 3.3l7.1 7.1a2 2 0 0 1 0 2.8l-6.5 6.5a2 2 0 0 1-2.8 0l-7.1-7.1V5.3a2 2 0 0 1 2-2z"/><circle cx="8" cy="8" r="1.5"/></svg>
+    <span data-i18n="nav_prov">Anbieter</span></a>
+</nav>
+
+<div class="consent hide" id="consent">
+  <p data-i18n="consent_text">Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.</p>
+  <div class="cbtns">
+    <button id="consentNo" data-i18n="consent_no">Ablehnen</button>
+    <button class="ok" id="consentYes" data-i18n="consent_yes">Einverstanden</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const ADS_ENABLED = false;
+let COUNTRY = "DE"; // Standardmarkt (per Geo-IP überschrieben); alle weiteren Länder unter „Mehr Sender"
+let MARKET_LOCKED = false; // true = Nutzer hat Land manuell gewählt (Geo-IP wird ignoriert)
+const _tk=new Date(); const TODAY_KEY = _tk.getFullYear()*10000+(_tk.getMonth()+1)*100+_tk.getDate(); // dynamisch: Spiele vor heute erscheinen nicht mehr in der Senderliste (sondern in Highlights)
+
+const I18N = {
+  de:{ nav_live:"Heute", nav_hl:"Highlights", nav_news:"Transfers", nav_prov:"Anbieter", nav_wm:"WM", nav_tipp:"Tippspiel",
+    tipp_eyebrow:"Tippspiel", tipp_title:"Tippe das Spiel – und gewinne",
+    tipp_sub:"Tippe das WM-Finale heute Abend: Spanien – Argentinien (21:00 Uhr, ZDF & MagentaTV). Gewinnst du, melden wir uns über Facebook oder Instagram bei dir.",
+    tipp_nick:"Spitzname (optional)", tipp_nick_ph:"Wie sollen wir dich nennen?",
+    tipp_tip_label:"Deine Tipps – genaues Endergebnis", tipp_tip_ph:"z. B. 0:2",
+    tipp_fb_label:"Dein Insta- oder Facebook-Profil", tipp_fb_ph:"Link zu deinem Insta- oder FB-Profil",
+    tipp_fb_help:"Nur zur Kontaktaufnahme, falls du gewinnst.",
+    tipp_consent:"Ich bin einverstanden, dass mein Tipp und mein Profil-Link zur Kontaktaufnahme im Gewinnfall gespeichert und verarbeitet werden.",
+    tipp_submit:"Tipp abgeben", tipp_rules_t:"So funktioniert's",
+    tipp_rule1:"Tippe beide Spiele aufs genaue Endergebnis.",
+    tipp_rule2:"Teilnahmeschluss ist der Anpfiff des ersten Spiels (Mo, 29.06., 19:00 Uhr).",
+    tipp_rule3:"Teilnahme nur mit Follow (Facebook oder Instagram) + geteilter Seite.",
+    tipp_rule4:"Verlost werden 1× 20 € und 1× 10 € Amazon-Gutschein. Bei Gewinn melden wir uns über Facebook oder Instagram.",
+    tipp_req_follow:"Ich folge tvfussball.de auf Facebook oder Instagram.", tipp_req_share:"Ich habe tvfussball.de mit mindestens einem Freund geteilt (z. B. per WhatsApp).",
+    tipp_cd:"Anpfiff in", tipp_kickoff:"Anpfiff – Tippabgabe geschlossen",
+    tipp_closed:"Das Spiel hat begonnen – die Tippabgabe ist geschlossen.",
+    tipp_e_tip:"Bitte gib deinen Tipp ein.", tipp_e_fb:"Bitte gib einen gültigen Instagram- oder Facebook-Link ein.",
+    tipp_e_consent:"Bitte stimme der Verarbeitung zu, um teilzunehmen.", tipp_e_follow:"Bitte bestätige, dass du uns auf Facebook oder Instagram folgst.", tipp_e_share:"Bitte bestätige, dass du die Seite geteilt hast.",
+    tipp_done_t:"Dein Tipp ist eingegangen!", tipp_done_s:"Viel Glück! Bei Gewinn melden wir uns über Facebook.",
+    tipp_your:"Dein Tipp", tipp_name:"Name",
+    tipp_fallback:"Damit dein Tipp uns sicher erreicht, schick ihn uns kurz per Facebook – wir haben ihn schon für dich kopiert.",
+    tipp_fb_send:"Auf Facebook senden", tipp_edit:"Tipp ändern",
+    tipp_prizes_t:"Heutige Gewinne", tipp_double_t:"Dreifache Gewinnchance", tipp_double_s:"Tippe auf tvfussball.de, bei Facebook UND bei Instagram – so bist du dreifach im Lostopf.", tipp_fb_game:"Facebook-Gewinnspiel", tipp_ig_game:"Instagram-Gewinnspiel", tipp_share_t:"Gewinnspiel mit Freunden teilen", tipp_share_native:"Teilen", tipp_share_text:"Tippe Deutschland – Paraguay & Brasilien – Japan auf TVFussball.de und gewinne Amazon-Gutscheine! 🎯⚽",
+    wm_eyebrow:"WM Special 2026", wm_title:"Die WM in USA, Kanada & Mexiko",
+    wm_sub:"Tabellen, K.-o.-Baum, Hymnen aller Teams, Memes und das große Quiz — alles an einem Ort.",
+    wm_groups:"Gruppen", wm_final:"Finale", wm_tables:"Tabellen & K.-o.-Runde",
+    wm_tables_sub:"Gruppen A–L plus Sechzehntel-, Achtel- und Viertelfinale",
+    wm_updated:"Stand: 23. Juni 2026 · Gruppenphase, Rangfolge ändert sich bis 27.06.",
+    wm_group_phase:"Gruppenphase", wm_leg_q:"1.–2.: Kurs Achtelfinale", wm_leg_m:"3.: beste Dritte",
+    wm_r32:"Sechzehntelfinale", wm_r16:"Achtelfinale", wm_r8:"Viertelfinale",
+    wm_quiz:"WM Quiz", wm_quiz_sub:"15 Fragen — wie gut kennst du die WM 2026?",
+    wm_quiz_intro:"Tippe pro Frage auf eine Antwort. Du siehst sofort, ob es stimmt. Am Ende gibt es deinen Rang.",
+    wm_quiz_reset:"Neu starten", wm_correct:"richtig",
+    wm_anthems:"Hymnen der Teams", wm_anthems_sub:"Alle 48 Teams — mit Kurzbeschreibung und Anhör-Link", wm_listen:"Anhören",
+    wm_memes:"Memes & Kurioses", wm_memes_sub:"Diese Sektion ist noch in Bearbeitung",
+    wm_wip:"Diese Sektion ist noch in Bearbeitung — Inhalte und Bilder folgen.",
+    wm_meme_note:"Bilder sind Platzhalter. Die Likes gelten nur für diese Sitzung.",
+    where:"Sender in", more:"Sender in weiteren Ländern", less:"Weniger anzeigen", running:"Läuft",
+    lohnt_t:"Lohnt sich’s?", tvf_rating:"TVFussball-Note", lh_voices:"Stimmen", lh_tip:"Tipp", lh_odds:"Wettquoten", lh_odds_upd:"Stand:", lh_last:"Letzte Spiele", lh_src:"Quelle", an_t:"Spielanalyse", an_more:"mehr Details", an_goals:"Tore", an_cards:"Karten", an_rating:"Spielnote", an_motm:"Spieler des Spiels", an_inj:"Verletzungen", an_ref:"Schiedsrichter", an_poss:"Ballbesitz", an_chances:"Chancen", an_run:"Laufwunder", an_pen:"Elfmeter", an_og:"Eigentor", an_src:"Statistik-Quelle", lohnt_score:"Lohnt-Score", an_events:"Tore & Karten", an_summary:"Fazit",
+    fta:"Free-TV", pay:"Pay", recent:"Vergangene Spiele", top_news:"Aktuelle News", prov_title:"Anbieter & Preise",
+    best_free:"Free-TV", best_radio:"Radio", best_pay:"Nur Pay", best_none:"Kein dt. TV-Sender", source:"Quelle", goals:"Tore", read:"Zur Quelle",
+    tz:"MEZ", share:"Teilen", shared:"Link kopiert", shared_btn:"Kopiert!", cal_add:"In Kalender", cal_done:"Termin als .ics gespeichert 📅",
+    ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
+    price_from:"ab", price_approx:"ca.",
+    result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Top",
+    f_free:"Nur Free-TV", f_tonight:"Demnächst", f_now:"Läuft jetzt", f_format:"Formate", f_mine:"★ Meine", fmt_head:"Sendungen & Magazine", fmt_live:"live", fmt_more:"Zur Sendung", fk_highlights:"Highlights", fk_magazin:"Magazin", fk_talk:"Talk", fk_vorbericht:"Vorbericht",fk_auslosung:"Auslosung", fk_live:"Live-Studio", fk_podcast:"Podcast", fk_video:"Video",
+    mine_empty:"Noch keinem Team gefolgt — tippe in einem Spiel auf „folgen“.", filt_empty:"Keine Spiele für diesen Filter.",
+    follow:"folgen", following:"folge ich", follow_hint:"Folge Teams, um nur deine Spiele zu sehen — Kalender-Erinnerung inklusive.",
+    abo_title:"Welches Abo brauche ich?", abo_sub:"Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.",
+    abo_pick:"Wettbewerbe wählen:", abo_pick_none:"Tippe oben auf die Wettbewerbe, die du sehen willst.",
+    abo_total:"Günstigste Kombination", abo_month:"/Mon.", abo_free_only:"Komplett gratis — kein Abo nötig! 🎉",
+    abo_free_keeps:"Gratis dabei (ARD/ZDF)", abo_need:"Dafür brauchst du", abo_full:"komplett", abo_partial:"Teil",
+    abo_complete:"Für die komplette Abdeckung zusätzlich:", abo_visit:"Zum Anbieter", abo_reset:"Zurücksetzen",
+    abo_aff_note:"Anbieter-Links sind neutral (kein Affiliate aktiv). Preise ca., Stand Juni 2026 — bitte beim Anbieter prüfen.",
+    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Liga", f_bl3:"3. Liga", f_el:"Europa League",f_ecl:"Conference League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_l1:"Ligue 1", f_test:"Tests", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", blhint_t:"Bundesliga-Auftakt terminiert", blhint_s:"1. & 2. Bundesliga · Spielplan steht, Anstoßzeiten folgen", blhint_cta:"Anzeigen", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
+    visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
+    imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
+    legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
+    consent_text:"Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.", wk_title:"Preisdeal-Wecker", wk_soon:"Bald automatisch", wk_sub:"Lass dich per E-Mail benachrichtigen, sobald wir ein gutes Angebot für deine Anbieter finden.", wk_pick:"Anbieter wählen:", wk_email_ph:"deine@email.de", wk_btn:"Wecker stellen", wk_priv:"Wir nutzen deine E-Mail ausschließlich für Preisdeal-Benachrichtigungen. Abmeldung jederzeit per Antwort-Mail.", wk_need_prov:"Bitte mindestens einen Anbieter wählen.", wk_need_mail:"Bitte eine gültige E-Mail eingeben.", wk_done_t:"Fast geschafft!", wk_done_s:"Sende die vorbereitete E-Mail ab \u2013 dann bist du vorgemerkt und wir melden uns, sobald wir ein passendes Angebot finden.", wk_change:"Auswahl ändern", wk_mail_subject:"Preisdeal-Wecker \u2013 Anmeldung", wk_mail_l1:"Ich möchte über Preisdeals für meine Anbieter benachrichtigt werden.", wk_mail_prov:"Anbieter:", wk_mail_mail:"E-Mail:", wk_mail_foot:"(Gesendet über den Preisdeal-Wecker auf tvfussball.de)", aux_radio:"Radio", aux_ticker:"Ticker",
+    consent_no:"Ablehnen", consent_yes:"Einverstanden",
+    prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
+    live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
+    f_relive:"Ganzes Spiel gratis",f_hltop:"\u2605 8,0+", hl_summaries:"Zusammenfassungen", hl_full:"Komplettes Spiel",
+    hl_watch:"ansehen", hl_whole:"Ganze Partie", hl_free_stream:"kostenlos im Stream", hl_checked:"geprüft", hl_preview:"Video-Highlights",
+    hl_pay_only:"Kein kostenloses Komplettspiel — nur bei", hl_pay_suffix:"(Pay · alle 104 Spiele)",
+    hl_note:"Quellen: ZDF-Mediathek, ARD/Sportschau, offizielle YouTube-Kanäle (abgerufen 11.07.2026). Ganze Spiele („Relive“) gibt es nur für ARD/ZDF-Partien und nur zeitlich begrenzt gratis; sonst ausschließlich Pay (MagentaTV, alle 104 Spiele). TVFussball verlinkt nur, überträgt selbst nicht." },
+  en:{ nav_live:"Today", nav_hl:"Highlights", nav_news:"Transfers", nav_prov:"Providers", nav_wm:"WM", nav_tipp:"Predictions",
+    tipp_eyebrow:"Prediction game", tipp_title:"Predict the match – and win",
+    tipp_sub:"Predict tonigh

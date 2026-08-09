@@ -1,0 +1,225 @@
+arters in Nyon the final 14 teams are paired for the play-offs (first legs 18/19 August, returns 25/26 August). UEFA publishes seedings and procedure from 8:30 CET; The draw starts at 12:00 CET and is streamed on UEFA.tv.",
+   stream:"uefa.com Livestream", url:"https://de.uefa.com/uefachampionsleague/draws/"},
+  {id:"el-po-los", day:"Montag, 03.08.2026", time:"13:00", name:"Europa League · Play-off-Auslosung", ch:"UEFA.tv / uefa.com", icon:"🎱", kind:"auslosung", live:true,
+   when_de:"Play-off-Runde · Auslosung in Nyon", when_en:"Play-off round · draw in Nyon",
+   desc_de:"Direkt nach der Champions-League-Ziehung werden die Europa-League-Play-offs gelost. Die Hinspiele steigen am 20. August, die Rückspiele am 27. August – die Sieger stehen in der Ligaphase.",
+   desc_en:"Straight after the Champions League draw the Europa League play-offs are paired; first legs on 20 August, returns on 27 August.",
+   stream:"uefa.com Livestream", url:"https://de.uefa.com/uefaeuropaleague/draws/"},
+  {id:"ecl-po-los", day:"Montag, 03.08.2026", time:"14:00", name:"Conference League · Play-off-Auslosung", ch:"UEFA.tv / uefa.com", icon:"🎱", kind:"auslosung", live:true,
+   when_de:"Play-off-Runde · Auslosung in Nyon", when_en:"Play-off round · draw in Nyon",
+   desc_de:"Die dritte Ziehung des Tages betrifft die Conference League. Für Rapid Wien und die Wiener Austria ist sie nur relevant, wenn sie die dritte Quali-Runde überstehen – Hinspiele der Play-offs am 20. August.",
+   desc_en:"The third draw of the day covers the Conference League \u2013 play-off first legs on 20 August.",
+   stream:"uefa.com Livestream", url:"https://de.uefa.com/uefaconferenceleague/draws/"},
+  {id:"cl-lp-los", day:"Donnerstag, 27.08.2026", time:"—", name:"Champions League · Auslosung der Ligaphase", ch:"UEFA.tv / uefa.com", icon:"🏆", kind:"auslosung", live:true,
+   when_de:"Ligaphase 2026/27 · alle 36 Teams", when_en:"League phase 2026/27 · all 36 teams",
+   desc_de:"Der wichtigste Lostag des Sommers: Für alle 36 Teilnehmer werden je acht Gegner gezogen – zwei aus jedem der vier Lostöpfe. Aus der Bundesliga sind vier Klubs dabei. Die Ligaphase startet am 8. September. Ein deutscher TV-Sender ist noch nicht bestätigt; DAZN und Prime Video halten die Spielrechte.",
+   desc_en:"The biggest draw of the summer: each of the 36 teams is given eight opponents, two from each of the four pots. Four Bundesliga clubs take part; the league phase starts on 8 September.",
+   stream:"uefa.com Livestream", url:"https://de.uefa.com/uefachampionsleague/draws/"},
+  {id:"el-lp-los", day:"Freitag, 28.08.2026", time:"—", name:"Europa League · Auslosung der Ligaphase", ch:"UEFA.tv / uefa.com", icon:"🏆", kind:"auslosung", live:true,
+   when_de:"Ligaphase 2026/27 · 36 Teams, acht Spiele", when_en:"League phase 2026/27 · 36 teams, eight games",
+   desc_de:"Einen Tag nach der Königsklasse wird in Nyon die Europa-League-Ligaphase gelost: 36 Teams, vier Lostöpfe, je acht verschiedene Gegner. Der Weg führt zum Finale am 26. Mai 2027 in Frankfurt.",
+   desc_en:"A day after the Champions League, Nyon pairs the Europa League league phase \u2013 36 teams, four pots, eight different opponents each, on the road to the final in Frankfurt on 26 May 2027.",
+   stream:"uefa.com Livestream", url:"https://de.uefa.com/uefaeuropaleague/draws/"},
+  {id:"ecl-lp-los", day:"Freitag, 28.08.2026", time:"—", name:"Conference League · Auslosung der Ligaphase", ch:"UEFA.tv / uefa.com", icon:"🏆", kind:"auslosung", live:true,
+   when_de:"Ligaphase 2026/27 · gemeinsam mit der Europa League", when_en:"League phase 2026/27 · together with the Europa League",
+   desc_de:"Im Anschluss an die Europa-League-Ziehung folgt die Conference League: Hier werden sechs Lostöpfe verwendet, jedes Team bekommt sechs Gegner. Kein Startplatz ist direkt vergeben – alle 36 Teilnehmer kommen aus der Qualifikation.",
+   desc_en:"The Conference League follows the Europa League draw: six pots, six opponents per team \u2013 and every one of the 36 places comes through qualifying.",
+   stream:"uefa.com Livestream", url:"https://de.uefa.com/uefaconferenceleague/draws/"},
+  {id:"ard-wm", day:"Donnerstag, 25.06.2026", time:"21:00", name:"Sportschau live – WM 2026", ch:"Das Erste (ARD)", icon:"📡", kind:"live", live:true,
+   when_de:"WM 2026 · Live-Spiele & Studio", when_en:"World Cup 2026 · live games & studio",
+   desc_de:"Die ARD überträgt im Wechsel mit dem ZDF Live-Spiele der WM 2026 – inklusive Vorbericht, Analysen und Studio. Ein mögliches Achtel- und Halbfinale mit deutscher Beteiligung läuft live in der ARD.",
+   desc_en:"ARD shows live World Cup 2026 matches (alternating with ZDF), including pre-match coverage, analysis and studio. A possible round of 16 and semi-final with German participation airs live on ARD.",
+   stream:"sportschau.de / ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"zdf-wm", day:"Freitag, 26.06.2026", time:"20:15", name:"ZDF sportstudio live – WM 2026", ch:"ZDF", icon:"📡", kind:"live", live:true,
+   when_de:"WM 2026 · Live-Spiele & WM-Studio", when_en:"World Cup 2026 · live games & studio",
+   desc_de:"Das ZDF zeigt 30 WM-Spiele live aus dem WM-Studio im Zollernhof in Berlin – mit Vorberichten, Experten-Analysen und Schalten ins DFB-Quartier. Das WM-Finale am 19. Juli 2026 läuft live im ZDF.",
+   desc_en:"ZDF broadcasts 30 World Cup matches live from its studio in Berlin – with previews, expert analysis and links to the German team's camp. The World Cup final on 19 July 2026 airs live on ZDF.",
+   stream:"sportstudio.de / ZDF Mediathek", url:"https://www.zdf.de/sport/sportstudio-live"},
+  {id:"wm-vorbericht", day:"Donnerstag, 25.06.2026", time:"05:30", name:"ZDF-Morgenmagazin – WM-Vorberichte", ch:"ZDF", icon:"🎙️", kind:"vorbericht", live:true,
+   when_de:"Mo–Fr · 05:30–09:00", when_en:"Mon–Fri · 05:30–09:00",
+   desc_de:"Während der WM berichtet das „Moma“ täglich aus dem DFB-Quartier in North Carolina – mit Vorberichten, Interviews und Experten-Einschätzungen (u. a. René Adler) rund um das DFB-Team.",
+   desc_en:"During the World Cup, ZDF's morning show reports daily from the German team's camp in North Carolina, with previews, interviews and expert views (incl. René Adler).",
+   stream:"ZDF Mediathek", url:"https://www.zdf.de/"},
+  {id:"sportschau-sa", day:"Samstag, 29.08.2026", time:"18:30", name:"Sportschau – Bundesliga", ch:"Das Erste (ARD)", icon:"⚽", kind:"highlights",
+   when_de:"Samstags · ab 18:30 (Saison)", when_en:"Saturdays · from 18:30 (in season)",
+   desc_de:"Der Klassiker am Samstagabend: Zusammenfassungen aller Bundesliga-Spiele des Nachmittags, ab ca. 18:00 Uhr mit der 3. Liga. Aktuell Sommerpause – Start der Saison 2026/27 im August.",
+   desc_en:"The Saturday-night institution: highlights of all afternoon Bundesliga games, with 3rd-division reports from around 18:00. Currently on summer break – the 2026/27 season starts in August.",
+   stream:"sportschau.de / ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"sportschau-so", day:"Sonntag, 30.08.2026", time:"18:00", name:"Sportschau am Sonntag", ch:"Das Erste (ARD)", icon:"⚽", kind:"highlights",
+   when_de:"Sonntags · 18:00 (Saison)", when_en:"Sundays · 18:00 (in season)",
+   desc_de:"Die Sonntagsausgabe fasst die Bundesliga-Sonntagsspiele zusammen und blickt auf das Spieltags-Geschehen zurück.",
+   desc_en:"The Sunday edition rounds up the Sunday Bundesliga games and reviews the matchday.",
+   stream:"ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"sportstudio", day:"Samstag, 29.08.2026", time:"23:00", name:"das aktuelle sportstudio", ch:"ZDF", icon:"🥅", kind:"magazin",
+   when_de:"Samstags · ab 23:00 (Stream ab 22:30)", when_en:"Saturdays · from 23:00 (stream 22:30)",
+   desc_de:"Seit 1963 das Kult-Sportmagazin am Samstagabend: Bundesliga-Highlights, Analysen, prominente Gäste und das legendäre Torwandschießen. Während der WM als „sportstudio live“ im WM-Modus.",
+   desc_en:"The cult Saturday-night sports magazine since 1963: Bundesliga highlights, analysis, celebrity guests and the legendary Torwand shootout. During the World Cup it runs as 'sportstudio live'.",
+   stream:"sportstudio.de / ZDF Mediathek", url:"https://www.zdf.de/sport/das-aktuelle-sportstudio"},
+  {id:"doppelpass", day:"Sonntag, 30.08.2026", time:"11:00", name:"Der CHECK24 Doppelpass", ch:"SPORT1", icon:"🗣️", kind:"talk",
+   when_de:"Sonntags · 11:00–13:30 (Saison)", when_en:"Sundays · 11:00–13:30 (in season)",
+   desc_de:"Deutschlands bekanntester Fußball-Stammtisch: Moderator und Experten diskutieren die heißesten Themen des Bundesliga-Wochenendes, dazu Highlight-Szenen des Spieltags.",
+   desc_en:"Germany's best-known football talk show: host and pundits debate the hottest topics of the Bundesliga weekend, with matchday highlight clips.",
+   stream:"sport1.de", url:"https://www.sport1.de/news/doppelpass/info"},
+  {id:"vor-acht", day:"Freitag, 28.08.2026", time:"19:55", name:"Sportschau vor acht", ch:"Das Erste (ARD)", icon:"📅", kind:"vorbericht",
+   when_de:"Werktags · vor der Tagesschau (Saison)", when_en:"Weekdays · before the 8pm news (in season)",
+   desc_de:"Kurzer Sport-Ausblick vor der 20-Uhr-Tagesschau – freitags mit Vorschau auf den anstehenden Bundesliga-Spieltag.",
+   desc_en:"A short sports preview before the 8pm news – on Fridays with an outlook on the upcoming Bundesliga matchday.",
+   stream:"ARD Mediathek", url:"https://www.sportschau.de/"},
+  {id:"ran", day:"Samstag, 22.08.2026", time:"19:45", name:"ran Fußball – Supercup & DFB-Pokal", ch:"SAT.1", icon:"🏆", kind:"live",
+   when_de:"Bei ausgewählten Spielen", when_en:"At selected matches",
+   desc_de:"Unter dem „ran“-Label zeigt SAT.1 im Free-TV ausgewählte Top-Spiele wie den Supercup (22.08.2026, Dortmund – Bayern) und das DFB-Pokal-Finale – jeweils mit ausführlicher Vorberichterstattung.",
+   desc_en:"Under the 'ran' brand, SAT.1 shows selected top matches free-to-air, such as the Supercup (22 Aug 2026, Dortmund vs Bayern) and the German Cup final – each with extensive pre-match coverage.",
+   stream:"ran.de / Joyn", url:"https://www.ran.de/"}
+];
+
+const FORMATS_OD = [
+  {id:"kicker-wmdaily", od:true, name:"kicker WM-Daily", ch:"kicker", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"T\u00e4glich \u00b7 6:00 Uhr (bis 19.07.)", when_en:"Daily \u00b7 6:00 (until 19 Jul)",
+   desc_de:"Der t\u00e4gliche WM-Podcast der kicker-Redaktion: In rund 15 Minuten ordnet das Team jeden Morgen die Spiele der Nacht und die wichtigsten Themen des Turniers ein.",
+   desc_en:"kicker's daily World Cup podcast: every morning the team sorts through the night's games and the key tournament topics in around 15 minutes.",
+   stream:"Spotify / Apple Podcasts / kicker", url:"https://www.kicker.de/"},
+  {id:"kicker-dazn", od:true, name:"kicker meets DAZN", ch:"kicker & DAZN", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"Montags \u00b7 Bundesliga-Spieltag", when_en:"Mondays \u00b7 Bundesliga matchday",
+   desc_de:"Der Bundesliga-Podcast f\u00fcr alle Fans: kicker-Redakteure und das DAZN-Team analysieren jeden Montag die Highlights des Spieltags \u2013 mit Interviews und einer Portion Streitkultur.",
+   desc_en:"The Bundesliga podcast for fans: kicker editors and the DAZN team break down the matchday highlights every Monday, with interviews and plenty of debate.",
+   stream:"Spotify / Apple Podcasts", url:"https://www.kicker.de/"},
+  {id:"sportschau-wm", od:true, name:"Wir Weltmeister.", ch:"Sportschau (ARD)", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"W\u00f6chentlich \u00b7 ARD Audiothek", when_en:"Weekly \u00b7 ARD Audiothek",
+   desc_de:"Der Fu\u00dfball-Podcast der Sportschau rund um die Nationalmannschaft und die gro\u00dfen Turniere \u2013 mit Reportern, Experten und Geschichten hinter den Spielen.",
+   desc_en:"The Sportschau football podcast around the national team and the big tournaments \u2013 with reporters, experts and the stories behind the games.",
+   stream:"ARD Audiothek / Spotify", url:"https://www.sportschau.de/"},
+  {id:"bohndesliga", od:true, name:"Bohndesliga", ch:"Rocket Beans \u00b7 YouTube", icon:"\u25B6\uFE0F", kind:"video",
+   when_de:"W\u00f6chentlich \u00b7 YouTube (Saison)", when_en:"Weekly \u00b7 YouTube (in season)",
+   desc_de:"Das Bundesliga-Videoformat von Rocket Beans: Nils Bomhoff, Etienne Gard\u00e9 und Tobias Escher nehmen den Spieltag taktisch und mit viel Meinung auseinander \u2013 floskelarm und diskussionsfreudig.",
+   desc_en:"Rocket Beans' Bundesliga video show: the hosts dissect the matchday tactically and with strong opinions \u2013 low on clich\u00e9s, high on debate.",
+   stream:"YouTube", url:"https://www.youtube.com/@Bohndesliga"},
+  {id:"luppen", od:true, name:"Einfach mal Luppen", ch:"Toni & Felix Kroos", icon:"\uD83C\uDFA7", kind:"podcast",
+   when_de:"W\u00f6chentlich \u00b7 Podcast", when_en:"Weekly \u00b7 podcast",
+   desc_de:"Toni und Felix Kroos plaudern aus dem N\u00e4hk\u00e4stchen des Profifu\u00dfballs \u2013 pers\u00f6nliche Einblicke, Anekdoten und klare Meinungen zu den aktuellen Themen.",
+   desc_en:"Toni and Felix Kroos chat from inside professional football \u2013 personal insights, anecdotes and clear opinions on current topics.",
+   stream:"Spotify / YouTube", url:"https://www.youtube.com/@einfachmalluppen"}
+];
+
+const FOLLOW = new Set();   // gefolgte Teams (jetzt mit localStorage-Persistenz)
+
+/* ---------- Persistenz: funktionaler localStorage (kein Tracking) ---------- */
+const LS_OK=(function(){ try{ const k="tvf:v1:__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
+const LS_KEY={ follow:"tvf:v1:follow", filters:"tvf:v2:filters", lang:"tvf:v1:lang", theme:"tvf:v1:theme", geo:"tvf:v1:geo", market:"tvf:v1:market" };
+function lsGet(k){ if(!LS_OK) return null; try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ if(!LS_OK) return; try{ localStorage.setItem(k,v); }catch(e){} }
+function saveFollow(){ lsSet(LS_KEY.follow, JSON.stringify([...FOLLOW])); }
+function saveFilters(){ lsSet(LS_KEY.filters, JSON.stringify([...LIVE_SEL])); }
+/* Standardfilter je Land: CL, EL, alle WM-Spiele + nationale Liga(en) & nationaler Pokal (sofern vorhanden) */
+function countryDefaultCats(cc){
+  const base=["wm","cl","el"];
+  const NAT={ DE:["bl","bl2","bl3","dfb"], UK:["pl","facup"], FR:["l1"], IT:["it"], ES:["es"] };
+  return base.concat(NAT[cc]||[]);
+}
+function applyCountryDefaultFilter(){ if(FILTER_USERSET) return; LIVE_SEL.clear(); /* Standard: "Alle" (kein Vorfilter) */ }
+function saveLang(){ lsSet(LS_KEY.lang, JSON.stringify(LANG)); }
+function loadPersisted(){
+  try{ const raw=lsGet(LS_KEY.follow); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ FOLLOW.clear(); a.forEach(x=>FOLLOW.add(x)); } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.filters); if(raw!==null){ const a=JSON.parse(raw); if(Array.isArray(a)){ LIVE_SEL.clear(); a.forEach(x=>LIVE_SEL.add(x)); FILTER_USERSET=true; if(LIVE_SEL.has("wm")){ LIVE_SEL.delete("wm"); } ["tonight","format","bl2","bl3","el","facup","test"].forEach(function(k){ LIVE_SEL.delete(k); }); } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.lang); if(raw!==null){ const v=JSON.parse(raw); if(v==="de"||v==="en"){ LANG=v; LANG_LOCKED=true; } } }catch(e){}
+  try{ const raw=lsGet(LS_KEY.market); if(raw!==null){ const v=JSON.parse(raw); if(typeof v==="string"&&v){ COUNTRY=v; MARKET_LOCKED=true; } } }catch(e){}
+}
+const ABO_SEL = {};         // im Abo-Rechner gewählte Wettbewerbe (id -> true)
+
+/* =========================================================================
+   ABO-RECHNER · Anbieter-, Preis- & Rechte-Daten   (Markt: Deutschland)
+   ▸ EINZIGE Quelle für den Rechner — hier Preise/Rechte pflegen.
+   ▸ price = günstigster regulärer Einstieg pro Monat (ca.), Stand Juni 2026.
+     DAZN 34,99 (Jahresabo) · Sky/WOW 29,99 · MagentaSport 9,95 ·
+     Prime 8,99 · RTL+ 6,99 · ARD/ZDF beitragsfinanziert = 0.
+   ▸ AFFILIATE: Das Feld "aff" ist ein Platzhalter und greift NUR, wenn
+     AFFILIATE_ENABLED = true. Default AUS -> es werden neutrale url-Links genutzt.
+   ========================================================================= */
+const AFFILIATE_ENABLED = false; // Feature-Flag: Affiliate-Links AUS (Standard)
+
+/* =========================================================================
+   LIVE-SCORES (ESPN, keyless, graceful fallback)
+   - Zeigt Ergebnis + Minute + Status in bestehende Karten; ergaenzt nur,
+     ersetzt nie. Bei Fehler/CORS/Timeout: still nichts tun.
+   - LIVE_SOURCE als Konstante -> spaeter Cloudflare-Worker-Proxy moeglich,
+     ohne Codeaenderung. LIVE_LEAGUE="ger.1" fuer die Bundesliga-Saison.
+   ========================================================================= */
+const LIVE_ENABLED = true;
+/* cat/comp -> ESPN-Liga-Slug (kostenlose ESPN-Scoreboard-API, kein Key noetig) */
+function espnLeagueFor(m){ var c=m.cat;
+  if(c==="cl") return /Quali/.test(m.comp||"") ? "uefa.champions_qual" : "uefa.champions";
+  if(c==="el") return /Quali/.test(m.comp||"") ? "uefa.europa_qual" : "uefa.europa";
+  if(c==="ecl") return /Quali/.test(m.comp||"") ? "uefa.europa.conf_qual" : "uefa.europa.conf";
+  return ({wm:"fifa.world",bl:"ger.1",bl2:"ger.2",bl3:"ger.3",dfb:"ger.dfb_pokal",pl:"eng.1",facup:"eng.fa",it:"ita.1",es:"esp.1",l1:"fra.1",test:"club.friendly"})[c]||null; }
+/* nur die Ligen abfragen, die heute (+/-1 Tag) ein Spiel haben -> spart Requests */
+function liveLeaguesToday(){ var tk=todayKeyNow(), set={}; for(var i=0;i<MATCHES.length;i++){ var m=MATCHES[i]; if(m.tba) continue; var re=/(\d{2})\.(\d{2})\.(\d{4})/g,x,hit=false; while((x=re.exec(String(m.day)))){ var k=(+x[3])*10000+(+x[2])*100+(+x[1]); if(k>=tk-1&&k<=tk+1){ hit=true; break; } } if(!hit) continue; var lg=espnLeagueFor(m); if(lg) set[lg]=true; } return Object.keys(set); }
+function liveSources(){ return liveLeaguesToday().map(function(lg){ return "https://site.api.espn.com/apis/site/v2/sports/soccer/"+lg+"/scoreboard"; }); }
+const LIVE_POLL_MS = 45000;
+const LIVE_ALIAS = {
+  "Ivory Coast":"Elfenbeinküste","Côte d'Ivoire":"Elfenbeinküste","Cote d'Ivoire":"Elfenbeinküste",
+  "Netherlands":"Niederlande","Germany":"Deutschland","Morocco":"Marokko","Sweden":"Schweden",
+  "South Africa":"Südafrika","Canada":"Kanada","Norway":"Norwegen","France":"Frankreich",
+  "Mexico":"Mexiko","Belgium":"Belgien","Spain":"Spanien","Austria":"Österreich",
+  "Brazil":"Brasilien","Switzerland":"Schweiz","Algeria":"Algerien","Australia":"Australien",
+  "Egypt":"Ägypten","Colombia":"Kolumbien","Croatia":"Kroatien","Argentina":"Argentinien",
+  "DR Congo":"DR Kongo","Congo DR":"DR Kongo","Democratic Republic of the Congo":"DR Kongo",
+  "United States":"USA","USA":"USA",
+  "Bosnia and Herzegovina":"Bosnien-Herzegowina","Bosnia & Herzegovina":"Bosnien-Herzegowina",
+  "Bosnia-Herzegovina":"Bosnien-Herzegowina","Bosnien-H.":"Bosnien-Herzegowina",
+  "Cape Verde":"Kap Verde","Cabo Verde":"Kap Verde","Qatar":"Katar","Saudi Arabia":"Saudi-Arabien",
+  "Uzbekistan":"Usbekistan","Turkey":"Türkei","Türkiye":"Türkei","South Korea":"Südkorea",
+  "Italy":"Italien","England":"England","Senegal":"Senegal","Ghana":"Ghana","Japan":"Japan",
+  "Paraguay":"Paraguay","Ecuador":"Ecuador","Portugal":"Portugal","Iran":"Iran","Curaçao":"Curaçao",
+  "Vardar":"Vardar Skopje","Iberia 1999":"Iberia Tiflis","Flora":"Flora Tallinn","Inter D'Escaldes":"Inter Escaldes","Györi ETO FC":"ETO Győr","Vikingur Reykjavik":"Víkingur Reykjavík","Sabah FK":"Sabah FC","Drita Gjilan":"FC Drita","Kauno Zalgiris":"Kauno Žalgiris","Larne":"Larne FC","Floriana FC":"Floriana","Sutjeska":"Sutjeska Nikšić","Klaksvik":"KÍ Klaksvík","KI Klaksvik":"KÍ Klaksvík","FK Vitebsk":"Vitebsk","U Craiova":"Universitatea Craiova","Petrocub Hincesti":"Petrocub","Egnatia Rrogozhine":"Egnatia","FK Qarabag":"Qarabağ Agdam","Qarabag":"Qarabağ Agdam","Dynamo Kyiv":"Dynamo Kiew","CSKA Sofia":"ZSKA Sofia","MSK Zilina":"MSK Žilina","Zilina":"MSK Žilina","Ferencvaros":"Ferencváros","Ferencvarosi TC":"Ferencváros",
+  "Bayern Munich":"FC Bayern München","Bayer Leverkusen":"Bayer 04 Leverkusen","Borussia Monchengladbach":"Borussia Mönchengladbach","Werder Bremen":"SV Werder Bremen","Union Berlin":"1. FC Union Berlin","FC Cologne":"1. FC Köln","1. FC Koln":"1. FC Köln","Cologne":"1. FC Köln","Mainz":"1. FSV Mainz 05","Mainz 05":"1. FSV Mainz 05","Schalke 04":"FC Schalke 04","Hamburg":"Hamburger SV","Paderborn":"SC Paderborn 07","1899 Hoffenheim":"TSG Hoffenheim","Hoffenheim":"TSG Hoffenheim","Elversberg":"SV Elversberg","Inter Milan":"Inter Mailand","Internazionale":"Inter Mailand","AC Milan":"AC Mailand","Juventus":"Juventus Turin","Napoli":"SSC Neapel","AS Roma":"AS Rom","Roma":"AS Rom","Lazio":"Lazio Rom","Atalanta":"Atalanta Bergamo","Fiorentina":"AC Florenz","Bologna":"FC Bologna","Torino":"FC Turin","Genoa":"CFC Genua","Como":"Como 1907","Udinese":"Udinese Calcio","Cagliari":"Cagliari Calcio","Parma":"Parma Calcio","Lecce":"US Lecce","Sassuolo":"US Sassuolo","Venezia":"FC Venedig","Monza":"AC Monza","Barcelona":"FC Barcelona","Atletico Madrid":"Atlético Madrid","Athletic Club":"Athletic Bilbao","Real Betis":"Betis Sevilla","Villarreal":"FC Villarreal","Valencia":"FC Valencia","Sevilla":"FC Sevilla","Espanyol":"Espanyol Barcelona","Getafe":"FC Getafe","Osasuna":"CA Osasuna","Elche":"FC Elche","Levante":"UD Levante","Alaves":"Deportivo Alavés","Celta Vigo":"Celta Vigo","Marseille":"Olympique Marseille","Lyon":"Olympique Lyon","Lille":"OSC Lille","Nice":"OGC Nizza","Monaco":"AS Monaco","Lens":"RC Lens","Strasbourg":"RC Straßburg","Rennes":"Stade Rennes","Brest":"Stade Brest","Toulouse":"FC Toulouse","Auxerre":"AJ Auxerre","Angers":"SCO Angers","Le Havre":"Le Havre AC","Lorient":"FC Lorient","Liverpool":"FC Liverpool","Chelsea":"FC Chelsea","Arsenal":"FC Arsenal","Everton":"FC Everton","Fulham":"FC Fulham","Brentford":"FC Brentford","Leeds United":"Leeds United","Sunderland":"AFC Sunderland","Bournemouth":"AFC Bournemouth","Brighton & Hove Albion":"Brighton & Hove Albion","Brighton":"Brighton & Hove Albion",
+  "Rapid Vienna":"SK Rapid Wien","SK Rapid Vienna":"SK Rapid Wien",
+  "Mjallby":"Mjällby AIF","Mjallby AIF":"Mjällby AIF","Red Star Belgrade":"Crvena Zvezda","Sabah FK":"Sabah FC","KI Klaksvik":"KÍ Klaksvík","Kauno Zalgiris":"Kauno Žalgiris","AGF":"Aarhus GF","AGF Aarhus":"Aarhus GF","Lech Poznan":"Lech Posen","CSU Craiova":"Universitatea Craiova","Omonia Nicosia":"Omonia Nikosia","Fenerbahce":"Fenerbahçe","Gornik Zabrze":"Górnik Zabrze","SK Sturm Graz":"Sturm Graz","Heart of Midlothian FC":"Heart of Midlothian","Hapoel Be'er":"Hapoel Be'er Sheva","Vikingur Reykjavik":"Víkingur Reykjavík","Iberia 1999":"Iberia Tiflis","Larne":"Larne FC",
+  "CSKA Sofia":"ZSKA Sofia","FK Qarabag":"Qarabağ Agdam","Qarabag":"Qarabağ Agdam","PAOK Salonika":"PAOK Saloniki","Dynamo Kyiv":"Dynamo Kiew","Anderlecht":"RSC Anderlecht","Maccabi Tel-Aviv":"Maccabi Tel Aviv","FC Hradec Králové":"Hradec Králové","Hradec Kralove":"Hradec Králové","Tromso":"Tromsø IL","Ferencvaros":"Ferencváros","FC Twente":"Twente Enschede","Benfica":"Benfica Lissabon","St. Gallen":"FC St. Gallen","Pafos":"Pafos FC","Besiktas JK":"Besiktas","LASK":"Linzer ASK","LASK Linz":"Linzer ASK","Fortuna Dusseldorf":"Fortuna Düsseldorf","Wrexham":"Wrexham AFC","Hamburg SV":"Hamburger SV","Sevilla FC":"FC Sevilla","Eintracht Frankfurt":"Eintracht Frankfurt","Waldhof Mannheim":"SV Waldhof Mannheim",
+  "1860 Munich":"TSV 1860 München","Ajax":"Ajax Amsterdam","Aston Villa":"Aston Villa","Atletic Escaldes":"Atletic Escaldes","Aue":"FC Erzgebirge Aue","Augsburg":"FC Augsburg","Austria Vienna":"FK Austria Wien","BSC Young Boys":"BSC Young Boys","Basel":"FC Basel","Besiktas":"Besiktas","Betis":"Betis Sevilla","Bochum":"VfL Bochum","Braunschweig":"Eintracht Braunschweig","Brondby":"Brøndby IF","Burnley":"FC Burnley","Celtic":"Celtic Glasgow","Cerezo Osaka":"Cerezo Osaka","Club Brugge":"Club Brügge","Crystal Palace":"Crystal Palace","Darmstadt":"SV Darmstadt 98","Duisburg":"MSV Duisburg","Dukagjini":"KF Dukagjini","Dynamo Kiev":"Dynamo Kiew","FC Nordsjaelland":"FC Nordsjaelland","FC Porto":"FC Porto","FC Santa Coloma":"FC Santa Coloma","FC St Pauli":"FC St. Pauli","FK Austria Wien":"FK Austria Wien","FK Liepaja":"FK Liepaja","Fagiano Okayama":"Fagiano Okayama","Fenerbahce SK":"Fenerbahçe","Feyenoord":"Feyenoord Rotterdam","Freiburg":"SC Freiburg","GAIS":"GAIS Göteborg","Galatasaray":"Galatasaray","Genk":"KRC Genk","Girona":"FC Girona","Grasshoppers":"Grasshopper Zürich","Greuther Furth":"SpVgg Greuther Fürth","Hammarby":"Hammarby IF","Hannover 96":"Hannover 96","Hansa Rostock":"F.C. Hansa Rostock","Heidenheim":"1. FC Heidenheim","Hertha BSC":"Hertha BSC","Hertha Berlin":"Hertha BSC","Inter Escaldes":"Atletic Escaldes","Ipswich":"Ipswich Town","Ipswich Town":"Ipswich Town","Kaiserslautern":"1. FC Kaiserslautern","Karlsruhe":"Karlsruher SC","Karlsruher SC":"Karlsruher SC","Kickers Offenbach":"Kickers Offenbach","Leicester":"Leicester City","Leicester City":"Leicester City","Liepaja":"FK Liepaja","Lugano":"FC Lugano","Magdeburg":"1. FC Magdeburg","Mallorca":"RCD Mallorca","Malmo FF":"Malmö FF","Manchester City":"Manchester City","Manchester United":"Manchester United","Midtjylland":"FC Midtjylland","Molde":"Molde FK","Newcastle":"Newcastle United","Newcastle United":"Newcastle United","Nomme Kalju":"Nomme Kalju FC","Nordsjaelland":"FC Nordsjaelland","Nottingham Forest":"Nottingham Forest","Nuremberg":"1. FC Nürnberg","Nurnberg":"1. FC Nürnberg","Offenbach":"Kickers Offenbach","Olympique Lyonnais":"Olympique Lyon","PAOK":"PAOK Saloniki","PSV Eindhoven":"PSV Eindhoven","Paris Saint-Germain":"Paris Saint-Germain","Preussen Munster":"SC Preußen Münster","Rangers":"Glasgow Rangers","Rayo Vallecano":"Rayo Vallecano","Red Bull Salzburg":"RB Salzburg","Rosenborg":"Rosenborg BK","Rot-Weiss Essen":"Rot-Weiss Essen","Saarbrucken":"1. FC Saarbrücken","Salzburg":"RB Salzburg","Santa Coloma":"FC Santa Coloma","Servette":"Servette Genf","Shakhtar Donetsk":"Schachtar Donezk","Shelbourne":"FC Shelbourne","Sporting CP":"Sporting Lissabon","Sporting Lisbon":"Sporting Lissabon","St. Pauli":"FC St. Pauli","Standard Liege":"Standard Lüttich","Stoke":"Stoke City","Stoke City":"Stoke City","Sturm Graz":"Sturm Graz","Stuttgart":"VfB Stuttgart","Swansea":"Swansea City","Swansea City":"Swansea City","Tottenham Hotspur":"Tottenham Hotspur","Udinese Calcio":"Udinese Calcio","Vaduz":"FC Vaduz","VfL Bochum":"VfL Bochum","VfL Wolfsburg":"VfL Wolfsburg","Viktoria Koln":"FC Viktoria Köln","Wehen Wiesbaden":"SV Wehen Wiesbaden","West Ham":"West Ham United","West Ham United":"West Ham United","Wolfsberger AC":"Wolfsberger AC","Wolfsburg":"VfL Wolfsburg","Wolverhampton Wanderers":"Wolverhampton Wanderers","Young Boys":"BSC Young Boys",
+  "1. FC Heidenheim 1846":"1. FC Heidenheim","1. FSV Mainz 05":"1. FSV Mainz 05","Alemannia Aachen":"Alemannia Aachen","Borussia Mönchengladbach":"Borussia Mönchengladbach","Eintracht Braunschweig":"Eintracht Braunschweig","FC Ingolstadt 04":"FC Ingolstadt 04","Fortuna Köln":"SC Fortuna Köln","Jahn Regensburg":"SSV Jahn Regensburg","Preußen Münster":"SC Preußen Münster","SV 07 Elversberg":"SV Elversberg","SV Darmstadt 98":"SV Darmstadt 98","SV Meppen":"SV Meppen","SpVgg Greuther Fürth":"SpVgg Greuther Fürth","TSG 1899 Hoffenheim II":"TSG Hoffenheim II","TSV Havelse":"TSV Havelse","VfB Stuttgart II":"VfB Stuttgart II","Viktoria Köln":"FC Viktoria Köln","Würzburger Kickers":"FC Würzburger Kickers",
+  "DSC Arminia Bielefeld":"Arminia Bielefeld","SC Paderborn 07":"SC Paderborn",
+  "Bodo/Glimt":"FK Bodø/Glimt","NEC":"NEC Nijmegen","Olympiacos":"Olympiakos Piräus","Sparta Prague":"Sparta Prag","Union St.-Gilloise":"Union Saint-Gilloise"
+};
+/* ===== Zweitquelle: OpenLigaDB (kostenlos, ohne Key, CORS offen) =====
+   Greift nur fuer deutsche Wettbewerbe und nur dort, wo ESPN nichts liefert.
+   Liefert Tore mit Minute/Schuetze, aber keine Karten und keine Spieluhr. */
+const OLDB_LEAGUE = {bl:"bl1", bl2:"bl2", bl3:"bl3", dfb:"dfb"};
+function liveOldbSources(){
+  var tk=todayKeyNow(), set={};
+  for(var i=0;i<MATCHES.length;i++){
+    var m=MATCHES[i]; if(m.tba) continue;
+    var sc=OLDB_LEAGUE[m.cat]; if(!sc) continue;
+    var re=/(\d{2})\.(\d{2})\.(\d{4})/g, x, hit=false;
+    while((x=re.exec(String(m.day)))){ var k=(+x[3])*10000+(+x[2])*100+(+x[1]); if(k>=tk-1&&k<=tk+1){ hit=true; break; } }
+    if(hit) set[sc]=true;
+  }
+  return Object.keys(set).map(function(sc){ return "https://api.openligadb.de/getmatchdata/"+sc; });
+}
+function _oldbEntry(mm){
+  try{
+    var hn=liveNorm(mm.team1&&mm.team1.teamName), an=liveNorm(mm.team2&&mm.team2.teamName);
+    if(!hn||!an) return null;
+    var koMs=Date.parse(mm.matchDateTimeUTC||mm.matchDateTime||"");
+    if(!koMs) return null;
+    var now=Date.now(), state;
+    if(mm.matchIsFinished) state="post";
+    else if(now>=koMs && now<koMs+3.5*3600000) state="in";
+    else state=(now>=koMs)?"post":"pre";
+    var goals=(mm.goals||[]), evs=[], ph=0, pa=0, hs="0", as="0";
+    for(var i=0;i<goals.length;i++){
+      var g=goals[i], gh=+g.scoreTeam1, ga=+g.scoreTeam2;
+      var side=(gh>ph)?"h":((ga>pa)?"a":"");
+      if(g.isOwnGoal && side) side=(side==="h")?"a":"h";   /* Name steht beim Spieler, nicht beim Nutznießer */
+      ph=gh; pa=ga; hs=String(gh); as=String(ga);
+      evs.push({t:"goal", min:(g.matchMinute?String(g.matchMinute)+"'":""), who:g.goalGetterName||"", side:side, og:!!g.isOwnGoal, pen:!!g.isPenalty});
+    }
+    var res=(mm.matchResults||[]);
+    for(var r=0;r<res.length;r++){ if(res[r].resultTypeID===2){ hs=String(res[r].pointsTeam1); as=String(res[r].pointsTeam2); } }
+    return {key:livePairKey(hn,an)+"@"+_berlinKey(koMs),
+            val:{state:state, id:String(mm.matchID||""), hn:hn, an:an, hs:hs, as:as, clock:"", half:false, hyd:false, events:evs, src:"oldb"}};
+  }catch(e){ return null; }
+}
+let LIVE_CACHE = {};
+let _livePoll = null, _liveBusy = false;
+function liveNorm(s){ s=String(s||"").trim(); return LIVE_ALIAS[s]||s; }
+function livePairKey(a,b){ return [a,b].sort().join("~"); }
+fu
