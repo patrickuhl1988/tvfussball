@@ -1,36 +1,24 @@
 (()=>{
   const cardSelectors='.card,.match-card,.game-card';
   const pick=(root,selectors)=>root.querySelector(selectors);
+  const norm=s=>(s||'').replace(/\s+/g,' ').trim().toLowerCase();
 
   function enhanceCard(card){
     if(!card || card.nodeType!==1) return;
     card.classList.add('tvf-card');
-
     const head=pick(card,'.comp,.competition,.league,.league-title,.meta');
     if(head) head.classList.add('tvf-card-head');
-
     const teams=pick(card,'.teams,.clubs,.matchup,.pairing');
     if(teams) teams.classList.add('tvf-card-teams');
-
     const score=pick(card,'.score,.result,.match-score,.kickoff,.kick,.ko,.time');
     if(score) score.classList.add('tvf-card-score');
-
     const broadcast=pick(card,'.channels,.broadcast,.foot,.providers,.stations');
     if(broadcast) broadcast.classList.add('tvf-card-broadcast');
-
     const fav=pick(card,'.favorite,.fav,.star,[data-fav],[data-favorite]');
-    if(fav){
-      fav.classList.add('tvf-card-fav');
-      if(!fav.getAttribute('aria-label')) fav.setAttribute('aria-label','Spiel merken');
-      if(!fav.getAttribute('title')) fav.setAttribute('title','Spiel merken');
-    }
-
+    if(fav){fav.classList.add('tvf-card-fav');if(!fav.getAttribute('aria-label'))fav.setAttribute('aria-label','Favorit markieren');}
     const ticker=pick(card,'.ticker,.live-ticker,.ticker-box,[data-ticker]');
     if(ticker) ticker.classList.add('tvf-card-ticker');
-
-    if(card.querySelector('.live,.live-badge,.live-status,[data-live="true"]')) card.classList.add('tvf-is-live');
-    else card.classList.remove('tvf-is-live');
-
+    if(card.querySelector('.live,.live-badge,.live-status,[data-live="true"]')) card.classList.add('tvf-is-live'); else card.classList.remove('tvf-is-live');
     card.dataset.tvfEnhanced='1';
   }
 
@@ -39,7 +27,7 @@
     ticker.classList.add('tvf-ticker');
     ticker.querySelectorAll('li,.ticker-row,.ticker-event,.event').forEach((row,index)=>{
       row.classList.add('tvf-ticker-row');
-      const text=(row.textContent||'').toLowerCase();
+      const text=norm(row.textContent);
       if(/tor|goal|⚽/.test(text)) row.classList.add('tvf-ticker-goal');
       if(/gelb|yellow|karte/.test(text)) row.classList.add('tvf-ticker-card');
       if(/rot|red card/.test(text)) row.classList.add('tvf-ticker-red');
@@ -47,17 +35,55 @@
     });
   }
 
-  function enhanceChrome(root=document){
+  function legacyClick(matchers){
+    const nodes=[...document.querySelectorAll('button,a,[role="button"],.tab,.btn,.m-btn')].filter(el=>!el.closest('.tvf-redesign-hero'));
+    const target=nodes.find(el=>matchers.some(rx=>rx.test(norm(el.textContent))));
+    if(target){target.click();return true}
+    return false;
+  }
+
+  function buildHero(){
+    if(document.querySelector('.tvf-redesign-hero')) return;
+    const header=document.querySelector('header,.hdr');
+    const hero=document.createElement('section');
+    hero.className='tvf-redesign-hero';
+    hero.innerHTML='<div class="tvf-redesign-eyebrow">Fußball im TV & Stream</div><h1>Kein Spiel mehr verpassen.</h1><p>Alle wichtigen Fußballspiele, Sender und Live-Updates auf einen Blick.</p><div class="tvf-redesign-stats"><div class="tvf-redesign-stat"><strong data-tvf-stat="matches">–</strong><span>Spiele</span></div><div class="tvf-redesign-stat"><strong data-tvf-stat="live">–</strong><span>live</span></div><div class="tvf-redesign-stat"><strong data-tvf-stat="favorites">–</strong><span>Favoriten</span></div></div><div class="tvf-focusbar"><button class="tvf-focusbtn is-active" data-tvf-action="today">Heute</button><button class="tvf-focusbtn" data-tvf-action="live">Live</button><button class="tvf-focusbtn" data-tvf-action="mine">Meine</button><button class="tvf-focusbtn" data-tvf-action="highlights">Highlights</button><label class="tvf-focussearch"><input type="search" placeholder="Team, Wettbewerb oder Sender suchen" aria-label="Spiele durchsuchen"></label></div>';
+    if(header?.parentNode) header.insertAdjacentElement('afterend',hero); else document.body.prepend(hero);
+
+    hero.querySelectorAll('.tvf-focusbtn').forEach(btn=>btn.addEventListener('click',()=>{
+      const action=btn.dataset.tvfAction;
+      const map={today:[/^heute$/],live:[/^live$/,/(^| )live( |$)/],mine:[/^meine$/, /favorit/],highlights:[/highlight/]};
+      legacyClick(map[action]||[]);
+      hero.querySelectorAll('.tvf-focusbtn').forEach(b=>b.classList.toggle('is-active',b===btn));
+      setTimeout(updateStats,80);
+    }));
+
+    const fresh=hero.querySelector('.tvf-focussearch input');
+    fresh.addEventListener('input',()=>{
+      const old=[...document.querySelectorAll('input[type="search"],#search')].find(el=>el!==fresh && !el.closest('.tvf-redesign-hero'));
+      if(old){old.value=fresh.value;old.dispatchEvent(new Event('input',{bubbles:true}));old.dispatchEvent(new Event('change',{bubbles:true}));}
+      setTimeout(updateStats,50);
+    });
+  }
+
+  function simplifyChrome(root=document){
     root.querySelectorAll?.('.datebar,.date-nav,.dates,.m-datebar').forEach(el=>el.classList.add('tvf-date-nav'));
-    root.querySelectorAll?.('.tabs,.tabbar,.subbar,.m-quicknav').forEach(el=>el.classList.add('tvf-primary-nav'));
-    root.querySelectorAll?.('.toolbar,.m-filters,.filters,.filter-wrap,.filter-panel').forEach(el=>el.classList.add('tvf-filter-area'));
+    root.querySelectorAll?.('.tabs,.tabbar,.subbar,.m-quicknav').forEach(el=>{el.classList.add('tvf-primary-nav','tvf-simplified-hidden')});
+    root.querySelectorAll?.('.toolbar,.m-filters,.filters,.filter-wrap,.filter-panel').forEach(el=>{el.classList.add('tvf-filter-area','tvf-simplified-hidden')});
     root.querySelectorAll?.('.bottomnav,.m-fixed').forEach(el=>el.classList.add('tvf-mobile-dock'));
-    root.querySelectorAll?.('input[type="search"],#search,.btn-search').forEach(el=>el.classList.add('tvf-search'));
-    root.querySelectorAll?.('.tvf-filter-area button,.tvf-filter-area .btn,.tvf-filter-area select').forEach(el=>el.classList.add('tvf-filter-control'));
+  }
+
+  function updateStats(){
+    const cards=[...document.querySelectorAll(cardSelectors)];
+    const visible=cards.filter(c=>getComputedStyle(c).display!=='none');
+    const live=visible.filter(c=>c.classList.contains('tvf-is-live')||c.querySelector('.live,.live-badge,.live-status,[data-live="true"]'));
+    const favs=document.querySelectorAll('.favorite.active,.fav.active,.star.active,[data-fav].active,[data-favorite].active').length;
+    const set=(k,v)=>{const el=document.querySelector(`[data-tvf-stat="${k}"]`);if(el)el.textContent=v};
+    set('matches',visible.length||cards.length);set('live',live.length);set('favorites',favs);
   }
 
   function enhance(root=document){
-    enhanceChrome(root);
+    simplifyChrome(root);
     if(root.matches?.(cardSelectors)) enhanceCard(root);
     root.querySelectorAll?.(cardSelectors).forEach(enhanceCard);
     if(root.matches?.('.ticker,.live-ticker,.ticker-box,#ticker')) enhanceTicker(root);
@@ -65,17 +91,9 @@
   }
 
   function boot(){
-    enhance(document);
-    const observer=new MutationObserver(mutations=>{
-      for(const mutation of mutations){
-        for(const node of mutation.addedNodes){
-          if(node.nodeType===1) enhance(node);
-        }
-      }
-    });
+    buildHero();enhance(document);updateStats();
+    const observer=new MutationObserver(mutations=>{for(const mutation of mutations){for(const node of mutation.addedNodes){if(node.nodeType===1)enhance(node)}}clearTimeout(window.__tvfStatsTimer);window.__tvfStatsTimer=setTimeout(updateStats,60)});
     observer.observe(document.body,{childList:true,subtree:true});
   }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
-  else boot();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
 })();
