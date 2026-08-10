@@ -39,8 +39,8 @@ jobs:
 
           out = Path('/tmp/tvfussball-direct')
           out.mkdir(parents=True, exist_ok=True)
-          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=13"><link rel="stylesheet" href="direct.css?v=13">'''
-          app = '''<script src="app-direct.js?v=13"></script>'''
+          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=14"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=14"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=14"><link rel="shortcut icon" href="favicon.ico?v=14"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=14"><link rel="stylesheet" href="direct.css?v=14">'''
+          app = '''<script src="app-direct.js?v=14"></script>'''
 
           for name in ('index.html', 'highlights.html', 'anbieter.html'):
               src = Path(name).read_text(encoding='utf-8')
@@ -66,10 +66,15 @@ jobs:
           git show origin/main:hero-pitch.webp > hero-pitch.webp
           git show origin/main:impressum.html > impressum.html
           git show origin/main:datenschutz.html > datenschutz.html
+          git show origin/main:favicon.ico > favicon.ico
+          git show origin/main:favicon-16x16.png > favicon-16x16.png
+          git show origin/main:favicon-32x32.png > favicon-32x32.png
+          git show origin/main:apple-touch-icon.png > apple-touch-icon.png
+          git show origin/main:icon-512.png > icon-512.png
           git rm -f data-bridge.js app-shell.js app-shell.css 2>/dev/null || true
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html highlights.html anbieter.html app-direct.js direct.css favicon.svg hero-pitch.webp impressum.html datenschutz.html
+          git add index.html highlights.html anbieter.html app-direct.js direct.css favicon.svg favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png icon-512.png hero-pitch.webp impressum.html datenschutz.html
           if git diff --cached --quiet; then
             echo 'Nothing to publish.'
             exit 0
