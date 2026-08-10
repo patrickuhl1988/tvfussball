@@ -39,8 +39,8 @@ jobs:
 
           out = Path('/tmp/tvfussball-direct')
           out.mkdir(parents=True, exist_ok=True)
-          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=17"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=17"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=17"><link rel="shortcut icon" href="favicon.ico?v=17"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=17"><link rel="stylesheet" href="direct.css?v=17">'''
-          app = '''<script src="app-direct.js?v=17"></script>'''
+          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=18"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=18"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=18"><link rel="shortcut icon" href="favicon.ico?v=18"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=18"><link rel="stylesheet" href="direct.css?v=18">'''
+          app = '''<script src="app-direct.js?v=18"></script>'''
 
           for name in ('index.html', 'highlights.html', 'anbieter.html'):
               src = Path(name).read_text(encoding='utf-8')
