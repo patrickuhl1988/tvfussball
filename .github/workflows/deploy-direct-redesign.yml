@@ -11,6 +11,8 @@ on:
       - 'direct.css'
       - 'favicon.svg'
       - 'hero-pitch.webp'
+      - 'impressum.html'
+      - 'datenschutz.html'
       - '.github/workflows/deploy-direct-redesign.yml'
   workflow_dispatch:
 
@@ -37,8 +39,8 @@ jobs:
 
           out = Path('/tmp/tvfussball-direct')
           out.mkdir(parents=True, exist_ok=True)
-          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=11"><link rel="stylesheet" href="direct.css?v=11">'''
-          app = '''<script src="app-direct.js?v=11"></script>'''
+          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=12"><link rel="stylesheet" href="direct.css?v=12">'''
+          app = '''<script src="app-direct.js?v=12"></script>'''
 
           for name in ('index.html', 'highlights.html', 'anbieter.html'):
               src = Path(name).read_text(encoding='utf-8')
@@ -62,10 +64,12 @@ jobs:
           git show origin/main:direct.css > direct.css
           git show origin/main:favicon.svg > favicon.svg
           git show origin/main:hero-pitch.webp > hero-pitch.webp
+          git show origin/main:impressum.html > impressum.html
+          git show origin/main:datenschutz.html > datenschutz.html
           git rm -f data-bridge.js app-shell.js app-shell.css 2>/dev/null || true
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html highlights.html anbieter.html app-direct.js direct.css favicon.svg hero-pitch.webp
+          git add index.html highlights.html anbieter.html app-direct.js direct.css favicon.svg hero-pitch.webp impressum.html datenschutz.html
           if git diff --cached --quiet; then
             echo 'Nothing to publish.'
             exit 0
