@@ -34,7 +34,11 @@ const buy=e.target.closest('[data-act^="buy-"]');if(buy&&!buy.disabled){const w=
  else if(act==='buy-gold'&&w.balls>=15&&!w.gold){w.balls-=15;w.gold=true;w.events.push('🏆 Der Goldene Ball gehört dir!')}
  else return;
  walletSave(w);const shop=document.querySelector('.tvfd-shop');if(shop&&typeof window.__tvfShop==='function')shop.outerHTML=window.__tvfShop(walletLoad());if(typeof window.__tvfStats==='function')window.__tvfStats();return}
-const ex=e.target.closest('[data-act="tip-export"]');if(ex){const code=tipExport();(async()=>{try{await navigator.clipboard.writeText(code);const o=ex.innerHTML;ex.innerHTML='✓ Code kopiert';setTimeout(()=>ex.innerHTML=o,1600)}catch(err){prompt('Dein Spielstand-Code (kopieren):',code)}})();return}
+const ex=e.target.closest('[data-act="tip-export"]');if(ex){const code=tipExport(),d=new Date(),pad=n=>String(n).padStart(2,'0'),stamp=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+ const txt=`TVFussball.de – Spielstand-Sicherung (${stamp})\r\n\r\nZum Wiederherstellen: tvfussball.de → 🎯 Meine Tipps → „Code einlösen" → den Code unten einfügen.\r\n\r\n${code}\r\n`;
+ try{const bl=new Blob([txt],{type:'text/plain'}),u=URL.createObjectURL(bl),l=document.createElement('a');l.href=u;l.download=`tvfussball-spielstand-${stamp}.txt`;document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}catch(err){}
+ (async()=>{try{await navigator.clipboard.writeText(code)}catch(err){}})();
+ const o=ex.innerHTML;ex.innerHTML='✓ Datei gespeichert';setTimeout(()=>ex.innerHTML=o,1800);return}
 const ho=e.target.closest('[data-act="hint-ok"]');if(ho){const w=walletLoad();w.hintOk=true;walletSave(w);const n=ho.closest('.tvfd-betanote');if(n)n.remove();return}
 const im=e.target.closest('[data-act="tip-import"]');if(im){const code=prompt('Spielstand-Code einfügen:');if(code&&tipImport(code)){location.reload()}else if(code!==null)alert('Der Code konnte nicht gelesen werden.');return}});
 const TIPS_KEY='tvf_tips',STREAK_KEY='tvf_streak';
@@ -70,7 +74,7 @@ function walletEarn(w,st){const gain=dpActive(w)?2:1;w.balls+=gain;w.earned+=gai
  if(st.current===3){w.balls+=1;w.earned+=1;w.events.push('🔥 3er-Serie! +1 Bonus-Ball')}
  if(st.current===7){w.balls+=3;w.earned+=3;w.events.push('🔥🔥 7er-Serie! +3 Bonus-Bälle')}}
 function tipExport(){const data={t:tipsLoad(),s:streakLoad(),w:walletLoad()};return btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_')}
-function tipImport(code){try{const data=JSON.parse(decodeURIComponent(escape(atob(String(code||'').trim().replace(/-/g,'+').replace(/_/g,'/')))));if(!data||typeof data!=='object')return false;if(data.t)tipsSave(data.t);if(data.s)streakSave(data.s);if(data.w)walletSave(data.w);return true}catch(e){return false}}
+function tipImport(code){try{const raw=String(code||''),m=raw.match(/[A-Za-z0-9\-_+\/=]{40,}/g),pick=m?m[m.length-1]:raw.trim();const data=JSON.parse(decodeURIComponent(escape(atob(pick.replace(/-/g,'+').replace(/_/g,'/')))));if(!data||typeof data!=='object')return false;if(data.t)tipsSave(data.t);if(data.s)streakSave(data.s);if(data.w)walletSave(data.w);return true}catch(e){return false}}
 function tipHasNew(){const t=tipsLoad();return Object.values(t).some(x=>x.status&&x.seen===false)}
 function tipCount(){return Object.keys(tipsLoad()).length}
 function tipUi(m){const key=tipKey(m),t=tipsLoad()[key];
