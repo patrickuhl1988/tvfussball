@@ -35,6 +35,7 @@ const buy=e.target.closest('[data-act^="buy-"]');if(buy&&!buy.disabled){const w=
  else return;
  walletSave(w);const shop=document.querySelector('.tvfd-shop');if(shop&&typeof window.__tvfShop==='function')shop.outerHTML=window.__tvfShop(walletLoad());if(typeof window.__tvfStats==='function')window.__tvfStats();return}
 const ex=e.target.closest('[data-act="tip-export"]');if(ex){const code=tipExport();(async()=>{try{await navigator.clipboard.writeText(code);const o=ex.innerHTML;ex.innerHTML='✓ Code kopiert';setTimeout(()=>ex.innerHTML=o,1600)}catch(err){prompt('Dein Spielstand-Code (kopieren):',code)}})();return}
+const ho=e.target.closest('[data-act="hint-ok"]');if(ho){const w=walletLoad();w.hintOk=true;walletSave(w);const n=ho.closest('.tvfd-betanote');if(n)n.remove();return}
 const im=e.target.closest('[data-act="tip-import"]');if(im){const code=prompt('Spielstand-Code einfügen:');if(code&&tipImport(code)){location.reload()}else if(code!==null)alert('Der Code konnte nicht gelesen werden.');return}});
 const TIPS_KEY='tvf_tips',STREAK_KEY='tvf_streak';
 function tipsLoad(){try{return JSON.parse(localStorage.getItem(TIPS_KEY))||{}}catch(e){return{}}}
@@ -137,7 +138,9 @@ function shopHtml(w){if(w.earned<1)return'';
  return out}
 function render(){const q=norm(search.value);let pool=[],display=[],label='';if(mode==='tips'){const tips=tipsLoad(),st=streakLoad(),byKey={};for(const m of data.matches)byKey[tipKey(m)]=m;
  const keys=Object.keys(tips),open=keys.filter(k=>!tips[k].status).sort((a,b)=>getKey(tips[a].day)-getKey(tips[b].day)),done=keys.filter(k=>tips[k].status).sort((a,b)=>(tips[b].ts||0)-(tips[a].ts||0)).slice(0,50);
- const w=walletLoad();let out=shopHtml(w);
+ const w=walletLoad();let out='';
+ if(w.earned>=1&&!w.hintOk)out+=`<div class="tvfd-betanote"><b>🧪 Kleine Beta</b><p>Das Tippspiel ist ein frisches Experiment. Deine Tipps, deine Serie und deine Bälle werden <b>nur lokal in diesem Browser</b> gespeichert – sie verschwinden, wenn du Website-Daten löschst, den Inkognito-Modus nutzt oder Gerät/Browser wechselst. Tipp: Sichere deinen Stand regelmäßig über „💾 Spielstand sichern".</p><button type="button" class="tvfd-act" data-act="hint-ok">Alles klar 👍</button></div>`;
+ out+=shopHtml(w);
  if(st.current>=2)out+=`<div class="tvfd-tipshare"><span>🔥 ${st.current} richtige in Folge!</span><button type="button" class="tvfd-act" data-act="tip-share" data-cur="${st.current}" data-best="${st.best}">Serie teilen</button></div>`;
  if(open.length)out+=secHead('Offene Tipps',open.length)+open.map(k=>byKey[k]?matchCard(byKey[k],data.market):'').join('');
  if(done.length)out+=secHead('Aufgelöst',done.length)+`<div class="tvfd-tipres-list">${done.map(k=>tipResRow(tips[k])).join('')}</div>`;
