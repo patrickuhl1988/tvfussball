@@ -5849,7 +5849,8 @@ function injectBells(){
 /* ---- Events ---- */
 document.addEventListener("click",function(e){
   var t=e.target;
-  if(t.closest && t.closest("#pshHint")){ pshOpen("push"); return; }
+  var opener=t.closest && t.closest("#pshHint,.psh-hint,[data-psh-open]");
+  if(opener){ pshOpen(opener.getAttribute("data-psh-open")==="news"?"news":"push"); return; }
   if(t.closest && t.closest(".psh-daybell")){ pshOpen("push"); return; }
   if(t.id==="pshClose" || (t.closest && t.closest("#pshClose"))){ pshCloseFn(); return; }
   if(t===ov){ pshCloseFn(); return; }
@@ -5865,8 +5866,47 @@ document.addEventListener("keydown",function(e){
   if(e.key==="Escape" && ov.classList.contains("show")) pshCloseFn();
   if((e.key==="Enter"||e.key===" ") && e.target && e.target.id==="pshHint"){ e.preventDefault(); pshOpen("push"); }
 });
+/* ---- Integration ins Redesign-Overlay (app-direct.js versteckt die Quellseite in #tvf-source-engine) ---- */
+function integrateRedesign(){
+  var app=document.getElementById("tvf-direct-app");
+  if(!app) return false;
+  /* Modal in die sichtbare Redesign-App verschieben (direct.css versteckt alles andere unter body per !important) */
+  if(ov && ov.parentElement!==app) app.appendChild(ov);
+  /* Banner oberhalb der Spielliste */
+  var main=app.querySelector(".tvfd-main .tvfd-wrap");
+  if(main && !app.querySelector(".psh-hint")){
+    var b=document.createElement("div");
+    b.className="psh-hint"; b.setAttribute("data-psh-open","push");
+    b.setAttribute("role","button"); b.setAttribute("tabindex","0");
+    b.innerHTML='<span class="psh-badge">\uD83D\uDD14</span><span class="psh-tx"><b>Nie wieder ein Spiel deines Vereins verpassen</b><span>Push-Alarm am Spieltag &amp; Newsletter \u2013 kostenlos, jederzeit abbestellbar.</span></span><span class="psh-cta">Aktivieren</span>';
+    main.insertBefore(b, main.firstChild);
+  }
+  /* Glocke in der Filterleiste */
+  var vf=app.querySelector(".tvfd-viewfilters");
+  if(vf && !vf.querySelector(".psh-daybell")){
+    var g=document.createElement("button");
+    g.type="button"; g.className="psh-daybell"; g.style.width="34px"; g.style.height="34px"; g.style.fontSize="15px";
+    g.innerHTML="\uD83D\uDD14"; g.title="Spiel-Alarm einrichten";
+    g.setAttribute("aria-label","Spiel-Alarm f\u00fcr deine Vereine einrichten");
+    vf.appendChild(g);
+  }
+  /* Newsletter-Link im Redesign-Footer */
+  var ftr=app.querySelector(".tvfd-footerin span:last-child");
+  if(ftr && !ftr.querySelector("[data-psh-open]")){
+    var a=document.createElement("a");
+    a.href="javascript:void(0)"; a.setAttribute("data-psh-open","news");
+    a.textContent="Newsletter"; ftr.appendChild(document.createTextNode(" \u00b7 ")); ftr.appendChild(a);
+  }
+  updateBells();
+  return true;
+}
+function waitRedesign(tries){
+  if(integrateRedesign()) return;
+  if(tries>0) setTimeout(function(){ waitRedesign(tries-1); }, 400);
+}
 function bootBells(){
   injectBells();
+  waitRedesign(40);
   var board=document.getElementById("liveBoard");
   if(board && window.MutationObserver){
     new MutationObserver(function(){ injectBells(); }).observe(board,{childList:true});
@@ -5875,5 +5915,5 @@ function bootBells(){
 if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bootBells); else bootBells();
 })();
 </script>
-<script src="app-direct.js?v=22"></script></body>
+</body>
 </html>
