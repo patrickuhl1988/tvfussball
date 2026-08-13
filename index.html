@@ -5693,6 +5693,9 @@ if(PAGE==="live"){
     <div class="psh-body" id="pshBodyPush" role="tabpanel">
       <p class="psh-sub">W&auml;hle deine Vereine &ndash; wir schicken dir am Spieltag morgens eine Push-Nachricht mit Anpfiffzeit und Sender. Mehrfachauswahl m&ouml;glich, jederzeit &auml;nderbar.</p>
       <div id="pshClubs"></div>
+      <div class="psh-lg">Anderen Verein finden</div>
+      <input type="text" class="psh-mail" id="pshClubSearch" placeholder="Verein suchen … (z. B. Salzburg, Benfica)" autocomplete="off">
+      <div class="psh-chips" id="pshClubResults" style="margin-top:8px"></div>
       <button class="psh-save" id="pshSave">Benachrichtigungen aktivieren</button>
       <div class="psh-msg" id="pshMsg" role="status"></div>
       <p class="psh-note">Beim Aktivieren fragt dein Browser einmalig nach der Erlaubnis f&uuml;r Benachrichtigungen. Abbestellen jederzeit &uuml;ber die Browser-Einstellungen oder hier per Abwahl der Vereine.</p>
@@ -5740,6 +5743,14 @@ function deriveClubs(){
   Object.keys(groups).forEach(function(k){ groups[k].sort(function(a,b){return a.localeCompare(b,"de");}); });
   return groups;
 }
+var ALL_TEAMS=null;
+function allTeams(){
+  if(ALL_TEAMS) return ALL_TEAMS;
+  var set={};
+  try{ (typeof MATCHES!=="undefined"?MATCHES:[]).forEach(function(m){ if(m.h)set[m.h]=1; if(m.a)set[m.a]=1; }); }catch(e){}
+  ALL_TEAMS=Object.keys(set).sort(function(a,b){return a.localeCompare(b,"de");});
+  return ALL_TEAMS;
+}
 function loadSel(){ try{ var a=JSON.parse(localStorage.getItem(PUSH_KEY)||"[]"); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
 function saveSel(a){ try{ localStorage.setItem(PUSH_KEY, JSON.stringify(a)); }catch(e){} }
 
@@ -5760,6 +5771,9 @@ function switchTab(t){
 function renderClubs(){
   var box=document.getElementById("pshClubs"); if(!box) return;
   var sel=loadSel(), groups=deriveClubs(), h="";
+  var known={}; Object.keys(groups).forEach(function(g){ groups[g].forEach(function(n){ known[n]=1; }); });
+  var extra=sel.filter(function(n){ return !known[n]; });
+  if(extra.length) groups["Deine weiteren Vereine"]=extra;
   Object.keys(groups).forEach(function(g){
     if(!groups[g].length) return;
     h+='<div class="psh-lg">'+g+'</div><div class="psh-chips">';
@@ -5856,11 +5870,33 @@ document.addEventListener("click",function(e){
   if(t===ov){ pshCloseFn(); return; }
   if(t.id==="pshTabPush"){ switchTab("push"); return; }
   if(t.id==="pshTabNews"){ switchTab("news"); return; }
+  var addBtn=t.closest && t.closest("[data-club-add]");
+  if(addBtn){
+    var name=addBtn.getAttribute("data-club-add");
+    var sel2=[].slice.call(document.querySelectorAll('#pshClubs .psh-chip[aria-pressed="true"]')).map(function(b){return b.dataset.club;});
+    if(sel2.indexOf(name)<0) sel2.push(name);
+    saveSel(sel2);
+    var si=document.getElementById("pshClubSearch"); if(si) si.value="";
+    var rb=document.getElementById("pshClubResults"); if(rb) rb.innerHTML="";
+    renderClubs(); return;
+  }
   var chip=t.closest && t.closest("#pshClubs .psh-chip");
   if(chip){ chip.setAttribute("aria-pressed", chip.getAttribute("aria-pressed")==="true"?"false":"true"); return; }
   if(t.id==="pshSave"){ pushSave(); return; }
   if(t.id==="pshMailSave"){ nlSubmit(document.getElementById("pshMail"),document.getElementById("pshConsent"),document.getElementById("pshMailMsg"),t); return; }
   if(t.id==="pshFootBtn"){ nlSubmit(document.getElementById("pshFootMail"),document.getElementById("pshFootConsent"),document.getElementById("pshFootMsg"),t); return; }
+});
+document.addEventListener("input",function(e){
+  if(e.target && e.target.id==="pshClubSearch"){
+    var q=e.target.value.trim().toLowerCase(), box=document.getElementById("pshClubResults");
+    if(q.length<2){ box.innerHTML=""; return; }
+    var cur={}; [].forEach.call(document.querySelectorAll('#pshClubs .psh-chip'),function(b){ cur[b.dataset.club]=1; });
+    var hits=allTeams().filter(function(n){ return n.toLowerCase().indexOf(q)>=0 && !cur[n]; }).slice(0,12);
+    box.innerHTML=hits.length ? hits.map(function(n){
+      var e2=n.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+      return '<button type="button" class="psh-chip" data-club-add="'+e2+'"><span class="ck">+</span>'+e2+'</button>';
+    }).join("") : '<span style="font-size:12px;color:var(--faint)">Kein Verein gefunden.</span>';
+  }
 });
 document.addEventListener("keydown",function(e){
   if(e.key==="Escape" && ov.classList.contains("show")) pshCloseFn();
