@@ -1,0 +1,50 @@
+name: Daily match push notifications
+
+on:
+  schedule:
+    # 08:00 Europe/Berlin. GitHub-Cron läuft in UTC:
+    #   Sommerzeit (CEST, UTC+2): 06:00 UTC  |  Winterzeit (CET, UTC+1): 07:00 UTC
+    # Beide Slots sind eingeplant; das Script prüft die lokale Berliner Stunde
+    # und beendet sich still, wenn es nicht 08:00 Uhr in Berlin ist.
+    - cron: "0 6 * * *"
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "DST-Check überspringen und sofort senden (true/false)"
+        required: false
+        default: "false"
+      dry_run:
+        description: "Nur anzeigen, was gesendet würde (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: push-notifications
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Send match notifications
+        env:
+          # ⚠️ Secret manuell anlegen: Repo → Settings → Secrets and variables →
+          #    Actions → New repository secret → Name: ONESIGNAL_REST_API_KEY
+          ONESIGNAL_REST_API_KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
+          ONESIGNAL_APP_ID: "94a57127-83f5-4bd7-af6c-294c041a3958"
+          FORCE_SEND: ${{ github.event.inputs.force || 'false' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          SITE_URL: "https://tvfussball.de"
+        run: node scripts/send-push.mjs
