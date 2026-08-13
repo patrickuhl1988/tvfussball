@@ -5866,7 +5866,7 @@ document.addEventListener("keydown",function(e){
   if(e.key==="Escape" && ov.classList.contains("show")) pshCloseFn();
   if((e.key==="Enter"||e.key===" ") && e.target && e.target.id==="pshHint"){ e.preventDefault(); pshOpen("push"); }
 });
-/* ---- Integration ins Redesign-Overlay (app-direct.js versteckt die Quellseite in #tvf-source-engine) ---- */
+/* ---- Integration ins Redesign-Overlay (das Redesign-Overlay versteckt die Quellseite in #tvf-source-engine) ---- */
 function integrateRedesign(){
   var app=document.getElementById("tvf-direct-app");
   if(!app) return false;
@@ -5915,5 +5915,5 @@ function bootBells(){
 if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bootBells); else bootBells();
 })();
 </script>
-</body>
+<script src="app-direct.js?v=22"></script></body>
 </html>
