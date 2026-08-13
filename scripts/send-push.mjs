@@ -24,6 +24,17 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import vm from "node:vm";
+import { createHash } from "node:crypto";
+
+/* Deterministische UUID (v5-Format) aus einem Namen – OneSignal verlangt fuer
+   den Idempotenz-Key eine valide UUID; gleicher Verein+Tag => gleiche UUID. */
+function idemUuid(name) {
+  const h = createHash("sha1").update("tvfussball.de:" + name).digest();
+  h[6] = (h[6] & 0x0f) | 0x50;
+  h[8] = (h[8] & 0x3f) | 0x80;
+  const x = h.subarray(0, 16).toString("hex");
+  return `${x.slice(0,8)}-${x.slice(8,12)}-${x.slice(12,16)}-${x.slice(16,20)}-${x.slice(20,32)}`;
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -119,7 +130,7 @@ for (const [slug, { club, lines }] of perClub) {
     app_id: APP_ID,
     target_channel: "push",
     name: `matchday-${slug}-${dateKey}`,
-    external_id: `tvf-${slug}-${dateKey}`, // Idempotenz: verhindert Doppel-Versand bei Retries
+    external_id: idemUuid(`${slug}-${dateKey}`), // Idempotenz (UUID-Pflicht seitens OneSignal)
     headings: { en: `${club} spielt heute!`, de: `${club} spielt heute!` },
     contents: { en: content, de: content },
     url: clickUrl,
