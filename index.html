@@ -5990,12 +5990,46 @@ function waitRedesign(tries){
   if(integrateRedesign()) return;
   if(tries>0) setTimeout(function(){ waitRedesign(tries-1); }, 400);
 }
+window.tvfPushReset=async function(){
+  try{
+    var regs=await navigator.serviceWorker.getRegistrations();
+    for(var i=0;i<regs.length;i++){
+      try{ var ps=await regs[i].pushManager.getSubscription(); if(ps) await ps.unsubscribe(); }catch(e){}
+      try{ await regs[i].unregister(); }catch(e){}
+    }
+  }catch(e){}
+  try{
+    if(indexedDB.databases){
+      var dbs=await indexedDB.databases();
+      for(var j=0;j<dbs.length;j++){ if(dbs[j].name && /one_?signal/i.test(dbs[j].name)){ try{ indexedDB.deleteDatabase(dbs[j].name); }catch(e){} } }
+    }
+  }catch(e){}
+  try{ indexedDB.deleteDatabase("ONE_SIGNAL_SDK_DB"); }catch(e){}
+  try{ Object.keys(localStorage).forEach(function(k){ if(/one_?signal/i.test(k)) localStorage.removeItem(k); }); }catch(e){}
+  /* Vereinsauswahl (tvf_push_clubs) bleibt absichtlich erhalten */
+  alert("OneSignal-Speicher zur\u00fcckgesetzt. Die Seite l\u00e4dt jetzt neu \u2013 danach Vereine pr\u00fcfen und auf \u201eBenachrichtigungen aktivieren\u201c dr\u00fccken.");
+  location.href=location.pathname+"?pushdebug=1&r="+Date.now();
+};
 function pushDebugPanel(d){
   console.log("[TVF-Push-Debug]",d);
-  var el=document.createElement("pre");
-  el.style.cssText="position:fixed;left:8px;bottom:8px;z-index:9999;background:#111;color:#7CFFB2;font-size:10px;padding:10px;border-radius:8px;max-width:90vw;overflow:auto;max-height:40vh";
-  el.textContent="TVF Push-Debug\n"+JSON.stringify(d,null,1);
-  (document.getElementById("tvf-direct-app")||document.body).appendChild(el);
+  var wrap=document.createElement("div");
+  wrap.style.cssText="position:fixed;left:8px;bottom:8px;z-index:9999;background:#111;border-radius:8px;max-width:90vw;overflow:hidden;font-family:monospace";
+  var bar=document.createElement("div");
+  bar.style.cssText="display:flex;gap:8px;padding:8px 10px;background:#1d1d1d;align-items:center";
+  var rst=document.createElement("button");
+  rst.textContent="\u26A0\uFE0F SDK zur\u00fccksetzen";
+  rst.style.cssText="background:#B42318;color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700";
+  rst.onclick=function(){ if(confirm("OneSignal-Speicher dieses Browsers komplett zur\u00fccksetzen und neu registrieren?")) window.tvfPushReset(); };
+  var cls=document.createElement("button");
+  cls.textContent="\u2715 schlie\u00dfen";
+  cls.style.cssText="background:#333;color:#ccc;border:none;border-radius:6px;padding:6px 10px;font-size:11px;margin-left:auto";
+  cls.onclick=function(){ wrap.remove(); };
+  bar.appendChild(rst); bar.appendChild(cls);
+  var pre=document.createElement("pre");
+  pre.style.cssText="margin:0;color:#7CFFB2;font-size:10px;padding:10px;overflow:auto;max-height:34vh";
+  pre.textContent="TVF Push-Debug\n"+JSON.stringify(d,null,1);
+  wrap.appendChild(bar); wrap.appendChild(pre);
+  (document.getElementById("tvf-direct-app")||document.body).appendChild(wrap);
 }
 function pushDebug(){
   if(location.search.indexOf("pushdebug")<0) return;
