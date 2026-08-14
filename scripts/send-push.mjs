@@ -122,6 +122,21 @@ for (const m of todays) {
 }
 if (!perClub.size) { console.log("Keine heutigen Spiele – nichts zu senden."); process.exit(0); }
 
+/* Liga-Abos: 1 Digest pro Liga mit allen heutigen Spielen dieser Liga */
+function ligaSlug(comp) {
+  const base = String(comp || "").split(" \u00b7 ")[0].trim();
+  if (!base) return null;
+  return { slug: "liga_" + clubSlug(base).slice(5), name: base };
+}
+const perLiga = new Map();
+for (const m of todays) {
+  const L = ligaSlug(m.comp); if (!L) continue;
+  const time = m.time && /^\d{1,2}:\d{2}$/.test(m.time) ? m.time + " Uhr" : "heute";
+  const line = `\u26bd ${m.h} \u2013 ${m.a} \u00b7 ${time} \u00b7 ${bestSender(m)}`;
+  if (!perLiga.has(L.slug)) perLiga.set(L.slug, { name: L.name, lines: [] });
+  if (!perLiga.get(L.slug).lines.includes(line)) perLiga.get(L.slug).lines.push(line);
+}
+
 /* ---------- 3) Versand über OneSignal REST API ---------- */
 const clickUrl = `${SITE_URL}/?utm_source=onesignal&utm_medium=web_push&utm_campaign=matchday#liveBoard`;
 const dateKey = TODAY.replace(/\./g, "");
@@ -181,6 +196,23 @@ for (const [slug, { club, lines }] of perClub) {
   if (ok === true) sent++; else if (ok === false) failed++;
 }
 
+/* --- 3a2) Liga-Digests --- */
+for (const [slug, { name, lines }] of perLiga) {
+  const shown = lines.slice(0, 8);
+  const content = shown.join("\n") + (lines.length > 8 ? `\n\u2026 und ${lines.length - 8} weitere Spiele` : "");
+  const ok = await postNote({
+    app_id: APP_ID, target_channel: "push",
+    name: `ligaday-${slug}-${dateKey}`,
+    external_id: idemUuid(`${slug}-${dateKey}`),
+    headings: { en: `${name} heute: ${lines.length} Spiel${lines.length===1?"":"e"}`, de: `${name} heute: ${lines.length} Spiel${lines.length===1?"":"e"}` },
+    contents: { en: content, de: content },
+    url: clickUrl,
+    filters: [{ field: "tag", key: slug, relation: "=", value: "1" }],
+    ttl: 43200,
+  }, `Liga ${name} (${slug})`);
+  if (ok === true) sent++; else if (ok === false) failed++;
+}
+
 /* --- 3b) Anpfiff-Erinnerung: 30 Min vor jedem Spiel, via send_after von OneSignal
        sekundengenau zugestellt (unabhaengig von Cron-Verspaetungen) --- */
 const PRE_MIN = 30;
@@ -202,7 +234,12 @@ for (const m of todays) {
       headings: { en: `\u23f0 Gleich Anpfiff: ${club}!`, de: `\u23f0 Gleich Anpfiff: ${club}!` },
       contents: { en: content, de: content },
       url: clickUrl,
-      filters: [{ field: "tag", key: slug, relation: "=", value: "1" }],
+      filters: (function(){
+        const f=[{ field:"tag", key:slug, relation:"=", value:"1" }];
+        const L=ligaSlug(m.comp);
+        if(L){ f.push({operator:"OR"},{ field:"tag", key:L.slug, relation:"=", value:"1" }); }
+        return f;
+      })(),
       send_after: new Date(fireAt).toISOString(),
       ttl: 5400,
     }, `Erinnerung ${club} ${m.time}`);

@@ -5746,7 +5746,9 @@ if(location.search.indexOf("pushdebug")>=0){
 
 /* Slug muss identisch zu scripts/send-push.mjs sein! */
 function clubSlug(name){
-  return "club_"+String(name).toLowerCase()
+  var pre="club_", n=String(name);
+  if(n.indexOf("Liga: ")===0){ pre="liga_"; n=n.slice(6); }
+  return pre+n.toLowerCase()
     .replace(/\u00e4/g,"ae").replace(/\u00f6/g,"oe").replace(/\u00fc/g,"ue").replace(/\u00df/g,"ss")
     .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
     .replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").replace(/_{2,}/g,"_");
@@ -5766,9 +5768,13 @@ function deriveClubs(){
       }
     });
   }catch(e){}
+  var LIGEN=["Bundesliga","2. Bundesliga","3. Liga","DFB-Pokal","Champions League","Europa League","Conference League","Premier League","LaLiga","Serie A","Ligue 1","Eredivisie"];
+  var present={};
+  try{ (typeof MATCHES!=="undefined"?MATCHES:[]).forEach(function(m){ var b=String(m.comp||"").split(" \u00b7 ")[0].trim(); present[b]=1; }); }catch(e){}
+  groups["Ganze Ligen \u2013 jedes Spiel"]=LIGEN.filter(function(l){ return present[l]; }).map(function(l){ return "Liga: "+l; });
   /* Fallback, falls Top-Klubs (noch) nicht in den Daten sind */
   if(!groups["Internationale Top-Klubs"].length) groups["Internationale Top-Klubs"]=TOP_INTL.slice();
-  Object.keys(groups).forEach(function(k){ groups[k].sort(function(a,b){return a.localeCompare(b,"de");}); });
+  Object.keys(groups).forEach(function(k){ if(k.indexOf("Ganze Ligen")<0) groups[k].sort(function(a,b){return a.localeCompare(b,"de");}); });
   return groups;
 }
 function normTxt(x){
@@ -5813,7 +5819,8 @@ function renderClubs(){
     h+='<div class="psh-lg">'+g+'</div><div class="psh-chips">';
     groups[g].forEach(function(n){
       var on=sel.indexOf(n)>=0, e=n.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
-      h+='<button type="button" class="psh-chip" data-club="'+e+'" aria-pressed="'+(on?"true":"false")+'"><span class="ck">&#10003;</span>'+e+'</button>';
+      var lbl=e.indexOf("Liga: ")===0? "\u26bd "+e.slice(6)+" (alle Spiele)": e;
+      h+='<button type="button" class="psh-chip" data-club="'+e+'" aria-pressed="'+(on?"true":"false")+'"><span class="ck">&#10003;</span>'+lbl+'</button>';
     });
     h+='</div>';
   });
