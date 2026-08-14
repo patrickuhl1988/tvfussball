@@ -125,50 +125,90 @@ if (!perClub.size) { console.log("Keine heutigen Spiele – nichts zu senden.");
 /* ---------- 3) Versand über OneSignal REST API ---------- */
 const clickUrl = `${SITE_URL}/?utm_source=onesignal&utm_medium=web_push&utm_campaign=matchday#liveBoard`;
 const dateKey = TODAY.replace(/\./g, "");
-let sent = 0, failed = 0;
+let sent = 0, failed = 0, scheduled = 0;
 
+/* Berliner Uhrzeit (DD.MM.YYYY + HH:MM) nach UTC-Timestamp (DST-sicher) */
+function berlinToUtcMs(dmy, hm) {
+  const [d, m, y] = dmy.split(".").map(Number);
+  const [hh, mm] = hm.split(":").map(Number);
+  for (const off of [2, 1]) { // CEST / CET durchprobieren und verifizieren
+    const t = Date.UTC(y, m - 1, d, hh - off, mm);
+    const parts = Object.fromEntries(new Intl.DateTimeFormat("de-DE", {
+      timeZone: "Europe/Berlin", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false,
+    }).formatToParts(new Date(t)).map(x => [x.type, x.value]));
+    if (parseInt(parts.day) === d && parseInt(parts.hour) === hh && parseInt(parts.minute) === mm) return t;
+  }
+  return null;
+}
+
+async function postNote(payload, label) {
+  if (DRY) { console.log(`[DRY] ${label}${payload.send_after ? " (geplant: " + payload.send_after + ")" : ""}:\n${payload.contents.de}\n`); return true; }
+  try {
+    const res = await fetch("https://api.onesignal.com/notifications", {
+      method: "POST",
+      headers: { "content-type": "application/json; charset=utf-8", authorization: `Key ${API_KEY}` },
+      body: JSON.stringify(payload),
+    });
+    const body = await res.json().catch(() => ({}));
+    if (res.ok && !body.errors) {
+      console.log(`\u2714 ${label}: ${payload.send_after ? "geplant fuer " + payload.send_after : "gesendet"}, id=${body.id || "-"}`);
+      return true;
+    } else if (body.errors && JSON.stringify(body.errors).includes("not subscribed")) {
+      console.log(`\u2013 ${label}: keine Abonnenten mit diesem Tag \u2013 uebersprungen.`);
+      return null;
+    } else {
+      console.error(`\u2716 ${label}: HTTP ${res.status}`, JSON.stringify(body).slice(0, 300));
+      return false;
+    }
+  } catch (e) { console.error(`\u2716 ${label}: ${e.message}`); return false; }
+  finally { await new Promise(r => setTimeout(r, 350)); }
+}
+
+/* --- 3a) Morgen-Digest: 1 Push pro Verein mit allen heutigen Spielen --- */
 for (const [slug, { club, lines }] of perClub) {
-  const content = lines.join("\n"); // Spiele desselben Vereins gebündelt → max. 1 Push pro Verein/Tag
-  const payload = {
+  const content = lines.join("\n");
+  const ok = await postNote({
     app_id: APP_ID,
     target_channel: "push",
     name: `matchday-${slug}-${dateKey}`,
-    external_id: idemUuid(`${slug}-${dateKey}`), // Idempotenz (UUID-Pflicht seitens OneSignal)
+    external_id: idemUuid(`${slug}-${dateKey}`),
     headings: { en: `${club} spielt heute!`, de: `${club} spielt heute!` },
     contents: { en: content, de: content },
     url: clickUrl,
     filters: [{ field: "tag", key: slug, relation: "=", value: "1" }],
-    ttl: 43200, // nach 12h nicht mehr zustellen (Spieltag vorbei)
-  };
-
-  if (DRY) { console.log(`[DRY] ${slug}:\n${content}\n`); sent++; continue; }
-
-  try {
-    const res = await fetch("https://api.onesignal.com/notifications", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json; charset=utf-8",
-        authorization: `Key ${API_KEY}`,
-      },
-      body: JSON.stringify(payload),
-    });
-    const body = await res.json().catch(() => ({}));
-    // "All included players are not subscribed" ist OK: für diesen Verein hat (noch) niemand abonniert.
-    if (res.ok && !body.errors) {
-      console.log(`✔ ${club} (${slug}): gesendet, id=${body.id || "-"} recipients=${body.recipients ?? "?"}`);
-      sent++;
-    } else if (body.errors && JSON.stringify(body.errors).includes("not subscribed")) {
-      console.log(`– ${club} (${slug}): keine Abonnenten mit diesem Tag – übersprungen.`);
-    } else {
-      console.error(`✖ ${club} (${slug}): HTTP ${res.status}`, JSON.stringify(body));
-      failed++;
-    }
-  } catch (e) {
-    console.error(`✖ ${club} (${slug}): ${e.message}`);
-    failed++;
-  }
-  await new Promise(r => setTimeout(r, 350)); // sanftes Rate-Limit
+    ttl: 43200,
+  }, `${club} (${slug})`);
+  if (ok === true) sent++; else if (ok === false) failed++;
 }
 
-console.log(`Fertig. Gesendet/geplant: ${sent}, Fehler: ${failed}, Vereine mit Spiel heute: ${perClub.size}`);
+/* --- 3b) Anpfiff-Erinnerung: 30 Min vor jedem Spiel, via send_after von OneSignal
+       sekundengenau zugestellt (unabhaengig von Cron-Verspaetungen) --- */
+const PRE_MIN = 30;
+for (const m of todays) {
+  if (!m.time || !/^\d{1,2}:\d{2}$/.test(m.time)) continue;
+  const kickUtc = berlinToUtcMs(TODAY, m.time);
+  if (!kickUtc) continue;
+  const fireAt = kickUtc - PRE_MIN * 60000;
+  if (fireAt < Date.now() + 3 * 60000) continue; // schon (fast) vorbei -> nur Morgen-Digest
+  const sender = bestSender(m);
+  const content = `\u26bd ${m.h} \u2013 ${m.a} \u00b7 Anpfiff ${m.time} Uhr \u00b7 live auf ${sender}`;
+  for (const club of [m.h, m.a]) {
+    const slug = clubSlug(club);
+    const ok = await postNote({
+      app_id: APP_ID,
+      target_channel: "push",
+      name: `prekick-${slug}-${dateKey}-${m.time.replace(":", "")}`,
+      external_id: idemUuid(`${slug}-${dateKey}-pre-${m.time}`),
+      headings: { en: `\u23f0 Gleich Anpfiff: ${club}!`, de: `\u23f0 Gleich Anpfiff: ${club}!` },
+      contents: { en: content, de: content },
+      url: clickUrl,
+      filters: [{ field: "tag", key: slug, relation: "=", value: "1" }],
+      send_after: new Date(fireAt).toISOString(),
+      ttl: 5400,
+    }, `Erinnerung ${club} ${m.time}`);
+    if (ok === true) scheduled++; else if (ok === false) failed++;
+  }
+}
+
+console.log(`Fertig. Morgen-Digest gesendet: ${sent}, Erinnerungen geplant: ${scheduled}, Fehler: ${failed}, Vereine mit Spiel heute: ${perClub.size}`);
 process.exit(failed ? 1 : 0);
