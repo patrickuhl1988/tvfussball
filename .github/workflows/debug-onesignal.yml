@@ -1,0 +1,25 @@
+name: Debug OneSignal subscriptions
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List subscriptions with tags
+        env:
+          KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
+        run: |
+          curl -s "https://api.onesignal.com/players?app_id=94a57127-83f5-4bd7-af6c-294c041a3958&limit=50" \
+            -H "Authorization: Key $KEY" | python3 -c "
+          import json,sys
+          d=json.load(sys.stdin)
+          print('Gesamt:', d.get('total_count'))
+          for p in d.get('players',[]):
+              print('---')
+              print('id:', p.get('id'))
+              print('typ:', p.get('device_type'), '| model:', p.get('device_model'), '| os:', p.get('device_os'))
+              print('erstellt:', p.get('created_at'), '| zuletzt:', p.get('last_active'))
+              print('invalid:', p.get('invalid_identifier'))
+              print('tags:', json.dumps(p.get('tags',{}), ensure_ascii=False))
+          "
