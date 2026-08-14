@@ -5743,6 +5743,12 @@ function deriveClubs(){
   Object.keys(groups).forEach(function(k){ groups[k].sort(function(a,b){return a.localeCompare(b,"de");}); });
   return groups;
 }
+function normTxt(x){
+  return String(x).toLowerCase()
+    .replace(/\u00e4/g,"ae").replace(/\u00f6/g,"oe").replace(/\u00fc/g,"ue").replace(/\u00df/g,"ss")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9]+/g," ").trim();
+}
 var ALL_TEAMS=null;
 function allTeams(){
   if(ALL_TEAMS) return ALL_TEAMS;
@@ -5799,10 +5805,13 @@ function pushSave(){
   window.OneSignalDeferred=window.OneSignalDeferred||[];
   OneSignalDeferred.push(async function(OneSignal){
     try{
-      if(!OneSignal.Notifications.permission){
+      var granted=OneSignal.Notifications.permission || (typeof Notification!=="undefined" && Notification.permission==="granted");
+      if(!granted){
         await OneSignal.Notifications.requestPermission();
+        await new Promise(function(r){setTimeout(r,800);});
+        granted=(typeof Notification!=="undefined" && Notification.permission==="granted") || OneSignal.Notifications.permission;
       }
-      if(!OneSignal.Notifications.permission){
+      if(!granted){
         msg(out,"err","Benachrichtigungen wurden im Browser nicht erlaubt. Deine Auswahl ist gespeichert \u2013 du kannst die Erlaubnis jederzeit in den Browser-Einstellungen erteilen.");
         btn.disabled=false; return;
       }
@@ -5811,7 +5820,14 @@ function pushSave(){
       var removed=prev.filter(function(c){ return sel.indexOf(c)<0; });
       if(Object.keys(addTags).length) await OneSignal.User.addTags(addTags);
       for(var i=0;i<removed.length;i++){ try{ await OneSignal.User.removeTag(clubSlug(removed[i])); }catch(e){} }
-      msg(out,"ok", sel.length ? ("\u2705 Aktiv f\u00fcr: "+sel.join(", ")+". Du bekommst am Spieltag eine Push-Nachricht.") : "Alle Vereins-Alarme wurden entfernt.");
+      /* Rueckbestaetigung: Tags aus dem SDK-State lesen (getTags ist in v16 synchron) */
+      await new Promise(function(r){setTimeout(r,600);});
+      var applied={}; try{ applied=OneSignal.User.getTags()||{}; }catch(e){}
+      var confirmed=sel.filter(function(c){ var v=applied[clubSlug(c)]; return v==="1"||v===1; });
+      if(!sel.length){ msg(out,"ok","Alle Vereins-Alarme wurden entfernt."); }
+      else if(confirmed.length===sel.length){ msg(out,"ok","\u2705 Von OneSignal best\u00e4tigt \u2013 aktiv f\u00fcr: "+confirmed.join(", ")+". Du bekommst am Spieltag morgens eine Push-Nachricht."); }
+      else { msg(out,"ok","Gespeichert ("+sel.length+" Vereine). OneSignal hat erst best\u00e4tigt: "+(confirmed.join(", ")||"noch keine")+" \u2013 die \u00dcbertragung l\u00e4uft evtl. noch, bitte in 1\u20132 Min erneut auf den Button dr\u00fccken."); }
+      console.log("[TVF-Push] Auswahl:",sel,"| Tags laut SDK:",applied);
       updateBells();
     }catch(e){
       console.warn("Push subscribe:", e);
@@ -5873,12 +5889,17 @@ document.addEventListener("click",function(e){
   var addBtn=t.closest && t.closest("[data-club-add]");
   if(addBtn){
     var name=addBtn.getAttribute("data-club-add");
+    var existing=null;
+    [].forEach.call(document.querySelectorAll('#pshClubs .psh-chip'),function(b){ if(b.dataset.club===name) existing=b; });
+    if(existing){ existing.setAttribute("aria-pressed","true"); }
     var sel2=[].slice.call(document.querySelectorAll('#pshClubs .psh-chip[aria-pressed="true"]')).map(function(b){return b.dataset.club;});
     if(sel2.indexOf(name)<0) sel2.push(name);
     saveSel(sel2);
     var si=document.getElementById("pshClubSearch"); if(si) si.value="";
     var rb=document.getElementById("pshClubResults"); if(rb) rb.innerHTML="";
-    renderClubs(); return;
+    renderClubs();
+    msg(document.getElementById("pshMsg"),"ok",name+" hinzugef\u00fcgt \u2013 mit \u201eBenachrichtigungen aktivieren\u201c unten best\u00e4tigen, erst dann wird es an OneSignal \u00fcbertragen.");
+    return;
   }
   var chip=t.closest && t.closest("#pshClubs .psh-chip");
   if(chip){ chip.setAttribute("aria-pressed", chip.getAttribute("aria-pressed")==="true"?"false":"true"); return; }
@@ -5890,8 +5911,11 @@ document.addEventListener("input",function(e){
   if(e.target && e.target.id==="pshClubSearch"){
     var q=e.target.value.trim().toLowerCase(), box=document.getElementById("pshClubResults");
     if(q.length<2){ box.innerHTML=""; return; }
-    var cur={}; [].forEach.call(document.querySelectorAll('#pshClubs .psh-chip'),function(b){ cur[b.dataset.club]=1; });
-    var hits=allTeams().filter(function(n){ return n.toLowerCase().indexOf(q)>=0 && !cur[n]; }).slice(0,12);
+    var toks=normTxt(q).split(" ").filter(Boolean);
+    var hits=allTeams().filter(function(n){
+      var t=normTxt(n), t2=t.replace(/ae/g,"a").replace(/oe/g,"o").replace(/ue/g,"u");
+      return toks.every(function(w){ return t.indexOf(w)>=0 || t2.indexOf(w)>=0; });
+    }).slice(0,12);
     box.innerHTML=hits.length ? hits.map(function(n){
       var e2=n.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
       return '<button type="button" class="psh-chip" data-club-add="'+e2+'"><span class="ck">+</span>'+e2+'</button>';
@@ -5940,9 +5964,36 @@ function waitRedesign(tries){
   if(integrateRedesign()) return;
   if(tries>0) setTimeout(function(){ waitRedesign(tries-1); }, 400);
 }
+function pushDebugPanel(d){
+  console.log("[TVF-Push-Debug]",d);
+  var el=document.createElement("pre");
+  el.style.cssText="position:fixed;left:8px;bottom:8px;z-index:9999;background:#111;color:#7CFFB2;font-size:10px;padding:10px;border-radius:8px;max-width:90vw;overflow:auto;max-height:40vh";
+  el.textContent="TVF Push-Debug\n"+JSON.stringify(d,null,1);
+  (document.getElementById("tvf-direct-app")||document.body).appendChild(el);
+}
+function pushDebug(){
+  if(location.search.indexOf("pushdebug")<0) return;
+  var done=false;
+  setTimeout(function(){ if(!done){ done=true; pushDebugPanel({fehler:"OneSignal SDK nicht initialisiert (Timeout)", nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a", lokaleAuswahl:loadSel()}); } },5000);
+  window.OneSignalDeferred=window.OneSignalDeferred||[];
+  OneSignalDeferred.push(async function(OneSignal){
+    if(done) return; done=true;
+    var d={
+      nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a",
+      sdkPermission:OneSignal.Notifications.permission,
+      onesignalId:OneSignal.User.onesignalId||null,
+      pushSubId:OneSignal.User.PushSubscription.id||null,
+      optedIn:OneSignal.User.PushSubscription.optedIn,
+      tags:(function(){try{return OneSignal.User.getTags()}catch(e){return "err"}})(),
+      lokaleAuswahl:loadSel()
+    };
+    pushDebugPanel(d);
+  });
+}
 function bootBells(){
   injectBells();
   waitRedesign(40);
+  pushDebug();
   var board=document.getElementById("liveBoard");
   if(board && window.MutationObserver){
     new MutationObserver(function(){ injectBells(); }).observe(board,{childList:true});
