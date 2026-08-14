@@ -5818,8 +5818,10 @@ function pushSave(){
   saveSel(sel);
   if(!sel.length && !prev.length){ msg(out,"err","Bitte w\u00e4hle mindestens einen Verein aus."); return; }
   btn.disabled=true; clearMsg(out);
+  var guard=setTimeout(function(){ btn.disabled=false; msg(out,"err","Das Benachrichtigungs-System (OneSignal) hat nicht reagiert \u2013 vermutlich h\u00e4ngt der lokale Speicher. Bitte lade die Seite neu; falls es dann weiter h\u00e4ngt: \u00fcber tvfussball.de/?pushdebug=1 den Button \u201eSDK zur\u00fccksetzen\u201c nutzen."); },12000);
   window.OneSignalDeferred=window.OneSignalDeferred||[];
   OneSignalDeferred.push(async function(OneSignal){
+    clearTimeout(guard);
     try{
       var granted=OneSignal.Notifications.permission || (typeof Notification!=="undefined" && Notification.permission==="granted");
       if(!granted){
@@ -5869,8 +5871,10 @@ function nlSubmit(mailEl,consentEl,out,btn){
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ msg(out,"err","Bitte gib eine g\u00fcltige E-Mail-Adresse ein."); return; }
   if(!consentEl.checked){ msg(out,"err","Bitte best\u00e4tige die Einwilligung (Checkbox), um den Newsletter zu erhalten."); return; }
   btn.disabled=true; clearMsg(out);
+  var guard=setTimeout(function(){ btn.disabled=false; msg(out,"err","Das System hat nicht reagiert. Bitte Seite neu laden und erneut versuchen."); },12000);
   window.OneSignalDeferred=window.OneSignalDeferred||[];
   OneSignalDeferred.push(async function(OneSignal){
+    clearTimeout(guard);
     try{
       await OneSignal.User.addEmail(email);
       try{ localStorage.setItem(NL_KEY,email); }catch(e){}
@@ -5998,13 +6002,10 @@ window.tvfPushReset=async function(){
       try{ await regs[i].unregister(); }catch(e){}
     }
   }catch(e){}
-  try{
-    if(indexedDB.databases){
-      var dbs=await indexedDB.databases();
-      for(var j=0;j<dbs.length;j++){ if(dbs[j].name && /one_?signal/i.test(dbs[j].name)){ try{ indexedDB.deleteDatabase(dbs[j].name); }catch(e){} } }
-    }
-  }catch(e){}
-  try{ indexedDB.deleteDatabase("ONE_SIGNAL_SDK_DB"); }catch(e){}
+  function delDb(n){ return new Promise(function(res){ try{ var q=indexedDB.deleteDatabase(n); q.onsuccess=q.onerror=q.onblocked=function(){res();}; setTimeout(res,3000); }catch(e){ res(); } }); }
+  var names=["ONE_SIGNAL_SDK_DB"];
+  try{ if(indexedDB.databases){ (await indexedDB.databases()).forEach(function(db){ if(db.name && /one_?signal/i.test(db.name) && names.indexOf(db.name)<0) names.push(db.name); }); } }catch(e){}
+  for(var j=0;j<names.length;j++){ await delDb(names[j]); }
   try{ Object.keys(localStorage).forEach(function(k){ if(/one_?signal/i.test(k)) localStorage.removeItem(k); }); }catch(e){}
   /* Vereinsauswahl (tvf_push_clubs) bleibt absichtlich erhalten */
   alert("OneSignal-Speicher zur\u00fcckgesetzt. Die Seite l\u00e4dt jetzt neu \u2013 danach Vereine pr\u00fcfen und auf \u201eBenachrichtigungen aktivieren\u201c dr\u00fccken.");
@@ -6020,11 +6021,20 @@ function pushDebugPanel(d){
   rst.textContent="\u26A0\uFE0F SDK zur\u00fccksetzen";
   rst.style.cssText="background:#B42318;color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700";
   rst.onclick=function(){ if(confirm("OneSignal-Speicher dieses Browsers komplett zur\u00fccksetzen und neu registrieren?")) window.tvfPushReset(); };
+  var cpy=document.createElement("button");
+  cpy.textContent="\u29C9 kopieren";
+  cpy.style.cssText="background:#2563EB;color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px";
+  cpy.onclick=function(){
+    var t="TVF Push-Debug\n"+JSON.stringify(d,null,1);
+    function okFb(){ cpy.textContent="\u2713 kopiert"; setTimeout(function(){cpy.textContent="\u29C9 kopieren";},1500); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(okFb).catch(function(){ fb(); }); } else fb();
+    function fb(){ var ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy"); okFb();}catch(e){} ta.remove(); }
+  };
   var cls=document.createElement("button");
   cls.textContent="\u2715 schlie\u00dfen";
   cls.style.cssText="background:#333;color:#ccc;border:none;border-radius:6px;padding:6px 10px;font-size:11px;margin-left:auto";
   cls.onclick=function(){ wrap.remove(); };
-  bar.appendChild(rst); bar.appendChild(cls);
+  bar.appendChild(rst); bar.appendChild(cpy); bar.appendChild(cls);
   var pre=document.createElement("pre");
   pre.style.cssText="margin:0;color:#7CFFB2;font-size:10px;padding:10px;overflow:auto;max-height:34vh";
   pre.textContent="TVF Push-Debug\n"+JSON.stringify(d,null,1);
@@ -6034,7 +6044,9 @@ function pushDebugPanel(d){
 function pushDebug(){
   if(location.search.indexOf("pushdebug")<0) return;
   var done=false;
-  setTimeout(function(){ if(!done){ done=true; pushDebugPanel({fehler:"OneSignal SDK nicht initialisiert (Timeout)", nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a", lokaleAuswahl:loadSel(), apiOneSignal:window.__tvfApiCheck||"?"}); } },5000);
+  setTimeout(async function(){ if(!done){ done=true;
+    var sw=[]; try{ sw=(await navigator.serviceWorker.getRegistrations()).map(function(r){return r.scope+" ["+((r.active||{}).state||"?")+"]";}); }catch(e){}
+    pushDebugPanel({fehler:"OneSignal SDK nicht initialisiert (Timeout nach 10s)", nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a", lokaleAuswahl:loadSel(), apiOneSignal:window.__tvfApiCheck||"?", serviceWorker:sw, sdkLogs:(window.__tvfLogs||[]).slice(-12)}); } },10000);
   window.__tvfApiCheck="pr\u00fcfe\u2026";
   fetch("https://api.onesignal.com/sync/94a57127-83f5-4bd7-af6c-294c041a3958/web",{method:"GET"})
     .then(function(r){ window.__tvfApiCheck="erreichbar (HTTP "+r.status+")"; })
