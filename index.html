@@ -5822,6 +5822,16 @@ function pushSave(){
       for(var i=0;i<removed.length;i++){ try{ await OneSignal.User.removeTag(clubSlug(removed[i])); }catch(e){} }
       /* Rueckbestaetigung: Tags aus dem SDK-State lesen (getTags ist in v16 synchron) */
       await new Promise(function(r){setTimeout(r,600);});
+      /* Ohne Push-Subscription-ID kann nie ein Push zugestellt werden - Tags allein reichen nicht */
+      var subId=null;
+      for(var w=0; w<10 && !subId; w++){
+        try{ subId=OneSignal.User.PushSubscription.id; }catch(e){}
+        if(!subId) await new Promise(function(r){setTimeout(r,700);});
+      }
+      if(sel.length && !subId){
+        msg(out,"err","Die Push-Registrierung deines Browsers ist unvollst\u00e4ndig (keine Subscription-ID). Bitte l\u00f6sche einmal die Website-Daten f\u00fcr tvfussball.de (Chrome: Einstellungen \u2192 Website-Einstellungen \u2192 tvfussball.de \u2192 Daten l\u00f6schen), lade die Seite neu und aktiviere erneut.");
+        btn.disabled=false; return;
+      }
       var applied={}; try{ applied=OneSignal.User.getTags()||{}; }catch(e){}
       var confirmed=sel.filter(function(c){ var v=applied[clubSlug(c)]; return v==="1"||v===1; });
       if(!sel.length){ msg(out,"ok","Alle Vereins-Alarme wurden entfernt."); }
