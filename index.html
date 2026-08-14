@@ -6030,11 +6030,15 @@ function pushDebugPanel(d){
     if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(okFb).catch(function(){ fb(); }); } else fb();
     function fb(){ var ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy"); okFb();}catch(e){} ta.remove(); }
   };
+  var mini=document.createElement("button");
+  mini.textContent="\u2581 minimieren";
+  mini.style.cssText="background:#333;color:#ccc;border:none;border-radius:6px;padding:6px 10px;font-size:11px;margin-left:auto";
+  mini.onclick=function(){ var h=pre.style.display==="none"; pre.style.display=h?"":"none"; mini.textContent=h?"\u2581 minimieren":"\u25B3 anzeigen"; };
   var cls=document.createElement("button");
-  cls.textContent="\u2715 schlie\u00dfen";
-  cls.style.cssText="background:#333;color:#ccc;border:none;border-radius:6px;padding:6px 10px;font-size:11px;margin-left:auto";
+  cls.textContent="\u2715";
+  cls.style.cssText="background:#333;color:#ccc;border:none;border-radius:6px;padding:6px 10px;font-size:11px";
   cls.onclick=function(){ wrap.remove(); };
-  bar.appendChild(rst); bar.appendChild(cpy); bar.appendChild(cls);
+  bar.appendChild(rst); bar.appendChild(cpy); bar.appendChild(mini); bar.appendChild(cls);
   var pre=document.createElement("pre");
   pre.style.cssText="margin:0;color:#7CFFB2;font-size:10px;padding:10px;overflow:auto;max-height:34vh";
   pre.textContent="TVF Push-Debug\n"+JSON.stringify(d,null,1);
