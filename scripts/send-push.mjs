@@ -55,8 +55,11 @@ function berlinParts(d = new Date()) {
 }
 const { dmy: TODAY, hour: BERLIN_HOUR } = berlinParts();
 
-if (!FORCE && BERLIN_HOUR !== 8) {
-  console.log(`Berlin ist gerade ${BERLIN_HOUR}:xx Uhr (nicht 08:xx) – falscher Cron-Slot (Sommer-/Winterzeit). Beende ohne Versand.`);
+/* GitHub-Cron laeuft oft 1-2h verspaetet, daher Fenster statt exakter Stunde.
+   Doppel-Versand (beide Cron-Slots im Fenster) verhindert die deterministische
+   Idempotenz-UUID: gleicher Verein+Tag => gleiche UUID => OneSignal dedupliziert. */
+if (!FORCE && (BERLIN_HOUR < 8 || BERLIN_HOUR > 11)) {
+  console.log(`Berlin ist gerade ${BERLIN_HOUR}:xx Uhr (Sendefenster 08-11 Uhr verfehlt) – Beende ohne Versand.`);
   process.exit(0);
 }
 if (!API_KEY && !DRY) {
