@@ -44,6 +44,7 @@
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 OneSignalDeferred.push(async function(OneSignal){
   try{
+    if(location.search.indexOf("pushdebug")>=0){ try{ OneSignal.Debug.setLogLevel("trace"); }catch(e){} }
     await OneSignal.init({
       appId: "94a57127-83f5-4bd7-af6c-294c041a3958",
       serviceWorkerPath: "OneSignalSDKWorker.js",
@@ -5715,6 +5716,21 @@ if(PAGE==="live"){
 (function(){
 "use strict";
 var PUSH_KEY="tvf_push_clubs", NL_KEY="tvf_nl_email";
+/* Debug: OneSignal-Konsolenzeilen mitschneiden (nur bei ?pushdebug) */
+if(location.search.indexOf("pushdebug")>=0){
+  window.__tvfLogs=[];
+  ["log","warn","error","debug","info"].forEach(function(k){
+    var orig=console[k];
+    console[k]=function(){
+      try{
+        var txt=[].map.call(arguments,function(a){ try{return typeof a==="string"?a:JSON.stringify(a)}catch(e){return String(a)} }).join(" ");
+        if(/onesignal|operation|subscription|createUser|executor/i.test(txt)) window.__tvfLogs.push(k+": "+txt.slice(0,220));
+        if(window.__tvfLogs.length>25) window.__tvfLogs.shift();
+      }catch(e){}
+      return orig.apply(console,arguments);
+    };
+  });
+}
 
 /* Slug muss identisch zu scripts/send-push.mjs sein! */
 function clubSlug(name){
@@ -5986,7 +6002,7 @@ function pushDebug(){
   var done=false;
   setTimeout(function(){ if(!done){ done=true; pushDebugPanel({fehler:"OneSignal SDK nicht initialisiert (Timeout)", nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a", lokaleAuswahl:loadSel(), apiOneSignal:window.__tvfApiCheck||"?"}); } },5000);
   window.__tvfApiCheck="pr\u00fcfe\u2026";
-  fetch("https://api.onesignal.com/apps/94a57127-83f5-4bd7-af6c-294c041a3958/config",{method:"GET"})
+  fetch("https://api.onesignal.com/sync/94a57127-83f5-4bd7-af6c-294c041a3958/web",{method:"GET"})
     .then(function(r){ window.__tvfApiCheck="erreichbar (HTTP "+r.status+")"; })
     .catch(function(e){ window.__tvfApiCheck="BLOCKIERT/NICHT ERREICHBAR: "+String(e).slice(0,80); });
   window.OneSignalDeferred=window.OneSignalDeferred||[];
@@ -6018,6 +6034,16 @@ function pushDebug(){
         }catch(pe){ d.pushDienstTest="FEHLER: "+pe.name+" \u2013 "+String(pe.message).slice(0,120); }
       } else { d.pushDienstTest="\u00fcbersprungen (kein SW oder kein VAPID-Key)"; }
     }catch(swe){ d.pushDienstTest="Test fehlgeschlagen: "+String(swe).slice(0,120); }
+    /* Direkter Test des User-Anlege-Endpoints (den nutzt das SDK intern) */
+    try{
+      var ur=await fetch("https://api.onesignal.com/apps/94a57127-83f5-4bd7-af6c-294c041a3958/users",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({identity:{},subscriptions:[],properties:{}})
+      });
+      var ub=""; try{ ub=(await ur.text()).slice(0,140); }catch(e){}
+      d.userCreateTest="HTTP "+ur.status+" "+ub;
+    }catch(ue){ d.userCreateTest="FEHLER: "+String(ue).slice(0,140); }
+    d.sdkLogs=(window.__tvfLogs||[]).slice(-12);
     pushDebugPanel(d);
   });
 }
