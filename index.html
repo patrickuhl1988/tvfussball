@@ -6003,6 +6003,21 @@ function pushDebug(){
       lokaleAuswahl:loadSel(),
       apiOneSignal:window.__tvfApiCheck||"?"
     };
+    /* Direkter Test der Push-Registrierung (Service Worker + FCM/Push-Dienst) */
+    try{
+      var regs=await navigator.serviceWorker.getRegistrations();
+      d.serviceWorker=regs.map(function(r){return r.scope+" ["+((r.active||{}).state||"?")+"]";});
+      var cfg=await (await fetch("https://api.onesignal.com/sync/94a57127-83f5-4bd7-af6c-294c041a3958/web")).json();
+      var vapid=(cfg.config||{}).vapid_public_key;
+      d.vapidKey=vapid?("vorhanden ("+vapid.slice(0,10)+"\u2026)"):"FEHLT";
+      if(vapid && regs.length){
+        function b64ToU8(b){var pad="=".repeat((4-b.length%4)%4);var r=(b+pad).replace(/-/g,"+").replace(/_/g,"/");var raw=atob(r);var a=new Uint8Array(raw.length);for(var i=0;i<raw.length;i++)a[i]=raw.charCodeAt(i);return a;}
+        try{
+          var sub=await regs[0].pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToU8(vapid)});
+          d.pushDienstTest="OK \u2013 Endpoint: "+sub.endpoint.slice(0,55)+"\u2026";
+        }catch(pe){ d.pushDienstTest="FEHLER: "+pe.name+" \u2013 "+String(pe.message).slice(0,120); }
+      } else { d.pushDienstTest="\u00fcbersprungen (kein SW oder kein VAPID-Key)"; }
+    }catch(swe){ d.pushDienstTest="Test fehlgeschlagen: "+String(swe).slice(0,120); }
     pushDebugPanel(d);
   });
 }
