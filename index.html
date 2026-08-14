@@ -5984,10 +5984,15 @@ function pushDebugPanel(d){
 function pushDebug(){
   if(location.search.indexOf("pushdebug")<0) return;
   var done=false;
-  setTimeout(function(){ if(!done){ done=true; pushDebugPanel({fehler:"OneSignal SDK nicht initialisiert (Timeout)", nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a", lokaleAuswahl:loadSel()}); } },5000);
+  setTimeout(function(){ if(!done){ done=true; pushDebugPanel({fehler:"OneSignal SDK nicht initialisiert (Timeout)", nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a", lokaleAuswahl:loadSel(), apiOneSignal:window.__tvfApiCheck||"?"}); } },5000);
+  window.__tvfApiCheck="pr\u00fcfe\u2026";
+  fetch("https://api.onesignal.com/apps/94a57127-83f5-4bd7-af6c-294c041a3958/config",{method:"GET"})
+    .then(function(r){ window.__tvfApiCheck="erreichbar (HTTP "+r.status+")"; })
+    .catch(function(e){ window.__tvfApiCheck="BLOCKIERT/NICHT ERREICHBAR: "+String(e).slice(0,80); });
   window.OneSignalDeferred=window.OneSignalDeferred||[];
   OneSignalDeferred.push(async function(OneSignal){
     if(done) return; done=true;
+    await new Promise(function(r){setTimeout(r,1500);});
     var d={
       nativePermission:(typeof Notification!=="undefined")?Notification.permission:"n/a",
       sdkPermission:OneSignal.Notifications.permission,
@@ -5995,7 +6000,8 @@ function pushDebug(){
       pushSubId:OneSignal.User.PushSubscription.id||null,
       optedIn:OneSignal.User.PushSubscription.optedIn,
       tags:(function(){try{return OneSignal.User.getTags()}catch(e){return "err"}})(),
-      lokaleAuswahl:loadSel()
+      lokaleAuswahl:loadSel(),
+      apiOneSignal:window.__tvfApiCheck||"?"
     };
     pushDebugPanel(d);
   });
