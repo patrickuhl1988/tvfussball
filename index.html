@@ -5841,10 +5841,22 @@ function pushSave(){
       /* Rueckbestaetigung: Tags aus dem SDK-State lesen (getTags ist in v16 synchron) */
       await new Promise(function(r){setTimeout(r,600);});
       /* Ohne Push-Subscription-ID kann nie ein Push zugestellt werden - Tags allein reichen nicht */
-      var subId=null;
-      for(var w=0; w<10 && !subId; w++){
-        try{ subId=OneSignal.User.PushSubscription.id; }catch(e){}
-        if(!subId) await new Promise(function(r){setTimeout(r,700);});
+      function sleep(ms){ return new Promise(function(r){setTimeout(r,ms);}); }
+      async function pollSub(n,ms){ var id=null; for(var w=0; w<n && !id; w++){ try{ id=OneSignal.User.PushSubscription.id; }catch(e){} if(!id) await sleep(ms); } return id; }
+      var subId=await pollSub(6,700);
+      if(sel.length && !subId){
+        /* Selbstheilung: festgefahrenen optedIn-Zustand aufbrechen - optOut erzwingt
+           beim folgenden optIn die Neuanlage des Subscription-Modells */
+        console.warn("[TVF-Push] Keine Subscription-ID - versuche optOut/optIn-Recovery");
+        try{ await OneSignal.User.PushSubscription.optOut(); }catch(e){ console.warn("optOut:",e); }
+        await sleep(800);
+        try{ await OneSignal.Notifications.requestPermission(); }catch(e){}
+        try{ await OneSignal.User.PushSubscription.optIn(); }catch(e){ console.warn("optIn:",e); }
+        subId=await pollSub(12,800);
+        if(subId){
+          /* Tags nach Recovery erneut setzen - sie koennten am alten Zustand haengen */
+          try{ if(Object.keys(addTags).length) await OneSignal.User.addTags(addTags); }catch(e){}
+        }
       }
       if(sel.length && !subId){
         msg(out,"err","Die Push-Registrierung deines Browsers ist unvollst\u00e4ndig (keine Subscription-ID). Bitte l\u00f6sche einmal die Website-Daten f\u00fcr tvfussball.de (Chrome: Einstellungen \u2192 Website-Einstellungen \u2192 tvfussball.de \u2192 Daten l\u00f6schen), lade die Seite neu und aktiviere erneut.");
