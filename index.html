@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html data-build="2026-08-13-datenlauf" lang="de" data-theme="light">
-<head><script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=22"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=22"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=22"><link rel="shortcut icon" href="favicon.ico?v=22"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=22"><link rel="stylesheet" href="direct.css?v=22">
+<head><script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=23"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=23"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=23"><link rel="shortcut icon" href="favicon.ico?v=23"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=23"><link rel="stylesheet" href="direct.css?v=23">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT8VKN46TH"></script>
 <script>
@@ -593,14 +593,14 @@ function tintStyle(m){
 
 /* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
 const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
-  ORF={n:"ORF 1",t:"fta",q:"HD"}, SERV={n:"ServusTV",t:"fta",q:"HD"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD"},
-  SRF2={n:"SRF zwei",t:"fta",q:"HD"}, SRFi={n:"SRF info",t:"fta",q:"HD"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
-  SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD"}, BBC={n:"BBC One",t:"fta",q:"HD"}, ITV={n:"ITV1",t:"fta",q:"HD"},
-  UKg={n:"BBC / ITV",t:"fta",q:"HD"};
-const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, RTL={n:"RTL",t:"fta",q:"HD",u:"https://plus.rtl.de/"}, SKY={n:"Sky",t:"pay",q:"HD"};
+  ORF={n:"ORF 1",t:"fta",q:"HD",u:"https://on.orf.at/"}, SERV={n:"ServusTV",t:"fta",q:"HD",u:"https://www.servustv.com/"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD",u:"https://on.orf.at/"},
+  SRF2={n:"SRF zwei",t:"fta",q:"HD",u:"https://www.srf.ch/play/tv/live"}, SRFi={n:"SRF info",t:"fta",q:"HD",u:"https://www.srf.ch/play/tv/live"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
+  SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD",u:"https://www.srf.ch/play/tv/live"}, BBC={n:"BBC One",t:"fta",q:"HD",u:"https://www.bbc.co.uk/iplayer"}, ITV={n:"ITV1",t:"fta",q:"HD",u:"https://www.itvx.com/"},
+  UKg={n:"BBC / ITV",t:"fta",q:"HD",u:"https://www.bbc.co.uk/iplayer"};
+const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, RTL={n:"RTL",t:"fta",q:"HD",u:"https://plus.rtl.de/"}, SKY={n:"Sky",t:"pay",q:"HD",u:"https://www.wow.de/"};
 const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
-const M6={n:"M6",t:"fta"}, BEIN={n:"beIN Sports",t:"pay"}, RAI={n:"RAI",t:"fta"}, DAZN={n:"DAZN",t:"pay"}, OF={n:"OneFootball",t:"fta",u:"https://onefootball.com/"}, LAOLA={n:"LAOLA1",t:"fta",u:"https://www.laola1.at/"}, CLUBTV={n:"Vereins-/Regional-Stream",t:"fta"}, SKYAT={n:"Sky Sport Austria",t:"pay"}, BLUE={n:"blue Sport",t:"pay"},
-  RTVE={n:"RTVE",t:"fta"}, NOS={n:"NOS",t:"fta"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
+const M6={n:"M6",t:"fta",u:"https://www.6play.fr/"}, BEIN={n:"beIN Sports",t:"pay",u:"https://www.beinsports.com/"}, RAI={n:"RAI",t:"fta",u:"https://www.raiplay.it/"}, DAZN={n:"DAZN",t:"pay",u:"https://www.dazn.com/de-DE/home"}, OF={n:"OneFootball",t:"fta",u:"https://onefootball.com/"}, LAOLA={n:"LAOLA1",t:"fta",u:"https://www.laola1.at/"}, CLUBTV={n:"Vereins-/Regional-Stream",t:"fta"}, SKYAT={n:"Sky Sport Austria",t:"pay",u:"https://www.skysportaustria.at/"}, BLUE={n:"blue Sport",t:"pay",u:"https://www.blue.ch/de/sport/"},
+  RTVE={n:"RTVE",t:"fta",u:"https://www.rtve.es/play/"}, NOS={n:"NOS",t:"fta",u:"https://nos.nl/live"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
   CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"},
   RTE={n:"RTÉ 2",t:"fta",q:"HD"}, YLE={n:"Yle TV2",t:"fta",q:"HD"}, MTV3={n:"MTV3",t:"fta",q:"HD"},
   MEDIA={n:"Mediacorp",t:"fta",q:"HD"}, TSPT={n:"T Sports",t:"fta",q:"HD"}, BTV={n:"BTV",t:"fta",q:"HD"},
@@ -628,17 +628,17 @@ const RSI2={n:"RSI LA 2",t:"fta",q:"HD",u:"https://www.rsi.ch/play/"};
 const OEFBTV={n:"ÖFB TV",t:"fta",u:"https://tv.oefb.at/"};
 const MAGSPORT={n:"MagentaSport",t:"pay",q:"HD",u:"https://www.magentasport.de/"}, FCBTV={n:"FC Bayern TV PLUS",t:"pay",u:"https://fcbayern.com/fcbayerntv"}, BVBTV={n:"BVB-TV",t:"fta",u:"https://www.bvb.tv/"}, SGETV={n:"EintrachtTV+",t:"pay",u:"https://tv.eintracht.de/"}, HSVTV={n:"HSVtv / YouTube",t:"fta",u:"https://www.hsv.de/hsvtv"}, JUVTV={n:"Juventus.com / App",t:"fta",u:"https://www.juventus.com/"}, VOLKS={n:"Volksstimme-Livestream",t:"pay",u:"https://www.volksstimme.de/"}, LFCTV={n:"LFCTV / All Red Video",t:"pay",u:"https://video.liverpoolfc.com/"}, SKYYT={n:"skysport.de / YouTube",t:"fta",u:"https://sport.sky.de/"};
 /* Premier-League-Auslandssender 2025–28 (Rechteinhaber je Land) */
-const SKYUK={n:"Sky Sports",t:"pay",q:"HD"}, TNT={n:"TNT Sports",t:"pay",q:"HD"}, BBCHL={n:"BBC (Highlights)",t:"fta",q:"HD"},
-  CANALP={n:"Canal+",t:"pay",q:"HD"}, SKYIT={n:"Sky Italia",t:"pay",q:"HD"}, VIAPLAY={n:"Viaplay",t:"pay",q:"HD"},
-  PEACOCK={n:"NBC / Peacock",t:"pay",q:"HD"}, FUBO={n:"Fubo",t:"pay",q:"HD"}, SKYIE={n:"Sky Sports / Premier Sports",t:"pay",q:"HD"},
+const SKYUK={n:"Sky Sports",t:"pay",q:"HD",u:"https://www.skysports.com/"}, TNT={n:"TNT Sports",t:"pay",q:"HD",u:"https://www.tntsports.co.uk/"}, BBCHL={n:"BBC (Highlights)",t:"fta",q:"HD",u:"https://www.bbc.co.uk/iplayer"},
+  CANALP={n:"Canal+",t:"pay",q:"HD",u:"https://www.canalplus.com/"}, SKYIT={n:"Sky Italia",t:"pay",q:"HD",u:"https://sport.sky.it/"}, VIAPLAY={n:"Viaplay",t:"pay",q:"HD",u:"https://viaplay.com/"},
+  PEACOCK={n:"NBC / Peacock",t:"pay",q:"HD",u:"https://www.peacocktv.com/"}, FUBO={n:"Fubo",t:"pay",q:"HD"}, SKYIE={n:"Sky Sports / Premier Sports",t:"pay",q:"HD",u:"https://www.skysports.com/"},
   STARHUB={n:"StarHub",t:"pay",q:"HD"}, FOXMX={n:"Fox Sports / Tubi",t:"pay",q:"HD"}, JASTH={n:"trueID / JAS",t:"pay",q:"HD"}, TAPMAD={n:"tapmad",t:"pay",q:"HD"};
 /* La-Liga-Auslandssender 2026/27 (Rechteinhaber je Land) */
-const MOVI={n:"Movistar+ / DAZN",t:"pay",q:"HD"}, PREMSP={n:"Premier Sports",t:"pay",q:"HD"}, DISNEY={n:"Disney+",t:"pay",q:"HD"},
-  ESPNPLUS={n:"ESPN+ / ESPN",t:"pay",q:"HD"}, ZIGGO={n:"Ziggo Sport",t:"pay",q:"HD"};
+const MOVI={n:"Movistar+ / DAZN",t:"pay",q:"HD",u:"https://www.movistarplus.es/"}, PREMSP={n:"Premier Sports",t:"pay",q:"HD"}, DISNEY={n:"Disney+",t:"pay",q:"HD",u:"https://www.disneyplus.com/"},
+  ESPNPLUS={n:"ESPN+ / ESPN",t:"pay",q:"HD",u:"https://www.espn.com/watch/"}, ZIGGO={n:"Ziggo Sport",t:"pay",q:"HD"};
 /* Serie-A-Auslandssender 2026/27 (Rechteinhaber je Land) */
-const PARA={n:"Paramount+ / CBS Sports",t:"pay",q:"HD"}, CMORE={n:"C More",t:"pay",q:"HD"}, SSPORT={n:"S Sport",t:"pay",q:"HD"};
+const PARA={n:"Paramount+ / CBS Sports",t:"pay",q:"HD",u:"https://www.paramountplus.com/"}, CMORE={n:"C More",t:"pay",q:"HD"}, SSPORT={n:"S Sport",t:"pay",q:"HD"};
 /* Ligue-1-Sender 2026/27 */
-const LIGUE1PLUS={n:"Ligue 1+",t:"pay",q:"HD"};
+const LIGUE1PLUS={n:"Ligue 1+",t:"pay",q:"HD",u:"https://plus.ligue1.com/"};
 const UEFATV={n:"UEFA.tv",t:"fta",q:"HD",u:"https://www.uefa.tv/"};
 
 
@@ -6121,5 +6121,5 @@ function bootBells(){
 if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bootBells); else bootBells();
 })();
 </script>
-<script src="app-direct.js?v=22"></script></body>
+<script src="app-direct.js?v=23"></script></body>
 </html>
