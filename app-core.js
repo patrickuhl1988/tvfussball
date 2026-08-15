@@ -1,0 +1,417 @@
+
+const ADS_ENABLED = false;
+let COUNTRY = "DE"; // Standardmarkt (per Geo-IP überschrieben); alle weiteren Länder unter „Mehr Sender"
+let MARKET_LOCKED = false; // true = Nutzer hat Land manuell gewählt (Geo-IP wird ignoriert)
+const _tk=new Date(); const TODAY_KEY = _tk.getFullYear()*10000+(_tk.getMonth()+1)*100+_tk.getDate(); // dynamisch: Spiele vor heute erscheinen nicht mehr in der Senderliste (sondern in Highlights)
+
+const I18N = {
+  de:{ nav_live:"Heute", nav_hl:"Highlights", nav_news:"Transfers", nav_prov:"Anbieter", nav_wm:"WM", nav_tipp:"Tippspiel",
+    tipp_eyebrow:"Tippspiel", tipp_title:"Tippe das Spiel – und gewinne",
+    tipp_sub:"Tippe das WM-Finale heute Abend: Spanien – Argentinien (21:00 Uhr, ZDF & MagentaTV). Gewinnst du, melden wir uns über Facebook oder Instagram bei dir.",
+    tipp_nick:"Spitzname (optional)", tipp_nick_ph:"Wie sollen wir dich nennen?",
+    tipp_tip_label:"Deine Tipps – genaues Endergebnis", tipp_tip_ph:"z. B. 0:2",
+    tipp_fb_label:"Dein Insta- oder Facebook-Profil", tipp_fb_ph:"Link zu deinem Insta- oder FB-Profil",
+    tipp_fb_help:"Nur zur Kontaktaufnahme, falls du gewinnst.",
+    tipp_consent:"Ich bin einverstanden, dass mein Tipp und mein Profil-Link zur Kontaktaufnahme im Gewinnfall gespeichert und verarbeitet werden.",
+    tipp_submit:"Tipp abgeben", tipp_rules_t:"So funktioniert's",
+    tipp_rule1:"Tippe beide Spiele aufs genaue Endergebnis.",
+    tipp_rule2:"Teilnahmeschluss ist der Anpfiff des ersten Spiels (Mo, 29.06., 19:00 Uhr).",
+    tipp_rule3:"Teilnahme nur mit Follow (Facebook oder Instagram) + geteilter Seite.",
+    tipp_rule4:"Verlost werden 1× 20 € und 1× 10 € Amazon-Gutschein. Bei Gewinn melden wir uns über Facebook oder Instagram.",
+    tipp_req_follow:"Ich folge tvfussball.de auf Facebook oder Instagram.", tipp_req_share:"Ich habe tvfussball.de mit mindestens einem Freund geteilt (z. B. per WhatsApp).",
+    tipp_cd:"Anpfiff in", tipp_kickoff:"Anpfiff – Tippabgabe geschlossen",
+    tipp_closed:"Das Spiel hat begonnen – die Tippabgabe ist geschlossen.",
+    tipp_e_tip:"Bitte gib deinen Tipp ein.", tipp_e_fb:"Bitte gib einen gültigen Instagram- oder Facebook-Link ein.",
+    tipp_e_consent:"Bitte stimme der Verarbeitung zu, um teilzunehmen.", tipp_e_follow:"Bitte bestätige, dass du uns auf Facebook oder Instagram folgst.", tipp_e_share:"Bitte bestätige, dass du die Seite geteilt hast.",
+    tipp_done_t:"Dein Tipp ist eingegangen!", tipp_done_s:"Viel Glück! Bei Gewinn melden wir uns über Facebook.",
+    tipp_your:"Dein Tipp", tipp_name:"Name",
+    tipp_fallback:"Damit dein Tipp uns sicher erreicht, schick ihn uns kurz per Facebook – wir haben ihn schon für dich kopiert.",
+    tipp_fb_send:"Auf Facebook senden", tipp_edit:"Tipp ändern",
+    tipp_prizes_t:"Heutige Gewinne", tipp_double_t:"Dreifache Gewinnchance", tipp_double_s:"Tippe auf tvfussball.de, bei Facebook UND bei Instagram – so bist du dreifach im Lostopf.", tipp_fb_game:"Facebook-Gewinnspiel", tipp_ig_game:"Instagram-Gewinnspiel", tipp_share_t:"Gewinnspiel mit Freunden teilen", tipp_share_native:"Teilen", tipp_share_text:"Tippe Deutschland – Paraguay & Brasilien – Japan auf TVFussball.de und gewinne Amazon-Gutscheine! 🎯⚽",
+    wm_eyebrow:"WM Special 2026", wm_title:"Die WM in USA, Kanada & Mexiko",
+    wm_sub:"Tabellen, K.-o.-Baum, Hymnen aller Teams, Memes und das große Quiz — alles an einem Ort.",
+    wm_groups:"Gruppen", wm_final:"Finale", wm_tables:"Tabellen & K.-o.-Runde",
+    wm_tables_sub:"Gruppen A–L plus Sechzehntel-, Achtel- und Viertelfinale",
+    wm_updated:"Stand: 23. Juni 2026 · Gruppenphase, Rangfolge ändert sich bis 27.06.",
+    wm_group_phase:"Gruppenphase", wm_leg_q:"1.–2.: Kurs Achtelfinale", wm_leg_m:"3.: beste Dritte",
+    wm_r32:"Sechzehntelfinale", wm_r16:"Achtelfinale", wm_r8:"Viertelfinale",
+    wm_quiz:"WM Quiz", wm_quiz_sub:"15 Fragen — wie gut kennst du die WM 2026?",
+    wm_quiz_intro:"Tippe pro Frage auf eine Antwort. Du siehst sofort, ob es stimmt. Am Ende gibt es deinen Rang.",
+    wm_quiz_reset:"Neu starten", wm_correct:"richtig",
+    wm_anthems:"Hymnen der Teams", wm_anthems_sub:"Alle 48 Teams — mit Kurzbeschreibung und Anhör-Link", wm_listen:"Anhören",
+    wm_memes:"Memes & Kurioses", wm_memes_sub:"Diese Sektion ist noch in Bearbeitung",
+    wm_wip:"Diese Sektion ist noch in Bearbeitung — Inhalte und Bilder folgen.",
+    wm_meme_note:"Bilder sind Platzhalter. Die Likes gelten nur für diese Sitzung.",
+    where:"Sender in", more:"Sender in weiteren Ländern", less:"Weniger anzeigen", running:"Läuft",
+    lohnt_t:"Lohnt sich’s?", tvf_rating:"TVFussball-Note", lh_voices:"Stimmen", lh_tip:"Tipp", lh_odds:"Wettquoten", lh_odds_upd:"Stand:", lh_last:"Letzte Spiele", lh_src:"Quelle", an_t:"Spielanalyse", an_more:"mehr Details", an_goals:"Tore", an_cards:"Karten", an_rating:"Spielnote", an_motm:"Spieler des Spiels", an_inj:"Verletzungen", an_ref:"Schiedsrichter", an_poss:"Ballbesitz", an_chances:"Chancen", an_run:"Laufwunder", an_pen:"Elfmeter", an_og:"Eigentor", an_src:"Statistik-Quelle", lohnt_score:"Lohnt-Score", an_events:"Tore & Karten", an_summary:"Fazit",
+    fta:"Free-TV", pay:"Pay", recent:"Vergangene Spiele", top_news:"Aktuelle News", prov_title:"Anbieter & Preise",
+    best_free:"Free-TV", best_radio:"Radio", best_pay:"Nur Pay", best_none:"Kein dt. TV-Sender", source:"Quelle", goals:"Tore", read:"Zur Quelle",
+    tz:"MEZ", share:"Teilen", shared:"Link kopiert", shared_btn:"Kopiert!", cal_add:"In Kalender", cal_done:"Termin als .ics gespeichert 📅",
+    ad_label:"Anzeigenplatz · deaktiviert", ad_sub:"Reserviert (AdSense/GAM) · per Feature-Flag aktivierbar", ad_on:"Anzeige",
+    price_from:"ab", price_approx:"ca.",
+    result:"Endstand", ft:"ENDE", nohits:"Keine Treffer", f_all:"Alle", f_3goals:"3+ Tore", f_top:"Top",
+    f_free:"Nur Free-TV", f_tonight:"Demnächst", f_now:"Läuft jetzt", f_format:"Formate", f_mine:"★ Meine", fmt_head:"Sendungen & Magazine", fmt_live:"live", fmt_more:"Zur Sendung", fk_highlights:"Highlights", fk_magazin:"Magazin", fk_talk:"Talk", fk_vorbericht:"Vorbericht",fk_auslosung:"Auslosung", fk_live:"Live-Studio", fk_podcast:"Podcast", fk_video:"Video",
+    mine_empty:"Noch keinem Team gefolgt — tippe in einem Spiel auf „folgen“.", filt_empty:"Keine Spiele für diesen Filter.",
+    follow:"folgen", following:"folge ich", follow_hint:"Folge Teams, um nur deine Spiele zu sehen — Kalender-Erinnerung inklusive.",
+    abo_title:"Welches Abo brauche ich?", abo_sub:"Wähle, was du sehen willst — wir zeigen die günstigste Kombination und was gratis bleibt.",
+    abo_pick:"Wettbewerbe wählen:", abo_pick_none:"Tippe oben auf die Wettbewerbe, die du sehen willst.",
+    abo_total:"Günstigste Kombination", abo_month:"/Mon.", abo_free_only:"Komplett gratis — kein Abo nötig! 🎉",
+    abo_free_keeps:"Gratis dabei (ARD/ZDF)", abo_need:"Dafür brauchst du", abo_full:"komplett", abo_partial:"Teil",
+    abo_complete:"Für die komplette Abdeckung zusätzlich:", abo_visit:"Zum Anbieter", abo_reset:"Zurücksetzen",
+    abo_aff_note:"Anbieter-Links sind neutral (kein Affiliate aktiv). Preise ca., Stand Juni 2026 — bitte beim Anbieter prüfen.",
+    f_wm:"WM", f_dfb:"DFB-Pokal", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Liga", f_bl3:"3. Liga", f_el:"Europa League",f_ecl:"Conference League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_l1:"Ligue 1", f_test:"Tests", soon_title:"Bald verfügbar", soon_sub:"Spiel- und Senderdaten stehen bald zur Verfügung.", soon_bl_t:"Bundesliga-Spielplan folgt", soon_bl:"Die Paarungen werden am 2. Juli 2026 veröffentlicht. Die Spiele und Sender (Sky/DAZN; Eröffnungsspiel ggf. im Free-TV bei ARD/ZDF) ergänzen wir dann hier.", blhint_t:"Bundesliga-Auftakt terminiert", blhint_s:"1. & 2. Bundesliga · Spielplan steht, Anstoßzeiten folgen", blhint_cta:"Anzeigen", tba_chip:"Sender folgen", tba_note_t:"Senderdaten stehen bald zur Verfügung", tba_note_s:"Das Spiel ist terminiert. Die Übertragungsrechte (Free-TV, Pay, Stream) ergänzen wir, sobald sie feststehen.",
+    visit:"Zur Seite", p_free:"FREE", p_pay:"PAY", prov_check:"Aktuelle Preise auf der Anbieter-Seite",
+    imprint:"Impressum", privacy:"Datenschutz", about:"Über uns",
+    legal_note:"TVFussball.de überträgt selbst keine Spiele. Wir verweisen nur auf legale Sender und betten ausschließlich offizielle, freigegebene Videos ein. News: nur Schlagzeile + Teaser + Quell-Link. — Demo mit echten WM-2026-Daten.",
+    consent_text:"Wir nutzen Google Analytics, um die Nutzung dieser Seite anonym auszuwerten. Cookies dafür werden erst nach deiner Einwilligung gesetzt.", wk_title:"Preisdeal-Wecker", wk_soon:"Bald automatisch", wk_sub:"Lass dich per E-Mail benachrichtigen, sobald wir ein gutes Angebot für deine Anbieter finden.", wk_pick:"Anbieter wählen:", wk_email_ph:"deine@email.de", wk_btn:"Wecker stellen", wk_priv:"Wir nutzen deine E-Mail ausschließlich für Preisdeal-Benachrichtigungen. Abmeldung jederzeit per Antwort-Mail.", wk_need_prov:"Bitte mindestens einen Anbieter wählen.", wk_need_mail:"Bitte eine gültige E-Mail eingeben.", wk_done_t:"Fast geschafft!", wk_done_s:"Sende die vorbereitete E-Mail ab \u2013 dann bist du vorgemerkt und wir melden uns, sobald wir ein passendes Angebot finden.", wk_change:"Auswahl ändern", wk_mail_subject:"Preisdeal-Wecker \u2013 Anmeldung", wk_mail_l1:"Ich möchte über Preisdeals für meine Anbieter benachrichtigt werden.", wk_mail_prov:"Anbieter:", wk_mail_mail:"E-Mail:", wk_mail_foot:"(Gesendet über den Preisdeal-Wecker auf tvfussball.de)", aux_radio:"Radio", aux_ticker:"Ticker",
+    consent_no:"Ablehnen", consent_yes:"Einverstanden",
+    prov_note:"Preise ca., Stand Juni 2026 — Aktionen, Pakete und Laufzeiten variieren. Bitte vor Abschluss beim Anbieter prüfen.",
+    live_note:"Anstoßzeiten in mitteleuropäischer Zeit (MEZ). Qualität: 4K = UHD (MagentaTV), HD = HD-Ausstrahlung; unter HD kein Symbol. Ligen (Bundesliga, 2. Liga, Premier League, Serie A, La Liga, Champions/Europa League) sind aktuell in der Sommerpause.",
+    f_relive:"Ganzes Spiel gratis",f_hltop:"\u2605 8,0+", hl_summaries:"Zusammenfassungen", hl_full:"Komplettes Spiel",
+    hl_watch:"ansehen", hl_whole:"Ganze Partie", hl_free_stream:"kostenlos im Stream", hl_checked:"geprüft", hl_preview:"Video-Highlights",
+    hl_pay_only:"Kein kostenloses Komplettspiel — nur bei", hl_pay_suffix:"(Pay · alle 104 Spiele)",
+    hl_note:"Quellen: ZDF-Mediathek, ARD/Sportschau, offizielle YouTube-Kanäle (abgerufen 11.07.2026). Ganze Spiele („Relive“) gibt es nur für ARD/ZDF-Partien und nur zeitlich begrenzt gratis; sonst ausschließlich Pay (MagentaTV, alle 104 Spiele). TVFussball verlinkt nur, überträgt selbst nicht." },
+  en:{ nav_live:"Today", nav_hl:"Highlights", nav_news:"Transfers", nav_prov:"Providers", nav_wm:"WM", nav_tipp:"Predictions",
+    tipp_eyebrow:"Prediction game", tipp_title:"Predict the match – and win",
+    tipp_sub:"Predict tonight's World Cup final: Spain – Argentina (9pm CEST, ZDF & MagentaTV). If you win, we'll reach out via Facebook or Instagram.",
+    tipp_nick:"Nickname (optional)", tipp_nick_ph:"What should we call you?",
+    tipp_tip_label:"Your predictions – exact final score", tipp_tip_ph:"e.g. 0:2",
+    tipp_fb_label:"Your Instagram or Facebook profile", tipp_fb_ph:"Link to your Instagram or FB profile",
+    tipp_fb_help:"Only used to contact you if you win.",
+    tipp_consent:"I agree that my prediction and profile link may be stored and processed so you can be contacted if you win.",
+    tipp_submit:"Submit prediction", tipp_rules_t:"How it works",
+    tipp_rule1:"Predict the exact final score of both games.",
+    tipp_rule2:"Entries close at the first kick-off (Mon 29 June, 19:00 CEST).",
+    tipp_rule3:"Entry requires a follow (Facebook or Instagram) + sharing the site.",
+    tipp_rule4:"Prizes: 1× €20 and 1× €10 Amazon voucher. If you win, we'll contact you via Facebook or Instagram.",
+    tipp_req_follow:"I follow tvfussball.de on Facebook or Instagram.", tipp_req_share:"I've shared tvfussball.de with at least one friend (e.g. via WhatsApp).",
+    tipp_cd:"Kick-off in", tipp_kickoff:"Kick-off – entries closed",
+    tipp_closed:"The match has started – entries are now closed.",
+    tipp_e_tip:"Please enter your prediction.", tipp_e_fb:"Please enter a valid Instagram or Facebook link.",
+    tipp_e_consent:"Please accept the processing to take part.", tipp_e_follow:"Please confirm you follow us on Facebook or Instagram.", tipp_e_share:"Please confirm you've shared the site.",
+    tipp_done_t:"Your prediction is in!", tipp_done_s:"Good luck! If you win, we'll reach out via Facebook.",
+    tipp_your:"Your prediction", tipp_name:"Name",
+    tipp_fallback:"To make sure your entry reaches us, please send it via Facebook – we've already copied it for you.",
+    tipp_fb_send:"Send via Facebook", tipp_edit:"Edit prediction",
+    tipp_prizes_t:"Today's prizes", tipp_double_t:"Triple your chance", tipp_double_s:"Predict on tvfussball.de, on Facebook AND on Instagram – three entries in the draw.", tipp_fb_game:"Facebook giveaway", tipp_ig_game:"Instagram giveaway", tipp_share_t:"Share the giveaway with friends", tipp_share_native:"Share", tipp_share_text:"Predict Germany – Paraguay & Brazil – Japan on TVFussball.de and win Amazon vouchers! 🎯⚽",
+    wm_eyebrow:"World Cup Special 2026", wm_title:"The World Cup in USA, Canada & Mexico",
+    wm_sub:"Tables, knockout bracket, anthems of all teams, memes and the big quiz — all in one place.",
+    wm_groups:"groups", wm_final:"Final", wm_tables:"Tables & knockout stage",
+    wm_tables_sub:"Groups A–L plus round of 32, 16 and quarter-finals",
+    wm_updated:"As of 23 June 2026 · group stage, standings change until 27 June.",
+    wm_group_phase:"Group stage", wm_leg_q:"1st–2nd: into the round of 32", wm_leg_m:"3rd: best-third ranking",
+    wm_r32:"Round of 32", wm_r16:"Round of 16", wm_r8:"Quarter-finals",
+    wm_quiz:"World Cup quiz", wm_quiz_sub:"15 questions — how well do you know the 2026 World Cup?",
+    wm_quiz_intro:"Tap one answer per question. You'll see right away if it's correct. Your rank shows at the end.",
+    wm_quiz_reset:"Restart", wm_correct:"correct",
+    wm_anthems:"Team anthems", wm_anthems_sub:"All 48 teams — with a short description and a listen link", wm_listen:"Listen",
+    wm_memes:"Memes & oddities", wm_memes_sub:"This section is still in progress",
+    wm_wip:"This section is still in progress — content and images to follow.",
+    wm_meme_note:"Images are placeholders. Likes are for this session only.",
+    where:"Channels in", more:"Channels in other countries", less:"Show less", running:"Live",
+    lohnt_t:"Worth watching?", tvf_rating:"TVFussball rating", lh_voices:"Voices", lh_tip:"Tip", lh_odds:"Betting odds", lh_odds_upd:"Last updated:", lh_last:"Recent matches", lh_src:"Source", an_t:"Match Analysis", an_more:"more details", an_goals:"Goals", an_cards:"Cards", an_rating:"Match rating", an_motm:"Player of the match", an_inj:"Injuries", an_ref:"Referee", an_poss:"Possession", an_chances:"Chances", an_run:"Distance leader", an_pen:"Penalty", an_og:"Own goal", an_src:"Stats source", lohnt_score:"Worth-it score", an_events:"Goals & cards", an_summary:"Summary",
+    fta:"Free TV", pay:"Pay", recent:"Past matches", top_news:"Latest news", prov_title:"Providers & Prices",
+    best_free:"Free TV", best_radio:"Radio", best_pay:"Pay only", best_none:"No German TV", source:"Source", goals:"goals", read:"Read at source",
+    tz:"CET", share:"Share", shared:"Link copied", shared_btn:"Copied!", cal_add:"Add to calendar", cal_done:"Saved as .ics 📅",
+    ad_label:"Ad slot · disabled", ad_sub:"Reserved (AdSense/GAM) · toggled via feature flag", ad_on:"Advertisement",
+    price_from:"from", price_approx:"approx.",
+    result:"Final", ft:"FT", nohits:"No results", f_all:"All", f_3goals:"3+ goals", f_top:"Top",
+    f_free:"Free TV only", f_tonight:"Upcoming", f_now:"Live now", f_format:"Shows", f_mine:"★ Mine", fmt_head:"Shows & magazines", fmt_live:"live", fmt_more:"Show page", fk_highlights:"Highlights", fk_magazin:"Magazine", fk_talk:"Talk", fk_vorbericht:"Preview",fk_auslosung:"Draw", fk_live:"Live studio", fk_podcast:"Podcast", fk_video:"Video",
+    mine_empty:"Not following any team yet — tap “follow” on a match.", filt_empty:"No matches for this filter.",
+    follow:"follow", following:"following", follow_hint:"Follow teams to see only your matches — calendar reminder included.",
+    abo_title:"Which subscription do I need?", abo_sub:"Pick what you want to watch — we show the cheapest combination and what stays free.",
+    abo_pick:"Choose competitions:", abo_pick_none:"Tap the competitions above that you want to watch.",
+    abo_total:"Cheapest combination", abo_month:"/mo", abo_free_only:"Completely free — no subscription needed! 🎉",
+    abo_free_keeps:"Free with ARD/ZDF", abo_need:"You'll need", abo_full:"full", abo_partial:"part",
+    abo_complete:"For full coverage also add:", abo_visit:"Visit provider", abo_reset:"Reset",
+    abo_aff_note:"Provider links are neutral (no affiliate active). Prices approx., as of June 2026 — please verify with the provider.",
+    f_wm:"WM", f_dfb:"DFB Cup", f_bl:"Bundesliga", f_cl:"Champions League", f_bl2:"2. Bundesliga", f_bl3:"3. Liga", f_el:"Europa League",f_ecl:"Conference League", f_pl:"Premier League", f_facup:"FA Cup", f_it:"Serie A", f_es:"LaLiga", f_l1:"Ligue 1", f_test:"Friendlies", soon_title:"Coming soon", soon_sub:"Match and broadcaster data will be available soon.", soon_bl_t:"Bundesliga schedule to follow", soon_bl:"The fixture list is released on 2 July 2026. Matches and channels (Sky/DAZN; opener possibly free-to-air on ARD/ZDF) will appear here then.", blhint_t:"Bundesliga kick-off scheduled", blhint_s:"Bundesliga & 2. Bundesliga · fixtures out, times to follow", blhint_cta:"View", tba_chip:"Channels TBA", tba_note_t:"Broadcaster info coming soon", tba_note_s:"The match is scheduled. We will add the broadcast rights (free TV, pay, stream) as soon as they are confirmed.",
+    visit:"Visit site", p_free:"FREE", p_pay:"PAY", prov_check:"Current prices on the provider's site",
+    imprint:"Imprint", privacy:"Privacy", about:"About",
+    legal_note:"TVFussball.de does not broadcast any matches itself. We only link to legal channels and embed official, cleared videos. News: headline + teaser + source link only. — Demo with real World Cup 2026 data.",
+    consent_text:"We use Google Analytics to measure how this site is used, anonymously. Cookies for this are only set after your consent.", wk_title:"Price-deal alert", wk_soon:"Auto soon", wk_sub:"Get an email as soon as we find a good deal for your providers.", wk_pick:"Choose providers:", wk_email_ph:"you@email.com", wk_btn:"Set alert", wk_priv:"We use your email only for price-deal alerts. Unsubscribe anytime by replying.", wk_need_prov:"Please choose at least one provider.", wk_need_mail:"Please enter a valid email.", wk_done_t:"Almost done!", wk_done_s:"Send the prepared email \u2014 then you are on the list and we will reach out when a matching deal appears.", wk_change:"Change selection", wk_mail_subject:"Price-deal alert \u2013 sign-up", wk_mail_l1:"I would like to be notified about price deals for my providers.", wk_mail_prov:"Providers:", wk_mail_mail:"Email:", wk_mail_foot:"(Sent via the price-deal alert on tvfussball.de)", aux_radio:"Radio", aux_ticker:"Ticker",
+    consent_no:"Decline", consent_yes:"Accept",
+    prov_note:"Prices approx., as of June 2026 — offers, bundles and terms vary. Please check with the provider before subscribing.",
+    live_note:"Kick-off times in Central European Time (CET). Quality: 4K = UHD (MagentaTV), HD = HD broadcast; below HD no symbol. Domestic leagues (Bundesliga, Premier League, Serie A, La Liga, Champions/Europa League) are currently on summer break.",
+    f_relive:"Free full match",f_hltop:"\u2605 8.0+", hl_summaries:"Summaries", hl_full:"Full match",
+    hl_watch:"watch", hl_whole:"Full match", hl_free_stream:"free stream", hl_checked:"verified", hl_preview:"Video highlights",
+    hl_pay_only:"No free full match — only on", hl_pay_suffix:"(pay · all 104 games)",
+    hl_note:"Sources: ZDF Mediathek, ARD/Sportschau, official YouTube channels (retrieved 11 July 2026). Full-match replays are only available free for ARD/ZDF games and only for a limited time; otherwise pay only (MagentaTV, all 104 games). TVFussball only links, it does not broadcast." }
+};
+
+/* Flaggen (Emoji) */
+const FL = {"Saudi-Arabien":"🇸🇦",Portugal:"🇵🇹",Usbekistan:"🇺🇿",England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Ghana:"🇬🇭",Panama:"🇵🇦",Kroatien:"🇭🇷",
+  Kolumbien:"🇨🇴","DR Kongo":"🇨🇩",Schweiz:"🇨🇭",Kanada:"🇨🇦","Bosnien-H.":"🇧🇦",Katar:"🇶🇦",
+  Marokko:"🇲🇦",Haiti:"🇭🇹",Schottland:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",Brasilien:"🇧🇷",Tschechien:"🇨🇿",Mexiko:"🇲🇽",
+  "Südafrika":"🇿🇦","Südkorea":"🇰🇷",Ecuador:"🇪🇨",Deutschland:"🇩🇪","Curaçao":"🇨🇼","Elfenbeinküste":"🇨🇮",
+  Norwegen:"🇳🇴",Senegal:"🇸🇳",Jordanien:"🇯🇴",Algerien:"🇩🇿",Frankreich:"🇫🇷",Irak:"🇮🇶",
+  Argentinien:"🇦🇷","Österreich":"🇦🇹",Spanien:"🇪🇸","Saudi-Arabien":"🇸🇦",Tunesien:"🇹🇳",Japan:"🇯🇵",
+  Niederlande:"🇳🇱",Schweden:"🇸🇪","Türkei":"🇹🇷",Paraguay:"🇵🇾",USA:"🇺🇸",Australien:"🇦🇺",Iran:"🇮🇷",
+  Neuseeland:"🇳🇿",Uruguay:"🇺🇾",Belgien:"🇧🇪","Ägypten":"🇪🇬","Kap Verde":"🇨🇻","Bosnien-Herzegowina":"🇧🇦"};
+/* Vereinsfarben (Primaer, Sekundaer) fuer getoente Baelle – nur 1. Bundesliga 2026/27; rechtlich sichere Alternative zu Wappen */
+const CLUB_BALL={
+ "FC Bayern München":["#DC052D","#FFFFFF"],"Bayern München":["#DC052D","#FFFFFF"],
+ "Borussia Dortmund":["#FDE100","#000000"],"BVB":["#FDE100","#000000"],
+ "RB Leipzig":["#FFFFFF","#D2003C"],
+ "Bayer 04 Leverkusen":["#E32219","#000000"],"Bayer Leverkusen":["#E32219","#000000"],
+ "VfB Stuttgart":["#FFFFFF","#E30613"],
+ "Eintracht Frankfurt":["#101010","#E1000F"],
+ "SC Freiburg":["#E2001A","#000000"],
+ "Werder Bremen":["#159A5B","#FFFFFF"],"SV Werder Bremen":["#159A5B","#FFFFFF"],
+ "1. FSV Mainz 05":["#C3141E","#FFFFFF"],"FSV Mainz 05":["#C3141E","#FFFFFF"],"Mainz 05":["#C3141E","#FFFFFF"],
+ "FC Augsburg":["#BA0C2F","#FFFFFF"],
+ "TSG Hoffenheim":["#1961AC","#FFFFFF"],"TSG 1899 Hoffenheim":["#1961AC","#FFFFFF"],"1899 Hoffenheim":["#1961AC","#FFFFFF"],
+ "1. FC Union Berlin":["#E00521","#FFFFFF"],"Union Berlin":["#E00521","#FFFFFF"],
+ "Borussia Mönchengladbach":["#FFFFFF","#00A651"],"Mönchengladbach":["#FFFFFF","#00A651"],
+ "1. FC Köln":["#E1000A","#FFFFFF"],"FC Köln":["#E1000A","#FFFFFF"],
+ "Hamburger SV":["#003087","#FFFFFF"],"HSV":["#003087","#FFFFFF"],
+ "FC Schalke 04":["#004E95","#FFFFFF"],"Schalke 04":["#004E95","#FFFFFF"],
+ "SV Elversberg":["#E30613","#000000"],"Elversberg":["#E30613","#000000"],
+ "SC Paderborn 07":["#005CA9","#000000"],"SC Paderborn":["#005CA9","#000000"],
+ /* 2. Bundesliga 2026/27 */
+ "Hertha BSC":["#005CA9","#FFFFFF"],"Hertha":["#005CA9","#FFFFFF"],
+ "1. FC Kaiserslautern":["#E2001A","#FFFFFF"],"Kaiserslautern":["#E2001A","#FFFFFF"],
+ "1. FC Nürnberg":["#A6093D","#FFFFFF"],"Nürnberg":["#A6093D","#FFFFFF"],
+ "Hannover 96":["#E2001A","#000000"],"Hannover":["#E2001A","#000000"],
+ "Karlsruher SC":["#0033A0","#FFFFFF"],"KSC":["#0033A0","#FFFFFF"],
+ "SpVgg Greuther Fürth":["#009A44","#FFFFFF"],"Greuther Fürth":["#009A44","#FFFFFF"],
+ "1. FC Magdeburg":["#164194","#FFFFFF"],"Magdeburg":["#164194","#FFFFFF"],
+ "SV Darmstadt 98":["#004A99","#FFFFFF"],"Darmstadt 98":["#004A99","#FFFFFF"],"Darmstadt":["#004A99","#FFFFFF"],
+ "Arminia Bielefeld":["#005CA9","#FFFFFF"],"Bielefeld":["#005CA9","#FFFFFF"],
+ "Dynamo Dresden":["#FFE500","#000000"],"SG Dynamo Dresden":["#FFE500","#000000"],
+ "Holstein Kiel":["#003C8F","#FFFFFF"],
+ "VfL Bochum":["#004E9E","#FFFFFF"],"Bochum":["#004E9E","#FFFFFF"],
+ "Eintracht Braunschweig":["#FDE100","#003DA5"],"Braunschweig":["#FDE100","#003DA5"],
+ "VfL Wolfsburg":["#65B32E","#FFFFFF"],"Wolfsburg":["#65B32E","#FFFFFF"],
+ "1. FC Heidenheim":["#E2001A","#003DA5"],"1. FC Heidenheim 1846":["#E2001A","#003DA5"],"Heidenheim":["#E2001A","#003DA5"],
+ "FC St. Pauli":["#5E2E1E","#FFFFFF"],"St. Pauli":["#5E2E1E","#FFFFFF"],
+ "VfL Osnabrück":["#6E2585","#FFFFFF"],"Osnabrück":["#6E2585","#FFFFFF"],
+ "Energie Cottbus":["#E2001A","#FFFFFF"],"FC Energie Cottbus":["#E2001A","#FFFFFF"],"Cottbus":["#E2001A","#FFFFFF"],
+ /* Premier League 2026/27 */
+ "FC Arsenal":["#EF0107","#FFFFFF"],"Arsenal":["#EF0107","#FFFFFF"],
+ "Aston Villa":["#670E36","#95BFE5"],
+ "AFC Bournemouth":["#DA291C","#000000"],"Bournemouth":["#DA291C","#000000"],
+ "FC Brentford":["#E30613","#FFFFFF"],"Brentford":["#E30613","#FFFFFF"],
+ "Brighton & Hove Albion":["#0057B8","#FFFFFF"],"Brighton":["#0057B8","#FFFFFF"],
+ "FC Chelsea":["#034694","#FFFFFF"],"Chelsea":["#034694","#FFFFFF"],
+ "Coventry City":["#4B92DB","#FFFFFF"],
+ "Crystal Palace":["#1B458F","#C4122E"],
+ "FC Everton":["#003399","#FFFFFF"],"Everton":["#003399","#FFFFFF"],
+ "FC Fulham":["#FFFFFF","#000000"],"Fulham":["#FFFFFF","#000000"],
+ "Hull City":["#F5A12D","#000000"],
+ "Ipswich Town":["#0044A9","#FFFFFF"],
+ "Leeds United":["#FFFFFF","#1D428A"],"Leeds":["#FFFFFF","#1D428A"],
+ "FC Liverpool":["#C8102E","#FFFFFF"],"Liverpool":["#C8102E","#FFFFFF"],
+ "Manchester City":["#6CABDD","#FFFFFF"],"Man City":["#6CABDD","#FFFFFF"],
+ "Manchester United":["#DA291C","#FFFFFF"],"Man United":["#DA291C","#FFFFFF"],
+ "Newcastle United":["#241F20","#FFFFFF"],"Newcastle":["#241F20","#FFFFFF"],
+ "Nottingham Forest":["#DD0000","#FFFFFF"],
+ "AFC Sunderland":["#EB172B","#FFFFFF"],"Sunderland":["#EB172B","#FFFFFF"],
+ "Tottenham Hotspur":["#FFFFFF","#132257"],"Tottenham":["#FFFFFF","#132257"],"Spurs":["#FFFFFF","#132257"],
+ /* La Liga 2026/27 */
+ "Real Madrid":["#FFFFFF","#FEBE10"],
+ "FC Barcelona":["#004D98","#A50044"],"Barcelona":["#004D98","#A50044"],"Barça":["#004D98","#A50044"],
+ "Atlético Madrid":["#CB3524","#FFFFFF"],"Atletico Madrid":["#CB3524","#FFFFFF"],"Atlético":["#CB3524","#FFFFFF"],
+ "Athletic Bilbao":["#EE2523","#FFFFFF"],"Athletic":["#EE2523","#FFFFFF"],
+ "Real Sociedad":["#0067B1","#FFFFFF"],
+ "Betis Sevilla":["#00954C","#FFFFFF"],"Real Betis":["#00954C","#FFFFFF"],"Betis":["#00954C","#FFFFFF"],
+ "FC Villarreal":["#FDE607","#004C9B"],"Villarreal":["#FDE607","#004C9B"],
+ "FC Valencia":["#FFFFFF","#F18E00"],"Valencia":["#FFFFFF","#F18E00"],
+ "FC Sevilla":["#D81920","#FFFFFF"],"Sevilla":["#D81920","#FFFFFF"],
+ "Celta Vigo":["#8AC3EE","#E5231B"],"Celta":["#8AC3EE","#E5231B"],
+ "Rayo Vallecano":["#FFFFFF","#E53027"],"Rayo":["#FFFFFF","#E53027"],
+ "CA Osasuna":["#D91A21","#0A346F"],"Osasuna":["#D91A21","#0A346F"],
+ "FC Getafe":["#005999","#FFFFFF"],"Getafe":["#005999","#FFFFFF"],
+ "Deportivo Alavés":["#0761AF","#FFFFFF"],"Alavés":["#0761AF","#FFFFFF"],
+ "Espanyol Barcelona":["#0072CE","#FFFFFF"],"Espanyol":["#0072CE","#FFFFFF"],
+ "UD Levante":["#004B9C","#A4123F"],"Levante":["#004B9C","#A4123F"],
+ "FC Elche":["#00953B","#FFFFFF"],"Elche":["#00953B","#FFFFFF"],
+ "Málaga CF":["#0090D4","#FFFFFF"],"Málaga":["#0090D4","#FFFFFF"],"Malaga":["#0090D4","#FFFFFF"],
+ "Deportivo La Coruña":["#0067B2","#FFFFFF"],"Deportivo":["#0067B2","#FFFFFF"],"Depor":["#0067B2","#FFFFFF"],
+ "Racing Santander":["#00954C","#FFFFFF"],"Racing":["#00954C","#FFFFFF"],
+ /* Serie A 2026/27 */
+ "Inter Mailand":["#0057B8","#000000"],"Inter":["#0057B8","#000000"],
+ "AC Mailand":["#E30613","#000000"],"Milan":["#E30613","#000000"],"AC Milan":["#E30613","#000000"],
+ "Juventus Turin":["#000000","#FFFFFF"],"Juventus":["#000000","#FFFFFF"],"Juve":["#000000","#FFFFFF"],
+ "SSC Neapel":["#12A0D7","#FFFFFF"],"Napoli":["#12A0D7","#FFFFFF"],
+ "AS Rom":["#8E1F2F","#F0BC42"],"AS Roma":["#8E1F2F","#F0BC42"],"Roma":["#8E1F2F","#F0BC42"],
+ "Lazio Rom":["#5C9DD5","#FFFFFF"],"Lazio":["#5C9DD5","#FFFFFF"],
+ "Atalanta Bergamo":["#1961A5","#000000"],"Atalanta":["#1961A5","#000000"],
+ "AC Florenz":["#5A2D82","#FFFFFF"],"Fiorentina":["#5A2D82","#FFFFFF"],
+ "FC Bologna":["#9F1C33","#1B2F5C"],"Bologna":["#9F1C33","#1B2F5C"],
+ "FC Turin":["#881600","#FFFFFF"],"Torino":["#881600","#FFFFFF"],
+ "CFC Genua":["#B01E28","#12284B"],"Genua":["#B01E28","#12284B"],"Genoa":["#B01E28","#12284B"],
+ "Udinese Calcio":["#1A1A1A","#FFFFFF"],"Udinese":["#1A1A1A","#FFFFFF"],
+ "Como 1907":["#004B9B","#FFFFFF"],"Como":["#004B9B","#FFFFFF"],
+ "US Sassuolo":["#00A651","#000000"],"Sassuolo":["#00A651","#000000"],
+ "Cagliari Calcio":["#A31F34","#132C57"],"Cagliari":["#A31F34","#132C57"],
+ "US Lecce":["#FFE500","#D50032"],"Lecce":["#FFE500","#D50032"],
+ "Parma Calcio":["#FDB913","#003C7E"],"Parma":["#FDB913","#003C7E"],
+ "AC Monza":["#E30613","#FFFFFF"],"Monza":["#E30613","#FFFFFF"],
+ "Frosinone Calcio":["#FFE500","#0055A5"],"Frosinone":["#FFE500","#0055A5"],
+ "FC Venedig":["#111111","#F58220"],"Venezia":["#111111","#F58220"],
+ /* Ligue 1 2026/27 */
+ "Paris Saint-Germain":["#004170","#DA291C"],"PSG":["#004170","#DA291C"],
+ "Olympique Marseille":["#2FAEE0","#FFFFFF"],"Marseille":["#2FAEE0","#FFFFFF"],"OM":["#2FAEE0","#FFFFFF"],
+ "AS Monaco":["#CE1126","#FFFFFF"],"Monaco":["#CE1126","#FFFFFF"],
+ "Olympique Lyon":["#FFFFFF","#E01E24"],"Lyon":["#FFFFFF","#E01E24"],"OL":["#FFFFFF","#E01E24"],
+ "OSC Lille":["#E01E24","#FFFFFF"],"Lille":["#E01E24","#FFFFFF"],"LOSC":["#E01E24","#FFFFFF"],
+ "OGC Nizza":["#E30613","#000000"],"Nizza":["#E30613","#000000"],"Nice":["#E30613","#000000"],
+ "RC Lens":["#FFE500","#E2001A"],"Lens":["#FFE500","#E2001A"],
+ "RC Straßburg":["#0060A9","#FFFFFF"],"Straßburg":["#0060A9","#FFFFFF"],"Strasbourg":["#0060A9","#FFFFFF"],
+ "Stade Rennes":["#D2001F","#000000"],"Rennes":["#D2001F","#000000"],
+ "Stade Brest":["#E2001A","#FFFFFF"],"Brest":["#E2001A","#FFFFFF"],
+ "FC Toulouse":["#6E2585","#FFFFFF"],"Toulouse":["#6E2585","#FFFFFF"],
+ "FC Lorient":["#FF6600","#000000"],"Lorient":["#FF6600","#000000"],
+ "SCO Angers":["#000000","#FFFFFF"],"Angers":["#000000","#FFFFFF"],
+ "AJ Auxerre":["#0A4EA2","#FFFFFF"],"Auxerre":["#0A4EA2","#FFFFFF"],
+ "Le Havre AC":["#0B2C5C","#5BA4D6"],"Le Havre":["#0B2C5C","#5BA4D6"],
+ "Paris FC":["#0033A0","#E2001A"],
+ "ESTAC Troyes":["#0E4C92","#FFFFFF"],"Troyes":["#0E4C92","#FFFFFF"],
+ "Le Mans FC":["#FFD200","#000000"],"Le Mans":["#FFD200","#000000"],
+ /* Champions League – Qualifikation 2026/27 */
+ "Kairat Almaty":["#FCD400","#000000"],"Sutjeska Nikšić":["#004A99","#FFFFFF"],
+ "Flora Tallinn":["#009639","#FFFFFF"],"Iberia Tiflis":["#0033A0","#FFFFFF"],
+ "Vitebsk":["#005BAB","#FFFFFF"],"Universitatea Craiova":["#FFFFFF","#0055A4"],
+ "Petrocub":["#F7D417","#0A7D33"],"Egnatia":["#FFFFFF","#C8102E"],
+ "Sabah FC":["#0AAD4E","#FFFFFF"],"The New Saints":["#0B7A3B","#FFFFFF"],
+ "Lincoln Red Imps":["#D50032","#000000"],"Inter Escaldes":["#003DA5","#000000"],
+ "Ararat-Armenia":["#D90000","#FFFFFF"],"Riga FC":["#7A1F2B","#FFFFFF"],
+ "Kauno Žalgiris":["#00843D","#FFFFFF"],"FC Drita":["#E30613","#FFFFFF"],
+ "Vardar Skopje":["#E2001A","#000000"],"KuPS Kuopio":["#FFD200","#000000"],
+ "Floriana":["#008751","#FFFFFF"],"Shamrock Rovers":["#1A7A3D","#FFFFFF"],
+ "Tre Fiori":["#FFD200","#009639"],"Larne FC":["#D50032","#FFFFFF"],
+ "Borac Banja Luka":["#E2001A","#003DA5"],"Levski Sofia":["#0057B8","#FFFFFF"],
+ "KÍ Klaksvík":["#004B87","#FFFFFF"],"Atert Bissen":["#EF3340","#FFFFFF"],
+ "Víkingur Reykjavík":["#E2001A","#000000"],"ETO Győr":["#008C45","#FFFFFF"],
+ /* CL-Quali – ab 2. Runde */
+ "Mjällby AIF":["#FFD200","#000000"],"Crvena Zvezda":["#E2001A","#FFFFFF"],
+ "Aarhus GF":["#005BAB","#FFFFFF"],"Lech Posen":["#004B9B","#FFFFFF"],
+ "Omonia Nikosia":["#00843D","#FFFFFF"],"FC Thun":["#E2001A","#FFFFFF"],
+ "Dinamo Zagreb":["#0067B1","#FFFFFF"],"Hapoel Be'er Sheva":["#E2001A","#FFFFFF"],
+ "Slovan Bratislava":["#004B9B","#FFFFFF"],"NK Celje":["#FFD200","#003DA5"],
+ /* Europa League – Qualifikation 2026/27 */
+ "Dynamo Kiew":["#0057B8","#FFFFFF"],"Universitatea Cluj":["#FFFFFF","#111111"],
+ "Qarabağ Agdam":["#111111","#FFFFFF"],"Vestri":["#D2001C","#FFFFFF"],
+ "Hajduk Split":["#FFFFFF","#0057B8"],"MSK Žilina":["#00843D","#FFD200"],
+ "ZSKA Sofia":["#E2001A","#FFFFFF"],"Derry City":["#D50032","#FFFFFF"],
+ "Sheriff Tiraspol":["#FFD200","#000000"],"Aluminij":["#00843D","#FFFFFF"],
+ "Vojvodina":["#E2001A","#FFFFFF"],"Ferencváros":["#009639","#FFFFFF"]
+,
+  "1. FC Phönix Lübeck":["#00843D","#FFFFFF"],"1. FC Saarbrücken":["#005CA9","#000000"],"AD Ceuta":["#FFFFFF","#000000"],"Bahlinger SC":["#E2001A","#FFFFFF"],"Benfica Lissabon":["#E2001A","#FFFFFF"],"Besiktas":["#000000","#FFFFFF"],"Cerezo Osaka":["#E75297","#3D1E6D"],"DSC Arminia Bielefeld":["#005CA9","#000000"],"F.C. Hansa Rostock":["#005CA9","#FFFFFF"],"FC Astoria Walldorf":["#005CA9","#FFFFFF"],"FC Basel":["#D20A10","#0057B8"],"FC Carl Zeiss Jena":["#00457C","#F7D000"],"FC Erzgebirge Aue":["#6A2A8A","#FFFFFF"],"FC Gießen":["#E2001A","#FFFFFF"],"FC Midtjylland":["#000000","#E2001A"],"FC Rottach-Egern":["#00843D","#FFFFFF"],"FC St. Gallen":["#00843D","#FFFFFF"],"FC Viktoria Köln":["#E2001A","#FFFFFF"],"FC Winterthur":["#E2001A","#FFFFFF"],"FC Würzburger Kickers":["#E2001A","#FFFFFF"],"FC-Astoria Walldorf":["#005CA9","#FFFFFF"],"FSV Schöningen":["#005CA9","#F7D000"],"Fagiano Okayama":["#8C0F2F","#FFFFFF"],"Fenerbahçe":["#163962","#FFD200"],"Fortuna Düsseldorf":["#E2001A","#FFFFFF"],"Górnik Zabrze":["#005CA9","#E2001A"],"HEBC Hamburg":["#C8102E","#000000"],"Hallescher FC":["#E2001A","#FFFFFF"],"Hammarby IF":["#00A651","#FFFFFF"],"Heart of Midlothian":["#800910","#FFFFFF"],"Hradec Králové":["#000000","#FFFFFF"],"Linzer ASK":["#000000","#FFFFFF"],"Lüneburger SK Hansa":["#C8102E","#FFFFFF"],"MSV Duisburg":["#005CA9","#FFFFFF"],"Maccabi Tel Aviv":["#FFD200","#0057B8"],"PAOK Saloniki":["#000000","#FFFFFF"],"Pafos FC":["#0057B8","#FFFFFF"],"RSC Anderlecht":["#4D1F8C","#FFFFFF"],"RW Oberhausen":["#E2001A","#FFFFFF"],"Rot-Weiss Essen":["#E2001A","#FFFFFF"],"SC Preußen Münster":["#00843D","#000000"],"SC St. Tönis 1911/20":["#005CA9","#F7D000"],"SC Verl":["#00A651","#000000"],"SG Sonnenhof Großaspach":["#005CA9","#FFFFFF"],"SK Rapid Wien":["#00843D","#FFFFFF"],"SSV Jeddeloh":["#005CA9","#FFFFFF"],"SV Eintracht Trier":["#005CA9","#FFFFFF"],"SV Hemelingen":["#00843D","#FFFFFF"],"SV Waldhof Mannheim":["#1E5CB3","#000000"],"SV Wehen Wiesbaden":["#E2001A","#000000"],"SV Westfalia Rhynern":["#000000","#FFFFFF"],"Sturm Graz":["#000000","#FFFFFF"],"TSV 1860 München":["#1E73BE","#FFFFFF"],"TSV Schott Mainz":["#005CA9","#FFFFFF"],"Tromsø IL":["#E2001A","#FFFFFF"],"Twente Enschede":["#E2001A","#FFFFFF"],"VSG Altglienicke Berlin":["#00843D","#FFFFFF"],"VfB 1921 Krieschow":["#005CA9","#FFFFFF"],"WSG Tirol":["#00843D","#FFFFFF"],"Wrexham AFC":["#E2001A","#FFFFFF"]
+,
+  "Atletic Escaldes":["#FFD200","#005CA9"],"Bergisch Gladbach 09":["#E2001A","#FFFFFF"],"FC Lugano":["#111111","#FFFFFF"],"FC Nordsjaelland":["#FFD200","#E2001A"],"FC Santa Coloma":["#005CA9","#FFD200"],"FC Shelbourne":["#E2001A","#FFFFFF"],"FC Vaduz":["#E2001A","#FFFFFF"],"FK Austria Wien":["#5C2483","#FFFFFF"],"FK Liepaja":["#7A1F2B","#FFFFFF"],"GAIS Göteborg":["#006A4E","#FFFFFF"],"KF Dukagjini":["#005CA9","#E2001A"],"Kickers Offenbach":["#E2001A","#FFFFFF"],"Nomme Kalju FC":["#E75297","#111111"],"Stoke City":["#E2001A","#FFFFFF"],"Swansea City":["#FFFFFF","#111111"]
+,
+  "FC Tokyo":["#E2001A","#005CA9"],"Sheffield United":["#E2001A","#FFFFFF"]
+,
+  "Birmingham City":["#1F4EA1","#FFFFFF"],"KSV Hessen Kassel":["#E2001A","#FFFFFF"]
+,
+  "West Ham United":["#7A263A","#1BB1E7"]
+,
+  "Alemannia Aachen":["#FFD200","#000000"],"FC Ingolstadt 04":["#E2001A","#000000"],"FK Bodø/Glimt":["#FFD200","#000000"],"NEC Nijmegen":["#E30613","#00843D"],"Olympiakos Piräus":["#E30613","#FFFFFF"],"SC Fortuna Köln":["#E2001A","#FFFFFF"],"SSV Jahn Regensburg":["#E2001A","#FFFFFF"],"SV Meppen":["#005CA9","#FFFFFF"],"Sparta Prag":["#8B1A1A","#FFD200"],"TSG Hoffenheim II":["#1961B5","#FFFFFF"],"TSV Havelse":["#005CA9","#FFFFFF"],"Union Saint-Gilloise":["#FFD800","#005CA9"],"VfB Stuttgart II":["#FFFFFF","#E2001A"]
+,
+  "Real Oviedo":["#005CA9","#FFFFFF"]
+,
+  "1. FC Kaiserslautern U19":["#E2001A","#FFFFFF"],"Aberdeen FC":["#E2001A","#FFFFFF"],"Club Brügge":["#0057B8","#000000"],"Dundee United":["#FF6600","#000000"],"FC Bayern München II":["#DC052D","#FFFFFF"],"FC Schweinfurt 05":["#00843D","#FFFFFF"],"Fastav Zlín":["#FFD200","#005CA9"],"Glasgow Rangers":["#005CA9","#E2001A"],"Grazer AK":["#E2001A","#000000"],"LASK":["#000000","#FFFFFF"],"RB Leipzig U19":["#E2001A","#FFFFFF"],"RB Salzburg":["#E2001A","#FFFFFF"],"TSV Hartberg":["#000000","#FFFFFF"],"Wacker Burghausen":["#FFD200","#000000"]
+,
+  "Ajax Amsterdam":["#E2001A","#FFFFFF"],"Beitar Jerusalem":["#FFD200","#000000"],"FC Inter Turku":["#005CA9","#FFFFFF"],"FC Sion":["#FFFFFF","#E2001A"],"FK Jablonec":["#00843D","#FFD200"],"HJK Helsinki":["#005CA9","#FFFFFF"],"IFK Göteborg":["#005CA9","#FFFFFF"],"Jagiellonia Białystok":["#FFD200","#E2001A"],"KAA Gent":["#005CA9","#FFFFFF"],"Motherwell FC":["#FFD200","#8B1A1A"],"NSI Runavik":["#005CA9","#FFFFFF"],"Paide Linnameeskond":["#000000","#FFD200"],"Raków Częstochowa":["#E2001A","#005CA9"],"Rigas FS":["#7A1F2B","#FFFFFF"],"Sporting Braga":["#E2001A","#FFFFFF"],"Zalgiris Vilnius":["#00843D","#FFFFFF"]
+,
+  "Bohemians Prag":["#00843D","#FFFFFF"],"CFR Cluj":["#7A1F2B","#FFFFFF"],"Dinamo Minsk":["#005CA9","#FFFFFF"],"FC Noah":["#000000","#FFD200"],"Feyenoord Rotterdam":["#E2001A","#FFFFFF"],"Galatasaray":["#E2001A","#FFD200"],"Trabzonspor":["#7A1F2B","#0057B8"]
+,
+  "Celtic Glasgow":["#00843D","#FFFFFF"],"Dundee FC":["#0B2A5B","#FFFFFF"]
+,
+  "Jeju United":["#F58220","#005CA9"]
+,
+  "Académico Viseu":["#005CA9","#FFFFFF"],"FC Alverca":["#E2001A","#FFFFFF"],"Hertha BSC II":["#005CA9","#FFFFFF"],"Hibernian FC":["#00843D","#FFFFFF"],"Kilmarnock FC":["#005CA9","#FFFFFF"],"Lok Leipzig":["#005CA9","#FFD200"],"PEC Zwolle":["#005CA9","#FFFFFF"],"SV Ried":["#00843D","#FFFFFF"],"Sparta Rotterdam":["#E2001A","#FFFFFF"],"Wolfsberger AC":["#FFFFFF","#000000"]
+,
+  "FC Porto":["#005CA9","#FFFFFF"]
+};
+function clubBall(c1,c2){
+ return '<svg class="cball" viewBox="0 0 24 24" aria-hidden="true">'
+  +'<circle cx="12" cy="12" r="10.5" fill="'+c1+'" stroke="rgba(0,0,0,.32)" stroke-width="1"/>'
+  +'<path d="M12 7.8L15.99 10.7L14.47 15.4L9.53 15.4L8.01 10.7Z" fill="'+c2+'"/>'
+  +'<path d="M12 7.8L12 2.4M15.99 10.7L21.13 9.03M14.47 15.4L17.64 19.77M9.53 15.4L6.36 19.77M8.01 10.7L2.87 9.03" stroke="'+c2+'" stroke-width="1.2" stroke-linecap="round" fill="none"/>'
+  +'</svg>';
+}
+function flag(n){ if(FL[n]) return FL[n]; var c=CLUB_BALL[n]; return c?clubBall(c[0],c[1]):"⚽"; }
+/* Primaerfarben (Flagge) fuer Trikot-Verlauf der Karten (Variante A, hell) */
+const NAT_TINT={Belgien:"#EF3340",Senegal:"#00853F",Spanien:"#C60B1E","Österreich":"#EF3340",Portugal:"#DA291C",Kroatien:"#ED1C24",
+ Schweiz:"#DA291C",Algerien:"#006233",Australien:"#FFCD00","Ägypten":"#CE1126",Argentinien:"#75AADB","Kap Verde":"#003DA5",
+ USA:"#B31942","Bosnien-Herzegowina":"#002F6C",Ghana:"#CE1126",Panama:"#DA121A",Norwegen:"#BA0C2F",Frankreich:"#0055A4",
+ Brasilien:"#009739",Japan:"#BC002D",Marokko:"#C1272D",Niederlande:"#FF6C00",Schweden:"#005293",Paraguay:"#D52B1E",
+ Deutschland:"#DD0000",Mexiko:"#006341",Ecuador:"#FFD100",England:"#CE1124",Uruguay:"#5CB8E4","Türkei":"#E30A17",
+ Iran:"#239F40",Neuseeland:"#101010",Usbekistan:"#0099B5","Saudi-Arabien":"#006C35",Tunesien:"#E70013",Jordanien:"#CE1126",
+ Irak:"#CE1126","Elfenbeinküste":"#F77F00",Kolumbien:"#FCD116",Chile:"#D52B1E",Kanada:"#D80621",Katar:"#8A1538",
+ Südkorea:"#CD2E3A",Nigeria:"#008751",Kamerun:"#007A5E",Polen:"#DC143C",Italien:"#008C45",Dänemark:"#C8102E",Schottland:"#0065BF"};
+function tintStyle(m){
+  function pc(n){ if(CLUB_BALL[n]) return CLUB_BALL[n][0]; if(NAT_TINT[n]) return NAT_TINT[n]; return null; }
+  var a=pc(m.h), b=pc(m.a); if(!a&&!b) return "";
+  a=a||b; b=b||a; return ' style="--c1:'+a+';--c2:'+b+'"';
+}
+
+/* Sender (n=Name, t=fta|pay, q=HD|4K|null) */
+const MAG={n:"MagentaTV",t:"pay",q:"4K",u:"https://www.magentasport.de/"}, ARD={n:"Das Erste",t:"fta",q:"HD",u:"https://www.ardmediathek.de/sport-fifa-weltmeisterschaft"}, ZDF={n:"ZDF",t:"fta",q:"HD",u:"https://www.zdf.de/video/livestreams/fifa-weltmeisterschaft-live-livestream-highlights-100/"},
+  ORF={n:"ORF 1",t:"fta",q:"HD",u:"https://on.orf.at/"}, SERV={n:"ServusTV",t:"fta",q:"HD",u:"https://www.servustv.com/"}, ATg={n:"ORF 1 / ServusTV",t:"fta",q:"HD",u:"https://on.orf.at/"},
+  SRF2={n:"SRF zwei",t:"fta",q:"HD",u:"https://www.srf.ch/play/tv/live"}, SRFi={n:"SRF info",t:"fta",q:"HD",u:"https://www.srf.ch/play/tv/live"}, RTS={n:"RTS 2",t:"fta",q:"HD"},
+  SRFg={n:"SRF / RTS / RSI",t:"fta",q:"HD",u:"https://www.srf.ch/play/tv/live"}, BBC={n:"BBC One",t:"fta",q:"HD",u:"https://www.bbc.co.uk/iplayer"}, ITV={n:"ITV1",t:"fta",q:"HD",u:"https://www.itvx.com/"},
+  UKg={n:"BBC / ITV",t:"fta",q:"HD",u:"https://www.bbc.co.uk/iplayer"};
+const SAT1={n:"SAT.1",t:"fta",q:"HD",u:"https://www.joyn.de/"}, RTL={n:"RTL",t:"fta",q:"HD",u:"https://plus.rtl.de/"}, SKY={n:"Sky",t:"pay",q:"HD",u:"https://www.wowtv.de/live-sport"};
+const JOYN={n:"Joyn",t:"fta",q:"HD",u:"https://www.joyn.de/"};
+const M6={n:"M6",t:"fta",u:"https://www.6play.fr/"}, BEIN={n:"beIN Sports",t:"pay",u:"https://www.beinsports.com/"}, RAI={n:"RAI",t:"fta",u:"https://www.raiplay.it/"}, DAZN={n:"DAZN",t:"pay",u:"https://www.dazn.com/de-DE/home"}, OF={n:"OneFootball",t:"fta",u:"https://onefootball.com/"}, LAOLA={n:"LAOLA1",t:"fta",u:"https://www.laola1.at/"}, CLUBTV={n:"Vereins-/Regional-Stream",t:"fta"}, SKYAT={n:"Sky Sport Austria",t:"pay",u:"https://www.skysportaustria.at/"}, BLUE={n:"blue Sport",t:"pay",u:"https://www.blue.ch/de/sport/"},
+  RTVE={n:"RTVE",t:"fta",u:"https://www.rtve.es/play/"}, NOS={n:"NOS",t:"fta",u:"https://nos.nl/live"}, MONO29={n:"MONO29",t:"fta"}, MONOMAX={n:"Monomax",t:"pay"},
+  CTV={n:"CTV",t:"fta"}, TSN={n:"TSN",t:"pay"}, FOX={n:"FOX",t:"fta"}, TELE={n:"Telemundo",t:"fta"},
+  RTE={n:"RTÉ 2",t:"fta",q:"HD"}, YLE={n:"Yle TV2",t:"fta",q:"HD"}, MTV3={n:"MTV3",t:"fta",q:"HD"},
+  MEDIA={n:"Mediacorp",t:"fta",q:"HD"}, TSPT={n:"T Sports",t:"fta",q:"HD"}, BTV={n:"BTV",t:"fta",q:"HD"},
+  TRT={n:"TRT 1",t:"fta",q:"HD"}, SVT={n:"SVT1",t:"fta",q:"HD"}, TV4={n:"TV4",t:"fta",q:"HD"},
+  CAN5={n:"Canal 5",t:"fta",q:"HD"}, AZT={n:"Azteca 7",t:"fta",q:"HD"};
+/* Klub-/Spezial-Streams Sommer 2026 + MagentaSport (3. Liga) */
+const WERDERTV={n:"WERDER.TV / YouTube",t:"fta",u:"https://www.werder.de/werdertv"};
+const KOELNTV={n:"FC-TV (1. FC Köln)",t:"fta",u:"https://fc.de/fc-tv/"};
+const VFBTV={n:"VfB TV / YouTube",t:"fta",u:"https://www.vfb.de/de/vfb/aktuell/vfbtv/"};
+const BVBTOTAL={n:"BVB Total",t:"pay",u:"https://www.bvb.de/bvb-total"};
+const RTLPLUS={n:"RTL+",t:"pay",u:"https://plus.rtl.de/"};
+const BRTV={n:"BR Fernsehen / BR24 Sport",t:"fta",q:"HD",u:"https://www.br24sport.de/"};
+const FCBPLUS={n:"FC Bayern.tv plus",t:"pay",u:"https://fcbayern.com/fcbayerntv"};
+const FCATV={n:"FCA TV",t:"fta",u:"https://www.fcaugsburg.de/fcatv"};
+const SPORT1={n:"SPORT1",t:"fta",q:"HD",u:"https://www.sport1.de/livestream"};
+const WDR={n:"WDR Fernsehen / ARD Mediathek",t:"fta",q:"HD",u:"https://www.ardmediathek.de/wdr"};
+const SSN={n:"Sky Sport News (Free-TV)",t:"fta",q:"HD",u:"https://sport.sky.de/sky-sport-news"};
+const M05TV={n:"Mainz 05 / YouTube",t:"fta",u:"https://www.youtube.com/@1FSVMainz05"};
+const SCFTV={n:"SC Freiburg / YouTube",t:"fta",u:"https://www.youtube.com/@scfreiburg"};
+const TSGTV={n:"TSG Hoffenheim / YouTube",t:"fta",u:"https://www.youtube.com/@tsghoffenheim"};
+const BLUEYT={n:"blue Sport / YouTube (kostenlos)",t:"fta",u:"https://www.youtube.com/@bluesportch"};
+const WERKSELF={n:"Werkself-TV",t:"fta",u:"https://www.bayer04.de/de-de/werkself-tv"};
+const SPORTDIG={n:"Sportdigital Fussball",t:"pay",q:"HD",u:"https://www.sportdigital.de/"};
+const MZLIVE={n:"Volksstimme / MZ Livestream",t:"pay",u:"https://www.volksstimme.de/"};
+const MDR={n:"MDR / ARD Mediathek",t:"fta",q:"HD",u:"https://www.sportimosten.de/"};
+const FOHLENTV={n:"Fohlen.TV",t:"fta",u:"https://www.borussia.de/de/fohlentv.html"};
+const BARCATV={n:"FC Barcelona YouTube (PPV)",t:"pay",u:"https://www.youtube.com/@FCBarcelona"};
+const AIS={n:"AIS Play",t:"pay",q:"HD",u:"https://www.ais.th/play/"};
+const STPTV={n:"FC St. Pauli TV / YouTube",t:"fta",u:"https://www.youtube.com/watch?v=_8Rx9mNHN_8"};
+const PULS4={n:"PULS 4 / Joyn",t:"fta",q:"HD",u:"https://www.joyn.at/"};
+const RSI2={n:"RSI LA 2",t:"fta",q:"HD",u:"https://www.rsi.ch/play/"};
+const OEFBTV={n:"ÖFB TV",t:"fta",u:"https://tv.oefb.at/"};
+const MAGSPORT={n:"MagentaSport",t:"pay",q:"HD",u:"https://www.magentasport.de/"}, FCBTV={n:"FC Bayern TV PLUS",t:"pay",u:"https://fcbayern.com/fcbayerntv"}, BVBTV={n:"BVB-TV",t:"fta",u:"https://www.bvb.tv/"}, SGETV={n:"EintrachtTV+",t:"pay",u:"https://tv.eintracht.de/"}, HSVTV={n:"HSVtv / YouTube",t:"fta",u:"https://www.hsv.de/hsvtv"}, JUVTV={n:"Juventus.com / App",t:"fta",u:"https://www.juventus.com/"}, VOLKS={n:"Volksstimme-Livestream",t:"pay",u:"https://www.volksstimme.de/"}, LFCTV={n:"LFCTV / All Red Video",t:"pay",u:"https://video.liverpoolfc.com/"}, SKYYT={n:"skysport.de / YouTube",t:"fta",u:"https://sport.sky.de/"};
+/* Premier-League-Auslandssender 2025–28 (Rechteinhaber je Land) */
+const SKYUK={n:"Sky Sports",t:"pay",q:"HD",u:"https://www.skysports.com/"}, TNT={n:"TNT Sports",t:"pay",q:"HD",u:"https://www.tntsports.co.uk/"}, BBCHL={n:"BBC (Highlights)",t:"fta",q:"HD",u:"https://www.bbc.co.uk/iplayer"},
+  CANALP={n:"Canal+",t:"pay",q:"HD",u:"https://www.canalplus.com/"}, SKYIT={n:"Sky Italia",t:"pay",q:"HD",u:"https://sport.sky.it/"}, VIAPLAY={n:"Viaplay",t:"pay",q:"HD",u:"https://viaplay.com/"},
+  PEACOCK={n:"NBC / Peacock",t:"pay",q:"HD",u:"https://www.peacocktv.com/"}, FUBO={n:"Fubo",t:"pay",q:"HD"}, SKYIE={n:"Sky Sports / Premier Sports",t:"pay",q:"HD",u:"https://www.skysports.com/"},
+  STARHUB={n:"StarHub",t:"pay",q:"HD"}, FOXMX={n:"Fox Sports / Tubi",t:"pay",q:"HD"}, JASTH={n:"trueID / JAS",t:"pay",q:"HD"}, TAPMAD={n:"tapmad",t:"pay",q:"HD"};
+/* La-Liga-Auslandssender 2026/27 (Rechteinhaber je Land) */
+const MOVI={n:"Movistar+ / DAZN",t:"pay",q:"HD",u:"https://www.movistarplus.es/"}, PREMSP={n:"Premier Sports",t:"pay",q:"HD"}, DISNEY={n:"Disney+",t:"pay",q:"HD",u:"https://www.disneyplus.com/"},
+  ESPNPLUS={n:"ESPN+ / ESPN",t:"pay",q:"HD",u:"https://www.espn.com/watch/"}, ZIGGO={n:"Ziggo Sport",t:"pay",q:"HD"};
+/* Serie-A-Auslandssender 2026/27 (Rechteinhaber je Land) */
+const PARA={n:"Paramount+ / CBS Sports",t:"pay",q:"HD",u:"https://www.paramountplus.com/"}, CMORE={n:"C More",t:"pay",q:"HD"}, SSPORT={n:"S Sport",t:"pay",q:"HD"};
+/* Ligue-1-Sender 2026/27 */
+const LIGUE1PLUS={n:"Ligue 1+",t:"pay",q:"HD",u:"https://plus.ligue1.com/"};
+const UEFATV={n:"UEFA.tv",t:"fta",q:"HD",u:"https://www.uefa.tv/"};
+
+
+
+
+const WM_INTL={ FR:[M6,BEIN], IT:[RAI,DAZN], ES:[RTVE,DAZN], NL:[NOS], TH:[BEIN], CA:[CTV,TSN], US:[FOX,TELE], IE:[RTE], FI:[YLE,MTV3], SG:[MEDIA], BD:[TSPT,BTV], TR:[TRT], SE:[SVT,TV4], MX:[CAN5,AZT] };
+
+const CFLAG={DE:"🇩🇪",AT:"🇦🇹",CH:"🇨🇭",UK:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",ES:"🇪🇸",NL:"🇳🇱",TH:"🇹🇭",CA:"🇨🇦",US:"🇺🇸",IE:"🇮🇪",FI:"🇫🇮",SG:"🇸🇬",BD:"🇧🇩",TR:"🇹🇷",SE:"🇸🇪",MX:"🇲🇽"};
+const CNAME={de:{DE:"Deutschland",AT:"Österreich",CH:"Schweiz",UK:"UK",FR:"Frankreich",IT:"Italien",ES:"Spanien",NL:"Niederlande",TH:"Thailand",CA:"Kanada",US:"USA",IE:"Irland",FI:"Finnland",SG:"Singapur",BD:"Bangladesch",TR:"Türkei",SE:"Schweden",MX:"Mexiko"},en:{DE:"Germany",AT:"Austria",CH:"Switzerland",UK:"UK",FR:"France",IT:"Italy",ES:"Spain",NL:"Netherlands",TH:"Thailand",CA:"Canada",US:"USA",IE:"Ireland",FI:"Finland",SG:"Singapore",BD:"Bangladesh",TR:"Turkey",SE:"Sweden",MX:"Mexico"}};
+
+/* WM 2026 — echte Partien, Zeiten (MEZ) */
