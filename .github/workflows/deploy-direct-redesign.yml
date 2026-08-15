@@ -8,6 +8,11 @@ on:
       - 'highlights.html'
       - 'anbieter.html'
       - 'app-direct.js'
+      - 'app-core.js'
+      - 'app-data.js'
+      - 'app-main.js'
+      - 'legacy.css'
+      - 'sitemap.xml'
       - 'direct.css'
       - 'favicon.svg'
       - 'hero-pitch.webp'
@@ -39,8 +44,8 @@ jobs:
 
           out = Path('/tmp/tvfussball-direct')
           out.mkdir(parents=True, exist_ok=True)
-          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot')</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=27"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=27"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=27"><link rel="shortcut icon" href="favicon.ico?v=27"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=27"><link rel="stylesheet" href="direct.css?v=27">'''
-          app = '''<script src="app-direct.js?v=27"></script>'''
+          boot = '''<script>document.documentElement.classList.add('tvf-direct-boot');(function(){var h=document.documentElement,u=function(){h.classList.remove('tvf-direct-boot')};setTimeout(u,3500);window.addEventListener('error',u);window.addEventListener('unhandledrejection',u)})();</script><link rel="icon" type="image/svg+xml" href="favicon.svg?v=28"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=28"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=28"><link rel="shortcut icon" href="favicon.ico?v=28"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=28"><link rel="stylesheet" href="direct.css?v=28">'''
+          app = '''<script src="app-direct.js?v=28"></script>'''
 
           for name in ('index.html', 'highlights.html', 'anbieter.html'):
               src = Path(name).read_text(encoding='utf-8')
@@ -61,6 +66,12 @@ jobs:
           cp /tmp/tvfussball-direct/highlights.html highlights.html
           cp /tmp/tvfussball-direct/anbieter.html anbieter.html
           git show origin/main:app-direct.js > app-direct.js
+          git show origin/main:legacy.css > legacy.css
+          git show origin/main:app-core.js > app-core.js
+          git show origin/main:app-data.js > app-data.js
+          git show origin/main:app-main.js > app-main.js
+          git show origin/main:sitemap.xml > sitemap.xml
+          git show origin/main:robots.txt > robots.txt
           git show origin/main:direct.css > direct.css
           git show origin/main:favicon.svg > favicon.svg
           git show origin/main:hero-pitch.webp > hero-pitch.webp
@@ -75,7 +86,7 @@ jobs:
           git rm -f data-bridge.js app-shell.js app-shell.css 2>/dev/null || true
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add OneSignalSDKWorker.js index.html highlights.html anbieter.html app-direct.js direct.css favicon.svg favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png icon-512.png hero-pitch.webp impressum.html datenschutz.html
+          git add OneSignalSDKWorker.js index.html highlights.html anbieter.html app-direct.js direct.css legacy.css app-core.js app-data.js app-main.js sitemap.xml robots.txt favicon.svg favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png icon-512.png hero-pitch.webp impressum.html datenschutz.html
           if git diff --cached --quiet; then
             echo 'Nothing to publish.'
             exit 0

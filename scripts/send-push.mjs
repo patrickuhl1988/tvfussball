@@ -2,7 +2,7 @@
 /**
  * TVFussball.de – täglicher Spiel-Alarm via OneSignal
  *
- * - Extrahiert das MATCHES-Array aus index.html (inkl. der Sender-Konstanten,
+ * - Extrahiert das MATCHES-Array aus app-core.js + app-data.js (inkl. der Sender-Konstanten,
  *   die im selben <script>-Block davor definiert sind) und wertet es in einer
  *   Node-VM-Sandbox aus. Damit sind auch Referenzen wie tv:{DE:[ARD,MAG]}
  *   sauber aufgelöst – robuster als reines Regex-Parsing der Objekte.
@@ -67,19 +67,18 @@ if (!API_KEY && !DRY) {
   process.exit(1);
 }
 
-/* ---------- 1) MATCHES aus index.html extrahieren ---------- */
-const html = readFileSync(join(ROOT, "index.html"), "utf-8");
+/* ---------- 1) MATCHES aus app-core.js + app-data.js extrahieren ----------
+   Seit v28 liegen die Sender-Konstanten (ARD, MAG, …) in app-core.js und
+   das MATCHES-Array am Anfang von app-data.js (nicht mehr inline in index.html). */
+const core = readFileSync(join(ROOT, "app-core.js"), "utf-8");
+const dataJs = readFileSync(join(ROOT, "app-data.js"), "utf-8");
 
-const matchesIdx = html.indexOf("const MATCHES = [");
-if (matchesIdx < 0) { console.error("FEHLER: 'const MATCHES = [' nicht in index.html gefunden."); process.exit(1); }
-// Start des umgebenden <script>-Blocks (enthält die Sender-Konstanten wie ARD, MAG, …)
-const scriptOpen = html.lastIndexOf("<script>", matchesIdx);
-if (scriptOpen < 0) { console.error("FEHLER: umgebendes <script> nicht gefunden."); process.exit(1); }
-const codeStart = html.indexOf(">", scriptOpen) + 1;
+const matchesIdx = dataJs.indexOf("const MATCHES = [");
+if (matchesIdx < 0) { console.error("FEHLER: 'const MATCHES = [' nicht in app-data.js gefunden."); process.exit(1); }
 // Ende des MATCHES-Arrays: erstes "\n];" nach dem Array-Start
-const arrEnd = html.indexOf("\n];", matchesIdx);
+const arrEnd = dataJs.indexOf("\n];", matchesIdx);
 if (arrEnd < 0) { console.error("FEHLER: Ende des MATCHES-Arrays nicht gefunden."); process.exit(1); }
-const code = html.slice(codeStart, arrEnd + 3);
+const code = core + "\n" + dataJs.slice(matchesIdx, arrEnd + 3);
 
 const sandbox = { console: { log(){}, warn(){}, error(){} } };
 vm.createContext(sandbox);
@@ -94,7 +93,7 @@ if (!Array.isArray(MATCHES) || !MATCHES.length) { console.error("FEHLER: MATCHES
 console.log(`MATCHES geladen: ${MATCHES.length} Einträge. Heute (Berlin): ${TODAY}`);
 
 /* ---------- 2) Heutige Spiele + Vereins-Zuordnung ---------- */
-/* Slug muss identisch zur Frontend-Funktion clubSlug() in index.html sein! */
+/* Slug muss identisch zur Frontend-Funktion clubSlug() in app-main.js sein! */
 function clubSlug(name) {
   return "club_" + String(name).toLowerCase()
     .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
